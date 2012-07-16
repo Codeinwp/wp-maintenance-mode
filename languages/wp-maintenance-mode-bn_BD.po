@@ -1,0 +1,276 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: !wartungsmodus\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: TodoWordPress <traducciones@todowp.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: !wartungsmodus.php:119
+msgid "Settings"
+msgstr "সেটিংস"
+
+#: !wartungsmodus.php:212
+msgid "Save"
+msgstr "সংরক্ষণ"
+
+#: !wartungsmodus.php:238
+#: !wartungsmodus.php:273
+msgid "Updated"
+msgstr "হালনাগাদকৃত"
+
+#: site.php:83
+msgid "Admin-Login"
+msgstr "নিয়স্ত্রক লগইন"
+
+#: !wartungsmodus.php:382
+msgid "Plugin by:"
+msgstr "প্লাগইনটি:"
+
+#: !wartungsmodus.php:384
+#: !wartungsmodus.php:387
+#: !wartungsmodus.php:390
+#: !wartungsmodus.php:393
+#: !wartungsmodus.php:396
+#: !wartungsmodus.php:399
+#: !wartungsmodus.php:402
+#: !wartungsmodus.php:405
+#: !wartungsmodus.php:408
+#: !wartungsmodus.php:411
+msgid "Design by:"
+msgstr "ডিজাইনটি:"
+
+#: !wartungsmodus.php:153
+msgid "Plugin Settings"
+msgstr "প্লাগইন সেটিংস"
+
+#: !wartungsmodus.php:140
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "প্লাগইন  %s সেটিংস <strong>হালনাগাদকৃত</strong>।"
+
+#: site.php:7
+#: site.php:77
+msgid "Maintenance Mode"
+msgstr "রক্ষণাবেক্ষণ ধরন"
+
+#: !wartungsmodus.php:178
+msgid "Link:"
+msgstr "লিংক:"
+
+#: !wartungsmodus.php:183
+msgid "Theme:"
+msgstr "থীম:"
+
+#: !wartungsmodus.php:186
+msgid "Simple Text"
+msgstr "সাধারণ পাঠাংশ"
+
+#: !wartungsmodus.php:187
+msgid "The Truck"
+msgstr "লেনদেন"
+
+#: !wartungsmodus.php:164
+msgid "Value:"
+msgstr "মূল্য:"
+
+#: !wartungsmodus.php:166
+msgid "Unit:"
+msgstr "একাঙ্ক:"
+
+#: !wartungsmodus.php:168
+msgid "second"
+msgstr "সেকেন্ড"
+
+#: !wartungsmodus.php:169
+msgid "minute"
+msgstr "মিনিট"
+
+#: !wartungsmodus.php:170
+msgid "hour"
+msgstr "ঘন্টা"
+
+#: !wartungsmodus.php:171
+msgid "day"
+msgstr "দিন"
+
+#: !wartungsmodus.php:172
+msgid "week"
+msgstr "সপ্তাহ"
+
+#: !wartungsmodus.php:173
+msgid "month"
+msgstr "মাস"
+
+#: !wartungsmodus.php:174
+msgid "year"
+msgstr "বছর"
+
+#: !wartungsmodus.php:147
+#: !wartungsmodus.php:158
+#: !wartungsmodus.php:180
+msgid "False"
+msgstr "মিথ্যা"
+
+#: !wartungsmodus.php:148
+#: !wartungsmodus.php:159
+#: !wartungsmodus.php:181
+msgid "True"
+msgstr "সত্য"
+
+#: !wartungsmodus.php:327
+#: site.php:39
+#: site.php:44
+msgid "seconds"
+msgstr "সেকেন্ড"
+
+#: !wartungsmodus.php:331
+#: site.php:39
+#: site.php:44
+msgid "minutes"
+msgstr "মিনিট"
+
+#: !wartungsmodus.php:335
+#: site.php:39
+#: site.php:44
+msgid "hours"
+msgstr "ঘন্টা"
+
+#: !wartungsmodus.php:339
+#: site.php:39
+#: site.php:44
+msgid "days"
+msgstr "দিন"
+
+#: !wartungsmodus.php:343
+msgid "weeks"
+msgstr "সপ্তাহ"
+
+#: !wartungsmodus.php:347
+msgid "moths"
+msgstr "মাস"
+
+#: !wartungsmodus.php:351
+msgid "years"
+msgstr "বছর"
+
+#: !wartungsmodus.php:141
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "প্লাগইনটি %s সক্রিয় অবস্থায় <strong>হালনাগাতকৃত</strong>।"
+
+#: !wartungsmodus.php:143
+msgid "Plugin Activate"
+msgstr "প্লাগইনটি সক্রিয়"
+
+#: !wartungsmodus.php:185
+msgid "Own Style"
+msgstr "নিজের স্টাইল"
+
+#: !wartungsmodus.php:188
+msgid "The Sun"
+msgstr "সূর্য"
+
+#: !wartungsmodus.php:189
+msgid "The FF Error"
+msgstr "FF ভুল"
+
+#: !wartungsmodus.php:190
+msgid "Monster"
+msgstr "বিকৃতগঠন"
+
+#: !wartungsmodus.php:198
+msgid "Own Style URL (incl. http://):"
+msgstr "নিজের স্টাইল URL (সহ http://):"
+
+#: !wartungsmodus.php:202
+msgid "Text:"
+msgstr "পাঠাংশ:"
+
+#: !wartungsmodus.php:311
+msgid "Coution: Maintenance mode is <strong>active</strong>!"
+msgstr "সতর্কতা: রক্ষণাবেক্ষণ ধরন <strong>সক্রিয় আছে</strong>!"
+
+#: !wartungsmodus.php:150
+msgid "Update"
+msgstr "হালনাগাদ"
+
+#: !wartungsmodus.php:191
+msgid "Chastely"
+msgstr "নিরলঙ্কার"
+
+#: !wartungsmodus.php:192
+msgid "Only Typo"
+msgstr "শুধু পাঠাংশ"
+
+#: !wartungsmodus.php:193
+msgid "Paint"
+msgstr "রঙ"
+
+#: !wartungsmodus.php:194
+msgid "Animate (Flash, only german)"
+msgstr "প্রাণবন্ত (ফ্লাশ, শুধু জার্মানী)"
+
+#: !wartungsmodus.php:311
+msgid "Deactivate or change Settings"
+msgstr "নিস্ক্রিয় করা অথবা সেটিং পরিবর্তন"
+
+#: !wartungsmodus.php:156
+msgid "Countdown:"
+msgstr "উল্টো গোনা:"
+
+#: !wartungsmodus.php:161
+#: !wartungsmodus.php:162
+msgid "Click for datepicker"
+msgstr "তারিখ কুড়ানোর জন্য ক্লিক করুন"
+
+#: !wartungsmodus.php:161
+msgid "Date:"
+msgstr "তারিখ::"
+
+#: !wartungsmodus.php:163
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "এর জন্য সক্রিয় উল্টো গোনা। মূল্য এবং একাঙ্ক অথবা উল্টো গোনা ব্যবহার করুন এবং তারিখ সেট করুন।"
+
+#: !wartungsmodus.php:195
+msgid "Damask"
+msgstr "দামেস্ক চেলি"
+
+#: !wartungsmodus.php:196
+msgid "Lego"
+msgstr "লেগো"
+
+#: !wartungsmodus.php:206
+msgid "Excludes:"
+msgstr "বাধা দেওয়া:"
+
+#: !wartungsmodus.php:209
+msgid "Exlude pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example: "
+msgstr "রক্ষণাবেক্ষণ ধরন থেকে বাদ দেওয়া পৃষ্ঠাগুলো, পোষ্টগুলো অথবা দস্তাবেজগুলো। এবং যোগ করো পৃষ্ঠা অথবা পোষ্ট কমা দ্বারা আলাদা করা তালিকা।<br/>উদাহরণ: "
+
+#: site.php:37
+msgid "The due date was before"
+msgstr "ন্যায্য তারিখের পূর্বে"
+
+#: site.php:39
+#: site.php:44
+msgid "and"
+msgstr "এবং"
+
+#: !wartungsmodus.php:202
+#, php-format
+msgid "(Use the first %s for the time value or countdown and second %s for the unit of the time, HTML is possible)"
+msgstr "(%s সময়ের মূল্যের জন্য প্রথম ব্যবহার অথবা উল্টো গোনা এবং একাঙ্ক সময়ের জন্য সেকেন্ড %s, HTML এ সম্ভব)"
+

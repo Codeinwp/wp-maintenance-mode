@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: !Wartungsmodus 1.5.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-06 22:59+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: jurica Zuanović <jurica.zuanovic@gmail.com>\n"
+"Language-Team: Jurica Zuanović <jurica.zuanovic@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: !wartungsmodus.php:120
+msgid "Settings"
+msgstr "Postavke"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:191
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Plugin %s postavke <strong>ažurirane</strong>."
+
+# @ wartungsmodus
+#: !wartungsmodus.php:192
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Aktivan status %s plugina <strong>ažuriran</strong>."
+
+# @ wartungsmodus
+#: !wartungsmodus.php:194
+msgid "Plugin Activate"
+msgstr "Aktivnost plugina"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:198
+#: !wartungsmodus.php:214
+#: !wartungsmodus.php:258
+msgid "False"
+msgstr "Isključen/o"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:199
+#: !wartungsmodus.php:215
+#: !wartungsmodus.php:259
+msgid "True"
+msgstr "Uključen/o"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:201
+msgid "Update"
+msgstr "Ažuriraj"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:204
+msgid "Plugin Settings"
+msgstr "Plugin Postavke"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:210
+msgid "Countdown:"
+msgstr "Odbrojavanje:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:221
+#: !wartungsmodus.php:224
+msgid "Click for datepicker"
+msgstr "Klikni za izbor datuma"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:221
+msgid "Date:"
+msgstr "Datum:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:225
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Aktiviraj odbrojavanje za upotrebu ove funkcije. Upotrijebite Vrijednosti i Jedinice ili upotrijebite Datum za podešavanje odbrojavanja."
+
+# @ wartungsmodus
+#: !wartungsmodus.php:230
+msgid "Value:"
+msgstr "Vrijednost:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:238
+msgid "Unit:"
+msgstr "Jedinica:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:242
+msgid "second"
+msgstr "sekunda"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:243
+msgid "minute"
+msgstr "minuta"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:244
+msgid "hour"
+msgstr "sat"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:245
+msgid "day"
+msgstr "dan"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:246
+msgid "week"
+msgstr "tjedan"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:247
+msgid "month"
+msgstr "mjesec"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:248
+msgid "year"
+msgstr "godina"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:254
+msgid "Link:"
+msgstr "Link:"
+
+#: !wartungsmodus.php:262
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Molim ostavite link do do plugina- i autora dizajna -na prikazanoj stranici održavanja."
+
+# @ wartungsmodus
+#: !wartungsmodus.php:267
+msgid "Theme:"
+msgstr "Tema:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:271
+msgid "Own Style"
+msgstr "Vlastiti dizajn"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:272
+msgid "Simple Text"
+msgstr "Jednostavni tekst"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:273
+msgid "The Truck"
+msgstr "The Truck"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:274
+msgid "The Sun"
+msgstr "The Sun"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:275
+msgid "The FF Error"
+msgstr "The FF Error"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:276
+msgid "Monster"
+msgstr "Monster"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:277
+msgid "Chastely"
+msgstr "Chastely"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:278
+msgid "Only Typo"
+msgstr "Only Typo"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:279
+msgid "Paint"
+msgstr "Paint"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:280
+msgid "Animate (Flash, only german)"
+msgstr "Animate (Flash, samo na njemačkom)"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:281
+msgid "Damask"
+msgstr "Damask"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:282
+msgid "Lego"
+msgstr "Lego"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:288
+msgid "Own Style URL (incl. http://):"
+msgstr "URL vašeg vlastitiog dizajna (uklj. http://):"
+
+#: !wartungsmodus.php:291
+msgid "URL to the css-file"
+msgstr "URL do CSS datoteke."
+
+#: !wartungsmodus.php:296
+msgid "Title:"
+msgstr "Naslov:"
+
+#: !wartungsmodus.php:299
+#: !wartungsmodus.php:307
+#: !wartungsmodus.php:315
+msgid "Leave empty for default."
+msgstr "Kao zadano je ostavljeno prazno polje."
+
+#: !wartungsmodus.php:304
+msgid "Header:"
+msgstr "Zaglavlje:"
+
+#: !wartungsmodus.php:312
+msgid "Heading:"
+msgstr "Podnaslov:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:320
+msgid "Text:"
+msgstr "Tekst:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:325
+#, php-format
+msgid "Use the first %s for the time value or countdown and second %s for the unit of the time; HTML is possible"
+msgstr "Upotrijebite prvi %s za vremensku vrijednost ili odbrojavanje, i drugi %s za jedinicu vremena, HTML je omogućen"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:330
+msgid "Excludes:"
+msgstr "Izuzeto:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:335
+msgid "Exlude pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example: "
+msgstr "Izuzmite stranice, postove ili arhiv iz moda održavanja. Dodajte Slug stranice ili posta u listu odvojenu zarezom. <br />Primjer:"
+
+#: !wartungsmodus.php:340
+msgid "Role:"
+msgstr "Uloga:"
+
+#: !wartungsmodus.php:361
+msgid "Allowed userrole for see the frontend of this blog."
+msgstr "Korisničke uloge kojima je dopušten pregled početne stranice bloga."
+
+# @ wartungsmodus
+#: !wartungsmodus.php:367
+msgid "Save"
+msgstr "Spremi"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:395
+#: !wartungsmodus.php:438
+msgid "Updated"
+msgstr "Ažurirano"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:508
+msgid "Coution: Maintenance mode is <strong>active</strong>!"
+msgstr "Pažnja: Mod održavanja je <strong>aktivan</strong>!"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:508
+msgid "Deactivate or change Settings"
+msgstr "Deaktiviraj ili promijeni Postavke"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:524
+#: site.php:46
+#: site.php:51
+msgid "seconds"
+msgstr "Sekunde"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:528
+#: site.php:46
+#: site.php:51
+msgid "minutes"
+msgstr "Minute"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:532
+#: site.php:46
+#: site.php:51
+msgid "hours"
+msgstr "sati"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:536
+#: site.php:46
+#: site.php:51
+msgid "days"
+msgstr "Dana"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:540
+msgid "weeks"
+msgstr "tjedana"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:544
+msgid "months"
+msgstr "mjesec/i"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:548
+msgid "years"
+msgstr "godina"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:579
+msgid "Plugin by:"
+msgstr "Plugin od:"
+
+# @ wartungsmodus
+#: !wartungsmodus.php:581
+#: !wartungsmodus.php:584
+#: !wartungsmodus.php:587
+#: !wartungsmodus.php:590
+#: !wartungsmodus.php:593
+#: !wartungsmodus.php:596
+#: !wartungsmodus.php:599
+#: !wartungsmodus.php:602
+#: !wartungsmodus.php:605
+#: !wartungsmodus.php:608
+msgid "Design by:"
+msgstr "Dizajn od:"
+
+# @ wartungsmodus
+#: site.php:6
+#: site.php:84
+msgid "Maintenance Mode"
+msgstr "Mod Održavanja"
+
+# @ wartungsmodus
+#: site.php:44
+msgid "The due date was before"
+msgstr "Termin je bio prije "
+
+# @ wartungsmodus
+#: site.php:46
+#: site.php:51
+msgid "and"
+msgstr "i"
+
+# @ wartungsmodus
+#: site.php:90
+msgid "Admin-Login"
+msgstr "Admin-Prijava"
+

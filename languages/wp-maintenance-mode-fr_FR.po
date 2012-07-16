@@ -1,0 +1,365 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-04 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Frank Bueltge <frank@bueltge.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: d:/xampp/htdocs/wpbeta/wp-content/plugins/wartungsmodus/\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-maintenance-mode.php:134
+msgid "Settings"
+msgstr "Réglages"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:205
+#: wp-maintenance-mode.php:381
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Paramètres plugin  %s <strong>mis a jour</strong>."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:206
+#: wp-maintenance-mode.php:217
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Plugin %s status actif <strong>mis a jour</strong>."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:208
+msgid "Plugin Activate"
+msgstr "Activation plugin"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:212
+#: wp-maintenance-mode.php:229
+#: wp-maintenance-mode.php:273
+msgid "False"
+msgstr "Faux"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:213
+#: wp-maintenance-mode.php:230
+#: wp-maintenance-mode.php:274
+msgid "True"
+msgstr "Vrai"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:215
+msgid "Update"
+msgstr "Mis à jour"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:219
+msgid "Plugin Settings"
+msgstr "Réglages plugin"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:225
+msgid "Countdown:"
+msgstr "Compte à rebours:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:236
+#: wp-maintenance-mode.php:239
+msgid "Click for datepicker"
+msgstr "Cliquez pour récupérer la date"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:236
+msgid "Date:"
+msgstr "Date:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:240
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Activez le compte à rebours pour utiliser celui ci et paramètrez la date et l'heure d'échéance. Sinon saisissez une durée et une unité de temps."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:245
+msgid "Value:"
+msgstr "Durée:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:253
+msgid "Unit:"
+msgstr "Unité:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:257
+msgid "second"
+msgstr "seconde"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:258
+msgid "minute"
+msgstr "minute"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:259
+msgid "hour"
+msgstr "heure"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:260
+msgid "day"
+msgstr "jour"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:261
+msgid "week"
+msgstr "semaine"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:262
+msgid "month"
+msgstr "mois"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:263
+msgid "year"
+msgstr "année"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:269
+msgid "Link:"
+msgstr "Lien:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:282
+msgid "Theme:"
+msgstr "Thème:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:286
+msgid "Own Style"
+msgstr "Style personnel"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:287
+msgid "Simple Text"
+msgstr "Texte simple"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:288
+msgid "The Truck"
+msgstr "Camion"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:289
+msgid "The Sun"
+msgstr "Soleil"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:290
+msgid "The FF Error"
+msgstr "Erreur FF"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:291
+msgid "Monster"
+msgstr "Monstre"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:292
+msgid "Chastely"
+msgstr "Chastely"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:293
+msgid "Only Typo"
+msgstr "Typo seulement"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:294
+msgid "Paint"
+msgstr "Peinture"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:295
+msgid "Animate (Flash, only german)"
+msgstr "Animation (Flash, seulement en allemand)"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:296
+msgid "Damask"
+msgstr "Tapisserie"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:297
+msgid "Lego"
+msgstr "Lego"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:303
+msgid "Own Style URL (incl. http://):"
+msgstr "URL Style Personnel (inclure http://):"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:335
+msgid "Text:"
+msgstr "Texte:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:345
+msgid "Excludes:"
+msgstr "Exclus:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:350
+msgid "Exlude pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example: "
+msgstr "Pages, articles ou archives exclus du mode maintenance. Ajouter le permalien de la page ou de l'article sous forme de liste séparés par des virgules. <br /> Exemple:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:355
+msgid "Role:"
+msgstr "Rôle:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:383
+msgid "Save"
+msgstr "Sauvegarder"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:418
+#: wp-maintenance-mode.php:461
+msgid "Updated"
+msgstr "Mis à jour"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:538
+msgid "Deactivate or change Settings"
+msgstr "Désactiver ou changer les paramètres"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:553
+msgid "seconds"
+msgstr "secondes"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:557
+msgid "minutes"
+msgstr "minutes"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:561
+msgid "hours"
+msgstr "heures"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:565
+msgid "days"
+msgstr "jours"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:569
+msgid "weeks"
+msgstr "semaines"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:577
+msgid "years"
+msgstr "années"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:624
+msgid "Plugin by:"
+msgstr "Plugin de:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:626
+#: wp-maintenance-mode.php:629
+#: wp-maintenance-mode.php:632
+#: wp-maintenance-mode.php:635
+#: wp-maintenance-mode.php:638
+#: wp-maintenance-mode.php:641
+#: wp-maintenance-mode.php:644
+#: wp-maintenance-mode.php:647
+#: wp-maintenance-mode.php:650
+#: wp-maintenance-mode.php:653
+msgid "Design by:"
+msgstr "Design par:"
+
+#@ wp-maintenance-mode
+#: site.php:6
+#: site.php:82
+msgid "Maintenance Mode"
+msgstr "Mode Maintenance"
+
+#@ wp-maintenance-mode
+#: site.php:79
+msgid "Admin-Login"
+msgstr "Admin-Login"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:311
+msgid "Title:"
+msgstr "Titre:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:306
+msgid "URL to the css-file"
+msgstr "URL du fichier CSS"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:314
+#: wp-maintenance-mode.php:322
+#: wp-maintenance-mode.php:330
+msgid "Leave empty for default."
+msgstr "Laissez vide par défaut."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:319
+msgid "Header:"
+msgstr "Entête:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:327
+msgid "Heading:"
+msgstr "Titre:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:277
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Merci de laissez un lien vers le plugin et le designer sur votre site en mode maintenance."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:573
+msgid "months"
+msgstr "mois"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:340
+#, php-format
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML is possible"
+msgstr "Utilisez le premier<em> %1$s</em> pour la durée ou le compte à rebours et le second<em> %2$s</em> pour l'unité de temps ou la fin du compte à rebours; HTML possible"
+
+#@ wp-maintenance-mode
+#: site.php:72
+msgid "Access to the admin area blocked"
+msgstr "Accès à la zone d'administration bloquée"
+
+#@ wp-maintenance-mode
+#: site.php:75
+msgid "Admin-Logout"
+msgstr "Admin-Logout"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:376
+msgid "Allowed userrole for see the frontend of this blog."
+msgstr "Niveau autorisé pour voir ce blog"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:536
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr ""
+

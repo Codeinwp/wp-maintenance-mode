@@ -1,0 +1,430 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-04 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: d:/xampp/htdocs/wpbeta/wp-content/plugins/wartungsmodus/\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+msgid "The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings."
+msgstr "Šis papildinys į Jūsų tinklaraštį prideda pristatomąjį puslapį, kuris visiems Jūsų lankytojams parodo, jog tinklaraštyje šiuo metu vykdoma techninė priežiūra. Priklausomai nuo nuostatų, prisijungę vartotojai turi pilną priėjimą prie Jūsų tinklaraščio, įskaitant išorinės pusės pasiektį."
+
+#@ default
+#: wp-maintenance-mode.php:160
+msgid "Settings"
+msgstr "Nuostatos"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:260
+#: wp-maintenance-mode.php:454
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Papildinio %s nuostatos <strong>atnaujintos</strong>."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:263
+#: wp-maintenance-mode.php:276
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Papildinio %s veikimo būsena <strong>atnaujinta</strong>."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:266
+msgid "Plugin Activate"
+msgstr "Aktyvinti Papildinį"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:270
+#: wp-maintenance-mode.php:289
+#: wp-maintenance-mode.php:333
+msgid "False"
+msgstr "Netiesa"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:271
+#: wp-maintenance-mode.php:290
+#: wp-maintenance-mode.php:334
+msgid "True"
+msgstr "Tiesa"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:273
+msgid "Update"
+msgstr "Atnaujinti"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:279
+msgid "Plugin Settings"
+msgstr "Papildinio Nuostatos"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:285
+msgid "Countdown:"
+msgstr "Atvirkštinis laikmatis:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:296
+#: wp-maintenance-mode.php:299
+msgid "Click for datepicker"
+msgstr "Spragtelkite, norėdami surinkti datos duomenis"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:296
+msgid "Date:"
+msgstr "Data:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:300
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Aktyvinkite atgalinį laikmatį naudodami tai. Naudokite reikšmę ir vienetą arba naudokite atgalinį laikmatį, nustatydami datą."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:305
+msgid "Value:"
+msgstr "Reikšmė:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:313
+msgid "Unit:"
+msgstr "Vienetas:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:317
+msgid "second"
+msgstr "sekundė"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:318
+msgid "minute"
+msgstr "minutė"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:319
+msgid "hour"
+msgstr "valanda"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:320
+msgid "day"
+msgstr "diena"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:321
+msgid "week"
+msgstr "savaitė"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:322
+msgid "month"
+msgstr "mėnesis"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:323
+msgid "year"
+msgstr "metai"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:329
+msgid "Link:"
+msgstr "Nuoroda:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:342
+msgid "Theme:"
+msgstr "Apipavidalinimas:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:346
+msgid "Own Style"
+msgstr "Savitas Stilius"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:347
+msgid "Simple Text"
+msgstr "Paprastasis Tekstas"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:348
+msgid "The Truck"
+msgstr "Platforma"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:349
+msgid "The Sun"
+msgstr "Saulė"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:350
+msgid "The FF Error"
+msgstr "FF Klaida"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:351
+msgid "Monster"
+msgstr "Monstras"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:352
+msgid "Chastely"
+msgstr "Skaisčiai"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:353
+msgid "Only Typo"
+msgstr "Tik Rašybos klaidos"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:354
+msgid "Paint"
+msgstr "Spalvinimas"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:356
+msgid "Damask"
+msgstr "Nebeslėpti"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:357
+msgid "Lego"
+msgstr "Lego"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:364
+msgid "Own Style URL (incl. http://):"
+msgstr "Savito Stiliaus Universalioji nuoroda (įtraukite http://)"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:406
+msgid "Text:"
+msgstr "Tekstas:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:416
+msgid "Excludes:"
+msgstr "Neįtraukti:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:426
+msgid "Role:"
+msgstr "Funkcija:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:457
+msgid "Save"
+msgstr "Įrašyti"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:502
+#: wp-maintenance-mode.php:545
+msgid "Updated"
+msgstr "Atnaujinta"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:697
+#: wp-maintenance-mode.php:699
+msgid "Deactivate or change Settings"
+msgstr "Deaktyvinti arba keisti Nuostatas"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:625
+msgid "seconds"
+msgstr "sekundės"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:629
+msgid "minutes"
+msgstr "minutės"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:633
+msgid "hours"
+msgstr "valandos"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:637
+msgid "days"
+msgstr "dienos"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:641
+msgid "weeks"
+msgstr "savaitės"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:649
+msgid "years"
+msgstr "metai"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:763
+msgid "Plugin by:"
+msgstr "Papildinys sukurtas"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:765
+#: wp-maintenance-mode.php:767
+#: wp-maintenance-mode.php:769
+#: wp-maintenance-mode.php:771
+#: wp-maintenance-mode.php:773
+#: wp-maintenance-mode.php:775
+#: wp-maintenance-mode.php:777
+#: wp-maintenance-mode.php:779
+#: wp-maintenance-mode.php:781
+#: wp-maintenance-mode.php:783
+#: wp-maintenance-mode.php:785
+msgid "Design by:"
+msgstr "Ruošinys sukurtas:"
+
+#@ wp-maintenance-mode
+#: site.php:12
+#: site.php:48
+msgid "Maintenance Mode"
+msgstr "Maintenance Mode"
+
+#@ wp-maintenance-mode
+#: site.php:62
+msgid "Admin-Login"
+msgstr "Administratoriaus Prisijungimas"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:382
+msgid "Title:"
+msgstr "Antraštė:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:367
+msgid "URL to the css-file"
+msgstr "Universalioji nuoroda į css rinkmeną"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:385
+#: wp-maintenance-mode.php:393
+#: wp-maintenance-mode.php:401
+msgid "Leave empty for default."
+msgstr "Palikti tuščią, kad būtų traktuojama kaip numatytosios parinktys"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:390
+msgid "Header:"
+msgstr "Puslapinė antraštė:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:398
+msgid "Heading:"
+msgstr "Antraštė:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:337
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Prašome palikti nuorodą į papildinio ir ruošinio kūrėjo autorių svetaines Jūsų techninės priežiūros būsenos puslapyje."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:645
+msgid "months"
+msgstr "mėnesiai"
+
+#@ wp-maintenance-mode
+#: site.php:55
+msgid "Access to the admin area blocked"
+msgstr "Priėjimas prie svetainės administravimo srities užblokuotas"
+
+#@ wp-maintenance-mode
+#: site.php:58
+msgid "Admin-Logout"
+msgstr "Administratoriaus Atsijungimas"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:447
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Vartotojo, kuriam leidžiama peržiūrėti tinklaraščio vidinę pusę, pobūdis"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:695
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Dėmėsio: Techninės priežiūros būsena <strong>suaktyvinta<strong>!"
+
+#@ default
+#: index.php:5
+msgid "Cheatin&#8217; uh?"
+msgstr "Bandote sukčiauti, taip?"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:369
+msgid "<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
+msgstr "<strong>Dėmesio:</strong> Prašome neįrašinėti stiliaus lapų į Jūsų papildinių katalogą, nes tokiu atveju jie bus ištrinti sekančio automatinio papildinio atnaujinimo metu."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:374
+#: wp-maintenance-mode.php:377
+msgid "Preview"
+msgstr "Peržiūra"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+msgid "WP Maintenance Mode"
+msgstr "WP Maintenance Mode"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+msgstr "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+msgid "Frank B&uuml;ltge"
+msgstr "Frank B&uuml;ltge"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/"
+msgstr "http://bueltge.de/"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:355
+msgid "Animate (Flash)"
+msgstr "Animuoti (Flash)"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:358
+msgid "Chemistry"
+msgstr "Chemija"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:411
+#, php-format
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible"
+msgstr "Naudokite pirmąją <em>%1$s</em> laiko reikšmės arba atgalinio laikmačio, o antrąjį <em>%2$s</em> naudokite laiko vieneto arba atgalinio laikmačio reikšmės nustatymui; HTML ir trumpieji kodai tinkami naudojimui."
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+msgid "1.6.7"
+msgstr "1.6.7"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:448
+msgid "Super Admin has always access."
+msgstr "Super Administratorius visada turi priėjimą prie visų tinklaraščio sričių."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:421
+msgid "Exclude feed, pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr "Neįtraukti padavimų, puslapių, įrašų ir archyvų iš techninės priežiūros būsenos. Pridėkite šio puslapio trumpinį arba paskelbkite tai kaip kableliais atskirtą sąrašą. <br />Pavyzdys:"
+

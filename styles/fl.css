@@ -1,0 +1,136 @@
+@charset "utf-8";
+/*---------------------
+Author: Fabian Letscher
+URL: http://fabianletscher.de
+Credits go to:
+- [The Inspiration Gallery] 
+  http://www.theinspirationgallery.com/wallpaper/damask/wp_damask01.htm
+
+---------------------*/
+
+* {margin:0;padding:0;border:0;}
+
+html,body {width:100%;height:100%;font-size:10px;}
+
+body {background:url('images/bg.gif') repeat;position:relative;color:#fff;}
+
+#header {
+height:1.6em;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9kIFAoqMrzFdDAAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12OIYGBIAwABywC/D1QgTgAAAABJRU5ErkJggg%3D%3D);
+background: rgba(88,0,0,0.4);
+border-bottom:1px solid #fff;
+font: 1.6em helvetica, tahoma, sans-serif;
+padding: 0.4em 1.5em;
+line-height:1.6em;
+font-variant:small-caps;
+font-weight:bold;
+letter-spacing:0.1em;
+}
+
+/*IE6 , IE7 Hack*/
+* html #header {filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40880000,endColorstr=#40880000);}
+*+html #header {filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40880000,endColorstr=#40880000);}
+
+#content {
+position:absolute;
+height:45em;
+width:70em;
+margin:5em 0;
+top:50%;
+left:50%;
+margin-top:-22.5em;
+margin-left:-35em;
+border:1px dotted;
+border-radius:1.5em;
+-moz-border-radius: 1.5em;
+-webkit-border-radius: 1.5em;
+border:1px solid #fff;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9kIFAooATEjd6QAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12NgYGBIAwAAawBnwq0NKAAAAABJRU5ErkJggg%3D%3D);
+background: rgba(0,0,0,0.4);
+z-index:999
+}
+* html #content  {filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40000000,endColorstr=#40000000);}
+*+html #content {filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40000000,endColorstr=#40000000);}
+
+#content:before {
+border:1px dotted;
+content: '!';
+height:1.1em;
+width:1.1em;
+border-radius:1em;
+-moz-border-radius: 1em;
+-webkit-border-radius: 1em;
+border:0.14em solid #fff;
+display:block;
+font:14em trebuchet ms;
+text-align:center;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9kIFAoqMrzFdDAAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12OIYGBIAwABywC/D1QgTgAAAABJRU5ErkJggg%3D%3D);
+background:rgba(88,0,0,0.4);
+opacity:0.5;
+margin: 0.2em auto 0.1em auto;
+
+}
+
+#content:hover:before{
+opacity:0.8;
+}
+
+#footer{
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9kIFAoqMrzFdDAAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAADUlEQVQI12OIYGBIAwABywC/D1QgTgAAAABJRU5ErkJggg%3D%3D);
+background: rgba(88,0,0,0.4);
+border-top:1px solid #fff;
+font: 1.4em helvetica, tahoma, sans-serif;
+line-height:1.6em;
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+}
+* html #footer {filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40880000,endColorstr=#40880000);}
+*+html #footer {filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40880000,endColorstr=#40880000);}
+
+
+h1 {
+font: 4em helvetica, tahoma, arial, sans-serif;
+text-align:center;
+margin:0 0 0.7em !important;
+margin:4em 0 0.7em 0;
+}
+
+h3 {
+text-align:center;
+}
+
+*+html h1 {margin:10em 0 0.7 0;}
+
+#content p {
+margin:0 12em;
+text-align:justify;
+font: 1.5em helvetica, tahoma, arial, sans-serif;
+}
+
+#content p strong {font-size:1.2em;}
+
+#content div.admin {
+position:absolute;
+bottom:0;
+right:0;
+font: 1.1em tahoma, arial, sans-serif;
+margin: 0 1em 1em 0;
+}
+
+a {color:#fff; text-decoration:none; border-bottom:1px dotted #fff;}
+a:hover {border:0;}
+
+#footer p {
+vertical-align:baseline;
+padding:0.4em 1.5em;
+line-height:1.6em;
+}
+
+p a img {
+margin:0 0 -2px;
+}
+
+#footer a {border:0;}
+

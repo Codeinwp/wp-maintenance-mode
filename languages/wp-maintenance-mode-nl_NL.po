@@ -1,0 +1,368 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-maintenance-mode v1.6.1 - Dutch Translation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-04 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Frank Bueltge <frank@bueltge.de>\n"
+"Language-Team: http://WPwebshop.com <info@wppg.me>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: d:/xampp/htdocs/wpbeta/wp-content/plugins/wartungsmodus/\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-maintenance-mode.php:134
+msgid "Settings"
+msgstr "Instellingen"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:205
+#: wp-maintenance-mode.php:381
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Plugin %s Instellingen <strong>bijgewerkt</strong>."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:206
+#: wp-maintenance-mode.php:217
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Plugin %s actieve status <strong>bijgewerkt</strong>."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:208
+msgid "Plugin Activate"
+msgstr "Plugin activeren"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:212
+#: wp-maintenance-mode.php:229
+#: wp-maintenance-mode.php:273
+msgid "False"
+msgstr "Nee"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:213
+#: wp-maintenance-mode.php:230
+#: wp-maintenance-mode.php:274
+msgid "True"
+msgstr "Ja"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:215
+msgid "Update"
+msgstr "Bijwerken"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:219
+msgid "Plugin Settings"
+msgstr "Plugin Instellingen"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:225
+msgid "Countdown:"
+msgstr "Aftellen:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:236
+#: wp-maintenance-mode.php:239
+msgid "Click for datepicker"
+msgstr "Klik voor datumprikker"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:236
+msgid "Date:"
+msgstr "Datum:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:240
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Activeer aftellen om dit te gebruiken. Gebruik waarde en eenheid of gebruik het aftellen en stel de datum in."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:245
+msgid "Value:"
+msgstr "Waarde:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:253
+msgid "Unit:"
+msgstr "Eenheid:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:257
+msgid "second"
+msgstr "seconde"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:258
+msgid "minute"
+msgstr "minuut"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:259
+msgid "hour"
+msgstr "uur"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:260
+msgid "day"
+msgstr "dag"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:261
+msgid "week"
+msgstr "week"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:262
+msgid "month"
+msgstr "maand"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:263
+msgid "year"
+msgstr "jaar"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:269
+msgid "Link:"
+msgstr "Link:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:282
+msgid "Theme:"
+msgstr "Thema:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:286
+msgid "Own Style"
+msgstr "Eigen Design"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:287
+msgid "Simple Text"
+msgstr "Simpele Tekst"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:288
+msgid "The Truck"
+msgstr "De Truck"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:289
+msgid "The Sun"
+msgstr "The Sun"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:290
+msgid "The FF Error"
+msgstr "The FF Error"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:291
+msgid "Monster"
+msgstr "Monster"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:292
+msgid "Chastely"
+msgstr "Chastely"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:293
+msgid "Only Typo"
+msgstr "Only Typo"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:294
+msgid "Paint"
+msgstr "Paint"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:295
+msgid "Animate (Flash, only german)"
+msgstr "Animeren (Flash, alleen in Duits)"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:296
+msgid "Damask"
+msgstr "Damask"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:297
+msgid "Lego"
+msgstr "Lego"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:303
+msgid "Own Style URL (incl. http://):"
+msgstr "Eigen Design URL (incl. http://)"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:335
+msgid "Text:"
+msgstr "Tekst:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:345
+msgid "Excludes:"
+msgstr "Uitsluiten:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:350
+msgid "Exclude pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example: "
+msgstr "Sluit pagina's, berichten of archieven uit van de onderhoudsmodus. Voeg de slug van de pagina of bericht toe als een door komma's gescheiden lijst.<br/>Voorbeeld: "
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:355
+msgid "Role:"
+msgstr "Rol:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:383
+msgid "Save"
+msgstr "Opslaan"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:418
+#: wp-maintenance-mode.php:461
+msgid "Updated"
+msgstr "Bijgewerkt"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:538
+msgid "Deactivate or change Settings"
+msgstr "Deactiveren of Instellingen veranderen"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:553
+msgid "seconds"
+msgstr "seconden"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:557
+msgid "minutes"
+msgstr "minuten"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:561
+msgid "hours"
+msgstr "uren"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:565
+msgid "days"
+msgstr "dagen"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:569
+msgid "weeks"
+msgstr "weken"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:577
+msgid "years"
+msgstr "jaren"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:624
+msgid "Plugin by:"
+msgstr "Plugin door:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:626
+#: wp-maintenance-mode.php:629
+#: wp-maintenance-mode.php:632
+#: wp-maintenance-mode.php:635
+#: wp-maintenance-mode.php:638
+#: wp-maintenance-mode.php:641
+#: wp-maintenance-mode.php:644
+#: wp-maintenance-mode.php:647
+#: wp-maintenance-mode.php:650
+#: wp-maintenance-mode.php:653
+msgid "Design by:"
+msgstr "Design door:"
+
+# @ wp-maintenance-mode
+#: site.php:6
+#: site.php:82
+msgid "Maintenance Mode"
+msgstr "Maintenance Mode"
+
+# @ wp-maintenance-mode
+#: site.php:79
+msgid "Admin-Login"
+msgstr "Admin-Login"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:311
+msgid "Title:"
+msgstr "Titel:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:306
+msgid "URL to the css-file"
+msgstr "URL voor het css bestand"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:314
+#: wp-maintenance-mode.php:322
+#: wp-maintenance-mode.php:330
+msgid "Leave empty for default."
+msgstr "Laat leeg voor standaard."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:319
+msgid "Header:"
+msgstr "Header:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:327
+msgid "Heading:"
+msgstr "Kop:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:277
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Laat aub een link achter naar de plugin- en design auteur op je Maintenance Mode site."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:573
+msgid "months"
+msgstr "maanden"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:340
+#, php-format
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML is possible"
+msgstr "Gebruik de eerste <em>%1$s</em> voor de tijdswaarde of aftelling en tweede <em>%2$s</em> voor de tijdseenheid of de aftellingswaarde; HTML is mogelijk"
+
+# @ wp-maintenance-mode
+#: site.php:72
+msgid "Access to the admin area blocked"
+msgstr "Toegang tot de beheersomgeving is geblokkeerd"
+
+# @ wp-maintenance-mode
+#: site.php:75
+msgid "Admin-Logout"
+msgstr "Admin-Logout"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:376
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Toegestane gebruikersrol om de frontend van deze blog te zien."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:536
+#, fuzzy
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Let op: Onderhoudsmodus is <strong>actief</strong>!"
+

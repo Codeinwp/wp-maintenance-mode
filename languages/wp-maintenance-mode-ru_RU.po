@@ -1,0 +1,432 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-04 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jim Jerginson <portablecomponentsforall@gmail.com>\n"
+"Language-Team: http://www.portablecomponentsforall.com <portablecomponentsforall@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: d:/xampp/htdocs/wpbeta/wp-content/plugins/wartungsmodus/\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+msgid "The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings."
+msgstr "Плагин добавил splash страницу на ваш блог которая дает вам знать ваш блог закрыт на техническое обслуживание. Залогиненые пользователи имеют полный доступ к блогу включая  front-end страницу блога,в зависимости от установок."
+
+# @ default
+#: wp-maintenance-mode.php:160
+msgid "Settings"
+msgstr "Установки"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:260
+#: wp-maintenance-mode.php:454
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Установки %s плагина <strong>обновлено</strong>."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:263
+#: wp-maintenance-mode.php:276
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Плагин %s активирован <strong>обновлено</strong>."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:266
+msgid "Plugin Activate"
+msgstr "Плагин активирован"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:270
+#: wp-maintenance-mode.php:289
+#: wp-maintenance-mode.php:333
+msgid "False"
+msgstr "Ложь"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:271
+#: wp-maintenance-mode.php:290
+#: wp-maintenance-mode.php:334
+msgid "True"
+msgstr "Истина"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:273
+msgid "Update"
+msgstr "Обновить"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:279
+msgid "Plugin Settings"
+msgstr "Настройки плагина"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:285
+msgid "Countdown:"
+msgstr "Обратный отсчет:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:296
+#: wp-maintenance-mode.php:299
+msgid "Click for datepicker"
+msgstr "Кликните для выбора даты"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:296
+msgid "Date:"
+msgstr "Дата:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:300
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Активируйте обратный отсчет для использования этого.Используйте значения и единицы или используйте обратный отсчет и установите дату."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:305
+msgid "Value:"
+msgstr "Значение:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:313
+msgid "Unit:"
+msgstr "Блок:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:317
+msgid "second"
+msgstr "второй"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:318
+msgid "minute"
+msgstr "минута"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:319
+msgid "hour"
+msgstr "час"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:320
+msgid "day"
+msgstr "день"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:321
+msgid "week"
+msgstr "неделя"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:322
+msgid "month"
+msgstr "месяц"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:323
+msgid "year"
+msgstr "год"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:329
+msgid "Link:"
+msgstr "Ссылка:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:342
+msgid "Theme:"
+msgstr "Тема:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:346
+msgid "Own Style"
+msgstr "Собственный стиль"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:347
+msgid "Simple Text"
+msgstr "Простой текст"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:348
+msgid "The Truck"
+msgstr "Грузовик"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:349
+msgid "The Sun"
+msgstr "Солнце"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:350
+msgid "The FF Error"
+msgstr "FF Ошибка"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:351
+msgid "Monster"
+msgstr "Монстр"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:352
+msgid "Chastely"
+msgstr "Целомудренно"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:353
+msgid "Only Typo"
+msgstr "Только Typo"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:354
+msgid "Paint"
+msgstr "Рисовать"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:356
+msgid "Damask"
+msgstr "Дамаск"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:357
+msgid "Lego"
+msgstr "Lego"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:364
+msgid "Own Style URL (incl. http://):"
+msgstr "Собственный URL Стиль (включ. http://)"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:406
+msgid "Text:"
+msgstr "Текст:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:416
+msgid "Excludes:"
+msgstr "Исключает:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:426
+msgid "Role:"
+msgstr "Роль:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:457
+msgid "Save"
+msgstr "Сохранить"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:502
+#: wp-maintenance-mode.php:545
+msgid "Updated"
+msgstr "Обновленный"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:697
+#: wp-maintenance-mode.php:699
+msgid "Deactivate or change Settings"
+msgstr "Отключить или изменить настройки "
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:625
+msgid "seconds"
+msgstr "секунды"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:629
+msgid "minutes"
+msgstr "минуты"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:633
+msgid "hours"
+msgstr "часы"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:637
+msgid "days"
+msgstr "дни"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:641
+msgid "weeks"
+msgstr "недели"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:649
+msgid "years"
+msgstr "годы"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:763
+msgid "Plugin by:"
+msgstr "Плагин от:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:765
+#: wp-maintenance-mode.php:767
+#: wp-maintenance-mode.php:769
+#: wp-maintenance-mode.php:771
+#: wp-maintenance-mode.php:773
+#: wp-maintenance-mode.php:775
+#: wp-maintenance-mode.php:777
+#: wp-maintenance-mode.php:779
+#: wp-maintenance-mode.php:781
+#: wp-maintenance-mode.php:783
+#: wp-maintenance-mode.php:785
+msgid "Design by:"
+msgstr "Дизайн:"
+
+# @ wp-maintenance-mode
+#: site.php:12
+#: site.php:48
+msgid "Maintenance Mode"
+msgstr "В режиме обслуживания"
+
+# @ wp-maintenance-mode
+#: site.php:62
+msgid "Admin-Login"
+msgstr "Admin-Войти"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:382
+msgid "Title:"
+msgstr "Название:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:367
+msgid "URL to the css-file"
+msgstr "URL к css-файлу"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:385
+#: wp-maintenance-mode.php:393
+#: wp-maintenance-mode.php:401
+msgid "Leave empty for default."
+msgstr "Оставьте поле пустым, по умолчанию."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:390
+msgid "Header:"
+msgstr "Заголовок:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:398
+msgid "Heading:"
+msgstr "Заголовок:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:337
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Пожалуйста оставьте линк к плагину - и дизайн-автора на своем сайте в режиме обслуживания."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:645
+msgid "months"
+msgstr "месяцы"
+
+# @ wp-maintenance-mode
+#: site.php:55
+msgid "Access to the admin area blocked"
+msgstr "Доступ к области администрирования закрыт"
+
+# @ wp-maintenance-mode
+#: site.php:58
+msgid "Admin-Logout"
+msgstr "Admin-Выход"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:447
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Разрешенная роль пользователя для просмотра этого блога."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:695
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Осторожно: Режим обслуживания <strong>активен</strong>!"
+
+# @ default
+#: index.php:5
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:369
+msgid "<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
+msgstr "<strong>Осторожно:</strong> Пожалуйтса не копируйте stylesheet в вашу директорию плагинов, это должно быть удалено при следующем автоматическом обновлении плагина!"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:374
+#: wp-maintenance-mode.php:377
+msgid "Preview"
+msgstr "Предпросмотр"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+msgid "WP Maintenance Mode"
+msgstr "WP в режиме обслуживания"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+msgstr ""
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+msgid "Frank B&uuml;ltge"
+msgstr ""
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:355
+msgid "Animate (Flash)"
+msgstr "Анимировать (Flash)"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:358
+msgid "Chemistry"
+msgstr "Химия"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:411
+#, php-format
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible"
+msgstr "Используйте первый <em>%1$s</em> для значения времени или обратный отсчет и второй <em>%2$s</em> за единицу времени или обратный отсчет; HTML и Shortcodes возможны"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+msgid "1.6.7"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:448
+msgid "Super Admin has always access."
+msgstr "Super Admin всегда имеет доступ."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:421
+msgid "Exclude feed, pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr "Исключите feed, страницы, посты или архивы из режим обслуживания. Добавьте Slug страницы или поста как разделенных запятыми список.<br />Пример:"
+

@@ -1,0 +1,26 @@
+#wm_config_tr, #wm_config_tr td {
+padding: 0;
+}
+
+#wm_config_row {
+margin: 10px;
+}
+
+.config_hidden {
+display: none;
+}
+
+#wm_message, #wm_message_update, #wm_message_active, #wm_message_active2, #wm_message_update2 {
+display: none;
+}
+
+#wphead #mm_in_admin_header {
+	font: normal 11px Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+	line-height: 17px;
+	padding: 17px 0 0 0;
+	float: left;
+	color: #464646;
+}
+#wphead a#mm_in_admin_header:hover {
+	text-decoration: underline;
+}

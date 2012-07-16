@@ -1,0 +1,104 @@
+/**
+ * @design http://fv-web.de/
+ */
+ 
+* {
+	margin: 0;
+	padding: 0;
+	font-size: small;
+	font-family: "Palatino Linotype", Palatino, Georgia, Serif;
+}
+
+body {
+	background-color: #FFF;
+	text-align: center;
+}
+
+p, strong, a {
+	line-height: 140%;
+	font-family: Verdana, Arial, Sans-Serif;
+}
+
+#header {
+	position: absolute;
+	top: 5px;
+	width: 100%;
+	height: 20px;
+	border-bottom: 1px solid #CCC;
+	text-align: right;
+}
+
+#header p {
+	padding-right: 15px;
+}
+
+#content {
+	margin: 100px auto;
+	width: 500px;
+	height: 350px;
+	background: url('images/do-not-enter.jpg') bottom right no-repeat;
+	text-align: left;
+}
+
+#content h1 {
+	margin: 20px;
+	padding-top: 20px;
+	font-size: 300%;
+	color: #B8C9DD;
+	letter-spacing: 2px;
+	text-align: center;
+	border-bottom: 7px solid #C5C5C5;
+}
+
+#content h3 {
+	font-size: 140%;
+	color: #8f1218;
+	padding: 0 0 0 22px;
+}
+
+#content p {
+	width: 300px;
+}
+
+#content p {
+	padding: 22px;
+}
+
+div.admin {
+	margin-top: 130px;
+	margin-right: 45px;
+	text-align: right;
+}
+
+div.admin a:link, div.admin a:visited {
+	padding: 7px;
+	color: #202020;
+}
+
+div.admin a:hover, div.admin a:focus, div.admin a:active {
+	background-color: #B8C9DD;
+	text-decoration: underline;
+}
+
+#footer {
+	width: 100%;
+	height: 20px;
+	padding-top: 15px;
+	border-top: 1px solid #CCC;
+	text-align: right;
+}
+
+#footer img {
+	border: none;
+}
+
+#footer a:link, #footer a:visited {
+	margin-right: 15px;
+	padding: 14px 7px 7px 7px;
+	color: #000;
+}
+
+#footer a:hover, #footer a:focus, #footer a:active {
+	background-color: #B8C9DD;
+	text-decoration: underline;
+}

@@ -1,0 +1,102 @@
+/**
+ * @design http://www.davidhellmann.com/
+ */
+* {
+list-style-type: none;
+margin: 0;
+padding: 0;
+text-decoration: none;
+font-weight: 700;
+border: none;
+}
+
+body {
+background: url('images/background.jpg') repeat;
+font: 400 13px/18px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+a {
+text-decoration: none;
+color: #fff;
+}
+
+a:hover {
+text-decoration: none;
+}
+
+#content {
+width: 800px;
+height: 600px;
+background: url('images/box-bg.jpg') no-repeat;
+position: absolute;
+top: 0;
+left: 50%;
+margin: 0 0 0 -400px;
+z-index: 5;
+}
+
+#content h1 {
+position: absolute;
+width: 410px;
+height: 60px;
+left: 50px;
+top: 270px;
+no-repeat;
+}
+
+#content h3 {
+position: absolute;
+width: 410px;
+font-size: 20px;
+left: 55px;
+top: 320px;
+color: #8f1218;
+}
+
+#content p {
+width: 380px;
+height: 300px;
+color: #888;
+position: absolute;
+top: 340px;
+left: 55px;
+font: normal 17px/24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#content p strong {
+font-weight: 900;
+color: #555;
+}
+
+#content div.admin {
+position: absolute;
+width: 85px;
+height: 28px;
+line-height: 28px;
+font-weight: 900 !important;
+bottom: 10px;
+right: 40px;
+}
+
+#header {
+width: 100%;
+height: 28px;
+background: url('images/leiste.jpg') repeat-x;
+color: #fff;
+text-align: center;
+position: absolute;
+top: 0;
+z-index: 10;
+line-height: 28px;
+font-weight: bold;
+}
+
+#footer {
+position: absolute;
+bottom: 10px;
+left: 15px;
+font-size: smaller;
+}
+#footer img {
+vertical-align: bottom;
+}

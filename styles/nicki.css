@@ -1,0 +1,62 @@
+/**
+ * @design http://www.mynicki.net
+ */
+body{
+font-size: 67.5%;
+}
+
+a {
+color: #333;
+text-decoration: underline;
+}
+
+#header {
+display: none;
+}
+
+#content{
+background: url('images/wartungsmodus.jpg') no-repeat;
+position: absolute;
+width: 380px;
+height: 302px;
+left: 50%;
+top: 50%;
+margin-left: -351px;
+margin-top: -196px;
+border: 1px solid #222;
+padding: 90px 0 0 320px;
+color: #fff;
+font-size: 1.2em;
+}
+
+#content h3 {
+color: #8f1218;
+}
+
+#content p{
+width: 305px;   
+}
+
+.admin {
+width: 305px;
+padding: 10px 0 0 0;
+text-align: center;
+}
+
+.admin a {
+color: #fff;
+text-decoration: underline;
+}
+
+#footer {
+position: absolute;
+width: 702px;
+left: 50%;
+top: 50%;
+margin-left: -351px;
+margin-top: 200px;
+}
+
+#footer img {
+border: none;
+}

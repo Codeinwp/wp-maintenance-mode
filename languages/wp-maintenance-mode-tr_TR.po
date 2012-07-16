@@ -1,0 +1,333 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Hüseyin Ülkü <huseyinulku@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: !wartungsmodus.php:119
+msgid "Settings"
+msgstr ""
+
+#: !wartungsmodus.php:212
+#@ wartungsmodus
+msgid "Save"
+msgstr "Kaydet"
+
+#: !wartungsmodus.php:238
+#: !wartungsmodus.php:273
+#@ wartungsmodus
+msgid "Updated"
+msgstr "Güncellendi"
+
+#: site.php:83
+#@ wartungsmodus
+msgid "Admin-Login"
+msgstr "Yönetici Girişi"
+
+#: !wartungsmodus.php:382
+#@ wartungsmodus
+msgid "Plugin by:"
+msgstr "Eklenti yazarı:"
+
+#: !wartungsmodus.php:384
+#: !wartungsmodus.php:387
+#: !wartungsmodus.php:390
+#: !wartungsmodus.php:393
+#: !wartungsmodus.php:396
+#: !wartungsmodus.php:399
+#: !wartungsmodus.php:402
+#: !wartungsmodus.php:405
+#: !wartungsmodus.php:408
+#: !wartungsmodus.php:411
+#@ wartungsmodus
+msgid "Design by:"
+msgstr "Tasarımcı:"
+
+#: !wartungsmodus.php:153
+#@ wartungsmodus
+msgid "Plugin Settings"
+msgstr "Eklenti Ayarları"
+
+#: !wartungsmodus.php:140
+#, php-format
+#@ wartungsmodus
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Eklenti %s ayarları <strong>güncellendi</strong>."
+
+#: site.php:7
+#: site.php:77
+#@ wartungsmodus
+msgid "Maintenance Mode"
+msgstr "Bakım Modu"
+
+#: !wartungsmodus.php:178
+#@ wartungsmodus
+msgid "Link:"
+msgstr "Bağlantı:"
+
+#: !wartungsmodus.php:183
+#@ wartungsmodus
+msgid "Theme:"
+msgstr "Tema:"
+
+#: !wartungsmodus.php:186
+#@ wartungsmodus
+msgid "Simple Text"
+msgstr "Basit Metin"
+
+#: !wartungsmodus.php:187
+#@ wartungsmodus
+msgid "The Truck"
+msgstr "Kamyon"
+
+#: !wartungsmodus.php:164
+#@ wartungsmodus
+msgid "Value:"
+msgstr "Değer:"
+
+#: !wartungsmodus.php:166
+#@ wartungsmodus
+msgid "Unit:"
+msgstr "Birim:"
+
+#: !wartungsmodus.php:168
+#@ wartungsmodus
+msgid "second"
+msgstr "saniye"
+
+#: !wartungsmodus.php:169
+#@ wartungsmodus
+msgid "minute"
+msgstr "dakika"
+
+#: !wartungsmodus.php:170
+#@ wartungsmodus
+msgid "hour"
+msgstr "saat"
+
+#: !wartungsmodus.php:171
+#@ wartungsmodus
+msgid "day"
+msgstr "gün"
+
+#: !wartungsmodus.php:172
+#@ wartungsmodus
+msgid "week"
+msgstr "hafta"
+
+#: !wartungsmodus.php:173
+#@ wartungsmodus
+msgid "month"
+msgstr "ay"
+
+#: !wartungsmodus.php:174
+#@ wartungsmodus
+msgid "year"
+msgstr "yıl"
+
+#: !wartungsmodus.php:147
+#: !wartungsmodus.php:158
+#: !wartungsmodus.php:180
+#@ wartungsmodus
+msgid "False"
+msgstr "Hayır"
+
+#: !wartungsmodus.php:148
+#: !wartungsmodus.php:159
+#: !wartungsmodus.php:181
+#@ wartungsmodus
+msgid "True"
+msgstr "Evet"
+
+#: !wartungsmodus.php:327
+#: site.php:39
+#: site.php:44
+#@ wartungsmodus
+msgid "seconds"
+msgstr "saniye"
+
+#: !wartungsmodus.php:331
+#: site.php:39
+#: site.php:44
+#@ wartungsmodus
+msgid "minutes"
+msgstr "dakika"
+
+#: !wartungsmodus.php:335
+#: site.php:39
+#: site.php:44
+#@ wartungsmodus
+msgid "hours"
+msgstr "saat"
+
+#: !wartungsmodus.php:339
+#: site.php:39
+#: site.php:44
+#@ wartungsmodus
+msgid "days"
+msgstr "gün"
+
+#: !wartungsmodus.php:343
+#@ wartungsmodus
+msgid "weeks"
+msgstr "hafta"
+
+#: !wartungsmodus.php:347
+#@ wartungsmodus
+msgid "moths"
+msgstr "ay"
+
+#: !wartungsmodus.php:351
+#@ wartungsmodus
+msgid "years"
+msgstr "yıl"
+
+#: !wartungsmodus.php:141
+#, php-format
+#@ wartungsmodus
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Eklenti %s etkinlik durumu <strong>güncellendi</strong>."
+
+#: !wartungsmodus.php:143
+#@ wartungsmodus
+msgid "Plugin Activate"
+msgstr "Eklentiyi Etkinleştir"
+
+#: !wartungsmodus.php:185
+#@ wartungsmodus
+msgid "Own Style"
+msgstr "Kendi Stili"
+
+#: !wartungsmodus.php:188
+#@ wartungsmodus
+msgid "The Sun"
+msgstr "Güneş"
+
+#: !wartungsmodus.php:189
+#@ wartungsmodus
+msgid "The FF Error"
+msgstr "FF Hatası"
+
+#: !wartungsmodus.php:190
+#@ wartungsmodus
+msgid "Monster"
+msgstr "Canavar"
+
+#: !wartungsmodus.php:198
+#@ wartungsmodus
+msgid "Own Style URL (incl. http://):"
+msgstr "Kendi Stil URL'si (http:// ile)"
+
+#: !wartungsmodus.php:202
+#@ wartungsmodus
+msgid "Text:"
+msgstr "Metin:"
+
+#: !wartungsmodus.php:311
+#@ wartungsmodus
+msgid "Coution: Maintenance mode is <strong>active</strong>!"
+msgstr "Dikkat: Bakım modu<strong> aktif</strong>!"
+
+#: !wartungsmodus.php:150
+#@ wartungsmodus
+msgid "Update"
+msgstr "Güncelle"
+
+#: !wartungsmodus.php:191
+#@ wartungsmodus
+msgid "Chastely"
+msgstr "Chastely"
+
+#: !wartungsmodus.php:192
+#@ wartungsmodus
+msgid "Only Typo"
+msgstr "Only Typo"
+
+#: !wartungsmodus.php:193
+#@ wartungsmodus
+msgid "Paint"
+msgstr "Paint"
+
+#: !wartungsmodus.php:194
+#@ wartungsmodus
+msgid "Animate (Flash, only german)"
+msgstr "Animate (Flash, sadece Almanca)"
+
+#: !wartungsmodus.php:311
+#@ wartungsmodus
+msgid "Deactivate or change Settings"
+msgstr "Devre dışı bırakmak veya değiştirmek Ayarlar"
+
+#: !wartungsmodus.php:156
+#@ wartungsmodus
+msgid "Countdown:"
+msgstr ""
+
+#: !wartungsmodus.php:161
+#: !wartungsmodus.php:162
+#@ wartungsmodus
+msgid "Click for datepicker"
+msgstr ""
+
+#: !wartungsmodus.php:161
+#@ wartungsmodus
+msgid "Date:"
+msgstr ""
+
+#: !wartungsmodus.php:163
+#@ wartungsmodus
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr ""
+
+#: !wartungsmodus.php:195
+#@ wartungsmodus
+msgid "Damask"
+msgstr ""
+
+#: !wartungsmodus.php:196
+#@ wartungsmodus
+msgid "Lego"
+msgstr ""
+
+#: !wartungsmodus.php:206
+#@ wartungsmodus
+msgid "Excludes:"
+msgstr ""
+
+#: !wartungsmodus.php:209
+#@ wartungsmodus
+msgid "Exlude pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example: "
+msgstr ""
+
+#: site.php:37
+#@ wartungsmodus
+msgid "The due date was before"
+msgstr ""
+
+#: site.php:39
+#: site.php:44
+#@ wartungsmodus
+msgid "and"
+msgstr ""
+
+#: !wartungsmodus.php:202
+#, php-format
+#@ wartungsmodus
+msgid "(Use the first %s for the time value or countdown and second %s for the unit of the time, HTML is possible)"
+msgstr ""
+

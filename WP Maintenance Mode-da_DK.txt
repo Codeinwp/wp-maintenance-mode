@@ -1,0 +1,28 @@
+WP Maintenance Mode 1.6.5
+
+Sprogfilerne skal ligge i wp-maintenance-mode/languages
+Oplysning om stierne er pakket med.
+Understøtter dit udpakningsprogram anvendelse heraf,
+kan du udpakke direkte til (formentlig) wp-content/plugins
+
+En oversættelse til HTML-beskeden kunne være:
+
+"<p>Beklager ulejligheden.<br />Der foregår i øjeblikket planlagt vedligeholdelse af siten.<br /><strong>Prøv at komme tilbage om %1$s %2$s</strong><br />Mange tak for din forståelse.</p>"
+
+Evt. opdateringer eller info herom kan hentes via http://wordpress.blogos.dk/wpdadkdownloads
+eller direkte på http://wordpress.blogos.dk/s%C3%B8g-efter-downloads/?did=250
+
+Se evt. også http://wordpress.blogos.dk/tag/wp-maintenance-mode
+
+
+
+FOR THE DEVELOPER
+You are very welcome to check for updated language files in one of the following ways:
+
+1. On my downloads page that list all files available for download:
+http://wordpress.blogos.dk/wpdadkdownloads/
+
+2. Directly on my Download Monitor download page: http://wordpress.blogos.dk/s%C3%B8g-efter-downloads/?did=250
+
+If I have blogged about your plugin, theme or other resource, you will be able to find it via this tag: http://wordpress.blogos.dk/tag/wp-maintenance-mode
+

@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+/**
+ * @design http://krautsuppe.de/
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif;
+}
+
+body {
+	font-size: x-small; /* fuer IE5/Win */
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	font-size: small; /* fuer konforme Browser */
+	padding: 11% 5% 0 10%;
+	background-color: #FFF;
+}
+
+strong {
+	font-size: 120%;
+	line-height: 200%;
+	color: #000;
+}
+
+#header {
+	visibility: hidden;
+}
+
+#content {
+	margin: 0 auto;
+}
+
+#content h1 {
+	font-size: 450%;
+	margin-left: 4%;
+	margin-bottom: 2%;
+	color: #000;
+}
+
+#content h3 {
+	font-size: 170%;
+	margin-left: 25%;
+	color: #8f1218;
+}
+
+#content p {
+	font-size: 170%;
+	margin-left: 25%;
+	line-height: 135%;
+	color: #666;
+}
+
+.admin {
+	visibility: hidden;
+	display: none;
+}
+
+#footer {
+	visibility: hidden;
+	display: none;
+}

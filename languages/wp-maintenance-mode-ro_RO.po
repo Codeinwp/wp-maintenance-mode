@@ -1,0 +1,433 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Maintenance-Mode 1.6.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-04 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ovidiu <ovidiu@selco.biz>\n"
+"Language-Team: Selco Resita <office@selco-computers.ro>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: ROMANIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+#@ wp-maintenance-mode
+msgid "The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings."
+msgstr "Plugin-ul adauga o pagină goala blogului tău care atrage atenţia vizitatorilor de faptul ca blog-ul este deyactivat pentru mentenanţă. Utilizatorii autentificaţi au acces nelimitat inclusiv pe prima pagină, în funcţie de setări."
+
+#: wp-maintenance-mode.php:160
+#@ default
+msgid "Settings"
+msgstr "Setări"
+
+#: wp-maintenance-mode.php:260
+#: wp-maintenance-mode.php:469
+#, php-format
+#@ wp-maintenance-mode
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Setările plugin-ului %s <strong>memorate</strong>."
+
+#: wp-maintenance-mode.php:263
+#: wp-maintenance-mode.php:276
+#, php-format
+#@ wp-maintenance-mode
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Starea de activare a plugin-ului %s <strong>memorată</strong>."
+
+#: wp-maintenance-mode.php:266
+#@ wp-maintenance-mode
+msgid "Plugin Activate"
+msgstr "Activează plugin"
+
+#: wp-maintenance-mode.php:270
+#: wp-maintenance-mode.php:289
+#: wp-maintenance-mode.php:333
+#@ wp-maintenance-mode
+msgid "False"
+msgstr "Nu"
+
+#: wp-maintenance-mode.php:271
+#: wp-maintenance-mode.php:290
+#: wp-maintenance-mode.php:334
+#@ wp-maintenance-mode
+msgid "True"
+msgstr "Da"
+
+#: wp-maintenance-mode.php:273
+#@ wp-maintenance-mode
+msgid "Update"
+msgstr "Actualizează"
+
+#: wp-maintenance-mode.php:279
+#@ wp-maintenance-mode
+msgid "Plugin Settings"
+msgstr "Setări plugin"
+
+#: wp-maintenance-mode.php:285
+#@ wp-maintenance-mode
+msgid "Countdown:"
+msgstr "Numărătoare inversă:"
+
+#: wp-maintenance-mode.php:296
+#: wp-maintenance-mode.php:299
+#@ wp-maintenance-mode
+msgid "Click for datepicker"
+msgstr "Click pentru alegerea datei"
+
+#: wp-maintenance-mode.php:296
+#@ wp-maintenance-mode
+msgid "Date:"
+msgstr "Data:"
+
+#: wp-maintenance-mode.php:300
+#@ wp-maintenance-mode
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Activează funcţia de numărătoare inversă pentru această utilizare. Introdu o valoare şi o unitate de timp sau alege o dată pentru numărătoarea inversă."
+
+#: wp-maintenance-mode.php:305
+#@ wp-maintenance-mode
+msgid "Value:"
+msgstr "Valoare:"
+
+#: wp-maintenance-mode.php:313
+#@ wp-maintenance-mode
+msgid "Unit:"
+msgstr "Unitate timp:"
+
+#: wp-maintenance-mode.php:317
+#@ wp-maintenance-mode
+msgid "second"
+msgstr "secundă"
+
+#: wp-maintenance-mode.php:318
+#@ wp-maintenance-mode
+msgid "minute"
+msgstr "minut"
+
+#: wp-maintenance-mode.php:319
+#@ wp-maintenance-mode
+msgid "hour"
+msgstr "oră"
+
+#: wp-maintenance-mode.php:320
+#@ wp-maintenance-mode
+msgid "day"
+msgstr "zi"
+
+#: wp-maintenance-mode.php:321
+#@ wp-maintenance-mode
+msgid "week"
+msgstr "săptămână"
+
+#: wp-maintenance-mode.php:322
+#@ wp-maintenance-mode
+msgid "month"
+msgstr "lună"
+
+#: wp-maintenance-mode.php:323
+#@ wp-maintenance-mode
+msgid "year"
+msgstr "an"
+
+#: wp-maintenance-mode.php:329
+#@ wp-maintenance-mode
+msgid "Link:"
+msgstr "Link:"
+
+#: wp-maintenance-mode.php:342
+#@ wp-maintenance-mode
+msgid "Theme:"
+msgstr "Temă:"
+
+#: wp-maintenance-mode.php:346
+#@ wp-maintenance-mode
+msgid "Own Style"
+msgstr "Design propriu"
+
+#: wp-maintenance-mode.php:347
+#@ wp-maintenance-mode
+msgid "Simple Text"
+msgstr "Text simplu"
+
+#: wp-maintenance-mode.php:348
+#@ wp-maintenance-mode
+msgid "The Truck"
+msgstr "The Truck"
+
+#: wp-maintenance-mode.php:349
+#@ wp-maintenance-mode
+msgid "The Sun"
+msgstr "The Sun"
+
+#: wp-maintenance-mode.php:350
+#@ wp-maintenance-mode
+msgid "The FF Error"
+msgstr "The FF Error"
+
+#: wp-maintenance-mode.php:351
+#@ wp-maintenance-mode
+msgid "Monster"
+msgstr "Monster"
+
+#: wp-maintenance-mode.php:352
+#@ wp-maintenance-mode
+msgid "Chastely"
+msgstr "Chastely"
+
+#: wp-maintenance-mode.php:353
+#@ wp-maintenance-mode
+msgid "Only Typo"
+msgstr "Only Typo"
+
+#: wp-maintenance-mode.php:354
+#@ wp-maintenance-mode
+msgid "Paint"
+msgstr "Paint"
+
+#: wp-maintenance-mode.php:356
+#@ wp-maintenance-mode
+msgid "Damask"
+msgstr "Damask"
+
+#: wp-maintenance-mode.php:357
+#@ wp-maintenance-mode
+msgid "Lego"
+msgstr "Lego"
+
+#: wp-maintenance-mode.php:364
+#@ wp-maintenance-mode
+msgid "Own Style URL (incl. http://):"
+msgstr "URL design propriu (inkl. http://)"
+
+#: wp-maintenance-mode.php:406
+#@ wp-maintenance-mode
+msgid "Text:"
+msgstr "Text:"
+
+#: wp-maintenance-mode.php:416
+#@ wp-maintenance-mode
+msgid "Excludes:"
+msgstr "Excluderi:"
+
+#: wp-maintenance-mode.php:437
+#@ wp-maintenance-mode
+msgid "Role:"
+msgstr "Rol:"
+
+#: wp-maintenance-mode.php:472
+#@ wp-maintenance-mode
+msgid "Save"
+msgstr "Memorează"
+
+#: wp-maintenance-mode.php:517
+#: wp-maintenance-mode.php:560
+#@ wp-maintenance-mode
+msgid "Updated"
+msgstr "Actualizat"
+
+#: wp-maintenance-mode.php:716
+#: wp-maintenance-mode.php:718
+#@ wp-maintenance-mode
+msgid "Deactivate or change Settings"
+msgstr "Dezactivează sau modifică setări "
+
+#: wp-maintenance-mode.php:644
+#@ wp-maintenance-mode
+msgid "seconds"
+msgstr "secunde"
+
+#: wp-maintenance-mode.php:648
+#@ wp-maintenance-mode
+msgid "minutes"
+msgstr "minute"
+
+#: wp-maintenance-mode.php:652
+#@ wp-maintenance-mode
+msgid "hours"
+msgstr "ore"
+
+#: wp-maintenance-mode.php:656
+#@ wp-maintenance-mode
+msgid "days"
+msgstr "zile"
+
+#: wp-maintenance-mode.php:660
+#@ wp-maintenance-mode
+msgid "weeks"
+msgstr "săptămâni"
+
+#: wp-maintenance-mode.php:668
+#@ wp-maintenance-mode
+msgid "years"
+msgstr "ani"
+
+#: wp-maintenance-mode.php:786
+#@ wp-maintenance-mode
+msgid "Plugin by:"
+msgstr "Plugin:"
+
+#: wp-maintenance-mode.php:788
+#: wp-maintenance-mode.php:790
+#: wp-maintenance-mode.php:792
+#: wp-maintenance-mode.php:794
+#: wp-maintenance-mode.php:796
+#: wp-maintenance-mode.php:798
+#: wp-maintenance-mode.php:800
+#: wp-maintenance-mode.php:802
+#: wp-maintenance-mode.php:804
+#: wp-maintenance-mode.php:806
+#: wp-maintenance-mode.php:808
+#@ wp-maintenance-mode
+msgid "Design by:"
+msgstr "Design:"
+
+#: site.php:12
+#: site.php:48
+#@ wp-maintenance-mode
+msgid "Maintenance Mode"
+msgstr "Stare de mentenanţă"
+
+#: site.php:62
+#@ wp-maintenance-mode
+msgid "Admin-Login"
+msgstr "Login admin"
+
+#: wp-maintenance-mode.php:382
+#@ wp-maintenance-mode
+msgid "Title:"
+msgstr "Titlu:"
+
+#: wp-maintenance-mode.php:367
+#@ wp-maintenance-mode
+msgid "URL to the css-file"
+msgstr "Calea către fişierul CSS"
+
+#: wp-maintenance-mode.php:385
+#: wp-maintenance-mode.php:393
+#: wp-maintenance-mode.php:401
+#@ wp-maintenance-mode
+msgid "Leave empty for default."
+msgstr "Lasă liber pentru setarea implicită."
+
+#: wp-maintenance-mode.php:390
+#@ wp-maintenance-mode
+msgid "Header:"
+msgstr "Header:"
+
+#: wp-maintenance-mode.php:398
+#@ wp-maintenance-mode
+msgid "Heading:"
+msgstr "Heading:"
+
+#: wp-maintenance-mode.php:337
+#@ wp-maintenance-mode
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Te rog să laşi o legătură către autorul plugin-ului şi al design-ului pe site-ul tău aflat în mentenanţă"
+
+#: wp-maintenance-mode.php:664
+#@ wp-maintenance-mode
+msgid "months"
+msgstr "luni"
+
+#: site.php:55
+#@ wp-maintenance-mode
+msgid "Access to the admin area blocked"
+msgstr "Accesul în zona de administrare este interzis"
+
+#: site.php:58
+#@ wp-maintenance-mode
+msgid "Admin-Logout"
+msgstr "Ieşire admin"
+
+#: wp-maintenance-mode.php:462
+#@ wp-maintenance-mode
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Rolul utilizatorului pentru care este permisă vizualizarea paginii de start."
+
+#: wp-maintenance-mode.php:714
+#@ wp-maintenance-mode
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Atenţie: Starea de mentenanţă este <strong>activată</strong>!"
+
+#: index.php:5
+#@ default
+msgid "Cheatin&#8217; uh?"
+msgstr "Trişezi&#8217; uh?"
+
+#: wp-maintenance-mode.php:369
+#@ wp-maintenance-mode
+msgid "<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
+msgstr "<strong>Atenţie:</strong> Te rog să nu copiezi fişierul de still CSS în folder-ul plugin-ului, acesta va fi şters la următoarea actualizare automată a plugin-ului!"
+
+#: wp-maintenance-mode.php:374
+#: wp-maintenance-mode.php:377
+#@ wp-maintenance-mode
+msgid "Preview"
+msgstr "Previzualizare"
+
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+#@ wp-maintenance-mode
+msgid "WP Maintenance Mode"
+msgstr "Stare de mentenanţă"
+
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+#@ wp-maintenance-mode
+msgid "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+msgstr "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+#@ wp-maintenance-mode
+msgid "Frank B&uuml;ltge"
+msgstr "Frank B&uuml;ltge"
+
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+#@ wp-maintenance-mode
+msgid "http://bueltge.de/"
+msgstr "http://bueltge.de/"
+
+#: wp-maintenance-mode.php:355
+#@ wp-maintenance-mode
+msgid "Animate (Flash)"
+msgstr "Animatie (Flash, numai în limba germană)"
+
+#: wp-maintenance-mode.php:358
+#@ wp-maintenance-mode
+msgid "Chemistry"
+msgstr "Chemistry"
+
+#: wp-maintenance-mode.php:411
+#, php-format
+#@ wp-maintenance-mode
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible"
+msgstr "Foloseşte primul <em>%1$s</em> pentru timp sau numaratoare inversa si a doua <em>%2$s</em> pentru unitatea de timp sau valoarea numaratorii; HTML si Scurtături sunt posibile"
+
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+#@ wp-maintenance-mode
+msgid "1.6.7"
+msgstr "1.6.7"
+
+#: wp-maintenance-mode.php:463
+#@ wp-maintenance-mode
+msgid "Super Admin has always access."
+msgstr "Super Administratorul are întotdeauna acces."
+
+#: wp-maintenance-mode.php:432
+#@ wp-maintenance-mode
+msgid "Exclude feed, pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr "Exclude pagini, articole sau arhive din starea de mentenanţă. Adaugă forma titlului unei pagini sau al unui articol (slug) ca listă separată prin virgule.<br />Exemplu: "
+

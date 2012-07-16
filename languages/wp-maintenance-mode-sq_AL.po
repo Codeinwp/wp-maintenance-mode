@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Frank Bueltge <frank@bueltge.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: !wartungsmodus.php:119
+msgid "Settings"
+msgstr ""
+
+#@ wartungsmodus
+#: !wartungsmodus.php:212
+msgid "Save"
+msgstr "Ruaj"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:238
+#: !wartungsmodus.php:273
+msgid "Updated"
+msgstr "Updated"
+
+#@ wartungsmodus
+#: site.php:83
+msgid "Admin-Login"
+msgstr "Admin-Login"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:382
+msgid "Plugin by:"
+msgstr "Plugin nga:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:384
+#: !wartungsmodus.php:387
+#: !wartungsmodus.php:390
+#: !wartungsmodus.php:393
+#: !wartungsmodus.php:396
+#: !wartungsmodus.php:399
+#: !wartungsmodus.php:402
+#: !wartungsmodus.php:405
+#: !wartungsmodus.php:408
+#: !wartungsmodus.php:411
+msgid "Design by:"
+msgstr "Designi nga:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:153
+msgid "Plugin Settings"
+msgstr "Opsionet e Pluginit"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:140
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Ndryshimet e Pluginit %s  <strong>u ruajtën</strong>."
+
+#@ wartungsmodus
+#: site.php:7
+#: site.php:77
+msgid "Maintenance Mode"
+msgstr "Faqe në Ndërtim"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:178
+msgid "Link:"
+msgstr "Link:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:183
+msgid "Theme:"
+msgstr "Theme:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:186
+msgid "Simple Text"
+msgstr "Tekst i thjeshtë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:187
+msgid "The Truck"
+msgstr "Kamioni"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:164
+msgid "Value:"
+msgstr "Vlera:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:166
+msgid "Unit:"
+msgstr "Njësia:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:168
+msgid "second"
+msgstr "sekonda"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:169
+msgid "minute"
+msgstr "minuta"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:170
+msgid "hour"
+msgstr "orë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:171
+msgid "day"
+msgstr "ditë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:172
+msgid "week"
+msgstr "javë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:173
+msgid "month"
+msgstr "muaj"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:174
+msgid "year"
+msgstr "vit"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:147
+#: !wartungsmodus.php:158
+#: !wartungsmodus.php:180
+msgid "False"
+msgstr "Jo"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:148
+#: !wartungsmodus.php:159
+#: !wartungsmodus.php:181
+msgid "True"
+msgstr "Po"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:327
+#: site.php:39
+#: site.php:44
+msgid "seconds"
+msgstr "sekonda"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:331
+#: site.php:39
+#: site.php:44
+msgid "minutes"
+msgstr "minuta"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:335
+#: site.php:39
+#: site.php:44
+msgid "hours"
+msgstr "orë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:339
+#: site.php:39
+#: site.php:44
+msgid "days"
+msgstr "ditë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:343
+msgid "weeks"
+msgstr "javë"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:347
+msgid "moths"
+msgstr "muaj"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:351
+msgid "years"
+msgstr "vite"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:141
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Statusi i pluginit %s  <strong>u aktvizu</strong>."
+
+#@ wartungsmodus
+#: !wartungsmodus.php:143
+msgid "Plugin Activate"
+msgstr "Aktivizo Pluginin"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:185
+msgid "Own Style"
+msgstr "Designi juaj"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:188
+msgid "The Sun"
+msgstr "Dielli"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:189
+msgid "The FF Error"
+msgstr "The FF Error"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:190
+msgid "Monster"
+msgstr "Monster"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:198
+msgid "Own Style URL (incl. http://):"
+msgstr "URL-ja Designit tuaj (inkl. http://)"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:202
+msgid "Text:"
+msgstr "Text:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:311
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Kujdes: Maintenance mode është <strong>aktive</strong>!"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:150
+msgid "Update"
+msgstr "Update"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:191
+msgid "Chastely"
+msgstr "Chastely"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:192
+msgid "Only Typo"
+msgstr "Only Typo"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:193
+msgid "Paint"
+msgstr "Paint"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:194
+msgid "Animate (Flash, only german)"
+msgstr "Animate (Flash, vetëm në gjermanisht)"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:311
+msgid "Deactivate or change Settings"
+msgstr "C'aktivizo ose  ndrysho opsionet"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:156
+msgid "Countdown:"
+msgstr "Countdown:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:163
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Aktivizo Countdownin që të përdorni këtë. Përdor vlerë edhe njësi ose përdor Countdown duke vendosur datën."
+
+#@ wartungsmodus
+#: !wartungsmodus.php:195
+msgid "Damask"
+msgstr ""
+
+#@ wartungsmodus
+#: !wartungsmodus.php:196
+msgid "Lego"
+msgstr ""
+
+#@ wartungsmodus
+#: !wartungsmodus.php:206
+msgid "Excludes:"
+msgstr "Përjashtime:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:209
+msgid "Exlude pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example: "
+msgstr "Përjashto faqe, postime apo arkivin nga maintenance mode. Shto Slug të një faqeje apo postimi si comma-separated list.<br />Shembulll: "
+
+#@ wartungsmodus
+#: site.php:37
+msgid "The due date was before"
+msgstr "Data ishte përpara"
+
+#@ wartungsmodus
+#: site.php:39
+#: site.php:44
+msgid "and"
+msgstr "dhe"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:161
+#: !wartungsmodus.php:162
+msgid "Click for datepicker"
+msgstr "Kliko për \\\"Datums-Picker\\\""
+
+#@ wartungsmodus
+#: !wartungsmodus.php:161
+msgid "Date:"
+msgstr "Data:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:202
+#, php-format
+msgid "(Use the first %s for the time value or countdown and second %s for the unit of the time, HTML is possible)"
+msgstr "(Përdor të parën %s për kohën ose countdown dhe të dytën %s  për njësinë e kohës, HTML është e mundëshme)"
+

@@ -1,0 +1,54 @@
+ /* Wartungsmodusplugin by Bueltge.de - CSS and Grafik by Bugeyes.de */
+ 
+ * {
+ margin:0px;
+ padding:0px;
+ border:0px;}
+ 
+ body {
+ background:#548a32 url('images/bg.jpg') center top no-repeat;
+ font-family:Arial, Verdana;
+ color:#fff;
+ font-size:14px;
+ padding-top:200px;
+ width:700px;
+ margin:0px auto;}
+ 
+ a { color:#fff; text-decoration:none;}
+ 
+ a:hover { color:#ead311;}
+ 
+ #content { position:relative; padding-left:118px;}
+ 
+ #content p {
+ margin-top:30px;
+ font-size:18px;
+ line-height:28px;}
+ 
+ h1 {
+ font-weight:36px;
+ font-family:verdana;
+ font-weight:normal;}
+ 
+ h3 {
+ color: #8f1218;}
+ 
+ #header { margin-bottom:90px; padding-left:}
+ 
+ div.admin a {
+
+ display:block;
+ width:142px;
+ text-align:center;
+ padding-top:20px;
+ height:32px;
+ background-image:url('images/button.png');
+ position:absolute;
+ right:155px;}
+ 
+ #footer { margin-top:75px; font-size:12px;}
+ 
+ #footer img { margin-bottom:-2px; width:12px; height:12px;}
+ 
+  
+ 

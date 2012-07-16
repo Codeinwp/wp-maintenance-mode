@@ -1,0 +1,53 @@
+/**
+ * @design http://www.cayou-media.de/
+ */
+
+body {
+	background:#000;
+	color:#FFF;
+	font:normal 10pt/13pt Trebuchet MS; 
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+a, a:link, a:visited, a.active {
+	text-decoration:none;
+	color:#FFCC01;
+	font:bold 10pt/13pt Trebuchet MS; 
+}
+
+a:hover {
+	text-decoration:underline;	
+}
+
+img {
+	border:none;
+}
+
+.admin {
+
+}
+
+#header {
+	font:bold 12pt/15pt Trebuchet MS; 
+	color:#fff;
+}
+
+#content {
+
+}
+
+h3 {
+	color: #8f1218;
+}
+
+#footer {
+	text-align:right;
+}
+
+#footer a, #footer a:link, #footer a:visited, #footer a.active, #footer a:hover {
+	font:normal 10pt/13pt Trebuchet MS; 
+	text-decoration:none;
+	color:#8C8A8C;
+}

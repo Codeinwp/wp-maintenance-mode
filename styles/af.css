@@ -1,0 +1,90 @@
+/**
+ * @design http://www.afrison.com/
+ */
+ 
+* {
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: Georgia, Arial, Helvetica, Sans Serif;
+font-size: 65.5%;
+font: 400 13px/18px "Trebuchet MS", Arial, Helvetica, sans-serif;
+background-image: url(images/lego-bg.jpg);
+background-repeat: repeat-x;
+}
+
+a {
+color: #000;
+}
+
+a:hover {
+color: #333;
+}
+
+#header {
+color: #333;
+padding: 1.5em;
+text-align: center;
+font-size: 1.2em;
+}
+
+#content {
+width: 1000px;
+height: 600px;
+background: url('images/lego-content.jpg') no-repeat;
+position: absolute;
+top: 40px;
+left: 50%;
+margin: 0 0 0 -500px;
+z-index: 5;
+}
+
+#content p {
+width: 250px;
+position: absolute;
+top: 220px;
+left: 155px;
+}
+
+h1 {
+background-image: url(images/headline-de_DE.jpg);
+background-repeat: no-repeat;
+position: absolute;
+width: 365px;
+height: 57px;
+left: 150px;
+top: 150px;
+no-repeat;
+}
+
+h3 {
+position: absolute;
+left: 155px;
+top: 100px;
+color: #8f1218;
+}
+
+#content div.admin {
+position: absolute;
+top: 255px;
+left: 640px;
+font-size: 14px;
+font-weight:bold;
+}
+
+#content div.admin a{
+text-decoration:none;
+}
+
+#footer {
+position: absolute;
+bottom: 10px;
+left: 15px;
+}
+
+#footer img {
+border: none;
+vertical-align: bottom;
+}

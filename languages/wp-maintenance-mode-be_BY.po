@@ -1,0 +1,268 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wart\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Fat Cow <zhr@tut.by>\n"
+"Language-Team: Fat Cow <zhr@tut.by>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-Language: Belarusian\n"
+"X-Poedit-Country: BELARUS\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: !wartungsmodus.php:110
+msgid "Settings"
+msgstr "Настройки"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:185
+msgid "Save"
+msgstr "Сохранить"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:211
+#: !wartungsmodus.php:240
+msgid "Updated"
+msgstr "Обновлено"
+
+#@ wartungsmodus
+#: site.php:28
+msgid "Admin-Login"
+msgstr "Логин админа"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:337
+msgid "Plugin by:"
+msgstr "Плагин от:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:339
+#: !wartungsmodus.php:342
+#: !wartungsmodus.php:345
+#: !wartungsmodus.php:348
+#: !wartungsmodus.php:351
+#: !wartungsmodus.php:354
+#: !wartungsmodus.php:357
+#: !wartungsmodus.php:360
+msgid "Design by:"
+msgstr "Дизайн:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:144
+msgid "Plugin Settings"
+msgstr "Настройки плагина"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:131
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Настройки %s плагина <strong>обновлены</strong>."
+
+#@ wartungsmodus
+#: site.php:7
+#: site.php:26
+msgid "Maintenance Mode"
+msgstr "Основной режим"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:159
+msgid "Link:"
+msgstr "Ссылка:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:164
+msgid "Theme:"
+msgstr "Тема:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:167
+msgid "Simple Text"
+msgstr "Простой текст"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:168
+msgid "The Truck"
+msgstr "Трак"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:147
+msgid "Value:"
+msgstr "Значение:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:149
+msgid "Unit:"
+msgstr "Юнит:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:151
+msgid "second"
+msgstr "секунда"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:152
+msgid "minute"
+msgstr "минута"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:153
+msgid "hour"
+msgstr "час"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:154
+msgid "day"
+msgstr "день"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:155
+msgid "week"
+msgstr "неделя"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:156
+msgid "month"
+msgstr "месяц"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:157
+msgid "year"
+msgstr "год"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:138
+#: !wartungsmodus.php:161
+msgid "False"
+msgstr "Ложь"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:139
+#: !wartungsmodus.php:162
+msgid "True"
+msgstr "Правда"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:283
+msgid "seconds"
+msgstr "секунд"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:287
+msgid "minutes"
+msgstr "минут"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:291
+msgid "hours"
+msgstr "часов"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:295
+msgid "days"
+msgstr "дней"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:299
+msgid "weeks"
+msgstr "недель"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:303
+msgid "moths"
+msgstr "месяцев"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:307
+msgid "years"
+msgstr "лет"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:132
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Активный статус %s плагина <strong>обновлен</strong>."
+
+#@ wartungsmodus
+#: !wartungsmodus.php:134
+msgid "Plugin Activate"
+msgstr "Плагин активирован"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:166
+msgid "Own Style"
+msgstr "Свой стиль"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:169
+msgid "The Sun"
+msgstr "Солнце"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:170
+msgid "The FF Error"
+msgstr "FF ошибка"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:171
+msgid "Monster"
+msgstr "Монстр"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:177
+msgid "Own Style URL (incl. http://):"
+msgstr "Собственный стиль УРЛа (вкл. http://):"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:181
+msgid "Text:"
+msgstr "Текст:"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:181
+#, php-format
+msgid "(Use the first %s for the time value and second %s for the unit of the time, HTML is possible)"
+msgstr "(Используйте вначале %s для значения времени и секунды %s для значений времени, HTML по возможности)"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:267
+msgid "Coution: Maintenance mode is <strong>active</strong>!"
+msgstr "Coution: Режим обслуживания <strong>активен!</strong>"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:141
+msgid "Update"
+msgstr "Обновление"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:172
+msgid "Chastely"
+msgstr "Chastely"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:173
+msgid "Only Typo"
+msgstr "Только Typo"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:174
+msgid "Paint"
+msgstr "Paint"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:175
+msgid "Animate (Flash, only german)"
+msgstr "Анимация (Flash, sadece Almanca)"
+
+#@ wartungsmodus
+#: !wartungsmodus.php:267
+msgid "Deactivate or change Settings"
+msgstr "Отключить или изменить настройки"
+

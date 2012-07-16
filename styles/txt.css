@@ -1,0 +1,65 @@
+		* {
+		margin: 0;
+		padding: 0;
+		}
+		
+		body {
+		font-family: Georgia, Arial, Helvetica, Sans Serif;
+		font-size: 65.5%;
+		}
+		
+		a {
+		color: #08658F;
+		}
+		
+		a:hover {
+		color: #0092BF;
+		}
+		
+		#header {
+		color: #333;
+		padding: 1.5em;
+		text-align: center;
+		font-size: 1.2em;
+		border-bottom: 1px dotted #0092BF
+		}
+		
+		#content {
+		font-size: 150%;
+		width: 80%;
+		margin: 0 auto;
+		padding: 8% 0
+		}
+		
+		#content p {
+		font-size: 1em;
+		padding: .8em 0
+		}
+		
+		h1 {
+		color: #08658F;
+		font-size: 300%;
+		padding: .5em 0;
+		}
+		
+		h3 {
+		color: #8f1218;
+		}
+		
+		#content div.admin {
+		position: fixed;
+		bottom: 10px;
+		left: 8%;
+		font-size: .8em;
+		}
+		
+		#footer {
+		position: fixed;
+		bottom: 10px;
+		right: 15px;
+		}
+		
+		#footer img {
+		border: none;
+		vertical-align: bottom;
+		}

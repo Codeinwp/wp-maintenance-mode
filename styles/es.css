@@ -1,0 +1,92 @@
+/**
+ * @design http://www.elmastudio.de
+ * @link   http://www.elmastudio.de/freebies/freebie-illustration-fuer-wartungsmodus-in-wordpress/
+ */
+* {
+list-style-type: none;
+margin: 0;
+padding: 0;
+border: none;
+}
+
+body {
+	background: url('images/es/bg.jpg') repeat;
+}
+a {
+	text-decoration: none;
+	color: #262626;
+}
+a:hover {
+	color:#000;
+	text-decoration: underline;
+}
+#content {
+	margin: 30px auto;
+	width: 980px;
+	height: 610px;
+	background:url('images/es/bg-image.png') 0 0 no-repeat;
+	position:relative;
+}
+#content h1 {
+	position: absolute;
+	width: 384px;
+	height: 45px;
+	top: 75px;
+	right: 110px;
+	background:url('images/es/m-mode.png') 0 0 no-repeat;
+	text-indent:-9999px;
+}
+#content h3 {
+	position: absolute;
+	width: 410px;
+	left: 55px;
+	top: 320px;
+	font-size: 20px;
+	color: #8f1218;
+}
+#content p {
+	width: 380px;
+	height: 300px;
+	position: absolute;
+	top: 130px;
+	right: 105px;
+	font: normal 18px/23px Arial, Helvetica, sans-serif;
+	color: #ccc;
+	text-shadow: 1px 1px 2px #333;
+	filter: dropshadow(color=#333, offx=1, offy=1);
+}
+#content p strong {
+	font-weight:700;
+	color: #30ADE6;
+}
+#content div.admin {
+	position: absolute;
+	width: 106px;
+	height: 40px;
+	top: 260px;
+	right:110px;
+	background:url('images/es/button.png') 0 0 no-repeat;
+	text-indent:-9999px;
+	cursor:pointer;
+}
+#header {
+	position: absolute;
+	top: 15px;
+	width: 100%;
+	text-align:center;
+	font: normal 15px Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	color: #ccc;
+	text-shadow: 1px 1px 2px #333;
+	filter: dropshadow(color=#333, offx=1, offy=1);
+	font-weight:700;
+}
+#footer {
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	font: normal 15px Arial, Helvetica, sans-serif;
+}
+#footer img {
+	vertical-align: bottom;
+}

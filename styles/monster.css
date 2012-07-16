@@ -1,0 +1,93 @@
+/*
+	Designed by: Sebastian Sebald (www.distractedbysquirrels.com)
+ */
+
+body{
+	margin: 0;
+	background-color:#66CCFF;
+	
+}
+
+img{
+	border: none;
+}
+
+#header{
+	margin:0;
+	text-align:center;
+	color:#CCF0FF;
+	border-bottom:solid 1px #CCF0FF;
+}
+
+#header p{
+	margin:5px 0;
+	font: 14px/14px helvetica, arial, sans-serif;
+}
+
+#content{ 
+    overflow:hidden; 
+	position:absolute; 
+	top:120px; 
+	left:30%; 
+	right:30%;
+	height:414px;	
+	width:615px; 
+    background: #66CCFF url(images/monster.jpg) no-repeat scroll right center;      
+ }
+
+#content h1{
+	font: 50px/52px impact, arial, helvetica;
+	color:#404040;
+	padding: 0 0 0 40px;
+	margin: 33px 0 20px 0;
+}
+
+#content h3 {
+	padding: 0 0 0 55px;
+	margin: -20px 0;
+	color: #8f1218;
+}
+
+#content p{
+	width:300px;
+	font: 14px/16px helvetica, arial, sans-serif;
+	color:#404040;
+	padding: 0 0 0 55px;	
+}
+
+#content strong{
+	font: bold 14px/26px helvetica, arial, sans-serif;
+}
+
+.admin {
+	position:absolute;
+	bottom:0;
+	right:17px;
+ }
+
+.admin a{
+	font: bold 12px/12px helvetica, arial, sans-serif;
+	color:#CCF0FF;
+	text-decoration:none;
+}
+
+#footer{
+	position: absolute;
+	bottom: 0px;
+	right: 10px
+}
+
+#footer p{
+	margin: 0;	
+}
+
+#footer a{
+	text-decoration: none;
+	color: #CCF0FF;
+	font: 10px/14px helvetica, arial, sans-serif;
+	vertical-align:4px;
+}
+
+#footer img{
+	vertical-align: -4px
+}

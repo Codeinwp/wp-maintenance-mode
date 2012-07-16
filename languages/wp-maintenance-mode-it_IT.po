@@ -1,0 +1,418 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode in italiano\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-04 12:57+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gianni Diurno (aka gidibao) <gidibao[at]gmail[dot]com>\n"
+"Language-Team: Gianni Diurno | gidibao.net <gidibao[at]gmail[dot]com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+msgid "The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings."
+msgstr "Questo plugin aggiunge al tuo blog una pagina splash in modo tale che gli utenti sappiano che il sito é in manutenzione. Gli utenti collegati potranno avere il completo accesso al blog (front-end compreso) in relazione alle impostazioni."
+
+#: wp-maintenance-mode.php:160
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: wp-maintenance-mode.php:260
+#: wp-maintenance-mode.php:454
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Le impostazioni del plugin %s sono state <strong>aggiornate</strong>."
+
+#: wp-maintenance-mode.php:263
+#: wp-maintenance-mode.php:276
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Lo status per il plugin %s é stato <strong>aggiornato</strong>."
+
+#: wp-maintenance-mode.php:266
+msgid "Plugin Activate"
+msgstr "Il plugin é attivo"
+
+#: wp-maintenance-mode.php:270
+#: wp-maintenance-mode.php:289
+#: wp-maintenance-mode.php:333
+msgid "False"
+msgstr "No"
+
+#: wp-maintenance-mode.php:271
+#: wp-maintenance-mode.php:290
+#: wp-maintenance-mode.php:334
+msgid "True"
+msgstr "Sì"
+
+#: wp-maintenance-mode.php:273
+msgid "Update"
+msgstr "Aggiorna"
+
+#: wp-maintenance-mode.php:279
+msgid "Plugin Settings"
+msgstr "Impostazioni per il plugin"
+
+#: wp-maintenance-mode.php:285
+msgid "Countdown:"
+msgstr "Conto alla rovescia:"
+
+#: wp-maintenance-mode.php:296
+#: wp-maintenance-mode.php:299
+msgid "Click for datepicker"
+msgstr "Calendario"
+
+#: wp-maintenance-mode.php:296
+msgid "Date:"
+msgstr "Data:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:300
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Sarà necessario attivare il conto alla rovescia. Inserire il valore e l'unità temporale oppure utilizzare il countdown ed impostare la data."
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:305
+msgid "Value:"
+msgstr "Valore:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:313
+msgid "Unit:"
+msgstr "Unità:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:317
+msgid "second"
+msgstr "secondo"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:318
+msgid "minute"
+msgstr "minuto"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:319
+msgid "hour"
+msgstr "ora"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:320
+msgid "day"
+msgstr "giorno"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:321
+msgid "week"
+msgstr "settimana"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:322
+msgid "month"
+msgstr "mese"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:323
+msgid "year"
+msgstr "anno"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:329
+msgid "Link:"
+msgstr "Link:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:342
+msgid "Theme:"
+msgstr "Tema:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:346
+msgid "Own Style"
+msgstr "Stile personale"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:347
+msgid "Simple Text"
+msgstr "Solo testo"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:348
+msgid "The Truck"
+msgstr "The Truck"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:349
+msgid "The Sun"
+msgstr "The Sun"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:350
+msgid "The FF Error"
+msgstr "The FF Error"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:351
+msgid "Monster"
+msgstr "Monster"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:352
+msgid "Chastely"
+msgstr "Chastely"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:353
+msgid "Only Typo"
+msgstr "Only Typo"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:354
+msgid "Paint"
+msgstr "Paint"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:356
+msgid "Damask"
+msgstr "Damask"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:357
+msgid "Lego"
+msgstr "Lego"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:364
+msgid "Own Style URL (incl. http://):"
+msgstr "URL stile personale (incl. http://):"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:406
+msgid "Text:"
+msgstr "Testo:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:416
+msgid "Excludes:"
+msgstr "Escludere:"
+
+#: wp-maintenance-mode.php:426
+msgid "Role:"
+msgstr "Ruolo:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:457
+msgid "Save"
+msgstr "Salva"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:502
+#: wp-maintenance-mode.php:545
+msgid "Updated"
+msgstr "Aggiornato"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:697
+#: wp-maintenance-mode.php:699
+msgid "Deactivate or change Settings"
+msgstr "Disattiva o modifica le impostazioni"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:625
+msgid "seconds"
+msgstr "secondi"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:629
+msgid "minutes"
+msgstr "minuti"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:633
+msgid "hours"
+msgstr "ore"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:637
+msgid "days"
+msgstr "giorni"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:641
+msgid "weeks"
+msgstr "settimane"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:649
+msgid "years"
+msgstr "anni"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:763
+msgid "Plugin by:"
+msgstr "Plugin:"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:765
+#: wp-maintenance-mode.php:767
+#: wp-maintenance-mode.php:769
+#: wp-maintenance-mode.php:771
+#: wp-maintenance-mode.php:773
+#: wp-maintenance-mode.php:775
+#: wp-maintenance-mode.php:777
+#: wp-maintenance-mode.php:779
+#: wp-maintenance-mode.php:781
+#: wp-maintenance-mode.php:783
+#: wp-maintenance-mode.php:785
+msgid "Design by:"
+msgstr "Design:"
+
+# @ wartungsmodus
+#: site.php:12
+#: site.php:48
+msgid "Maintenance Mode"
+msgstr "Modalità manutenzione"
+
+# @ wartungsmodus
+#: site.php:62
+msgid "Admin-Login"
+msgstr "Login amministrazione"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:382
+msgid "Title:"
+msgstr "Titolo:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:367
+msgid "URL to the css-file"
+msgstr "URL al file css"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:385
+#: wp-maintenance-mode.php:393
+#: wp-maintenance-mode.php:401
+msgid "Leave empty for default."
+msgstr "Lascia in bianco per il predefinito."
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:390
+msgid "Header:"
+msgstr "Header:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:398
+msgid "Heading:"
+msgstr "Intestazione:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:337
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Lascia il link allo sviluppatore del plugin. Grazie."
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:645
+msgid "months"
+msgstr "mesi"
+
+# @ wp-maintenance-mode
+#: site.php:55
+msgid "Access to the admin area blocked"
+msgstr "L'accesso all'area di amministrazione é stato bloccato"
+
+# @ wartungsmodus
+#: site.php:58
+msgid "Admin-Logout"
+msgstr "Logout amministrazione"
+
+#: wp-maintenance-mode.php:447
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Ruoli utente accreditati per la visualizzazione del lato frontend del blog."
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:695
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Attenzione: la modalità di manutenzione é <strong>attiva</strong>!"
+
+# @ default
+#: index.php:5
+msgid "Cheatin&#8217; uh?"
+msgstr "Paura eh?"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:369
+msgid "<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
+msgstr "<strong>Attenzione:</strong> non copiare il foglio di stile nella cartella del plugin poiché esso verrà cancellato durante l'aggiornamento in automatico del plugin!"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:374
+#: wp-maintenance-mode.php:377
+msgid "Preview"
+msgstr "Anteprima"
+
+# @ wartungsmodus
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+msgid "WP Maintenance Mode"
+msgstr "WP Maintenance Mode"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+msgstr "http://bueltge.de/wp-wartungsmodus-plugin/101/"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+msgid "Frank B&uuml;ltge"
+msgstr "Frank B&uuml;ltge"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/"
+msgstr "http://bueltge.de/"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:355
+msgid "Animate (Flash)"
+msgstr "Animazione (Flash)"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:358
+msgid "Chemistry"
+msgstr "Chemistry"
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:411
+#, php-format
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible"
+msgstr "Usa il primo <em>%1$s</em> per il valore del tempo o per il countdown ed il secondo <em>%2$s</em> per la unità temporale o per il valore-countdown; HTML e shortcode disponibili"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+msgid "1.6.7"
+msgstr "1.6.8"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:448
+msgid "Super Admin has always access."
+msgstr "Super Admin - accesso permanente."
+
+# @ wartungsmodus
+#: wp-maintenance-mode.php:421
+msgid "Exclude feed, pages, posts or archives from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr "Escludi dalla modalità di manutenzione: pagine, articoli, feed o archivi. Aggiungi lo Slug di una pagina o articolo separando con una virgola.<br />Esempio: "
+
