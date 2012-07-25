@@ -238,6 +238,10 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.0 =
+* Inlcude all scripts in backend via function
+* Update datepicker and countdown js
+
 = 1.7.1 (12/05/2011) =
 * fix for WP smaller 3.2* on Network
 

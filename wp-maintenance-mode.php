@@ -1,44 +1,43 @@
 <?php
 /**
  * Plugin Name: WP Maintenance Mode
- * Plugin URI: http://bueltge.de/wp-wartungsmodus-plugin/101/
+ * Plugin URI:  http://bueltge.de/wp-wartungsmodus-plugin/101/
  * Text Domain: wp-maintenance-mode
  * Domain Path: /languages
  * Description: The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings.
- * Author: Frank B&uuml;ltge
- * Author URI: http://bueltge.de/
- * Donate URI: http://bueltge.de/wunschliste/
- * Version: 1.7.1
- * Last change: 5.12.2011
- * Licence: GPLv3
+ * Author:      Frank B&uuml;ltge
+ * Author URI:  http://bueltge.de/
+ * Donate URI:  http://bueltge.de/wunschliste/
+ * Version:     1.8.0
+ * Last change: 07/25/2012
+ * Licence:     GPLv3
+ * 
+ * 
+ * License:
+ * ==============================================================================
+ * Copyright 2009-2011 Frank Bueltge  (email : frank@bueltge.de)
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * 
+ * Requirements:
+ * ==============================================================================
+ * This plugin requires WordPress >= 2.6 and tested with PHP Interpreter >= 5.3
  */
 
-/**
-License:
-==============================================================================
-Copyright 2009-2011 Frank Bueltge  (email : frank@bueltge.de)
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-Requirements:
-==============================================================================
-This plugin requires WordPress >= 2.6 and tested with PHP Interpreter >= 5.3.1
-*/
-
 //avoid direct calls to this file, because now WP core and framework has been used
-if ( ! function_exists('add_action') ) {
+if ( ! function_exists( 'add_filter' ) ) {
 	header('Status: 403 Forbidden');
 	header('HTTP/1.1 403 Forbidden');
 	exit();
@@ -51,9 +50,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 	if ( ! defined('WP_PLUGIN_URL') )
 		define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
 	
-	define( 'FB_WM_BASENAME', plugin_basename(__FILE__) );
-	define( 'FB_WM_BASEDIR', dirname( plugin_basename(__FILE__) ) );
-	define( 'FB_WM_BASE', rtrim (dirname (__FILE__), '/') );
+	define( 'FB_WM_BASENAME',   plugin_basename(__FILE__) );
+	define( 'FB_WM_BASEDIR',    dirname( plugin_basename(__FILE__) ) );
+	define( 'FB_WM_BASE',       rtrim(dirname (__FILE__), '/') );
 	define( 'FB_WM_TEXTDOMAIN', 'wp-maintenance-mode' );
 
 	class WPMaintenanceMode {
@@ -61,7 +60,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function WPMaintenanceMode() {
 			
 			register_activation_hook( __FILE__, array(&$this, 'add_config') );
-			add_action( 'load-plugins.php', array(&$this, 'add_scripts') );
+			add_action( 'admin_print_scripts-plugins.php', array(&$this, 'add_scripts') );
+			//add_action( 'load-plugins.php', array(&$this, 'add_scripts') );
 			add_action( 'init',             array(&$this, 'on_init'), 1 );
 			add_action( 'admin_init',       array(&$this, 'admin_init') );
 			
@@ -70,7 +70,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		}
 		
 		
-		function esc_attr($text) {
+		function esc_attr( $text ) {
+			
 			if ( function_exists('esc_attr') )
 				$text = esc_attr($text);
 			else
@@ -81,7 +82,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		
 		// function for WP < 2.8
-		function get_plugins_url($path = '', $plugin = '') {
+		function get_plugins_url( $path = '', $plugin = '' ) {
 			
 			if ( function_exists('plugin_url') )
 				return plugins_url($path, $plugin);
@@ -127,25 +128,33 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$valuemsqld = (int) get_option( FB_WM_TEXTDOMAIN . '-msqld' );
 			
 			if ( 1 === $valuemsqld || '1' === $valuemsqld ) {
-				$this -> on_active();
+				$this->on_active();
 				add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_alert' ), 9999 );
 			}
 		}
 		
 		
 		function add_scripts() {
-			global $current_user;
 			
 			$locale = get_locale();
+			$i18n = substr($locale, 0, 2);
 			
-			wp_enqueue_script( 'jquery-ui-datetimepicker', $this->get_plugins_url( 'js/ui.datetimepicker.js', __FILE__ ), array('jquery-ui-core') , 0.1, TRUE );
-			//wp_register_script( 'jquery-ui-datetimepicker-de', $this->get_plugins_url( 'js/de_DE.datetimepicker.js', __FILE__ ), array( 'jquery-ui-core', 'jquery-ui-datetimepicker' ) , 0.1, TRUE );
-			//if ( 'de_DE' === $locale )
-			//	wp_enqueue_script( 'jquery-ui-core', 'jquery-ui-datetimepicker', 'jquery-ui-datetimepicker-de' );
-			add_action( 'admin_footer', array(&$this, 'add_script2admin_footer') );
+			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+			wp_enqueue_script( 'wp-maintenance-mode' );
 			
-			wp_enqueue_style( 'jquery-ui-datepicker', $this->get_plugins_url( 'css/overcast/jquery-ui-1.7.2.custom.css', __FILE__ ) );
+			// translations for datepicker
+			if ( ! empty( $i18n ) && 
+				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/i18n/jquery.ui.datepicker-' . $i18n . '.js' )
+				) {
+				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
+			}
 			
+			// include styles for datepicker
+			wp_enqueue_style( 'jquery-ui-datepicker' );
+			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', __FILE__ ) );
+			
+			// for preview
 			add_thickbox();
 		}
 		
@@ -189,79 +198,6 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			return $links;
 		}
 		
-		
-		function add_script2admin_footer() {
-			?>
-			<script type="text/javascript">
-				jQuery(document).ready( function($){
-					
-					$('#wm-pluginconflink').click(function(s){$('#wm_config_row').slideToggle('fast'); });
-					$('#wm_config_active').click(function(){ wm_config_active(); });
-					$('#wm_config_submit').click(function(){ wm_config_update(); });
-					$("#wm_config-date").datetimepicker({ dateFormat: 'dd-mm-yy', timeFormat: ' hh:ii:ss' });
-					
-					function wm_config_active(){
-						
-						active_Val = $('#wm_config-active').val();
-						url = '<?php echo get_bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php';
-						$.post( url , { 
-								"action" : "wm_config-active", 
-								"wm_config-active" : active_Val 
-							}, 
-							function(data) {
-								$('#wm_message_active, #wm_message_active2').show('fast').animate({opacity: 1.0}, 3000).hide('slow');
-							}
-						);
-					}
-					
-					function wm_config_update(){
-						
-						time_Val         = $('#wm_config-time').val();
-						link_Val         = $('#wm_config-link').val();
-						unit_Val         = $('#wm_config-unit').val();
-						theme_Val        = $('#wm_config-theme').val();
-						styleurl_Val     = $('#wm_config-styleurl').val();
-						title_Val        = $('#wm_config-title').val();
-						header_Val       = $('#wm_config-header').val();
-						heading_Val      = $('#wm_config-heading').val();
-						text_Val         = $('#wm_config-text').val();
-						exclude_Val      = $('#wm_config-exclude').val();
-						role_Val         = $('#wm_config-role').val();
-						radio_Val        = $('#wm_config-radio').val();
-						date_Val         = $('#wm_config-date').val();
-						cd_day_Val       = $('#wm_config-cd-day').val();
-						cd_month_Val     = $('#wm_config-cd-month').val();
-						cd_year_Val      = $('#wm_config-cd-year').val();
-						url = '<?php echo get_bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php';
-						$.post( url , {
-								"action" : "wm_config-update", 
-								"wm_config-time" : time_Val, 
-								"wm_config-unit" : unit_Val, 
-								"wm_config-link" : link_Val, 
-								"wm_config-theme" : theme_Val, 
-								"wm_config-styleurl" : styleurl_Val, 
-								"wm_config-title" : title_Val, 
-								"wm_config-header" : header_Val, 
-								"wm_config-heading" : heading_Val, 
-								"wm_config-text" : text_Val, 
-								"wm_config-exclude" : exclude_Val, 
-								"wm_config-role" : role_Val, 
-								"wm_config-radio" : radio_Val, 
-								"wm_config-date" : date_Val, 
-								"wm_config-cd-day" : cd_day_Val, 
-								"wm_config-cd-month" : cd_month_Val, 
-								"wm_config-cd-year" : cd_year_Val
-							}, 
-							function(data) {
-								$('#wm_message_update, #wm_message_update2').show('fast').animate({opacity: 1.0}, 3000).hide('slow');
-							}
-						);
-						return false;
-					}
-				});
-			</script>
-		<?php
-		}
 		
 		/**
 		 * 

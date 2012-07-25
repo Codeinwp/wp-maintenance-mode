@@ -78,16 +78,16 @@ if ( !isset($value) ) {
 	?>
 		<script type="text/javascript" src="<?php bloginfo('url') ?>/wp-includes/js/jquery/jquery.js"></script>
 		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown.pack.js', __FILE__ ); ?>"></script>
-		<?php if ( file_exists(FB_WM_BASE . '/js/jquery.countdown-' . $locale . '.js') ) { ?>
+		<?php if ( @file_exists( FB_WM_BASE . '/js/jquery.countdown-' . $locale . '.js') ) { ?>
 		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown-' . $locale . '.js', __FILE__ ); ?>"></script>
 		<?php } ?>
 		<script type="text/javascript">
-		jQuery(document).ready( function($){
-			var austDay = new Date();
-			// 'Years', 'Months', 'Weeks', 'Days', 'Hours', 'Minutes', 'Seconds'
-			austDay = new Date(<?php echo $td[2]; ?>);
-			$('#countdown').countdown({until: austDay});
-		});
+			jQuery(document).ready( function($){
+				var austDay = new Date();
+				// 'Years', 'Months', 'Weeks', 'Days', 'Hours', 'Minutes', 'Seconds'
+				austDay = new Date(<?php echo $td[2]; ?>);
+				$('#countdown').countdown({ until: austDay });
+			});
 		</script>
 	<?php } ?>
 </body>
