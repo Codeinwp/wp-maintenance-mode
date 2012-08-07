@@ -7,7 +7,7 @@ Author URI: http://bueltge.de/
 Donate link: http://bueltge.de/wunschliste/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
-Tested up to: 3.4-Beta3
+Tested up to: 3.5-alpha
 Stable tag: 1.7.1
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional. Works on WP Multisite installs.
@@ -235,6 +235,7 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to [Andrew Kovalev](http://www.portablecomponentsforall.com/)
 * Thanks to [Brian Flores](http://www.inmotionhosting.com/) for serbian translation
 * Lithuanian translation files by [Vincent G](http://www.host1plus.com)
+* Swedish translation files by [Kenneth Andersson](http://www.telia.se/)
 
 
 == Changelog ==
