@@ -1,0 +1,345 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode 1.6.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-18 09:55+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kenneth Andersson <kenneth.h.andersson@telia.com>\n"
+"Language-Team: Team Blogos <wordpress@blogos.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2;plural=n != 1;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_nc:1,2;_nx:1,2;_n_noop:1,2;_nx_noop;_x;_c;esc_html__;esc_html_e;esc_html_x;"
+"esc_attr__;esc_attr_e;esc_attr_x\n"
+"X-Poedit-Basepath: d:\\wordpress\\plugins\\wp-maintenance-mode\n"
+"Language: da_DK\n"
+"X-Poedit-SearchPath-0: d:\\wordpress\\plugins\\wp-maintenance-mode\n"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/index.php:5
+msgid "Cheatin&#8217; uh?"
+msgstr "Luras du, va&#39;?"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/site.php:12
+#: d:\wordpress\plugins\wp-maintenance-mode/site.php:88
+msgid "Maintenance Mode"
+msgstr "Underhållsarbete pågår"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/site.php:78
+msgid "Access to the admin area blocked"
+msgstr "Tillgång till admin area är blockerad"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/site.php:81
+msgid "Admin-Logout"
+msgstr "Admin-logout"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/site.php:85
+msgid "Admin-Login"
+msgstr "Admin-login"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:154
+msgid "Settings"
+msgstr "Inställningar"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:227
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:414
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Inställningar för plugin %s <strong>uppdaterade</strong>."
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:228
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:239
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Aktiveringsstatus för plugin %s <strong>uppdaterad</strong>."
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:230
+msgid "Plugin Activate"
+msgstr "Aktivering av plugin"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:234
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:251
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:295
+msgid "False"
+msgstr "Falsk"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:235
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:252
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:296
+msgid "True"
+msgstr "Sann"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:237
+msgid "Update"
+msgstr "Uppdatera"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:241
+msgid "Plugin Settings"
+msgstr "Plugin-inställningar"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:247
+msgid "Countdown:"
+msgstr "Nedräkning:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:258
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:261
+msgid "Click for datepicker"
+msgstr "Klicka för datumval"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:258
+msgid "Date:"
+msgstr "Datum:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:262
+msgid ""
+"Activate countdown for using this. Use value and unit or use the countdown "
+"and set the date."
+msgstr ""
+"Aktivera timer, om du vill använda den. Använd värde och enhet eller använd "
+"nedräkning och ange datum."
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:267
+msgid "Value:"
+msgstr "Värde:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:275
+msgid "Unit:"
+msgstr "Enhet:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:279
+msgid "second"
+msgstr "sekund"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:280
+msgid "minute"
+msgstr "minut"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:281
+msgid "hour"
+msgstr "timme"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:282
+msgid "day"
+msgstr "dag"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:283
+msgid "week"
+msgstr "vecka"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:284
+msgid "month"
+msgstr "månad"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:285
+msgid "year"
+msgstr "år"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:291
+msgid "Link:"
+msgstr "Länk:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:299
+msgid ""
+"Please leave a link to the plugin- and design-author on your maintenance "
+"mode site."
+msgstr ""
+"Visa gärna länken till plugin- och designer på sidan, där du använder "
+"underhållsfunktionen."
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:304
+msgid "Theme:"
+msgstr "Tema:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:308
+msgid "Own Style"
+msgstr "Egen design"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:309
+msgid "Simple Text"
+msgstr "Enkel text"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:310
+msgid "The Truck"
+msgstr "The Truck"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:311
+msgid "The Sun"
+msgstr "The Sun"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:312
+msgid "The FF Error"
+msgstr "The FF Error"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:313
+msgid "Monster"
+msgstr "Monster"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:314
+msgid "Chastely"
+msgstr "Chastely"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:315
+msgid "Only Typo"
+msgstr "Only Typo"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:316
+msgid "Paint"
+msgstr "Paint"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:317
+msgid "Animate (Flash)"
+msgstr "Animate (Flash)"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:318
+msgid "Damask"
+msgstr "Damask"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:319
+msgid "Lego"
+msgstr "Lego"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:320
+msgid "Chemistry"
+msgstr "Chemistry"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:326
+msgid "Own Style URL (incl. http://):"
+msgstr "URL till egen design (inkl. http://):"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:329
+msgid "URL to the css-file"
+msgstr "URL till CSS-filen"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:331
+msgid ""
+"<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your "
+"plugin folder, it will be deleted on the next automatical update of the "
+"plugin!"
+msgstr ""
+"<strong>Varning:</strong> Du bör inte kopiera stylesheet till din plugin-"
+"mapp. Det raderas nästa gång, pluginnet uppdateras automatiskt!"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:336
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:339
+msgid "Preview"
+msgstr "Förhandsvisning"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:344
+msgid "Title:"
+msgstr "Titel:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:347
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:355
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:363
+msgid "Leave empty for default."
+msgstr "För att använda standardvärden skall du inte fylla i fältet."
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:352
+msgid "Header:"
+msgstr "Huvud:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:360
+msgid "Heading:"
+msgstr "Överskrift:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:368
+msgid "Text:"
+msgstr "Text:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:373
+#, php-format
+msgid ""
+"Use the first <em>%1$s</em> for the time value or countdown and second <em>"
+"%2$s</em> for the unit of the time or countdown-value; HTML is possible"
+msgstr ""
+"Använd den första <em>%1$s</em> för tidsvärdet eller nedräkning och den "
+"andra <em>%2$s</em> för tidsenhet eller nedräkningsvärde; HTML kan användas"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:378
+msgid "Excludes:"
+msgstr "Exkluderar:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:383
+msgid ""
+"Exclude pages, posts or archives from the maintenance mode. Add the Slug of "
+"page or post as a comma-separated list.<br />Example:"
+msgstr ""
+"Exkludera sidor, inlägg eller arkiv från underhållsmode. Tillfoga korttitlar "
+"på sidor eller inlägg som en kommaseparerad lista.<br />Exempel: "
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:388
+msgid "Role:"
+msgstr "Roll:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:409
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Användarroll, som tillåtes tillgång till att se själva bloggen."
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:416
+msgid "Save"
+msgstr "Spara"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:451
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:494
+msgid "Updated"
+msgstr "Uppdaterad"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:571
+msgid "seconds"
+msgstr "sekunder"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:575
+msgid "minutes"
+msgstr "minuter"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:579
+msgid "hours"
+msgstr "timmar"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:583
+msgid "days"
+msgstr "dagar"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:587
+msgid "weeks"
+msgstr "veckor"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:591
+msgid "months"
+msgstr "månader"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:595
+msgid "years"
+msgstr "år"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:609
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Varning: Underhållsarbete är <strong>aktivt</strong>!"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:611
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:613
+msgid "Deactivate or change Settings"
+msgstr "Inaktivera eller ändra inställningar"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:677
+msgid "Plugin by:"
+msgstr "Plugin av:"
+
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:679
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:681
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:683
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:685
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:687
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:689
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:691
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:693
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:695
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:697
+#: d:\wordpress\plugins\wp-maintenance-mode/wp-maintenance-mode.php:699
+msgid "Design by:"
+msgstr "Design av:"
+
+#~ msgid "HTML is possible"
+#~ msgstr "HTML kan bruges"
