@@ -1,8 +1,8 @@
 <?php
-if( ! defined( 'ABSPATH') && ! defined('WP_UNINSTALL_PLUGIN') )
+if( ! defined( 'ABSPATH' ) && ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
-if ( is_multisite() && isset($_GET['networkwide']) && 1 == $_GET['networkwide'] ) {
+if ( is_multisite() && is_plugin_active_for_network( 'WP-Maintenance-Mode/wp-maintenance-mode.php' ) ) {
 	add_site_option( 'wp-maintenance-mode' );
 	add_site_option( 'wp-maintenance-mode-msqd' );
 } else {

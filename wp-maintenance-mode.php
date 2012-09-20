@@ -233,7 +233,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				'exclude' => 'wp-cron, feed, wp-admin'
 			);
 			// if is active in network of multisite
-			if ( is_multisite() && isset($_GET['networkwide']) && 1 == $_GET['networkwide'] ) {
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				add_site_option( FB_WM_TEXTDOMAIN, $this->data );
 				add_site_option( FB_WM_TEXTDOMAIN . '-msqld', $this->data['active'] );
 			} else {
