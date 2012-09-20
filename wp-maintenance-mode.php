@@ -503,13 +503,16 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			else
 				$settings_link = admin_url() . 'plugins.php#wm-pluginconflink';
 			
+			$scmsg = '';
 			// Super Cache Plugin; clear cache on activation of maintance mode
-			if ( function_exists( 'wp_cache_clear_cache' ) )
+			if ( function_exists( 'wp_cache_clear_cache' ) ) {
 				wp_cache_clear_cache();
+				$scmsg = __( ' &amp; WP Super Cache flushed.', FB_WM_TEXTDOMAIN );
+			}
 			
 			$message = __( 'Caution: Maintenance mode is <strong>active</strong>!', FB_WM_TEXTDOMAIN );
 			add_filter( 'login_message', create_function( '', "return '<div id=\"login_error\">$message</div>';" ) );
-			$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . ' <a href="plugins.php#wm-pluginconflink">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
+			$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . $scmsg . ' <a href="plugins.php#wm-pluginconflink">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
 				add_action( 'network_admin_notices', create_function( '', "echo '$admin_notices';" ) );
 			add_action( 'admin_notices', create_function( '', "echo '$admin_notices';" ) );
