@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WP Maintenance Mode
- * Plugin URI:  http://bueltge.de/wp-wartungsmodus-plugin/101/
+ * Plugin URI:  http://wordpress.org/extend/plugins/wp-maintenance-mode/
  * Text Domain: wp-maintenance-mode
  * Domain Path: /languages
  * Description: The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings.
@@ -507,7 +507,13 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			// Super Cache Plugin; clear cache on activation of maintance mode
 			if ( function_exists( 'wp_cache_clear_cache' ) ) {
 				wp_cache_clear_cache();
-				$scmsg = __( ' &amp; WP Super Cache flushed.', FB_WM_TEXTDOMAIN );
+				$scmsg .= __( ' &amp; WP Super Cache flushed.', FB_WM_TEXTDOMAIN );
+			}
+			
+			// W3 Total Cache Support
+			if ( function_exists( 'w3tc_pgcache_flush' ) ) {
+				w3tc_pgcache_flush();
+				$scmsg .= __( ' &amp; W3 Total Cache for pages flushed.', FB_WM_TEXTDOMAIN );
 			}
 			
 			$message = __( 'Caution: Maintenance mode is <strong>active</strong>!', FB_WM_TEXTDOMAIN );

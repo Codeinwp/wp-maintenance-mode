@@ -8,9 +8,9 @@ Donate link: http://bueltge.de/wunschliste/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
 Tested up to: 3.5-alpha
-Stable tag: 1.7.1
+Stable tag: 1.8.0
 
-Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional. Works on WP Multisite installs.
+Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
 == Description ==
 Adds a maintenance-page to your blog that lets visitors know your blog is down for maintenancetime. User with rights for theme-options get full access to the blog including the frontend.
@@ -67,6 +67,12 @@ Example:
 1. WordPress version 2.6 and later, works also on Multisite
 1. PHP 5
 
+= Bugs, technical hints or contribute =
+Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/bueltge/WP-Maintenance-Mode).
+
+**Made by [Inpsyde](http://inpsyde.com) &middot; We love WordPress**
+
+Have a look at the premium plugins in our [market](http://marketpress.com).
 
 = Work with MySQLDumper =
 This option is designed for users, who backups their database with "MySQLDumper".
@@ -110,11 +116,8 @@ Please visit [the official website](http://www.mysqldumper.de/) for general info
 = How to: Backup with maintenance mode and MySQLDumper (illustrated Tutorial in german language) =
 Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/2010/05/09/automatisches-backup-der-wordpress-datenbank/)
 
-= How to: Use a contact form inside the Maintenance Message =
-Please use a plugin for the form-function with the possibility Shortcode, like [Contact Form 7](http://wordpress.org/extend/plugins/contact-form-7/). Use a Shortcode of the plugin inside the teyt on the options of the plugin WP Maintenance Mode, thats all.
-
-= More Plugins = 
-Please see also my [Premium Plugins](http://wpplugins.com/author/malo.conny/). Maybe you find an solution for your requirement.
+= Cache Plugin Support =
+The plugin flush the cache on activate the maintenance mode form the plugins W3 Total Cache and WP Super Cache
 
 = Interested in WordPress tips and tricks =
 You may also be interested in WordPress tips and tricks at [WP Engineer](http://wpengineer.com/) or for german people [bueltge.de](http://bueltge.de/) 
@@ -157,8 +160,8 @@ Please visit [the official website](http://www.mysqldumper.de/) for general info
 = How to: Backup with maintenance mode and MySQLDumper (illustrated Tutorial in german language) =
 Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/2010/05/09/automatisches-backup-der-wordpress-datenbank/)
 
-= How to: Use a contact form inside the Maintenance Message =
-Please use a plugin for the form-function with the possibility Shortcode, like [Contact Form 7](http://wordpress.org/extend/plugins/contact-form-7/). Use a Shortcode of the plugin inside the teyt on the options of the plugin WP Maintenance Mode, thats all.
+= Cache Plugin Support =
+The plugin flush the cache on activate the maintenance mode form the plugins W3 Total Cache and WP Super Cache
 
 == Other Notes ==
 = Work with MySQLDumper =
@@ -240,8 +243,11 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 == Changelog ==
 = 1.8.0 =
-* Inlcude all scripts in backend via function
+* Include all scripts in backend via function
 * Update datepicker and countdown js
+* Supportet IP as exclude for see the frontend
+* Add support for flish cache od WP Super Cache and W3 Total Cache plugins
+* Fix for changes in WP 3.3 Multisite
 
 = 1.7.1 (12/05/2011) =
 * fix for WP smaller 3.2* on Network
