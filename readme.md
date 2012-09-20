@@ -9,7 +9,7 @@ Also you can add urls for exlude of maintenance mode.
 
 You can add your own html and stylesheet and add the url of this style to the options of the plugin. Write your style to this markup and upload to the webspace; after add the url include http:// to the settings of this plugin and change th theme to `"Own Theme"`:
 
-
+	
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" id="wartungsmodus" >
@@ -37,7 +37,7 @@ You can add your own html and stylesheet and add the url of this style to the op
 		
 	</body>
 	</html>
-
+	
 
 Also you can add content via hook:
 
@@ -47,9 +47,9 @@ Also you can add content via hook:
 
 
 **Example:**
-
+	
 	function add_my_link() {
-	    echo '<a href="http://mylink.com/">My Link</a>
+		echo '<a href="http://mylink.com/">My Link</a>
 	}
 	add_action( 'wm_footer', 'add_my_link' );
 
