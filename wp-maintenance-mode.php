@@ -503,6 +503,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			else
 				$settings_link = admin_url() . 'plugins.php#wm-pluginconflink';
 			
+			// Super Cache Plugin; clear cache on activation of maintance mode
+			if ( function_exists( 'wp_cache_clear_cache' ) )
+				wp_cache_clear_cache();
+			
 			$message = __( 'Caution: Maintenance mode is <strong>active</strong>!', FB_WM_TEXTDOMAIN );
 			add_filter( 'login_message', create_function( '', "return '<div id=\"login_error\">$message</div>';" ) );
 			$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . ' <a href="plugins.php#wm-pluginconflink">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
@@ -535,11 +539,11 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			else
 				$backtime = NULL;
 			
-			if ( ( !$this->check_role() )
-					&& !strstr($_SERVER['PHP_SELF'], 'wp-login.php' )
-					&& !strstr($_SERVER['PHP_SELF'], 'async-upload.php')
-					&& !strstr($_SERVER['PHP_SELF'], '/plugins/')
-					&& !$this->check_exclude()
+			if ( ( ! $this->check_role() )
+					&& ! strstr($_SERVER['PHP_SELF'], 'wp-login.php' )
+					&& ! strstr($_SERVER['PHP_SELF'], 'async-upload.php')
+					&& ! strstr($_SERVER['PHP_SELF'], '/plugins/')
+					&& ! $this->check_exclude()
 				 ) {
 				$rolestatus = 'norights';
 				nocache_headers();
@@ -550,15 +554,15 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			}
 			
 			//$this->check_version();
-			if ( !strstr($_SERVER['PHP_SELF'], 'feed/')
-				&& !strstr($_SERVER['PHP_SELF'], 'wp-admin/')
-				&& !strstr($_SERVER['PHP_SELF'], 'wp-login.php')
-				&& !strstr($_SERVER['PHP_SELF'], 'async-upload.php')
-				&& !( strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_role() )
-				&& !strstr($_SERVER['PHP_SELF'], 'trackback/')
-				&& !strstr($_SERVER['PHP_SELF'], '/plugins/')
-				&& !$this->check_exclude()
-				&& !$this->check_role()
+			if ( ! strstr($_SERVER['PHP_SELF'], 'feed/')
+				&& ! strstr($_SERVER['PHP_SELF'], 'wp-admin/')
+				&& ! strstr($_SERVER['PHP_SELF'], 'wp-login.php')
+				&& ! strstr($_SERVER['PHP_SELF'], 'async-upload.php')
+				&& ! ( strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_role() )
+				&& ! strstr($_SERVER['PHP_SELF'], 'trackback/')
+				&& ! strstr($_SERVER['PHP_SELF'], '/plugins/')
+				&& ! $this->check_exclude()
+				&& ! $this->check_role()
 				) {
 				include('site.php');
 				exit();
