@@ -221,16 +221,17 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_config() {
 			
 			$this->data = array( 
-				'active' => 0, 
-				'radio' => 0, 
-				'time' => 60, 
-				'link' => 1, 
-				'theme' => 1, 
-				'role' => 'administrator', 
-				'unit' => 1, 
-				'title' => 'Maintenance mode', 
-				'text' => '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', 
-				'exclude' => 'wp-cron, feed, wp-admin'
+				'active'     => 0, 
+				'radio'      => 0, 
+				'time'       => 60, 
+				'link'       => 1, 
+				'admin_link' => 1,
+				'theme'      => 1, 
+				'role'       => 'administrator', 
+				'unit'       => 1, 
+				'title'      => __( 'Maintenance mode', FB_WM_TEXTDOMAIN ), 
+				'text'       => __( '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', FB_WM_TEXTDOMAIN ), 
+				'exclude'    => 'wp-cron, feed, wp-admin'
 			);
 			// if is active in network of multisite
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
@@ -287,6 +288,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$this->data['unit'] = (int) $_POST['wm_config-unit'];
 			if ( isset($_POST['wm_config-link']) )
 				$this->data['link'] = (int) $_POST['wm_config-link'];
+			if ( isset($_POST['wm_config-admin_link']) )
+				$this->data['admin_link'] = (int) $_POST['wm_config-admin_link'];
 			if ( isset($_POST['wm_config-theme']) )
 				$this->data['theme'] = (int) $_POST['wm_config-theme'];
 			if ( isset($_POST['wm_config-styleurl']) ) {

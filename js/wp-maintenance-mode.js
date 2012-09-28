@@ -24,6 +24,7 @@ jQuery(document).ready( function($){
 		
 		time_Val         = $('#wm_config-time').val();
 		link_Val         = $('#wm_config-link').val();
+		admin_link_Val   = $('#wm_config-admin_link').val();
 		unit_Val         = $('#wm_config-unit').val();
 		theme_Val        = $('#wm_config-theme').val();
 		styleurl_Val     = $('#wm_config-styleurl').val();
@@ -44,6 +45,7 @@ jQuery(document).ready( function($){
 				"wm_config-time" : time_Val, 
 				"wm_config-unit" : unit_Val, 
 				"wm_config-link" : link_Val, 
+				"wm_config-admin_link" : admin_link_Val,
 				"wm_config-theme" : theme_Val, 
 				"wm_config-styleurl" : styleurl_Val, 
 				"wm_config-title" : title_Val, 

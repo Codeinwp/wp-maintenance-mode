@@ -51,21 +51,23 @@ if ( !isset($value) ) {
 		<h1><?php if ( isset($value['heading']) && ($value['heading'] != '') ) echo stripslashes_deep( $value['heading'] ); else _e( 'Maintenance Mode', FB_WM_TEXTDOMAIN ); ?></h1>
 		
 		<?php wm_content();
-		
-		if (isset($user_ID) && $user_ID) {
-			$adminlogin    = wp_logout_url();
-			if ( isset($rolestatus) && 'norights' == $rolestatus )
-				$adminloginmsg = '<h3>' . __( 'Access to the admin area blocked', FB_WM_TEXTDOMAIN ) . '</h3>';
-			else
+		if ( isset( $value['admin_link'] ) && 1 === $value['admin_link'] ) {
+			if ( isset($user_ID) && $user_ID ) {
+				$adminlogin    = wp_logout_url();
+				if ( isset($rolestatus) && 'norights' == $rolestatus )
+					$adminloginmsg = '<h3>' . __( 'Access to the admin area blocked', FB_WM_TEXTDOMAIN ) . '</h3>';
+				else
+					$adminloginmsg = '';
+				$adminloginstr = __( 'Admin-Logout', FB_WM_TEXTDOMAIN );
+			} else {
+				$adminlogin    = site_url('wp-login.php', 'login');
 				$adminloginmsg = '';
-			$adminloginstr = __( 'Admin-Logout', FB_WM_TEXTDOMAIN );
-		} else {
-			$adminlogin    = site_url('wp-login.php', 'login');
-			$adminloginmsg = '';
-			$adminloginstr = __( 'Admin-Login', FB_WM_TEXTDOMAIN );
-		} ?>
-		<?php echo $adminloginmsg; ?>
+				$adminloginstr = __( 'Admin-Login', FB_WM_TEXTDOMAIN );
+			}
+			echo $adminloginmsg;
+		?>
 		<div class="admin" onclick="location.href='<?php echo $adminlogin; ?>';" onkeypress="location.href='<?php echo $adminlogin; ?>';"><a href="<?php echo $adminlogin; ?>"><?php echo $adminloginstr; ?></a></div>
+		<?php } ?>
 	</div>
 	
 	<?php wm_footer(); ?>

@@ -115,6 +115,19 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
+						<th scope="row">
+							<label for="wm_config-admin_link"><?php _e( 'Admin Link:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td>
+							<select name="wm_config-admin_link" id="wm_config-admin_link">
+								<option value="0"<?php if ( isset($value['admin_link']) && 0 === $value['admin_link'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1"<?php if ( isset($value['admin_link']) && 1 === $value['admin_link'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+							</select>
+							<br />
+							<small><?php _e( 'Do you will a link to the admin area of your install?', FB_WM_TEXTDOMAIN ); ?></small>
+						</td>
+					</tr>
+					<tr valign="top">
 						<th scope="row" class="alternate">
 							<label for="wm_config-theme"><?php _e( 'Theme:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
