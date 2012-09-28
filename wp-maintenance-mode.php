@@ -299,6 +299,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$this->data['styleurl'] = clean_url( $_POST['wm_config-styleurl'] );
 				}
 			}
+			if ( isset($_POST['wm_config-index']) )
+				$this->data['index'] = (int) $_POST['wm_config-index'];
 			if ( isset($_POST['wm_config-title']) ) 
 				$this->data['title'] =  stripslashes_deep( $_POST['wm_config-title'] );
 				if ( isset($_POST['wm_config-header']) ) 

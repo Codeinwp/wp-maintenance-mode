@@ -169,6 +169,19 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
+							<label for="wm_config-index"><?php _e( 'noindex, nofollow:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td>
+							<select name="wm_config-index" id="wm_config-index">
+								<option value="0"<?php if ( isset($value['index']) && 0 === $value['index'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1"<?php if ( isset($value['index']) && 1 === $value['index'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+							</select>
+							<br />
+							<small><?php _e( 'The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results. Set TRUE for noindex, nofollow; set FALSE for index, follow.', FB_WM_TEXTDOMAIN ); ?></small>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
 							<label for="wm_config-title"><?php _e( 'Title:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td>

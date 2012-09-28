@@ -28,6 +28,7 @@ jQuery(document).ready( function($){
 		unit_Val         = $('#wm_config-unit').val();
 		theme_Val        = $('#wm_config-theme').val();
 		styleurl_Val     = $('#wm_config-styleurl').val();
+		index_Val        = $('#wm_config-index').val();
 		title_Val        = $('#wm_config-title').val();
 		header_Val       = $('#wm_config-header').val();
 		heading_Val      = $('#wm_config-heading').val();
@@ -48,6 +49,7 @@ jQuery(document).ready( function($){
 				"wm_config-admin_link" : admin_link_Val,
 				"wm_config-theme" : theme_Val, 
 				"wm_config-styleurl" : styleurl_Val, 
+				"wm_config-index" : index_Val,
 				"wm_config-title" : title_Val, 
 				"wm_config-header" : header_Val, 
 				"wm_config-heading" : heading_Val, 

@@ -17,7 +17,13 @@ if ( !isset($value) ) {
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="author" content="WP Maintenance Mode: Frank Bueltge, http://bueltge.de" />
 	<meta name="description" content="<?php bloginfo('name'); echo ' - '; bloginfo('description'); ?>" />
-	<meta name="robots" content="noindex,nofollow" />
+	<?php
+	if ( isset( $value['index'] ) && 1 === $value['index'] )
+		$content = 'noindex, nofollow';
+	else {
+		$content = 'index, follow';
+	} ?>
+	<meta name="robots" content="<?php echo $content; ?>" />
 	<link rel="Shortcut Icon" type="image/x-icon" href="<?php echo get_option('home'); ?>/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR ?>/css/jquery.countdown.css" media="all" />
 	
