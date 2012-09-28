@@ -7,8 +7,8 @@ Author URI: http://bueltge.de/
 Donate link: http://bueltge.de/wunschliste/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
-Tested up to: 3.5-alpha
-Stable tag: 1.8.0
+Tested up to: 3.5-beta1
+Stable tag: 1.8.1
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
@@ -242,6 +242,10 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.1 =
+* Add option for value of robots meta tag
+* Add option for optional admin login
+
 = 1.8.0 =
 * Include all scripts in backend via function
 * Update datepicker and countdown js
