@@ -160,20 +160,20 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$locale = get_locale();
 			$i18n = substr($locale, 0, 2);
 			
-			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', basename(dirname(__FILE__)) ), array('jquery-ui-datepicker') , '', TRUE );
 			wp_enqueue_script( 'wp-maintenance-mode' );
 			
 			// translations for datepicker
 			if ( ! empty( $i18n ) && 
 				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/i18n/jquery.ui.datepicker-' . $i18n . '.js' )
 				) {
-				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', basename(dirname(__FILE__)) ), array('jquery-ui-datepicker') , '', TRUE );
 				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
 			}
 			
 			// include styles for datepicker
 			wp_enqueue_style( 'jquery-ui-datepicker' );
-			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', __FILE__ ) );
+			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', basename(dirname(__FILE__)) ) );
 			
 			// for preview
 			add_thickbox();
@@ -197,7 +197,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				}
 			}
 			
-			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', __FILE__ ) );
+			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', basename(dirname(__FILE__)) ) );
 		}
 		
 		
@@ -657,7 +657,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 2:
 					$theme = 'dh.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', __FILE__) . '\') no-repeat; }' . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', basename(dirname(__FILE__))) . '\') no-repeat; }' . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -688,7 +688,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 11:
 					$theme = 'af.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', __FILE__ ) . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', basename(dirname(__FILE__)) ) . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -697,7 +697,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					break;
 			}
 			if ( ! empty($theme) )
-				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', __FILE__ ) . $theme . '" type="text/css" media="all" />' ."\n";
+				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', basename(dirname(__FILE__)) ) . $theme . '" type="text/css" media="all" />' ."\n";
 			echo $link . $style;
 		}
 		
@@ -722,7 +722,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					if ( file_exists($flash) ) {
 						$flash = $flash;
 					} else {
-						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung.swf';
+						$flash = $this->get_plugins_url( 'styles/', basename(dirname(__FILE__)) ) . 'wartung.swf';
 					}
 					
 					$object = '
