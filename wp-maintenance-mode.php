@@ -107,7 +107,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		// function for WP < 2.8
 		function get_plugins_url( $path = '', $plugin = '' ) {
 			
-			if ( function_exists('plugin_url') )
+			if ( function_exists('plugins_url') )
 				return plugins_url($path, $plugin);
 			
 			if ( function_exists('is_ssl') )
