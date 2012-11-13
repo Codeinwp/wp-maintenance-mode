@@ -17,7 +17,13 @@ if ( !isset($value) ) {
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="author" content="WP Maintenance Mode: Frank Bueltge, http://bueltge.de" />
 	<meta name="description" content="<?php bloginfo('name'); echo ' - '; bloginfo('description'); ?>" />
-	<meta name="robots" content="noindex,nofollow" />
+	<?php
+	if ( isset( $value['index'] ) && 1 === $value['index'] )
+		$content = 'noindex, nofollow';
+	else {
+		$content = 'index, follow';
+	} ?>
+	<meta name="robots" content="<?php echo $content; ?>" />
 	<link rel="Shortcut Icon" type="image/x-icon" href="<?php echo get_option('home'); ?>/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR ?>/css/jquery.countdown.css" media="all" />
 	
@@ -51,21 +57,23 @@ if ( !isset($value) ) {
 		<h1><?php if ( isset($value['heading']) && ($value['heading'] != '') ) echo stripslashes_deep( $value['heading'] ); else _e( 'Maintenance Mode', FB_WM_TEXTDOMAIN ); ?></h1>
 		
 		<?php wm_content();
-		
-		if (isset($user_ID) && $user_ID) {
-			$adminlogin    = wp_logout_url();
-			if ( isset($rolestatus) && 'norights' == $rolestatus )
-				$adminloginmsg = '<h3>' . __( 'Access to the admin area blocked', FB_WM_TEXTDOMAIN ) . '</h3>';
-			else
+		if ( isset( $value['admin_link'] ) && 1 === $value['admin_link'] ) {
+			if ( isset($user_ID) && $user_ID ) {
+				$adminlogin    = wp_logout_url();
+				if ( isset($rolestatus) && 'norights' == $rolestatus )
+					$adminloginmsg = '<h3>' . __( 'Access to the admin area blocked', FB_WM_TEXTDOMAIN ) . '</h3>';
+				else
+					$adminloginmsg = '';
+				$adminloginstr = __( 'Admin-Logout', FB_WM_TEXTDOMAIN );
+			} else {
+				$adminlogin    = site_url('wp-login.php', 'login');
 				$adminloginmsg = '';
-			$adminloginstr = __( 'Admin-Logout', FB_WM_TEXTDOMAIN );
-		} else {
-			$adminlogin    = site_url('wp-login.php', 'login');
-			$adminloginmsg = '';
-			$adminloginstr = __( 'Admin-Login', FB_WM_TEXTDOMAIN );
-		} ?>
-		<?php echo $adminloginmsg; ?>
+				$adminloginstr = __( 'Admin-Login', FB_WM_TEXTDOMAIN );
+			}
+			echo $adminloginmsg;
+		?>
 		<div class="admin" onclick="location.href='<?php echo $adminlogin; ?>';" onkeypress="location.href='<?php echo $adminlogin; ?>';"><a href="<?php echo $adminlogin; ?>"><?php echo $adminloginstr; ?></a></div>
+		<?php } ?>
 	</div>
 	
 	<?php wm_footer(); ?>
@@ -77,9 +85,9 @@ if ( !isset($value) ) {
 		$locale = substr($locale, 0, 2);
 	?>
 		<script type="text/javascript" src="<?php bloginfo('url') ?>/wp-includes/js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown.pack.js', __FILE__ ); ?>"></script>
+		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown.pack.js', basename(dirname(__FILE__ ))); ?>"></script>
 		<?php if ( @file_exists( FB_WM_BASE . '/js/jquery.countdown-' . $locale . '.js') ) { ?>
-		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown-' . $locale . '.js', __FILE__ ); ?>"></script>
+		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown-' . $locale . '.js', basename(dirname(__FILE__ )) ); ?>"></script>
 		<?php } ?>
 		<script type="text/javascript">
 			jQuery(document).ready( function($){

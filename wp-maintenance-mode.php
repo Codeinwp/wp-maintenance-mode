@@ -8,8 +8,8 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.0
- * Last change: 09/20/2012
+ * Version:     1.8.1
+ * Last change: 09/28/2012
  * Licence:     GPLv3
  * 
  * 
@@ -84,10 +84,15 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			// load all files with the pattern *.php from the directory inc
 			foreach( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $class )
 				require_once $class;
-		
 		}
 		
-		
+		/**
+		 * Function to escape strings
+		 * Use WP default, if exists
+		 * 
+		 * @param  String
+		 * @return String
+		 */
 		function esc_attr( $text ) {
 			
 			if ( function_exists('esc_attr') )
@@ -102,7 +107,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		// function for WP < 2.8
 		function get_plugins_url( $path = '', $plugin = '' ) {
 			
-			if ( function_exists('plugin_url') )
+			if ( function_exists('plugins_url') )
 				return plugins_url($path, $plugin);
 			
 			if ( function_exists('is_ssl') )
@@ -118,8 +123,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$url = str_replace( 'http://', "{$scheme}://", $url );
 			}
 		
-			if ( !empty($plugin) && is_string($plugin) )
-			{
+			if ( !empty($plugin) && is_string($plugin) ) {
 				$folder = dirname(plugin_basename($plugin));
 				if ('.' != $folder)
 					$url .= '/' . ltrim($folder, '/');
@@ -136,9 +140,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			load_plugin_textdomain( FB_WM_TEXTDOMAIN, FALSE, FB_WM_BASEDIR . '/languages' );
 			
-			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) ) {
+			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) )
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-			}
 			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
 				$valuemsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
@@ -157,20 +160,20 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$locale = get_locale();
 			$i18n = substr($locale, 0, 2);
 			
-			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', basename(dirname(__FILE__)) ), array('jquery-ui-datepicker') , '', TRUE );
 			wp_enqueue_script( 'wp-maintenance-mode' );
 			
 			// translations for datepicker
 			if ( ! empty( $i18n ) && 
 				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/i18n/jquery.ui.datepicker-' . $i18n . '.js' )
 				) {
-				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', basename(dirname(__FILE__)) ), array('jquery-ui-datepicker') , '', TRUE );
 				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
 			}
 			
 			// include styles for datepicker
 			wp_enqueue_style( 'jquery-ui-datepicker' );
-			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', __FILE__ ) );
+			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', basename(dirname(__FILE__)) ) );
 			
 			// for preview
 			add_thickbox();
@@ -194,7 +197,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				}
 			}
 			
-			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', __FILE__ ) );
+			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', basename(dirname(__FILE__)) ) );
 		}
 		
 		
@@ -221,16 +224,17 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_config() {
 			
 			$this->data = array( 
-				'active' => 0, 
-				'radio' => 0, 
-				'time' => 60, 
-				'link' => 1, 
-				'theme' => 1, 
-				'role' => 'administrator', 
-				'unit' => 1, 
-				'title' => 'Maintenance mode', 
-				'text' => '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', 
-				'exclude' => 'wp-cron, feed, wp-admin'
+				'active'     => 0, 
+				'radio'      => 0, 
+				'time'       => 60, 
+				'link'       => 1, 
+				'admin_link' => 1,
+				'theme'      => 1, 
+				'role'       => 'administrator', 
+				'unit'       => 1, 
+				'title'      => __( 'Maintenance mode', FB_WM_TEXTDOMAIN ), 
+				'text'       => __( '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', FB_WM_TEXTDOMAIN ), 
+				'exclude'    => 'wp-cron, feed, wp-admin'
 			);
 			// if is active in network of multisite
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
@@ -287,6 +291,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$this->data['unit'] = (int) $_POST['wm_config-unit'];
 			if ( isset($_POST['wm_config-link']) )
 				$this->data['link'] = (int) $_POST['wm_config-link'];
+			if ( isset($_POST['wm_config-admin_link']) )
+				$this->data['admin_link'] = (int) $_POST['wm_config-admin_link'];
 			if ( isset($_POST['wm_config-theme']) )
 				$this->data['theme'] = (int) $_POST['wm_config-theme'];
 			if ( isset($_POST['wm_config-styleurl']) ) {
@@ -296,6 +302,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$this->data['styleurl'] = clean_url( $_POST['wm_config-styleurl'] );
 				}
 			}
+			if ( isset($_POST['wm_config-index']) )
+				$this->data['index'] = (int) $_POST['wm_config-index'];
 			if ( isset($_POST['wm_config-title']) ) 
 				$this->data['title'] =  stripslashes_deep( $_POST['wm_config-title'] );
 				if ( isset($_POST['wm_config-header']) ) 
@@ -357,10 +365,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			foreach ( (array) $value['exclude'] as $exclude ) {
 				// check for IP
-				if ( strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
+				if ( $exclude && $_SERVER['REMOTE_ADDR'] && strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
 					return TRUE;
 				
-				if ( $exclude && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
+				if ( $exclude && $_SERVER['REQUEST_URI'] && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
 					return TRUE;
 			}
 			
@@ -649,7 +657,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 2:
 					$theme = 'dh.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', __FILE__) . '\') no-repeat; }' . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', basename(dirname(__FILE__))) . '\') no-repeat; }' . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -680,7 +688,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 11:
 					$theme = 'af.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', __FILE__ ) . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', basename(dirname(__FILE__)) ) . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -689,7 +697,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					break;
 			}
 			if ( ! empty($theme) )
-				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', __FILE__ ) . $theme . '" type="text/css" media="all" />' ."\n";
+				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', basename(dirname(__FILE__)) ) . $theme . '" type="text/css" media="all" />' ."\n";
 			echo $link . $style;
 		}
 		
@@ -714,7 +722,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					if ( file_exists($flash) ) {
 						$flash = $flash;
 					} else {
-						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung.swf';
+						$flash = $this->get_plugins_url( 'styles/', basename(dirname(__FILE__)) ) . 'wartung.swf';
 					}
 					
 					$object = '
