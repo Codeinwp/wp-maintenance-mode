@@ -151,10 +151,10 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-styleurl"><?php _e( 'Own Style URL (incl. http://):', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-styleurl"><?php _e( 'Own Style URL:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
-							<input size="30" type="text" id="wm_config-styleurl" name="wm_config-styleurl" value="<?php if ( isset($value['styleurl']) ) echo $value['styleurl']; ?>" /> <small><?php _e( 'URL to the css-file', FB_WM_TEXTDOMAIN ); ?></small>
+							<input size="30" type="text" id="wm_config-styleurl" name="wm_config-styleurl" value="<?php if ( isset($value['styleurl']) ) echo $value['styleurl']; ?>" /> <small><?php _e( 'URL to the css-file (incl. http://)', FB_WM_TEXTDOMAIN ); ?></small>
 							<br />
 							<small><?php _e( '<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
@@ -237,33 +237,74 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-role"><?php _e( 'Role:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-role"><?php _e( 'Role Backend:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<select name="wm_config-role" id="wm_config-role">
-								<?php
-								// fallback
-								if ( ! isset($value['role'][0]) )
-									$value['role'][0] = NULL;
-								
-								foreach ( $wp_roles->roles as $role => $name ) {
-									if ( function_exists('translate_user_role') )
-										$role_name = translate_user_role( $name['name'] );
-									elseif ( function_exists('before_last_bar') )
-										$role_name = before_last_bar( $name['name'], 'User role' );
-									else
-										$role_name = strrpos( $name['name'], '|' );
-										
-									if ($value['role'][0] !== $role)
-										$selected = '';
-									else
-										$selected = ' selected="selected"';
-									echo '<option value="' . $role . '"' . $selected . '>' . $role_name . ' (' . $role . ')' . ' </option>';
-								}
-								?>
+							<?php
+							// fallback
+							if ( ! isset($value['role'][0]) )
+								$value['role'][0] = NULL;
+							
+							foreach ( $wp_roles->roles as $role => $name ) {
+								if ( function_exists('translate_user_role') )
+									$role_name = translate_user_role( $name['name'] );
+								elseif ( function_exists('before_last_bar') )
+									$role_name = before_last_bar( $name['name'], 'User role' );
+								else
+									$role_name = strrpos( $name['name'], '|' );
+									
+								if ($value['role'][0] !== $role)
+									$selected = '';
+								else
+									$selected = ' selected="selected"';
+								echo '<option value="' . $role . '"' . $selected . '>' . $role_name . ' (' . $role . ')' . ' </option>';
+							}
+							?>
+							</select>
+							<small><?php _e( 'Allowed userrole to access the backend of this blog.', FB_WM_TEXTDOMAIN ); ?>
+							<?php if ( is_multisite() ) { _e( 'Super Admin has always access.', FB_WM_TEXTDOMAIN ); } ?></small>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" class="alternate">
+							<label for="wm_config-role_frontend"><?php _e( 'Role Frontend:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td class="alternate">
+							<select name="wm_config-role_frontend" id="wm_config-role_frontend">
+							<?php
+							// fallback
+							if ( ! isset($value['role_frontend'][0]) )
+								$value['role_frontend'][0] = NULL;
+							
+							foreach ( $wp_roles->roles as $role_frontend => $name ) {
+								if ( function_exists('translate_user_role') )
+									$role_name = translate_user_role( $name['name'] );
+								elseif ( function_exists('before_last_bar') )
+									$role_name = before_last_bar( $name['name'], 'User role' );
+								else
+									$role_name = strrpos( $name['name'], '|' );
+									
+								if ($value['role_frontend'][0] !== $role_frontend)
+									$selected = '';
+								else
+									$selected = ' selected="selected"';
+								echo '<option value="' . $role_frontend . '"' . $selected . '>' . $role_name . ' (' . $role_frontend . ')' . ' </option>';
+							}
+							?>
 							</select>
 							<small><?php _e( 'Allowed userrole to see the frontend of this blog.', FB_WM_TEXTDOMAIN ); ?>
 							<?php if ( is_multisite() ) { _e( 'Super Admin has always access.', FB_WM_TEXTDOMAIN ); } ?></small>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row" class="alternate">
+							<label for="wm_config-rewrite"><?php _e( 'Rewrite:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td class="alternate">
+							<input class="large-text" size="30" type="text" id="wm_config-rewrite" name="wm_config-rewrite" value="<?php if ( isset($value['rewrite']) ) echo $value['rewrite']; ?>" />
+							<br />
+							<small><?php _e( 'If you want that after the login the destination address is not standard to the dashboard, then defining a URL. (incl. http://)', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
 					</table>

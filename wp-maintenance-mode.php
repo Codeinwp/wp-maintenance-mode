@@ -8,8 +8,8 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.1
- * Last change: 09/28/2012
+ * Version:     1.8.2
+ * Last change: 11/13/2012
  * Licence:     GPLv3
  * 
  * 
@@ -66,6 +66,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			//add_action( 'load-plugins.php', array(&$this, 'add_scripts') );
 			add_action( 'init',       array( $this, 'on_init'), 1 );
 			add_action( 'admin_init', array( $this, 'admin_init') );
+			add_action( 'admin_menu', array( $this, 'redirect' ) );
 			
 			add_action( 'wp_ajax_wm_config-update', array( $this, 'save_config' ) );
 			add_action( 'wp_ajax_wm_config-active', array( $this, 'save_active' ) );
@@ -107,7 +108,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		// function for WP < 2.8
 		function get_plugins_url( $path = '', $plugin = '' ) {
 			
-			if ( function_exists('plugins_url') )
+			if ( function_exists('plugin_url') )
 				return plugins_url($path, $plugin);
 			
 			if ( function_exists('is_ssl') )
@@ -160,20 +161,20 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$locale = get_locale();
 			$i18n = substr($locale, 0, 2);
 			
-			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', basename(dirname(__FILE__)) ), array('jquery-ui-datepicker') , '', TRUE );
+			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
 			wp_enqueue_script( 'wp-maintenance-mode' );
 			
 			// translations for datepicker
 			if ( ! empty( $i18n ) && 
 				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/i18n/jquery.ui.datepicker-' . $i18n . '.js' )
 				) {
-				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', basename(dirname(__FILE__)) ), array('jquery-ui-datepicker') , '', TRUE );
+				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
 				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
 			}
 			
 			// include styles for datepicker
 			wp_enqueue_style( 'jquery-ui-datepicker' );
-			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', basename(dirname(__FILE__)) ) );
+			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', __FILE__ ) );
 			
 			// for preview
 			add_thickbox();
@@ -197,7 +198,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				}
 			}
 			
-			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', basename(dirname(__FILE__)) ) );
+			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', __FILE__ ) );
 		}
 		
 		
@@ -293,6 +294,13 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$this->data['link'] = (int) $_POST['wm_config-link'];
 			if ( isset($_POST['wm_config-admin_link']) )
 				$this->data['admin_link'] = (int) $_POST['wm_config-admin_link'];
+			if ( isset($_POST['wm_config-rewrite']) ) {
+				if ( function_exists('esc_url') ) {
+					$this->data['rewrite'] = esc_url( $_POST['wm_config-rewrite'] );
+				} else {
+					$this->data['rewrite'] = clean_url( $_POST['wm_config-rewrite'] );
+				}
+			}
 			if ( isset($_POST['wm_config-theme']) )
 				$this->data['theme'] = (int) $_POST['wm_config-theme'];
 			if ( isset($_POST['wm_config-styleurl']) ) {
@@ -316,6 +324,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$this->data['exclude'] = preg_split("/[\s,]+/", $this->esc_attr( $_POST['wm_config-exclude'] ) );
 			if ( isset($_POST['wm_config-role']) )
 				$this->data['role'] = preg_split("/[\s,]+/", $this->esc_attr( $_POST['wm_config-role'] ) );
+			if ( isset($_POST['wm_config-role_frontend']) )
+				$this->data['role_frontend'] = preg_split("/[\s,]+/", $this->esc_attr( $_POST['wm_config-role_frontend'] ) );
 			if ( isset($_POST['wm_config-radio']) )
 				$this->data['radio'] = (int) $_POST['wm_config-radio'];
 			if ( isset($_POST['wm_config-date']) )
@@ -352,6 +362,36 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			}
 		}
 		
+		/**
+		 * Rewrite for Frontend Login
+		 * 
+		 * @return  void
+		 */
+		function redirect() {
+			
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
+				$value = get_site_option( FB_WM_TEXTDOMAIN );
+			else
+				$value = get_option( FB_WM_TEXTDOMAIN );
+			
+			// if the redirect active
+			if ( ! isset($value['rewrite']) )
+				return NULL;
+			
+			// check, is the maintenance mode active
+			if ( 0 === $value['active'] )
+				return NULL;
+			
+			// check, Access to backend
+			if ( current_user_can( $value['role'][0] ) )
+				return NULL;
+			
+			// redirect for wp-admin
+			// only Dashboard: #wp-admin/?(index.php)?$#
+			if ( preg_match( '#wp-admin/#', $_SERVER['REQUEST_URI'] ) )
+				wp_redirect( $value['rewrite'] );
+		}
+		
 		
 		function check_exclude() {
 			
@@ -365,10 +405,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			foreach ( (array) $value['exclude'] as $exclude ) {
 				// check for IP
-				if ( $exclude && $_SERVER['REMOTE_ADDR'] && strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
+				if ( strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
 					return TRUE;
 				
-				if ( $exclude && $_SERVER['REQUEST_URI'] && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
+				if ( $exclude && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
 					return TRUE;
 			}
 			
@@ -377,6 +417,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		
 		function check_role() {
+			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
 				$value = get_site_option( FB_WM_TEXTDOMAIN );
 			else
@@ -385,34 +426,41 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( is_super_admin() )
 				return TRUE;
 			
-			if ( !isset( $value['role'][0] ) || ( '' != $value['role'][0] ) )
+			if ( ! isset( $value['role'][0] ) || ( '' != $value['role'][0] ) )
 				$role = 'manage_options';
+			
+			if ( is_admin() )
+				$current = $value['role'][0];
+			else
+				$current = $value['role_frontend'][0];
 			
 			$defaultroles = array('administrator', 'editor', 'author', 'contributor', 'subscriber');
 			
-			if ( isset($value['role'][0]) ) {
-				if ( 'administrator' == $value['role'][0] )
+			if ( isset( $current ) ) {
+				if ( 'administrator' == $current )
 					$role = 'manage_options';
 					
-				elseif ( 'editor' == $value['role'][0] )
+				elseif ( 'editor' == $current )
 					$role = 'manage_categories';
 					
-				elseif ( 'author' == $value['role'][0] )
+				elseif ( 'author' == $current )
 					$role = 'publish_posts';
 					
-				elseif ( 'contributor' == $value['role'][0] )
+				elseif ( 'contributor' == $current )
 					$role = 'edit_posts';
 					
-				elseif ( 'subscriber' == $value['role'][0] )
+				elseif ( 'subscriber' == $current )
 					$role = 'read';
 					
-				elseif ( !in_array( $value['role'][0], $defaultroles ) )
+				elseif ( ! in_array( $current, $defaultroles ) )
 					$role = 'manage_options';
 			} else {
 				$role = 'manage_options';
 			}
 			
 			if ( current_user_can( $role ) )
+				return TRUE;
+			else if ( current_user_can( $value['role_frontend'][0] ) )
 				return TRUE;
 			
 			return FALSE;
@@ -501,25 +549,25 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			}
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
-			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
 				$settings_link = network_admin_url() . 'plugins.php#wm-pluginconflink';
-			else
+			} else {
+				$value = get_option( FB_WM_TEXTDOMAIN );
 				$settings_link = admin_url() . 'plugins.php#wm-pluginconflink';
+			}
 			
 			$scmsg = '';
 			// Super Cache Plugin; clear cache on activation of maintance mode
 			if ( function_exists( 'wp_cache_clear_cache' ) ) {
+				ob_end_clean();
 				wp_cache_clear_cache();
 				$scmsg .= __( ' &amp; WP Super Cache flushed.', FB_WM_TEXTDOMAIN );
 			}
 			
 			// W3 Total Cache Support
 			if ( function_exists( 'w3tc_pgcache_flush' ) ) {
+				ob_end_clean();
 				w3tc_pgcache_flush();
 				$scmsg .= __( ' &amp; W3 Total Cache for pages flushed.', FB_WM_TEXTDOMAIN );
 			}
@@ -555,7 +603,6 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$backtime = $value['time'] * $unitvalues['multiplier'];
 			else
 				$backtime = NULL;
-			
 			if ( ( ! $this->check_role() )
 					&& ! strstr($_SERVER['PHP_SELF'], 'wp-login.php' )
 					&& ! strstr($_SERVER['PHP_SELF'], 'async-upload.php')
@@ -657,7 +704,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 2:
 					$theme = 'dh.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', basename(dirname(__FILE__))) . '\') no-repeat; }' . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', __FILE__) . '\') no-repeat; }' . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -688,7 +735,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 11:
 					$theme = 'af.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', basename(dirname(__FILE__)) ) . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', __FILE__ ) . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -697,7 +744,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					break;
 			}
 			if ( ! empty($theme) )
-				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', basename(dirname(__FILE__)) ) . $theme . '" type="text/css" media="all" />' ."\n";
+				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', __FILE__ ) . $theme . '" type="text/css" media="all" />' ."\n";
 			echo $link . $style;
 		}
 		
@@ -722,7 +769,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					if ( file_exists($flash) ) {
 						$flash = $flash;
 					} else {
-						$flash = $this->get_plugins_url( 'styles/', basename(dirname(__FILE__)) ) . 'wartung.swf';
+						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung.swf';
 					}
 					
 					$object = '
@@ -745,23 +792,22 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$value = get_option( FB_WM_TEXTDOMAIN );
 			$echo = NULL;
 			// default for unit
-			if ( !isset($value['unit']) )
+			if ( ! isset($value['unit']) )
 				$value['unit'] = NULL;
 				
 			$unitvalues = $this->case_unit($value['unit']);
 			$td = $this->check_datetime();
 			
 			if ( isset($value['radio']) && 1 === $value['radio'] && 0 !== $td[2] ) {
-				$echodate = $td[0][0];
-				if ('de_DE' == $locale)
-					$echodate = str_replace('-', '.', $td[0][0]);
-				if ( 0 !== $td[1] )
-					$echodate .= ' ' . $td[0][1];
-				$echo = wp_sprintf( stripslashes_deep( $value['text']), '<br /><span id="countdown"></span>', $echodate );
+				$echo = wp_sprintf( 
+					stripslashes_deep( $value['text']),
+					'<br /><span id="countdown"></span>',
+					date_i18n( get_option('date_format'), strtotime( $td[0][0] ) )
+				);
 			} elseif ( isset($value['text']) ) {
-				if (!isset($value['time']) || 0 == $value['time'] )
+				if ( ! isset($value['time']) || 0 == $value['time'] )
 					$value['time'] = FALSE;
-				if (!isset($unitvalues['unit']) )
+				if ( ! isset($unitvalues['unit']) )
 					$unitvalues['unit'] = FALSE;
 				$echo = wp_sprintf( stripslashes_deep( $value['text'] ), $value['time'], $unitvalues['unit'] );
 			}
