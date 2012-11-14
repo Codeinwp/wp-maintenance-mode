@@ -8,7 +8,7 @@ Donate link: http://bueltge.de/wunschliste/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
 Tested up to: 3.5-beta3
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
@@ -242,6 +242,10 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.3 =
+* Fix for the forgotten update of JS-files; slow SVN :(
+* Minor Fixes, see (Bugtracker)[http://bueltge.de/bt/view.php?id=2]
+
 = 1.8.2 =
 * Add different access for Frontend and Backend
 * Add Rewrite after Login for Frontend Access

@@ -24,7 +24,7 @@ class WPMaintenanceMode_Settings {
 		//if ( 0 < count($_POST['checked']) )
 		//	return;
 		
-		if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
+		if ( is_multisite() && is_plugin_active_for_network( FB_WM_BASENAME ) )
 			$value = get_site_option( FB_WM_TEXTDOMAIN );
 		else
 			$value = get_option( FB_WM_TEXTDOMAIN );
@@ -216,11 +216,11 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for="wm_config-exclude"><?php _e( 'Excludes:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-exclude"><?php _e( 'Exclude:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td>
-							<?php 
-							if ( isset($value['exclude']) ) {
+							<?php
+							if ( isset($value['exclude']) && '' !== $value['exclude'][0] ) {
 								if ( 1 < count($value['exclude']) ) {
 									$value_exclude = join( ', ', $value['exclude'] );
 								} else {
@@ -237,7 +237,7 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-role"><?php _e( 'Role Backend:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-role"><?php _e( 'Backend Role:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<select name="wm_config-role" id="wm_config-role">
@@ -268,7 +268,7 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-role_frontend"><?php _e( 'Role Frontend:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-role_frontend"><?php _e( 'Frontend Role:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<select name="wm_config-role_frontend" id="wm_config-role_frontend">
@@ -299,7 +299,7 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-rewrite"><?php _e( 'Rewrite:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-rewrite"><?php _e( 'Redirection:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<input class="large-text" size="30" type="text" id="wm_config-rewrite" name="wm_config-rewrite" value="<?php if ( isset($value['rewrite']) ) echo $value['rewrite']; ?>" />

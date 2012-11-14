@@ -8,9 +8,9 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.2
- * Last change: 11/13/2012
- * Licence:     GPLv3
+ * Version:     1.8.3
+ * Last change: 11/14/2012
+ * License:     GPLv3
  * 
  * 
  * License:
@@ -33,7 +33,7 @@
  * 
  * Requirements:
  * ==============================================================================
- * This plugin requires WordPress >= 2.6 and tested with PHP Interpreter >= 5.3
+ * This plugin requires WordPress >= 2.6 and tested with PHP >= 5.3, WP 3.5*
  */
 
 //avoid direct calls to this file, because now WP core and framework has been used
@@ -235,7 +235,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				'unit'       => 1, 
 				'title'      => __( 'Maintenance mode', FB_WM_TEXTDOMAIN ), 
 				'text'       => __( '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', FB_WM_TEXTDOMAIN ), 
-				'exclude'    => 'wp-cron, feed, wp-admin'
+				'exclude'    => 'wp-cron, feed, login'
 			);
 			// if is active in network of multisite
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {

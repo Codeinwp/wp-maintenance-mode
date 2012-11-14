@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-13 16:38+0100\n"
+"POT-Creation-Date: 2012-11-14 12:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frank Bueltge <frank@bueltge.de>\n"
 "Language-Team: \n"
@@ -423,7 +423,8 @@ msgstr ""
 
 # @ wp-maintenance-mode
 #: inc/wp-maintenance-mode-settings.php:219
-msgid "Excludes:"
+#, fuzzy
+msgid "Exclude:"
 msgstr "Ausnahmen:"
 
 # @ wp-maintenance-mode
@@ -437,8 +438,8 @@ msgstr ""
 ">Beispiel:"
 
 #: inc/wp-maintenance-mode-settings.php:240
-msgid "Role Backend:"
-msgstr "Rolle Backend:"
+msgid "Backend Role:"
+msgstr "Backendrolle:"
 
 # @ wp-maintenance-mode
 #: inc/wp-maintenance-mode-settings.php:265
@@ -452,8 +453,8 @@ msgid "Super Admin has always access."
 msgstr "Super Admin hat immer Zugang."
 
 #: inc/wp-maintenance-mode-settings.php:271
-msgid "Role Frontend:"
-msgstr "Rolle Frontend:"
+msgid "Frontend Role:"
+msgstr "Frontendrolle:"
 
 # @ wp-maintenance-mode
 #: inc/wp-maintenance-mode-settings.php:296
@@ -461,7 +462,7 @@ msgid "Allowed userrole to see the frontend of this blog."
 msgstr "Erlaubte User-Rolle für das Sehen des Frontend von diesem Blog."
 
 #: inc/wp-maintenance-mode-settings.php:302
-msgid "Rewrite:"
+msgid "Redirection:"
 msgstr "Weiterleitung:"
 
 #: inc/wp-maintenance-mode-settings.php:307
@@ -476,3 +477,6 @@ msgstr ""
 #: inc/wp-maintenance-mode-settings.php:316
 msgid "Save"
 msgstr "Speichern"
+
+#~ msgid "Rewrite:"
+#~ msgstr "Weiterleitung:"
