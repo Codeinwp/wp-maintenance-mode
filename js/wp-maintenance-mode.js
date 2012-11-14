@@ -22,24 +22,26 @@ jQuery(document).ready( function($){
 	
 	function wm_config_update() {
 		
-		time_Val         = $('#wm_config-time').val();
-		link_Val         = $('#wm_config-link').val();
-		admin_link_Val   = $('#wm_config-admin_link').val();
-		unit_Val         = $('#wm_config-unit').val();
-		theme_Val        = $('#wm_config-theme').val();
-		styleurl_Val     = $('#wm_config-styleurl').val();
-		index_Val        = $('#wm_config-index').val();
-		title_Val        = $('#wm_config-title').val();
-		header_Val       = $('#wm_config-header').val();
-		heading_Val      = $('#wm_config-heading').val();
-		text_Val         = $('#wm_config-text').val();
-		exclude_Val      = $('#wm_config-exclude').val();
-		role_Val         = $('#wm_config-role').val();
-		radio_Val        = $('#wm_config-radio').val();
-		date_Val         = $('#wm_config-date').val();
-		cd_day_Val       = $('#wm_config-cd-day').val();
-		cd_month_Val     = $('#wm_config-cd-month').val();
-		cd_year_Val      = $('#wm_config-cd-year').val();
+		time_Val          = $('#wm_config-time').val();
+		link_Val          = $('#wm_config-link').val();
+		admin_link_Val    = $('#wm_config-admin_link').val();
+		rewrite_Val       = $('#wm_config-rewrite').val();
+		unit_Val          = $('#wm_config-unit').val();
+		theme_Val         = $('#wm_config-theme').val();
+		styleurl_Val      = $('#wm_config-styleurl').val();
+		index_Val         = $('#wm_config-index').val();
+		title_Val         = $('#wm_config-title').val();
+		header_Val        = $('#wm_config-header').val();
+		heading_Val       = $('#wm_config-heading').val();
+		text_Val          = $('#wm_config-text').val();
+		exclude_Val       = $('#wm_config-exclude').val();
+		role_Val          = $('#wm_config-role').val();
+		role_frontend_Val = $('#wm_config-role_frontend').val();
+		radio_Val         = $('#wm_config-radio').val();
+		date_Val          = $('#wm_config-date').val();
+		cd_day_Val        = $('#wm_config-cd-day').val();
+		cd_month_Val      = $('#wm_config-cd-month').val();
+		cd_year_Val       = $('#wm_config-cd-year').val();
 		url = '/wp-admin/admin-ajax.php';
 		$.post( ajaxurl , {
 				"action" : "wm_config-update", 
@@ -47,6 +49,7 @@ jQuery(document).ready( function($){
 				"wm_config-unit" : unit_Val, 
 				"wm_config-link" : link_Val, 
 				"wm_config-admin_link" : admin_link_Val,
+				"wm_config-rewrite" : rewrite_Val,
 				"wm_config-theme" : theme_Val, 
 				"wm_config-styleurl" : styleurl_Val, 
 				"wm_config-index" : index_Val,
@@ -56,6 +59,7 @@ jQuery(document).ready( function($){
 				"wm_config-text" : text_Val, 
 				"wm_config-exclude" : exclude_Val, 
 				"wm_config-role" : role_Val, 
+				"wm_config-role_frontend" : role_frontend_Val,
 				"wm_config-radio" : radio_Val, 
 				"wm_config-date" : date_Val, 
 				"wm_config-cd-day" : cd_day_Val, 
