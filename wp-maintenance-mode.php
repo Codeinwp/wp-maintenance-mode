@@ -9,7 +9,7 @@
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
  * Version:     1.8.3
- * Last change: 11/14/2012
+ * Last change: 11/15/2012
  * License:     GPLv3
  * 
  * 
@@ -383,7 +383,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				return NULL;
 			
 			// check, Access to backend
-			if ( current_user_can( $value['role'][0] ) )
+			if ( isset( $value['role'][0] ) && current_user_can( $value['role'][0] ) )
 				return NULL;
 			
 			// redirect for wp-admin
