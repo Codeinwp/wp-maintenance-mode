@@ -887,5 +887,3 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 	
 	$GLOBALS['WPMaintenanceMode'] = new WPMaintenanceMode();
 }
-
-?>
