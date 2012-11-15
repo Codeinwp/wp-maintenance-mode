@@ -429,6 +429,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( ! isset( $value['role'][0] ) || ( '' != $value['role'][0] ) )
 				$role = 'manage_options';
 			
+			if ( ! isset( $value['role_frontend'][0] ) )
+				$value['role_frontend'][0] = 'manage_options';
+			
 			if ( is_admin() )
 				$current = $value['role'][0];
 			else
