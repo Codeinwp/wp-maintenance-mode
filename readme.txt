@@ -1,5 +1,5 @@
 ﻿=== WP Maintenance Mode ===
-Contributors: Bueltge
+Contributors: Bueltge, inpsyde
 Plugin Name: WP Maintenance Mode
 Plugin URI: http://bueltge.de/wp-wartungsmodus-plugin/101/
 Author: Frank B&uuml;ltge
