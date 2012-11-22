@@ -221,7 +221,7 @@ class WPMaintenanceMode_Settings {
 						<td>
 							<?php
 							if ( isset($value['exclude']) && '' !== $value['exclude'][0] ) {
-								if ( 1 < count($value['exclude']) ) {
+								if ( 1 <= count($value['exclude']) ) {
 									$value_exclude = join( ', ', $value['exclude'] );
 								} else {
 									$value_exclude = $value['exclude'];
