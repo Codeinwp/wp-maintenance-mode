@@ -8,8 +8,8 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.3
- * Last change: 11/15/2012
+ * Version:     1.8.4
+ * Last change: 11/22/2012
  * License:     GPLv3
  * 
  * 
@@ -601,6 +601,11 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( isset($value['unit']) )
 				$unitvalues = $this->case_unit($value['unit']);
 			
+			if ( get_bloginfo('charset') )
+				$charset = get_bloginfo('charset');
+			else
+				$charset = 'UTF-8';
+			
 			// set backtime for header status
 			if ( isset($value['time']) )
 				$backtime = $value['time'] * $unitvalues['multiplier'];
@@ -614,6 +619,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				 ) {
 				$rolestatus = 'norights';
 				nocache_headers();
+				header("Content-type: text/html; charset=$charset");
 				header("HTTP/1.0 503 Service Unavailable");
 				header("Retry-After: $backtime");
 				include('site.php');
@@ -635,6 +641,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				exit();
 			} else if ( strstr($_SERVER['PHP_SELF'], 'feed/') || strstr($_SERVER['PHP_SELF'], 'trackback/') ) {
 				nocache_headers();
+				header("Content-type: text/html; charset=$charset");
 				header("HTTP/1.0 503 Service Unavailable");
 				header("Retry-After: $backtime");
 				exit();
