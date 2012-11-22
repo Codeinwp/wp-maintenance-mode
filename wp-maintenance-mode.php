@@ -400,7 +400,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			else
 				$value = get_option( FB_WM_TEXTDOMAIN );
 			
-			if ( ! isset($value['exclude']) )
+			if ( ! isset($value['exclude']) || empty( $value['exclude'][0] ) )
 				return FALSE;
 			
 			foreach ( (array) $value['exclude'] as $exclude ) {
