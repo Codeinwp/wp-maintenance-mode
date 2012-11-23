@@ -7,7 +7,7 @@ Author URI: http://bueltge.de/
 Donate link: http://bueltge.de/wunschliste/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
-Tested up to: 3.5-beta3
+Tested up to: 3.5-RC1
 Stable tag: 1.8.3
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
@@ -242,6 +242,11 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.4 =
+* Fix for include JS in frontend to use countdown
+* Small minif fix for a php notice
+* Add charset on spalsh page for strange databases
+ 
 = 1.8.3 =
 * Fix for the forgotten update of JS-files; slow SVN :(
 * Minor Fixes, see (Bugtracker)[http://bueltge.de/bt/view.php?id=2]
