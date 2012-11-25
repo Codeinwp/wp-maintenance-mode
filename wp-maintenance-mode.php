@@ -236,7 +236,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				'unit'       => 1, 
 				'title'      => __( 'Maintenance mode', FB_WM_TEXTDOMAIN ), 
 				'text'       => __( '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', FB_WM_TEXTDOMAIN ), 
-				'exclude'    => 'wp-cron, feed, login'
+				'exclude'    => 'wp-cron, feed, wp-login, login, wp-admin'
 			);
 			// if is active in network of multisite
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
