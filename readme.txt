@@ -239,6 +239,7 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to [Brian Flores](http://www.inmotionhosting.com/) for serbian translation
 * Lithuanian translation files by [Vincent G](http://www.host1plus.com)
 * Swedish translation files by [Kenneth Andersson](http://www.telia.se/)
+* Japanese translation files by [Groove Brain]
 
 
 == Changelog ==
