@@ -203,6 +203,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		
 		function add_settings_link( $links, $file ) {
+			
 			if ( plugin_basename( __FILE__ ) == $file  )
 				array_unshift(
 					$links,
