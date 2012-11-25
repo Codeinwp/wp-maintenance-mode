@@ -21,17 +21,28 @@ class WPMaintenanceMode_Login_Form {
 	 */
 	public function login_form_shortcode( $atts, $content = NULL ) {
 		
+		if ( is_multisite() && is_plugin_active_for_network( FB_WM_BASENAME ) )
+			$value = get_site_option( FB_WM_TEXTDOMAIN );
+		else
+			$value = get_option( FB_WM_TEXTDOMAIN );
+		
 		extract( shortcode_atts(
 			array(
 				'redirect' => ''
 			),
-		$atts ) );
+			$atts
+		) );
 		
 		if ( ! is_user_logged_in() ) {
-			if ( $redirect )
-				$redirect_url = $redirect;
+			
+			// set default link
+			if ( '' == get_permalink() )
+				$redirect_default_url = home_url( '/' );
+			
+			if ( ! isset( $value['rewrite'] ) || empty( $value['rewrite'] ) )
+				$redirect_url = $redirect_default_url;
 			else
-				$redirect_url = get_permalink();
+				$redirect_url = $value['rewrite'];
 			
 			$form = wp_login_form( array(
 				'echo' => FALSE,
