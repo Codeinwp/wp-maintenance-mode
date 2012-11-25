@@ -797,11 +797,14 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_content() {
 			
 			$locale = get_locale();
+			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
 				$value = get_site_option( FB_WM_TEXTDOMAIN );
 			else
 				$value = get_option( FB_WM_TEXTDOMAIN );
+			
 			$echo = NULL;
+			
 			// default for unit
 			if ( ! isset($value['unit']) )
 				$value['unit'] = NULL;
@@ -809,9 +812,12 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$unitvalues = $this->case_unit($value['unit']);
 			$td = $this->check_datetime();
 			
+			if ( ! empty( $value['text'] ) )
+				$value['text'] = apply_filters( 'the_content', $value['text'] );
+			
 			if ( isset($value['radio']) && 1 === $value['radio'] && 0 !== $td[2] ) {
 				$echo = wp_sprintf( 
-					stripslashes_deep( $value['text']),
+					stripslashes_deep( $value['text'] ),
 					'<br /><span id="countdown"></span>',
 					date_i18n( get_option('date_format'), strtotime( $td[0][0] ) )
 				);

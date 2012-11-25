@@ -211,7 +211,10 @@ class WPMaintenanceMode_Settings {
 						<td class="alternate">
 							<textarea class="code" style="width: 95%;" cols="40" rows="4" name="wm_config-text" id="wm_config-text"><?php if ( isset($value['text']) ) echo esc_attr($value['text']); ?></textarea>
 							<br />
-							<small><?php _e( 'Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible', FB_WM_TEXTDOMAIN ); ?></small>
+							<small>
+								<?php _e( 'Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible.', FB_WM_TEXTDOMAIN ); ?>
+								<?php _e( 'Use <code>[loginform]</code> for add the default login form in the maintenance page.', FB_WM_TEXTDOMAIN ); ?>
+							</small>
 						</td>
 					</tr>
 					<tr valign="top">
@@ -230,7 +233,7 @@ class WPMaintenanceMode_Settings {
 								$value_exclude = NULL;
 							}
 							?>
-							<input size="30" type="text" id="wm_config-exclude" name="wm_config-exclude" value="<?php echo $value_exclude; ?>" />
+							<input class="large-text" size="30" type="text" id="wm_config-exclude" name="wm_config-exclude" value="<?php echo $value_exclude; ?>" />
 							<br />
 							<small><?php _e( 'Exclude feed, pages, posts, archives or IPs from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:', FB_WM_TEXTDOMAIN ); ?> <code>wp-cron, feed, wp-admin, ?page_id=12, about, category/test, 127.0.0.1</code></small>
 						</td>

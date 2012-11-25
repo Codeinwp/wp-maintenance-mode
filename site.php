@@ -81,7 +81,7 @@ if ( !isset($value) ) {
 	<?php
 	$td = WPMaintenanceMode::check_datetime();
 	if ( isset($td[2]) && 0 !== $td[2] ) {
-
+		
 		$locale = substr($locale, 0, 2);
 	?>
 		<script type="text/javascript" src="<?php bloginfo('url') ?>/wp-includes/js/jquery/jquery.js"></script>
