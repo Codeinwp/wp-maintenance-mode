@@ -108,7 +108,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		// function for WP < 2.8
 		function get_plugins_url( $path = '', $plugin = '' ) {
 			
-			if ( function_exists('plugin_url') )
+			if ( function_exists('plugins_url') )
 				return plugins_url($path, $plugin);
 			
 			if ( function_exists('is_ssl') )
@@ -124,15 +124,15 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$url = str_replace( 'http://', "{$scheme}://", $url );
 			}
 		
-			if ( !empty($plugin) && is_string($plugin) ) {
+			if ( ! empty($plugin) && is_string($plugin) ) {
 				$folder = dirname(plugin_basename($plugin));
 				if ('.' != $folder)
 					$url .= '/' . ltrim($folder, '/');
 			}
 		
-			if ( !empty($path) && is_string($path) && ( FALSE === strpos($path, '..') ) )
+			if ( ! empty($path) && is_string($path) && ( FALSE === strpos($path, '..') ) )
 				$url .= '/' . ltrim($path, '/');
-		
+			
 			return apply_filters('plugins_url', $url, $path, $plugin);
 		}
 		
