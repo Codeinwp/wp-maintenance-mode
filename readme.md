@@ -7,6 +7,8 @@ Adds a maintenance-page to your blog that lets visitors know your blog is down f
 Activate the plugin and your blog is in maintenance-mode, works and see the frontend, only registered users with enough rights. You can use a date with a countdown for informations the visitors or set a value and unit for infomrations.
 Also you can add urls for exlude of maintenance mode.
 
+Use the shortcode `[loginform]` for easy use a login form on the maintenance page.
+
 You can add your own html and stylesheet and add the url of this style to the options of the plugin. Write your style to this markup and upload to the webspace; after add the url include http:// to the settings of this plugin and change th theme to `"Own Theme"`:
 
 	
