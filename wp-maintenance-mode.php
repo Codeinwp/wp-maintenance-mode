@@ -9,7 +9,7 @@
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
  * Version:     1.8.4
- * Last change: 11/22/2012
+ * Last change: 11/25/2012
  * License:     GPLv3
  * 
  * 
