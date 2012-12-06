@@ -17,6 +17,8 @@ Adds a maintenance-page to your blog that lets visitors know your blog is down f
 Activate the plugin and your blog is in maintenance-mode, works and see the frontend, only registered users with enough rights. You can use a date with a countdown for informations the visitors or set a value and unit for infomrations.
 Also you can add urls for exlude of maintenance mode.
 
+Use the shortcode `[loginform]` for easy use a login form on the maintenance page.
+
 You can add your own html and stylesheet and add the url of this style to the options of the plugin. Write your style to this markup and upload to the webspace; after add the url include http:// to the settings of this plugin and change th theme to `"Own Theme"`:
 
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -248,6 +250,7 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Small mini fix for a php notice
 * Add charset on spalsh page for strange databases
 * Enhanced default exclude adresses
+* Add shortcode `[loginform]` for easy use a login form in splash page
 * Test with WordPress 3.5
  
 = 1.8.3 =
