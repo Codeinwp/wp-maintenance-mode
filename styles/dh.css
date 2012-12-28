@@ -41,7 +41,7 @@ width: 410px;
 height: 60px;
 left: 50px;
 top: 270px;
-no-repeat;
+background-repeat:no-repeat;
 }
 
 #content h3 {

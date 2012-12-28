@@ -49,14 +49,14 @@ left: 155px;
 }
 
 h1 {
-background-image: url(images/headline-de_DE.jpg);
+background-image: url('images/headline-de_DE.jpg');
 background-repeat: no-repeat;
 position: absolute;
 width: 365px;
 height: 57px;
 left: 150px;
 top: 150px;
-no-repeat;
+background-repeat: no-repeat;
 }
 
 h3 {
