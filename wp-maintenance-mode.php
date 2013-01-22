@@ -8,8 +8,8 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.4
- * Last change: 11/25/2012
+ * Version:     1.8.5
+ * Last change: 01/22/2013
  * License:     GPLv3
  * 
  * 
@@ -144,14 +144,18 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) )
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
+				$value      = get_site_option( FB_WM_TEXTDOMAIN );
 				$valuemsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
-			else
+			} else {
+				$value      = get_option( FB_WM_TEXTDOMAIN );
 				$valuemsqld = (int) get_option( FB_WM_TEXTDOMAIN . '-msqld' );
+			}
 			
 			if ( 1 === $valuemsqld || '1' === $valuemsqld ) {
 				$this->on_active();
-				add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_alert' ), 9999 );
+				if ( ! isset( $value['notice'] ) || 0 !== $value['notice'] )
+					add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_alert' ), 9999 );
 			}
 		}
 		
@@ -236,7 +240,15 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				'unit'       => 1, 
 				'title'      => __( 'Maintenance mode', FB_WM_TEXTDOMAIN ), 
 				'text'       => __( '<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>', FB_WM_TEXTDOMAIN ), 
-				'exclude'    => 'wp-cron, feed, wp-login, login, wp-admin'
+				'exclude'    => array( 
+					0 => 'wp-cron',
+					1 => 'feed',
+					2 => 'wp-login',
+					3 => 'login',
+					4 => 'wp-admin',
+					5 => 'wp-admin/admin-ajax.php'
+				),
+				'notice'     => 1,
 			);
 			// if is active in network of multisite
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
@@ -302,6 +314,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$this->data['rewrite'] = clean_url( $_POST['wm_config-rewrite'] );
 				}
 			}
+			if ( isset($_POST['wm_config-notice']) )
+				$this->data['notice'] = (int) $_POST['wm_config-notice'];
 			if ( isset($_POST['wm_config-theme']) )
 				$this->data['theme'] = (int) $_POST['wm_config-theme'];
 			if ( isset($_POST['wm_config-styleurl']) ) {
@@ -576,20 +590,26 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$scmsg .= __( ' &amp; W3 Total Cache for pages flushed.', FB_WM_TEXTDOMAIN );
 			}
 			
-			$message = __( 'Caution: Maintenance mode is <strong>active</strong>!', FB_WM_TEXTDOMAIN );
-			add_filter( 'login_message', create_function( '', "return '<div id=\"login_error\">$message</div>';" ) );
-			$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . $scmsg . ' <a href="plugins.php#wm-pluginconflink">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				add_action( 'network_admin_notices', create_function( '', "echo '$admin_notices';" ) );
-			add_action( 'admin_notices', create_function( '', "echo '$admin_notices';" ) );
-			$in_admin_header = '<a id="mm_in_admin_header" href="' . $settings_link . '" title="' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '">' . $message . '</a>';
-			//add_action( 'in_admin_header', create_function( '', "echo '$in_admin_header';" ) );
-			/**
-			// actual a ticket in trac #14126
-			// @link http://core.trac.wordpress.org/ticket/14126
-			$in_admin_header = '<a class="privacy-on-link" href="plugins.php#wm-pluginconflink" title="' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '">' . $message . '</a>';
-			add_action( 'in_admin_site_heading', create_function( '', "echo '$in_admin_header';" ) );
-			*/
+			// check options, if the user will see the notices for active maintenance mode
+			if ( ! isset($value['notice']) || 0 !== $value['notice'] ) {
+				$message = __( 'Caution: Maintenance mode is <strong>active</strong>!', FB_WM_TEXTDOMAIN );
+				add_filter( 'login_message', create_function( '', "return '<div id=\"login_error\">$message</div>';" ) );
+				$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . $scmsg . ' <a href="plugins.php#wm-pluginconflink">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
+				
+				if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
+					add_action( 'network_admin_notices', create_function( '', "echo '$admin_notices';" ) );
+				
+				add_action( 'admin_notices', create_function( '', "echo '$admin_notices';" ) );
+				
+				//$in_admin_header = '<a id="mm_in_admin_header" href="' . $settings_link . '" title="' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '">' . $message . '</a>';
+				//add_action( 'in_admin_header', create_function( '', "echo '$in_admin_header';" ) );
+				/**
+				// actual a ticket in trac #14126
+				// @link http://core.trac.wordpress.org/ticket/14126
+				$in_admin_header = '<a class="privacy-on-link" href="plugins.php#wm-pluginconflink" title="' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '">' . $message . '</a>';
+				add_action( 'in_admin_site_heading', create_function( '', "echo '$in_admin_header';" ) );
+				*/
+			}
 			
 			add_action( 'wm_head', array(&$this, 'add_theme') );
 			add_action( 'wm_content', array(&$this, 'add_flash') );
@@ -612,6 +632,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$backtime = $value['time'] * $unitvalues['multiplier'];
 			else
 				$backtime = NULL;
+			
 			if ( ( ! $this->check_role() )
 					&& ! strstr($_SERVER['PHP_SELF'], 'wp-login.php' )
 					&& ! strstr($_SERVER['PHP_SELF'], 'async-upload.php')

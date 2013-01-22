@@ -224,11 +224,11 @@ class WPMaintenanceMode_Settings {
 						<td>
 							<?php
 							if ( isset($value['exclude']) && '' !== $value['exclude'][0] ) {
-								if ( 1 <= count($value['exclude']) ) {
-									$value_exclude = join( ', ', $value['exclude'] );
+								if ( is_array( $value['exclude'] ) && 1 <= count($value['exclude']) ) {
+									$value_exclude = implode( ', ', $value['exclude'] );
 								} else {
 									$value_exclude = $value['exclude'];
-								} 
+								}
 							} else {
 								$value_exclude = NULL;
 							}
@@ -310,6 +310,21 @@ class WPMaintenanceMode_Settings {
 							<small><?php _e( 'If you want that after the login the destination address is not standard to the dashboard, then defining a URL. (incl. http://)', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
+					
+					<tr valign="top">
+						<th scope="row">
+							<label for="wm_config-notice"><?php _e( 'Notice:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td>
+							<select name="wm_config-notice" id="wm_config-notice">
+								<option value="0"<?php if ( isset($value['notice']) && 0 === $value['notice'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1"<?php if ( isset($value['notice']) && 1 === $value['notice'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+							</select>
+							<br />
+							<small><?php _e( 'Do you will see all notices, inside backend, the Admin Bar and the login screen?', FB_WM_TEXTDOMAIN ); ?></small>
+						</td>
+					</tr>
+					
 					</table>
 					<br />
 					<div class="plugin-update-tr">

@@ -26,6 +26,7 @@ jQuery(document).ready( function($){
 		link_Val          = $('#wm_config-link').val();
 		admin_link_Val    = $('#wm_config-admin_link').val();
 		rewrite_Val       = $('#wm_config-rewrite').val();
+		notice_Val        = $('#wm_config-notice').val();
 		unit_Val          = $('#wm_config-unit').val();
 		theme_Val         = $('#wm_config-theme').val();
 		styleurl_Val      = $('#wm_config-styleurl').val();
@@ -50,6 +51,7 @@ jQuery(document).ready( function($){
 				"wm_config-link" : link_Val, 
 				"wm_config-admin_link" : admin_link_Val,
 				"wm_config-rewrite" : rewrite_Val,
+				"wm_config-notice" : notice_Val, 
 				"wm_config-theme" : theme_Val, 
 				"wm_config-styleurl" : styleurl_Val, 
 				"wm_config-index" : index_Val,
