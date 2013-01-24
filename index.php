@@ -1,11 +1,32 @@
 <?php
-require_once('../../../wp-load.php');
 
-if( !current_user_can('unfiltered_html') )
+if ( ! function_exists( 'fb_find_wp_config_path' ) ) {
+	function fb_find_wp_config_path() {
+		
+		$dir = dirname(__FILE__);
+		
+		do {
+			if( file_exists( $dir . "/wp-config.php" ) ) {
+				return $dir;
+				var_dump($dir);
+			}
+		} while ( $dir = realpath( "$dir/.." ) );
+		
+		return NULL;
+	}
+}
+
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'WP_USE_THEMES', FALSE );
+	require_once( fb_find_wp_config_path() . '/wp-config.php' );
+}
+
+if( ! defined( 'ABSPATH' ) || ! current_user_can('unfiltered_html') ) {
 	wp_die( __('Cheatin&#8217; uh?') );
+	exit;
+}
 
 $WPMaintenanceMode = new WPMaintenanceMode();
 $WPMaintenanceMode->on_active();
 
 include 'site.php';
-?>

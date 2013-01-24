@@ -164,6 +164,27 @@ class WPMaintenanceMode_Settings {
 							<label for="wm_config-preview"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate" style="padding:5px 0 0 0;">
+						<script type="text/javascript">
+						<!--
+							var viewportwidth,
+							    viewportheight;
+							
+							if (typeof window.innerWidth != 'undefined' ) {
+								viewportwidth = window.innerWidth-80,
+								viewportheight = window.innerHeight-100
+							} else if (typeof document.documentElement != 'undefined'
+								&& typeof document.documentElement.clientWidth !=
+								'undefined' && document.documentElement.clientWidth != 0)
+							{
+								viewportwidth = document.documentElement.clientWidth,
+								viewportheight = document.documentElement.clientHeight
+							} else { // older versions of IE
+								viewportwidth = document.getElementsByTagName('body' )[0].clientWidth,
+								viewportheight = document.getElementsByTagName('body' )[0].clientHeight
+							}
+							document.write('<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR; ?>/index.php?TB_iframe=true&amp;height=' + viewportheight + '&amp;width=' + viewportwidth + '" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
+							//-->
+						</script>
 						<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR; ?>/index.php?TB_iframe=true" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>
 						</td>
 					</tr>
