@@ -320,7 +320,6 @@ class WPMaintenanceMode_Settings {
 								<option value="0"<?php if ( isset($value['notice']) && 0 === $value['notice'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
 								<option value="1"<?php if ( isset($value['notice']) && 1 === $value['notice'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
-							<br />
 							<small><?php _e( 'Do you will see all notices, inside backend, the Admin Bar and the login screen?', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>

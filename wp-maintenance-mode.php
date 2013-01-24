@@ -9,13 +9,13 @@
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
  * Version:     1.8.5
- * Last change: 01/22/2013
+ * Last change: 01/24/2013
  * License:     GPLv3
  * 
  * 
  * License:
  * ==============================================================================
- * Copyright 2009-2012 Frank Bueltge  (email : frank@bueltge.de)
+ * Copyright 2009-2013 Frank Bueltge  (email : frank@bueltge.de)
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,6 +58,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 	class WPMaintenanceMode {
 		
 		function WPMaintenanceMode() {
+			
+			$this->data = array();
+			$this->datamsqld = array();
 			
 			$this->load_classes();
 			
@@ -159,7 +162,43 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			}
 		}
 		
+		/**
+		 * Return the options, check for install and active on WP multisite
+		 * 
+		 * @return  array $values
+		 */
+		public function get_options() {
+			
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
+				$values = get_site_option( FB_WM_TEXTDOMAIN );
+			} else {
+				$values = get_option( FB_WM_TEXTDOMAIN );
+			}
+			
+			return $values;
+		}
 		
+		/**
+		 * Return the msql-dumper-options, check for install and active on WP multisite
+		 * 
+		 * @return  Array | Boolean $valuemsqld
+		 */
+		public function get_msqld_option() {
+				
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
+				$valuemsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
+			} else {
+				$valuemsqld = (int) get_option( FB_WM_TEXTDOMAIN . '-msqld' );
+			}
+			
+			return $valuemsqld;
+		}
+		
+		/**
+		 * Register and enqueue scripts and styles
+		 * 
+		 * @return  void
+		 */
 		function add_scripts() {
 			
 			$locale = get_locale();
@@ -267,15 +306,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function save_active() {
 			
-			$this->data = array();
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
-				$this->data = get_site_option( FB_WM_TEXTDOMAIN );
-				$this->datamsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
-			} else {
-				$this->data = get_option( FB_WM_TEXTDOMAIN );
-				$this->datamsqld = get_option( FB_WM_TEXTDOMAIN . '-msqld' );
-			}
-
+			$this->data      = $this->get_options();
+			$this->datamsqld = $this->get_msqld_option();
+			
 			if ( isset($_POST['wm_config-active']) )
 				$this->data['active'] = (int) $_POST['wm_config-active'];
 			
@@ -293,11 +326,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function save_config() {
 			
-			$this->data = array();
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$this->data = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$this->data = get_option( FB_WM_TEXTDOMAIN );
+			$this->data = $this->get_options();
 			
 			if ( isset($_POST['wm_config-time']) )
 				$this->data['time'] = (int) $_POST['wm_config-time'];
@@ -384,10 +413,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 */
 		function redirect() {
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$value = $this->get_options();
 			
 			// if the redirect active
 			if ( ! isset($value['rewrite']) )
@@ -410,10 +436,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function check_exclude() {
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$value = $this->get_options();
 			
 			if ( ! isset($value['exclude']) || empty( $value['exclude'][0] ) )
 				return FALSE;
@@ -433,10 +456,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function check_role() {
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$value = $this->get_options();
 			
 			if ( is_super_admin() )
 				return TRUE;
@@ -528,12 +548,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function check_datetime() {
 			
 			$datetime = NULL;
-			$time = NULL;
-			$date = NULL;
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$time     = NULL;
+			$date     = NULL;
+			$value    = $this->get_options();
 			
 			if ( isset($value['radio']) && 1 === $value['radio'] ) {
 				$datetime = explode( ' ', $value['date'] );
@@ -567,11 +584,11 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			}
 			
+			$value = $this->get_options();
+			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
 				$settings_link = network_admin_url() . 'plugins.php#wm-pluginconflink';
 			} else {
-				$value = get_option( FB_WM_TEXTDOMAIN );
 				$settings_link = admin_url() . 'plugins.php#wm-pluginconflink';
 			}
 			
@@ -656,6 +673,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				&& ! ( strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_role() )
 				&& ! strstr($_SERVER['PHP_SELF'], 'trackback/')
 				&& ! strstr($_SERVER['PHP_SELF'], '/plugins/')
+				&& ! strstr($_SERVER['PHP_SELF'], '/xmlrpc.php')
 				&& ! $this->check_exclude()
 				&& ! $this->check_role()
 				) {
@@ -674,10 +692,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function add_link() {
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$value = $this->get_options();
 			?>
 			<div id="footer">
 				<p><a href="http://bueltge.de/"><?php _e( 'Plugin by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://bueltge.de/favicon.ico" alt="bueltge.de" width="16" height="16" /></a>
@@ -713,10 +728,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_theme() {
 			
 			$locale = get_locale();
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$value  = $this->get_options();
 			
 			$theme  = '';
 			$link   = '';
@@ -784,10 +796,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_flash() {
 			
 			$locale = get_locale();
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
+			$value  = $this->get_options();
 			
 			$flash  = '';
 			$object = '';
@@ -818,13 +827,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_content() {
 			
 			$locale = get_locale();
+			$value  = $this->get_options();
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$value = get_site_option( FB_WM_TEXTDOMAIN );
-			else
-				$value = get_option( FB_WM_TEXTDOMAIN );
-			
-			$echo = NULL;
+			$echo   = NULL;
 			
 			// default for unit
 			if ( ! isset($value['unit']) )
@@ -859,7 +864,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$url = parse_url($url);
 			$fp  = fsockopen($url['host'], 80, $errno, $errstr, 30);
 			
-			if (!$fp) {
+			if ( ! $fp) {
 				echo $errstr . ' (' . $errno . ')<br />'. "\n";
 			} else {
 				$httpRequest = 'HEAD ' . $url['path'] . ' HTTP/1.1' . "\r\n"
@@ -896,7 +901,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		
 		function url_exists($url) {
-			if ( (strpos($url, "http")) === FALSE ) $url = "http://" . $url;
+			
+			if ( ( strpos($url, "http") ) === FALSE )
+				$url = "http://" . $url;
+			
 			if ( is_array(@get_headers($url)) )
 				return TRUE;
 			else
