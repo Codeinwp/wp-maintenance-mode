@@ -1,5 +1,5 @@
 <?php
-if ( !isset($value) ) {
+if ( ! isset($value) ) {
 	if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
 		$value = get_site_option( FB_WM_TEXTDOMAIN );
 	else
@@ -7,9 +7,8 @@ if ( !isset($value) ) {
 	$unitvalues = $WPMaintenanceMode->case_unit($value['unit']);
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?> id="wp_maintenance_mode" >
-
+<!DOCTYPE html>
+<html <?php language_attributes(); ?> id="wp_maintenance_mode" >
 <head>
 	
 	<title><?php if ( isset($value['title']) && ($value['title'] != '') ) echo stripslashes_deep( $value['title'] ); else { bloginfo('name'); echo ' - '; _e( 'Maintenance Mode', FB_WM_TEXTDOMAIN ); } ?></title>
