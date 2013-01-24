@@ -4,7 +4,7 @@ Plugin Name: WP Maintenance Mode
 Plugin URI: http://bueltge.de/wp-wartungsmodus-plugin/101/
 Author: Frank B&uuml;ltge
 Author URI: http://bueltge.de/
-Donate link: http://bueltge.de/wunschliste/
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4578111
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
 Tested up to: 3.6-alpha
