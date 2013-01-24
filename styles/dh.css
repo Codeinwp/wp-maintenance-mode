@@ -6,8 +6,7 @@ list-style-type: none;
 margin: 0;
 padding: 0;
 text-decoration: none;
-font-weight: 700;
-border: none;
+font-weight: 400;
 }
 
 body {
@@ -61,6 +60,13 @@ position: absolute;
 top: 340px;
 left: 55px;
 font: normal 17px/24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#content form p {
+	position: relative;
+	width: auto;
+	height: auto;
+	top: 400px;
 }
 
 #content p strong {

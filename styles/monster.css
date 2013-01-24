@@ -55,6 +55,10 @@ img{
 	padding: 0 0 0 55px;	
 }
 
+#content form p{
+	margin: 0;
+}
+
 #content strong{
 	font: bold 14px/26px helvetica, arial, sans-serif;
 }

@@ -68,8 +68,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			add_action( 'admin_print_scripts-plugins.php', array( $this, 'add_scripts' ) );
 			//add_action( 'load-plugins.php', array(&$this, 'add_scripts') );
 			add_action( 'init',       array( $this, 'on_init'), 1 );
-			add_action( 'admin_init', array( $this, 'admin_init') );
+			//add_action( 'admin_init', array( $this, 'admin_init') );
 			add_action( 'admin_menu', array( $this, 'redirect' ) );
+			
+			add_action( 'admin_init', array( 'WPMaintenanceMode_Settings', 'get_object' ) );
 			
 			add_action( 'wp_ajax_wm_config-update', array( $this, 'save_config' ) );
 			add_action( 'wp_ajax_wm_config-active', array( $this, 'save_active' ) );
@@ -147,15 +149,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) )
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			
-			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
-				$value      = get_site_option( FB_WM_TEXTDOMAIN );
-				$valuemsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
-			} else {
-				$value      = get_option( FB_WM_TEXTDOMAIN );
-				$valuemsqld = (int) get_option( FB_WM_TEXTDOMAIN . '-msqld' );
-			}
+			$value = self::get_options();
+			$valuemsqld = self::get_msqld_option();
 			
-			if ( 1 === $valuemsqld || '1' === $valuemsqld ) {
+			if ( 1 === intval( $valuemsqld ) ) {
 				$this->on_active();
 				if ( ! isset( $value['notice'] ) || 0 !== $value['notice'] )
 					add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_alert' ), 9999 );
@@ -167,7 +164,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 * 
 		 * @return  array $values
 		 */
-		public function get_options() {
+		public static function get_options() {
 			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$values = get_site_option( FB_WM_TEXTDOMAIN );
@@ -183,7 +180,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 * 
 		 * @return  Array | Boolean $valuemsqld
 		 */
-		public function get_msqld_option() {
+		public static function get_msqld_option() {
 				
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$valuemsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
@@ -229,7 +226,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				// multisite install
 				add_filter( 'network_admin_plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
-				add_action( 'after_plugin_row_' . FB_WM_BASENAME, array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
+				//add_action( 'after_plugin_row_' . FB_WM_BASENAME, array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
 			} else {
 				// Single mode install of WP
 				if ( version_compare( $GLOBALS['wp_version'], '2.7alpha', '>' ) ) {
@@ -242,27 +239,6 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			}
 			
 			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', __FILE__ ) );
-		}
-		
-		
-		function add_settings_link( $links, $file ) {
-			
-			if ( plugin_basename( __FILE__ ) == $file  )
-				array_unshift(
-					$links,
-					sprintf( '<a id="wm-pluginconflink" href="javascript:void(0)" title="Configure this plugin">%s</a>', __('Settings') )
-				);
-			
-			return $links;
-		}
-		
-		
-		function network_admin_add_settings_link( $links, $file ) {
-			
-			if ( plugin_basename( __FILE__ ) == $file )
-				$links[] = '<a  id="wm-pluginconflink" href="javascript:void(0)" title="Configure this plugin">' . __('Settings') . '</a>';
-			
-			return $links;
 		}
 		
 		
@@ -306,8 +282,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function save_active() {
 			
-			$this->data      = $this->get_options();
-			$this->datamsqld = $this->get_msqld_option();
+			$this->data      = self::get_options();
+			$this->datamsqld = self::get_msqld_option();
 			
 			if ( isset($_POST['wm_config-active']) )
 				$this->data['active'] = (int) $_POST['wm_config-active'];
@@ -326,7 +302,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function save_config() {
 			
-			$this->data = $this->get_options();
+			$this->data = self::get_options();
 			
 			if ( isset($_POST['wm_config-time']) )
 				$this->data['time'] = (int) $_POST['wm_config-time'];
@@ -413,7 +389,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 */
 		function redirect() {
 			
-			$value = $this->get_options();
+			$value = self::get_options();
 			
 			// if the redirect active
 			if ( ! isset($value['rewrite']) )
@@ -436,7 +412,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function check_exclude() {
 			
-			$value = $this->get_options();
+			$value = self::get_options();
 			
 			if ( ! isset($value['exclude']) || empty( $value['exclude'][0] ) )
 				return FALSE;
@@ -456,7 +432,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function check_role() {
 			
-			$value = $this->get_options();
+			$value = self::get_options();
 			
 			if ( is_super_admin() )
 				return TRUE;
@@ -550,7 +526,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$datetime = NULL;
 			$time     = NULL;
 			$date     = NULL;
-			$value    = $this->get_options();
+			$value    = self::get_options();
 			
 			if ( isset($value['radio']) && 1 === $value['radio'] ) {
 				$datetime = explode( ' ', $value['date'] );
@@ -583,8 +559,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) ) {
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			}
-			
-			$value = $this->get_options();
+			ob_start();
+			$value = self::get_options();
 			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$settings_link = network_admin_url() . 'plugins.php#wm-pluginconflink';
@@ -658,10 +634,12 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				 ) {
 				$rolestatus = 'norights';
 				nocache_headers();
+				ob_start();
 				header("Content-type: text/html; charset=$charset");
 				header("HTTP/1.0 503 Service Unavailable");
 				header("Retry-After: $backtime");
 				include('site.php');
+				ob_flush();
 				exit();
 			}
 			
@@ -692,7 +670,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function add_link() {
 			
-			$value = $this->get_options();
+			$value = self::get_options();
 			?>
 			<div id="footer">
 				<p><a href="http://bueltge.de/"><?php _e( 'Plugin by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://bueltge.de/favicon.ico" alt="bueltge.de" width="16" height="16" /></a>
@@ -728,7 +706,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_theme() {
 			
 			$locale = get_locale();
-			$value  = $this->get_options();
+			$value  = self::get_options();
 			
 			$theme  = '';
 			$link   = '';
@@ -796,7 +774,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_flash() {
 			
 			$locale = get_locale();
-			$value  = $this->get_options();
+			$value  = self::get_options();
 			
 			$flash  = '';
 			$object = '';
@@ -827,7 +805,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		function add_content() {
 			
 			$locale = get_locale();
-			$value  = $this->get_options();
+			$value  = self::get_options();
 			
 			$echo   = NULL;
 			

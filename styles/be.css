@@ -24,7 +24,9 @@
  margin-top:30px;
  font-size:18px;
  line-height:28px;}
- 
+ #content form p {
+ margin: 0;
+ }
  h1 {
  font-size:36px;
  font-family:verdana;

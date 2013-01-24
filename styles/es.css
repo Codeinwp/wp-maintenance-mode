@@ -59,6 +59,12 @@ a:hover {
 	font-weight:700;
 	color: #30ADE6;
 }
+#content form p {
+	position: relative;
+	height: auto;
+	top: 210px;
+	left: 495px;
+}
 #content div.admin {
 	position: absolute;
 	width: 106px;

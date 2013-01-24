@@ -6,8 +6,65 @@
  */
 class WPMaintenanceMode_Settings {
 	
-	public function init() {
+	protected static $classobj;
+	
+	public function __construct() {
 		
+		if ( ! is_admin() )
+			return;
+		
+		if ( is_multisite() && is_plugin_active_for_network( plugin_basename( FB_WM_BASENAME ) ) ) {
+			// multisite install
+			add_filter( 'network_admin_plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
+			add_action( 'after_plugin_row_' . FB_WM_BASENAME, array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
+		} else {
+			// Single mode install of WP
+			if ( version_compare( $GLOBALS['wp_version'], '2.7alpha', '>' ) ) {
+				add_action( 'after_plugin_row_' . FB_WM_BASENAME,    array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
+				add_filter( 'plugin_action_links_' . FB_WM_BASENAME, array( $this, 'add_settings_link' ), 10, 2 );
+			} else {
+				add_action( 'after_plugin_row',     array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
+				add_filter( 'plugin_action_links',  array( $this, 'add_settings_link' ), 10, 2 );
+			}
+		}
+		
+		wp_enqueue_style( 'wp-maintenance-mode-options', plugin_dir_url( FB_WM_BASENAME ) . 'css/style.css' );
+	}
+	
+	/**
+	 * Handler for the action 'init'. Instantiates this class.
+	 *
+	 * @since   2.0.0
+	 * @access  public
+	 * @return  $classobj
+	 */
+	public static function get_object() {
+		
+		if ( NULL === self :: $classobj ) {
+			self :: $classobj = new self;
+		}
+	
+		return self :: $classobj;
+	}
+	
+	function add_settings_link( $links, $file ) {
+		
+		if ( plugin_basename( FB_WM_BASENAME ) == $file  )
+			array_unshift(
+				$links,
+				sprintf( '<a id="wm-pluginconflink" href="javascript:void(0)" title="Configure this plugin">%s</a>', __('Settings') )
+			);
+		
+		return $links;
+	}
+	
+	
+	function network_admin_add_settings_link( $links, $file ) {
+		
+		if ( plugin_basename( FB_WM_BASENAME ) == $file )
+			$links[] = '<a  id="wm-pluginconflink" href="javascript:void(0)" title="Configure this plugin">' . __('Settings') . '</a>';
+		
+		return $links;
 	}
 	
 	/**
@@ -168,7 +225,7 @@ class WPMaintenanceMode_Settings {
 						<!--
 							var viewportwidth,
 							    viewportheight;
-							
+							console.log( viewportwidth );
 							if (typeof window.innerWidth != 'undefined' ) {
 								viewportwidth = window.innerWidth-80,
 								viewportheight = window.innerHeight-100
@@ -182,10 +239,12 @@ class WPMaintenanceMode_Settings {
 								viewportwidth = document.getElementsByTagName('body' )[0].clientWidth,
 								viewportheight = document.getElementsByTagName('body' )[0].clientHeight
 							}
-							document.write('<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR; ?>/index.php?TB_iframe=true&amp;height=' + viewportheight + '&amp;width=' + viewportwidth + '" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
+							document.write('<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' 
+								. FB_WM_BASEDIR; ?>/index.php?KeepThis=true&amp;TB_iframe=true&amp;height=' 
+								+ viewportheight + '&amp;width=' + viewportwidth 
+								+ '&amp;modal=false" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
 							//-->
 						</script>
-						<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR; ?>/index.php?TB_iframe=true" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>
 						</td>
 					</tr>
 					<tr valign="top">

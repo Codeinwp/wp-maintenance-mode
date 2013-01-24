@@ -48,6 +48,11 @@ top: 220px;
 left: 155px;
 }
 
+#content form p {
+position: relative;
+top: 250px;
+}
+
 h1 {
 background-image: url('images/headline-de_DE.jpg');
 background-repeat: no-repeat;

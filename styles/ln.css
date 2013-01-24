@@ -64,6 +64,9 @@ text-align: center;
 #content {
 padding: 2.5em 2em 0 11em;
 }
+#content form p {
+margin: 5px 0;
+}
 #footer {
 position: absolute;
 bottom: -24px;

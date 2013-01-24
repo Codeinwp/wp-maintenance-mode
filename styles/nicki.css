@@ -14,7 +14,7 @@ text-decoration: underline;
 display: none;
 }
 
-#content{
+#content {
 background: url('images/wartungsmodus.jpg') no-repeat;
 position: absolute;
 width: 380px;
@@ -33,8 +33,12 @@ font-size: 1.2em;
 color: #8f1218;
 }
 
-#content p{
-width: 305px;   
+#content p {
+width: 305px;
+}
+
+#content form p {
+margin: 0;
 }
 
 .admin {

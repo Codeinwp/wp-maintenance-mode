@@ -111,6 +111,8 @@ font: 1.5em helvetica, tahoma, arial, sans-serif;
 
 #content p strong {font-size:1.2em;}
 
+#content form p {margin-top:.25em;margin-bottom:.25em;}
+
 #content div.admin {
 position:absolute;
 bottom:0;

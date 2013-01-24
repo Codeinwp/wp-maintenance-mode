@@ -26,7 +26,4 @@ if( ! defined( 'ABSPATH' ) || ! current_user_can('unfiltered_html') ) {
 	exit;
 }
 
-$WPMaintenanceMode = new WPMaintenanceMode();
-$WPMaintenanceMode->on_active();
-
 include 'site.php';

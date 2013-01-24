@@ -24,3 +24,13 @@ display: none;
 #wphead a#mm_in_admin_header:hover {
 	text-decoration: underline;
 }
+/*
+.plugins-php #TB_window, .plugins-php #TB_window iframe {
+	width: 96% !important;
+	left: 1% !important;
+	margin-left: 1% !important;
+}
+.plugins-php #TB_window iframe {
+	width: 99% !important;
+}
+*/
