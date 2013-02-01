@@ -213,7 +213,7 @@ class WPMaintenanceMode_Settings {
 						<td class="alternate">
 							<input size="30" type="text" id="wm_config-styleurl" name="wm_config-styleurl" value="<?php if ( isset($value['styleurl']) ) echo $value['styleurl']; ?>" /> <small><?php _e( 'URL to the css-file (incl. http://)', FB_WM_TEXTDOMAIN ); ?></small>
 							<br />
-							<small><?php _e( '<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!', FB_WM_TEXTDOMAIN ); ?></small>
+							<small><?php _e( '<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
 					<tr valign="top">

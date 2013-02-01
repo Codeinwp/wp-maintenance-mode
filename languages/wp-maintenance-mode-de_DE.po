@@ -356,7 +356,7 @@ msgstr "URL zur css-Datei (inkl. http://)"
 
 #: inc/wp-maintenance-mode-settings.php:216
 #@ wp-maintenance-mode
-msgid "<strong>Coution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
+msgid "<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
 msgstr "<strong>Hinweis:</strong> Bitte speichere das Sytelsheet nicht im Plugin-Ordner, der Ordner wird beim automatischen Update ersetzt!"
 
 #: inc/wp-maintenance-mode-settings.php:221
