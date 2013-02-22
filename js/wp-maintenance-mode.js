@@ -3,7 +3,8 @@ jQuery(document).ready( function($){
 	$('#wm-pluginconflink').click(function(s){$('#wm_config_row').slideToggle('fast'); });
 	$('#wm_config_active').click(function(){ wm_config_active(); });
 	$('#wm_config_submit').click(function(){ wm_config_update(); });
-	$("#wm_config-date").datepicker({ dateFormat: 'dd-mm-yy' });
+	//$("#wm_config-date").datepicker({ dateFormat: 'dd-mm-yy' });
+	$("#wm_config-date").datetimepicker({ timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy' });
 	
 	function wm_config_active(){
 		

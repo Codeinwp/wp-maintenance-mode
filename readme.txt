@@ -8,7 +8,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
 Tested up to: 3.6-alpha
-Stable tag: 1.8.5
+Stable tag: 1.8.6
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
@@ -244,6 +244,13 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.6 (02/22/2013) =
+* Remove log inside console for JS
+* Add support for time inside the countdown
+* Add filter hook `wm_meta_author`for the meta data author
+* Add filter hook `wm_meta_description` for custom description
+* Add filter hook `wm_meta_keywords`for custom meta keys
+
 = 1.8.5 (01/24/2013) =
 * Added new settings for hide, view notices about the active maintenance mode
 * Changes on source, codex

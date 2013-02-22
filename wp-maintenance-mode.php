@@ -8,7 +8,7 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.5
+ * Version:     1.8.6
  * Last change: 02/22/2013
  * License:     GPLv3
  * 
@@ -201,7 +201,22 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$locale = get_locale();
 			$i18n = substr($locale, 0, 2);
 			
-			wp_register_script( 'wp-maintenance-mode', $this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+			wp_register_script(
+				'jquery-ui-timepicker-addon',
+				$this->get_plugins_url( 'js/jquery-ui-timepicker-addon.js', __FILE__ ),
+				array( 'jquery-ui-datepicker' ),
+				'02-22-2013',
+				TRUE
+			);
+			
+			wp_register_script(
+				'wp-maintenance-mode',
+				$this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ),
+				array( 'jquery-ui-datepicker', 'jquery-ui-timepicker-addon' ),
+				'',
+				TRUE
+			);
+			wp_enqueue_script( 'jquery-ui-timepicker-addon' );
 			wp_enqueue_script( 'wp-maintenance-mode' );
 			
 			// translations for datepicker
@@ -538,6 +553,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$date = 0; //ausschalten wegen datum is nicht
 				} else {
 					$date[1] = $date[1] - 1;
+					
 					if (count($time) < 3)
 						$time = 0;
 					if ( isset($time) && 0 !== $time ) {
