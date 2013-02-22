@@ -225,7 +225,6 @@ class WPMaintenanceMode_Settings {
 						<!--
 							var viewportwidth,
 							    viewportheight;
-							console.log( viewportwidth );
 							if (typeof window.innerWidth != 'undefined' ) {
 								viewportwidth = window.innerWidth-80,
 								viewportheight = window.innerHeight-100
