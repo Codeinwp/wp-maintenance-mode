@@ -120,10 +120,12 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$scheme = ( is_ssl() ? 'https' : 'http' );
 			else
 				$scheme = 'http';
+			
 			if ( function_exists('plugins_url') )
 				$url = plugins_url();
 			else 
 				$url = WP_PLUGIN_URL;
+			
 			if ( 0 === strpos($url, 'http') ) {
 				if ( function_exists('is_ssl') && is_ssl() )
 					$url = str_replace( 'http://', "{$scheme}://", $url );
@@ -903,10 +905,12 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		
 		function url_exists( $url ) {
 			
-			if ( ( strpos($url, "http") ) === FALSE )
-				$url = "http://" . $url;
+			$scheme = ( is_ssl() ? 'https://' : 'http://' );
 			
-			if ( is_array(@get_headers($url)) )
+			if ( ( strpos( $url, $scheme ) ) === FALSE )
+				$url = $scheme . $url;
+			
+			if ( is_array( @get_headers( $url ) ) )
 				return TRUE;
 			else
 				return FALSE;
