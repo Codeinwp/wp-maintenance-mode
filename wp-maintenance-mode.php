@@ -659,7 +659,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				header( "Content-type: text/html; charset=$charset" );
 				header( "$protocol $status_code Service Unavailable", TRUE, $status_code );
 				header( "Retry-After: $backtime" );
-				include('site.php');
+				// Allow alternative splash page
+				if ( ! file_exists( WP_CONTENT_DIR . '/wp-maintenance-mode.php' ) )
+					include('site.php');
 				ob_flush();
 				exit();
 			}
