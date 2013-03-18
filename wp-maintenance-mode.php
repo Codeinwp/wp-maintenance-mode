@@ -649,11 +649,14 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					&& ! $this->check_exclude()
 				 ) {
 				$rolestatus = 'norights';
+				$protocol = $_SERVER["SERVER_PROTOCOL"];
+				if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
+					$protocol = 'HTTP/1.0';
 				nocache_headers();
 				ob_start();
-				header("Content-type: text/html; charset=$charset");
-				header("HTTP/1.0 503 Service Unavailable");
-				header("Retry-After: $backtime");
+				header( "Content-type: text/html; charset=$charset" );
+				header( "$protocol 503 Service Unavailable", TRUE, 503 );
+				header( "Retry-After: $backtime" );
 				include('site.php');
 				ob_flush();
 				exit();
