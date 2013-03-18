@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> id="wp_maintenance_mode" >
+<html <?php language_attributes(); ?> id="wp_maintenance_mode"<?php if ( is_rtl() ) echo ' dir="rtl"'; ?>>
 <head>
 	<?php
 	if ( ! isset($value) ) {
