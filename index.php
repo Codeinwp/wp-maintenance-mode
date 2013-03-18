@@ -25,5 +25,6 @@ if( ! defined( 'ABSPATH' ) || ! current_user_can('unfiltered_html') ) {
 	wp_die( __('Cheatin&#8217; uh?') );
 	exit;
 }
-
-include 'site.php';
+// Allow alternative splash page
+if ( ! file_exists( WP_CONTENT_DIR . '/wp-maintenance-mode.php' ) )
+	include 'site.php';
