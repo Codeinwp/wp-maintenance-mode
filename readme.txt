@@ -244,6 +244,10 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.7 () =
+* Add RTL support for splash page
+* Add Filter Hook `wp_maintenance_mode_status_code` Status Code; default is 503
+
 = 1.8.6 (02/22/2013) =
 * Remove log inside console for JS
 * Add support for time inside the countdown

@@ -652,10 +652,12 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$protocol = $_SERVER["SERVER_PROTOCOL"];
 				if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
 					$protocol = 'HTTP/1.0';
+				// Allow to change status code via hook
+				$status_code = (int) apply_filters( 'wp_maintenance_mode_status_code', '503' );
 				nocache_headers();
 				ob_start();
 				header( "Content-type: text/html; charset=$charset" );
-				header( "$protocol 503 Service Unavailable", TRUE, 503 );
+				header( "$protocol $status_code Service Unavailable", TRUE, $status_code );
 				header( "Retry-After: $backtime" );
 				include('site.php');
 				ob_flush();
