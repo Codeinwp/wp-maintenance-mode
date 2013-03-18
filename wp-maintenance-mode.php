@@ -151,7 +151,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) )
 				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			
-			$value = self::get_options();
+			$value      = self::get_options();
 			$valuemsqld = self::get_msqld_option();
 			
 			if ( 1 === intval( $valuemsqld ) ) {
@@ -185,7 +185,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		public static function get_msqld_option() {
 				
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
-				$valuemsqld = get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
+				$valuemsqld = (int) get_site_option( FB_WM_TEXTDOMAIN . '-msqld' );
 			} else {
 				$valuemsqld = (int) get_option( FB_WM_TEXTDOMAIN . '-msqld' );
 			}
