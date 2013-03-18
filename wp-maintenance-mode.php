@@ -901,7 +901,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		}
 		
 		
-		function url_exists($url) {
+		function url_exists( $url ) {
 			
 			if ( ( strpos($url, "http") ) === FALSE )
 				$url = "http://" . $url;
