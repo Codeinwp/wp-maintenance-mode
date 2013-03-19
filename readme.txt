@@ -39,6 +39,11 @@ Example:
 	}
 	add_action( 'wm_footer', 'add_my_link' );
 
+More hooks for meta data inside the head. The `<meta>` tag provides metadata about the HTML document. Metadata will not be displayed on the page, but will be machine parsable. You can change the data for 3 different meta data:
+
+ * `wm_meta_author` -  Define the author of a page
+ * `wm_meta_description` - Define a description of your web page
+ * `wm_meta_keywords` - Define keywords for search engines
 
 = Requirements =
 1. WordPress version 2.6 and later, works also on Multisite
