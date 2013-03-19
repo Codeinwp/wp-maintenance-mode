@@ -15,7 +15,8 @@ In plugin settings, choose the "Own CSS Style" in the CSS Style dropdown. Then e
 ### Custom HTML
 You can add your own html by dropping a `wp-maintenance-mode.php` file in the wp-content folder. It will automatically be used instead of the default html.
 The default html Markup and my source for countdown and more find you in the `site.php` inside the plugin folder of this plugin.
-   
+
+### Custom Content
 You can also add content via these hook:
 
  * `wm_head` - hook inside the head of the maintenance mode site
