@@ -19,39 +19,16 @@ Also you can add urls for exlude of maintenance mode.
 
 Use the shortcode `[loginform]` for easy use a login form on the maintenance page.
 
-The plugin allow custom stylesheet for the splash page. Create a stylesheet `.css` and leave this on a public url, like the wp-content folder of your install or other one. Add this URL (inlcude http://) to the options of WP Maintenance Mode and select the theme option "Own Theme". The plugin will include this file inside the head of the splash page. See the markup of the default splash page below.
+= Adding Custom CSS =
 
-The plugin allow to use a custom splash page, custom markup. Leave a file with the string `wp-maintenance-mode.php` inside the wp-content directory. You can start with the source code of the `site.php` inside this plugin folder.
+In plugin settings, choose the "Own CSS Style" in the CSS Style dropdown. Then enter the full URL to your stylesheet in the textbox underneath.
 
-	<!DOCTYPE html>
-	<html lang="en-US" id="wp_maintenance_mode" >
+= Custom HTML =
+
+You can add your own html by dropping a wp-maintenance-mode.php file in the wp-content folder. It will automatically be used instead of the default html.
 	
-	<head>
-		<title>Blogname - Maintenance Mode</title>
-	</head>
-	
-	<body>
-		
-		<div id="header">
-			<p>WP Dev</p>
-		</div>
-		
-		<div id="content">
-		
-			<h1>Maintenance Mode</h1>
-			<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in 231 weeks.</strong><br />Thank you for your understanding.</p>
-			<div class="admin"><a href="http://example.com/wp-admin/">Admin-Login</a></div>
-		</div>
-		
-		<div id="footer">
-			<p><a href="http://bueltge.de/">Plugin by: <img src="http://bueltge.de/favicon.ico" alt="bueltge.de" width="16" height="16" /></a></p>
-		</div>
-		
-	</body>
-	</html>
 
-
-Also you can add content via hook:
+You can also add content via these hook:
 
 `wm_head` - hook inside the head of the maintenance mode site
 `wm_content` - hook over the content, after the div with id content
