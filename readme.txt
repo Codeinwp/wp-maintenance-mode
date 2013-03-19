@@ -19,7 +19,7 @@ Also you can add urls for exlude of maintenance mode.
 
 Use the shortcode `[loginform]` for easy use a login form on the maintenance page.
 
-The plugin allow custom stylesheet for the splash page. Create a stylesheet `.css` and leave this on a public url, like the wp-content folder of your install or other one. Add this URL (inlcude http://) to the options of WP Maintenance Mode and select the theme option "Own Theme". The plugin will include this file inside the head of the splash page. See the markup of the default splash page below.
+The plugin allow custom stylesheet for the splash page. Create a stylesheet `.css` and leave this on a public url, like the wp-content folder of your install or other one. Add this URL (inlcude http://) to the options of WP Maintenance Mode and select the theme option "Own Style". The plugin will include this file inside the head of the splash page. See the markup of the default splash page below.
 
 The plugin allow to use a custom splash page, custom markup. Leave a file with the string `wp-maintenance-mode.php` inside the wp-content directory. You can start with the source code of the `site.php` inside this plugin folder.
 
