@@ -186,11 +186,11 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-theme"><?php _e( 'Theme:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-theme"><?php _e( 'CSS Style:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<select name="wm_config-theme" id="wm_config-theme">
-								<option value="0"<?php if ( isset($value['theme']) && 0 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Own Style', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0"<?php if ( isset($value['theme']) && 0 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Own CSS Stylesheet', FB_WM_TEXTDOMAIN ); ?> </option>
 								<option value="1"<?php if ( isset($value['theme']) && 1 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Simple Text', FB_WM_TEXTDOMAIN ); ?> </option>
 								<option value="2"<?php if ( isset($value['theme']) && 2 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('The Truck', FB_WM_TEXTDOMAIN ); ?> </option>
 								<option value="3"<?php if ( isset($value['theme']) && 3 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('The Sun', FB_WM_TEXTDOMAIN ); ?> </option>
@@ -208,7 +208,7 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="alternate">
-							<label for="wm_config-styleurl"><?php _e( 'Own Style URL:', FB_WM_TEXTDOMAIN ); ?></label>
+							<label for="wm_config-styleurl"><?php _e( 'Own CSS Style URL:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<input size="30" type="text" id="wm_config-styleurl" name="wm_config-styleurl" value="<?php if ( isset($value['styleurl']) ) echo $value['styleurl']; ?>" /> <small><?php _e( 'URL to the css-file (incl. http://)', FB_WM_TEXTDOMAIN ); ?></small>
