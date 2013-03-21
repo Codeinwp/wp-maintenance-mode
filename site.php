@@ -74,6 +74,7 @@
 					$adminloginmsg = '';
 				$adminloginstr = __( 'Admin-Logout', FB_WM_TEXTDOMAIN );
 			} else {
+				// Returns the Log In URL
 				$adminlogin    = wp_login_url();
 				$adminloginmsg = '';
 				$adminloginstr = __( 'Admin-Login', FB_WM_TEXTDOMAIN );
