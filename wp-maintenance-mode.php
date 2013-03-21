@@ -697,11 +697,11 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				*/
 			}
 			
-			add_action( 'wm_head', array(&$this, 'add_theme') );
-			add_action( 'wm_content', array(&$this, 'add_flash') );
-			add_action( 'wm_content', array( &$this, 'add_content' ) );
+			add_action( 'wm_head', array( $this, 'add_theme' ) );
+			add_action( 'wm_content', array( $this, 'add_flash' ) );
+			add_action( 'wm_content', array( $this, 'add_content' ) );
 			if ( isset($value['link']) && 1 === $value['link'] )
-				add_action( 'wm_footer', array(&$this, 'add_link') );
+				add_action( 'wm_footer', array( $this, 'add_link' ) );
 			
 			$locale = get_locale();
 			
@@ -922,7 +922,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$locale = get_locale();
 			$value  = self::get_options();
 			
-			$echo   = NULL;
+			$echo   = '';
 			
 			// default for unit
 			if ( ! isset($value['unit']) )
@@ -932,7 +932,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$td = $this->check_datetime();
 			
 			if ( ! empty( $value['text'] ) )
-				$value['text'] = apply_filters( 'the_content', $value['text'] );
+				$value['text'] = wpautop( $value['text'] ); // apply_filters( 'the_content', $value['text'] );
 			
 			if ( isset($value['radio']) && 1 === $value['radio'] && 0 !== $td[2] ) {
 				$echo = wp_sprintf( 
@@ -948,7 +948,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				$echo = wp_sprintf( stripslashes_deep( $value['text'] ), $value['time'], $unitvalues['unit'] );
 			}
 			
-			echo do_shortcode($echo);
+			echo do_shortcode( $echo );
 		}
 		
 		
@@ -1013,17 +1013,17 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 	*/
 	function wm_head() {
 		
-		do_action('wm_head');
+		do_action( 'wm_head', '' );
 	}
 	
 	function wm_content() {
 		
-		do_action('wm_content');
+		do_action( 'wm_content', '' );
 	}
 	
 	function wm_footer() {
 		
-		do_action('wm_footer');
+		do_action( 'wm_footer', '' );
 	}
 	
 	$GLOBALS['WPMaintenanceMode'] = new WPMaintenanceMode();
