@@ -65,30 +65,32 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$this->datamsqld = array();
 			
 			/**
+			 * Crawler List for bypass function
 			 * 
 			 * Description, Name => Spider, String for check
 			 */
 			$this->crawlers = array(
-				'Google'          => 'Googlebot',
-				'MSN'             => 'msnbot',
-				'Rambler'         => 'Rambler',
-				'Yahoo'           => 'Yahoo',
-				'AbachoBOT'       => 'AbachoBOT',
-				'accoona'         => 'Accoona',
+				'Abacho'          => 'AbachoBOT',
+				'Accoona'         => 'Acoon',
 				'AcoiRobot'       => 'AcoiRobot',
+				'AltaVista robot' => 'Altavista',
+				'Altavista robot' => 'Scooter',
 				'ASPSeek'         => 'ASPSeek',
+				'Atomz'           => 'Atomz',
 				'CrocCrawler'     => 'CrocCrawler',
 				'Dumbot'          => 'Dumbot',
+				'eStyle Bot'      => 'eStyle',
 				'FAST-WebCrawler' => 'FAST-WebCrawler',
 				'GeonaBot'        => 'GeonaBot',
 				'Gigabot'         => 'Gigabot',
-				'Lycos spider'    => 'Lycos',
-				'MSRBOT'          => 'MSRBOT',
-				'Altavista robot' => 'Scooter',
-				'AltaVista robot' => 'Altavista',
+				'Google'          => 'Googlebot',
 				'ID-Search Bot'   => 'IDBot',
-				'eStyle Bot'      => 'eStyle',
+				'Lycos spider'    => 'Lycos',
+				'MSN'             => 'msnbot',
+				'MSRBOT'          => 'MSRBOT',
+				'Rambler'         => 'Rambler',
 				'Scrubby robot'   => 'Scrubby',
+				'Yahoo'           => 'Yahoo',
 			);
 			
 			$this->load_classes();
