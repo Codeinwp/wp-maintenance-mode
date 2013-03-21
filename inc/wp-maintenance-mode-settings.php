@@ -85,6 +85,10 @@ class WPMaintenanceMode_Settings {
 			$value = get_site_option( FB_WM_TEXTDOMAIN );
 		else
 			$value = get_option( FB_WM_TEXTDOMAIN );
+		
+		// check the additional settings
+		if ( ! isset( $value['bypass'] ) )
+			$value['bypass'] = 0;
 		?>
 		<tr id="wm_config_tr" >
 			<td colspan="3">
@@ -120,8 +124,8 @@ class WPMaintenanceMode_Settings {
 						</th>
 						<td>
 							<select name="wm_config-radio" id="wm_config-radio">
-								<option value="0"<?php if ( isset($value['radio']) && 0 === $value['radio'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['radio']) && 1 === $value['radio'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['radio'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['radio'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 						</td>
 					</tr>
@@ -135,7 +139,7 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-time"><?php _e( 'Value:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -143,18 +147,18 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-unit"><?php _e( 'Unit:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<select name="wm_config-unit" id="wm_config-unit">
-								<option value="0"<?php if ( isset($value['unit']) && 0 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('second', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['unit']) && 1 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('minute', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="2"<?php if ( isset($value['unit']) && 2 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('hour', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="3"<?php if ( isset($value['unit']) && 3 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('day', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="4"<?php if ( isset($value['unit']) && 4 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('week', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="5"<?php if ( isset($value['unit']) && 5 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('month', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="6"<?php if ( isset($value['unit']) && 6 === $value['unit'] ) { echo ' selected="selected"'; } ?>><?php _e('year', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['unit'], 0 ); ?>><?php _e('second', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['unit'], 1 ); ?>><?php _e('minute', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="2" <?php selected( $value['unit'], 2 ); ?>><?php _e('hour', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="3" <?php selected( $value['unit'], 3 ); ?>><?php _e('day', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="4" <?php selected( $value['unit'], 4 ); ?>><?php _e('week', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="5" <?php selected( $value['unit'], 5 ); ?>><?php _e('month', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="6" <?php selected( $value['unit'], 6 ); ?>><?php _e('year', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 						</td>
 					</tr>
@@ -164,8 +168,8 @@ class WPMaintenanceMode_Settings {
 						</th>
 						<td>
 							<select name="wm_config-link" id="wm_config-link">
-								<option value="0"<?php if ( isset($value['link']) && 0 === $value['link'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['link']) && 1 === $value['link'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['link'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['link'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 							<br />
 							<small><?php _e( 'Please leave a link to the plugin- and design-author on your maintenance mode site.', FB_WM_TEXTDOMAIN ); ?></small>
@@ -177,37 +181,37 @@ class WPMaintenanceMode_Settings {
 						</th>
 						<td>
 							<select name="wm_config-admin_link" id="wm_config-admin_link">
-								<option value="0"<?php if ( isset($value['admin_link']) && 0 === $value['admin_link'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['admin_link']) && 1 === $value['admin_link'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['admin_link'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['admin_link'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 							<br />
 							<small><?php _e( 'Do you will a link to the admin area of your install?', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-theme"><?php _e( 'CSS Style:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
 							<select name="wm_config-theme" id="wm_config-theme">
-								<option value="0"<?php if ( isset($value['theme']) && 0 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Own CSS Stylesheet', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['theme']) && 1 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Simple Text', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="2"<?php if ( isset($value['theme']) && 2 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('The Truck', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="3"<?php if ( isset($value['theme']) && 3 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('The Sun', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="4"<?php if ( isset($value['theme']) && 4 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('The FF Error', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="5"<?php if ( isset($value['theme']) && 5 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Monster', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="6"<?php if ( isset($value['theme']) && 6 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Chastely', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="7"<?php if ( isset($value['theme']) && 7 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Only Typo', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="8"<?php if ( isset($value['theme']) && 8 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Paint', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="9"<?php if ( isset($value['theme']) && 9 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Animate (Flash)', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="10"<?php if ( isset($value['theme']) && 10 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Damask', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="11"<?php if ( isset($value['theme']) && 11 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Lego', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="12"<?php if ( isset($value['theme']) && 12 === $value['theme'] ) { echo ' selected="selected"'; } ?>><?php _e('Chemistry', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['theme'], 0 ); ?>><?php _e('Own CSS Stylesheet', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['theme'], 1 ); ?>><?php _e('Simple Text', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="2" <?php selected( $value['theme'], 2 ); ?>><?php _e('The Truck', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="3" <?php selected( $value['theme'], 3 ); ?>><?php _e('The Sun', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="4" <?php selected( $value['theme'], 4 ); ?>><?php _e('The FF Error', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="5" <?php selected( $value['theme'], 5 ); ?>><?php _e('Monster', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="6" <?php selected( $value['theme'], 6 ); ?>><?php _e('Chastely', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="7" <?php selected( $value['theme'], 7 ); ?>><?php _e('Only Typo', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="8" <?php selected( $value['theme'], 8 ); ?>><?php _e('Paint', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="9" <?php selected( $value['theme'], 9 ); ?>><?php _e('Animate (Flash)', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="10" <?php selected( $value['theme'], 10 ); ?>><?php _e('Damask', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="11" <?php selected( $value['theme'], 11 ); ?>><?php _e('Lego', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="12" <?php selected( $value['theme'], 12 ); ?>><?php _e('Chemistry', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-styleurl"><?php _e( 'Own CSS Style URL:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -217,7 +221,7 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-preview"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate" style="padding:5px 0 0 0;">
@@ -252,8 +256,8 @@ class WPMaintenanceMode_Settings {
 						</th>
 						<td>
 							<select name="wm_config-index" id="wm_config-index">
-								<option value="0"<?php if ( isset($value['index']) && 0 === $value['index'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['index']) && 1 === $value['index'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['index'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['index'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 							<br />
 							<small><?php _e( 'The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results. Set TRUE for noindex, nofollow; set FALSE for index, follow.', FB_WM_TEXTDOMAIN ); ?></small>
@@ -268,7 +272,7 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-header"><?php _e( 'Header:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -284,7 +288,7 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-text"><?php _e( 'Text:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -317,8 +321,22 @@ class WPMaintenanceMode_Settings {
 							<small><?php _e( 'Exclude feed, pages, posts, archives or IPs from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:', FB_WM_TEXTDOMAIN ); ?> <code>wp-cron, feed, wp-admin, ?page_id=12, about, category/test, 127.0.0.1</code></small>
 						</td>
 					</tr>
+					
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
+							<label for="wm_config-bypass"><?php _e( 'Bypass for Search Bots:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td>
+							<select name="wm_config-bypass" id="wm_config-bypass">
+								<option value="0" <?php selected( $value['bypass'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['bypass'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+							</select>
+							<small><?php _e( 'Allow Search Bots to bypass maintenance mode?', FB_WM_TEXTDOMAIN ); ?></small>
+						</td>
+					</tr>
+					
+					<tr valign="top">
+						<th scope="row">
 							<label for="wm_config-role"><?php _e( 'Backend Role:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -349,7 +367,7 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-role_frontend"><?php _e( 'Frontend Role:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -380,7 +398,7 @@ class WPMaintenanceMode_Settings {
 						</td>
 					</tr>
 					<tr valign="top">
-						<th scope="row" class="alternate">
+						<th scope="row">
 							<label for="wm_config-rewrite"><?php _e( 'Redirection:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
@@ -396,8 +414,8 @@ class WPMaintenanceMode_Settings {
 						</th>
 						<td>
 							<select name="wm_config-notice" id="wm_config-notice">
-								<option value="0"<?php if ( isset($value['notice']) && 0 === $value['notice'] ) { echo ' selected="selected"'; } ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1"<?php if ( isset($value['notice']) && 1 === $value['notice'] ) { echo ' selected="selected"'; } ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['notice'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['notice'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 							<small><?php _e( 'Do you will see all notices, inside backend, the Admin Bar and the login screen?', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>

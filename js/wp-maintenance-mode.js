@@ -37,6 +37,7 @@ jQuery(document).ready( function($){
 		heading_Val       = $('#wm_config-heading').val();
 		text_Val          = $('#wm_config-text').val();
 		exclude_Val       = $('#wm_config-exclude').val();
+		bypass_Val        = $('#wm_config-bypass').val();
 		role_Val          = $('#wm_config-role').val();
 		role_frontend_Val = $('#wm_config-role_frontend').val();
 		radio_Val         = $('#wm_config-radio').val();
@@ -60,7 +61,8 @@ jQuery(document).ready( function($){
 				"wm_config-header" : header_Val, 
 				"wm_config-heading" : heading_Val, 
 				"wm_config-text" : text_Val, 
-				"wm_config-exclude" : exclude_Val, 
+				"wm_config-exclude" : exclude_Val,
+				"wm_config-bypass" : bypass_Val,
 				"wm_config-role" : role_Val, 
 				"wm_config-role_frontend" : role_frontend_Val,
 				"wm_config-radio" : radio_Val, 

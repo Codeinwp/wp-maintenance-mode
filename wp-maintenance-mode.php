@@ -57,10 +57,17 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 	
 	class WPMaintenanceMode {
 		
+		public $crawlers = array();
+		
 		function WPMaintenanceMode() {
 			
-			$this->data = array();
+			$this->data      = array();
 			$this->datamsqld = array();
+			
+			$this->crawlers = array(
+				'localhost DEV' => 'localhost',
+				'Mozilla' => 'KHTML'
+			);
 			
 			$this->load_classes();
 			
@@ -280,6 +287,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					4 => 'wp-admin',
 					5 => 'wp-admin/admin-ajax.php'
 				),
+				'bypass'     => 0,
 				'notice'     => 1,
 			);
 			// if is active in network of multisite
@@ -323,12 +331,13 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			if ( isset($_POST['wm_config-time']) )
 				$this->data['time'] = (int) $_POST['wm_config-time'];
-			if ( isset($_POST['wm_config-unit']) )
-				$this->data['unit'] = (int) $_POST['wm_config-unit'];
+			
 			if ( isset($_POST['wm_config-link']) )
 				$this->data['link'] = (int) $_POST['wm_config-link'];
+			
 			if ( isset($_POST['wm_config-admin_link']) )
 				$this->data['admin_link'] = (int) $_POST['wm_config-admin_link'];
+			
 			if ( isset($_POST['wm_config-rewrite']) ) {
 				if ( function_exists('esc_url') ) {
 					$this->data['rewrite'] = esc_url( $_POST['wm_config-rewrite'] );
@@ -336,10 +345,16 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$this->data['rewrite'] = clean_url( $_POST['wm_config-rewrite'] );
 				}
 			}
-			if ( isset($_POST['wm_config-notice']) )
+			
+			if ( isset( $_POST['wm_config-notice'] ) )
 				$this->data['notice'] = (int) $_POST['wm_config-notice'];
+			
+			if ( isset($_POST['wm_config-unit']) )
+				$this->data['unit'] = (int) $_POST['wm_config-unit'];
+			
 			if ( isset($_POST['wm_config-theme']) )
 				$this->data['theme'] = (int) $_POST['wm_config-theme'];
+			
 			if ( isset($_POST['wm_config-styleurl']) ) {
 				if ( function_exists('esc_url') ) {
 					$this->data['styleurl'] = esc_url( $_POST['wm_config-styleurl'] );
@@ -347,24 +362,37 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					$this->data['styleurl'] = clean_url( $_POST['wm_config-styleurl'] );
 				}
 			}
+
 			if ( isset($_POST['wm_config-index']) )
 				$this->data['index'] = (int) $_POST['wm_config-index'];
+			
 			if ( isset($_POST['wm_config-title']) ) 
 				$this->data['title'] =  stripslashes_deep( $_POST['wm_config-title'] );
-				if ( isset($_POST['wm_config-header']) ) 
+			
+			if ( isset($_POST['wm_config-header']) ) 
 				$this->data['header'] =  stripslashes_deep( $_POST['wm_config-header'] );
+				
 			if ( isset($_POST['wm_config-heading']) ) 
 				$this->data['heading'] =  stripslashes_deep( $_POST['wm_config-heading'] );
+				
 			if ( isset($_POST['wm_config-text']) ) 
 				$this->data['text'] =  stripslashes_deep( $_POST['wm_config-text'] );
+			
 			if ( isset($_POST['wm_config-exclude']) )
 				$this->data['exclude'] = preg_split("/[\s,]+/", $this->esc_attr( $_POST['wm_config-exclude'] ) );
+			
+			if ( isset( $_POST['wm_config-bypass'] ) )
+				$this->data['bypass'] = (int) $_POST['wm_config-bypass'];
+				
 			if ( isset($_POST['wm_config-role']) )
 				$this->data['role'] = preg_split("/[\s,]+/", $this->esc_attr( $_POST['wm_config-role'] ) );
+			
 			if ( isset($_POST['wm_config-role_frontend']) )
 				$this->data['role_frontend'] = preg_split("/[\s,]+/", $this->esc_attr( $_POST['wm_config-role_frontend'] ) );
+			
 			if ( isset($_POST['wm_config-radio']) )
 				$this->data['radio'] = (int) $_POST['wm_config-radio'];
+			
 			if ( isset($_POST['wm_config-date']) )
 				$this->data['date'] = $this->esc_attr( $_POST['wm_config-date'] );
 			
@@ -446,6 +474,55 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			return FALSE;
 		}
 		
+		
+		/**
+		 * Check exclude for search bots
+		 * 
+		 * @since  20/03/2013
+		 * @return boolean
+		 */
+		public function check_bypass() {
+			
+			$value = self::get_options();
+			
+			if ( ! isset($value['bypass']) || ( 0 === $value['bypass'] ) )
+				return FALSE;
+			
+			$crawler = $this->crawler_detect( $_SERVER['HTTP_USER_AGENT'] );
+			if ( $crawler )
+				return TRUE;
+			
+			return FALSE;
+		}
+		
+		/**
+		 * Check for str array value
+		 * 
+		 * @since   20/03/2013
+		 * @see     http://stackoverflow.com/a/5927675/730125
+		 * @return  boolean
+		 */
+		public function str_in_array( $str, $array ) {
+			
+			$regexp = '/(' . implode( '|', array_values( $array ) ) . ')/i';
+			return (bool) preg_match( $regexp, $str );
+		}
+		
+		/**
+		 * Check for crawlers
+		 * 
+		 * @since  20/03/2013
+		 * @return boolean TRUE, if is a crawler detect
+		 */
+		public function crawler_detect( $user_agent ) {
+			var_dump($user_agent);
+			var_dump($this->crawlers);
+			var_dump($this->str_in_array( $user_agent, $this->crawlers ));
+			if ( array_search( $user_agent, $this->crawlers ) )
+				return TRUE;
+			
+			return FALSE;
+		}
 		
 		function check_role() {
 			
@@ -644,30 +721,40 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			else
 				$backtime = NULL;
 			
+			$protocol = $_SERVER["SERVER_PROTOCOL"];
+			if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
+				$protocol = 'HTTP/1.0';
+			// Allow to change status code via hook
+			$status_code = (int) apply_filters( 'wp_maintenance_mode_status_code', '503' );
+			
 			if ( ( ! $this->check_role() )
 					&& ! strstr($_SERVER['PHP_SELF'], 'wp-login.php' )
+					&& ! strstr($_SERVER['PHP_SELF'], 'wp-admin/')
 					&& ! strstr($_SERVER['PHP_SELF'], 'async-upload.php')
+					&& ! ( strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_role() )
 					&& ! strstr($_SERVER['PHP_SELF'], '/plugins/')
+					&& ! strstr($_SERVER['PHP_SELF'], '/xmlrpc.php')
 					&& ! $this->check_exclude()
+					&& ! $this->check_bypass()
 				 ) {
 				$rolestatus = 'norights';
-				$protocol = $_SERVER["SERVER_PROTOCOL"];
-				if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
-					$protocol = 'HTTP/1.0';
-				// Allow to change status code via hook
-				$status_code = (int) apply_filters( 'wp_maintenance_mode_status_code', '503' );
+				
 				nocache_headers();
 				ob_start();
 				header( "Content-type: text/html; charset=$charset" );
 				header( "$protocol $status_code Service Unavailable", TRUE, $status_code );
 				header( "Retry-After: $backtime" );
 				// Allow alternative splash page
-				if ( ! file_exists( WP_CONTENT_DIR . '/wp-maintenance-mode.php' ) )
+				if ( file_exists( WP_CONTENT_DIR . '/wp-maintenance-mode.php' ) )
+					include( WP_CONTENT_DIR . '/wp-maintenance-mode.php' );
+				else
 					include('site.php');
 				ob_flush();
 				exit();
 			}
 			
+			/*
+			 * @TODO: check this old source
 			//$this->check_version();
 			if ( ! strstr($_SERVER['PHP_SELF'], 'feed/')
 				&& ! strstr($_SERVER['PHP_SELF'], 'wp-admin/')
@@ -678,18 +765,23 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				&& ! strstr($_SERVER['PHP_SELF'], '/plugins/')
 				&& ! strstr($_SERVER['PHP_SELF'], '/xmlrpc.php')
 				&& ! $this->check_exclude()
+				&& ! $this->check_bypass()
 				&& ! $this->check_role()
 				) {
-				include('site.php');
+				// Allow alternative splash page
+				if ( file_exists( WP_CONTENT_DIR . '/wp-maintenance-mode.php' ) )
+					include( WP_CONTENT_DIR . '/wp-maintenance-mode.php' );
+				else
+					include('site.php');
 				exit();
 			} else if ( strstr($_SERVER['PHP_SELF'], 'feed/') || strstr($_SERVER['PHP_SELF'], 'trackback/') ) {
 				nocache_headers();
-				header("Content-type: text/html; charset=$charset");
-				header("HTTP/1.0 503 Service Unavailable");
-				header("Retry-After: $backtime");
+				header( "Content-type: text/html; charset=$charset" );
+				header( "$protocol $status_code Service Unavailable", TRUE, $status_code );
+				header( "Retry-After: $backtime" );
 				exit();
 			}
-			
+			*/
 		}
 		
 		
