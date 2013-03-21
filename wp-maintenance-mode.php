@@ -66,7 +66,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			$this->crawlers = array(
 				'localhost DEV' => 'localhost',
-				'Mozilla' => 'KHTML'
+				'Mozilla' => 'Chrome123'
 			);
 			
 			$this->load_classes();
@@ -504,7 +504,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 */
 		public function str_in_array( $str, $array ) {
 			
-			$regexp = '/(' . implode( '|', array_values( $array ) ) . ')/i';
+			$regexp = '~(' . implode( '|', array_values( $array ) ) . ')~i';
 			return (bool) preg_match( $regexp, $str );
 		}
 		
@@ -515,10 +515,8 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 * @return boolean TRUE, if is a crawler detect
 		 */
 		public function crawler_detect( $user_agent ) {
-			var_dump($user_agent);
-			var_dump($this->crawlers);
-			var_dump($this->str_in_array( $user_agent, $this->crawlers ));
-			if ( array_search( $user_agent, $this->crawlers ) )
+			
+			if ( $this->str_in_array( $user_agent, $this->crawlers ) )
 				return TRUE;
 			
 			return FALSE;

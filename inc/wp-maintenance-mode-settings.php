@@ -87,6 +87,8 @@ class WPMaintenanceMode_Settings {
 			$value = get_option( FB_WM_TEXTDOMAIN );
 		
 		// check the additional settings
+		if ( ! isset( $value['notice'] ) )
+			$value['notice'] = 1;
 		if ( ! isset( $value['bypass'] ) )
 			$value['bypass'] = 0;
 		?>
