@@ -7,8 +7,8 @@ Author URI: http://bueltge.de/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4578111
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 2.6
-Tested up to: 3.6-alpha
-Stable tag: 1.8.6
+Tested up to: 3.6-beta1
+Stable tag: 1.8.7
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
