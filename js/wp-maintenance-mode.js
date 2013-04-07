@@ -6,7 +6,7 @@ jQuery(document).ready( function($){
 	//$("#wm_config-date").datepicker({ dateFormat: 'dd-mm-yy' });
 	$("#wm_config-date").datetimepicker({ timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy' });
 	
-	function wm_config_active(){
+	function wm_config_active() {
 		
 		var active_Val = $('#wm_config-active').val();
 		$.post( ajaxurl, {
@@ -19,6 +19,12 @@ jQuery(document).ready( function($){
 				3000).hide('slow');
 			}
 		);
+		// show admin bar and message note
+		if ( active_Val == 1 )
+			$('#wp-admin-bar-mm_alert, #message.error').show('fast');
+		// hide admin bar and message note
+		if ( active_Val == 0 )
+			$('#wp-admin-bar-mm_alert, #message.error').hide('fast');
 	}
 	
 	function wm_config_update() {

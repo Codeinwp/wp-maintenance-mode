@@ -24,7 +24,7 @@
 	
 	if ( isset($value['title']) && ($value['title'] != '') )
 		$title = stripslashes_deep( $value['title'] );
-	else {
+	else
 		$title = get_bloginfo( 'name' ) . ' - ' . __( 'Maintenance Mode', FB_WM_TEXTDOMAIN );
 	?>
 	
@@ -60,7 +60,7 @@
 	if ( isset( $value['header'] ) && ( $value['header'] != '' ) )
 		$header = stripslashes_deep( $value['header'] );
 	else 
-		get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
+		$header = get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
 	
 	// heading string
 	if ( isset( $value['heading'] ) && ( $value['heading'] != '' ) ) 
