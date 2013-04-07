@@ -22,9 +22,13 @@
 		$content = 'index, follow';
 	}
 	
+	if ( isset($value['title']) && ($value['title'] != '') )
+		$title = stripslashes_deep( $value['title'] );
+	else {
+		$title = get_bloginfo( 'name' ) . ' - ' . __( 'Maintenance Mode', FB_WM_TEXTDOMAIN );
 	?>
 	
-	<title><?php if ( isset($value['title']) && ($value['title'] != '') ) echo stripslashes_deep( $value['title'] ); else { bloginfo('name'); echo ' - '; _e( 'Maintenance Mode', FB_WM_TEXTDOMAIN ); } ?></title>
+	<title><?php echo apply_filters( 'wm_title', $title ); ?></title>
 	
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="author" content="<?php echo $author; ?>" />
