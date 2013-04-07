@@ -232,12 +232,13 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
-= 1.8.7 () =
+= 1.8.7 (04/07/2013) =
 * Add RTL support for splash page
 * Add Filter Hook `wp_maintenance_mode_status_code` Status Code; default is 503
 * Add support for custom splash page; leave a file with this name `wp-maintenance-mode.php`  in the wp-content; the plugin use this file
   The plugin checks in `WP_CONTENT_DIR . '/wp-maintenance-mode.php'`
-* 
+* Small minor changes
+* Add filter for more date on splash page
 
 = 1.8.6 (02/22/2013) =
 * Remove log inside console for JS
