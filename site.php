@@ -30,7 +30,7 @@
 	
 	<title><?php echo apply_filters( 'wm_title', $title ); ?></title>
 	
-	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 	<meta name="author" content="<?php echo $author; ?>" />
 	<meta name="description" content="<?php echo $desc; ?>" />
 	<meta name="keywords" content="<?php echo $keywords; ?>" />
@@ -54,14 +54,20 @@
 	get_currentuserinfo();
 	$locale = get_locale();
 	
-	wm_head(); ?>
+	wm_head();
+	
+	if ( isset( $value['header'] ) && ( $value['header'] != '' ) )
+		$header = stripslashes_deep( $value['header'] );
+	else 
+		get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' ); } 
+	?>
 	
 </head>
 
 <body>
 	
 	<div id="header">
-		<p><?php if ( isset($value['header']) && ($value['header'] != '') ) echo stripslashes_deep( $value['header'] ); else { bloginfo('name'); echo ' - '; bloginfo('description'); } ?></p>
+		<p><?php echo apply_filters( 'wm_header', $header ); ?></p>
 	</div>
 
 	<div id="content">

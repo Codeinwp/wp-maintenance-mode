@@ -46,6 +46,11 @@ More hooks for meta data inside the head. The `<meta>` tag provides metadata abo
  * `wm_meta_description` - Define a description of your web page
  * `wm_meta_keywords` - Define keywords for search engines
 
+More hooks for other data.
+
+ * `wm_title` - Filter the title od splash page
+ * `wm_header` - Filter for header string on splash page
+
 = Requirements =
 1. WordPress version 2.6 and later, works also on Multisite
 1. PHP 5
