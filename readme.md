@@ -37,10 +37,11 @@ More hooks for meta data inside the head. The `<meta>` tag provides metadata abo
  * `wm_meta_description` - Define a description of your web page
  * `wm_meta_keywords` - Define keywords for search engines
 
-More hooks for other data.
+More hooks for other data, if the settings possibilities is not enough.
 
  * `wm_title` - Filter the title on splash page
  * `wm_header` - Filter for header string on splash page
+ * `wm_heading` - Filter for the heading string
 
 ## Other Notes
 ### License

@@ -56,10 +56,17 @@
 	
 	wm_head();
 	
+	// header string
 	if ( isset( $value['header'] ) && ( $value['header'] != '' ) )
 		$header = stripslashes_deep( $value['header'] );
 	else 
-		get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' ); } 
+		get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
+	
+	// heading string
+	if ( isset( $value['heading'] ) && ( $value['heading'] != '' ) ) 
+		$heading = stripslashes_deep( $value['heading'] );
+	else
+		$heading = __( 'Maintenance Mode', FB_WM_TEXTDOMAIN );
 	?>
 	
 </head>
@@ -72,7 +79,7 @@
 
 	<div id="content">
 		
-		<h1><?php if ( isset($value['heading']) && ($value['heading'] != '') ) echo stripslashes_deep( $value['heading'] ); else _e( 'Maintenance Mode', FB_WM_TEXTDOMAIN ); ?></h1>
+		<h1><?php echo apply_filters( 'wm_heading', $heading ); ?></h1>
 		
 		<?php wm_content();
 		if ( isset( $value['admin_link'] ) && 1 === $value['admin_link'] ) {

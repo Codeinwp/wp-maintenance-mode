@@ -42,14 +42,15 @@ Example:
 
 More hooks for meta data inside the head. The `<meta>` tag provides metadata about the HTML document. Metadata will not be displayed on the page, but will be machine parsable. You can change the data for 3 different meta data values:
 
- * `wm_meta_author` -  Define the author of a page
+ * `wm_meta_author` - Define the author of a page
  * `wm_meta_description` - Define a description of your web page
  * `wm_meta_keywords` - Define keywords for search engines
 
-More hooks for other data.
+More hooks for other data, if the settings possibilities is not enough.
 
- * `wm_title` - Filter the title od splash page
+ * `wm_title` - Filter the title on splash page
  * `wm_header` - Filter for header string on splash page
+ * `wm_heading` - Filter for the heading string
 
 = Requirements =
 1. WordPress version 2.6 and later, works also on Multisite
