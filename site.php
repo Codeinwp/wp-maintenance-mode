@@ -3,9 +3,9 @@
 <head>
 	<?php
 	if ( ! isset($value) ) {
-		$WPMaintenanceMode = new WPMaintenanceMode();
-		$value = WPMaintenanceMode::get_options();
-		$unitvalues = $WPMaintenanceMode->case_unit($value['unit']);
+		//$WPMaintenanceMode = new WPMaintenanceMode();
+		$value      = WPMaintenanceMode::get_options();
+		$unitvalues = WPMaintenanceMode::case_unit( $value['unit'] );
 	}
 	
 	$author = 'WP Maintenance Mode: Frank Bueltge, http://bueltge.de';

@@ -8,8 +8,8 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.7
- * Last change: 04/07/2013
+ * Version:     1.8.8
+ * Last change: 04/08/2013
  * License:     GPLv3
  * 
  * 
@@ -633,7 +633,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		}
 		
 		
-		public function case_unit($unitvalue) {
+		public function case_unit( $unitvalue ) {
 			
 			$value['unit'] = $unitvalue;
 			$unitvalues = array();
@@ -1086,5 +1086,4 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		do_action( 'wm_footer', '' );
 	}
 	
-	//$GLOBALS['WPMaintenanceMode'] = new WPMaintenanceMode();
-}
+} // end if class exists
