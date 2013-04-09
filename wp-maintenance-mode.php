@@ -945,7 +945,11 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			echo $link . $style;
 		}
 		
-		
+		/**
+		 * Add markup for flash theme
+		 * 
+		 * @return  String
+		 */
 		public function add_flash() {
 			
 			$locale = get_locale();
@@ -961,7 +965,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				case 9:
 					$flash = FB_WM_BASE . '/styles/wartung-' . $locale . '.swf';
 					if ( file_exists($flash) ) {
-						$flash = $flash;
+						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung-' . $locale . '.swf';
 					} else {
 						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung.swf';
 					}
@@ -973,10 +977,16 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					</object>';
 					break;
 			}
+			
 			echo $object;
 		}
 		
 		
+		/**
+		 * Add content on splash page
+		 * 
+		 * @return  String
+		 */
 		public function add_content() {
 			
 			$locale = get_locale();
