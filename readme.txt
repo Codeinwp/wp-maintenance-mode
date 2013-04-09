@@ -232,6 +232,10 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 
 
 == Changelog ==
+= 1.8.8 (04/09/2013) =
+* Fix path to localized flash content
+* Fix preview function
+
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page
 * Add Filter Hook `wp_maintenance_mode_status_code` Status Code; default is 503
