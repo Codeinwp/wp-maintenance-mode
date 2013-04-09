@@ -3,6 +3,7 @@
 <head>
 	<?php
 	if ( ! isset($value) ) {
+		$WPMaintenanceMode = new WPMaintenanceMode();
 		$value = WPMaintenanceMode::get_options();
 		$unitvalues = $WPMaintenanceMode->case_unit($value['unit']);
 	}
