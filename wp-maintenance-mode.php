@@ -8,7 +8,7 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.8
+ * Version:     1.8.8-beta
  * Last change: 04/08/2013
  * License:     GPLv3
  * 
