@@ -1,0 +1,573 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode v1.8.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-14 12:06+0100\n"
+"PO-Revision-Date: 2013-04-13 15:48+0900\n"
+"Last-Translator: YAT <yat@yat-net.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: c:/xampp/htdocs/wp-plugins/wp-maintenance-mode/\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wp-maintenance-mode
+#: site.php:27 site.php:65
+msgid "Maintenance Mode"
+msgstr "メンテナンスモード"
+
+# @ wp-maintenance-mode
+#: site.php:72
+msgid "Access to the admin area blocked"
+msgstr "管理機能へのアクセスはブロックされています"
+
+# @ wp-maintenance-mode
+#: site.php:75
+msgid "Admin-Logout"
+msgstr "管理者ログアウト"
+
+# @ wp-maintenance-mode
+#: site.php:80
+msgid "Admin-Login"
+msgstr "管理者ログイン"
+
+# @ default
+#: inc/wp-maintenance-mode-settings.php:55
+#: inc/wp-maintenance-mode-settings.php:65
+msgid "Settings"
+msgstr "設定"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:304
+msgid "Maintenance mode"
+msgstr "メンテナンスモード"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:305
+#, php-format
+msgid ""
+"<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
+"scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</"
+"strong><br />Thank you for your understanding.</p>"
+msgstr ""
+"<p>ご不便をおかけしており大変恐縮です。<br />現在メンテナンス中です。<br />お"
+"手数をおかけしますが、<strong> %1$s %2$s </strong>頃に再度ご訪問いただきます"
+"ようお願いいたします。</p>"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:348 wp-maintenance-mode.php:428
+msgid "Updated"
+msgstr "更新しました。"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:607
+msgid "seconds"
+msgstr "秒"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:611
+msgid "minutes"
+msgstr "分"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:615
+msgid "hours"
+msgstr "時"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:619
+msgid "days"
+msgstr "日"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:623
+msgid "weeks"
+msgstr "週"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:627
+msgid "months"
+msgstr "月"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:631
+msgid "years"
+msgstr "年"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:693
+msgid " &amp; WP Super Cache flushed."
+msgstr " & WP Super Cache のフラッシュを行ないました。"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:700
+msgid " &amp; W3 Total Cache for pages flushed."
+msgstr " & W3 Total Cache のフラッシュを行ないました。"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:705 wp-maintenance-mode.php:1013
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "注意: メンテナンスモードは<strong>有効</strong>です！"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:707
+msgid "Deactivate or change Settings"
+msgstr "無効化または設定変更"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:815
+msgid "Plugin by:"
+msgstr "プラグイン作成:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:817 wp-maintenance-mode.php:819
+#: wp-maintenance-mode.php:821 wp-maintenance-mode.php:823
+#: wp-maintenance-mode.php:825 wp-maintenance-mode.php:827
+#: wp-maintenance-mode.php:829 wp-maintenance-mode.php:831
+#: wp-maintenance-mode.php:833 wp-maintenance-mode.php:835
+#: wp-maintenance-mode.php:837
+msgid "Design by:"
+msgstr "デザイン:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:100
+#: inc/wp-maintenance-mode-settings.php:429
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "プラグイン %s の設定が <strong>変更されました</strong>。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:103
+#: inc/wp-maintenance-mode-settings.php:116
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "プラグイン%sの有効状態が <strong>更新されました</strong>。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:106
+msgid "Plugin Activate"
+msgstr "プラグイン有効化"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:110
+#: inc/wp-maintenance-mode-settings.php:129
+#: inc/wp-maintenance-mode-settings.php:173
+#: inc/wp-maintenance-mode-settings.php:186
+#: inc/wp-maintenance-mode-settings.php:261
+#: inc/wp-maintenance-mode-settings.php:333
+#: inc/wp-maintenance-mode-settings.php:419
+msgid "False"
+msgstr "いいえ"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:111
+#: inc/wp-maintenance-mode-settings.php:130
+#: inc/wp-maintenance-mode-settings.php:174
+#: inc/wp-maintenance-mode-settings.php:187
+#: inc/wp-maintenance-mode-settings.php:262
+#: inc/wp-maintenance-mode-settings.php:334
+#: inc/wp-maintenance-mode-settings.php:420
+msgid "True"
+msgstr "はい"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:113
+msgid "Update"
+msgstr "更新"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:119
+msgid "Plugin Settings"
+msgstr "プラグイン設定"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:125
+msgid "Countdown:"
+msgstr "カウントダウン:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:136
+#: inc/wp-maintenance-mode-settings.php:139
+msgid "Click for datepicker"
+msgstr "日付を選択"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:136
+msgid "Date:"
+msgstr "日付:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:140
+msgid ""
+"Activate countdown for using this. Use value and unit or use the countdown "
+"and set the date."
+msgstr ""
+"これを使うには「カウントダウン」を有効にして下さい。値と時間単位を使うか、カ"
+"ウントダウンを使って日数を設定して下さい"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:145
+msgid "Value:"
+msgstr "値:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:153
+msgid "Unit:"
+msgstr "時間単位:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:157
+msgid "second"
+msgstr "秒"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:158
+msgid "minute"
+msgstr "分"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:159
+msgid "hour"
+msgstr "時"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:160
+msgid "day"
+msgstr "日"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:161
+msgid "week"
+msgstr "週"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:162
+msgid "month"
+msgstr "月"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:163
+msgid "year"
+msgstr "年"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:169
+msgid "Link:"
+msgstr "リンク:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:177
+msgid ""
+"Please leave a link to the plugin- and design-author on your maintenance "
+"mode site."
+msgstr ""
+"プラグイン作者とデザイン担当へのリンクは残しておいてくださるとありがたいで"
+"す。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:182
+msgid "Admin Link:"
+msgstr "管理者リンク"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:190
+msgid "Do you will a link to the admin area of your install?"
+msgstr "管理領域へのリンクを置きますか？"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:200
+msgid "Simple Text"
+msgstr "Simple Text"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:201
+msgid "The Truck"
+msgstr "Thr Truck"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:202
+msgid "The Sun"
+msgstr "The Sun"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:203
+msgid "The FF Error"
+msgstr "The FF Error（Firefox向けのエラーページ）"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:204
+msgid "Monster"
+msgstr "Monster"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:205
+msgid "Chastely"
+msgstr "Chastely"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:206
+msgid "Only Typo"
+msgstr "Only Typo"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:207
+msgid "Paint"
+msgstr "Paint"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:208
+msgid "Animate (Flash)"
+msgstr "Animate (Flash)"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:209
+msgid "Damask"
+msgstr "Damask"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:210
+msgid "Lego"
+msgstr "Lego"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:211
+msgid "Chemistry"
+msgstr "Chemistry"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:220
+msgid "URL to the css-file (incl. http://)"
+msgstr "CSSファイルへのリンク(http:// で始まること)"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:222
+msgid ""
+"<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your "
+"plugin folder, it will be deleted on the next automatical update of the "
+"plugin!"
+msgstr ""
+"<strong>ご注意:</strong> スタイルシートをプラグインディレクトリの中にコピーし"
+"ないで下さい。次回の自動更新の時に削除されてしまいます！"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:227
+#: inc/wp-maintenance-mode-settings.php:250
+msgid "Preview"
+msgstr "プレビュー"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:257
+msgid "noindex, nofollow:"
+msgstr "noindex, nofollow:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:265
+msgid ""
+"The robots meta tag lets you utilize a granular, page-specific approach to "
+"controlling how an individual page should be indexed and served to users in "
+"search results. Set TRUE for noindex, nofollow; set FALSE for index, follow."
+msgstr ""
+"ロボットメタタグは、どのページがインデックスされ検索結果に載せられてユーザー"
+"に提供されるかを、きめ細かくページ単位で制御するやり方を可能にします。イン"
+"デックスもリンク追跡もしなければ「はい」を、インデックスもリンク追跡も許可す"
+"るなら「いいえ」を設定してください。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:270
+msgid "Title:"
+msgstr "タイトル:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:273
+#: inc/wp-maintenance-mode-settings.php:281
+#: inc/wp-maintenance-mode-settings.php:289
+msgid "Leave empty for default."
+msgstr "空にしておくとデフォルトの値が使われます。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:278
+msgid "Header:"
+msgstr "ヘッダー:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:286
+msgid "Heading:"
+msgstr "ヘッディング:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:294
+msgid "Text:"
+msgstr "テキスト:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:307
+msgid "Exclude:"
+msgstr "除外項目:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:323
+msgid ""
+"Exclude feed, pages, posts, archives or IPs from the maintenance mode. Add "
+"the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr ""
+"フィード、ページや投稿、または特定のIPアドレスからのアクセスをメンテナンスか"
+"ら除外できます。ページや投稿のスラッグをカンマで区切って入力してください。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:342
+msgid "Backend Role:"
+msgstr "バックエンドロール:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:367
+msgid "Allowed userrole to access the backend of this blog."
+msgstr "このブログのバックエンドに対するアクセスを持ったユーザー権限"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:368
+#: inc/wp-maintenance-mode-settings.php:399
+msgid "Super Admin has always access."
+msgstr "特権管理者は常にアクセスできます。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:373
+msgid "Frontend Role:"
+msgstr "フロントエンドロール:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:398
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "このブログのフロントエンドにアクセスできるユーザーロール"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:404
+msgid "Redirection:"
+msgstr "リダイレクト:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:409
+msgid ""
+"If you want that after the login the destination address is not standard to "
+"the dashboard, then defining a URL. (incl. http://)"
+msgstr ""
+"フロントエンドでユーザーがログインした場合、ログイン後別のアドレスにリダイレ"
+"クトさせたい場合は、そのURLを定義してください。（http://を含めてください）"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:432
+msgid "Save"
+msgstr "保存"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:300
+#, php-format
+msgid ""
+"Use the first <em>%1$s</em> for the time value or countdown and second <em>"
+"%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes "
+"are possible."
+msgstr ""
+"最初の %1$s はカウントダウンの時間値、二番目の %2$s はカウントダウン値に対す"
+"る単位です。HTMLの記法やショートコードも記述可能です。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:301
+msgid ""
+"Use <code>[loginform]</code> for add the default login form in the "
+"maintenance page."
+msgstr ""
+"メンテナンスページにログインフォームを追加するために <code>[loginform]</"
+"code> を使ってください。"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:415
+msgid "Notice:"
+msgstr "注意:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:422
+msgid ""
+"Do you will see all notices, inside backend, the Admin Bar and the login "
+"screen?"
+msgstr ""
+"バックエンドの中や、管理バー、ログインスクリーンにすべてのお知らせを載せます"
+"か？"
+
+# @ default
+#: index.php:25
+msgid "Cheatin&#8217; uh?"
+msgstr "cheat in"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+msgid "WP Maintenance Mode"
+msgstr "WP Maintenance Mode"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+msgid "http://wordpress.org/extend/plugins/wp-maintenance-mode/"
+msgstr "http://wordpress.org/extend/plugins/wp-maintenance-mode/"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+msgid ""
+"The plugin adds a splash page to your blog that lets visitors know your blog "
+"is down for maintenance. Logged in users get full access to the blog "
+"including the front-end, depends of the settings."
+msgstr ""
+"このプラグインは訪問者にあなたのブログががメンテナンス中だと知らせるスプラッ"
+"シュページを追加します。設定内容によって、ログインしたユーザーはフロントエン"
+"ドを含むすべてのページへアクセスできます。"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+msgid "Frank B&uuml;ltge"
+msgstr "Frank B&uuml;ltge"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/"
+msgstr "http://bueltge.de/"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:195
+msgid "CSS Style:"
+msgstr "CSSスタイル:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:199
+msgid "Own CSS Stylesheet"
+msgstr "独自CSSスタイルシート"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:217
+msgid "Own CSS Style URL:"
+msgstr "独自CSSスタイルのURL:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:329
+msgid "Bypass for Search Bots:"
+msgstr "検索ボットのクローリングを許可:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:336
+msgid "Allow Search Bots to bypass maintenance mode?"
+msgstr ""
+"検索ボットがメンテナンスモード中でもクローリングさせる事を可能にしますか？"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+msgid "1.8.7"
+msgstr "1.8.7"
