@@ -8,7 +8,6 @@ if ( ! function_exists( 'fb_find_wp_config_path' ) ) {
 		do {
 			if( file_exists( $dir . "/wp-config.php" ) ) {
 				return $dir;
-				var_dump($dir);
 			}
 		} while ( $dir = realpath( "$dir/.." ) );
 		
