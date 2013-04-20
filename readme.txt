@@ -211,7 +211,7 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to [Stefan Wilhelm](http://www.beedy.de/) for Idea, Tests and a tutorial for work with MySQLDumper
 
 * Thanks to [Omer Faruk ](http://yakalasam.com) and [H&uuml;seyin &Uuml;lk&uuml;](http://www.salsabar.org/ "H&uuml;seyin &Uuml;lk&uuml;") for turkey language file
-* Thanks to [Gilles WALET](http://www.nevermindfr.com/ "Gilles WALET") for frensh language file
+* Thanks to LIJE Creative, [Agence web Strasbourg](http://www.lije-creative.com/ "Agence web LIJE Creative") and [Gilles WALET](http://www.nevermindfr.com/ "Gilles WALET") for frensh language file
 * Thanks to [J&uuml;rgen Toth](http://www.relijoc.ro/ "J&uuml;rgen Toth") for romanian language file
 * Thanks to [Gianni Diurno](http://gidibao.net/ "Gianni Diurno") for italian language file and an [tutorial](http://gidibao.net/index.php/2010/09/16/wp-maintenance-mode-in-italiano/ "WP Maintenance Mode in italiano") for italien users
 * Thanks to [Romeo Shuka](http://www.romeolab.com/wp-wartungsmodus-shqip "About this Plugin in albanian language") for albanian language file
