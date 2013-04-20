@@ -53,7 +53,7 @@ More hooks for other data, if the settings possibilities is not enough.
  * `wm_heading` - Filter for the heading string
 
 = Requirements =
-1. WordPress version 2.6 and later, works also on Multisite
+1. WordPress version 3.0 and later, works also on Multisite
 1. PHP 5
 
 = Bugs, technical hints or contribute =
