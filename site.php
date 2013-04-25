@@ -7,6 +7,7 @@
 			require_once 'wp-maintenance-mode.php';
 			$WPMaintenanceMode = new WPMaintenanceMode();
 		}
+		
 		$value      = WPMaintenanceMode::get_options();
 		$unitvalues = WPMaintenanceMode::case_unit( $value['unit'] );
 	}
