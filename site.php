@@ -3,7 +3,10 @@
 <head>
 	<?php
 	if ( ! isset($value) ) {
-		//$WPMaintenanceMode = new WPMaintenanceMode();
+		if ( ! class_exists( 'WPMaintenanceMode' ) ) {
+			require_once 'wp-maintenance-mode.php';
+			$WPMaintenanceMode = new WPMaintenanceMode();
+		}
 		$value      = WPMaintenanceMode::get_options();
 		$unitvalues = WPMaintenanceMode::case_unit( $value['unit'] );
 	}

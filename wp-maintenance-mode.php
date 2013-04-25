@@ -43,7 +43,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-if ( ! class_exists('WPMaintenanceMode') ) {
+if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 
 	if ( ! defined('WP_CONTENT_URL') )
 		define('WP_CONTENT_URL', site_url() . '/wp-content');

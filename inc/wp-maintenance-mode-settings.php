@@ -247,7 +247,7 @@ class WPMaintenanceMode_Settings {
 							document.write('<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' 
 								. FB_WM_BASEDIR; ?>/index.php?KeepThis=true&amp;TB_iframe=true&amp;height=' 
 								+ viewportheight + '&amp;width=' + viewportwidth 
-								+ '&amp;modal=false" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
+								+ '&amp;modal=false" title="<?php _e( 'Preview Maintenance Mode', FB_WM_TEXTDOMAIN ); ?>" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
 							//-->
 						</script>
 						</td>
