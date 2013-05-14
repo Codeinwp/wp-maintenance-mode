@@ -226,15 +226,17 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to [Yaser Maadan](http://www.englize.com "www.englize.com") for a arabic language files
 * Thanks to [Andrew Kovalev](http://www.portablecomponentsforall.com/)
 * Thanks to [Brian Flores](http://www.inmotionhosting.com/) for serbian translation
-* Lithuanian translation files by [Vincent G](http://www.host1plus.com)
-* Swedish translation files by [Kenneth Andersson](http://www.telia.se/)
-* Japanese translation files by [Groove Brain]
+* Thsnks for lithuanian translation files by [Vincent G](http://www.host1plus.com)
+* Thanks for swedish translation files by [Kenneth Andersson](http://www.telia.se/)
+* Thanks for japanese translation files by [Groove Brain]
+* Thanks to [Maksym Kobieliev](mailto:maximaximums@gmail.com) for ukrainian translation
 
 
 == Changelog ==
-= 1.8.8 (04/09/2013) =
+= 1.8.8 (*/*/2013) =
 * Fix path to localized flash content
 * Fix preview function
+* Add ukrainian translation
 
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page

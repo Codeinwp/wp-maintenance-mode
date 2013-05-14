@@ -1,0 +1,578 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode v1.8.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-14 12:06+0100\n"
+"PO-Revision-Date: 2013-04-29 22:28+0200\n"
+"Last-Translator: Maksym Kobieliev <maximaximums@gmail.com>\n"
+"Language-Team:  <maximaximums@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: c:/xampp/htdocs/wp-plugins/wp-maintenance-mode/\n"
+"X-Textdomain-Support: yes\n"
+"Language: uk\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wp-maintenance-mode
+#: site.php:27 site.php:65
+msgid "Maintenance Mode"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: site.php:72
+msgid "Access to the admin area blocked"
+msgstr "Доступ до панелі адміністратора заблоковано"
+
+# @ wp-maintenance-mode
+#: site.php:75
+msgid "Admin-Logout"
+msgstr "Вийти"
+
+# @ wp-maintenance-mode
+#: site.php:80
+msgid "Admin-Login"
+msgstr "Вхід для адміністраторів"
+
+# @ default
+#: inc/wp-maintenance-mode-settings.php:55
+#: inc/wp-maintenance-mode-settings.php:65
+msgid "Settings"
+msgstr "Налаштування"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:304
+msgid "Maintenance mode"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:305
+#, php-format
+msgid ""
+"<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
+"scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</"
+"strong><br />Thank you for your understanding.</p>"
+msgstr ""
+"<p>Даруйте за незручності.<br />На нашому веб-сайті зараз проводиться "
+"планові технічні роботи.<br /><strong>Будь ласка, спробуйте ще раз через "
+"%1$s %2$s</strong><br />Дякуємо за розуміння.</p>"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:348 wp-maintenance-mode.php:428
+msgid "Updated"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:607
+msgid "seconds"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:611
+msgid "minutes"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:615
+msgid "hours"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:619
+msgid "days"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:623
+msgid "weeks"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:627
+msgid "months"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:631
+msgid "years"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:693
+msgid " &amp; WP Super Cache flushed."
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:700
+msgid " &amp; W3 Total Cache for pages flushed."
+msgstr ""
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:705 wp-maintenance-mode.php:1013
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Увага: Режим обслуговування <strong>активовано</strong>!"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:707
+msgid "Deactivate or change Settings"
+msgstr "Деактивувати або змінити налаштування"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:815
+msgid "Plugin by:"
+msgstr "Автор плаґіну:"
+
+# @ wp-maintenance-mode
+#: wp-maintenance-mode.php:817 wp-maintenance-mode.php:819
+#: wp-maintenance-mode.php:821 wp-maintenance-mode.php:823
+#: wp-maintenance-mode.php:825 wp-maintenance-mode.php:827
+#: wp-maintenance-mode.php:829 wp-maintenance-mode.php:831
+#: wp-maintenance-mode.php:833 wp-maintenance-mode.php:835
+#: wp-maintenance-mode.php:837
+msgid "Design by:"
+msgstr "Дизайн плаґіну:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:100
+#: inc/wp-maintenance-mode-settings.php:429
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Налаштування плаґіна %s <strong>оновлено</strong>."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:103
+#: inc/wp-maintenance-mode-settings.php:116
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Статус плаґіна %s <strong>оновлено</strong>."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:106
+msgid "Plugin Activate"
+msgstr "Активність плаґіну"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:110
+#: inc/wp-maintenance-mode-settings.php:129
+#: inc/wp-maintenance-mode-settings.php:173
+#: inc/wp-maintenance-mode-settings.php:186
+#: inc/wp-maintenance-mode-settings.php:261
+#: inc/wp-maintenance-mode-settings.php:333
+#: inc/wp-maintenance-mode-settings.php:419
+msgid "False"
+msgstr "Ні"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:111
+#: inc/wp-maintenance-mode-settings.php:130
+#: inc/wp-maintenance-mode-settings.php:174
+#: inc/wp-maintenance-mode-settings.php:187
+#: inc/wp-maintenance-mode-settings.php:262
+#: inc/wp-maintenance-mode-settings.php:334
+#: inc/wp-maintenance-mode-settings.php:420
+msgid "True"
+msgstr "Так"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:113
+msgid "Update"
+msgstr "Оновити"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:119
+msgid "Plugin Settings"
+msgstr "Налаштування плаґіна"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:125
+msgid "Countdown:"
+msgstr "Зворотній відлік:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:136
+#: inc/wp-maintenance-mode-settings.php:139
+msgid "Click for datepicker"
+msgstr "Клацніть, щоб відобразити календар"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:136
+msgid "Date:"
+msgstr "Дата:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:140
+msgid ""
+"Activate countdown for using this. Use value and unit or use the countdown "
+"and set the date."
+msgstr ""
+"Активуйте зворотній відлік, щоб використовувати це.  Вкажіть значення і "
+"одиницю виміру або вкажіть дату."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:145
+msgid "Value:"
+msgstr "Значення:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:153
+msgid "Unit:"
+msgstr "Одиниця виміру:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:157
+msgid "second"
+msgstr "секунда"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:158
+msgid "minute"
+msgstr "хвилина"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:159
+msgid "hour"
+msgstr "година"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:160
+msgid "day"
+msgstr "день"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:161
+msgid "week"
+msgstr "тиждень"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:162
+msgid "month"
+msgstr "місяць"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:163
+msgid "year"
+msgstr "рік"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:169
+msgid "Link:"
+msgstr "Посилання:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:177
+msgid ""
+"Please leave a link to the plugin- and design-author on your maintenance "
+"mode site."
+msgstr ""
+"Будь ласка, залишіть посилання на дизайнера та автора плаґіну на вашому "
+"сайті, що перебуває в режимі обслуговування."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:182
+msgid "Admin Link:"
+msgstr "Посилання на адмінку:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:190
+msgid "Do you will a link to the admin area of your install?"
+msgstr "Ви хочете відображати посилання на адмінку вашого сайту?"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:200
+msgid "Simple Text"
+msgstr "Простий текст"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:201
+msgid "The Truck"
+msgstr "Вантажівка"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:202
+msgid "The Sun"
+msgstr "Сонце"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:203
+msgid "The FF Error"
+msgstr "Помилка ВогнеЛиса"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:204
+msgid "Monster"
+msgstr "Монстр"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:205
+msgid "Chastely"
+msgstr "Поміркованість"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:206
+msgid "Only Typo"
+msgstr "Тільки опечатки"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:207
+msgid "Paint"
+msgstr "Фарба"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:208
+msgid "Animate (Flash)"
+msgstr "Анімація (Flash)"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:209
+msgid "Damask"
+msgstr "Дамаск"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:210
+msgid "Lego"
+msgstr "Леґо"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:211
+msgid "Chemistry"
+msgstr "Хімія"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:220
+msgid "URL to the css-file (incl. http://)"
+msgstr "Шлях до css-файлу (включаючи http://)"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:222
+msgid ""
+"<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your "
+"plugin folder, it will be deleted on the next automatical update of the "
+"plugin!"
+msgstr ""
+"<strong>Увага:</strong> Будь ласка, не копіюйте ваш CSS-файл у теку плаґіну, "
+"оскільки він буде видалений при наступному автоматичному оновленні плаґіну!"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:227
+#: inc/wp-maintenance-mode-settings.php:250
+msgid "Preview"
+msgstr "Попередній перегляд"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:257
+msgid "noindex, nofollow:"
+msgstr ""
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:265
+msgid ""
+"The robots meta tag lets you utilize a granular, page-specific approach to "
+"controlling how an individual page should be indexed and served to users in "
+"search results. Set TRUE for noindex, nofollow; set FALSE for index, follow."
+msgstr ""
+"Мета-теґи для пошукових роботів дають можливість використовувати тонко "
+"налаштований, специфічний для кожної сторінки підхід то управління тим, як "
+"конкретна сторінка індексується та надається користувачам у результатах "
+"пошукових запитів. Встановіть Так для noindex, nofollow; встановіть Ні для "
+"index, follow."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:270
+msgid "Title:"
+msgstr "Назва:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:273
+#: inc/wp-maintenance-mode-settings.php:281
+#: inc/wp-maintenance-mode-settings.php:289
+msgid "Leave empty for default."
+msgstr "Лишіть порожнім, щоб використати значення за замовчуванням."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:278
+msgid "Header:"
+msgstr "Заголовок:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:286
+msgid "Heading:"
+msgstr "Підзаголовок:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:294
+msgid "Text:"
+msgstr "Текст:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:307
+msgid "Exclude:"
+msgstr "Винятки:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:323
+msgid ""
+"Exclude feed, pages, posts, archives or IPs from the maintenance mode. Add "
+"the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr ""
+"Виключіть RSS-канал, сторінки, публікації, архіви або IP-адреси з режиму "
+"обслуговування. Додайте скорочення сторінок або публікацій, розділені комами."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:342
+msgid "Backend Role:"
+msgstr "Роль для адмінки:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:367
+msgid "Allowed userrole to access the backend of this blog."
+msgstr "Роль, якій надано доступ до адмінки блоґу."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:368
+#: inc/wp-maintenance-mode-settings.php:399
+msgid "Super Admin has always access."
+msgstr "Суперадміністоратор завжди має доступ."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:373
+msgid "Frontend Role:"
+msgstr "Роль для фронтенду:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:398
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Роль, якій дозволено переглядати фронтенд блоґу."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:404
+msgid "Redirection:"
+msgstr "Перенаправлення:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:409
+msgid ""
+"If you want that after the login the destination address is not standard to "
+"the dashboard, then defining a URL. (incl. http://)"
+msgstr ""
+"Якщо Ви хочете, щоб після входу здійснювалася переадресація на сторінку, "
+"відмінну від головної сторінки майстерні, вкажіть адресу сторінки. (влючаючи "
+"http://)"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:432
+msgid "Save"
+msgstr "Зберегти"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:300
+#, php-format
+msgid ""
+"Use the first <em>%1$s</em> for the time value or countdown and second <em>"
+"%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes "
+"are possible."
+msgstr ""
+"Використовуйте <em>%1$s</em> замість значення часу або зворотнього відліку і "
+"<em>%2$s</em> замість одиниць виміру часу або зворотнього відліку; можна "
+"також використовувати HTML і Shortcodes."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:301
+msgid ""
+"Use <code>[loginform]</code> for add the default login form in the "
+"maintenance page."
+msgstr ""
+"Використовуйте код <code>[loginform]</code>, щоб вставити стандартну форму "
+"входу на сторінці режиму обслуговування."
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:415
+msgid "Notice:"
+msgstr "Сповіщення:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:422
+msgid ""
+"Do you will see all notices, inside backend, the Admin Bar and the login "
+"screen?"
+msgstr ""
+"Чи хочете Ви бачити всі сповіщення в адмінці, рядку адміністратора вгорі "
+"сторінки у фронтенді, та на сторінці входу?"
+
+# @ default
+#: index.php:25
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+msgid "WP Maintenance Mode"
+msgstr "Режим обслуговування Wordpress"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+msgid "http://wordpress.org/extend/plugins/wp-maintenance-mode/"
+msgstr "http://wordpress.org/extend/plugins/wp-maintenance-mode/"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+msgid ""
+"The plugin adds a splash page to your blog that lets visitors know your blog "
+"is down for maintenance. Logged in users get full access to the blog "
+"including the front-end, depends of the settings."
+msgstr ""
+"Плаґін додає до Вашого блоґу спеціальну сторінку, яка дає відвідувачам "
+"знати, що блоґ тимчасово закритий і проводяться роботи з технічного "
+"обслуговування. Користувачі, що увійшли, отримують повний доступ до блоґу, "
+"включно із фронтендом, в залежності від налаштувань."
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+msgid "Frank B&uuml;ltge"
+msgstr "Frank B&uuml;ltge"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/"
+msgstr "http://bueltge.de/"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:195
+msgid "CSS Style:"
+msgstr "Стиль CSS:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:199
+msgid "Own CSS Stylesheet"
+msgstr "Власна таблиця стилів CSS"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:217
+msgid "Own CSS Style URL:"
+msgstr "Шлях до власної таблиців стилів CSS:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:329
+msgid "Bypass for Search Bots:"
+msgstr "Обхід для пошукових роботів:"
+
+# @ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:336
+msgid "Allow Search Bots to bypass maintenance mode?"
+msgstr "Дозволити пошуковим роботам обходити режим обслуговування?"
+
+# @ wp-maintenance-mode
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+msgid "1.8.7"
+msgstr "1.8.7"
