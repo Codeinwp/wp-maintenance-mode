@@ -51,6 +51,7 @@ More hooks for other data, if the settings possibilities is not enough.
  * `wm_title` - Filter the title on splash page
  * `wm_header` - Filter for header string on splash page
  * `wm_heading` - Filter for the heading string
+ * `wm_meta_content` - Filter for content to change output on splash page
 
 = Requirements =
 1. WordPress version 3.0 and later, works also on Multisite
@@ -235,8 +236,9 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 == Changelog ==
 = 1.8.8 (*/*/2013) =
 * Fix path to localized flash content
-* Fix preview function
+* Fix preview function, check for MU and single activation and check blog id
 * Add ukrainian translation
+' Add new filter hook for content - `wm_meta_content`
 
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page
