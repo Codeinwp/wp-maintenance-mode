@@ -238,7 +238,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			else
 				$blog_id = FALSE;
 			// for preview in MU
-			if ( $blog_id )
+			if ( is_multisite() && $blog_id )
 				return get_blog_option( $blog_id, FB_WM_TEXTDOMAIN );
 			
 			// default
