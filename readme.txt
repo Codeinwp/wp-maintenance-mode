@@ -231,14 +231,15 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks for swedish translation files by [Kenneth Andersson](http://www.telia.se/)
 * Thanks for japanese translation files by [Groove Brain]
 * Thanks to [Maksym Kobieliev](mailto:maximaximums@gmail.com) for ukrainian translation
-
+* Thanks to Michal Nusko for czech translation
 
 == Changelog ==
 = 1.8.8 (*/*/2013) =
 * Fix path to localized flash content
 * Fix preview function, check for MU and single activation and check blog id
 * Add ukrainian translation
-' Add new filter hook for content - `wm_meta_content`
+* Add czech translation
+* Add new filter hook for content - `wm_meta_content`
 
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page
