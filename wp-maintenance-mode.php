@@ -9,7 +9,7 @@
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
  * Version:     1.8.8-beta
- * Last change: 04/08/2013
+ * Last change: 04/25/2013
  * License:     GPLv3
  * 
  * 
@@ -43,7 +43,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-if ( ! class_exists('WPMaintenanceMode') ) {
+if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 
 	if ( ! defined('WP_CONTENT_URL') )
 		define('WP_CONTENT_URL', site_url() . '/wp-content');
@@ -74,7 +74,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 */
 		public $crawlers = array();
 		
-		function WPMaintenanceMode() {
+		public function WPMaintenanceMode() {
 			
 			$this->data      = array();
 			$this->datamsqld = FALSE;
@@ -233,6 +233,15 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 */
 		public static function get_options() {
 			
+			if ( isset( $_GET[ 'wm_blog_id' ] ) )
+				$blog_id = (int) $_GET[ 'wm_blog_id' ];
+			else
+				$blog_id = FALSE;
+			// for preview in MU
+			if ( is_multisite() && $blog_id )
+				return get_blog_option( $blog_id, FB_WM_TEXTDOMAIN );
+			
+			// default
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$values = get_site_option( FB_WM_TEXTDOMAIN );
 			} else {
@@ -887,7 +896,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$link   = '';
 			$style  = '';
 			// default theme
-			if ( !isset($value['theme']) )
+			if ( ! isset($value['theme']) )
 				$value['theme'] = 1;
 			
 			switch( $value['theme'] ) {
@@ -1002,7 +1011,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$td = $this->check_datetime();
 			
 			if ( ! empty( $value['text'] ) )
-				$value['text'] = wpautop( $value['text'] ); // apply_filters( 'the_content', $value['text'] );
+				$value['text'] = apply_filters( 'wm_meta_content', wpautop( $value['text'] ) ); // apply_filters( 'the_content', $value['text'] );
 			
 			if ( isset($value['radio']) && 1 === $value['radio'] && 0 !== $td[2] ) {
 				$echo = wp_sprintf( 

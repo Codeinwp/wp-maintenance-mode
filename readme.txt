@@ -51,9 +51,10 @@ More hooks for other data, if the settings possibilities is not enough.
  * `wm_title` - Filter the title on splash page
  * `wm_header` - Filter for header string on splash page
  * `wm_heading` - Filter for the heading string
+ * `wm_meta_content` - Filter for content to change output on splash page
 
 = Requirements =
-1. WordPress version 2.6 and later, works also on Multisite
+1. WordPress version 3.0 and later, works also on Multisite
 1. PHP 5
 
 = Bugs, technical hints or contribute =
@@ -211,7 +212,7 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to [Stefan Wilhelm](http://www.beedy.de/) for Idea, Tests and a tutorial for work with MySQLDumper
 
 * Thanks to [Omer Faruk ](http://yakalasam.com) and [H&uuml;seyin &Uuml;lk&uuml;](http://www.salsabar.org/ "H&uuml;seyin &Uuml;lk&uuml;") for turkey language file
-* Thanks to [Gilles WALET](http://www.nevermindfr.com/ "Gilles WALET") for frensh language file
+* Thanks to LIJE Creative, [Agence web Strasbourg](http://www.lije-creative.com/ "Agence web LIJE Creative") and [Gilles WALET](http://www.nevermindfr.com/ "Gilles WALET") for frensh language file
 * Thanks to [J&uuml;rgen Toth](http://www.relijoc.ro/ "J&uuml;rgen Toth") for romanian language file
 * Thanks to [Gianni Diurno](http://gidibao.net/ "Gianni Diurno") for italian language file and an [tutorial](http://gidibao.net/index.php/2010/09/16/wp-maintenance-mode-in-italiano/ "WP Maintenance Mode in italiano") for italien users
 * Thanks to [Romeo Shuka](http://www.romeolab.com/wp-wartungsmodus-shqip "About this Plugin in albanian language") for albanian language file
@@ -226,15 +227,19 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to [Yaser Maadan](http://www.englize.com "www.englize.com") for a arabic language files
 * Thanks to [Andrew Kovalev](http://www.portablecomponentsforall.com/)
 * Thanks to [Brian Flores](http://www.inmotionhosting.com/) for serbian translation
-* Lithuanian translation files by [Vincent G](http://www.host1plus.com)
-* Swedish translation files by [Kenneth Andersson](http://www.telia.se/)
-* Japanese translation files by [Groove Brain]
-
+* Thsnks for lithuanian translation files by [Vincent G](http://www.host1plus.com)
+* Thanks for swedish translation files by [Kenneth Andersson](http://www.telia.se/)
+* Thanks for japanese translation files by [Groove Brain]
+* Thanks to [Maksym Kobieliev](mailto:maximaximums@gmail.com) for ukrainian translation
+* Thanks to Michal Nusko for czech translation
 
 == Changelog ==
-= 1.8.8 (04/09/2013) =
+= 1.8.8 (*/*/2013) =
 * Fix path to localized flash content
-* Fix preview function
+* Fix preview function, check for MU and single activation and check blog id
+* Add ukrainian translation
+* Add czech translation
+* Add new filter hook for content - `wm_meta_content`
 
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page

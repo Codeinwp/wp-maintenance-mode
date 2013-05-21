@@ -1,0 +1,531 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode v1.8.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-05-17 21:32+0100\n"
+"Last-Translator: Frank Bueltge <frank@bueltge.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ default
+#: inc/wp-maintenance-mode-settings.php:55
+#: inc/wp-maintenance-mode-settings.php:65
+msgid "Settings"
+msgstr ""
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:100
+#: inc/wp-maintenance-mode-settings.php:429
+#, php-format
+msgid "Plugin %s settings <strong>updated</strong>."
+msgstr "Nastavení pluginu %s  <strong>aktualizováno</strong>."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:103
+#: inc/wp-maintenance-mode-settings.php:116
+#, php-format
+msgid "Plugin %s active status <strong>updated</strong>."
+msgstr "Status pluginu %s <strong>aktualizován</strong>."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:106
+msgid "Plugin Activate"
+msgstr "Zapnout režim údržby"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:110
+#: inc/wp-maintenance-mode-settings.php:129
+#: inc/wp-maintenance-mode-settings.php:173
+#: inc/wp-maintenance-mode-settings.php:186
+#: inc/wp-maintenance-mode-settings.php:261
+#: inc/wp-maintenance-mode-settings.php:333
+#: inc/wp-maintenance-mode-settings.php:419
+msgid "False"
+msgstr "Ne"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:111
+#: inc/wp-maintenance-mode-settings.php:130
+#: inc/wp-maintenance-mode-settings.php:174
+#: inc/wp-maintenance-mode-settings.php:187
+#: inc/wp-maintenance-mode-settings.php:262
+#: inc/wp-maintenance-mode-settings.php:334
+#: inc/wp-maintenance-mode-settings.php:420
+msgid "True"
+msgstr "Ano"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:113
+msgid "Update"
+msgstr "Změnit"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:119
+msgid "Plugin Settings"
+msgstr "Nastavení pluginu"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:125
+msgid "Countdown:"
+msgstr "Odpočítávání:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:136
+#: inc/wp-maintenance-mode-settings.php:139
+msgid "Click for datepicker"
+msgstr "Klikněte pro výběr data"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:136
+msgid "Date:"
+msgstr "Datum:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:140
+msgid "Activate countdown for using this. Use value and unit or use the countdown and set the date."
+msgstr "Použije se jen, když zapnete odpočítávání. Nastavte hodnotu a jednotku, nebo nastavte datum odpočítávání."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:145
+msgid "Value:"
+msgstr "Hodnota:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:153
+msgid "Unit:"
+msgstr "Jednotka:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:157
+msgid "second"
+msgstr "sekunda/sekund"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:158
+msgid "minute"
+msgstr "minuta/minut"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:159
+msgid "hour"
+msgstr "hodina/hodin"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:160
+msgid "day"
+msgstr "den/dny"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:161
+msgid "week"
+msgstr "týden/týdny"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:162
+msgid "month"
+msgstr "měsíc/měsíce"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:163
+msgid "year"
+msgstr "rok/roky"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:169
+msgid "Link:"
+msgstr "Odkaz na plugin:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:177
+msgid "Please leave a link to the plugin- and design-author on your maintenance mode site."
+msgstr "Prosím nechte odkaz na plugin na vaší stránce v režimu údržby."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:182
+msgid "Admin Link:"
+msgstr "Odkaz na administraci:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:190
+msgid "Do you will a link to the admin area of your install?"
+msgstr "Chcete zobrazit odkaz pro přihlášení?"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:195
+msgid "CSS Style:"
+msgstr "CSS styl:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:199
+msgid "Own CSS Stylesheet"
+msgstr "Vlastní CSS soubor"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:200
+msgid "Simple Text"
+msgstr "Jednoduchý text"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:201
+msgid "The Truck"
+msgstr "Kamion"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:202
+msgid "The Sun"
+msgstr "Slunce"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:203
+msgid "The FF Error"
+msgstr "Chyba Firefoxu"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:204
+msgid "Monster"
+msgstr "Příšera"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:205
+msgid "Chastely"
+msgstr "Decentní"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:206
+msgid "Only Typo"
+msgstr "Typografický"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:207
+msgid "Paint"
+msgstr "Malba"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:208
+msgid "Animate (Flash)"
+msgstr "Animace (flash v němčině)"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:209
+msgid "Damask"
+msgstr "Damaškový"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:210
+msgid "Lego"
+msgstr "Lego"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:211
+msgid "Chemistry"
+msgstr "Chemie"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:217
+msgid "Own CSS Style URL:"
+msgstr "Adresa vlastního CSS stylu:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:220
+msgid "URL to the css-file (incl. http://)"
+msgstr "Adresa souboru (včetně http://)"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:222
+msgid "<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!"
+msgstr "<strong>Pozor:</strong> Nedávejte soubor do složky pluginu. Při případné aktualizaci by byl vymazán."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:227
+#: inc/wp-maintenance-mode-settings.php:250
+msgid "Preview"
+msgstr "Náhled (nejprve uložte předvolby)"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:257
+msgid "noindex, nofollow:"
+msgstr "noindex, nofollow:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:265
+msgid "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results. Set TRUE for noindex, nofollow; set FALSE for index, follow."
+msgstr "Nastavte ANO, aby se obsah neindexoval; nastavte NE pro indexování."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:270
+msgid "Title:"
+msgstr "Záhlaví:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:273
+#: inc/wp-maintenance-mode-settings.php:281
+#: inc/wp-maintenance-mode-settings.php:289
+msgid "Leave empty for default."
+msgstr "Když necháte prázdné, tak se použije výchozí."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:278
+msgid "Header:"
+msgstr "Nadpis:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:286
+msgid "Heading:"
+msgstr "Hlavička:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:294
+msgid "Text:"
+msgstr "Text:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:300
+#, php-format
+msgid "Use the first <em>%1$s</em> for the time value or countdown and second <em>%2$s</em> for the unit of the time or countdown-value; HTML and Shortcodes are possible."
+msgstr "Použijte <em>%1$s</em> pro časový údaj nebo odpočítávání a <em>%2$s</em> pro jednotku času nebo jednotku odpočítávání; Je možné použít HTML a zkratkové kódy."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:301
+msgid "Use <code>[loginform]</code> for add the default login form in the maintenance page."
+msgstr "Kód <code>[loginform]</code> zobrazí standardní přihlašovací formulář na stránce v režimu ůdržby."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:307
+msgid "Exclude:"
+msgstr "Vynechat:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:323
+msgid "Exclude feed, pages, posts, archives or IPs from the maintenance mode. Add the Slug of page or post as a comma-separated list.<br />Example:"
+msgstr "Zadejte adresy, které chcete vyloučit.<br />Příklady:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:329
+msgid "Bypass for Search Bots:"
+msgstr "Povolit vyhledávací roboty:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:336
+msgid "Allow Search Bots to bypass maintenance mode?"
+msgstr "Nechat vyhledávací roboty obejít režim údržby?"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:342
+msgid "Backend Role:"
+msgstr "Přístup do administrace:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:367
+msgid "Allowed userrole to access the backend of this blog."
+msgstr "Uživatelé, kteří budou mít přístup k administraci blogu."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:368
+#: inc/wp-maintenance-mode-settings.php:399
+msgid "Super Admin has always access."
+msgstr "Super Admin má vždy přístup."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:373
+msgid "Frontend Role:"
+msgstr "Kdo může vidět web:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:398
+msgid "Allowed userrole to see the frontend of this blog."
+msgstr "Kdo si po přihlášení může prohlédnout web."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:404
+msgid "Redirection:"
+msgstr "Přesměrování:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:409
+msgid "If you want that after the login the destination address is not standard to the dashboard, then defining a URL. (incl. http://)"
+msgstr "Pokud nechcete po přihlášení otevřít nástěnku (adresa včetně http://)."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:415
+msgid "Notice:"
+msgstr "Připomínka:"
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:422
+msgid "Do you will see all notices, inside backend, the Admin Bar and the login screen?"
+msgstr "Uvidíte upozornění na režim údržby v administraci a na přihlašovací stránce."
+
+#@ wp-maintenance-mode
+#: inc/wp-maintenance-mode-settings.php:432
+msgid "Save"
+msgstr "Uložit"
+
+#@ default
+#: index.php:25
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+#@ wp-maintenance-mode
+#: site.php:29
+#: site.php:70
+msgid "Maintenance Mode"
+msgstr "Režim údržby"
+
+#@ wp-maintenance-mode
+#: site.php:90
+msgid "Access to the admin area blocked"
+msgstr "Přístup do administrace je zakázán"
+
+#@ wp-maintenance-mode
+#: site.php:93
+msgid "Admin-Logout"
+msgstr "Odhlášení z administrace"
+
+#@ wp-maintenance-mode
+#: site.php:98
+msgid "Admin-Login"
+msgstr "Přihlášení k administraci"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Name'
+#: wp-maintenance-mode.php:0
+msgid "WP Maintenance Mode"
+msgstr "WP Maintenance Mode"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'PluginURI'
+#: wp-maintenance-mode.php:0
+msgid "http://wordpress.org/extend/plugins/wp-maintenance-mode/"
+msgstr "http://wordpress.org/extend/plugins/wp-maintenance-mode/"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Description'
+#: wp-maintenance-mode.php:0
+msgid "The plugin adds a splash page to your blog that lets visitors know your blog is down for maintenance. Logged in users get full access to the blog including the front-end, depends of the settings."
+msgstr "Plugin přidá krycí domácí stránku s upozorněním, že se blog upravuje. Přihlášení uživatelé mohou vidět vzhled webu, pokud to povolíte v nastavení."
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Author'
+#: wp-maintenance-mode.php:0
+msgid "Frank B&uuml;ltge"
+msgstr "Frank B&uuml;ltge"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'AuthorURI'
+#: wp-maintenance-mode.php:0
+msgid "http://bueltge.de/"
+msgstr "http://bueltge.de/"
+
+#@ wp-maintenance-mode
+#. translators: plugin header field 'Version'
+#: wp-maintenance-mode.php:0
+msgid "1.8.7"
+msgstr "1.8.7"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:340
+msgid "Maintenance mode"
+msgstr "Režim údržby"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:341
+#, php-format
+msgid "<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br /><strong>Please try back in %1$s %2$s</strong><br />Thank you for your understanding.</p>"
+msgstr ""
+"<p>Omlouváme se.<br />Na stránce právě probíhá plánovaná údržba.<br /><strong>\n"
+"Prosím zkuste se sem vrátit za %1$s %2$s</strong><br />Děkujeme za pochopení.</p>"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:384
+#: wp-maintenance-mode.php:464
+msgid "Updated"
+msgstr "Uloženo"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:643
+msgid "seconds"
+msgstr "sekundy"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:647
+msgid "minutes"
+msgstr "minuty"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:651
+msgid "hours"
+msgstr "hodiny"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:655
+msgid "days"
+msgstr "dny"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:659
+msgid "weeks"
+msgstr "týdny"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:663
+msgid "months"
+msgstr "měsíce"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:667
+msgid "years"
+msgstr "roky"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:729
+msgid " &amp; WP Super Cache flushed."
+msgstr " &amp; WP Super Cache vyprázdněna."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:736
+msgid " &amp; W3 Total Cache for pages flushed."
+msgstr " &amp; W3 Total Cache vyprázdněna."
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:741
+#: wp-maintenance-mode.php:1059
+msgid "Caution: Maintenance mode is <strong>active</strong>!"
+msgstr "Pozor: Režim údržby je <strong>zapnutý</strong>!"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:743
+msgid "Deactivate or change Settings"
+msgstr "Vypnout nebo změnit nastavení"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:851
+msgid "Plugin by:"
+msgstr "Plugin od:"
+
+#@ wp-maintenance-mode
+#: wp-maintenance-mode.php:853
+#: wp-maintenance-mode.php:855
+#: wp-maintenance-mode.php:857
+#: wp-maintenance-mode.php:859
+#: wp-maintenance-mode.php:861
+#: wp-maintenance-mode.php:863
+#: wp-maintenance-mode.php:865
+#: wp-maintenance-mode.php:867
+#: wp-maintenance-mode.php:869
+#: wp-maintenance-mode.php:871
+#: wp-maintenance-mode.php:873
+msgid "Design by:"
+msgstr "Design:"
+
