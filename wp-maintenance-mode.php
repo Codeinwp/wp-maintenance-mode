@@ -50,12 +50,16 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 	if ( ! defined('WP_PLUGIN_URL') )
 		define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
 	
+	define( 'FB_WM_BASEFILE',   __FILE__ );
 	define( 'FB_WM_BASENAME',   plugin_basename(__FILE__) );
 	define( 'FB_WM_BASEDIR',    dirname( plugin_basename(__FILE__) ) );
-	define( 'FB_WM_BASE',       rtrim(dirname (__FILE__), '/') );
+	define( 'FB_WM_BASE',       rtrim( dirname(__FILE__), '/' ) );
 	define( 'FB_WM_TEXTDOMAIN', 'wp-maintenance-mode' );
 	
-	add_action( 'plugins_loaded', array ( 'WPMaintenanceMode', 'get_instance' ) );
+	add_action(
+		'plugins_loaded', 
+		array ( 'WPMaintenanceMode', 'get_instance' )
+	);
 	
 	class WPMaintenanceMode {
 		
@@ -137,7 +141,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		public static function get_instance() {
 
 			NULL === self::$instance and self::$instance = new self;
-
+			
 			return self::$instance;
 		}
 		
@@ -205,6 +209,32 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				$url .= '/' . ltrim($path, '/');
 			
 			return apply_filters('plugins_url', $url, $path, $plugin);
+		}
+		
+		
+		/**
+		 * return plugin comment data
+		 * 
+		 * @access public
+		 * @param  $value string, default = 'TextDomain'
+		 *         Name, PluginURI, Version, Description, Author, AuthorURI, TextDomain, DomainPath, Network, Title
+		 * @return string
+		 */
+		public function get_plugin_data( $value = 'TextDomain' ) {
+			
+			static $plugin_data = array ();
+			
+			// fetch the data just once.
+			if ( isset( $plugin_data[ $value ] ) )
+				return $plugin_data[ $value ];
+			
+			if ( ! function_exists( 'get_plugin_data' ) )
+				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			
+			$plugin_data  = get_plugin_data( __FILE__ );
+			$plugin_value = $plugin_data[$value];
+			
+			return empty ( $plugin_data[ $value ] ) ? '' : $plugin_data[ $value ];
 		}
 		
 		
