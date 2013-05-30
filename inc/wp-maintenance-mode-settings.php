@@ -245,9 +245,9 @@ class WPMaintenanceMode_Settings {
 								viewportheight = document.getElementsByTagName('body' )[0].clientHeight
 							}
 							document.write('<a onclick="return false;" href="<?php echo WP_PLUGIN_URL . '/' 
-								. FB_WM_BASEDIR; ?>/index.php?wm_blog_id=<?php echo get_current_blog_id(); ?>&amp;KeepThis=true&amp;TB_iframe=true&amp;height=' 
+								. FB_WM_BASEDIR; ?>/index.php?KeepThis=true&amp;TB_iframe=true&amp;height=' 
 								+ viewportheight + '&amp;width=' + viewportwidth 
-								+ '&amp;modal=false" title="<?php _e( 'Preview Maintenance Mode', FB_WM_TEXTDOMAIN ); ?>" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
+								+ '&amp;modal=false" class="thickbox button"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></a>' );
 							//-->
 						</script>
 						</td>

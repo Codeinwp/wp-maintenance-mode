@@ -8,8 +8,8 @@
  * Author:      Frank B&uuml;ltge
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
- * Version:     1.8.8-beta
- * Last change: 04/25/2013
+ * Version:     1.8.7
+ * Last change: 04/08/2013
  * License:     GPLv3
  * 
  * 
@@ -43,23 +43,19 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-if ( ! class_exists( 'WPMaintenanceMode' ) ) {
+if ( ! class_exists('WPMaintenanceMode') ) {
 
 	if ( ! defined('WP_CONTENT_URL') )
 		define('WP_CONTENT_URL', site_url() . '/wp-content');
 	if ( ! defined('WP_PLUGIN_URL') )
 		define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
 	
-	define( 'FB_WM_BASEFILE',   __FILE__ );
 	define( 'FB_WM_BASENAME',   plugin_basename(__FILE__) );
 	define( 'FB_WM_BASEDIR',    dirname( plugin_basename(__FILE__) ) );
-	define( 'FB_WM_BASE',       rtrim( dirname(__FILE__), '/' ) );
+	define( 'FB_WM_BASE',       rtrim(dirname (__FILE__), '/') );
 	define( 'FB_WM_TEXTDOMAIN', 'wp-maintenance-mode' );
 	
-	add_action(
-		'plugins_loaded', 
-		array ( 'WPMaintenanceMode', 'get_instance' )
-	);
+	add_action( 'plugins_loaded', array ( 'WPMaintenanceMode', 'get_instance' ) );
 	
 	class WPMaintenanceMode {
 		
@@ -78,7 +74,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 */
 		public $crawlers = array();
 		
-		public function WPMaintenanceMode() {
+		function WPMaintenanceMode() {
 			
 			$this->data      = array();
 			$this->datamsqld = FALSE;
@@ -141,7 +137,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		public static function get_instance() {
 
 			NULL === self::$instance and self::$instance = new self;
-			
+
 			return self::$instance;
 		}
 		
@@ -212,32 +208,6 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		}
 		
 		
-		/**
-		 * return plugin comment data
-		 * 
-		 * @access public
-		 * @param  $value string, default = 'TextDomain'
-		 *         Name, PluginURI, Version, Description, Author, AuthorURI, TextDomain, DomainPath, Network, Title
-		 * @return string
-		 */
-		public function get_plugin_data( $value = 'TextDomain' ) {
-			
-			static $plugin_data = array ();
-			
-			// fetch the data just once.
-			if ( isset( $plugin_data[ $value ] ) )
-				return $plugin_data[ $value ];
-			
-			if ( ! function_exists( 'get_plugin_data' ) )
-				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-			
-			$plugin_data  = get_plugin_data( __FILE__ );
-			$plugin_value = $plugin_data[$value];
-			
-			return empty ( $plugin_data[ $value ] ) ? '' : $plugin_data[ $value ];
-		}
-		
-		
 		public function on_init() {
 			
 			load_plugin_textdomain( FB_WM_TEXTDOMAIN, FALSE, FB_WM_BASEDIR . '/languages' );
@@ -263,15 +233,6 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 */
 		public static function get_options() {
 			
-			if ( isset( $_GET[ 'wm_blog_id' ] ) )
-				$blog_id = (int) $_GET[ 'wm_blog_id' ];
-			else
-				$blog_id = FALSE;
-			// for preview in MU
-			if ( is_multisite() && $blog_id )
-				return get_blog_option( $blog_id, FB_WM_TEXTDOMAIN );
-			
-			// default
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$values = get_site_option( FB_WM_TEXTDOMAIN );
 			} else {
@@ -926,7 +887,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			$link   = '';
 			$style  = '';
 			// default theme
-			if ( ! isset($value['theme']) )
+			if ( !isset($value['theme']) )
 				$value['theme'] = 1;
 			
 			switch( $value['theme'] ) {
@@ -1041,7 +1002,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			$td = $this->check_datetime();
 			
 			if ( ! empty( $value['text'] ) )
-				$value['text'] = apply_filters( 'wm_meta_content', wpautop( $value['text'] ) ); // apply_filters( 'the_content', $value['text'] );
+				$value['text'] = wpautop( $value['text'] ); // apply_filters( 'the_content', $value['text'] );
 			
 			if ( isset($value['radio']) && 1 === $value['radio'] && 0 !== $td[2] ) {
 				$echo = wp_sprintf( 

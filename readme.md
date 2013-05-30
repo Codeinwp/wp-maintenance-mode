@@ -42,7 +42,6 @@ More hooks for other data, if the settings possibilities is not enough.
  * `wm_title` - Filter the title on splash page
  * `wm_header` - Filter for header string on splash page
  * `wm_heading` - Filter for the heading string
- * `wm_meta_content` - Filter for content to change output on splash page
 
 ## Other Notes
 ### License
