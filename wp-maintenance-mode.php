@@ -78,7 +78,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 */
 		public $crawlers = array();
 		
-		public function WPMaintenanceMode() {
+		public function __construct() {
 			
 			$this->data      = array();
 			$this->datamsqld = FALSE;
