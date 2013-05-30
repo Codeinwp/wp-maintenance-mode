@@ -39,7 +39,14 @@ class WPMaintenanceMode_Main extends WPMaintenanceMode {
 			
 			<h3><span><?php _e( 'Status', FB_WM_TEXTDOMAIN ); ?></span></h3>
 			<div class="inside">
-				<?php var_dump($status); ?>
+				<p>
+					<select name="wm_config-active" id="wm_config-active">
+						<?php checked( 1, members_get_setting( 'role_manager' ) ); ?>
+						<option value="0"<?php selected( 0, $status, TRUE ); ?>><?php _e( 'False', FB_WM_TEXTDOMAIN ); ?> </option>
+						<option value="1"<?php selected( 1, $status, TRUE ); ?>><?php _e( 'True', FB_WM_TEXTDOMAIN ); ?> </option>
+					</select> 
+					<?php submit_button( esc_attr__( 'Save Changes' ), $type = 'primary large', $name = 'submit', $wrap = FALSE ); ?>
+				</p>
 			</div>
 			
 		</div>
