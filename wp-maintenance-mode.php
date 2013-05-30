@@ -139,8 +139,9 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 * @return  object of this class
 		 */
 		public static function get_instance() {
-
-			NULL === self::$instance and self::$instance = new self;
+			
+			if ( NULL === self::$instance )
+				self::$instance = new self;
 			
 			return self::$instance;
 		}
@@ -155,9 +156,10 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 */
 		protected function load_classes() {
 			
-			// load all files with the pattern *.php from the directory inc
-			foreach( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $class )
+			// load all files with the pattern *.php from the directory
+			foreach( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $class ) {
 				require_once $class;
+			}
 		}
 		
 		/**
@@ -169,7 +171,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 */
 		public function esc_attr( $text ) {
 			
-			if ( function_exists('esc_attr') )
+			if ( function_exists( 'esc_attr' ) )
 				$text = esc_attr($text);
 			else
 				$text = attribute_escape($text);
@@ -178,18 +180,27 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		}
 		
 		
-		// function for WP < 2.8
+		/** 
+		 * Retrieve the url to the plugins directory or to a specific file within that directory.
+		 * You can hardcode the plugin slug in $path or pass __FILE__ as a second argument to get the correct folder name.
+		 * 
+		 * function for WP < 2.8
+		 * 
+		 * @param string $path Optional. Path relative to the plugins url.
+		 * @param string $plugin Optional. The plugin file that you want to be relative to - i.e. pass in __FILE__
+		 * @return string Plugins url link with optional path appended.
+		*/
 		public function get_plugins_url( $path = '', $plugin = '' ) {
 			
-			if ( function_exists('plugins_url') )
-				return plugins_url($path, $plugin);
+			if ( function_exists( 'plugins_url' ) )
+				return plugins_url( $path, $plugin );
 			
-			if ( function_exists('is_ssl') )
+			if ( function_exists( 'is_ssl' ) )
 				$scheme = ( is_ssl() ? 'https' : 'http' );
 			else
 				$scheme = 'http';
 			
-			if ( function_exists('plugins_url') )
+			if ( function_exists( 'plugins_url' ) )
 				$url = plugins_url();
 			else 
 				$url = WP_PLUGIN_URL;

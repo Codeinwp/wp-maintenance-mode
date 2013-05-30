@@ -1,4 +1,10 @@
 <?php
+//avoid direct calls to this file, because now WP core and framework has been used
+if ( ! function_exists( 'add_filter' ) ) {
+	header('Status: 403 Forbidden');
+	header('HTTP/1.1 403 Forbidden');
+	exit();
+}
 
 /**
  * WordPress Options Page "Settings > Maintenance Mode"
@@ -51,10 +57,10 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 	
 	public static function get_object() {
 		
-		if ( NULL === self :: $classobj )
-			self :: $classobj = new self;
+		if ( NULL === self::$classobj )
+			self::$classobj = new self;
 		
-		return self :: $classobj;
+		return self::$classobj;
 	}
 	
 	public function register_settings() {
@@ -174,23 +180,16 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 			<h2><?php echo parent :: get_plugin_data( 'Name' ); ?></h2>
 			
 			<div id="poststuff">
-			
+				
+				<form method="post" action="<?php echo $action; ?>">
+				
 				<div id="post-body" class="metabox-holder columns-2">
 				
 					<!-- main content -->
 					<div id="post-body-content">
 						
 						<div class="meta-box-sortables ui-sortable">
-							<form method="post" action="<?php echo $action; ?>">
-								
-							<?php do_action( self::$option_string . '_settings_page' );
-				
-var_dump($this->options);
-							?>
-							<p class="submit">
-								<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />						</p>
-						
-							</form>
+							<?php do_action( self::$option_string . '_settings_page', $this->options ); ?>
 						</div> <!-- .meta-box-sortables .ui-sortable -->
 						
 					</div> <!-- post-body-content -->
@@ -199,7 +198,7 @@ var_dump($this->options);
 					<div id="postbox-container-1" class="postbox-container">
 						
 						<div class="meta-box-sortables">
-						<?php do_action( self::$option_string . '_settings_page_sidebar' ); ?>
+						<?php do_action( self::$option_string . '_settings_page_sidebar', $this->options ); ?>
 						</div> <!-- .meta-box-sortables -->
 						
 					</div> <!-- #postbox-container-1 .postbox-container -->
@@ -207,6 +206,10 @@ var_dump($this->options);
 				</div> <!-- #post-body .metabox-holder .columns-2 -->
 				
 				<br class="clear">
+				
+				<?php submit_button( esc_attr__( 'Save Changes' ) ); ?>
+				</form>
+				
 			</div> <!-- #poststuff -->
 			
 		</div>
