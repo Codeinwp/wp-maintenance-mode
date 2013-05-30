@@ -19,6 +19,7 @@ class WPMaintenanceMode_Main extends WPMaintenanceMode {
 		
 		self::$option_string = FB_WM_TEXTDOMAIN;
 		
+		add_action( self::$option_string . '_settings_page_sidebar', array( $this, 'get_status_settings' ), 10, 2 );
 		add_action( self::$option_string . '_settings_page', array( $this, 'get_value_settings' ) );
 		add_action( self::$option_string . '_settings_page', array( $this, 'get_content_settings' ) );
 		add_action( self::$option_string . '_settings_page', array( $this, 'get_design_settings' ) );
@@ -30,6 +31,19 @@ class WPMaintenanceMode_Main extends WPMaintenanceMode {
 			self :: $classobj = new self;
 		
 		return self :: $classobj;
+	}
+	
+	public function get_status_settings( $data, $status ) {
+		?>
+		<div class="postbox">
+			
+			<h3><span><?php _e( 'Status', FB_WM_TEXTDOMAIN ); ?></span></h3>
+			<div class="inside">
+				<?php var_dump($status); ?>
+			</div>
+			
+		</div>
+		<?php
 	}
 	
 	/*

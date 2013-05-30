@@ -31,6 +31,7 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 		self::$option_string = FB_WM_TEXTDOMAIN;
 		// get options
 		$this->options = parent::get_options();
+		$this->status  = parent::get_msqld_option();
 		
 		// remove db entries on uninstall
 		register_uninstall_hook( __FILE__, array( 'WP_MaintenanceMode_Options_Page', 'unregister_settings' ) );
@@ -189,7 +190,7 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 					<div id="post-body-content">
 						
 						<div class="meta-box-sortables ui-sortable">
-							<?php do_action( self::$option_string . '_settings_page', $this->options ); ?>
+							<?php do_action( self::$option_string . '_settings_page', $this->options, $this->status ); ?>
 						</div> <!-- .meta-box-sortables .ui-sortable -->
 						
 					</div> <!-- post-body-content -->
@@ -198,7 +199,7 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 					<div id="postbox-container-1" class="postbox-container">
 						
 						<div class="meta-box-sortables">
-						<?php do_action( self::$option_string . '_settings_page_sidebar', $this->options ); ?>
+						<?php do_action( self::$option_string . '_settings_page_sidebar', $this->options, $this->status ); ?>
 						</div> <!-- .meta-box-sortables -->
 						
 					</div> <!-- #postbox-container-1 .postbox-container -->
