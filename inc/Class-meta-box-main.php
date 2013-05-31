@@ -41,7 +41,6 @@ class WPMaintenanceMode_Main extends WPMaintenanceMode {
 			<div class="inside">
 				<p>
 					<select name="wm_config-active" id="wm_config-active">
-						<?php checked( 1, members_get_setting( 'role_manager' ) ); ?>
 						<option value="0"<?php selected( 0, $status, TRUE ); ?>><?php _e( 'False', FB_WM_TEXTDOMAIN ); ?> </option>
 						<option value="1"<?php selected( 1, $status, TRUE ); ?>><?php _e( 'True', FB_WM_TEXTDOMAIN ); ?> </option>
 					</select> 
