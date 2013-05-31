@@ -63,7 +63,28 @@ class WPMaintenanceMode_Main extends WPMaintenanceMode {
 			
 			<h3><span><?php _e( 'Values', FB_WM_TEXTDOMAIN ); ?></span></h3>
 			<div class="inside">
-				<?php var_dump($data); ?>
+				
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row"><label for="wm_config-radio"><?php esc_attr_e( 'Countdown', FB_WM_TEXTDOMAIN ); ?></label></th>
+						<td>
+							<select name="wm_config-radio" id="wm_config-radio">
+								<option value="0" <?php selected( $data['radio'], 0 ); ?>><?php esc_attr_e( 'False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $data['radio'], 1 ); ?>><?php esc_attr_e( 'True', FB_WM_TEXTDOMAIN ); ?> </option>
+							</select>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row"><label for="wm_config-date"><?php esc_attr_e( 'Date', FB_WM_TEXTDOMAIN ); ?></label></th>
+						<td>
+							<input size="30" title="<?php 
+								esc_attr_e( 'Click for datepicker', FB_WM_TEXTDOMAIN ); ?>" type="text" id="wm_config-date" name="wm_config-date" value="<?php 
+								if ( isset($value['date']) ) echo $value['date']; ?>" /><br />
+							<small><?php esc_attr_e( 'Activate countdown for using this. Use value and unit or use the countdown and set the date.', FB_WM_TEXTDOMAIN ); ?></small>
+						</td>
+					</tr>
+				</table>
+				
 			</div>
 			
 		</div>
