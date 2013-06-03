@@ -345,6 +345,14 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
 				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
 			}
+            
+            // translations for timepicker
+			if ( ! empty( $i18n ) && 
+				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js' )
+				) {
+				wp_register_script( 'jquery-ui-timepicker-addon-' . $i18n, $this->get_plugins_url( '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker', 'jquery-ui-timepicker-addon') , '1.3', TRUE );
+				wp_enqueue_script( 'jquery-ui-timepicker-addon-' . $i18n );
+			}
 			
 			// include styles for datepicker
 			wp_enqueue_style( 'jquery-ui-datepicker' );
