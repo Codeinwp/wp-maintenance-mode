@@ -183,6 +183,12 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 			<div id="poststuff">
 				
 				<form method="post" action="<?php echo $action; ?>">
+                <?php wp_nonce_field( 'wp-maintenance-mode-settings-nonce' );
+ 
+                /* Used to save closed meta boxes and their order */
+                wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
+                wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); 
+                ?>
 				
 				<div id="post-body" class="metabox-holder columns-2">
 				
