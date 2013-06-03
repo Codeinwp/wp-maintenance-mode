@@ -774,9 +774,9 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			$value = self::get_options();
 			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
-				$settings_link = network_admin_url() . 'plugins.php#wm-pluginconflink';
+				$settings_link = network_admin_url() . 'settings.php?page=' . FB_WM_TEXTDOMAIN;
 			} else {
-				$settings_link = admin_url() . 'plugins.php#wm-pluginconflink';
+				$settings_link = admin_url() . 'options-general.php?page=' . FB_WM_TEXTDOMAIN;  
 			}
 			
 			$scmsg = '';
@@ -796,15 +796,21 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			
 			// check options, if the user will see the notices for active maintenance mode
 			if ( ! isset($value['notice']) || 0 !== $value['notice'] ) {
+                
+                // add notification to the login screen
 				$message = __( 'Caution: Maintenance mode is <strong>active</strong>!', FB_WM_TEXTDOMAIN );
 				add_filter( 'login_message', create_function( '', "return '<div id=\"login_error\">$message</div>';" ) );
-				$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . $scmsg . ' <a href="plugins.php#wm-pluginconflink">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
-				
-				if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-					add_action( 'network_admin_notices', create_function( '', "echo '$admin_notices';" ) );
-				
-				add_action( 'admin_notices', create_function( '', "echo '$admin_notices';" ) );
-				
+                
+				$admin_notices = '<div id="message" class="error fade" style="background-color: #FFEBE8 !important;"><p>' . $message . $scmsg . ' <a href="' . $settings_link . '">' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '</a></p></div>';
+                
+                if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
+                    add_action( 'network_admin_notices', create_function( '', "echo '$admin_notices';" ) );
+                    add_action( 'admin_notices', create_function( '', "echo '$admin_notices';" ) );    
+                } else {
+                    add_action( 'admin_notices', create_function( '', "echo '$admin_notices';" ) );   
+                }
+
+				// DELETE THIS?
 				//$in_admin_header = '<a id="mm_in_admin_header" href="' . $settings_link . '" title="' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '">' . $message . '</a>';
 				//add_action( 'in_admin_header', create_function( '', "echo '$in_admin_header';" ) );
 				/**
@@ -812,7 +818,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				// @link http://core.trac.wordpress.org/ticket/14126
 				$in_admin_header = '<a class="privacy-on-link" href="plugins.php#wm-pluginconflink" title="' . __( 'Deactivate or change Settings', FB_WM_TEXTDOMAIN ) . '">' . $message . '</a>';
 				add_action( 'in_admin_site_heading', create_function( '', "echo '$in_admin_header';" ) );
-				*/
+				*/       
 			}
 			
 			add_action( 'wm_head', array( $this, 'add_theme' ) );
@@ -1107,9 +1113,9 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		public function add_admin_bar_alert() {
 			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
-				$settings_link = network_admin_url() . 'plugins.php#wm-pluginconflink';
+				$settings_link = network_admin_url() . 'settings.php?page=' . FB_WM_TEXTDOMAIN;
 			else
-				$settings_link = admin_url() . 'plugins.php#wm-pluginconflink';
+				$settings_link = admin_url() . 'options-general.php?page=' . FB_WM_TEXTDOMAIN;
 			
 			$GLOBALS['wp_admin_bar'] -> add_menu( 
 				array( 

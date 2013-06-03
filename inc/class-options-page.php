@@ -125,7 +125,7 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 	public function plugin_action_links( $links, $file ) {
 		
 		if ( FB_WM_BASENAME == $file  )
-			$links[] = '<a href="options-general.php?page=' . plugin_basename( __FILE__ ) . '">' . __('Settings') . '</a>';
+			$links[] = '<a href="options-general.php?page=' . FB_WM_TEXTDOMAIN . '">' . __( 'Settings' ) . '</a>';
 		
 		return $links;
 	}
@@ -141,7 +141,7 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 	public function network_admin_plugin_action_links( $links, $file ) {
 		
 		if ( FB_WM_BASENAME == $file  )
-			$links[] = '<a href="settings.php?page=' . plugin_basename( __FILE__ ) . '">' . __( 'Settings' ) . '</a>';
+			$links[] = '<a href="settings.php?page=' . FB_WM_TEXTDOMAIN . '">' . __( 'Settings' ) . '</a>';
 		
 		return $links;
 	}
@@ -151,18 +151,18 @@ class WP_MaintenanceMode_Options_Page extends WPMaintenanceMode {
 		if ( is_multisite() && is_plugin_active_for_network( self::$plugin ) ) {
 			add_submenu_page(
 				'settings.php',
-				parent :: get_plugin_data( 'Name' ) . ' ' . __( 'Settings', FB_WM_TEXTDOMAIN ),
+				parent :: get_plugin_data( 'Name' ) . ' ' . __( 'Settings' ),
 				parent :: get_plugin_data( 'Name' ),
-				'manage_options',
-				plugin_basename(__FILE__),
+				'manage_network',
+				FB_WM_TEXTDOMAIN,
 				array( $this, 'get_settings_page' )
 			);
 		} else {
 			add_options_page(
-				parent :: get_plugin_data( 'Name' ) . ' ' . __( 'Settings', FB_WM_TEXTDOMAIN ),
+				parent :: get_plugin_data( 'Name' ) . ' ' . __( 'Settings' ),
 				parent :: get_plugin_data( 'Name' ),
 				'manage_options',
-				plugin_basename(__FILE__),
+				FB_WM_TEXTDOMAIN,
 				array( $this, 'get_settings_page' )
 			);
 			add_action( 'contextual_help', array( $this, 'contextual_help' ), 10, 3 );
