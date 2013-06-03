@@ -124,7 +124,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			//add_action( 'admin_init', array( $this, 'admin_init') );
 			add_action( 'admin_menu', array( $this, 'redirect' ) );
 			
-			add_action( 'admin_init', array( 'WPMaintenanceMode_Settings', 'get_object' ) );
+			// add_action( 'admin_init', array( 'WPMaintenanceMode_Settings', 'get_object' ) );
 			
 			add_action( 'wp_ajax_wm_config-update', array( $this, 'save_config' ) );
 			add_action( 'wp_ajax_wm_config-active', array( $this, 'save_active' ) );
