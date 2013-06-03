@@ -1,0 +1,6 @@
+[submodule "js/jquery-countdown"]
+	path = js/jquery-countdown
+	url = git://github.com/wp-repository/wp-addin-countdown.git
+[submodule "js/jquery-ui-timepicker"]
+	path = js/jquery-ui-timepicker
+	url = git://github.com/wp-repository/wp-addin-jQuery-Timepicker-Addon.git
