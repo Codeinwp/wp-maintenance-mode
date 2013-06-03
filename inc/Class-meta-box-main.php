@@ -103,13 +103,13 @@ class WPMaintenanceMode_Main extends WPMaintenanceMode {
 						</th>
 						<td class="alternate">
 							<select name="wm_config-unit" id="wm_config-unit">
-								<option value="0" <?php selected( $value['unit'], 0 ); ?>><?php _e('second', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="1" <?php selected( $value['unit'], 1 ); ?>><?php _e('minute', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="2" <?php selected( $value['unit'], 2 ); ?>><?php _e('hour', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="3" <?php selected( $value['unit'], 3 ); ?>><?php _e('day', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="4" <?php selected( $value['unit'], 4 ); ?>><?php _e('week', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="5" <?php selected( $value['unit'], 5 ); ?>><?php _e('month', FB_WM_TEXTDOMAIN ); ?> </option>
-								<option value="6" <?php selected( $value['unit'], 6 ); ?>><?php _e('year', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="0" <?php selected( $value['unit'], 0 ); ?>><?php _e('second', FB_WM_TEXTDOMAIN ); ?></option>
+								<option value="1" <?php selected( $value['unit'], 1 ); ?>><?php _e('minute', FB_WM_TEXTDOMAIN ); ?></option>
+								<option value="2" <?php selected( $value['unit'], 2 ); ?>><?php _e('hour', FB_WM_TEXTDOMAIN ); ?></option>
+								<option value="3" <?php selected( $value['unit'], 3 ); ?>><?php _e('day', FB_WM_TEXTDOMAIN ); ?></option>
+								<option value="4" <?php selected( $value['unit'], 4 ); ?>><?php _e('week', FB_WM_TEXTDOMAIN ); ?></option>
+								<option value="5" <?php selected( $value['unit'], 5 ); ?>><?php _e('month', FB_WM_TEXTDOMAIN ); ?></option>
+								<option value="6" <?php selected( $value['unit'], 6 ); ?>><?php _e('year', FB_WM_TEXTDOMAIN ); ?></option>
 							</select>
 						</td>
 					</tr>
