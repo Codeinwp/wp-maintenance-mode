@@ -41,7 +41,7 @@
 	<meta name="keywords" content="<?php echo $keywords; ?>" />
 	<meta name="robots" content="<?php echo $content; ?>" />
 	<link rel="Shortcut Icon" type="image/x-icon" href="<?php echo get_option('home'); ?>/favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR ?>/css/jquery.countdown.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/' . FB_WM_BASEDIR ?>/js/jquery-countdown/jquery.countdown.css" media="all" />
 	
 	<?php
 	if ( ! defined('WP_CONTENT_URL') )
@@ -116,9 +116,9 @@
 	?>
 	
 		<script type="text/javascript" src="<?php echo site_url(); ?>/wp-includes/js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown.pack.js', __FILE__ ); ?>"></script>
-		<?php if ( @file_exists( FB_WM_BASE . '/js/jquery.countdown-' . $locale . '.js') ) { ?>
-		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery.countdown-' . $locale . '.js', __FILE__ ); ?>"></script>
+		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery-countdown/jquery.countdown.min.js', __FILE__ ); ?>"></script>
+		<?php if ( @file_exists( FB_WM_BASE . '/js/jquery-countdown/i18n/jquery.countdown-' . $locale . '.js') ) { ?>
+		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery-countdown/i18n/jquery.countdown-' . $locale . '.js', __FILE__ ); ?>"></script>
 		<?php } ?>
 		
 		<script type="text/javascript">

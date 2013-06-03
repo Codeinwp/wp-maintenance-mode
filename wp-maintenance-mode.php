@@ -322,9 +322,9 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			
 			wp_register_script(
 				'jquery-ui-timepicker-addon',
-				$this->get_plugins_url( 'js/jquery-ui-timepicker-addon.js', __FILE__ ),
+				$this->get_plugins_url( 'js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js', __FILE__ ),
 				array( 'jquery-ui-datepicker' ),
-				'02-22-2013',
+				'1.3',
 				TRUE
 			);
 			
@@ -332,7 +332,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				'wp-maintenance-mode',
 				$this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ),
 				array( 'jquery-ui-datepicker', 'jquery-ui-timepicker-addon' ),
-				'',
+				'1.8.8',
 				TRUE
 			);
 			wp_enqueue_script( 'jquery-ui-timepicker-addon' );
