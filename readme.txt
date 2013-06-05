@@ -233,13 +233,13 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to Michal Nusko for czech translation
 
 == Changelog ==
-= 1.8.8 (*/*/2013) =
+= 1.8.8 (06/05/2013) =
 * Fix path to localized flash content
 * Fix preview function
 * Add ukrainian translation
 * Add czech translation
 * Fix exclude function for IP
-* Securioty fix for save status via Ajax
+* Security fix for save status via Ajax
 
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page
