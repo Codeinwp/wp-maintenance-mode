@@ -11,7 +11,8 @@ jQuery(document).ready( function($){
 		var active_Val = $('#wm_config-active').val();
 		$.post( ajaxurl, {
 				"action" : "wm_config-active", 
-				"wm_config-active" : active_Val 
+				"wm_config-active" : active_Val,
+				"nonce" : wp_maintenance_mode_vars._nonce
 			}, 
 			
 			function(data) {
@@ -53,7 +54,8 @@ jQuery(document).ready( function($){
 		cd_year_Val       = $('#wm_config-cd-year').val();
 		url = '/wp-admin/admin-ajax.php';
 		$.post( ajaxurl , {
-				"action" : "wm_config-update", 
+				"action" : "wm_config-update",
+				"nonce" : wp_maintenance_mode_vars._nonce,
 				"wm_config-time" : time_Val, 
 				"wm_config-unit" : unit_Val, 
 				"wm_config-link" : link_Val, 

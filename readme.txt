@@ -8,7 +8,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 3.0
 Tested up to: 3.6-beta3
-Stable tag: 1.8.7
+Stable tag: 1.8.8
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
@@ -238,6 +238,8 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Fix preview function
 * Add ukrainian translation
 * Add czech translation
+* Fix exclude function for IP
+* Securioty fix for save status via Ajax
 
 = 1.8.7 (04/07/2013) =
 * Add RTL support for splash page

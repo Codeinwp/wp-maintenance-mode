@@ -9,7 +9,7 @@
  * Author URI:  http://bueltge.de/
  * Donate URI:  http://bueltge.de/wunschliste/
  * Version:     1.8.7
- * Last change: 04/08/2013
+ * Last change: 06/05/2013
  * License:     GPLv3
  * 
  * 
@@ -287,6 +287,15 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			);
 			wp_enqueue_script( 'jquery-ui-timepicker-addon' );
 			wp_enqueue_script( 'wp-maintenance-mode' );
+			// for nonce check on JS
+			wp_localize_script(
+				'wp-maintenance-mode',
+				'wp_maintenance_mode_vars', 
+				array(
+					'ajaxurl'                   => admin_url( 'admin-ajax.php' ),
+					'_nonce' => wp_create_nonce( 'wp-maintenance-mode-nonce' )
+				)
+			);
 			
 			// translations for datepicker
 			if ( ! empty( $i18n ) && 
@@ -362,10 +371,20 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			$old_check = get_option( 'wartungsmodus' );
 			if ($old_check)
 				delete_option( 'wartungsmodus' );
+			
+			exit();
 		}
 		
 		
 		public function save_active() {
+			
+			//check_ajax_referer( 'wm_config-update', 'wp-maintenance-mode-nonce' );
+			$nonce = $_POST['nonce'];
+			if ( ! wp_verify_nonce( $nonce, 'wp-maintenance-mode-nonce' ) )
+				wp_die( __( 'You are not authorised to perform this operation.' ) );
+			
+			if ( ! current_user_can( 'manage_options' ) )
+				wp_die( __( 'You are not authorised to perform this operation.' ) );
 			
 			$this->data      = self::get_options();
 			$this->datamsqld = self::get_msqld_option();
@@ -382,10 +401,20 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			}
 			
 			die( __( 'Updated', FB_WM_TEXTDOMAIN ) );
+			
+			exit();
 		}
 		
 		
 		public function save_config() {
+			
+			//check_ajax_referer( 'wm_config-update', 'wp-maintenance-mode-nonce' );
+			$nonce = $_POST['nonce'];
+			if ( ! wp_verify_nonce( $nonce, 'wp-maintenance-mode-nonce' ) )
+				wp_die( __( 'You are not authorised to perform this operation.' ) );
+			
+			if ( ! current_user_can( 'manage_options' ) )
+				wp_die( __( 'You are not authorised to perform this operation.' ) );
 			
 			$this->data = self::get_options();
 			
@@ -524,10 +553,10 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			foreach ( (array) $value['exclude'] as $exclude ) {
 				// check for IP
-				if ( strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
+				if ( $exclude && isset( $_SERVER['REMOTE_ADDR'] ) && strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
 					return TRUE;
 				
-				if ( $exclude && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
+				if ( $exclude && isset( $_SERVER['REQUEST_URI'] ) && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
 					return TRUE;
 			}
 			
