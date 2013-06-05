@@ -553,7 +553,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			foreach ( (array) $value['exclude'] as $exclude ) {
 				// check for IP
-				if ( $exclude && isset( $_SERVER['REMOTE_ADDR'] ) && strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
+				if ( $exclude && ! empty( $_SERVER['REMOTE_ADDR'] ) && strstr( $_SERVER['REMOTE_ADDR'], $exclude ) )
 					return TRUE;
 				
 				if ( $exclude && isset( $_SERVER['REQUEST_URI'] ) && strstr( $_SERVER['REQUEST_URI'], $exclude ) )
