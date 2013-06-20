@@ -74,7 +74,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		 */
 		public $crawlers = array();
 		
-		function WPMaintenanceMode() {
+		function __construct() {
 			
 			$this->data      = array();
 			$this->datamsqld = FALSE;
@@ -152,8 +152,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 		protected function load_classes() {
 			
 			// load all files with the pattern *.php from the directory inc
-			foreach( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $class )
+			foreach( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $class ) {
 				require_once $class;
+			}
 		}
 		
 		/**
@@ -342,6 +343,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				'radio'      => 0, 
 				'time'       => 60, 
 				'link'       => 1, 
+				'support'    => 1,
 				'admin_link' => 1,
 				'theme'      => 1, 
 				'role'       => 'administrator', 
@@ -423,6 +425,9 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 			
 			if ( isset($_POST['wm_config-link']) )
 				$this->data['link'] = (int) $_POST['wm_config-link'];
+			
+			if ( isset($_POST['wm_config-support']) )
+				$this->data['support'] = (int) $_POST['wm_config-support'];
 			
 			if ( isset($_POST['wm_config-admin_link']) )
 				$this->data['admin_link'] = (int) $_POST['wm_config-admin_link'];

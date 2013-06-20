@@ -32,6 +32,7 @@ jQuery(document).ready( function($){
 		
 		time_Val          = $('#wm_config-time').val();
 		link_Val          = $('#wm_config-link').val();
+		support_Val       = $('#wm_config-support').val();
 		admin_link_Val    = $('#wm_config-admin_link').val();
 		rewrite_Val       = $('#wm_config-rewrite').val();
 		notice_Val        = $('#wm_config-notice').val();
@@ -59,6 +60,7 @@ jQuery(document).ready( function($){
 				"wm_config-time" : time_Val, 
 				"wm_config-unit" : unit_Val, 
 				"wm_config-link" : link_Val, 
+				"wm_config-support" : support_Val, 
 				"wm_config-admin_link" : admin_link_Val,
 				"wm_config-rewrite" : rewrite_Val,
 				"wm_config-notice" : notice_Val, 

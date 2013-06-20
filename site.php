@@ -3,9 +3,11 @@
 <head>
 	<?php
 	if ( ! isset($value) ) {
-		//$WPMaintenanceMode = new WPMaintenanceMode();
+		require_once( 'wp-maintenance-mode.php' );
 		$value      = WPMaintenanceMode::get_options();
 		$unitvalues = WPMaintenanceMode::case_unit( $value['unit'] );
+		WPMaintenanceMode::get_instance();
+		
 	}
 	
 	$author = 'WP Maintenance Mode: Frank Bueltge, http://bueltge.de';
@@ -23,13 +25,16 @@
 		$content = 'index, follow';
 	}
 	
-	if ( isset($value['title']) && ($value['title'] != '') )
+	if ( isset($value['title']) )
 		$title = stripslashes_deep( $value['title'] );
 	else
 		$title = get_bloginfo( 'name' ) . ' - ' . __( 'Maintenance Mode', FB_WM_TEXTDOMAIN );
+	
+	if ( ! empty( $title ) )
+		$title = '<title>' . $title . '</title>';
 	?>
 	
-	<title><?php echo apply_filters( 'wm_title', $title ); ?></title>
+	<?php echo apply_filters( 'wm_title', $title ); ?>
 	
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 	<meta name="author" content="<?php echo $author; ?>" />
@@ -58,16 +63,22 @@
 	wm_head();
 	
 	// header string
-	if ( isset( $value['header'] ) && ( $value['header'] != '' ) )
+	if ( isset( $value['header'] ) )
 		$header = stripslashes_deep( $value['header'] );
 	else 
 		$header = get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' );
 	
+	if ( ! empty( $header ) )
+		$header = '<p>' . $header . '</p>';
+	
 	// heading string
-	if ( isset( $value['heading'] ) && ( $value['heading'] != '' ) ) 
+	if ( isset( $value['heading'] ) )
 		$heading = stripslashes_deep( $value['heading'] );
 	else
 		$heading = __( 'Maintenance Mode', FB_WM_TEXTDOMAIN );
+	
+	if ( ! empty( $heading ) )
+		$heading = '<h1>' . $heading . '</h1>';
 	?>
 	
 </head>
@@ -75,12 +86,12 @@
 <body>
 	
 	<div id="header">
-		<p><?php echo apply_filters( 'wm_header', $header ); ?></p>
+		<?php echo apply_filters( 'wm_header', $header ); ?>
 	</div>
 
 	<div id="content">
 		
-		<h1><?php echo apply_filters( 'wm_heading', $heading ); ?></h1>
+		<?php echo apply_filters( 'wm_heading', $heading ); ?>
 		
 		<?php wm_content();
 		if ( isset( $value['admin_link'] ) && 1 === $value['admin_link'] ) {

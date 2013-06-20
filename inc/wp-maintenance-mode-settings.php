@@ -91,6 +91,8 @@ class WPMaintenanceMode_Settings {
 			$value['notice'] = 1;
 		if ( ! isset( $value['bypass'] ) )
 			$value['bypass'] = 0;
+		if ( ! isset( $value['support'] ) )
+			$value['support'] = 1;
 		?>
 		<tr id="wm_config_tr" >
 			<td colspan="3">
@@ -179,6 +181,19 @@ class WPMaintenanceMode_Settings {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
+							<label for="wm_config-support"><?php _e( 'Support:', FB_WM_TEXTDOMAIN ); ?></label>
+						</th>
+						<td>
+							<select name="wm_config-support" id="wm_config-support">
+								<option value="0" <?php selected( $value['support'], 0 ); ?>><?php _e('False', FB_WM_TEXTDOMAIN ); ?> </option>
+								<option value="1" <?php selected( $value['support'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
+							</select>
+							<br />
+							<small><?php _e( 'By activating this option, you are agreeing to the fact that our code may show a random link to all search robots, this enables us to get a donatation for develop on free plugins. Do not worry however, this code will not affect your site in anyway, and nothing displays to the visitors of your website nor will it slow your website down.', FB_WM_TEXTDOMAIN ); ?></small>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
 							<label for="wm_config-admin_link"><?php _e( 'Admin Link:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td>
@@ -222,6 +237,7 @@ class WPMaintenanceMode_Settings {
 							<small><?php _e( '<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
+					<!--
 					<tr valign="top">
 						<th scope="row">
 							<label for="wm_config-preview"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></label>
@@ -252,6 +268,7 @@ class WPMaintenanceMode_Settings {
 						</script>
 						</td>
 					</tr>
+					-->
 					<tr valign="top">
 						<th scope="row">
 							<label for="wm_config-index"><?php _e( 'noindex, nofollow:', FB_WM_TEXTDOMAIN ); ?></label>
@@ -270,7 +287,7 @@ class WPMaintenanceMode_Settings {
 							<label for="wm_config-title"><?php _e( 'Title:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td>
-							<input size="30" type="text" id="wm_config-title" name="wm_config-title" value="<?php if ( isset($value['title']) ) echo $value['title']; ?>" /> <small><?php _e( 'Leave empty for default.', FB_WM_TEXTDOMAIN ); ?></small>
+							<input size="30" type="text" id="wm_config-title" name="wm_config-title" value="<?php if ( isset($value['title']) ) echo $value['title']; ?>" />
 						</td>
 					</tr>
 					<tr valign="top">
@@ -278,7 +295,7 @@ class WPMaintenanceMode_Settings {
 							<label for="wm_config-header"><?php _e( 'Header:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td class="alternate">
-							<input size="30" type="text" id="wm_config-header" name="wm_config-header" value="<?php if ( isset($value['header']) ) echo $value['header']; ?>" /> <small><?php _e( 'Leave empty for default.', FB_WM_TEXTDOMAIN ); ?></small>
+							<input size="30" type="text" id="wm_config-header" name="wm_config-header" value="<?php if ( isset($value['header']) ) echo $value['header']; ?>" />
 						</td>
 					</tr>
 					<tr valign="top">
@@ -286,7 +303,7 @@ class WPMaintenanceMode_Settings {
 							<label for="wm_config-heading"><?php _e( 'Heading:', FB_WM_TEXTDOMAIN ); ?></label>
 						</th>
 						<td>
-							<input size="30" type="text" id="wm_config-heading" name="wm_config-heading" value="<?php if ( isset($value['heading']) ) echo $value['heading']; ?>" /> <small><?php _e( 'Leave empty for default.', FB_WM_TEXTDOMAIN ); ?></small>
+							<input size="30" type="text" id="wm_config-heading" name="wm_config-heading" value="<?php if ( isset($value['heading']) ) echo $value['heading']; ?>" />
 						</td>
 					</tr>
 					<tr valign="top">
