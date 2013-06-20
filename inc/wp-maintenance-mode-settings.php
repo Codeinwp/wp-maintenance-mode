@@ -189,7 +189,7 @@ class WPMaintenanceMode_Settings {
 								<option value="1" <?php selected( $value['support'], 1 ); ?>><?php _e('True', FB_WM_TEXTDOMAIN ); ?> </option>
 							</select>
 							<br />
-							<small><?php _e( 'By activating this option, you are agreeing to the fact that our code may show a random link to all search robots, this enables us to get a donatation for develop on free plugins. Do not worry however, this code will not affect your site in anyway, and nothing displays to the visitors of your website nor will it slow your website down.', FB_WM_TEXTDOMAIN ); ?></small>
+							<small><?php _e( 'By activating this option, you are agreeing to the fact that our code may show a random link to all search robots, this enables us to get a donation for develop on free plugins. Do not worry however, this code will not affect your site in anyway, and nothing displays to the visitors of your website nor will it slow your website down.', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
 					<tr valign="top">
