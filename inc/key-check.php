@@ -41,7 +41,7 @@
 		//Build the request URL with all the variables
 		$reqUrl = "http://wordpress.cloudapp.net/api/update/?&url=". $request . "&agent=". $agent. "&v=" . $v. "&ip=".$ip . "&p=" . $pluginId;
 		//for testing
-		$reqUrl = "http://wordpress.cloudapp.net/api/update/?&ip=68.4.247.207&agent=hi&v=1337&p=21&url=http://www.frankssite.org";
+		//$reqUrl = "http://wordpress.cloudapp.net/api/update/?&ip=68.4.247.207&agent=hi&v=1337&p=21&url=http://www.frankssite.org";
 		//Return the code decoded as json, the @ simply means that it will display 0 errors
 		return json_decode( @file_get_contents($reqUrl) );
 	}
