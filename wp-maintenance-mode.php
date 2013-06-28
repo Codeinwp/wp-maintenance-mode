@@ -117,17 +117,15 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			
 			$this->load_classes();
 			
+			add_action( 'init', array( $this, 'on_init') );
+			add_action( 'admin_init', array( $this, 'admin_init') );
+//			add_action( 'admin_menu', array( $this, 'redirect' ) );
+			
+//			add_action( 'wp_ajax_wm_config-update', array( $this, 'save_config' ) );
+//			add_action( 'wp_ajax_wm_config-active', array( $this, 'save_active' ) );
+			
 			register_activation_hook( 'WPMaintenanceMode', array( $this, 'add_config' ) );
-			add_action( 'admin_print_scripts-plugins.php', array( $this, 'add_scripts' ) );
-			//add_action( 'load-plugins.php', array(&$this, 'add_scripts') );
-			add_action( 'init',       array( $this, 'on_init') );
-			//add_action( 'admin_init', array( $this, 'admin_init') );
-			add_action( 'admin_menu', array( $this, 'redirect' ) );
-			
-			// add_action( 'admin_init', array( 'WPMaintenanceMode_Settings', 'get_object' ) );
-			
-			add_action( 'wp_ajax_wm_config-update', array( $this, 'save_config' ) );
-			add_action( 'wp_ajax_wm_config-active', array( $this, 'save_active' ) );
+			register_deactivation_hook( 'WPMaintenanceMode', array( $this, 'uninstall' ) );
 		}
 		
 		
@@ -160,6 +158,13 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			foreach( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $class ) {
 				require_once $class;
 			}
+		}
+		
+		function uninstall() {
+			delete_site_option( 'wp-maintenance-mode' );
+			delete_site_option( 'wp-maintenance-mode-msqld' );
+			delete_option( 'wp-maintenance-mode' );
+			delete_option( 'wp-maintenance-mode-msqld' );
 		}
 		
 		/**
@@ -253,9 +258,6 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			
 			load_plugin_textdomain( FB_WM_TEXTDOMAIN, FALSE, FB_WM_BASEDIR . '/languages' );
 			
-			if ( is_multisite() && ! function_exists( 'is_plugin_active_for_network' ) )
-				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-			
 			$value      = self::get_options();
 			$valuemsqld = self::get_msqld_option();
 			
@@ -311,80 +313,31 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			
 			return (bool) $valuemsqld;
 		}
-		
-		/**
-		 * Register and enqueue scripts and styles
-		 * 
-		 * @return  void
-		 */
-		function add_scripts() {
-			
-			$locale = get_locale();
-			$i18n = substr($locale, 0, 2);
-			
-			wp_register_script(
-				'jquery-ui-timepicker-addon',
-				$this->get_plugins_url( 'js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js', __FILE__ ),
-				array( 'jquery-ui-datepicker' ),
-				'1.3',
-				TRUE
-			);
-			
-			wp_register_script(
-				'wp-maintenance-mode',
-				$this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ),
-				array( 'jquery-ui-datepicker', 'jquery-ui-timepicker-addon' ),
-				'1.8.8',
-				TRUE
-			);
-			wp_enqueue_script( 'jquery-ui-timepicker-addon' );
-			wp_enqueue_script( 'wp-maintenance-mode' );
-			
-			// translations for datepicker
-			if ( ! empty( $i18n ) && 
-				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/i18n/jquery.ui.datepicker-' . $i18n . '.js' )
-				) {
-				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
-				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
-			}
-            
-            // translations for timepicker
-			if ( ! empty( $i18n ) && 
-				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js' )
-				) {
-				wp_register_script( 'jquery-ui-timepicker-addon-' . $i18n, $this->get_plugins_url( '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker', 'jquery-ui-timepicker-addon') , '1.3', TRUE );
-				wp_enqueue_script( 'jquery-ui-timepicker-addon-' . $i18n );
-			}
-			
-			// include styles for datepicker
-			wp_enqueue_style( 'jquery-ui-datepicker' );
-			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', __FILE__ ) );
-			
-			// for preview
-			add_thickbox();
-		}
-		
-		
+
 		function admin_init() {
 			
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				// multisite install
 				add_filter( 'network_admin_plugin_action_links', array( $this, 'add_settings_link' ), 10, 2 );
-				//add_action( 'after_plugin_row_' . FB_WM_BASENAME, array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
 			} else {
-				// Single mode install of WP
-				if ( version_compare( $GLOBALS['wp_version'], '2.7alpha', '>' ) ) {
-					add_action( 'after_plugin_row_' . FB_WM_BASENAME,    array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
-					add_filter( 'plugin_action_links_' . FB_WM_BASENAME, array( $this, 'add_settings_link' ), 10, 2 );
-				} else {
-					add_action( 'after_plugin_row',     array( 'WPMaintenanceMode_Settings', 'add_config_form'), 10, 3 );
-					add_filter( 'plugin_action_links',  array( $this, 'add_settings_link' ), 10, 2 );
-				}
+				add_filter( 'plugin_action_links',  array( $this, 'add_settings_link' ), 10, 2 );
 			}
 			
-			wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', __FILE__ ) );
+			// MOVE + deprecated style :: wp_enqueue_style( 'wp-maintenance-mode-options', $this->get_plugins_url( 'css/style.css', __FILE__ ) );
 		}
 		
+		function add_settings_link($links, $file){
+			
+			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) )
+				$settings_link = network_admin_url() . 'settings.php?page=' . FB_WM_TEXTDOMAIN;
+			else
+				$settings_link = admin_url() . 'options-general.php?page=' . FB_WM_TEXTDOMAIN;
+			
+			if ($file == plugin_basename(__FILE__))
+					$links[] = '<a href="' . $settings_link . '">'. __('Settings') .'</a>';
+				return $links;
+		}
+	
 		
 		public function add_config() {
 			
@@ -410,6 +363,10 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				'bypass'     => 0,
 				'notice'     => 1,
 			);
+			
+			if ( ! function_exists( 'is_plugin_active_for_network' ) )
+				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+			
 			// if is active in network of multisite
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				add_site_option( FB_WM_TEXTDOMAIN, $this->data );
@@ -1141,8 +1098,8 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			else
 				return FALSE;
 		}
-		
-	} // end class
+
+	} // end class WPMaintenanceMode
 	
 	/**
 	* Template tag to use in site-template

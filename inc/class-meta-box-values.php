@@ -6,7 +6,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-class WP_Maintenance_Mode_About extends WPMaintenanceMode {
+class WP_Maintenance_Mode_Values extends WPMaintenanceMode {
 	
 	protected static $classobj = NULL;
 	
@@ -37,11 +37,17 @@ class WP_Maintenance_Mode_About extends WPMaintenanceMode {
 	 * @access public
 	 * @return void
 	 */
-	public function get_metabox_about() {
-		?>
-			ABOUT
+	public function get_metabox_values() {
+//		global $wp_roles;
+//        
+//        if ( is_multisite() && is_plugin_active_for_network( FB_WM_BASENAME ) )
+//			$value = get_site_option( FB_WM_TEXTDOMAIN );
+//		else
+//			$value = get_option( FB_WM_TEXTDOMAIN );
+		?>			
+		VALUES
 		<?php
 	}
 	
 }
-//$wp_maintenance_mode_about = WP_Maintenance_Mode_About::get_object();
+//$wp_maintenance_mode_values = WP_Maintenance_Mode_Values::get_object();

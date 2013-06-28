@@ -6,7 +6,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-class WP_Maintenance_Mode_About extends WPMaintenanceMode {
+class WP_Maintenance_Mode_Content extends WPMaintenanceMode {
 	
 	protected static $classobj = NULL;
 	
@@ -37,11 +37,11 @@ class WP_Maintenance_Mode_About extends WPMaintenanceMode {
 	 * @access public
 	 * @return void
 	 */
-	public function get_metabox_about() {
+	public function get_metabox_content() {
 		?>
-			ABOUT
+			CONTENT
 		<?php
 	}
 	
 }
-//$wp_maintenance_mode_about = WP_Maintenance_Mode_About::get_object();
+//$wp_maintenance_mode_content = WP_Maintenance_Mode_Content::get_object();

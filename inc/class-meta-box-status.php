@@ -6,7 +6,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 	exit();
 }
 
-class WP_Maintenance_Mode_About extends WPMaintenanceMode {
+class WP_Maintenance_Mode_Status extends WPMaintenanceMode {
 	
 	protected static $classobj = NULL;
 	
@@ -16,7 +16,7 @@ class WP_Maintenance_Mode_About extends WPMaintenanceMode {
 		
 		if ( ! is_admin() )
 			return NULL;
-		
+		$this->status  = parent::get_msqld_option();
 		// self::$option_string = FB_WM_TEXTDOMAIN;
 		
 		// add_action( self::$option_string . '_settings_page_sidebar', array( $this, 'get_about_plugin' ) );
@@ -37,11 +37,11 @@ class WP_Maintenance_Mode_About extends WPMaintenanceMode {
 	 * @access public
 	 * @return void
 	 */
-	public function get_metabox_about() {
+	public function get_metabox_status($data, $status) {
 		?>
-			ABOUT
+			STATUS
 		<?php
 	}
 	
 }
-//$wp_maintenance_mode_about = WP_Maintenance_Mode_About::get_object();
+//$wp_maintenance_mode_status = WP_Maintenance_Mode_Status::get_object();
