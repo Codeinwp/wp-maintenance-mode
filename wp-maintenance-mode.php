@@ -117,7 +117,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			
 			$this->load_classes();
 			
-			register_activation_hook( __FILE__, array( $this, 'add_config' ) );
+			register_activation_hook( 'WPMaintenanceMode', array( $this, 'add_config' ) );
 			add_action( 'admin_print_scripts-plugins.php', array( $this, 'add_scripts' ) );
 			//add_action( 'load-plugins.php', array(&$this, 'add_scripts') );
 			add_action( 'init',       array( $this, 'on_init') );
