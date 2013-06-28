@@ -23,12 +23,10 @@ class WP_Maintenance_Mode_Admin extends WPMaintenanceMode {
 		if ( ! function_exists( 'is_plugin_active_for_network' ) )
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		
-		add_action( 'admin_init', array( $this, 'add_scripts' ) );
+		add_action( 'current_screen', array( &$this, 'add_scripts') );
 		
 		if ( is_multisite() && is_plugin_active_for_network( FB_WM_BASENAME ) ) {
 			add_action( 'network_admin_menu',    array( $this, 'add_settings_page' ) );
-			// add settings link
-//			add_filter( 'network_admin_plugin_action_links', array( $this, 'network_admin_plugin_action_links' ), 10, 2 );
 			// save settings on network
 //			add_action( 'network_admin_edit_' . self::$option_string, array( $this, 'save_network_settings_page' ) );
 			// return message for update settings
@@ -36,8 +34,6 @@ class WP_Maintenance_Mode_Admin extends WPMaintenanceMode {
 			// add script on settings page
 		} else {
 			add_action( 'admin_menu',            array( $this, 'add_settings_page' ) );
-			// add settings link
-//			add_filter( 'plugin_action_links',   array( $this, 'plugin_action_links' ), 10, 2 );
 			// use settings API
 //			add_action( 'admin_init',            array( $this, 'register_settings' ) );
 		}
@@ -180,13 +176,13 @@ class WP_Maintenance_Mode_Admin extends WPMaintenanceMode {
 	 * @return  void
 	 */
 	function add_scripts( $screen ) {
-		if ( 'settings_page_wp-maintenance-mode-network' == $screen->id || 'settings_page_wp-maintenance-mode' == $screen->id ) { // 
+		// if ( 'settings_page_wp-maintenance-mode-network' == $screen->id || 'settings_page_wp-maintenance-mode' == $screen->id ) { 
 			$locale = get_locale();
 			$i18n = substr($locale, 0, 2);
 
 			wp_register_script(
 				'jquery-ui-timepicker-addon',
-				$this->get_plugins_url( 'js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js', __FILE__ ),
+				plugins_url( 'js/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js', FB_WM_BASEFILE),
 				array( 'jquery-ui-datepicker' ),
 				'1.3',
 				TRUE
@@ -194,7 +190,7 @@ class WP_Maintenance_Mode_Admin extends WPMaintenanceMode {
 
 			wp_register_script(
 				'wp-maintenance-mode',
-				$this->get_plugins_url( 'js/wp-maintenance-mode.js', __FILE__ ),
+				plugins_url( 'js/wp-maintenance-mode.js', FB_WM_BASEFILE),
 				array( 'jquery-ui-datepicker', 'jquery-ui-timepicker-addon' ),
 				'1.8.8',
 				TRUE
@@ -203,28 +199,41 @@ class WP_Maintenance_Mode_Admin extends WPMaintenanceMode {
 			wp_enqueue_script( 'wp-maintenance-mode' );
 
 			// translations for datepicker
-			if ( ! empty( $i18n ) && 
-				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/i18n/jquery.ui.datepicker-' . $i18n . '.js' )
-				) {
-				wp_register_script( 'jquery-ui-datepicker-' . $i18n, $this->get_plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker') , '', TRUE );
+			if ( ! empty( $i18n ) &&  @file_exists( plugin_dir_path( FB_WM_BASEFILE ) . '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js' ) ) {
+				wp_register_script(
+					'jquery-ui-datepicker-' . $i18n,
+					plugins_url( 'js/i18n/jquery.ui.datepicker-' . $i18n . '.js', FB_WM_BASEFILE),
+					array('jquery-ui-datepicker') ,
+					'',
+					TRUE
+				);
 				wp_enqueue_script( 'jquery-ui-datepicker-' . $i18n );
 			}
 
 			// translations for timepicker
-			if ( ! empty( $i18n ) && 
-				 @file_exists( WP_PLUGIN_DIR . '/' . dirname( plugin_basename(__FILE__) ) . '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js' )
-				) {
-				wp_register_script( 'jquery-ui-timepicker-addon-' . $i18n, $this->get_plugins_url( '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js', __FILE__ ), array('jquery-ui-datepicker', 'jquery-ui-timepicker-addon') , '1.3', TRUE );
+			if ( ! empty( $i18n ) && @file_exists( plugin_dir_path( FB_WM_BASEFILE ) . '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js' ) ) {
+				wp_register_script(
+					'jquery-ui-timepicker-addon-' . $i18n,
+					plugins_url( '/js/jquery-ui-timepicker/i18n/jquery-ui-timepicker-' . $i18n . '.js', FB_WM_BASEFILE),
+					array('jquery-ui-datepicker', 'jquery-ui-timepicker-addon') ,
+					'1.3',
+					TRUE
+				);
 				wp_enqueue_script( 'jquery-ui-timepicker-addon-' . $i18n );
 			}
 
 			// include styles for datepicker
-			wp_enqueue_style( 'jquery-ui-datepicker' );
-			wp_enqueue_style( 'jquery-ui-datepicker-overcast', $this->get_plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', __FILE__ ) );
+			wp_enqueue_style( 'jquery-ui-datepicker');
+			
+			wp_register_style( 
+				'jquery-ui-datepicker-overcast',
+				plugins_url( 'css/overcast/jquery-ui-1.8.21.custom.css', FB_WM_BASEFILE)
+			);
+			wp_enqueue_style( 'jquery-ui-datepicker-overcast');
 
 			// for preview
 			add_thickbox();
-		}
+		//}
 	}
 	
 	public function get_settings_page() {
@@ -232,8 +241,7 @@ class WP_Maintenance_Mode_Admin extends WPMaintenanceMode {
 		wp_enqueue_script('wp-lists');
 		wp_enqueue_script('postbox');
 
-		require( dirname( __FILE__ ) . '/views/settings-page.php' ); // CHECK for better solution
-		
+		require( dirname( __FILE__ ) . '/views/settings-page.php' ); // CHECK for better solution	
 	}
 		
 } // END WP_Maintenance_Mode_Admin
