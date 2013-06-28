@@ -33,7 +33,7 @@
  * 
  * Requirements:
  * ==============================================================================
- * This plugin requires WordPress >= 2.6 and tested with PHP >= 5.3, WP 3.5*
+ * This plugin requires WordPress >= 3.0 and tested with PHP >= 5.3, WP 3.5*
  */
 
 //avoid direct calls to this file, because now WP core and framework has been used
@@ -189,12 +189,13 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 		 * Retrieve the url to the plugins directory or to a specific file within that directory.
 		 * You can hardcode the plugin slug in $path or pass __FILE__ as a second argument to get the correct folder name.
 		 * 
-		 * function for WP < 2.8
+		 * function for WP < 2.8 
 		 * 
 		 * @param string $path Optional. Path relative to the plugins url.
 		 * @param string $plugin Optional. The plugin file that you want to be relative to - i.e. pass in __FILE__
 		 * @return string Plugins url link with optional path appended.
 		*/
+		// DEPRECATED because min WP version is 3.0
 		public function get_plugins_url( $path = '', $plugin = '' ) {
 			
 			if ( function_exists( 'plugins_url' ) )
@@ -924,7 +925,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				case 2:
 					$theme = 'dh.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  $this->get_plugins_url( '/styles/images/headline-' . $locale . '.jpg', __FILE__) . '\') no-repeat; }' . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' .  plugins_url( '/styles/images/headline-' . $locale . '.jpg', __FILE__) . '\') no-repeat; }' . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -955,7 +956,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				case 11:
 					$theme = 'af.css';
 					$style .= '	<style type="text/css">' . "\n" . '<!--';
-					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . $this->get_plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', __FILE__ ) . "\n";
+					$style .= '	#content h1 { text-indent: -99999px; background: url(\'' . plugins_url( 'styles/images/headline-af-' . $locale . '.jpg\') no-repeat; }', __FILE__ ) . "\n";
 					$style .= '	-->' . "\n";
 					$style .= '	</style>';
 					break;
@@ -964,7 +965,7 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 					break;
 			}
 			if ( ! empty($theme) )
-				$link  = '<link rel="stylesheet" href="' . $this->get_plugins_url( 'styles/', __FILE__ ) . $theme . '" type="text/css" media="all" />' ."\n";
+				$link  = '<link rel="stylesheet" href="' . plugins_url( 'styles/', __FILE__ ) . $theme . '" type="text/css" media="all" />' ."\n";
 			echo $link . $style;
 		}
 		
@@ -988,9 +989,9 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 				case 9:
 					$flash = FB_WM_BASE . '/styles/wartung-' . $locale . '.swf';
 					if ( file_exists($flash) ) {
-						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung-' . $locale . '.swf';
+						$flash = plugins_url( 'styles/', __FILE__ ) . 'wartung-' . $locale . '.swf';
 					} else {
-						$flash = $this->get_plugins_url( 'styles/', __FILE__ ) . 'wartung.swf';
+						$flash = plugins_url( 'styles/', __FILE__ ) . 'wartung.swf';
 					}
 					
 					$object = '

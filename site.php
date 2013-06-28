@@ -116,9 +116,9 @@
 	?>
 	
 		<script type="text/javascript" src="<?php echo site_url(); ?>/wp-includes/js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery-countdown/jquery.countdown.min.js', __FILE__ ); ?>"></script>
+		<script type="text/javascript" src="<?php echo plugins_url( 'js/jquery-countdown/jquery.countdown.min.js', __FILE__ ); ?>"></script>
 		<?php if ( @file_exists( FB_WM_BASE . '/js/jquery-countdown/i18n/jquery.countdown-' . $locale . '.js') ) { ?>
-		<script type="text/javascript" src="<?php echo WPMaintenanceMode::get_plugins_url( 'js/jquery-countdown/i18n/jquery.countdown-' . $locale . '.js', __FILE__ ); ?>"></script>
+		<script type="text/javascript" src="<?php echo plugins_url( 'js/jquery-countdown/i18n/jquery.countdown-' . $locale . '.js', __FILE__ ); ?>"></script>
 		<?php } ?>
 		
 		<script type="text/javascript">
