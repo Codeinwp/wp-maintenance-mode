@@ -282,6 +282,8 @@ if ( ! class_exists( 'WPMaintenanceMode' ) ) {
 			if ( is_multisite() && $blog_id )
 				return get_blog_option( $blog_id, FB_WM_TEXTDOMAIN );
 			
+			if ( ! function_exists( 'is_plugin_active_for_network' ) )
+				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 			// default
 			if ( is_multisite() && is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 				$values = get_site_option( FB_WM_TEXTDOMAIN );
