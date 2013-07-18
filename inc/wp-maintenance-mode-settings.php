@@ -86,13 +86,26 @@ class WPMaintenanceMode_Settings {
 		else
 			$value = get_option( FB_WM_TEXTDOMAIN );
 		
+		// check for non defaults
+		if ( ! isset( $value['radio'] ) )
+			$value['radio'] = 0;
+		if ( ! isset( $value['unit'] ) )
+			$value['unit'] = 1;
+		if ( ! isset( $value['link'] ) )
+			$value['link'] = 1;
+		if ( ! isset( $value['admin_link'] ) )
+			$value['admin_link'] = 1;
+		if ( ! isset( $value['theme'] ) )
+			$value['theme'] = 1;
+		if ( ! isset( $value['index'] ) )
+			$value['index'] = 0;
 		// check the additional settings
 		if ( ! isset( $value['notice'] ) )
 			$value['notice'] = 1;
 		if ( ! isset( $value['bypass'] ) )
 			$value['bypass'] = 0;
 		if ( ! isset( $value['support'] ) )
-			$value['support'] = 1;
+			$value['support'] = 0;
 		?>
 		<tr id="wm_config_tr" >
 			<td colspan="3">
@@ -237,7 +250,7 @@ class WPMaintenanceMode_Settings {
 							<small><?php _e( '<strong>Caution:</strong> Please don&acute;t copy the stylesheet in your plugin folder, it will be deleted on the next automatical update of the plugin!', FB_WM_TEXTDOMAIN ); ?></small>
 						</td>
 					</tr>
-					<!--
+					<?php /** comment, dont work ?>
 					<tr valign="top">
 						<th scope="row">
 							<label for="wm_config-preview"><?php _e( 'Preview', FB_WM_TEXTDOMAIN ); ?></label>
@@ -268,7 +281,7 @@ class WPMaintenanceMode_Settings {
 						</script>
 						</td>
 					</tr>
-					-->
+					<?php */ ?>
 					<tr valign="top">
 						<th scope="row">
 							<label for="wm_config-index"><?php _e( 'noindex, nofollow:', FB_WM_TEXTDOMAIN ); ?></label>

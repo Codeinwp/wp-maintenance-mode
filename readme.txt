@@ -7,8 +7,8 @@ Author URI: http://bueltge.de/
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4578111
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 3.0
-Tested up to: 3.6-beta3
-Stable tag: 1.8.9
+Tested up to: 3.6-RC1
+Stable tag: 1.8.10
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
 
@@ -233,6 +233,11 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to Michal Nusko for czech translation
 
 == Changelog ==
+= 1.8.10 (07/18/2013) =
+* Add check for urls, Performance topics
+* Change default setting of 'Support Link' to false
+* Fix network settings php notices
+
 = 1.8.9 (06/20/2013) =
 * Allow empty header, title, heading string
 * Small code changes
