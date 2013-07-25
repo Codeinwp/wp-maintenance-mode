@@ -75,7 +75,7 @@ class WPMaintenanceMode_Settings {
 	 * @param   $wm_context    Object (all, active, inactive)
 	 * @return  void
 	 */
-	public function add_config_form( $wm_pluginfile, $wm_plugindata, $wm_context ) {
+	public static function add_config_form( $wm_pluginfile, $wm_plugindata, $wm_context ) {
 		global $wp_roles;
 		
 		//if ( 0 < count($_POST['checked']) )
