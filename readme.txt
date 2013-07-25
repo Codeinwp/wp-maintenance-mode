@@ -233,6 +233,10 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to Michal Nusko for czech translation
 
 == Changelog ==
+= 1.8.11 (07/25/2013) =
+* Fixes for php notices in scrict mode
+* Alternative for check url, if curl is not installed
+
 = 1.8.10 (07/18/2013) =
 * Add check for urls, Performance topics
 * Change default setting of 'Support Link' to false
