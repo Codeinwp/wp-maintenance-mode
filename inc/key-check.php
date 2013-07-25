@@ -40,9 +40,19 @@
 		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) )
 			return FALSE;
 		
-		if ( ! function_exists( 'curl_init' ) )
-			return TRUE;
+		if ( ! function_exists( 'curl_init' ) && function_exists( 'get_headers' ) ) {
+				
+			$headers = get_headers( $url, 1 );
+			if ( $headers[0] == 'HTTP/1.1 200 OK' )
+				return TRUE;
+			else
+				return FALSE;
 			
+		} else if (  function_exists( 'curl_init' ) && ! function_exists( 'get_headers' ) ) {
+			
+			return FALSE;
+		}
+		
 		$handle = curl_init( urldecode( $url ) );
 		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 0.5 );
 		curl_setopt( $handle, CURLOPT_TIMEOUT, 1 );
