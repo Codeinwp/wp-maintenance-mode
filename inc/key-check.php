@@ -40,6 +40,9 @@
 		if ( ! filter_var( $url, FILTER_VALIDATE_URL ) )
 			return FALSE;
 		
+		if ( ! function_exists( 'curl_init' ) )
+			return TRUE;
+			
 		$handle = curl_init( urldecode( $url ) );
 		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 0.5 );
 		curl_setopt( $handle, CURLOPT_TIMEOUT, 1 );
