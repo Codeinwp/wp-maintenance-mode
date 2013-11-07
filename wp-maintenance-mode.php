@@ -831,15 +831,50 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 					&& ! $this->check_bypass()
 				 ) {
 				$rolestatus = 'norights';
-				
-				// helpful for header problems
-				// @see: http://www.arclab.com/products/webformbuilder/php-warning-cannot-modify-header-information-headers-already-sent.html 
-				
-				nocache_headers();
-				ob_start();
+
+
+
+
+
+
+
+
+/* ------------------------- Start TJ code ------------------------------------------- */       
+    $td = WPMaintenanceMode::check_datetime();
+    if ( isset($td[2]) && 0 !== $td[2] ) {
+        $locale = substr($locale, 0, 2);
+$tj_shutdown = gmdate('U', strtotime( $td[0][0] ));
+
+$tj_remaining = $tj_shutdown - gmdate('U');
+
+}
+else {
+
+$tj_remaining = "$backtime";
+
+}
+
+if ($tj_remaining <= 0) {
+$tj_remaining = 3600;
+}
+
+// Please notice the $tj_remaining variable in header Retry-After
+/* ------------------------- END TJ code ------------------------------------------- */         
+
+
+
+
+
+
+                // helpful for header problems
+                // @see: http://www.arclab.com/products/webformbuilder/php-warning-cannot-modify-header-information-headers-already-sent.html 
+
+                nocache_headers();
+                ob_start();
 header( "Content-type: text/html; charset=$charset" );
 header( "$protocol $status_code Service Unavailable", TRUE, $status_code );
-header( "Retry-After: $backtime" );
+header( "Retry-After: $tj_remaining" );
+
 				// Allow alternative splash page
 				if ( file_exists( WP_CONTENT_DIR . '/wp-maintenance-mode.php' ) )
 					include( WP_CONTENT_DIR . '/wp-maintenance-mode.php' );
