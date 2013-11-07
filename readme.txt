@@ -233,6 +233,9 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to Michal Nusko for czech translation
 
 == Changelog ==
+= 1.8.12 () =
+* Add establish Retry-After header content based on the date picker data, [see issue 37](https://github.com/bueltge/WP-Maintenance-Mode/issues/37)
+
 = 1.8.11 (07/25/2013) =
 * Fixes for php notices in scrict mode
 * Alternative for check url, if curl is not installed
