@@ -536,7 +536,7 @@ if ( ! class_exists('WPMaintenanceMode') ) {
 				return NULL;
 			
 			// check, is the maintenance mode active
-			if ( 0 === $value['active'] )
+			if ( ! isset( $value['active'] ) || 0 === $value['active'] )
 				return NULL;
 			
 			// check, Access to backend
