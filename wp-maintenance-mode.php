@@ -922,29 +922,59 @@ header( "Retry-After: $tj_remaining" );
 			?>
 			<div id="footer">
 				<p><a href="http://bueltge.de/"><?php _e( 'Plugin by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://bueltge.de/favicon.ico" alt="bueltge.de" width="16" height="16" /></a>
-				<?php if ( 2 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://davidhellmann.com/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://davidhellmann.com/favicon.ico" alt="davidhellmann.com" width="16" height="16" /></a>
-				<?php } elseif ( 3 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.mynicki.net"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.mynicki.net/favicon.ico" alt="mynicki.net" width="16" height="16" /></a>
-				<?php } elseif ( 4 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.lokalnetz.com"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.lokalnetz.com/images/favicon.ico" alt="lokalnetz.com" width="16" height="16" /></a>
-				<?php } elseif ( 5 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.distractedbysquirrels.com"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.distractedbysquirrels.com/favicon.ico" alt="distractedbysquirrels.com" width="16" height="16" /></a>
-				<?php } elseif ( 6 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://fv-web.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://fv-web.de/favicon.ico" alt="fv-web.de" width="16" height="16" /></a>
-				<?php } elseif ( 7 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://krautsuppe.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://krautsuppe.de/favicon.ico" alt="krautsuppe.de" width="16" height="16" /></a>
-				<?php } elseif ( 8 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.bugeyes.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.bugeyes.de/favicon.ico" alt="www.bugeyes.de" width="16" height="16" /></a>
-				<?php } elseif ( 9 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.cayou-media.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.cayou-media.de/favicon.ico" alt="www.cayou-media.de" width="16" height="16" /></a>
-				<?php } elseif ( 10 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://fabianletscher.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://fabianletscher.de/favicon.ico" alt="fabianletscher.de" width="16" height="16" /></a>
-				<?php } elseif ( 11 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.blogdrauf.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.blogdrauf.de/favicon.ico" alt="www.blogdrauf.de" width="16" height="16" /></a>
-				<?php } elseif ( 12 === $value['theme'] ) { ?>
-					&nbsp;<a href="http://www.elmastudio.de/"><?php _e( 'Design by:', FB_WM_TEXTDOMAIN ); ?> <img src="http://www.elmastudio.de/favicon.ico" alt="www.elmastudio.de" width="16" height="16" /></a>
-				<?php } ?>
+				<?php
+					switch( $value['theme'] ) {
+						case 2:
+							$url = 'davidhellmann.com';
+						break;
+						
+						case 3:
+							$url = 'www.mynicki.net';
+						break;
+						
+						case 4:
+							$url = 'www.lokalnetz.com';
+						break;
+						
+						case 5:
+							$url = 'www.distractedbysquirrels.com';
+						break;
+						
+						case 6:
+							$url = 'fv-web.de';
+						break;
+						
+						case 7:
+							$url = 'krautsuppe.de';
+						break;
+						
+						case 8:
+							$url = 'www.bugeyes.de';
+						break;
+						
+						case 9:
+							$url = 'www.cayou-media.de';
+						break;
+						
+						case 10:
+							$url = 'fabianletscher.de';
+						break;
+						
+						case 11:
+							$url = 'www.blogdrauf.de';
+						break;
+						
+						case 12:
+							$url = 'www.elmastudio.de';
+						break;
+						
+						default: 
+							$url = 'bueltge.de';
+						break;
+					}
+					
+					echo '&nbsp;<a href="//' . $url . '/">' . __( 'Design by:', FB_WM_TEXTDOMAIN ) . ' <img src="//' . $url . '/favicon.ico" alt="' . $url . '" width="16" height="16" /></a>';
+				?>
 				</p>
 			</div>
 			<?php
