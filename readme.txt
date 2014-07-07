@@ -1,13 +1,13 @@
 ﻿=== WP Maintenance Mode ===
-Contributors: Bueltge, inpsyde
+Contributors: designmodo
 Plugin Name: WP Maintenance Mode
-Plugin URI: http://bueltge.de/wp-wartungsmodus-plugin/101/
-Author: Frank B&uuml;ltge
-Author URI: http://bueltge.de/
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4578111
+Plugin URI: 
+Author: designmodo.com
+Author URI: http://designmodo.com/
+Donate link: 
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite
 Requires at least: 3.0
-Tested up to: 3.6-RC2
+Tested up to: 3.9.1
 Stable tag: 1.8.11
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.
@@ -57,11 +57,7 @@ More hooks for other data, if the settings possibilities is not enough.
 1. PHP 5
 
 = Bugs, technical hints or contribute =
-Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/bueltge/WP-Maintenance-Mode).
-
-**Made by [Inpsyde](http://inpsyde.com) &middot; We love WordPress**
-
-Have a look at the premium plugins in our [market](http://marketpress.com).
+Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/Designmodocom/WP-Maintenance-Mode).
 
 = Work with MySQLDumper =
 This option is designed for users, who backups their database with "MySQLDumper".
@@ -108,9 +104,6 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 = Cache Plugin Support =
 The plugin flush the cache on activate the maintenance mode form the plugins W3 Total Cache and WP Super Cache
 
-= Interested in WordPress tips and tricks =
-You may also be interested in WordPress tips and tricks at [WP Engineer](http://wpengineer.com/) or for german people [bueltge.de](http://bueltge.de/) 
-
 == Installation ==
 1. Unpack the download-package
 1. Upload all files to the `/wp-content/plugins/` directory, include folders
@@ -118,8 +111,6 @@ You may also be interested in WordPress tips and tricks at [WP Engineer](http://
 1. Click the `settings`-link for change time, link of authors, text and design
 1. Activate under the settings and your blog is in maintenance mode
 1. Please check the **Exclude** option in settings for parts of your install; maybe an custom login-adress etc.
-
-See on [the official website](http://bueltge.de/wp-wartungsmodus-plugin/101/ "WP Maintenance Mode").
 
 == Screenshots ==
 1. Aktiv Maintenance-Mode with Theme "The Truck" and german language
@@ -137,12 +128,6 @@ See on [the official website](http://bueltge.de/wp-wartungsmodus-plugin/101/ "WP
 1. Aktiv Maintenance-Mode with Theme "Chemistry"
 
 == Frequently Asked Questions ==
-= Where can I get more information? =
-Please visit [the official website](http://bueltge.de/wp-wartungsmodus-plugin/101/ "WP Maintenance Mode") for the latest information on this plugin.
-
-= I love this plugin! How can I show the developer how much I appreciate his work? =
-Please visit [the official website](http://bueltge.de/wp-wartungsmodus-plugin/101/ "WP Maintenance Mode") and let him know your care or see the [wishlist](http://bueltge.de/wunschliste/ "Wishlist") of the author.
-
 = Frequently Asked Questions for MySQLDumper =
 Please visit [the official website](http://www.mysqldumper.de/) for general informations about MySQLDumper.
 
@@ -233,8 +218,8 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
 * Thanks to Michal Nusko for czech translation
 
 == Changelog ==
-= 1.8.12 () =
-* Add establish Retry-After header content based on the date picker data, [see issue 37](https://github.com/bueltge/WP-Maintenance-Mode/issues/37)
+= 07/07/2014 =
+* Switch to new owner, contributor
 
 = 1.8.11 (07/25/2013) =
 * Fixes for php notices in scrict mode
@@ -293,7 +278,7 @@ Please visit [Automatisches Backup der WordPress-Datenbank](http://www.beedy.de/
  
 = 1.8.3 =
 * Fix for the forgotten update of JS-files; slow SVN :(
-* Minor Fixes, see (Bugtracker)[http://bueltge.de/bt/view.php?id=2]
+* Minor Fixes
 
 = 1.8.2 =
 * Add different access for Frontend and Backend

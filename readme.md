@@ -45,15 +45,10 @@ More hooks for other data, if the settings possibilities is not enough.
 
 ## Other Notes
 ### License
-Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin, you can thank me and leave a [small donation](http://bueltge.de/wunschliste/ "Wishliste and Donate") for the time I've spent writing and supporting this plugin. And I really don't want to know how many hours of my life this plugin has already eaten ;)
+Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. 
 
 ### Translations
 The plugin comes with various translations, please refer to the [WordPress Codex](http://codex.wordpress.org/Installing_WordPress_in_Your_Language "Installing WordPress in Your Language") for more information about activating the translation. If you want to help to translate the plugin to your language, please have a look at the .pot file which contains all defintions and may be used with a [gettext](http://www.gnu.org/software/gettext/) editor like [Poedit](http://www.poedit.net/) (Linux, Mac OS X, Windows).
 
 ### Contact & Feedback
-The plugin is designed and developed by me ([Frank Bültge](http://bueltge.de))
-
 Please let me know if you like the plugin or you hate it or whatever ... Please fork it, add an issue for ideas and bugs.
-
-### Disclaimer
-I'm German and my English might be gruesome here and there. So please be patient with me and let me know of typos or grammatical farts. Thanks
