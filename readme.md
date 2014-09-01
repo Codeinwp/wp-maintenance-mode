@@ -27,7 +27,7 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 
 **How to use plugin filters**
 
-1. `wpmm_backtime` - can be used to change the backtime from page header
+1. `wpmm_backtime` - can be used to change the backtime from page `Retry-After` header
 
 ```php
 function new_backtime() {
