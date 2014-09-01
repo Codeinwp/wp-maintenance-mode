@@ -1,0 +1,689 @@
+<?php
+if (!class_exists('WP_Maintenance_Mode')) {
+
+    class WP_Maintenance_Mode {
+
+        const VERSION = '2.0.0';
+
+        protected $plugin_slug = 'wp-maintenance-mode';
+        protected $plugin_settings;
+        protected static $instance = null;
+
+        private function __construct() {
+            $this->plugin_settings = get_option('wpmm_settings');
+
+            // Load plugin text domain
+            add_action('init', array($this, 'load_plugin_textdomain'));
+
+            // Activate plugin when new blog is added
+            add_action('wpmu_new_blog', array($this, 'activate_new_site'));
+
+            if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
+                // INIT
+                add_action('init', array($this, 'init'));
+
+                // Add ajax methods
+                add_action('wp_ajax_nopriv_wpmm_add_subscriber', array($this, 'add_subscriber'));
+                add_action('wp_ajax_wpmm_add_subscriber', array($this, 'add_subscriber'));
+                add_action('wp_ajax_nopriv_wpmm_send_contact', array($this, 'send_contact'));
+                add_action('wp_ajax_wpmm_send_contact', array($this, 'send_contact'));
+
+                // Redirect 
+                add_action('admin_init', array($this, 'redirect'));
+            }
+        }
+
+        public static function get_instance() {
+            if (null == self::$instance) {
+                self::$instance = new self;
+            }
+
+            return self::$instance;
+        }
+
+        /**
+         * Return plugin slug
+         * 
+         * @since 2.0.0
+         * @return string
+         */
+        public function get_plugin_slug() {
+            return $this->plugin_slug;
+        }
+
+        /**
+         * Return plugin settings
+         * 
+         * @since 2.0.0
+         * @return array
+         */
+        public function get_plugin_settings() {
+            return $this->plugin_settings;
+        }
+
+        /**
+         * Return plugin default settings
+         * 
+         * @since 2.0.0
+         * @return array
+         */
+        public function default_settings() {
+            return array(
+                'general' => array(
+                    'status' => 0,
+                    'status_date' => '',
+                    'bypass_bots' => 0,
+                    'backend_role' => 'administrator',
+                    'frontend_role' => 'administrator',
+                    'meta_robots' => 0,
+                    'redirection' => '',
+                    'exclude' => array(
+                        0 => 'wp-cron',
+                        1 => 'feed',
+                        2 => 'wp-login',
+                        3 => 'login',
+                        4 => 'wp-admin',
+                        5 => 'wp-admin/admin-ajax.php'
+                    ),
+                    'notice' => 1,
+                    'author_link' => 1
+                ),
+                'design' => array(
+                    'title' => __('Maintenance mode', $this->plugin_slug),
+                    'heading' => __('Maintenance mode', $this->plugin_slug),
+                    'heading_color' => '',
+                    'text' => __('<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br />Thank you for your understanding.</p>', $this->plugin_slug),
+                    'text_color' => '',
+                    'bg_type' => 'color',
+                    'bg_color' => '',
+                    'bg_custom' => '',
+                    'bg_predefined' => 'bg1.jpg',
+                    'custom_css' => array()
+                ),
+                'modules' => array(
+                    'countdown_status' => 0,
+                    'countdown_start' => date('Y-m-d H:i:s'),
+                    'countdown_details' => array(
+                        'days' => 0,
+                        'hours' => 1,
+                        'minutes' => 0
+                    ),
+                    'countdown_color' => '',
+                    'subscribe_status' => 0,
+                    'subscribe_text' => __('Notify me when it\'s ready', $this->plugin_slug),
+                    'subscribe_text_color' => '',
+                    'social_status' => 0,
+                    'social_github' => '',
+                    'social_dribbble' => '',
+                    'social_twitter' => '',
+                    'social_facebook' => '',
+                    'social_pinterest' => '',
+                    'social_google+' => '',
+                    'contact_status' => 0,
+                    'contact_email' => get_option('admin_email') ? get_option('admin_email') : '',
+                    'contact_effects' => 'move_top|move_bottom',
+                    'custom_css' => array()
+                )
+            );
+        }
+
+        /**
+         * What to do when the plugin is activated
+         *
+         * @since 2.0.0
+         * @param boolean $network_wide
+         */
+        public static function activate($network_wide) {
+            if (function_exists('is_multisite') && is_multisite()) {
+                if ($network_wide) {
+                    // Get all blog ids
+                    $blog_ids = self::get_blog_ids();
+                    foreach ($blog_ids as $blog_id) {
+                        switch_to_blog($blog_id);
+                        self::single_activate($network_wide);
+                        restore_current_blog();
+                    }
+
+                    // delete old options
+                    delete_site_option('wp-maintenance-mode');
+                    delete_site_option('wp-maintenance-mode-msqld');
+                } else {
+                    self::single_activate();
+
+                    // delete old options
+                    delete_option('wp-maintenance-mode');
+                    delete_option('wp-maintenance-mode-msqld');
+                }
+            } else {
+                self::single_activate();
+
+                // delete old options
+                delete_option('wp-maintenance-mode');
+                delete_option('wp-maintenance-mode-msqld');
+            }
+        }
+
+        /**
+         * What to do when the plugin is deactivated
+         *
+         * @since 2.0.0
+         * @param boolean $network_wide
+         */
+        public static function deactivate($network_wide) {
+            if (function_exists('is_multisite') && is_multisite()) {
+                if ($network_wide) {
+                    // Get all blog ids
+                    $blog_ids = self::get_blog_ids();
+                    foreach ($blog_ids as $blog_id) {
+                        switch_to_blog($blog_id);
+                        self::single_deactivate();
+                        restore_current_blog();
+                    }
+                } else {
+                    self::single_deactivate();
+                }
+            } else {
+                self::single_deactivate();
+            }
+        }
+
+        /**
+         * What to do when a new site is activated (multisite env)
+         *
+         * @since 2.0.0
+         * @param int $blog_id.
+         */
+        public function activate_new_site($blog_id) {
+            if (1 !== did_action('wpmu_new_blog')) {
+                return;
+            }
+
+            switch_to_blog($blog_id);
+            self::single_activate();
+            restore_current_blog();
+        }
+
+        /**
+         * What to do on single activate
+         * 
+         * @since 2.0.0
+         * @global object $wpdb
+         * @param boolean $network_wide
+         */
+        public static function single_activate($network_wide = false) {
+            global $wpdb;
+
+            // create wpmm_subscribers table
+            $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}wpmm_subscribers (
+                    `id_subscriber` bigint(20) NOT NULL AUTO_INCREMENT,
+                    `email` varchar(50) NOT NULL,
+                    `insert_date` datetime NOT NULL,
+                    PRIMARY KEY (`id_subscriber`)
+                  ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            dbDelta($sql);
+
+            // set notice if the plugin was installed before & set default settings
+            $default_options = self::get_instance()->default_settings();
+            if (is_multisite() && $network_wide) {
+                $old_options = get_site_option('wp-maintenance-mode');
+            } else {
+                $old_options = get_option('wp-maintenance-mode');
+            }
+
+            if (!empty($old_options)) {
+                add_option('wpmm_notice', array(
+                    'class' => 'updated',
+                    'msg' => sprintf(__('WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', self::get_instance()->plugin_slug), admin_url('options-general.php?page=' . self::get_instance()->plugin_slug))
+                ));
+
+                // import old options
+                if (isset($old_options['active'])) {
+                    $default_options['general']['status'] = $old_options['active'];
+                }
+                if (isset($old_options['bypass'])) {
+                    $default_options['general']['bypass_bots'] = $old_options['bypass'];
+                }
+
+                if (!empty($old_options['role'][0])) {
+                    $default_options['general']['backend_role'] = $old_options['role'][0];
+                }
+
+                if (!empty($old_options['role_frontend'][0])) {
+                    $default_options['general']['frontend_role'] = $old_options['role_frontend'][0];
+                }
+
+                if (isset($old_options['index'])) {
+                    $default_options['general']['meta_robots'] = $old_options['index'];
+                }
+
+                if (!empty($old_options['rewrite'])) {
+                    $default_options['general']['redirection'] = $old_options['rewrite'];
+                }
+
+                if (!empty($old_options['exclude'][0])) {
+                    $default_options['general']['exclude'] = array_unique(array_merge($default_options['general']['exclude'], $old_options['exclude']));
+                }
+
+                if (isset($old_options['notice'])) {
+                    $default_options['general']['notice'] = $old_options['notice'];
+                }
+
+                if (isset($old_options['link'])) {
+                    $default_options['general']['author_link'] = $old_options['link'];
+                }
+
+                if (!empty($old_options['title'])) {
+                    $default_options['design']['title'] = $old_options['title'];
+                }
+
+                if (!empty($old_options['heading'])) {
+                    $default_options['design']['heading'] = $old_options['heading'];
+                }
+
+                if (!empty($old_options['text'])) {
+                    $default_options['design']['text'] = $old_options['text'];
+                }
+
+                if (isset($old_options['radio'])) {
+                    $default_options['modules']['countdown_status'] = $old_options['radio'];
+                }
+
+                if (!empty($old_options['date'])) {
+                    $default_options['modules']['countdown_start'] = $old_options['date'];
+                }
+
+                if (isset($old_options['time']) && isset($old_options['unit'])) {
+                    switch ($old_options['unit']) {
+                        case 0: // seconds
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => 0,
+                                'hours' => 0,
+                                'minutes' => floor($old_options['time'] / 60)
+                            );
+                            break;
+                        case 1: // minutes
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => 0,
+                                'hours' => 0,
+                                'minutes' => $old_options['time']
+                            );
+                            break;
+                        case 2: // hours
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => 0,
+                                'hours' => $old_options['time'],
+                                'minutes' => 0
+                            );
+                        case 3: // days
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => $old_options['time'],
+                                'hours' => 0,
+                                'minutes' => 0
+                            );
+                            break;
+                        case 4: // weeks
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => $old_options['time'] * 7,
+                                'hours' => 0,
+                                'minutes' => 0
+                            );
+                            break;
+                        case 5: // months
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => $old_options['time'] * 30,
+                                'hours' => 0,
+                                'minutes' => 0
+                            );
+                            break;
+                        case 6: // years
+                            $default_options['modules']['countdown_details'] = array(
+                                'days' => $old_options['time'] * 365,
+                                'hours' => 0,
+                                'minutes' => 0
+                            );
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            // set default settings
+            add_option('wpmm_settings', $default_options);
+        }
+
+        /**
+         * What to do on single deactivate
+         * 
+         * @since 2.0.0
+         */
+        public static function single_deactivate() {
+            // nothing
+        }
+
+        /**
+         * Get all blog ids of blogs in the current network
+         *
+         * @since 2.0.0
+         * @return array / false
+         */
+        private static function get_blog_ids() {
+            global $wpdb;
+
+            return $wpdb->get_col($wpdb->prepare("SELECT blog_id FROM {$wpdb->blogs} WHERE archived = %d AND spam = %d AND deleted = %d", array(0, 0, 0)));
+        }
+
+        /**
+         * Load languages files
+         * 
+         * @since 2.0.0
+         */
+        public function load_plugin_textdomain() {
+            $domain = $this->plugin_slug;
+            $locale = apply_filters('plugin_locale', get_locale(), $domain);
+
+            load_textdomain($domain, trailingslashit(WP_LANG_DIR) . $domain . '/' . $domain . '-' . $locale . '.mo');
+            load_plugin_textdomain($domain, FALSE, WPMM_LANGUAGES_PATH);
+        }
+
+        /**
+         * Initialize when plugin is activated
+         */
+        public function init() {
+            /**
+             * DELETE CACHE IF ACTIVATED
+             */
+            // Super Cache Plugin
+            if (function_exists('wp_cache_clear_cache')) {
+                wp_cache_clear_cache(get_current_blog_id());
+            }
+
+            // W3 Total Cache Plugin
+            if (function_exists('w3tc_pgcache_flush')) {
+                w3tc_pgcache_flush();
+            }
+
+            /**
+             * CHECKS
+             */
+            if (
+                    (!$this->check_user_role()) &&
+                    !strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
+                    !strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
+                    !strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&
+                    !(strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_user_role()) &&
+                    !strstr($_SERVER['PHP_SELF'], '/plugins/') &&
+                    !strstr($_SERVER['PHP_SELF'], '/xmlrpc.php') &&
+                    !$this->check_exclude() &&
+                    !$this->check_search_bots()
+            ) {
+                // HEADER STUFF
+                $protocol = !empty($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.1', 'HTTP/1.0')) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+                $charset = get_bloginfo('charset') ? get_bloginfo('charset') : 'UTF-8';
+                $status_code = (int) apply_filters('wp_maintenance_mode_status_code', '503'); // this hook will be removed in the next versions
+                $status_code = (int) apply_filters('wpmm_status_code', '503');
+                $backtime_seconds = $this->calculate_backtime();
+                $backtime = (int) apply_filters('wpmm_backtime', $backtime_seconds);
+
+                // META STUFF
+                $title = !empty($this->plugin_settings['design']['title']) ? $this->plugin_settings['design']['title'] : get_bloginfo('name') . ' - ' . __('Maintenance Mode', $this->plugin_slug);
+                $title = apply_filters('wm_title', $title); // this hook will be removed in the next versions
+                $title = apply_filters('wpmm_meta_title', $title);
+
+                $robots = $this->plugin_settings['general']['meta_robots'] == 1 ? 'noindex, nofollow' : 'index, follow';
+                $robots = apply_filters('wpmm_meta_robots', $robots);
+
+                $author = apply_filters('wm_meta_author', 'Designmodo'); // this hook will be removed in the next versions
+                $author = apply_filters('wpmm_meta_author', 'Designmodo');
+
+                $description = get_bloginfo('name') . ' - ' . get_bloginfo('description');
+                $description = apply_filters('wm_meta_description', $description); // this hook will be removed in the next versions
+                $description = apply_filters('wpmm_meta_description', $description);
+
+                $keywords = __('Maintenance Mode', $this->plugin_slug);
+                $keywords = apply_filters('wm_meta_keywords', $keywords); // this hook will be removed in the next versions
+                $keywords = apply_filters('wpmm_meta_keywords', $keywords);
+
+                // CSS STUFF
+                $body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
+                $custom_css = array_merge($this->plugin_settings['design']['custom_css'], $this->plugin_settings['modules']['custom_css']);
+
+                // CONTENT
+                $heading = !empty($this->plugin_settings['design']['heading']) ? $this->plugin_settings['design']['heading'] : '';
+                $heading = apply_filters('wm_heading', $heading); // this hook will be removed in the next versions
+                $heading = apply_filters('wpmm_heading', $heading);
+
+                $text = !empty($this->plugin_settings['design']['text']) ? $this->plugin_settings['design']['text'] : '';
+                $text = apply_filters('wpmm_text', $text);
+
+                // COUNTDOWN
+                $countdown_start = !empty($this->plugin_settings['modules']['countdown_start']) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_data'];
+                $countdown_end = strtotime($countdown_start . ' +' . $backtime_seconds . ' seconds');
+
+                // JS FILES
+                $wp_scripts = new WP_Scripts();
+                $scripts = array(
+                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? home_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+                    'frontend' => WPMM_JS_URL . 'scripts.js'
+                );
+                if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
+                    $scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin.min.js';
+                    $scripts['countdown'] = WPMM_JS_URL . 'jquery.countdown.min.js';
+                }
+                if ((!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) || (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1)) {
+                    $scripts['validate'] = WPMM_JS_URL . 'jquery.validate.min.js';
+                }
+                $scripts = apply_filters('wpmm_scripts', $scripts);
+
+                // CSS FILES
+                $styles = array(
+                    'frontend' => WPMM_CSS_URL . 'style.css'
+                );
+                $styles = apply_filters('wpmm_styles', $styles);
+
+                nocache_headers();
+                ob_start();
+                header("Content-type: text/html; charset=$charset");
+                header("$protocol $status_code Service Unavailable", TRUE, $status_code);
+                header("Retry-After: $backtime");
+
+                if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) {
+                    include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
+                } else {
+                    include(WPMM_VIEWS_PATH . 'maintenance.php');
+                }
+                ob_flush();
+
+                exit();
+            }
+        }
+
+        /**
+         * Check if the current user has access to backend / frontend based on his role compared with role from settings
+         * 
+         * @return boolean
+         */
+        public function check_user_role() {
+            $is_allowed = false;
+
+            if (is_super_admin()) {
+                $is_allowed = true;
+            }
+
+            if (is_admin()) {
+                $role = $this->plugin_settings['general']['backend_role'];
+            } else {
+                $role = $this->plugin_settings['general']['frontend_role'];
+            }
+
+            if (current_user_can($role)) {
+                $is_allowed = true;
+            }
+
+            return $is_allowed;
+        }
+
+        /**
+         * Calculate backtime based on countdown remaining time if it is activated
+         * 
+         * @return int
+         */
+        public function calculate_backtime() {
+            $backtime = 3600;
+
+            if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
+                $backtime = ($this->plugin_settings['modules']['countdown_details']['days'] * DAY_IN_SECONDS) + ($this->plugin_settings['modules']['countdown_details']['hours'] * HOUR_IN_SECONDS) + ($this->plugin_settings['modules']['countdown_details']['minutes'] * MINUTE_IN_SECONDS);
+            }
+
+            return $backtime;
+        }
+
+        /**
+         * Check if the visitor is a bot (using useragent)
+         * 
+         * @return boolean
+         */
+        public function check_search_bots() {
+            $is_search_bots = false;
+
+            if (!empty($this->plugin_settings['general']['bypass_bots']) && $this->plugin_settings['general']['bypass_bots'] == 1) {
+                $bots = apply_filters('wpmm_search_bots', array(
+                    'Abacho' => 'AbachoBOT',
+                    'Accoona' => 'Acoon',
+                    'AcoiRobot' => 'AcoiRobot',
+                    'Adidxbot' => 'adidxbot',
+                    'AltaVista robot' => 'Altavista',
+                    'Altavista robot' => 'Scooter',
+                    'ASPSeek' => 'ASPSeek',
+                    'Atomz' => 'Atomz',
+                    'Bing' => 'bingbot',
+                    'BingPreview' => 'BingPreview',
+                    'CrocCrawler' => 'CrocCrawler',
+                    'Dumbot' => 'Dumbot',
+                    'eStyle Bot' => 'eStyle',
+                    'FAST-WebCrawler' => 'FAST-WebCrawler',
+                    'GeonaBot' => 'GeonaBot',
+                    'Gigabot' => 'Gigabot',
+                    'Google' => 'Googlebot',
+                    'ID-Search Bot' => 'IDBot',
+                    'Lycos spider' => 'Lycos',
+                    'MSN' => 'msnbot',
+                    'MSRBOT' => 'MSRBOT',
+                    'Rambler' => 'Rambler',
+                    'Scrubby robot' => 'Scrubby',
+                    'Yahoo' => 'Yahoo'
+                ));
+
+                $is_search_bots = (bool) preg_match('~(' . implode('|', array_values($bots)) . ')~i', $_SERVER['HTTP_USER_AGENT']);
+            }
+
+            return $is_search_bots;
+        }
+
+        /**
+         * Check if slug / ip address exists in exclude list
+         * 
+         * @return boolean
+         */
+        public function check_exclude() {
+            $is_excluded = false;
+
+            if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
+                foreach ($this->plugin_settings['general']['exclude'] as $item) {
+                    if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $item))) {
+                        $is_excluded = true;
+                        break;
+                    }
+                }
+            }
+
+            return $is_excluded;
+        }
+
+        /**
+         * Redirect if "Redirection" option is used and users don't have access to WordPress dashboard
+         * 
+         * @return null
+         */
+        public function redirect() {
+            if (empty($this->plugin_settings['general']['redirection'])) {
+                return NULL;
+            }
+
+            if ($this->check_user_role()) {
+                return NULL;
+            }
+
+            if (preg_match('#wp-admin/#', $_SERVER['REQUEST_URI'])) {
+                wp_redirect($this->plugin_settings['general']['redirection']);
+            }
+        }
+
+        /**
+         * Save subscriber into database
+         * 
+         * @global object $wpdb
+         */
+        public function add_subscriber() {
+            global $wpdb;
+
+            if (empty($_REQUEST['email']) || !is_email($_REQUEST['email'])) {
+                $response = array('response' => __('Please enter a valid email address.', $this->plugin_slug));
+            } else {
+                $exists = $wpdb->get_row($wpdb->prepare("SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", $_REQUEST['email']), ARRAY_A);
+                if (empty($exists)) {
+                    $wpdb->insert(
+                            $wpdb->prefix . 'wpmm_subscribers', array(
+                        'email' => $_REQUEST['email'],
+                        'insert_date' => date('Y-m-d H:i:s')
+                            ), array('%s', '%s'));
+                }
+
+                $response = array('response' => __('You successfuly subscribed. Thanks!', $this->plugin_slug));
+            }
+
+            wp_send_json($response);
+        }
+
+        /**
+         * Send email via contact form
+         */
+        public function send_contact() {
+            $errors = array();
+
+            if (empty($_REQUEST['name']) || empty($_REQUEST['email']) || empty($_REQUEST['content'])) {
+                $errors[] = __('All fields required.', $this->plugin_slug);
+            }
+
+            if (!empty($_REQUEST['email']) && !is_email($_REQUEST['email'])) {
+                $errors[] = __('Please enter a valid email address.', $this->plugin_slug);
+            }
+
+            if (!empty($errors)) {
+                $response = array('response' => implode('<br />', $errors));
+            } else {
+                ob_start();
+                ?>
+                Name: <?php echo sanitize_text_field($_REQUEST['name']); ?><br />
+                Email: <?php echo sanitize_text_field($_REQUEST['email']); ?><br />
+                Content: <br /><br />
+                <?php
+                echo nl2br(stripslashes($_REQUEST['content']));
+                $email_content = ob_get_contents();
+                ob_clean();
+
+                $send_to = !empty($this->plugin_settings['modules']['contact_email']) ? $this->plugin_settings['modules']['contact_email'] : get_option('admin_email');
+                $subject = __('Message via contact', $this->plugin_slug);
+                add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
+
+                @wp_mail($send_to, $subject, $email_content);
+                $response = array('response' => __('Your email was sent to the website administrator. Thanks!', $this->plugin_slug));
+            }
+
+            wp_send_json($response);
+        }
+
+    }
+
+}
