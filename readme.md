@@ -27,7 +27,7 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 
 **How to use plugin filters**
 
-1. `wpmm_backtime` - can be used to change the backtime from page `Retry-After` header
+`wpmm_backtime` - can be used to change the backtime from page `Retry-After` header
 
 ```php
 function new_backtime() {
@@ -39,7 +39,7 @@ add_filter('wpmm_backtime', 'new_backtime');
 
 Now... the search bots will retry to visit the page after 1800 seconds.
 
-2. `wpmm_search_bots` - if you have `Bypass for Search Bots` option (from General) activated, it can be used to add new bots (useragents)
+`wpmm_search_bots` - if you have `Bypass for Search Bots` option (from General) activated, it can be used to add / delete bots (useragents)
 
 ```php
 function new_search_bots($bots) {
@@ -61,7 +61,7 @@ add_filter('wpmm_search_bots', 'new_search_bots');
 
 We deleted a bot from list and added a new one.
 
-3. `wpmm_text` - can be used to change `Text` option
+`wpmm_text` - can be used to change `Text` option
 
 ```php
 function new_text($text) {
@@ -76,7 +76,7 @@ add_filter('wpmm_text', 'new_text');
 
 We replaced a string with another string. We can also add another text, add some extra html, etc.
 
-4. `wpmm_styles` - can be used to embed new css files
+`wpmm_styles` - can be used to embed new css files
 
 ```php
 function new_css_styles($styles) {
