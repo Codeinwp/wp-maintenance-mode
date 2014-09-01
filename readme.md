@@ -29,16 +29,17 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 
 1. `wpmm_backtime` - can be used to change the backtime from page header
 
-function new_backtime(){
+function new_backtime() {
     return 1800;
 }
+
 add_filter('wpmm_backtime', 'new_backtime');
 
 Now... the search bots will retry to visit the page after 1800 seconds.
 
 2. `wpmm_search_bots` - if you have `Bypass for Search Bots` option (from General) activated, it can be used to add new bots (useragents)
 
-function new_search_bots($bots){
+function new_search_bots($bots) {
     // we delete a bot from array
     if(!empty($bots['AcoiRobot'])){ 
         unset($bots['AcoiRobot']);
@@ -51,34 +52,38 @@ function new_search_bots($bots){
 
     return $bots;
 }
+
 add_filter('wpmm_search_bots', 'new_search_bots');
 
 We deleted a bot from list and added a new one.
 
 3. `wpmm_text` - can be used to change `Text` option
 
-function new_text($text){
+function new_text($text) {
     $text = str_replace('http://www.designmodo.com', 'http://designmodo.com', $text);
     
 
     return $text;
 }
+
 add_filter('wpmm_text', 'new_text');
 
 We replaced a string with another string. We can also add another text, add some extra html, etc.
 
 4. `wpmm_styles` - can be used to embed new css files
 
-function new_css_styles($styles){
+function new_css_styles($styles) {
     $styles['new-style'] = 'path_to_css_file/style.css'; // replace with the real path :)
 
     return $styles;
 }
+
 add_filter('wpmm_styles', 'new_css_styles');
 
 We embedded a new css style on maintenance page. Same mechanism can be used for javascript files (see `wpmm_scripts` filter).
 
 **Cache Plugin Support**
+
 The plugin flush the cache on activate the maintenance mode form the plugins W3 Total Cache and WP Super Cache
 
 ## Other Notes
