@@ -8,7 +8,7 @@ Tags: maintenance, mode, admin, administration, unavailable, coming soon, multis
 Requires at least: 3.5
 Tested up to: 3.9.2
 Stable tag: 2.0.0
-License: GPL
+License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
 
