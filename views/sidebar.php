@@ -4,7 +4,7 @@
         <div class="inside">
             <?php $plugin_data = wpmm_plugin_info($this->plugin_slug); ?>
             <ul>
-                <li>Name: 
+                <li><?php _e('Name', $this->plugin_slug); ?>: 
                     <?php
                     echo!empty($plugin_data['Name']) ? $plugin_data['Name'] : '';
                     echo!empty($plugin_data['Version']) ? ' v' . $plugin_data['Version'] : '';

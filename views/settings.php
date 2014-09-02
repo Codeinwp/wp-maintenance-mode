@@ -112,8 +112,8 @@
 
                         <?php wp_nonce_field('tab-general'); ?>
                         <input type="hidden" value="general" name="tab" />
-                        <input type="submit" value="Save settings" class="button button-primary" name="submit" />
-                        <input type="button" value="Reset settings" class="button button-secondary reset_settings" data-tab="general" name="submit">
+                        <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
+                        <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="general" name="submit">
                     </form>
                 </div>
                 <div id="tab-design" class="hidden">
@@ -213,8 +213,8 @@
 
                         <?php wp_nonce_field('tab-design'); ?>
                         <input type="hidden" value="design" name="tab" />
-                        <input type="submit" value="Save settings" class="button button-primary" name="submit">
-                        <input type="button" value="Reset settings" class="button button-secondary reset_settings" data-tab="design" name="submit">
+                        <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+                        <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit">
                     </form>
                 </div>
                 <div id="tab-modules" class="hidden">
@@ -368,9 +368,9 @@
                                     <th scope="row"><label for="options[modules][contact_effects]"><?php _e('Effects', $this->plugin_slug); ?></label></th>
                                     <td>	
                                         <select name="options[modules][contact_effects]">
-                                            <option value="move_top|move_bottom" <?php selected($this->plugin_settings['modules']['contact_effects'], 'move_top|move_bottom'); ?>>Move top - Move bottom</option>
-                                            <option value="zoom|zoomed" <?php selected($this->plugin_settings['modules']['contact_effects'], 'zoom|zoomed'); ?>>Zoom - Zoomed</option>
-                                            <option value="fold|unfold" <?php selected($this->plugin_settings['modules']['contact_effects'], 'fold|unfold'); ?>>Fold - Unfold</option>
+                                            <option value="move_top|move_bottom" <?php selected($this->plugin_settings['modules']['contact_effects'], 'move_top|move_bottom'); ?>><?php _e('Move top - Move bottom', $this->plugin_slug); ?></option>
+                                            <option value="zoom|zoomed" <?php selected($this->plugin_settings['modules']['contact_effects'], 'zoom|zoomed'); ?>><?php _e('Zoom - Zoomed', $this->plugin_slug); ?></option>
+                                            <option value="fold|unfold" <?php selected($this->plugin_settings['modules']['contact_effects'], 'fold|unfold'); ?>><?php _e('Fold - Unfold', $this->plugin_slug); ?></option>
                                         </select>
                                     </td>
                                 </tr>                                
@@ -379,8 +379,8 @@
 
                         <?php wp_nonce_field('tab-modules'); ?>
                         <input type="hidden" value="modules" name="tab" />
-                        <input type="submit" value="Save settings" class="button button-primary" name="submit">
-                        <input type="button" value="Reset settings" class="button button-secondary reset_settings" data-tab="modules" name="submit">
+                        <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+                        <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit">
                     </form>
                 </div>
             </div>

@@ -64,6 +64,9 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 
 == Changelog ==
 
+= 2.0.2 (N/A) =
+* Settings & sidebar view + old translation files edited
+
 = 2.0.1 (02/09/2014) =
 * Reintroduced some deprecated actions from old version (but still available in next 4 releases, after that will be removed) and replaced with new ones:
 - `wm_head` -> `wpmm_head`

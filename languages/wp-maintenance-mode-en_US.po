@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.0\n"
-"POT-Creation-Date: 2014-08-28 21:10+0200\n"
-"PO-Revision-Date: 2014-08-28 21:10+0200\n"
+"POT-Creation-Date: 2014-09-02 23:23+0200\n"
+"PO-Revision-Date: 2014-09-02 23:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: en\n"
@@ -18,15 +18,15 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:146
+#: includes/classes/wp-maintenance-mode-admin.php:153
 msgid "WP Maintenance Mode"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:296
+#: includes/classes/wp-maintenance-mode-admin.php:330
 msgid "Settings"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:315
+#: includes/classes/wp-maintenance-mode-admin.php:349
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -48,69 +48,69 @@ msgstr ""
 msgid "Notify me when it's ready"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:220
+#: includes/classes/wp-maintenance-mode.php:237
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
 "\">settings</a>."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:418
-#: includes/classes/wp-maintenance-mode.php:432
+#: includes/classes/wp-maintenance-mode.php:417
+#: includes/classes/wp-maintenance-mode.php:431
 msgid "Maintenance Mode"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:620
-#: includes/classes/wp-maintenance-mode.php:648
+#: includes/classes/wp-maintenance-mode.php:622
+#: includes/classes/wp-maintenance-mode.php:650
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:631
+#: includes/classes/wp-maintenance-mode.php:633
 msgid "You successfuly subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:644
+#: includes/classes/wp-maintenance-mode.php:646
 msgid "All fields required."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:665
+#: includes/classes/wp-maintenance-mode.php:667
 msgid "Message via contact"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:669
+#: includes/classes/wp-maintenance-mode.php:671
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr ""
 
-#: views/maintenance.php:45
+#: views/maintenance.php:49
 msgid "your e-mail..."
 msgstr ""
 
-#: views/maintenance.php:46 views/settings.php:258 views/sidebar.php:22
+#: views/maintenance.php:50 views/settings.php:258 views/sidebar.php:22
 #: views/sidebar.php:28
 msgid "Subscribe"
 msgstr ""
 
-#: views/maintenance.php:83
+#: views/maintenance.php:87 views/sidebar.php:7
 msgid "Name"
 msgstr ""
 
-#: views/maintenance.php:84
+#: views/maintenance.php:88
 msgid "E-mail"
 msgstr ""
 
-#: views/maintenance.php:86
+#: views/maintenance.php:90
 msgid "Your message"
 msgstr ""
 
-#: views/maintenance.php:87
+#: views/maintenance.php:91
 msgid "Send"
 msgstr ""
 
-#: views/maintenance.php:92
+#: views/maintenance.php:96
 msgid "Contact us"
 msgstr ""
 
-#: views/maintenance.php:97
+#: views/maintenance.php:101
 #, php-format
 msgid "Developed by <a href=\"%s\">Designmodo</a>"
 msgstr ""
@@ -226,6 +226,14 @@ msgstr ""
 msgid ""
 "Do you want to leave a link to the plugin author on your maintenance mode "
 "page?"
+msgstr ""
+
+#: views/settings.php:115 views/settings.php:216 views/settings.php:382
+msgid "Save settings"
+msgstr ""
+
+#: views/settings.php:116 views/settings.php:217 views/settings.php:383
+msgid "Reset settings"
 msgstr ""
 
 #: views/settings.php:121
@@ -351,6 +359,18 @@ msgstr ""
 
 #: views/settings.php:368
 msgid "Effects"
+msgstr ""
+
+#: views/settings.php:371
+msgid "Move top - Move bottom"
+msgstr ""
+
+#: views/settings.php:372
+msgid "Zoom - Zoomed"
+msgstr ""
+
+#: views/settings.php:373
+msgid "Fold - Unfold"
 msgstr ""
 
 #: views/sidebar.php:3
