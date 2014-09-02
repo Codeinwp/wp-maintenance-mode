@@ -3,7 +3,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
     class WP_Maintenance_Mode {
 
-        const VERSION = '2.0.0';
+        const VERSION = '2.0.1';
 
         protected $plugin_slug = 'wp-maintenance-mode';
         protected $plugin_settings;
@@ -392,19 +392,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
          */
         public function init() {
             /**
-             * DELETE CACHE IF ACTIVATED
-             */
-            // Super Cache Plugin
-            if (function_exists('wp_cache_clear_cache')) {
-                wp_cache_clear_cache(get_current_blog_id());
-            }
-
-            // W3 Total Cache Plugin
-            if (function_exists('w3tc_pgcache_flush')) {
-                w3tc_pgcache_flush();
-            }
-
-            /**
              * CHECKS
              */
             if (
@@ -421,8 +408,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 // HEADER STUFF
                 $protocol = !empty($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.1', 'HTTP/1.0')) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
                 $charset = get_bloginfo('charset') ? get_bloginfo('charset') : 'UTF-8';
-                $status_code = (int) apply_filters('wp_maintenance_mode_status_code', '503'); // this hook will be removed in the next versions
-                $status_code = (int) apply_filters('wpmm_status_code', '503');
+                $status_code = (int) apply_filters('wp_maintenance_mode_status_code', 503); // this hook will be removed in the next versions
+                $status_code = (int) apply_filters('wpmm_status_code', 503);
                 $backtime_seconds = $this->calculate_backtime();
                 $backtime = (int) apply_filters('wpmm_backtime', $backtime_seconds);
 
@@ -447,7 +434,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
                 // CSS STUFF
                 $body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
-                $custom_css = array_merge($this->plugin_settings['design']['custom_css'], $this->plugin_settings['modules']['custom_css']);
+                $custom_css_design = !empty($this->plugin_settings['design']['custom_css']) && is_array($this->plugin_settings['design']['custom_css']) ? $this->plugin_settings['design']['custom_css'] : array();
+                $custom_css_modules = !empty($this->plugin_settings['modules']['custom_css']) && is_array($this->plugin_settings['modules']['custom_css']) ? $this->plugin_settings['modules']['custom_css'] : array();
+                $custom_css = array_merge($custom_css_design, $custom_css_modules);
 
                 // CONTENT
                 $heading = !empty($this->plugin_settings['design']['heading']) ? $this->plugin_settings['design']['heading'] : '';
@@ -616,7 +605,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
             }
 
             if (preg_match('#wp-admin/#', $_SERVER['REQUEST_URI'])) {
-                wp_redirect($this->plugin_settings['general']['redirection']);
+                $redirect_to = stripslashes($this->plugin_settings['general']['redirection']);
+                wp_redirect($redirect_to);
             }
         }
 
@@ -635,7 +625,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 if (empty($exists)) {
                     $wpdb->insert(
                             $wpdb->prefix . 'wpmm_subscribers', array(
-                        'email' => $_REQUEST['email'],
+                        'email' => sanitize_text_field($_REQUEST['email']),
                         'insert_date' => date('Y-m-d H:i:s')
                             ), array('%s', '%s'));
                 }
@@ -673,7 +663,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 $email_content = ob_get_contents();
                 ob_clean();
 
-                $send_to = !empty($this->plugin_settings['modules']['contact_email']) ? $this->plugin_settings['modules']['contact_email'] : get_option('admin_email');
+                $send_to = !empty($this->plugin_settings['modules']['contact_email']) ? stripslashes($this->plugin_settings['modules']['contact_email']) : get_option('admin_email');
                 $subject = __('Message via contact', $this->plugin_slug);
                 add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
 

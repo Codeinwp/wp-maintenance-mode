@@ -42,7 +42,7 @@
                                     <td>	
                                         <select name="options[general][backend_role]">
                                             <?php foreach ($wp_roles->roles as $role => $details) { ?>
-                                                <option value="<?php echo $role; ?>" <?php selected($this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php selected($this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
                                             <?php } ?>
                                         </select>
                                         <p class="description"><?php _e('Which user role is allowed to access the backend of this blog?', $this->plugin_slug); ?></p>
@@ -53,7 +53,7 @@
                                     <td>	
                                         <select name="options[general][frontend_role]">
                                             <?php foreach ($wp_roles->roles as $role => $details) { ?>
-                                                <option value="<?php echo $role; ?>" <?php selected($this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php selected($this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
                                             <?php } ?>
                                         </select>
                                         <p class="description"><?php _e('Which user role is allowed to access the frontend of this blog?', $this->plugin_slug); ?></p>
@@ -72,7 +72,7 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[general][redirection]"><?php _e('Redirection', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['general']['redirection']; ?>" name="options[general][redirection]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['general']['redirection'])); ?>" name="options[general][redirection]" />
                                         <p class="description"><?php _e('If you want to redirect a user to a URL (which is not the WordPress dashboard) after login, then define a URL (incl. http://)', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>                                
@@ -81,7 +81,7 @@
                                     <td>	
                                         <textarea rows="7" name="options[general][exclude]" style="width: 625px;"><?php
                                             if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
-                                                echo implode("\n", $this->plugin_settings['general']['exclude']);
+                                                echo implode("\n", stripslashes_deep($this->plugin_settings['general']['exclude']));
                                             }
                                             ?></textarea>
                                         <p class="description"><?php _e('Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / IP per line!', $this->plugin_slug); ?></p>
@@ -125,21 +125,21 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][title]"><?php _e('Title (HTML tag)', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['design']['title']; ?>" name="options[design][title]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['title'])); ?>" name="options[design][title]" />
                                     </td>
                                 </tr>     
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][heading]"><?php _e('Heading', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['design']['heading']; ?>" name="options[design][heading]" />
-                                        <input type="text" value="<?php echo $this->plugin_settings['design']['heading_color']; ?>" name="options[design][heading_color]" data-default-color="<?php echo $this->plugin_settings['design']['heading_color']; ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading'])); ?>" name="options[design][heading]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading_color'])); ?>" name="options[design][heading_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading_color'])); ?>" class="color_picker_trigger"/>
                                     </td>
                                 </tr>      
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][text]"><?php _e('Text', $this->plugin_slug); ?></label></th>
                                     <td>	
                                         <?php
-                                        wp_editor($this->plugin_settings['design']['text'], 'options_design_text', array(
+                                        wp_editor(stripslashes($this->plugin_settings['design']['text']), 'options_design_text', array(
                                             'textarea_name' => 'options[design][text]',
                                             'textarea_rows' => 8,
                                             'editor_class' => 'large-text',
@@ -150,7 +150,7 @@
                                         ));
                                         ?>
                                         <br />
-                                        <input type="text" value="<?php echo $this->plugin_settings['design']['text_color']; ?>" data-default-color="<?php echo $this->plugin_settings['design']['text_color']; ?>" name="options[design][text_color]" class="color_picker_trigger" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" name="options[design][text_color]" class="color_picker_trigger" />
                                     </td>
                                 </tr>                                 
                             </tbody>
@@ -179,7 +179,7 @@
                                 <tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'custom' ? 'hidden' : ''; ?>" id="show_custom">
                                     <th scope="row"><label for="options[design][bg_custom]"><?php _e('Upload background', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['design']['bg_custom']; ?>" name="options[design][bg_custom]" class="upload_image_url" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['bg_custom'])); ?>" name="options[design][bg_custom]" class="upload_image_url" />
                                         <input type="button" value="Upload" class="button" id="upload_image_trigger" />
                                         <p class="description"><?php _e('Backgrounds should have 1920x1280 px size.', $this->plugin_slug); ?></p>
                                     </td>
@@ -198,7 +198,7 @@
                                         ?>
                                         <li class="<?php echo $this->plugin_settings['design']['bg_predefined'] == $file ? 'active' : ''; ?>">
                                             <label>
-                                                <input type="radio" value="<?php echo $file; ?>" name="options[design][bg_predefined]" <?php checked($this->plugin_settings['design']['bg_predefined'], $file); ?>>
+                                                <input type="radio" value="<?php echo esc_attr($file); ?>" name="options[design][bg_predefined]" <?php checked($this->plugin_settings['design']['bg_predefined'], $file); ?>>
                                                 <img src="<?php echo WPMM_URL . 'assets/images/backgrounds/' . $file_thumb; ?>" width="200" height="150" />
                                             </label>
                                         </li>
@@ -235,21 +235,21 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_start]"><?php _e('Start date', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['countdown_start']; ?>" name="options[modules][countdown_start]" class="countdown_start" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_start'])); ?>" name="options[modules][countdown_start]" class="countdown_start" />
                                     </td>
                                 </tr>                                  
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_details]"><?php _e('Countdown (remaining time)', $this->plugin_slug); ?></label></th>
                                     <td class="countdown_details">	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['countdown_details']['days']; ?>" name="options[modules][countdown_details][days]" /> <?php _e('Days', $this->plugin_slug); ?>
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['countdown_details']['hours']; ?>" name="options[modules][countdown_details][hours]" class="margin_left"/> <?php _e('Hours', $this->plugin_slug); ?>
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['countdown_details']['minutes']; ?>" name="options[modules][countdown_details][minutes]" class="margin_left" /> <?php _e('Minutes', $this->plugin_slug); ?>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_details']['days'])); ?>" name="options[modules][countdown_details][days]" /> <?php _e('Days', $this->plugin_slug); ?>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_details']['hours'])); ?>" name="options[modules][countdown_details][hours]" class="margin_left"/> <?php _e('Hours', $this->plugin_slug); ?>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_details']['minutes'])); ?>" name="options[modules][countdown_details][minutes]" class="margin_left" /> <?php _e('Minutes', $this->plugin_slug); ?>
                                     </td>
                                 </tr>     
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_color]"><?php _e('Color', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['countdown_color']; ?>" name="options[modules][countdown_color]" data-default-color="<?php echo $this->plugin_settings['modules']['countdown_color']; ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_color'])); ?>" name="options[modules][countdown_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_color'])); ?>" class="color_picker_trigger"/>
                                     </td>
                                 </tr>                                 
                             </tbody>
@@ -271,8 +271,8 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][subscribe_text]"><?php _e('Text', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['subscribe_text']; ?>" name="options[modules][subscribe_text]" />
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['subscribe_text_color']; ?>" name="options[modules][subscribe_text_color]" data-default-color="<?php echo $this->plugin_settings['modules']['subscribe_text_color']; ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text'])); ?>" name="options[modules][subscribe_text]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text_color'])); ?>" name="options[modules][subscribe_text_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text_color'])); ?>" class="color_picker_trigger"/>
                                     </td>
                                 </tr> 
                                 <tr valign="top">
@@ -308,37 +308,37 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_github]">Github</label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['social_github']; ?>" name="options[modules][social_github]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_github'])); ?>" name="options[modules][social_github]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_dribbble]">Dribbble</label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['social_dribbble']; ?>" name="options[modules][social_dribbble]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_dribbble'])); ?>" name="options[modules][social_dribbble]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_twitter]">Twitter</label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['social_twitter']; ?>" name="options[modules][social_twitter]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_twitter'])); ?>" name="options[modules][social_twitter]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_facebook]">Facebook</label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['social_facebook']; ?>" name="options[modules][social_facebook]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_facebook'])); ?>" name="options[modules][social_facebook]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_pinterest]">Pinterest</label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['social_pinterest']; ?>" name="options[modules][social_pinterest]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_pinterest'])); ?>" name="options[modules][social_pinterest]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_google+]">Google+</label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['social_google+']; ?>" name="options[modules][social_google+]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_google+'])); ?>" name="options[modules][social_google+]" />
                                     </td>
                                 </tr>
 
@@ -361,7 +361,7 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][contact_email]"><?php _e('Email address', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <input type="text" value="<?php echo $this->plugin_settings['modules']['contact_email']; ?>" name="options[modules][contact_email]" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['contact_email'])); ?>" name="options[modules][contact_email]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">

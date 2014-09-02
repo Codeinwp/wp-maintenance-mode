@@ -86,7 +86,7 @@ We embedded a new css style on maintenance page. Same mechanism can be used for 
 
 **Cache Plugin Support**
 
-The plugin flush the cache on activate the maintenance mode form the plugins W3 Total Cache and WP Super Cache
+WP Maintenance Mode can be unstable due the cache plugins, we recommend to deactivate any cache plugin when maintenance mode is active.
 
 ## Other Notes
 ### License

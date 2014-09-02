@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo $title; ?></title>
+        <title><?php echo stripslashes($title); ?></title>
         <?php
         if (!empty($styles) && is_array($styles)) {
             foreach ($styles as $src) {
@@ -11,26 +11,30 @@
             }
         }
         ?>
-        <meta name="author" content="<?php echo $author; ?>" />
-        <meta name="description" content="<?php echo $description; ?>" />
-        <meta name="keywords" content="<?php echo $keywords; ?>" />
-        <meta name="robots" content="<?php echo $robots; ?>" />
+        <meta name="author" content="<?php echo esc_attr($author); ?>" />
+        <meta name="description" content="<?php echo esc_attr($description); ?>" />
+        <meta name="keywords" content="<?php echo esc_attr($keywords); ?>" />
+        <meta name="robots" content="<?php echo esc_attr($robots); ?>" />
         <?php if (!empty($custom_css) && is_array($custom_css)) { ?>
             <style>
-    <?php
-    foreach ($custom_css as $css_line) {
-        echo $css_line . "\n";
-    }
-    ?>
+            <?php
+            foreach ($custom_css as $css_line) {
+                echo stripslashes($css_line) . "\n";
+            }
+            ?>
             </style>
             <?php
         }
+
+        // do some actions
+        do_action('wm_head'); // this hook will be removed in the next versions
+        do_action('wpmm_head');
         ?>
     </head>
     <body class="<?php echo $body_classes ? $body_classes : ''; ?>">
         <div class="wrap">
-            <?php if (!empty($heading)) { ?><h1><?php echo $heading; ?></h1><?php } ?>
-            <?php if (!empty($text)) { ?><h2><?php echo $text; ?></h2><?php } ?>
+            <?php if (!empty($heading)) { ?><h1><?php echo stripslashes($heading); ?></h1><?php } ?>
+            <?php if (!empty($text)) { ?><h2><?php echo stripslashes($text); ?></h2><?php } ?>
 
             <?php
             if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
@@ -39,7 +43,7 @@
             <?php } ?>
 
             <?php if (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1) { ?>
-                <?php if (!empty($this->plugin_settings['modules']['subscribe_text'])) { ?><h3><?php echo $this->plugin_settings['modules']['subscribe_text']; ?></h3><?php } ?>
+                <?php if (!empty($this->plugin_settings['modules']['subscribe_text'])) { ?><h3><?php echo stripslashes($this->plugin_settings['modules']['subscribe_text']); ?></h3><?php } ?>
                 <div class="subscribe_wrapper" style="min-height: 100px;">
                     <form class="subscribe_form">
                         <input type="text" placeholder="<?php _e('your e-mail...', $this->plugin_slug); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" />
@@ -51,34 +55,34 @@
             <?php if (!empty($this->plugin_settings['modules']['social_status']) && $this->plugin_settings['modules']['social_status'] == 1) { ?>
                 <div class="social">
                     <?php if (!empty($this->plugin_settings['modules']['social_twitter'])) { ?>
-                        <a class="tw" href="<?php echo $this->plugin_settings['modules']['social_twitter']; ?>">twitter</a>
+                        <a class="tw" href="<?php echo stripslashes($this->plugin_settings['modules']['social_twitter']); ?>">twitter</a>
                     <?php } ?>
 
                     <?php if (!empty($this->plugin_settings['modules']['social_facebook'])) { ?>
-                        <a class="fb" href="<?php echo $this->plugin_settings['modules']['social_facebook']; ?>">facebook</a>
+                        <a class="fb" href="<?php echo stripslashes($this->plugin_settings['modules']['social_facebook']); ?>">facebook</a>
                     <?php } ?>    
 
                     <?php if (!empty($this->plugin_settings['modules']['social_pinterest'])) { ?>
-                        <a class="pin" href="<?php echo $this->plugin_settings['modules']['social_pinterest']; ?>">pinterest</a>
+                        <a class="pin" href="<?php echo stripslashes($this->plugin_settings['modules']['social_pinterest']); ?>">pinterest</a>
                     <?php } ?>  
 
                     <?php if (!empty($this->plugin_settings['modules']['social_github'])) { ?>
-                        <a class="git" href="<?php echo $this->plugin_settings['modules']['social_github']; ?>">github</a>
+                        <a class="git" href="<?php echo stripslashes($this->plugin_settings['modules']['social_github']); ?>">github</a>
                     <?php } ?>
 
                     <?php if (!empty($this->plugin_settings['modules']['social_dribbble'])) { ?>
-                        <a class="dribbble" href="<?php echo $this->plugin_settings['modules']['social_dribbble']; ?>">dribbble</a>
+                        <a class="dribbble" href="<?php echo stripslashes($this->plugin_settings['modules']['social_dribbble']); ?>">dribbble</a>
                     <?php } ?>   
 
                     <?php if (!empty($this->plugin_settings['modules']['social_google+'])) { ?>
-                        <a class="gplus" href="<?php echo $this->plugin_settings['modules']['social_google+']; ?>">google plus</a>
+                        <a class="gplus" href="<?php echo stripslashes($this->plugin_settings['modules']['social_google+']); ?>">google plus</a>
                     <?php } ?>                         
                 </div>
             <?php } ?>
             <?php if (!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) { ?>
                 <div class="contact">
-                    <?php list($open, $close) = explode('|', $this->plugin_settings['modules']['contact_effects']); ?>
-                    <div class="form <?php echo $open; ?>">
+                    <?php list($open, $close) = !empty($this->plugin_settings['modules']['contact_effects']) && strstr($this->plugin_settings['modules']['contact_effects'], '|') ? explode('|', $this->plugin_settings['modules']['contact_effects']) : explode('|', 'move_top|move_bottom'); ?>
+                    <div class="form <?php echo esc_attr($open); ?>">
                         <form class="contact_form">
                             <p class="col"><input type="text" placeholder="<?php _e('Name', $this->plugin_slug); ?>" data-rule-required="true" name="name" class="name_input" /></p>
                             <p class="col last"><input type="text" placeholder="<?php _e('E-mail', $this->plugin_slug); ?>" data-rule-required="true" data-rule-email="true" name="email" class="email_input" /></p>
@@ -89,7 +93,7 @@
                     </div>
                 </div>                
 
-                <a class="contact_us" href="javascript:void(0);" data-open="<?php echo $open; ?>" data-close="<?php echo $close; ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
+                <a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
             <?php } ?>
 
             <?php if (!empty($this->plugin_settings['general']['author_link']) && $this->plugin_settings['general']['author_link'] == 1) { ?>
@@ -110,6 +114,10 @@
                 <?php
             }
         }
+
+        // Do some actions
+        do_action('wm_footer'); // this hook will be removed in the next versions
+        do_action('wpmm_footer');
         ?>
     </body>
 </html>

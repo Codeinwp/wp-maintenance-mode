@@ -7,7 +7,7 @@ Author URI: http://designmodo.com/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 3.9.2
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
@@ -60,19 +60,29 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 See [GitHub Repo] (https://github.com/Designmodocom/WP-Maintenance-Mode) FAQ.
 
 = Cache Plugin Support =
-The plugin flush the cache on activate the maintenance mode form the plugins W3 Total Cache and WP Super Cache
+WP Maintenance Mode can be unstable due the cache plugins, we recommend to deactivate any cache plugin when maintenance mode is active.
 
 == Changelog ==
 
-= 2.0.0 (02/09/2014) =
+= 2.0.1 (02/09/2014) =
+* Reintroduced some deprecated actions from old version (but still available in next 4 releases, after that will be removed) and replaced with new ones:
+- `wm_head` -> `wpmm_head`
+- `wm_footer` -> `wpmm_footer`
+* Multisite settings link fix
+* WP_Maintenance_Mode: init (array checking for custom_css arrays, move delete cache part into a helper, etc.), add_subscriber, send_contact, redirect fixes & optimizations 
+* WP_Maintenance_Mode_Admin: save_plugin_settings fixes, delete_cache (new method)
+* Settings & Maintenance views fixes
+* Readme.txt changes
+
+= 2.0.0 (01/09/2014) =
 * Changed design and functionality, new features
 * Changed multisite behaviour: now you can activate maintenance individually (each blog from the network has it's own maintenance settings) 
 * Removed actions: `wm_header`, `wm_footer`, `wm_content`
 * Removed filters: `wm_header` 
 * Removed [loginform] shortcode
-* Some filters are depreciated (but still available in next 4 releases, after that will be removed) and replaced with new ones:
+* Some filters are deprecated (but still available in next 4 releases, after that will be removed) and replaced with new ones:
 - `wm_heading` -> `wpmm_heading`, 
-- `wp_maintenance_mode_status_code` -> `wp_maintenance_mode_status_code`
+- `wp_maintenance_mode_status_code` -> `wpmm_status_code`
 - `wm_title` -> `wpmm_meta_title`
 - `wm_meta_author` -> `wpmm_meta_author`
 - `wm_meta_description` -> `wpmm_meta_description`
