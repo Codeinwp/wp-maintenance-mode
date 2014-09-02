@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.0\n"
-"POT-Creation-Date: 2014-08-28 21:10+0200\n"
-"PO-Revision-Date: 2014-09-02 21:08-0000\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.1\n"
+"POT-Creation-Date: 2014-09-02 23:23+0200\n"
+"PO-Revision-Date: 2014-09-02 22:15-0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -15,15 +15,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:146
+#: includes/classes/wp-maintenance-mode-admin.php:153
 msgid "WP Maintenance Mode"
 msgstr "WP Maintenance Mode"
 
-#: includes/classes/wp-maintenance-mode-admin.php:296
+#: includes/classes/wp-maintenance-mode-admin.php:330
 msgid "Settings"
 msgstr "Configurações"
 
-#: includes/classes/wp-maintenance-mode-admin.php:315
+#: includes/classes/wp-maintenance-mode-admin.php:349
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Notify me when it's ready"
 msgstr "Notificar-me quando estiver disponível."
 
-#: includes/classes/wp-maintenance-mode.php:220
+#: includes/classes/wp-maintenance-mode.php:237
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -58,62 +58,62 @@ msgstr ""
 "O plugin WP Maintenance Mode foi reactivado e DEVE rever as suas <a href=\"%s"
 "\">configurações</a>."
 
-#: includes/classes/wp-maintenance-mode.php:418
-#: includes/classes/wp-maintenance-mode.php:432
+#: includes/classes/wp-maintenance-mode.php:417
+#: includes/classes/wp-maintenance-mode.php:431
 msgid "Maintenance Mode"
 msgstr "Modo de Manutenção"
 
-#: includes/classes/wp-maintenance-mode.php:620
-#: includes/classes/wp-maintenance-mode.php:648
+#: includes/classes/wp-maintenance-mode.php:622
+#: includes/classes/wp-maintenance-mode.php:650
 msgid "Please enter a valid email address."
 msgstr "Por favor insira um endereço de email válido."
 
-#: includes/classes/wp-maintenance-mode.php:631
+#: includes/classes/wp-maintenance-mode.php:633
 msgid "You successfuly subscribed. Thanks!"
 msgstr "Subscrito com sucesso. Obrigado!"
 
-#: includes/classes/wp-maintenance-mode.php:644
+#: includes/classes/wp-maintenance-mode.php:646
 msgid "All fields required."
 msgstr "Todos os campos necessários."
 
-#: includes/classes/wp-maintenance-mode.php:665
+#: includes/classes/wp-maintenance-mode.php:667
 msgid "Message via contact"
 msgstr "Mensagem via contacto"
 
-#: includes/classes/wp-maintenance-mode.php:669
+#: includes/classes/wp-maintenance-mode.php:671
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "O email foi enviado ao administrador do site. Obrigado!"
 
-#: views/maintenance.php:45
+#: views/maintenance.php:49
 msgid "your e-mail..."
 msgstr "o seu email..."
 
-#: views/maintenance.php:46 views/settings.php:258 views/sidebar.php:22
+#: views/maintenance.php:50 views/settings.php:258 views/sidebar.php:22
 #: views/sidebar.php:28
 msgid "Subscribe"
 msgstr "Subscrever"
 
-#: views/maintenance.php:83
+#: views/maintenance.php:87 views/sidebar.php:7
 msgid "Name"
 msgstr "Nome"
 
-#: views/maintenance.php:84
+#: views/maintenance.php:88
 msgid "E-mail"
 msgstr "Email"
 
-#: views/maintenance.php:86
+#: views/maintenance.php:90
 msgid "Your message"
 msgstr "A sua mensagem"
 
-#: views/maintenance.php:87
+#: views/maintenance.php:91
 msgid "Send"
 msgstr "Enviar"
 
-#: views/maintenance.php:92
+#: views/maintenance.php:96
 msgid "Contact us"
 msgstr "Contacte-nos"
 
-#: views/maintenance.php:97
+#: views/maintenance.php:101
 #, php-format
 msgid "Developed by <a href=\"%s\">Designmodo</a>"
 msgstr "Desenvolvido por <a href=\"%s\">Designmodo</a>"
@@ -242,6 +242,14 @@ msgid ""
 msgstr ""
 "Pretende deixar uma ligação para o autor do plugin no seu mode de manutenção"
 
+#: views/settings.php:115 views/settings.php:216 views/settings.php:382
+msgid "Save settings"
+msgstr "Guardar configurações"
+
+#: views/settings.php:116 views/settings.php:217 views/settings.php:383
+msgid "Reset settings"
+msgstr "Repor configurações"
+
 #: views/settings.php:121
 msgid "Content"
 msgstr "Conteúdo"
@@ -366,6 +374,18 @@ msgstr "Endereço de email"
 #: views/settings.php:368
 msgid "Effects"
 msgstr "Efeitos"
+
+#: views/settings.php:371
+msgid "Move top - Move bottom"
+msgstr "Subir - Descer"
+
+#: views/settings.php:372
+msgid "Zoom - Zoomed"
+msgstr "Zoom"
+
+#: views/settings.php:373
+msgid "Fold - Unfold"
+msgstr "Dobrar - Desdrobrar"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
