@@ -2,12 +2,6 @@
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
 
-## Description
-Add a maintenance page to your blog that lets visitors know your blog is down for maintenance, or add a coming soon page for a new website. User with admin rights gets full access to the blog including the front end.
-
-Activate the plugin and your blog is in maintenance-mode, works and only registered users with enough rights can see the front end. You can use a date with a countdown timer for visitor information or set a value and unit for information. 
-Also works with WordPress Multisite installs (each blog from the network has it's own maintenance settings).
-
 **Features**
 
 * Fully customizable (change colors, texts and backgrounds);
