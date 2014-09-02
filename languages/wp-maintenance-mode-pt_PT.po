@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.0\n"
 "POT-Creation-Date: 2014-08-28 21:10+0200\n"
-"PO-Revision-Date: 2014-09-02 20:58-0000\n"
+"PO-Revision-Date: 2014-09-02 21:08-0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -172,7 +172,8 @@ msgstr "Perfil de utilizador do backend"
 
 #: views/settings.php:48
 msgid "Which user role is allowed to access the backend of this blog?"
-msgstr "Que perfil de utilizador tem permissão ao backend deste site?"
+msgstr ""
+"Que perfil de utilizador tem permissão de acesso ao backend deste site?"
 
 #: views/settings.php:52
 msgid "Frontend Role"
@@ -180,7 +181,8 @@ msgstr "Perfil de utilizador do frontend"
 
 #: views/settings.php:59
 msgid "Which user role is allowed to access the frontend of this blog?"
-msgstr "Que perfil de utilizador tem permissão ao frontend deste site?"
+msgstr ""
+"Que perfil de utilizador tem permissão de acesso ao frontend deste site?"
 
 #: views/settings.php:63
 msgid "Robots Meta Tag"
@@ -192,8 +194,8 @@ msgid ""
 "control how an individual page should be indexed and served to users in "
 "search results."
 msgstr ""
-"A Meta Tag Robots permite usar uma abordagem por página específica para "
-"controlar como cada página individual deve ser indexada e disponibilidade "
+"A meta tag Robots permite usar uma abordagem por página específica para "
+"controlar como cada página individual deve ser indexada e disponibilizada "
 "aos utilizadores nos seus resultados de pesquisa."
 
 #: views/settings.php:73
