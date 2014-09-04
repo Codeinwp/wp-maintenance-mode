@@ -6,8 +6,8 @@ Author: Designmodo
 Author URI: http://designmodo.com/
 Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 3.9.2
-Stable tag: 2.0.1
+Tested up to: 4.0.0
+Stable tag: 2.0.3
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
@@ -64,8 +64,12 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 
 == Changelog ==
 
-= 2.0.2 (N/A) =
+= 2.0.3 (N/A) =
 * Settings & sidebar view + old translation files edited
+
+= 2.0.2 (04/09/2014) =
+* Removed "Author Link" option from General
+* Countdown - save details fix
 
 = 2.0.1 (02/09/2014) =
 * Reintroduced some deprecated actions from old version (but still available in next 4 releases, after that will be removed) and replaced with new ones:

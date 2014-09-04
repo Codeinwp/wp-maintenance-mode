@@ -97,16 +97,6 @@
                                         <p class="description"><?php _e('Do you want to see notices when maintenance mode is activated?', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>                                
-                                <tr valign="top">
-                                    <th scope="row"><label for="options[general][author_link]"><?php _e('Author link', $this->plugin_slug); ?></label></th>
-                                    <td>	
-                                        <select name="options[general][author_link]">
-                                            <option value="1" <?php selected($this->plugin_settings['general']['author_link'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
-                                            <option value="0" <?php selected($this->plugin_settings['general']['author_link'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
-                                        </select>
-                                        <p class="description"><?php _e('Do you want to leave a link to the plugin author on your maintenance mode page?', $this->plugin_slug); ?></p>
-                                    </td>
-                                </tr> 
                             </tbody>
                         </table>
 
@@ -187,7 +177,9 @@
                                 <tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'predefined' ? 'hidden' : ''; ?>" id="show_predefined">
                                     <th scope="row">
                                         <label for="options[design][bg_predefined]"><?php _e('Choose background', $this->plugin_slug); ?></label>
-                            <p class="description">* source <a href="<?php echo 'http://designmodo.com/free-photos/' . WPMM_AUTHOR_UTM; ?>" target="_blank">Free Photos</a></p>
+                            <p class="description">
+                                * <?php echo sprintf(__('source <a href="%" target="_blank">Free Photos</a>', $this->plugin_slug), 'http://designmodo.com/free-photos/' . WPMM_AUTHOR_UTM); ?>
+                            </p>
                             </th>
                             <td>	
                                 <ul class="bg_list">

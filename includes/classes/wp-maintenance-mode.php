@@ -3,7 +3,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
     class WP_Maintenance_Mode {
 
-        const VERSION = '2.0.1';
+        const VERSION = '2.0.3';
 
         protected $plugin_slug = 'wp-maintenance-mode';
         protected $plugin_settings;
@@ -85,8 +85,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                         4 => 'wp-admin',
                         5 => 'wp-admin/admin-ajax.php'
                     ),
-                    'notice' => 1,
-                    'author_link' => 1
+                    'notice' => 1
                 ),
                 'design' => array(
                     'title' => __('Maintenance mode', $this->plugin_slug),
@@ -267,10 +266,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
                 if (isset($old_options['notice'])) {
                     $default_options['general']['notice'] = $old_options['notice'];
-                }
-
-                if (isset($old_options['link'])) {
-                    $default_options['general']['author_link'] = $old_options['link'];
                 }
 
                 if (!empty($old_options['title'])) {

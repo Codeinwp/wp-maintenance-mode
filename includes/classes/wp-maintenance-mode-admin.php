@@ -201,7 +201,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                             $_POST['options']['general']['exclude'] = array();
                         }
                         $_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
-                        $_POST['options']['general']['author_link'] = (int) $_POST['options']['general']['author_link'];
 
                         // delete cache everytime
                         $this->delete_cache();
@@ -256,9 +255,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['modules']['countdown_status'] = (int) $_POST['options']['modules']['countdown_status'];
                         $_POST['options']['modules']['countdown_start'] = sanitize_text_field($_POST['options']['modules']['countdown_start']);
                         $_POST['options']['modules']['countdown_details'] = array_map('trim', $_POST['options']['modules']['countdown_details']);
-                        $_POST['options']['modules']['countdown_details']['days'] = !empty($_POST['options']['modules']['countdown_details']['days']) && is_numeric($_POST['options']['modules']['countdown_details']['days']) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
-                        $_POST['options']['modules']['countdown_details']['hours'] = !empty($_POST['options']['modules']['countdown_details']['hours']) && is_numeric($_POST['options']['modules']['countdown_details']['hours']) ? $_POST['options']['modules']['countdown_details']['hours'] : 1;
-                        $_POST['options']['modules']['countdown_details']['minutes'] = !empty($_POST['options']['modules']['countdown_details']['minutes']) && is_numeric($_POST['options']['modules']['countdown_details']['minutes']) ? $_POST['options']['modules']['countdown_details']['minutes'] : 0;
+                        $_POST['options']['modules']['countdown_details']['days'] = isset($_POST['options']['modules']['countdown_details']['days']) && is_numeric($_POST['options']['modules']['countdown_details']['days']) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
+                        $_POST['options']['modules']['countdown_details']['hours'] = isset($_POST['options']['modules']['countdown_details']['hours']) && is_numeric($_POST['options']['modules']['countdown_details']['hours']) ? $_POST['options']['modules']['countdown_details']['hours'] : 1;
+                        $_POST['options']['modules']['countdown_details']['minutes'] = isset($_POST['options']['modules']['countdown_details']['minutes']) && is_numeric($_POST['options']['modules']['countdown_details']['minutes']) ? $_POST['options']['modules']['countdown_details']['minutes'] : 0;
                         if (!empty($_POST['options']['modules']['countdown_color'])) {
                             $_POST['options']['modules']['countdown_color'] = sanitize_text_field($_POST['options']['modules']['countdown_color']);
                             $custom_css['countdown_color'] = '.wrap .countdown span { color: ' . $_POST['options']['modules']['countdown_color'] . '; }';
