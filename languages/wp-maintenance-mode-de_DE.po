@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.0\n"
-"POT-Creation-Date: 2014-09-02 23:23+0200\n"
-"PO-Revision-Date: 2014-09-03 00:09+0100\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.3\n"
+"POT-Creation-Date: 2014-09-04 22:08+0200\n"
+"PO-Revision-Date: 2014-09-04 22:09+0200\n"
 "Last-Translator: Frank Bültge <frank@bueltge.de>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.7\n"
 "X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -22,11 +22,11 @@ msgstr ""
 msgid "WP Maintenance Mode"
 msgstr "WP Wartungsmodus"
 
-#: includes/classes/wp-maintenance-mode-admin.php:330
+#: includes/classes/wp-maintenance-mode-admin.php:329
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/classes/wp-maintenance-mode-admin.php:349
+#: includes/classes/wp-maintenance-mode-admin.php:348
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -35,12 +35,12 @@ msgstr ""
 "Der Wartungsmodus ist <strong>aktiv</strong>. Bitte vergiss nicht ihn zu <a "
 "href=\"%s\">deaktivieren</a>, wenn er nicht mehr benötigt wird."
 
+#: includes/classes/wp-maintenance-mode.php:91
 #: includes/classes/wp-maintenance-mode.php:92
-#: includes/classes/wp-maintenance-mode.php:93
 msgid "Maintenance mode"
 msgstr "Wartungsmodus"
 
-#: includes/classes/wp-maintenance-mode.php:95
+#: includes/classes/wp-maintenance-mode.php:94
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -48,11 +48,11 @@ msgstr ""
 "<p>Enschuldige die Unannehmlichkeiten,<br />unsere Website is aktuell in "
 "Wartungsarbeiten.<br />Vielen Dank für das Verständis.</p>"
 
-#: includes/classes/wp-maintenance-mode.php:113
+#: includes/classes/wp-maintenance-mode.php:112
 msgid "Notify me when it's ready"
 msgstr "Informiere mich, wenn  die Arbeiten abgeschlossen sind."
 
-#: includes/classes/wp-maintenance-mode.php:237
+#: includes/classes/wp-maintenance-mode.php:236
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -61,29 +61,29 @@ msgstr ""
 "Das WP Wartungsmodus Plugin wurde neu erstellt und du MUSST die <a href=\"%s"
 "\"></a> Einstellungen bearbeiten."
 
-#: includes/classes/wp-maintenance-mode.php:417
-#: includes/classes/wp-maintenance-mode.php:431
+#: includes/classes/wp-maintenance-mode.php:412
+#: includes/classes/wp-maintenance-mode.php:426
 msgid "Maintenance Mode"
 msgstr "Wartungsmodus"
 
-#: includes/classes/wp-maintenance-mode.php:622
-#: includes/classes/wp-maintenance-mode.php:650
+#: includes/classes/wp-maintenance-mode.php:617
+#: includes/classes/wp-maintenance-mode.php:645
 msgid "Please enter a valid email address."
 msgstr "Bitte gib eine valide E-Mail-Adresse an."
 
-#: includes/classes/wp-maintenance-mode.php:633
+#: includes/classes/wp-maintenance-mode.php:628
 msgid "You successfuly subscribed. Thanks!"
 msgstr "Erfolgreich abonniert, Danke!"
 
-#: includes/classes/wp-maintenance-mode.php:646
+#: includes/classes/wp-maintenance-mode.php:641
 msgid "All fields required."
 msgstr "Alle Felder sind notwendig."
 
-#: includes/classes/wp-maintenance-mode.php:667
+#: includes/classes/wp-maintenance-mode.php:662
 msgid "Message via contact"
 msgstr "Mitteilung via Kontakt"
 
-#: includes/classes/wp-maintenance-mode.php:671
+#: includes/classes/wp-maintenance-mode.php:666
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Deine E-Mail wurde an den Administrator der Webiste gesandt. Danke!"
 
@@ -91,7 +91,7 @@ msgstr "Deine E-Mail wurde an den Administrator der Webiste gesandt. Danke!"
 msgid "your e-mail..."
 msgstr "deine E-Mail..."
 
-#: views/maintenance.php:50 views/settings.php:258 views/sidebar.php:22
+#: views/maintenance.php:50 views/settings.php:250 views/sidebar.php:22
 #: views/sidebar.php:28
 msgid "Subscribe"
 msgstr "Abonniere"
@@ -115,11 +115,6 @@ msgstr "Senden"
 #: views/maintenance.php:96
 msgid "Contact us"
 msgstr "Kontaktiere uns"
-
-#: views/maintenance.php:101
-#, php-format
-msgid "Developed by <a href=\"%s\">Designmodo</a>"
-msgstr "Entwickelt durch <a href=\"%s\">Designmodo</a>"
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -153,15 +148,13 @@ msgstr "Inaktiv"
 msgid "Bypass for Search Bots"
 msgstr "bypass für Such-Bots"
 
-#: views/settings.php:34 views/settings.php:94 views/settings.php:104
-#: views/settings.php:230 views/settings.php:266 views/settings.php:303
-#: views/settings.php:356
+#: views/settings.php:34 views/settings.php:94 views/settings.php:222
+#: views/settings.php:258 views/settings.php:295 views/settings.php:348
 msgid "Yes"
 msgstr "Ja"
 
-#: views/settings.php:35 views/settings.php:95 views/settings.php:105
-#: views/settings.php:231 views/settings.php:267 views/settings.php:304
-#: views/settings.php:357
+#: views/settings.php:35 views/settings.php:95 views/settings.php:223
+#: views/settings.php:259 views/settings.php:296 views/settings.php:349
 msgid "No"
 msgstr "Nein"
 
@@ -230,158 +223,152 @@ msgstr "Hinweis"
 msgid "Do you want to see notices when maintenance mode is activated?"
 msgstr "Willst du den Hinweis sehen, wenn der Wartungsmodus aktiv ist?"
 
-#: views/settings.php:101
-msgid "Author link"
-msgstr "Autor-Link"
-
-#: views/settings.php:107
-msgid ""
-"Do you want to leave a link to the plugin author on your maintenance mode "
-"page?"
-msgstr "Willst du einen Link zum Autor dieses Plugins hinterlassen?"
-
-#: views/settings.php:115 views/settings.php:216 views/settings.php:382
+#: views/settings.php:105 views/settings.php:208 views/settings.php:374
 msgid "Save settings"
 msgstr "Einstellungen speichern"
 
-#: views/settings.php:116 views/settings.php:217 views/settings.php:383
+#: views/settings.php:106 views/settings.php:209 views/settings.php:375
 msgid "Reset settings"
 msgstr "Einstellungen zurücksetzen"
 
-#: views/settings.php:121
+#: views/settings.php:111
 msgid "Content"
 msgstr "Inhalt"
 
-#: views/settings.php:126
+#: views/settings.php:116
 msgid "Title (HTML tag)"
 msgstr "Title (html Tag)"
 
-#: views/settings.php:132
+#: views/settings.php:122
 msgid "Heading"
 msgstr "Überschrift"
 
-#: views/settings.php:139 views/settings.php:272
+#: views/settings.php:129 views/settings.php:264
 msgid "Text"
 msgstr "Text"
 
-#: views/settings.php:159
+#: views/settings.php:149
 msgid "Background"
 msgstr "Hintergrund"
 
-#: views/settings.php:164
+#: views/settings.php:154
 msgid "Choose type"
 msgstr "Type wählen"
 
-#: views/settings.php:167
+#: views/settings.php:157
 msgid "Custom color"
 msgstr "Benutzerdefinierte Farbe"
 
-#: views/settings.php:168
+#: views/settings.php:158
 msgid "Uploaded background"
 msgstr "Hochgeladene Hintergründe"
 
-#: views/settings.php:169
+#: views/settings.php:159
 msgid "Predefined background"
 msgstr "Vordefinierte Hintergründe"
 
-#: views/settings.php:174
+#: views/settings.php:164
 msgid "Choose color"
 msgstr "Farbe wählen"
 
-#: views/settings.php:180
+#: views/settings.php:170
 msgid "Upload background"
 msgstr "Hintergund laden"
 
-#: views/settings.php:184
+#: views/settings.php:174
 msgid "Backgrounds should have 1920x1280 px size."
 msgstr "Hintergründe sollten eine Größe von 1920x1280 px haben."
 
-#: views/settings.php:189
+#: views/settings.php:179
 msgid "Choose background"
 msgstr "Hintergrund wählen"
 
-#: views/settings.php:222
+#: views/settings.php:181
+msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+msgstr "oorsprong <a href=\"%\" target=\"_blank\">Free Photos</a>"
+
+#: views/settings.php:214
 msgid "Countdown"
 msgstr "Countdown"
 
-#: views/settings.php:227
+#: views/settings.php:219
 msgid "Show countdown?"
 msgstr "Zeige Countdown?"
 
-#: views/settings.php:236
+#: views/settings.php:228
 msgid "Start date"
 msgstr "Start-Datum"
 
-#: views/settings.php:242
+#: views/settings.php:234
 msgid "Countdown (remaining time)"
 msgstr "Countdown (Restzeit)"
 
-#: views/settings.php:244
+#: views/settings.php:236
 msgid "Days"
 msgstr "Tage"
 
-#: views/settings.php:245
+#: views/settings.php:237
 msgid "Hours"
 msgstr "Stunden"
 
-#: views/settings.php:246
+#: views/settings.php:238
 msgid "Minutes"
 msgstr "Minuten"
 
-#: views/settings.php:250
+#: views/settings.php:242
 msgid "Color"
 msgstr "Farbe"
 
-#: views/settings.php:263
+#: views/settings.php:255
 msgid "Show subscribe?"
 msgstr "Zeige Abonnenten?"
 
-#: views/settings.php:279
+#: views/settings.php:271
 msgid "Stats"
 msgstr "Statistik"
 
-#: views/settings.php:283
+#: views/settings.php:275
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Du hast %d Abonnenten"
 
-#: views/settings.php:288
+#: views/settings.php:280
 msgid "Export as CSV"
 msgstr "Export als CSV"
 
-#: views/settings.php:295
+#: views/settings.php:287
 msgid "Social Networks"
 msgstr "Soziale Netzwerke"
 
-#: views/settings.php:300
+#: views/settings.php:292
 msgid "Show social networks?"
 msgstr "Zeige soziale Netzwerke?"
 
-#: views/settings.php:348
+#: views/settings.php:340
 msgid "Contact"
 msgstr "Kontakt"
 
-#: views/settings.php:353
+#: views/settings.php:345
 msgid "Show contact?"
 msgstr "Zeige Kontakt?"
 
-#: views/settings.php:362
+#: views/settings.php:354
 msgid "Email address"
 msgstr "E-Mail-Adresse"
 
-#: views/settings.php:368
+#: views/settings.php:360
 msgid "Effects"
 msgstr "Effekte"
 
-#: views/settings.php:371
+#: views/settings.php:363
 msgid "Move top - Move bottom"
 msgstr "Bewegung nach oben - nach untern"
 
-#: views/settings.php:372
+#: views/settings.php:364
 msgid "Zoom - Zoomed"
 msgstr "Zoom - Vergrößern"
 
-#: views/settings.php:373
+#: views/settings.php:365
 msgid "Fold - Unfold"
 msgstr "Falten - Klappen"
 
@@ -420,3 +407,14 @@ msgstr "News"
 #: views/sidebar.php:50
 msgid "Resources"
 msgstr "Ressourcen"
+
+#~ msgid "Developed by <a href=\"%s\">Designmodo</a>"
+#~ msgstr "Entwickelt durch <a href=\"%s\">Designmodo</a>"
+
+#~ msgid "Author link"
+#~ msgstr "Autor-Link"
+
+#~ msgid ""
+#~ "Do you want to leave a link to the plugin author on your maintenance mode "
+#~ "page?"
+#~ msgstr "Willst du einen Link zum Autor dieses Plugins hinterlassen?"
