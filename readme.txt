@@ -66,6 +66,8 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 
 = 2.0.3 (N/A) =
 * Settings & sidebar view + old translation files edited
+* de_DE translation by Frank Bültge (http://bueltge.github.io/)
+* pt_PT translation by Pedro Mendonça (http://www.pedromendonca.pt)
 
 = 2.0.2 (04/09/2014) =
 * Removed "Author Link" option from General
