@@ -1,10 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.0\n"
-"POT-Creation-Date: 2014-08-28 21:10+0200\n"
-"PO-Revision-Date: 2014-09-08 18:18+0100\n"
+"POT-Creation-Date: 2014-09-08 19:23+0100\n"
+"PO-Revision-Date: 2014-09-08 19:29+0100\n"
 "Last-Translator: Dennis Hunink <dennishunink@me.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,20 +14,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"Language: nl\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:146
+#: includes/classes/wp-maintenance-mode-admin.php:153
 msgid "WP Maintenance Mode"
 msgstr "WP Maintenance Mode"
 
-#: includes/classes/wp-maintenance-mode-admin.php:296
+#: includes/classes/wp-maintenance-mode-admin.php:329
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/classes/wp-maintenance-mode-admin.php:315
+#: includes/classes/wp-maintenance-mode-admin.php:348
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -35,12 +35,12 @@ msgstr ""
 "De Onderhoudsmodus is <strong>actief</strong>. Vergeet niet om hem <a href="
 "\"%s\">uit te schakelen</a> wanneer je klaar bent."
 
+#: includes/classes/wp-maintenance-mode.php:91
 #: includes/classes/wp-maintenance-mode.php:92
-#: includes/classes/wp-maintenance-mode.php:93
 msgid "Maintenance mode"
 msgstr "Onderhoudsmodus"
 
-#: includes/classes/wp-maintenance-mode.php:95
+#: includes/classes/wp-maintenance-mode.php:94
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -48,11 +48,11 @@ msgstr ""
 "<p>Excuus voor het ongemak.<br />Onze website ondergaat op dit moment "
 "gepland onderhoud.<br/>Bedankt voor uw begrip.</p>"
 
-#: includes/classes/wp-maintenance-mode.php:113
+#: includes/classes/wp-maintenance-mode.php:112
 msgid "Notify me when it's ready"
 msgstr "Informeer mij wanneer het is afgerond"
 
-#: includes/classes/wp-maintenance-mode.php:220
+#: includes/classes/wp-maintenance-mode.php:236
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -61,65 +61,60 @@ msgstr ""
 "De WP Maintenance Mode Plugin is opnieuw opgestart en je MOET de <a href=\"%s"
 "\">instellingen</a> opnieuw bekijken."
 
-#: includes/classes/wp-maintenance-mode.php:418
-#: includes/classes/wp-maintenance-mode.php:432
+#: includes/classes/wp-maintenance-mode.php:412
+#: includes/classes/wp-maintenance-mode.php:426
 msgid "Maintenance Mode"
 msgstr "Onderhousmodus"
 
-#: includes/classes/wp-maintenance-mode.php:620
-#: includes/classes/wp-maintenance-mode.php:648
+#: includes/classes/wp-maintenance-mode.php:617
+#: includes/classes/wp-maintenance-mode.php:645
 msgid "Please enter a valid email address."
 msgstr "Voer een geldig e-mailadres in."
 
-#: includes/classes/wp-maintenance-mode.php:631
+#: includes/classes/wp-maintenance-mode.php:628
 msgid "You successfuly subscribed. Thanks!"
 msgstr "Je bent succesvol aangemeld, dankjewel!"
 
-#: includes/classes/wp-maintenance-mode.php:644
+#: includes/classes/wp-maintenance-mode.php:641
 msgid "All fields required."
 msgstr "Alle velden zijn verplicht."
 
-#: includes/classes/wp-maintenance-mode.php:665
+#: includes/classes/wp-maintenance-mode.php:662
 msgid "Message via contact"
 msgstr "Bericht via contact"
 
-#: includes/classes/wp-maintenance-mode.php:669
+#: includes/classes/wp-maintenance-mode.php:666
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Je bericht is verstuurd naar de beheerder. Dankjewel!"
 
-#: views/maintenance.php:45
+#: views/maintenance.php:49
 msgid "your e-mail..."
-msgstr "je e-mailadres..."
+msgstr "e-mailadres..."
 
-#: views/maintenance.php:46 views/settings.php:258 views/sidebar.php:22
+#: views/maintenance.php:50 views/settings.php:250 views/sidebar.php:22
 #: views/sidebar.php:28
 msgid "Subscribe"
 msgstr "Aanmelden"
 
-#: views/maintenance.php:83
+#: views/maintenance.php:87 views/sidebar.php:7
 msgid "Name"
 msgstr "Naam"
 
-#: views/maintenance.php:84
+#: views/maintenance.php:88
 msgid "E-mail"
 msgstr "E-mailadres"
 
-#: views/maintenance.php:86
+#: views/maintenance.php:90
 msgid "Your message"
 msgstr "Je bericht"
 
-#: views/maintenance.php:87
+#: views/maintenance.php:91
 msgid "Send"
 msgstr "Verstuur"
 
-#: views/maintenance.php:92
+#: views/maintenance.php:96
 msgid "Contact us"
 msgstr "Neem contact met ons op"
-
-#: views/maintenance.php:97
-#, php-format
-msgid "Developed by <a href=\"%s\">Designmodo</a>"
-msgstr "Ontwikkeld door <a href=\"%s\">Designmodo</a>"
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -153,15 +148,13 @@ msgstr "Gedeactiveerd"
 msgid "Bypass for Search Bots"
 msgstr "Omleiding voor zoekmachine robots"
 
-#: views/settings.php:34 views/settings.php:94 views/settings.php:104
-#: views/settings.php:230 views/settings.php:266 views/settings.php:303
-#: views/settings.php:356
+#: views/settings.php:34 views/settings.php:94 views/settings.php:222
+#: views/settings.php:258 views/settings.php:295 views/settings.php:348
 msgid "Yes"
 msgstr "Ja"
 
-#: views/settings.php:35 views/settings.php:95 views/settings.php:105
-#: views/settings.php:231 views/settings.php:267 views/settings.php:304
-#: views/settings.php:357
+#: views/settings.php:35 views/settings.php:95 views/settings.php:223
+#: views/settings.php:259 views/settings.php:296 views/settings.php:349
 msgid "No"
 msgstr "Nee"
 
@@ -183,7 +176,7 @@ msgstr "Frontend rol"
 
 #: views/settings.php:59
 msgid "Which user role is allowed to access the frontend of this blog?"
-msgstr "Which user role is allowed to access the frontend of this blog?"
+msgstr "Welke gebruikersrollen mogen de voorkant van dit blog bereiken?"
 
 #: views/settings.php:63
 msgid "Robots Meta Tag"
@@ -230,142 +223,154 @@ msgstr "Kennisgeving"
 msgid "Do you want to see notices when maintenance mode is activated?"
 msgstr "Wil je een bericht zien wanneer de onderhoudsmodus actief is?"
 
-#: views/settings.php:101
-msgid "Author link"
-msgstr "Auteur link"
+#: views/settings.php:105 views/settings.php:208 views/settings.php:374
+msgid "Save settings"
+msgstr "Instellingen opslaan"
 
-#: views/settings.php:107
-msgid ""
-"Do you want to leave a link to the plugin author on your maintenance mode "
-"page?"
-msgstr ""
-"Wil je een link naar de auteur van deze plugin tonen op de pagina van de "
-"onderhoudsmodus?"
+#: views/settings.php:106 views/settings.php:209 views/settings.php:375
+msgid "Reset settings"
+msgstr "Instellingen herstellen"
 
-#: views/settings.php:121
+#: views/settings.php:111
 msgid "Content"
 msgstr "Inhoud"
 
-#: views/settings.php:126
+#: views/settings.php:116
 msgid "Title (HTML tag)"
 msgstr "Titel (HTML tag)"
 
-#: views/settings.php:132
+#: views/settings.php:122
 msgid "Heading"
 msgstr "Titel"
 
-#: views/settings.php:139 views/settings.php:272
+#: views/settings.php:129 views/settings.php:264
 msgid "Text"
 msgstr "Tekst"
 
-#: views/settings.php:159
+#: views/settings.php:149
 msgid "Background"
 msgstr "Achtergrond"
 
-#: views/settings.php:164
+#: views/settings.php:154
 msgid "Choose type"
 msgstr "Kies type"
 
-#: views/settings.php:167
+#: views/settings.php:157
 msgid "Custom color"
 msgstr "Aangepaste kleur"
 
-#: views/settings.php:168
+#: views/settings.php:158
 msgid "Uploaded background"
 msgstr "Upload achtergrond"
 
-#: views/settings.php:169
+#: views/settings.php:159
 msgid "Predefined background"
-msgstr "Vooraf gedetineerde achtergrond"
+msgstr "Vooraf gedefineerde achtergrond"
 
-#: views/settings.php:174
+#: views/settings.php:164
 msgid "Choose color"
 msgstr "Kies kleur"
 
-#: views/settings.php:180
+#: views/settings.php:170
 msgid "Upload background"
 msgstr "Upload achtergrond"
 
-#: views/settings.php:184
+#: views/settings.php:174
 msgid "Backgrounds should have 1920x1280 px size."
 msgstr "Achtergronden moeten een afmeting van 1920x1280 px hebben."
 
-#: views/settings.php:189
+#: views/settings.php:179
 msgid "Choose background"
 msgstr "Kies achtergrond"
 
-#: views/settings.php:222
+#: views/settings.php:181
+msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+msgstr "bron <a href=\"%\" target=\"_blank\">Free Photos</a>"
+
+#: views/settings.php:214
 msgid "Countdown"
 msgstr "Countdown"
 
-#: views/settings.php:227
+#: views/settings.php:219
 msgid "Show countdown?"
 msgstr "Countdown tonen?"
 
-#: views/settings.php:236
+#: views/settings.php:228
 msgid "Start date"
 msgstr "Start datum"
 
-#: views/settings.php:242
+#: views/settings.php:234
 msgid "Countdown (remaining time)"
 msgstr "Countdown (resterende tijd)"
 
-#: views/settings.php:244
+#: views/settings.php:236
 msgid "Days"
 msgstr "Dagen"
 
-#: views/settings.php:245
+#: views/settings.php:237
 msgid "Hours"
 msgstr "Uren"
 
-#: views/settings.php:246
+#: views/settings.php:238
 msgid "Minutes"
 msgstr "Minuten"
 
-#: views/settings.php:250
+#: views/settings.php:242
 msgid "Color"
 msgstr "Kleur"
 
-#: views/settings.php:263
+#: views/settings.php:255
 msgid "Show subscribe?"
-msgstr "Toon abonneer?"
+msgstr "Toon aanmelden e-mail?"
 
-#: views/settings.php:279
+#: views/settings.php:271
 msgid "Stats"
 msgstr "Statistieken"
 
-#: views/settings.php:283
+#: views/settings.php:275
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Je hebt %d abonnee(s)"
 
-#: views/settings.php:288
+#: views/settings.php:280
 msgid "Export as CSV"
 msgstr "Exporteren als CSV"
 
-#: views/settings.php:295
+#: views/settings.php:287
 msgid "Social Networks"
 msgstr "Sociale netwerken"
 
-#: views/settings.php:300
+#: views/settings.php:292
 msgid "Show social networks?"
 msgstr "Toon sociale netwerken?"
 
-#: views/settings.php:348
+#: views/settings.php:340
 msgid "Contact"
 msgstr "Contact"
 
-#: views/settings.php:353
+#: views/settings.php:345
 msgid "Show contact?"
 msgstr "Toon contact?"
 
-#: views/settings.php:362
+#: views/settings.php:354
 msgid "Email address"
 msgstr "E-mailadres"
 
-#: views/settings.php:368
+#: views/settings.php:360
 msgid "Effects"
 msgstr "Effecten"
+
+#: views/settings.php:363
+msgid "Move top - Move bottom"
+msgstr "Naar top - Naar beneden"
+
+#: views/settings.php:364
+msgid "Zoom - Zoomed"
+msgstr "Zoom - Ingezoomd"
+
+#: views/settings.php:365
+msgid "Fold - Unfold"
+msgstr "Vouwen - Opvouwen"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
@@ -403,3 +408,16 @@ msgstr "Nieuws"
 #: views/sidebar.php:50
 msgid "Resources"
 msgstr "Ondersteuning"
+
+#~ msgid "Developed by <a href=\"%s\">Designmodo</a>"
+#~ msgstr "Ontwikkeld door <a href=\"%s\">Designmodo</a>"
+
+#~ msgid "Author link"
+#~ msgstr "Auteur link"
+
+#~ msgid ""
+#~ "Do you want to leave a link to the plugin author on your maintenance mode "
+#~ "page?"
+#~ msgstr ""
+#~ "Wil je een link naar de auteur van deze plugin tonen op de pagina van de "
+#~ "onderhoudsmodus?"
