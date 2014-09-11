@@ -72,6 +72,7 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 * nl_NL translation by dhunink (https://github.com/dhunink)
 * es_ES translation by Erick Ruiz de Chavez (http://erickruizdechavez.com/)
 * fr_FR translation by Florian TIAR (https://github.com/Mahjouba91)
+* pt_BR translation by Jonatas Araújo (http://www.designworld.com.br/)
 
 = 2.0.2 (04/09/2014) =
 * Removed "Author Link" option from General
