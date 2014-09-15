@@ -4,7 +4,7 @@ Plugin Name: WP Maintenance Mode
 Plugin URI: http://designmodo.com/
 Author: Designmodo
 Author URI: http://designmodo.com/
-Tags: maintenance, mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
+Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 4.0.0
 Stable tag: 2.0.3
@@ -66,13 +66,13 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 
 = 2.0.3 (N/A) =
 * Settings & sidebar view + old translation files edited
-* de_DE translation by Frank Bültge (http://bueltge.github.io/)
-* pt_PT translation by Pedro Mendonça (http://www.pedromendonca.pt)
+* de_DE translation by Frank BÃ¼ltge (http://bueltge.github.io/)
+* pt_PT translation by Pedro MendonÃ§a (http://www.pedromendonca.pt)
 * ru_RU translation by affectiosus (https://github.com/affectiosus)
 * nl_NL translation by dhunink (https://github.com/dhunink)
 * es_ES translation by Erick Ruiz de Chavez (http://erickruizdechavez.com/)
 * fr_FR translation by Florian TIAR (https://github.com/Mahjouba91)
-* pt_BR translation by Jonatas Araújo (http://www.designworld.com.br/)
+* pt_BR translation by Jonatas AraÃºjo (http://www.designworld.com.br/)
 
 = 2.0.2 (04/09/2014) =
 * Removed "Author Link" option from General
