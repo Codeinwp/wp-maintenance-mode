@@ -18,6 +18,7 @@ Adds a splash page to your site that lets visitors know your site is down for ma
 * Exclude URLs from maintenance.
 
 Developed by [Designmodo](http://designmodo.com)
+
 WordPress Theme: [Startup Framework for WordPress](http://designmodo.com/startup-wordpress/)
 
 ## F.A.Q.
