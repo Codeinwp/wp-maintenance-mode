@@ -1,0 +1,410 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode 2.0.3\n"
+"POT-Creation-Date: 2014-09-04 21:55+0200\n"
+"PO-Revision-Date: 2014-09-26 01:47+0100\n"
+"Last-Translator: Andréas Lundgren <adevade@gmail.com>\n"
+"Language-Team: Designmodo <info@designmodo.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: includes/classes\n"
+"X-Poedit-SearchPath-2: views\n"
+
+#: includes/classes/wp-maintenance-mode-admin.php:153
+msgid "WP Maintenance Mode"
+msgstr "WP Underhållsläge"
+
+#: includes/classes/wp-maintenance-mode-admin.php:329
+msgid "Settings"
+msgstr "Inställningar"
+
+#: includes/classes/wp-maintenance-mode-admin.php:348
+#, php-format
+msgid ""
+"The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
+"href=\"%s\">deactivate</a> as soon as you are done."
+msgstr ""
+"Underhållsläget är <strong>aktiverat</strong>. Glöm inte att <a href=\"%s"
+"\">avaktivera</a> det när du är klar."
+
+#: includes/classes/wp-maintenance-mode.php:91
+#: includes/classes/wp-maintenance-mode.php:92
+msgid "Maintenance mode"
+msgstr "Underhållsläge"
+
+#: includes/classes/wp-maintenance-mode.php:94
+msgid ""
+"<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
+"scheduled maintenance.<br />Thank you for your understanding.</p>"
+msgstr ""
+"<p>Ledsen för besväret.<br />Vår hemsida ligger för närvarande i "
+"underhållsläge.<br />Tack för att ni förstår.</p>"
+
+#: includes/classes/wp-maintenance-mode.php:112
+msgid "Notify me when it's ready"
+msgstr "Meddela mig när sidan är färdig"
+
+#: includes/classes/wp-maintenance-mode.php:236
+#, php-format
+msgid ""
+"WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
+"\">settings</a>."
+msgstr ""
+"Tillägget WP Underhållsläge återlanserades nyligen med massa nya <a href=\"%s"
+"\">inställningar</a>."
+
+#: includes/classes/wp-maintenance-mode.php:412
+#: includes/classes/wp-maintenance-mode.php:426
+msgid "Maintenance Mode"
+msgstr "Underhållsläge"
+
+#: includes/classes/wp-maintenance-mode.php:617
+#: includes/classes/wp-maintenance-mode.php:645
+msgid "Please enter a valid email address."
+msgstr "Vänligen fyll i en giltig e-postadress. "
+
+#: includes/classes/wp-maintenance-mode.php:628
+msgid "You successfuly subscribed. Thanks!"
+msgstr "Din e-post registrerades. Tack! "
+
+#: includes/classes/wp-maintenance-mode.php:641
+msgid "All fields required."
+msgstr "Vänligen fyll i alla fält."
+
+#: includes/classes/wp-maintenance-mode.php:662
+msgid "Message via contact"
+msgstr "Meddelande från underhållsläget"
+
+#: includes/classes/wp-maintenance-mode.php:666
+msgid "Your email was sent to the website administrator. Thanks!"
+msgstr "Ditt meddelande skickades till hemsidans ägare. Tack! "
+
+#: views/maintenance.php:49
+msgid "your e-mail..."
+msgstr "Din e-postadress..."
+
+#: views/maintenance.php:50 views/settings.php:250 views/sidebar.php:22
+#: views/sidebar.php:28
+msgid "Subscribe"
+msgstr "Prenumerera"
+
+#: views/maintenance.php:87 views/sidebar.php:7
+msgid "Name"
+msgstr "Namn"
+
+#: views/maintenance.php:88
+msgid "E-mail"
+msgstr "E-post"
+
+#: views/maintenance.php:90
+msgid "Your message"
+msgstr "Ditt meddelande"
+
+#: views/maintenance.php:91
+msgid "Send"
+msgstr "Skicka"
+
+#: views/maintenance.php:96
+msgid "Contact us"
+msgstr "Kontakta oss"
+
+#: views/settings.php:6
+msgid "Settings saved."
+msgstr "Inställningarna sparades."
+
+#: views/settings.php:13
+msgid "General"
+msgstr "Allmänt"
+
+#: views/settings.php:14
+msgid "Design"
+msgstr "Design"
+
+#: views/settings.php:15
+msgid "Modules"
+msgstr "Moduler"
+
+#: views/settings.php:24
+msgid "Status"
+msgstr "Status"
+
+#: views/settings.php:26
+msgid "Activated"
+msgstr "Aktiverad"
+
+#: views/settings.php:27
+msgid "Deactivated"
+msgstr "Avaktiverad"
+
+#: views/settings.php:31
+msgid "Bypass for Search Bots"
+msgstr "Låt sökrobotar gå förbi"
+
+#: views/settings.php:34 views/settings.php:94 views/settings.php:222
+#: views/settings.php:258 views/settings.php:295 views/settings.php:348
+msgid "Yes"
+msgstr "Ja"
+
+#: views/settings.php:35 views/settings.php:95 views/settings.php:223
+#: views/settings.php:259 views/settings.php:296 views/settings.php:349
+msgid "No"
+msgstr "Nej"
+
+#: views/settings.php:37
+msgid "Allow Search Bots to bypass maintenance mode?"
+msgstr "Tillåt sökrobotar att gå förbi underhållsläget? "
+
+#: views/settings.php:41
+msgid "Backend Role"
+msgstr "Back end-roll"
+
+#: views/settings.php:48
+msgid "Which user role is allowed to access the backend of this blog?"
+msgstr "Vilken användarroll får tillgång till back end av denna hemsidan?"
+
+#: views/settings.php:52
+msgid "Frontend Role"
+msgstr "Front end-roll"
+
+#: views/settings.php:59
+msgid "Which user role is allowed to access the frontend of this blog?"
+msgstr "Vilken användarroll får tillgång till front end av denna hemsidan?"
+
+#: views/settings.php:63
+msgid "Robots Meta Tag"
+msgstr "Robots meta-tagg"
+
+#: views/settings.php:69
+msgid ""
+"The robots meta tag lets you use a granular, page-specific approach to "
+"control how an individual page should be indexed and served to users in "
+"search results."
+msgstr ""
+"Metataggen för sökrobotar låter dig använda ett granulärt, sidspecifikt "
+"tillvägagångssätt för att kontrollera hur en enskild sida ska indexeras och "
+"visas för användare i sökresultat. "
+
+#: views/settings.php:73
+msgid "Redirection"
+msgstr "Omdirigering"
+
+#: views/settings.php:76
+msgid ""
+"If you want to redirect a user to a URL (which is not the WordPress "
+"dashboard) after login, then define a URL (incl. http://)"
+msgstr ""
+"Om du vill omdirigera en användare till en URL (förutom WordPresspanelen) "
+"efter att de har loggat in, fyll i en URL (inkl. http://)"
+
+#: views/settings.php:80
+msgid "Exclude"
+msgstr "Exkludera"
+
+#: views/settings.php:87
+msgid ""
+"Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
+"IP per line!"
+msgstr ""
+"Exkludera flöde, sidor, arkiv eller IP-adresser från underhållsläget. Lägg "
+"max till en permalänk/IP per rad! "
+
+#: views/settings.php:91
+msgid "Notice"
+msgstr "Meddelande"
+
+#: views/settings.php:97
+msgid "Do you want to see notices when maintenance mode is activated?"
+msgstr "Vill du se ett meddelande när underhållsläget är aktiverat?"
+
+#: views/settings.php:105 views/settings.php:208 views/settings.php:374
+msgid "Save settings"
+msgstr "Spara"
+
+#: views/settings.php:106 views/settings.php:209 views/settings.php:375
+msgid "Reset settings"
+msgstr "Återställ inställningar"
+
+#: views/settings.php:111
+msgid "Content"
+msgstr "Innehåll"
+
+#: views/settings.php:116
+msgid "Title (HTML tag)"
+msgstr "Titel (HTML-tagg)"
+
+#: views/settings.php:122
+msgid "Heading"
+msgstr "Rubrik"
+
+#: views/settings.php:129 views/settings.php:264
+msgid "Text"
+msgstr "Text"
+
+#: views/settings.php:149
+msgid "Background"
+msgstr "Bakgrund"
+
+#: views/settings.php:154
+msgid "Choose type"
+msgstr "Välj typ"
+
+#: views/settings.php:157
+msgid "Custom color"
+msgstr "Egen färg"
+
+#: views/settings.php:158
+msgid "Uploaded background"
+msgstr "Uppladdad bakgrund"
+
+#: views/settings.php:159
+msgid "Predefined background"
+msgstr "Fördefinierad bakgrund"
+
+#: views/settings.php:164
+msgid "Choose color"
+msgstr "Välj färg"
+
+#: views/settings.php:170
+msgid "Upload background"
+msgstr "Ladda upp bakgrund"
+
+#: views/settings.php:174
+msgid "Backgrounds should have 1920x1280 px size."
+msgstr "En bakgrund bör vara minst 1920x1280px. "
+
+#: views/settings.php:179
+msgid "Choose background"
+msgstr "Välj bakgrund"
+
+#: views/settings.php:181
+msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+msgstr "källa <a href=\"%\" target=\"_blank\">Free Photos</a>"
+
+#: views/settings.php:214
+msgid "Countdown"
+msgstr "Nedräkning"
+
+#: views/settings.php:219
+msgid "Show countdown?"
+msgstr "Visa nedräkning?"
+
+#: views/settings.php:228
+msgid "Start date"
+msgstr "Startdatum"
+
+#: views/settings.php:234
+msgid "Countdown (remaining time)"
+msgstr "Nedräkning (återstående tid)"
+
+#: views/settings.php:236
+msgid "Days"
+msgstr "Dagar"
+
+#: views/settings.php:237
+msgid "Hours"
+msgstr "Timmar"
+
+#: views/settings.php:238
+msgid "Minutes"
+msgstr "Minuter"
+
+#: views/settings.php:242
+msgid "Color"
+msgstr "Färg"
+
+#: views/settings.php:255
+msgid "Show subscribe?"
+msgstr "Visa prenumerationsknapp?"
+
+#: views/settings.php:271
+msgid "Stats"
+msgstr "Statistik"
+
+#: views/settings.php:275
+#, php-format
+msgid "You have %d subscriber(s)"
+msgstr "Du har %d prenumeranter"
+
+#: views/settings.php:280
+msgid "Export as CSV"
+msgstr "Exportera som CSV"
+
+#: views/settings.php:287
+msgid "Social Networks"
+msgstr "Sociala nätverk"
+
+#: views/settings.php:292
+msgid "Show social networks?"
+msgstr "Visa sociala nätverk?"
+
+#: views/settings.php:340
+msgid "Contact"
+msgstr "Kontakt"
+
+#: views/settings.php:345
+msgid "Show contact?"
+msgstr "Visa kontaktknapp?"
+
+#: views/settings.php:354
+msgid "Email address"
+msgstr "E-postadress"
+
+#: views/settings.php:360
+msgid "Effects"
+msgstr "Effekter"
+
+#: views/settings.php:363
+msgid "Move top - Move bottom"
+msgstr "Glid"
+
+#: views/settings.php:364
+msgid "Zoom - Zoomed"
+msgstr "Zoom"
+
+#: views/settings.php:365
+msgid "Fold - Unfold"
+msgstr "Vik"
+
+#: views/sidebar.php:3
+msgid "Plugin Info"
+msgstr "Information om tillägg"
+
+#: views/sidebar.php:13
+msgid "Author"
+msgstr "Författare"
+
+#: views/sidebar.php:14
+msgid "Website"
+msgstr "Hemsida"
+
+#: views/sidebar.php:15
+msgid "Twitter"
+msgstr "Twitter"
+
+#: views/sidebar.php:16
+msgid "GitHub"
+msgstr "GitHub"
+
+#: views/sidebar.php:24
+msgid "Subscribe now for early access to new WordPress themes."
+msgstr "Prenumerera nu för tidig tillgång till nya WordPress-teman."
+
+#: views/sidebar.php:27
+msgid "Enter your email address"
+msgstr "Fyll i din e-postadress"
+
+#: views/sidebar.php:34
+msgid "News"
+msgstr "Nyheter"
+
+#: views/sidebar.php:50
+msgid "Resources"
+msgstr "Resurser"
