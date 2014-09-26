@@ -47,7 +47,7 @@
             <?php if (!empty($this->plugin_settings['modules']['social_status']) && $this->plugin_settings['modules']['social_status'] == 1) { ?>
                 <div class="social" data-target="<?php echo!empty($this->plugin_settings['modules']['social_target']) ? 1 : 0; ?>">
                     <?php if (!empty($this->plugin_settings['modules']['social_twitter'])) { ?>
-                        <a class="tw" href="<?php echo stripslashes($this->plugin_settings['modules']['social_twitter']); ?>"<?php echo $target; ?>>twitter</a>
+                        <a class="tw" href="<?php echo stripslashes($this->plugin_settings['modules']['social_twitter']); ?>">twitter</a>
                     <?php } ?>
 
                     <?php if (!empty($this->plugin_settings['modules']['social_facebook'])) { ?>
