@@ -49,6 +49,7 @@ if (is_multisite() && !function_exists('is_plugin_active_for_network')) {
 /**
  * FRONTEND
  */
+require_once(WPMM_CLASSES_PATH . 'wp-maintenance-mode-shortcodes.php');
 require_once(WPMM_CLASSES_PATH . 'wp-maintenance-mode.php');
 register_activation_hook(__FILE__, array('WP_Maintenance_Mode', 'activate'));
 register_deactivation_hook(__FILE__, array('WP_Maintenance_Mode', 'deactivate'));

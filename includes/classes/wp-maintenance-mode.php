@@ -18,6 +18,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
             // Activate plugin when new blog is added
             add_action('wpmu_new_blog', array($this, 'activate_new_site'));
 
+            // Add shortcodes
+            add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));
+
             if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                 // INIT
                 add_action('init', array($this, 'init'));
@@ -30,6 +33,11 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
                 // Redirect 
                 add_action('admin_init', array($this, 'redirect'));
+
+                // Google Analytics tracking script
+                if (!empty($this->plugin_settings['modules']['ga_status']) && $this->plugin_settings['modules']['ga_status'] == 1 && !empty($this->plugin_settings['modules']['ga_code'])) {
+                    add_action('wpmm_head', create_function('', 'echo "' . stripslashes($this->plugin_settings['modules']['ga_code']) . '";'));
+                }
             }
         }
 
@@ -85,7 +93,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                         4 => 'wp-admin',
                         5 => 'wp-admin/admin-ajax.php'
                     ),
-                    'notice' => 1
+                    'notice' => 1,
+                    'admin_link' => 0
                 ),
                 'design' => array(
                     'title' => __('Maintenance mode', $this->plugin_slug),
@@ -112,15 +121,19 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     'subscribe_text' => __('Notify me when it\'s ready', $this->plugin_slug),
                     'subscribe_text_color' => '',
                     'social_status' => 0,
+                    'social_target' => 1,
                     'social_github' => '',
                     'social_dribbble' => '',
                     'social_twitter' => '',
                     'social_facebook' => '',
                     'social_pinterest' => '',
                     'social_google+' => '',
+                    'social_linkedin' => '',
                     'contact_status' => 0,
                     'contact_email' => get_option('admin_email') ? get_option('admin_email') : '',
                     'contact_effects' => 'move_top|move_bottom',
+                    'ga_status' => 0,
+                    'ga_code' => '',
                     'custom_css' => array()
                 )
             );
@@ -439,7 +452,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 $heading = apply_filters('wpmm_heading', $heading);
 
                 $text = !empty($this->plugin_settings['design']['text']) ? $this->plugin_settings['design']['text'] : '';
-                $text = apply_filters('wpmm_text', $text);
+                $text = apply_filters('wpmm_text', do_shortcode($text));
 
                 // COUNTDOWN
                 $countdown_start = !empty($this->plugin_settings['modules']['countdown_start']) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_data'];
@@ -475,7 +488,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) {
                     include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
                 } else {
-                    include(WPMM_VIEWS_PATH . 'maintenance.php');
+                    include_once(WPMM_VIEWS_PATH . 'maintenance.php');
                 }
                 ob_flush();
 

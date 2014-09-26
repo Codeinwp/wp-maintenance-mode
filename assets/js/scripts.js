@@ -13,6 +13,17 @@ jQuery(function($) {
     }
 
     /**
+     * SOCIAL LINKS
+     */
+    if ($('.social').length > 0) {
+        var link_target = $('.social').data('target');
+
+        if (link_target == 1) {
+            $('.social a').attr('target', '_blank');
+        }
+    }
+
+    /**
      * SUBSCRIBE FORM
      */
     if ($('.subscribe_form').length > 0) {

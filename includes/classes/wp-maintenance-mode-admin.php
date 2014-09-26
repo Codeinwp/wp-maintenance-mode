@@ -8,6 +8,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         protected $plugin_slug;
         protected $plugin_settings;
         protected $plugin_default_settings;
+        protected $plugin_basename;
         protected $plugin_screen_hook_suffix = null;
 
         private function __construct() {
@@ -15,6 +16,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $this->plugin_slug = $plugin->get_plugin_slug();
             $this->plugin_settings = $plugin->get_plugin_settings();
             $this->plugin_default_settings = $plugin->default_settings();
+            $this->plugin_basename = plugin_basename(WPMM_PATH . $this->plugin_slug . '.php');
 
             // Load admin style sheet and JavaScript.
             add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
@@ -24,12 +26,11 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             add_action('admin_menu', array($this, 'add_plugin_menu'));
 
             // Add an action link pointing to the options page
-            $plugin_basename = plugin_basename(WPMM_PATH . $this->plugin_slug . '.php');
-            if (is_multisite() && is_plugin_active_for_network($plugin_basename)) {
+            if (is_multisite() && is_plugin_active_for_network($this->plugin_basename)) {
                 // settings link will point to admin_url of the main blog, not to network_admin_url
-                add_filter('network_admin_plugin_action_links_' . $plugin_basename, array($this, 'add_settings_link'));
+                add_filter('network_admin_plugin_action_links_' . $this->plugin_basename, array($this, 'add_settings_link'));
             } else {
-                add_filter('plugin_action_links_' . $plugin_basename, array($this, 'add_settings_link'));
+                add_filter('plugin_action_links_' . $this->plugin_basename, array($this, 'add_settings_link'));
             }
 
             // Add admin notices
@@ -201,6 +202,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                             $_POST['options']['general']['exclude'] = array();
                         }
                         $_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
+                        $_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
 
                         // delete cache everytime
                         $this->delete_cache();
@@ -215,7 +217,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                             $_POST['options']['design']['heading_color'] = sanitize_text_field($_POST['options']['design']['heading_color']);
                             $custom_css['heading_color'] = '.wrap h1 { color: ' . $_POST['options']['design']['heading_color'] . '; }';
                         }
+                        add_filter('safe_style_css', array($this, 'add_safe_style_css')); // add before we save
                         $_POST['options']['design']['text'] = wp_kses_post($_POST['options']['design']['text']);
+                        remove_filter('safe_style_css', array($this, 'add_safe_style_css')); // remove after we save
+                        
                         if (!empty($_POST['options']['design']['text_color'])) {
                             $_POST['options']['design']['text_color'] = sanitize_text_field($_POST['options']['design']['text_color']);
                             $custom_css['text_color'] = '.wrap h2 { color: ' . $_POST['options']['design']['text_color'] . '; }';
@@ -268,23 +273,29 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['modules']['subscribe_text'] = sanitize_text_field($_POST['options']['modules']['subscribe_text']);
                         if (!empty($_POST['options']['modules']['subscribe_text_color'])) {
                             $_POST['options']['modules']['subscribe_text_color'] = sanitize_text_field($_POST['options']['modules']['subscribe_text_color']);
-                            $custom_css['subscribe_text_color'] = '.wrap h3 { color: ' . $_POST['options']['modules']['subscribe_text_color'] . '; }';
+                            $custom_css['subscribe_text_color'] = '.wrap h3, .wrap .subscribe_wrapper { color: ' . $_POST['options']['modules']['subscribe_text_color'] . '; }';
                         }
 
                         // SOCIAL NETWORKS
                         $_POST['options']['modules']['social_status'] = (int) $_POST['options']['modules']['social_status'];
+                        $_POST['options']['modules']['social_target'] = (int) $_POST['options']['modules']['social_target'];
                         $_POST['options']['modules']['social_github'] = sanitize_text_field($_POST['options']['modules']['social_github']);
                         $_POST['options']['modules']['social_dribbble'] = sanitize_text_field($_POST['options']['modules']['social_dribbble']);
                         $_POST['options']['modules']['social_twitter'] = sanitize_text_field($_POST['options']['modules']['social_twitter']);
                         $_POST['options']['modules']['social_facebook'] = sanitize_text_field($_POST['options']['modules']['social_facebook']);
                         $_POST['options']['modules']['social_pinterest'] = sanitize_text_field($_POST['options']['modules']['social_pinterest']);
                         $_POST['options']['modules']['social_google+'] = sanitize_text_field($_POST['options']['modules']['social_google+']);
+                        $_POST['options']['modules']['social_linkedin'] = sanitize_text_field($_POST['options']['modules']['social_linkedin']);
 
                         // CONTACT
                         $_POST['options']['modules']['contact_status'] = (int) $_POST['options']['modules']['contact_status'];
                         $_POST['options']['modules']['contact_email'] = sanitize_text_field($_POST['options']['modules']['contact_email']);
                         $_POST['options']['modules']['contact_effects'] = sanitize_text_field($_POST['options']['modules']['contact_effects']);
-
+                        
+                        // GOOGLE ANALYTICS
+                        $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
+                        $_POST['options']['modules']['ga_code'] = wp_kses(trim($_POST['options']['modules']['ga_code']), array('script' => array()));
+                        
                         $_POST['options']['modules']['custom_css'] = $custom_css;
 
                         // delete cache when is activated
@@ -300,6 +311,24 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         }
 
         /**
+         * Add new safe inline style css (use by wp_kses_attr in wp_kses_post)
+         * - bug discovered by cokemorgan: https://github.com/Designmodocom/WP-Maintenance-Mode/issues/56
+         * 
+         * @param array $properties
+         * @return array
+         */
+        public function add_safe_style_css($properties) {
+            $new_properties = array(
+                'min-height',
+                'max-height',
+                'min-width',
+                'max-width'
+            );
+
+            return array_merge($new_properties, $properties);
+        }
+
+        /**
          * Delete cache if any cache plugin (wp_cache or w3tc) is activated
          * 
          * @since 2.0.1
@@ -307,7 +336,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function delete_cache() {
             // Super Cache Plugin
             if (function_exists('wp_cache_clear_cache')) {
-                wp_cache_clear_cache(get_current_blog_id());
+                wp_cache_clear_cache(is_multisite() && is_plugin_active_for_network($this->plugin_basename) ? get_current_blog_id() : '');
             }
 
             // W3 Total Cache Plugin

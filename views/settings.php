@@ -96,7 +96,17 @@
                                         </select>
                                         <p class="description"><?php _e('Do you want to see notices when maintenance mode is activated?', $this->plugin_slug); ?></p>
                                     </td>
-                                </tr>                                
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[general][admin_link]"><?php _e('Dashboard link', $this->plugin_slug); ?></label></th>
+                                    <td>	
+                                        <select name="options[general][admin_link]">
+                                            <option value="1" <?php selected($this->plugin_settings['general']['admin_link'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['general']['admin_link'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
+                                        </select>
+                                        <p class="description"><?php _e('Do you want to add a link to the dashboard on your maintenance mode page?', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>                                 
                             </tbody>
                         </table>
 
@@ -298,6 +308,16 @@
                                     </td>
                                 </tr>
                                 <tr valign="top">
+                                    <th scope="row"><label for="options[modules][social_target]"><?php _e('Links target?', $this->plugin_slug); ?></label></th>
+                                    <td>	
+                                        <select name="options[modules][social_target]">
+                                            <option value="1" <?php selected($this->plugin_settings['modules']['social_target'], 1); ?>><?php _e('New page', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['modules']['social_target'], 0); ?>><?php _e('Same page', $this->plugin_slug); ?></option>
+                                        </select>
+                                        <p class="description"><?php _e('Choose how the links will open.', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>                                
+                                <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_github]">Github</label></th>
                                     <td>	
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_github'])); ?>" name="options[modules][social_github]" />
@@ -333,7 +353,12 @@
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_google+'])); ?>" name="options[modules][social_google+]" />
                                     </td>
                                 </tr>
-
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[modules][social_linkedin]">Linkedin</label></th>
+                                    <td>	
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_linkedin'])); ?>" name="options[modules][social_linkedin]" />
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>   
 
@@ -367,7 +392,29 @@
                                     </td>
                                 </tr>                                
                             </tbody>
-                        </table>                          
+                        </table>   
+
+                        <h3>&raquo; <?php _e('Google Analytics', $this->plugin_slug); ?></h3>
+
+                        <table class="form-table">
+                            <tbody>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[modules][ga_status]"><?php _e('Use Google Analytics?', $this->plugin_slug); ?></label></th>
+                                    <td>	
+                                        <select name="options[modules][ga_status]">
+                                            <option value="1" <?php selected($this->plugin_settings['modules']['ga_status'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['modules']['ga_status'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[modules][ga_code]"><?php _e('Tracking code', $this->plugin_slug); ?></label></th>
+                                    <td>	
+                                        <textarea rows="7" name="options[modules][ga_code]" style="width: 625px;"><?php echo stripslashes($this->plugin_settings['modules']['ga_code']); ?></textarea>
+                                    </td>
+                                </tr>                                
+                            </tbody>
+                        </table>                         
 
                         <?php wp_nonce_field('tab-modules'); ?>
                         <input type="hidden" value="modules" name="tab" />
