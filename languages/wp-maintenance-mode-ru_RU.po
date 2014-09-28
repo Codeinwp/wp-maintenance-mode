@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.3\n"
 "POT-Creation-Date: 2014-09-26 19:07+0200\n"
-"PO-Revision-Date: 2014-09-26 19:07+0200\n"
+"PO-Revision-Date: 2014-09-28 11:24+0200\n"
 "Last-Translator: Constantine Reeves <affectiosus@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
@@ -90,7 +90,7 @@ msgstr "Ваше сообщение отправлено администрат�
 
 #: views/loginform.php:8
 msgid "Login"
-msgstr ""
+msgstr "Войти"
 
 #: views/maintenance.php:41
 msgid "your e-mail..."
@@ -122,7 +122,7 @@ msgstr "Свяжитесь с нами"
 
 #: views/maintenance.php:97
 msgid "Dashboard"
-msgstr ""
+msgstr "Панель управления"
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -239,12 +239,14 @@ msgstr ""
 
 #: views/settings.php:101
 msgid "Dashboard link"
-msgstr ""
+msgstr "Ссылка на панель управления"
 
 #: views/settings.php:107
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr ""
+"Вы хотите добавить ссылку на панель управления на странице технического "
+"обслуживания?"
 
 #: views/settings.php:115 views/settings.php:218 views/settings.php:421
 msgid "Save settings"
@@ -369,19 +371,19 @@ msgstr "Отображать социальные сети?"
 
 #: views/settings.php:311
 msgid "Links target?"
-msgstr ""
+msgstr "Куда ведут ссылки?"
 
 #: views/settings.php:314
 msgid "New page"
-msgstr ""
+msgstr "Новая страница"
 
 #: views/settings.php:315
 msgid "Same page"
-msgstr ""
+msgstr "Такая же страница"
 
 #: views/settings.php:317
 msgid "Choose how the links will open."
-msgstr ""
+msgstr "Как будут открываться ссылки?"
 
 #: views/settings.php:365
 msgid "Contact"
@@ -413,15 +415,15 @@ msgstr "Поворот"
 
 #: views/settings.php:397
 msgid "Google Analytics"
-msgstr ""
+msgstr "Google Analytics"
 
 #: views/settings.php:402
 msgid "Use Google Analytics?"
-msgstr ""
+msgstr "Использовать Google Analytics?"
 
 #: views/settings.php:411
 msgid "Tracking code"
-msgstr ""
+msgstr "Код слежения"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
@@ -445,7 +447,7 @@ msgstr "GitHub"
 
 #: views/sidebar.php:22
 msgid "WordPress Themes"
-msgstr ""
+msgstr "Темы WordPress"
 
 #: views/sidebar.php:31
 msgid "Resources"
