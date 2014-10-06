@@ -15,6 +15,7 @@ function single_uninstall() {
     // delete options
     delete_option('wpmm_settings');
     delete_option('wpmm_notice');
+    delete_option('wpmm_version');
 }
 
 // Let's do it!

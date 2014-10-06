@@ -7,19 +7,24 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
         protected $plugin_slug = 'wp-maintenance-mode';
         protected $plugin_settings;
+        protected $plugin_basename;
         protected static $instance = null;
 
         private function __construct() {
             $this->plugin_settings = get_option('wpmm_settings');
+            $this->plugin_basename = plugin_basename(WPMM_PATH . $this->plugin_slug . '.php');
 
             // Load plugin text domain
             add_action('init', array($this, 'load_plugin_textdomain'));
 
+            // Add shortcodes
+            add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));            
+            
             // Activate plugin when new blog is added
             add_action('wpmu_new_blog', array($this, 'activate_new_site'));
 
-            // Add shortcodes
-            add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));
+            // Check update
+            add_action('admin_init', array($this, 'check_update'));
 
             if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                 // INIT
@@ -86,12 +91,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     'meta_robots' => 0,
                     'redirection' => '',
                     'exclude' => array(
-                        0 => 'wp-cron',
-                        1 => 'feed',
-                        2 => 'wp-login',
-                        3 => 'login',
-                        4 => 'wp-admin',
-                        5 => 'wp-admin/admin-ajax.php'
+                        0 => 'feed',
+                        1 => 'wp-login',
+                        2 => 'login'
                     ),
                     'notice' => 1,
                     'admin_link' => 0
@@ -146,6 +148,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
          * @param boolean $network_wide
          */
         public static function activate($network_wide) {
+            // because we need translated items when activate :)
+            load_plugin_textdomain(self::get_instance()->plugin_slug, FALSE, WPMM_LANGUAGES_PATH);
+            
+            // do the job
             if (function_exists('is_multisite') && is_multisite()) {
                 if ($network_wide) {
                     // Get all blog ids
@@ -172,6 +178,17 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 // delete old options
                 delete_option('wp-maintenance-mode');
                 delete_option('wp-maintenance-mode-msqld');
+            }
+        }
+
+        /**
+         * Check plugin version for updating process
+         */
+        public function check_update() {
+            $version = get_option('wpmm_version', '0');
+
+            if (!version_compare($version, WP_Maintenance_Mode::VERSION, '=')) {
+                self::activate(is_multisite() && is_plugin_active_for_network($this->plugin_basename) ? true : false);
             }
         }
 
@@ -235,15 +252,13 @@ if (!class_exists('WP_Maintenance_Mode')) {
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
 
-            // set notice if the plugin was installed before & set default settings
+            // get all options for different versions of the plugin
+            $v2_options = get_option('wpmm_settings');
+            $old_options = (is_multisite() && $network_wide) ? get_site_option('wp-maintenance-mode') : get_option('wp-maintenance-mode');
             $default_options = self::get_instance()->default_settings();
-            if (is_multisite() && $network_wide) {
-                $old_options = get_site_option('wp-maintenance-mode');
-            } else {
-                $old_options = get_option('wp-maintenance-mode');
-            }
 
-            if (!empty($old_options)) {
+            // set notice if the plugin was installed before & set default settings
+            if (!empty($old_options) && empty($v2_options)) {
                 add_option('wpmm_notice', array(
                     'class' => 'updated',
                     'msg' => sprintf(__('WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', self::get_instance()->plugin_slug), admin_url('options-general.php?page=' . self::get_instance()->plugin_slug))
@@ -279,6 +294,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
                 if (isset($old_options['notice'])) {
                     $default_options['general']['notice'] = $old_options['notice'];
+                }
+
+                if (isset($old_options['admin_link'])) {
+                    $default_options['general']['admin_link'] = $old_options['admin_link'];
                 }
 
                 if (!empty($old_options['title'])) {
@@ -357,8 +376,11 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 }
             }
 
-            // set default settings
+            // set options
             add_option('wpmm_settings', $default_options);
+                
+            // set current version
+            update_option('wpmm_version', WP_Maintenance_Mode::VERSION);
         }
 
         /**
@@ -404,6 +426,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
              */
             if (
                     (!$this->check_user_role()) &&
+                    !strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
                     !strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
                     !strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
                     !strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&

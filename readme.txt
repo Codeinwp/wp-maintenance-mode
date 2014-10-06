@@ -69,7 +69,7 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 
 == Changelog ==
 
-= 2.0.3 (N/A) =
+= 2.0.3 (07/10/2014) =
 * WP_Super_Cache issue was fixed
 * fixed "Subscribe" button issue on Safari mobile
 * fixed color of subscribe-success message (same color as subscribe_text)
@@ -77,8 +77,10 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 * new module "Google Analytics"
 * loginform shortcode reintroduced
 * dashboard link on maintenance page reintroduced
-* the content editor accepts new css inline styles: min-height, max-height, min-width, max-width. Use them wisely! :)
+* the content editor accepts new css inline properties: min-height, max-height, min-width, max-width. Use them wisely! :)
 * Settings & sidebar view + old translation files edited
+* Update from old version 1.x to 2.x issue was fixed
+* Translate on activation issue was fixed
 * de_DE translation by Frank Bültge (http://bueltge.github.io/)
 * pt_PT translation by Pedro Mendonça (http://www.pedromendonca.pt)
 * ru_RU translation by affectiosus (https://github.com/affectiosus)

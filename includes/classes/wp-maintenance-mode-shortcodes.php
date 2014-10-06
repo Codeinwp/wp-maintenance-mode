@@ -1,7 +1,9 @@
 <?php
 
 if (!class_exists('WP_Maintenance_Mode_Shortcodes')) {
-
+    /**
+     * Thanks Woocommerce for this idea :)
+     */
     class WP_Maintenance_Mode_Shortcodes {
 
         /**

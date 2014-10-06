@@ -204,8 +204,16 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
                         $_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
 
-                        // delete cache everytime
-                        $this->delete_cache();
+                        // delete cache when is already activated, when is activated and when is deactivated
+                        if (
+                                isset($this->plugin_settings['general']['status']) && isset($_POST['options']['general']['status']) && 
+                                (
+                                ($this->plugin_settings['general']['status'] == 1 && in_array($_POST['options']['general']['status'], array(0, 1))) ||
+                                ($this->plugin_settings['general']['status'] == 0 && $_POST['options']['general']['status'] == 1)
+                                )
+                        ) {
+                            $this->delete_cache();
+                        }
                         break;
                     case 'design':
                         $custom_css = array();
@@ -220,7 +228,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         add_filter('safe_style_css', array($this, 'add_safe_style_css')); // add before we save
                         $_POST['options']['design']['text'] = wp_kses_post($_POST['options']['design']['text']);
                         remove_filter('safe_style_css', array($this, 'add_safe_style_css')); // remove after we save
-                        
+
                         if (!empty($_POST['options']['design']['text_color'])) {
                             $_POST['options']['design']['text_color'] = sanitize_text_field($_POST['options']['design']['text_color']);
                             $custom_css['text_color'] = '.wrap h2 { color: ' . $_POST['options']['design']['text_color'] . '; }';
@@ -291,11 +299,11 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['modules']['contact_status'] = (int) $_POST['options']['modules']['contact_status'];
                         $_POST['options']['modules']['contact_email'] = sanitize_text_field($_POST['options']['modules']['contact_email']);
                         $_POST['options']['modules']['contact_effects'] = sanitize_text_field($_POST['options']['modules']['contact_effects']);
-                        
+
                         // GOOGLE ANALYTICS
                         $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
                         $_POST['options']['modules']['ga_code'] = wp_kses(trim($_POST['options']['modules']['ga_code']), array('script' => array()));
-                        
+
                         $_POST['options']['modules']['custom_css'] = $custom_css;
 
                         // delete cache when is activated
