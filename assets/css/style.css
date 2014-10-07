@@ -18,7 +18,7 @@ ol, ul {
 }
 blockquote, q {
     display: block;
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
     text-align: left;
     position: relative;
@@ -46,7 +46,7 @@ strong, b {
     font-weight: bold;
 }
 ol {
-    width: 500px;
+    width: 600px;
     margin: 0 auto;
     text-align: left;
 }
@@ -54,7 +54,7 @@ ol li {
     list-style-type: decimal;
 }
 ul {
-    width: 500px;
+    width: 600px;
     margin: 0 auto;
     text-align: left;
 }
@@ -75,7 +75,7 @@ body {
     font-family: Helvetica Neue, Arial, sans-serif;
 }
 .wrap {
-    width: 500px;
+    width: 605px;
     margin: 100px auto 0;
     text-align: center;
 }
@@ -202,7 +202,7 @@ body {
 .wrap .social a {
     width: 22px;
     height: 22px;
-    margin: 0 0 20px 60px;
+    margin: 0 0 20px 55px;
     background-image: url('../images/icn_sprite.png');
     background-repeat: no-repeat;
     display: inline-block;

@@ -322,6 +322,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          * Add new safe inline style css (use by wp_kses_attr in wp_kses_post)
          * - bug discovered by cokemorgan: https://github.com/Designmodocom/WP-Maintenance-Mode/issues/56
          * 
+         * @since 2.0.3
          * @param array $properties
          * @return array
          */

@@ -18,8 +18,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
             add_action('init', array($this, 'load_plugin_textdomain'));
 
             // Add shortcodes
-            add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));            
-            
+            add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));
+
             // Activate plugin when new blog is added
             add_action('wpmu_new_blog', array($this, 'activate_new_site'));
 
@@ -150,7 +150,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         public static function activate($network_wide) {
             // because we need translated items when activate :)
             load_plugin_textdomain(self::get_instance()->plugin_slug, FALSE, WPMM_LANGUAGES_PATH);
-            
+
             // do the job
             if (function_exists('is_multisite') && is_multisite()) {
                 if ($network_wide) {
@@ -161,28 +161,22 @@ if (!class_exists('WP_Maintenance_Mode')) {
                         self::single_activate($network_wide);
                         restore_current_blog();
                     }
-
-                    // delete old options
-                    delete_site_option('wp-maintenance-mode');
-                    delete_site_option('wp-maintenance-mode-msqld');
                 } else {
                     self::single_activate();
-
-                    // delete old options
-                    delete_option('wp-maintenance-mode');
-                    delete_option('wp-maintenance-mode-msqld');
                 }
             } else {
                 self::single_activate();
-
-                // delete old options
-                delete_option('wp-maintenance-mode');
-                delete_option('wp-maintenance-mode-msqld');
             }
+        
+            // delete old options
+            delete_option('wp-maintenance-mode');
+            delete_option('wp-maintenance-mode-msqld');
         }
 
         /**
          * Check plugin version for updating process
+         * 
+         * @since 2.0.3
          */
         public function check_update() {
             $version = get_option('wpmm_version', '0');
@@ -378,7 +372,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
             // set options
             add_option('wpmm_settings', $default_options);
-                
+
             // set current version
             update_option('wpmm_version', WP_Maintenance_Mode::VERSION);
         }
@@ -419,6 +413,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
         /**
          * Initialize when plugin is activated
+         * 
+         * @since 2.0.0
          */
         public function init() {
             /**
@@ -522,6 +518,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         /**
          * Check if the current user has access to backend / frontend based on his role compared with role from settings
          * 
+         * @since 2.0.0
          * @return boolean
          */
         public function check_user_role() {
@@ -547,6 +544,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         /**
          * Calculate backtime based on countdown remaining time if it is activated
          * 
+         * @since 2.0.0
          * @return int
          */
         public function calculate_backtime() {
@@ -562,6 +560,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         /**
          * Check if the visitor is a bot (using useragent)
          * 
+         * @since 2.0.0
          * @return boolean
          */
         public function check_search_bots() {
@@ -604,6 +603,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         /**
          * Check if slug / ip address exists in exclude list
          * 
+         * @since 2.0.0
          * @return boolean
          */
         public function check_exclude() {
@@ -624,6 +624,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         /**
          * Redirect if "Redirection" option is used and users don't have access to WordPress dashboard
          * 
+         * @since 2.0.0
          * @return null
          */
         public function redirect() {
@@ -644,6 +645,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
         /**
          * Save subscriber into database
          * 
+         * @since 2.0.0
          * @global object $wpdb
          */
         public function add_subscriber() {
@@ -669,6 +671,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
         /**
          * Send email via contact form
+         * 
+         * @since 2.0.0
          */
         public function send_contact() {
             $errors = array();

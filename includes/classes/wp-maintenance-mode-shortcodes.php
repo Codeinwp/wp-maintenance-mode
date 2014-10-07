@@ -1,13 +1,12 @@
 <?php
 
 if (!class_exists('WP_Maintenance_Mode_Shortcodes')) {
-    /**
-     * Thanks Woocommerce for this idea :)
-     */
     class WP_Maintenance_Mode_Shortcodes {
 
         /**
-         * Init shortcodes
+         * Add shortcodes
+         * 
+         * @since 2.0.3
          */
         public static function init() {
             $shortcodes = array(
@@ -22,6 +21,7 @@ if (!class_exists('WP_Maintenance_Mode_Shortcodes')) {
         /**
          * Shortcode Wrapper
          * 
+         * @since 2.0.3
          * @param string $function
          * @param array $atts
          * @param array $wrapper
@@ -40,6 +40,7 @@ if (!class_exists('WP_Maintenance_Mode_Shortcodes')) {
         /**
          * Login form shortcode.
          *
+         * @since 2.0.3
          * @param array $atts
          * @return string
          */
@@ -60,6 +61,7 @@ if (!class_exists('WP_Maintenance_Mode_Shortcode_Login')) {
         /**
          * Show login form
          * 
+         * @since 2.0.3
          * @param array $atts
          * @param string $content
          */
