@@ -1,30 +1,6 @@
 <?php
 
 /**
- * Get Designmodo posts
- * 
- * @param array $args
- * @return array
- */
-function get_designmodo_posts($args = array()) {
-    $args = wp_parse_args($args, array(
-        'feed' => 'http://feeds.feedburner.com/designmodo',
-        'posts_no' => 5
-    ));
-
-    // GET POSTS
-    $feed = fetch_feed($args['feed']);
-    if (!is_wp_error($feed)) {
-        $max_items = $feed->get_item_quantity($args['posts_no']);
-        $items = $feed->get_items(0, $max_items);
-
-        return $items;
-    }
-
-    return array();
-}
-
-/**
  * Get plugin info
  * 
  * @param string $plugin_slug

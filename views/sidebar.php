@@ -18,34 +18,15 @@
         </div>
     </div>
 
-    <div class="sidebar_box subscribe_box">
-        <h3><?php _e('Subscribe', $this->plugin_slug); ?></h3>
+    <div class="sidebar_box themes_box">
+        <h3><?php _e('WordPress Themes', $this->plugin_slug); ?></h3>
         <div class="inside">
-            <?php _e('Subscribe now for early access to new WordPress themes.', $this->plugin_slug); ?>
-
-            <form action="http://designmodo.us4.list-manage.com/subscribe/post?u=d7b5474e1bff23f08409d4ba9&amp;id=a2ae53acc1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" id="cse-search-box">
-                <input class="subscribe-input" type="text" name="EMAIL" id="mce-EMAIL" placeholder="<?php _e('Enter your email address', $this->plugin_slug); ?>" size="47" >
-                <button type="submit" class="button button-secondary"><?php _e('Subscribe', $this->plugin_slug); ?></button>
-            </form>
+            <ul>
+                <li><a href="<?php echo 'http://designmodo.com/startup-wordpress/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/startup-wordpress.jpg'; ?>" /></a></li>
+            </ul>
         </div>
-    </div>
-
-    <div class="sidebar_box news_box">
-        <h3><?php _e('News', $this->plugin_slug); ?></h3>
-        <div class="inside">
-            <?php
-            $items = get_designmodo_posts();
-            if (!empty($items)) {
-                ?>
-                <ul>
-                    <?php foreach ($items as $item) { ?>
-                        <li>&raquo; <a href="<?php echo esc_url($item->get_permalink()); ?>" target="_blank"><?php echo esc_html($item->get_title()); ?></a></li>
-                    <?php } ?>
-                </ul>
-            <?php } ?>
-        </div>
-    </div>
-
+    </div>     
+    
     <div class="sidebar_box resources_box">
         <h3><?php _e('Resources', $this->plugin_slug); ?></h3>
         <div class="inside">

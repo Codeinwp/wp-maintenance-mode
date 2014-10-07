@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.3\n"
-"POT-Creation-Date: 2014-09-04 21:55+0200\n"
-"PO-Revision-Date: 2014-09-26 01:47+0100\n"
+"POT-Creation-Date: 2014-09-26 19:07+0200\n"
+"PO-Revision-Date: 2014-09-26 19:07+0200\n"
 "Last-Translator: Andréas Lundgren <adevade@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.6.7\n"
 "X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -18,15 +18,15 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:153
+#: includes/classes/wp-maintenance-mode-admin.php:154
 msgid "WP Maintenance Mode"
 msgstr "WP Underhållsläge"
 
-#: includes/classes/wp-maintenance-mode-admin.php:329
+#: includes/classes/wp-maintenance-mode-admin.php:358
 msgid "Settings"
 msgstr "Inställningar"
 
-#: includes/classes/wp-maintenance-mode-admin.php:348
+#: includes/classes/wp-maintenance-mode-admin.php:377
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -35,12 +35,12 @@ msgstr ""
 "Underhållsläget är <strong>aktiverat</strong>. Glöm inte att <a href=\"%s"
 "\">avaktivera</a> det när du är klar."
 
-#: includes/classes/wp-maintenance-mode.php:91
-#: includes/classes/wp-maintenance-mode.php:92
+#: includes/classes/wp-maintenance-mode.php:100
+#: includes/classes/wp-maintenance-mode.php:101
 msgid "Maintenance mode"
 msgstr "Underhållsläge"
 
-#: includes/classes/wp-maintenance-mode.php:94
+#: includes/classes/wp-maintenance-mode.php:103
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -48,11 +48,11 @@ msgstr ""
 "<p>Ledsen för besväret.<br />Vår hemsida ligger för närvarande i "
 "underhållsläge.<br />Tack för att ni förstår.</p>"
 
-#: includes/classes/wp-maintenance-mode.php:112
+#: includes/classes/wp-maintenance-mode.php:121
 msgid "Notify me when it's ready"
 msgstr "Meddela mig när sidan är färdig"
 
-#: includes/classes/wp-maintenance-mode.php:236
+#: includes/classes/wp-maintenance-mode.php:249
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -61,60 +61,67 @@ msgstr ""
 "Tillägget WP Underhållsläge återlanserades nyligen med massa nya <a href=\"%s"
 "\">inställningar</a>."
 
-#: includes/classes/wp-maintenance-mode.php:412
-#: includes/classes/wp-maintenance-mode.php:426
+#: includes/classes/wp-maintenance-mode.php:425
+#: includes/classes/wp-maintenance-mode.php:439
 msgid "Maintenance Mode"
 msgstr "Underhållsläge"
 
-#: includes/classes/wp-maintenance-mode.php:617
-#: includes/classes/wp-maintenance-mode.php:645
+#: includes/classes/wp-maintenance-mode.php:630
+#: includes/classes/wp-maintenance-mode.php:658
 msgid "Please enter a valid email address."
 msgstr "Vänligen fyll i en giltig e-postadress. "
 
-#: includes/classes/wp-maintenance-mode.php:628
+#: includes/classes/wp-maintenance-mode.php:641
 msgid "You successfuly subscribed. Thanks!"
 msgstr "Din e-post registrerades. Tack! "
 
-#: includes/classes/wp-maintenance-mode.php:641
+#: includes/classes/wp-maintenance-mode.php:654
 msgid "All fields required."
 msgstr "Vänligen fyll i alla fält."
 
-#: includes/classes/wp-maintenance-mode.php:662
+#: includes/classes/wp-maintenance-mode.php:675
 msgid "Message via contact"
 msgstr "Meddelande från underhållsläget"
 
-#: includes/classes/wp-maintenance-mode.php:666
+#: includes/classes/wp-maintenance-mode.php:679
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Ditt meddelande skickades till hemsidans ägare. Tack! "
 
-#: views/maintenance.php:49
+#: views/loginform.php:8
+msgid "Login"
+msgstr ""
+
+#: views/maintenance.php:41
 msgid "your e-mail..."
 msgstr "Din e-postadress..."
 
-#: views/maintenance.php:50 views/settings.php:250 views/sidebar.php:22
-#: views/sidebar.php:28
+#: views/maintenance.php:42 views/settings.php:260
 msgid "Subscribe"
 msgstr "Prenumerera"
 
-#: views/maintenance.php:87 views/sidebar.php:7
+#: views/maintenance.php:83 views/sidebar.php:7
 msgid "Name"
 msgstr "Namn"
 
-#: views/maintenance.php:88
+#: views/maintenance.php:84
 msgid "E-mail"
 msgstr "E-post"
 
-#: views/maintenance.php:90
+#: views/maintenance.php:86
 msgid "Your message"
 msgstr "Ditt meddelande"
 
-#: views/maintenance.php:91
+#: views/maintenance.php:87
 msgid "Send"
 msgstr "Skicka"
 
-#: views/maintenance.php:96
+#: views/maintenance.php:92
 msgid "Contact us"
 msgstr "Kontakta oss"
+
+#: views/maintenance.php:97
+msgid "Dashboard"
+msgstr ""
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -148,13 +155,15 @@ msgstr "Avaktiverad"
 msgid "Bypass for Search Bots"
 msgstr "Låt sökrobotar gå förbi"
 
-#: views/settings.php:34 views/settings.php:94 views/settings.php:222
-#: views/settings.php:258 views/settings.php:295 views/settings.php:348
+#: views/settings.php:34 views/settings.php:94 views/settings.php:104
+#: views/settings.php:232 views/settings.php:268 views/settings.php:305
+#: views/settings.php:373 views/settings.php:405
 msgid "Yes"
 msgstr "Ja"
 
-#: views/settings.php:35 views/settings.php:95 views/settings.php:223
-#: views/settings.php:259 views/settings.php:296 views/settings.php:349
+#: views/settings.php:35 views/settings.php:95 views/settings.php:105
+#: views/settings.php:233 views/settings.php:269 views/settings.php:306
+#: views/settings.php:374 views/settings.php:406
 msgid "No"
 msgstr "Nej"
 
@@ -224,154 +233,191 @@ msgstr "Meddelande"
 msgid "Do you want to see notices when maintenance mode is activated?"
 msgstr "Vill du se ett meddelande när underhållsläget är aktiverat?"
 
-#: views/settings.php:105 views/settings.php:208 views/settings.php:374
+#: views/settings.php:101
+msgid "Dashboard link"
+msgstr ""
+
+#: views/settings.php:107
+msgid ""
+"Do you want to add a link to the dashboard on your maintenance mode page?"
+msgstr ""
+
+#: views/settings.php:115 views/settings.php:218 views/settings.php:421
 msgid "Save settings"
 msgstr "Spara"
 
-#: views/settings.php:106 views/settings.php:209 views/settings.php:375
+#: views/settings.php:116 views/settings.php:219 views/settings.php:422
 msgid "Reset settings"
 msgstr "Återställ inställningar"
 
-#: views/settings.php:111
+#: views/settings.php:121
 msgid "Content"
 msgstr "Innehåll"
 
-#: views/settings.php:116
+#: views/settings.php:126
 msgid "Title (HTML tag)"
 msgstr "Titel (HTML-tagg)"
 
-#: views/settings.php:122
+#: views/settings.php:132
 msgid "Heading"
 msgstr "Rubrik"
 
-#: views/settings.php:129 views/settings.php:264
+#: views/settings.php:139 views/settings.php:274
 msgid "Text"
 msgstr "Text"
 
-#: views/settings.php:149
+#: views/settings.php:159
 msgid "Background"
 msgstr "Bakgrund"
 
-#: views/settings.php:154
+#: views/settings.php:164
 msgid "Choose type"
 msgstr "Välj typ"
 
-#: views/settings.php:157
+#: views/settings.php:167
 msgid "Custom color"
 msgstr "Egen färg"
 
-#: views/settings.php:158
+#: views/settings.php:168
 msgid "Uploaded background"
 msgstr "Uppladdad bakgrund"
 
-#: views/settings.php:159
+#: views/settings.php:169
 msgid "Predefined background"
 msgstr "Fördefinierad bakgrund"
 
-#: views/settings.php:164
+#: views/settings.php:174
 msgid "Choose color"
 msgstr "Välj färg"
 
-#: views/settings.php:170
+#: views/settings.php:180
 msgid "Upload background"
 msgstr "Ladda upp bakgrund"
 
-#: views/settings.php:174
+#: views/settings.php:184
 msgid "Backgrounds should have 1920x1280 px size."
 msgstr "En bakgrund bör vara minst 1920x1280px. "
 
-#: views/settings.php:179
+#: views/settings.php:189
 msgid "Choose background"
 msgstr "Välj bakgrund"
 
-#: views/settings.php:181
+#: views/settings.php:191
 msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
 msgstr "källa <a href=\"%\" target=\"_blank\">Free Photos</a>"
 
-#: views/settings.php:214
+#: views/settings.php:224
 msgid "Countdown"
 msgstr "Nedräkning"
 
-#: views/settings.php:219
+#: views/settings.php:229
 msgid "Show countdown?"
 msgstr "Visa nedräkning?"
 
-#: views/settings.php:228
+#: views/settings.php:238
 msgid "Start date"
 msgstr "Startdatum"
 
-#: views/settings.php:234
+#: views/settings.php:244
 msgid "Countdown (remaining time)"
 msgstr "Nedräkning (återstående tid)"
 
-#: views/settings.php:236
+#: views/settings.php:246
 msgid "Days"
 msgstr "Dagar"
 
-#: views/settings.php:237
+#: views/settings.php:247
 msgid "Hours"
 msgstr "Timmar"
 
-#: views/settings.php:238
+#: views/settings.php:248
 msgid "Minutes"
 msgstr "Minuter"
 
-#: views/settings.php:242
+#: views/settings.php:252
 msgid "Color"
 msgstr "Färg"
 
-#: views/settings.php:255
+#: views/settings.php:265
 msgid "Show subscribe?"
 msgstr "Visa prenumerationsknapp?"
 
-#: views/settings.php:271
+#: views/settings.php:281
 msgid "Stats"
 msgstr "Statistik"
 
-#: views/settings.php:275
+#: views/settings.php:285
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Du har %d prenumeranter"
 
-#: views/settings.php:280
+#: views/settings.php:290
 msgid "Export as CSV"
 msgstr "Exportera som CSV"
 
-#: views/settings.php:287
+#: views/settings.php:297
 msgid "Social Networks"
 msgstr "Sociala nätverk"
 
-#: views/settings.php:292
+#: views/settings.php:302
 msgid "Show social networks?"
 msgstr "Visa sociala nätverk?"
 
-#: views/settings.php:340
+#: views/settings.php:311
+msgid "Links target?"
+msgstr ""
+
+#: views/settings.php:314
+msgid "New page"
+msgstr ""
+
+#: views/settings.php:315
+msgid "Same page"
+msgstr ""
+
+#: views/settings.php:317
+msgid "Choose how the links will open."
+msgstr ""
+
+#: views/settings.php:365
 msgid "Contact"
 msgstr "Kontakt"
 
-#: views/settings.php:345
+#: views/settings.php:370
 msgid "Show contact?"
 msgstr "Visa kontaktknapp?"
 
-#: views/settings.php:354
+#: views/settings.php:379
 msgid "Email address"
 msgstr "E-postadress"
 
-#: views/settings.php:360
+#: views/settings.php:385
 msgid "Effects"
 msgstr "Effekter"
 
-#: views/settings.php:363
+#: views/settings.php:388
 msgid "Move top - Move bottom"
 msgstr "Glid"
 
-#: views/settings.php:364
+#: views/settings.php:389
 msgid "Zoom - Zoomed"
 msgstr "Zoom"
 
-#: views/settings.php:365
+#: views/settings.php:390
 msgid "Fold - Unfold"
 msgstr "Vik"
+
+#: views/settings.php:397
+msgid "Google Analytics"
+msgstr ""
+
+#: views/settings.php:402
+msgid "Use Google Analytics?"
+msgstr ""
+
+#: views/settings.php:411
+msgid "Tracking code"
+msgstr ""
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
@@ -393,18 +439,19 @@ msgstr "Twitter"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: views/sidebar.php:24
-msgid "Subscribe now for early access to new WordPress themes."
-msgstr "Prenumerera nu för tidig tillgång till nya WordPress-teman."
+#: views/sidebar.php:22
+msgid "WordPress Themes"
+msgstr ""
 
-#: views/sidebar.php:27
-msgid "Enter your email address"
-msgstr "Fyll i din e-postadress"
-
-#: views/sidebar.php:34
-msgid "News"
-msgstr "Nyheter"
-
-#: views/sidebar.php:50
+#: views/sidebar.php:31
 msgid "Resources"
 msgstr "Resurser"
+
+#~ msgid "Subscribe now for early access to new WordPress themes."
+#~ msgstr "Prenumerera nu för tidig tillgång till nya WordPress-teman."
+
+#~ msgid "Enter your email address"
+#~ msgstr "Fyll i din e-postadress"
+
+#~ msgid "News"
+#~ msgstr "Nyheter"

@@ -2,6 +2,10 @@
 <html>
     <head>
         <title><?php echo stripslashes($title); ?></title>
+        <meta name="author" content="<?php echo esc_attr($author); ?>" />
+        <meta name="description" content="<?php echo esc_attr($description); ?>" />
+        <meta name="keywords" content="<?php echo esc_attr($keywords); ?>" />
+        <meta name="robots" content="<?php echo esc_attr($robots); ?>" />
         <?php
         if (!empty($styles) && is_array($styles)) {
             foreach ($styles as $src) {
@@ -10,20 +14,8 @@
                 <?php
             }
         }
-        ?>
-        <meta name="author" content="<?php echo esc_attr($author); ?>" />
-        <meta name="description" content="<?php echo esc_attr($description); ?>" />
-        <meta name="keywords" content="<?php echo esc_attr($keywords); ?>" />
-        <meta name="robots" content="<?php echo esc_attr($robots); ?>" />
-        <?php if (!empty($custom_css) && is_array($custom_css)) { ?>
-            <style>
-            <?php
-            foreach ($custom_css as $css_line) {
-                echo stripslashes($css_line) . "\n";
-            }
-            ?>
-            </style>
-            <?php
+        if (!empty($custom_css) && is_array($custom_css)) {
+            echo '<style>' . implode(array_map('stripslashes', $custom_css)) . '</style>';
         }
 
         // do some actions
@@ -53,7 +45,7 @@
             <?php } ?>
 
             <?php if (!empty($this->plugin_settings['modules']['social_status']) && $this->plugin_settings['modules']['social_status'] == 1) { ?>
-                <div class="social">
+                <div class="social" data-target="<?php echo!empty($this->plugin_settings['modules']['social_target']) ? 1 : 0; ?>">
                     <?php if (!empty($this->plugin_settings['modules']['social_twitter'])) { ?>
                         <a class="tw" href="<?php echo stripslashes($this->plugin_settings['modules']['social_twitter']); ?>">twitter</a>
                     <?php } ?>
@@ -76,6 +68,10 @@
 
                     <?php if (!empty($this->plugin_settings['modules']['social_google+'])) { ?>
                         <a class="gplus" href="<?php echo stripslashes($this->plugin_settings['modules']['social_google+']); ?>">google plus</a>
+                    <?php } ?>         
+
+                    <?php if (!empty($this->plugin_settings['modules']['social_linkedin'])) { ?>
+                        <a class="linkedin" href="<?php echo stripslashes($this->plugin_settings['modules']['social_linkedin']); ?>">linkedin</a>
                     <?php } ?>                         
                 </div>
             <?php } ?>
@@ -95,6 +91,12 @@
 
                 <a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
             <?php } ?>
+
+            <?php if (!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] == 1) { ?>
+                <div class="author_link">
+                    <a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a>
+                </div>
+            <?php } ?>    
         </div>
 
         <script type='text/javascript'>

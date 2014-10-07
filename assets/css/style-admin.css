@@ -103,31 +103,16 @@ h2.wpmm-title {
 }
 
 /* SIDEBARS */
-#sidebar .subscribe_box form {
-    margin-top: 10px;
-}
-
-#sidebar .subscribe_box input {
-    height: 40px;
-    width: 100%;
-}
-
-#sidebar .subscribe_box .button {
-    height: 30px;
-    margin-top: 10px;
-    width: 100%;
-}
-
-#sidebar .news_box ul, .info_box ul {
+#sidebar .info_box ul {
     margin-top: 10px;
     margin-bottom: -5px;
 }
 
-#sidebar .resources_box ul {
+#sidebar .resources_box ul, #sidebar .themes_box ul {
     margin-top: 10px;
     margin-bottom: -15px;
 }
 
-#sidebar .resources_box li {
+#sidebar .resources_box li, #sidebar .themes_box li {
     margin-bottom: 10px;
 }

@@ -67,17 +67,31 @@ See [GitHub Repo] (https://github.com/Designmodocom/WP-Maintenance-Mode) FAQ.
 = Cache Plugin Support =
 WP Maintenance Mode can be unstable due the cache plugins, we recommend to deactivate any cache plugin when maintenance mode is active.
 
+= Exclude list =
+If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
+
 == Changelog ==
 
-= 2.0.3 (N/A) =
+= 2.0.3 (07/10/2014) =
+* WP_Super_Cache issue was fixed
+* fixed "Subscribe" button issue on Safari mobile
+* fixed color of subscribe-success message (same color as subscribe_text)
+* "Social networks" module edits: settings for links target + a new social network: linkedin
+* new module "Google Analytics"
+* loginform shortcode reintroduced
+* dashboard link on maintenance page reintroduced
+* the content editor accepts new css inline properties: min-height, max-height, min-width, max-width. Use them wisely! :)
 * Settings & sidebar view + old translation files edited
+* Update from old version 1.x to 2.x issue was fixed
+* Translate on activation issue was fixed
 * de_DE translation by Frank Bültge (http://bueltge.github.io/)
-* pt_PT translation by Pedro Mendonça (http://www.pedromendonca.pt)
-* ru_RU translation by affectiosus (https://github.com/affectiosus)
+* pt_PT translation (100% translated) by Pedro Mendonça (http://www.pedromendonca.pt)
+* ru_RU translation (100% translated) by affectiosus (https://github.com/affectiosus)
 * nl_NL translation by dhunink (https://github.com/dhunink)
-* es_ES translation by Erick Ruiz de Chavez (http://erickruizdechavez.com/)
+* es_ES translation (100% translated) by Erick Ruiz de Chavez (http://erickruizdechavez.com/)
 * fr_FR translation by Florian TIAR (https://github.com/Mahjouba91)
 * pt_BR translation by Jonatas Araújo (http://www.designworld.com.br/)
+* sv_SE translation by Andréas Lundgren (http://adevade.com/)
 
 = 2.0.2 (04/09/2014) =
 * Removed "Author Link" option from General
