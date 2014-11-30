@@ -286,7 +286,7 @@ msgstr "Sfondi caricati"
 
 #: views/settings.php:169
 msgid "Predefined background"
-msgstr "Sfondo predefinito"
+msgstr "Sfondi predefiniti"
 
 #: views/settings.php:174
 msgid "Choose color"
@@ -407,7 +407,7 @@ msgstr "Zoom - Zoomed"
 
 #: views/settings.php:390
 msgid "Fold - Unfold"
-msgstr "Piega - Spiega"
+msgstr "Fold - Unfold"
 
 #: views/settings.php:397
 msgid "Google Analytics"
