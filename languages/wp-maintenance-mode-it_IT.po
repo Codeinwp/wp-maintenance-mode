@@ -32,7 +32,7 @@ msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
 "href=\"%s\">deactivate</a> as soon as you are done."
 msgstr ""
-"La modalità di manutenzione è <strong>attivata</strong>. Si prega di non "
+"La modalità di manutenzione è <strong>attiva</strong>. Si prega di non "
 "dimenticare di <a href=\"%s\">disattivarla</a> non appena si è finito."
 
 #: includes/classes/wp-maintenance-mode.php:100
@@ -322,7 +322,7 @@ msgstr "Data di inizio"
 
 #: views/settings.php:244
 msgid "Countdown (remaining time)"
-msgstr "Countdown (remaining time)"
+msgstr "Conto alla rovescia (tempo rimanente)"
 
 #: views/settings.php:246
 msgid "Days"
