@@ -38,25 +38,35 @@
                                     </td>
                                 </tr> 
                                 <tr valign="top">
-                                    <th scope="row"><label for="options[general][backend_role]"><?php _e('Backend Role', $this->plugin_slug); ?></label></th>
+                                    <th scope="row"><label for="options[general][backend_role][]"><?php _e('Backend Role', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <select name="options[general][backend_role]">
-                                            <?php foreach ($wp_roles->roles as $role => $details) { ?>
-                                                <option value="<?php echo esc_attr($role); ?>" <?php selected($this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
+                                        <select name="options[general][backend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php _e('Select role(s)', $this->plugin_slug); ?>">
+                                            <?php
+                                            foreach ($wp_roles->roles as $role => $details) {
+                                                if ($role == 'administrator') {
+                                                    continue;
+                                                }
+                                                ?>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect($this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name']; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <p class="description"><?php _e('Which user role is allowed to access the backend of this blog?', $this->plugin_slug); ?></p>
+                                        <p class="description"><?php _e('Which user role is allowed to access the backend of this blog? Administrators always have access.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>    
                                 <tr valign="top">
-                                    <th scope="row"><label for="options[general][frontend_role]"><?php _e('Frontend Role', $this->plugin_slug); ?></label></th>
+                                    <th scope="row"><label for="options[general][frontend_role][]"><?php _e('Frontend Role', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <select name="options[general][frontend_role]">
-                                            <?php foreach ($wp_roles->roles as $role => $details) { ?>
-                                                <option value="<?php echo esc_attr($role); ?>" <?php selected($this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
+                                        <select name="options[general][frontend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php _e('Select role(s)', $this->plugin_slug); ?>">
+                                            <?php
+                                            foreach ($wp_roles->roles as $role => $details) {
+                                                if ($role == 'administrator') {
+                                                    continue;
+                                                }
+                                                ?>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect($this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name']; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <p class="description"><?php _e('Which user role is allowed to access the frontend of this blog?', $this->plugin_slug); ?></p>
+                                        <p class="description"><?php _e('Which user role is allowed to access the frontend of this blog? Administrators always have access.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>   
                                 <tr valign="top">

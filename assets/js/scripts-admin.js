@@ -29,6 +29,12 @@ jQuery(function($) {
     $('.color_picker_trigger').wpColorPicker();
 
     /**
+     * CHOSEN.JS MULTISELECT
+     * @used for "Backend role" and "Frontend role" -> General tab
+     */
+    $('.chosen-select').chosen({disable_search_threshold: 10});
+
+    /**
      * BACKGROUND UPLOADER
      */
     var image_custom_uploader;
@@ -73,7 +79,7 @@ jQuery(function($) {
 
     $('#design_bg_type').change(function() {
         var selected_val = $(this).val();
-        
+
         show_bg_type(selected_val);
     });
 

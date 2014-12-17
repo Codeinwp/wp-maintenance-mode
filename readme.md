@@ -1,3 +1,5 @@
+# Version 2.0.4 - WORK IN PROGRESS!
+
 # WP Maintenance Mode
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.

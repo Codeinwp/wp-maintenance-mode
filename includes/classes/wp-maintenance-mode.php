@@ -3,7 +3,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
     class WP_Maintenance_Mode {
 
-        const VERSION = '2.0.3';
+        const VERSION = '2.0.4';
 
         protected $plugin_slug = 'wp-maintenance-mode';
         protected $plugin_settings;
@@ -86,8 +86,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     'status' => 0,
                     'status_date' => '',
                     'bypass_bots' => 0,
-                    'backend_role' => 'administrator',
-                    'frontend_role' => 'administrator',
+                    'backend_role' => array(),
+                    'frontend_role' => array(),
                     'meta_robots' => 0,
                     'redirection' => '',
                     'exclude' => array(
@@ -167,7 +167,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
             } else {
                 self::single_activate();
             }
-        
+
             // delete old options
             delete_option('wp-maintenance-mode');
             delete_option('wp-maintenance-mode-msqld');
@@ -267,11 +267,11 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 }
 
                 if (!empty($old_options['role'][0])) {
-                    $default_options['general']['backend_role'] = $old_options['role'][0];
+                    $default_options['general']['backend_role'] = $old_options['role'][0] == 'administrator' ? array() : $old_options['role'];
                 }
 
                 if (!empty($old_options['role_frontend'][0])) {
-                    $default_options['general']['frontend_role'] = $old_options['role_frontend'][0];
+                    $default_options['general']['frontend_role'] = $old_options['role_frontend'][0] == 'administrator' ? array() : $old_options['role_frontend'];
                 }
 
                 if (isset($old_options['index'])) {
@@ -424,13 +424,14 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     (!$this->check_user_role()) &&
                     !strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
                     !strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
-                    !strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
+                    !strstr($_SERVER['PHP_SELF'], 'wp-admin/admin-ajax.php') &&
                     !strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&
                     !(strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_user_role()) &&
                     !strstr($_SERVER['PHP_SELF'], '/plugins/') &&
                     !strstr($_SERVER['PHP_SELF'], '/xmlrpc.php') &&
                     !$this->check_exclude() &&
-                    !$this->check_search_bots()
+                    !$this->check_search_bots() &&
+                    !(defined('WP_CLI') && WP_CLI)
             ) {
                 // HEADER STUFF
                 $protocol = !empty($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.1', 'HTTP/1.0')) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
@@ -480,7 +481,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 // JS FILES
                 $wp_scripts = new WP_Scripts();
                 $scripts = array(
-                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? home_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
                     'frontend' => WPMM_JS_URL . 'scripts.js'
                 );
                 if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
@@ -522,22 +523,28 @@ if (!class_exists('WP_Maintenance_Mode')) {
          * @return boolean
          */
         public function check_user_role() {
-            $is_allowed = false;
-
-            if (is_super_admin()) {
-                $is_allowed = true;
+            if (is_super_admin()) { // administrators always have access
+                return true;
             }
 
+            // get defined user roles based on location (dashboard / frontend)
             if (is_admin()) {
-                $role = $this->plugin_settings['general']['backend_role'];
+                $settings_roles = $this->plugin_settings['general']['backend_role'];
             } else {
-                $role = $this->plugin_settings['general']['frontend_role'];
+                $settings_roles = $this->plugin_settings['general']['frontend_role'];
             }
 
-            if (current_user_can($role)) {
-                $is_allowed = true;
+            $user = wp_get_current_user();
+            $user_roles = !empty($user->roles) && is_array($user->roles) ? $user->roles : array();
+            
+            $is_allowed = false;
+            foreach ($settings_roles as $role) {
+                if (in_array($role, $user_roles)) {
+                    $is_allowed = true;
+                    break;
+                }
             }
-
+            
             return $is_allowed;
         }
 
@@ -611,6 +618,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
             if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
                 foreach ($this->plugin_settings['general']['exclude'] as $item) {
+                    if (empty($item)) { // just to be sure :-)
+                        continue;
+                    }
+
                     if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $item))) {
                         $is_excluded = true;
                         break;
@@ -628,11 +639,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
          * @return null
          */
         public function redirect() {
-            if (empty($this->plugin_settings['general']['redirection'])) {
-                return NULL;
-            }
-
-            if ($this->check_user_role()) {
+            if (empty($this->plugin_settings['general']['redirection']) || $this->check_user_role() || (defined('DOING_AJAX') && DOING_AJAX)) {
                 return NULL;
             }
 

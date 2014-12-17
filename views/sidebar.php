@@ -22,6 +22,7 @@
         <h3><?php _e('WordPress Themes', $this->plugin_slug); ?></h3>
         <div class="inside">
             <ul>
+                <li><a href="<?php echo 'http://designmodo.com/qards/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/qards.jpg'; ?>" /></a></li>
                 <li><a href="<?php echo 'http://designmodo.com/startup-wordpress/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/startup-wordpress.jpg'; ?>" /></a></li>
             </ul>
         </div>

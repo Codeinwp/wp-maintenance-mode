@@ -69,6 +69,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                 wp_enqueue_style($this->plugin_slug . '-admin-jquery-ui-styles', '//ajax.googleapis.com/ajax/libs/jqueryui/' . (!empty($ui->ver) ? $ui->ver : '1.10.4') . '/themes/smoothness/jquery-ui.min.css', array(), WP_Maintenance_Mode::VERSION);
                 wp_enqueue_style($this->plugin_slug . '-admin-styles', WPMM_CSS_URL . 'style-admin.css', array('wp-color-picker'), WP_Maintenance_Mode::VERSION);
+                wp_enqueue_style($this->plugin_slug . '-admin-chosen', WPMM_CSS_URL . 'chosen.min.css', array(), WP_Maintenance_Mode::VERSION);
             }
         }
 
@@ -88,7 +89,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 wp_enqueue_media();
                 wp_enqueue_script($this->plugin_slug . '-admin-timepicker-addon-script', WPMM_JS_URL . 'jquery-ui-timepicker-addon.js', array('jquery', 'jquery-ui-datepicker'), WP_Maintenance_Mode::VERSION);
                 wp_enqueue_script($this->plugin_slug . '-admin-script', WPMM_JS_URL . 'scripts-admin.js', array('jquery', 'wp-color-picker'), WP_Maintenance_Mode::VERSION);
-                wp_localize_script($this->plugin_slug . '-admin-script', 'wpmm_vars', array(
+                wp_enqueue_script($this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery.min.js', array(), WP_Maintenance_Mode::VERSION);
+                wp_localize_script($this->plugin_slug . '-admin-vars', 'wpmm_vars', array(
                     'ajax_url' => admin_url('admin-ajax.php'),
                     'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug)
                 ));
@@ -191,13 +193,14 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                             $_POST['options']['general']['status_date'] = date('Y-m-d H:i:s');
                         }
                         $_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
-                        $_POST['options']['general']['backend_role'] = sanitize_text_field($_POST['options']['general']['backend_role']);
-                        $_POST['options']['general']['frontend_role'] = sanitize_text_field($_POST['options']['general']['frontend_role']);
+                        $_POST['options']['general']['backend_role'] = !empty($_POST['options']['general']['backend_role']) ? $_POST['options']['general']['backend_role'] : array();
+                        $_POST['options']['general']['frontend_role'] = !empty($_POST['options']['general']['frontend_role']) ? $_POST['options']['general']['frontend_role'] : array();
                         $_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
                         $_POST['options']['general']['redirection'] = esc_url($_POST['options']['general']['redirection']);
                         if (!empty($_POST['options']['general']['exclude'])) {
                             $exclude_array = explode("\n", $_POST['options']['general']['exclude']);
-                            $_POST['options']['general']['exclude'] = array_map('trim', $exclude_array);
+                            // we need to be sure that empty lines will not be saved
+                            $_POST['options']['general']['exclude'] = array_filter(array_map('trim', $exclude_array));
                         } else {
                             $_POST['options']['general']['exclude'] = array();
                         }
@@ -206,7 +209,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                         // delete cache when is already activated, when is activated and when is deactivated
                         if (
-                                isset($this->plugin_settings['general']['status']) && isset($_POST['options']['general']['status']) && 
+                                isset($this->plugin_settings['general']['status']) && isset($_POST['options']['general']['status']) &&
                                 (
                                 ($this->plugin_settings['general']['status'] == 1 && in_array($_POST['options']['general']['status'], array(0, 1))) ||
                                 ($this->plugin_settings['general']['status'] == 0 && $_POST['options']['general']['status'] == 1)
