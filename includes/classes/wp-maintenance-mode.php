@@ -460,7 +460,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 $keywords = apply_filters('wpmm_meta_keywords', $keywords);
 
                 // CSS STUFF
-                $body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
+                $body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background wp-maintenance-mode' : 'wp-maintenance-mode';
                 $custom_css_design = !empty($this->plugin_settings['design']['custom_css']) && is_array($this->plugin_settings['design']['custom_css']) ? $this->plugin_settings['design']['custom_css'] : array();
                 $custom_css_modules = !empty($this->plugin_settings['modules']['custom_css']) && is_array($this->plugin_settings['modules']['custom_css']) ? $this->plugin_settings['modules']['custom_css'] : array();
                 $custom_css = array_merge($custom_css_design, $custom_css_modules);
