@@ -480,7 +480,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 // JS FILES
                 $wp_scripts = new WP_Scripts();
                 $scripts = array(
-                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? home_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
                     'frontend' => WPMM_JS_URL . 'scripts.js'
                 );
                 if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
