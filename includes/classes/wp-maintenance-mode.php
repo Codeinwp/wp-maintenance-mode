@@ -430,7 +430,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     !strstr($_SERVER['PHP_SELF'], '/plugins/') &&
                     !strstr($_SERVER['PHP_SELF'], '/xmlrpc.php') &&
                     !$this->check_exclude() &&
-                    !$this->check_search_bots()
+		    !$this->check_search_bots() &&
+		    !defined('WP_CLI')
             ) {
                 // HEADER STUFF
                 $protocol = !empty($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.1', 'HTTP/1.0')) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
