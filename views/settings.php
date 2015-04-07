@@ -188,7 +188,7 @@
                                     <th scope="row">
                                         <label for="options[design][bg_predefined]"><?php _e('Choose background', $this->plugin_slug); ?></label>
                             <p class="description">
-                                * <?php echo sprintf(__('source <a href="%" target="_blank">Free Photos</a>', $this->plugin_slug), 'http://designmodo.com/free-photos/' . WPMM_AUTHOR_UTM); ?>
+                                * <?php echo sprintf(__('source <a href="%s" target="_blank">Free Photos</a>', $this->plugin_slug), 'http://designmodo.com/free-photos/' . WPMM_AUTHOR_UTM); ?>
                             </p>
                             </th>
                             <td>	
