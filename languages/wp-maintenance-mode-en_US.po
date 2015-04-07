@@ -290,7 +290,7 @@ msgid "Choose background"
 msgstr ""
 
 #: views/settings.php:191
-msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 msgstr ""
 
 #: views/settings.php:224
