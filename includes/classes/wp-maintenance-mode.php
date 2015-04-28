@@ -608,15 +608,19 @@ if (!class_exists('WP_Maintenance_Mode')) {
          */
         public function check_exclude() {
             $is_excluded = false;
+            $exclude_list = null;
 
             if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
-                foreach ($this->plugin_settings['general']['exclude'] as $item) {
+                $exclude_list = $this->plugin_settings['general']['exclude'];
+                foreach ($exclude_list as $item) {
                     if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $item))) {
                         $is_excluded = true;
                         break;
                     }
                 }
             }
+
+            $is_exclude = apply_filters('wp_maintenance_mode_exclude', $is_excluded, $exclude_list);
 
             return $is_excluded;
         }
