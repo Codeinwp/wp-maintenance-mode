@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.3\n"
 "POT-Creation-Date: 2014-09-26 19:03+0200\n"
-"PO-Revision-Date: 2014-09-26 19:03+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2015-05-01 01:43+0100\n"
+"Last-Translator: Maciej Gryniuk <maciejka45@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
+"X-Generator: Poedit 1.8beta1\n"
 "X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -18,8 +18,12 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:154
+#: includes/classes/wp-maintenance-mode-admin.php:154 views/settings.php:2 wp-maintenance-mode.php:6
 msgid "WP Maintenance Mode"
+msgstr ""
+
+#: wp-maintenance-mode.php:8
+msgid "Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page."
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:358
@@ -28,20 +32,17 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:377
 #, php-format
-msgid ""
-"The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
-"href=\"%s\">deactivate</a> as soon as you are done."
+msgid "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a href=\"%s\">deactivate</a> as soon as you are done."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:100
-#: includes/classes/wp-maintenance-mode.php:101
+#: includes/classes/wp-maintenance-mode.php:100 includes/classes/wp-maintenance-mode.php:101
 msgid "Maintenance mode"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:103
 msgid ""
-"<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
-"scheduled maintenance.<br />Thank you for your understanding.</p>"
+"<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br />Thank you for your "
+"understanding.</p>"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:121
@@ -50,18 +51,14 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:249
 #, php-format
-msgid ""
-"WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
-"\">settings</a>."
+msgid "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s\">settings</a>."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:425
-#: includes/classes/wp-maintenance-mode.php:439
+#: includes/classes/wp-maintenance-mode.php:425 includes/classes/wp-maintenance-mode.php:439
 msgid "Maintenance Mode"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:630
-#: includes/classes/wp-maintenance-mode.php:658
+#: includes/classes/wp-maintenance-mode.php:630 includes/classes/wp-maintenance-mode.php:658
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -149,15 +146,13 @@ msgstr ""
 msgid "Bypass for Search Bots"
 msgstr ""
 
-#: views/settings.php:34 views/settings.php:94 views/settings.php:104
-#: views/settings.php:232 views/settings.php:268 views/settings.php:305
-#: views/settings.php:373 views/settings.php:405
+#: views/settings.php:34 views/settings.php:94 views/settings.php:104 views/settings.php:232 views/settings.php:268
+#: views/settings.php:305 views/settings.php:373 views/settings.php:405
 msgid "Yes"
 msgstr ""
 
-#: views/settings.php:35 views/settings.php:95 views/settings.php:105
-#: views/settings.php:233 views/settings.php:269 views/settings.php:306
-#: views/settings.php:374 views/settings.php:406
+#: views/settings.php:35 views/settings.php:95 views/settings.php:105 views/settings.php:233 views/settings.php:269
+#: views/settings.php:306 views/settings.php:374 views/settings.php:406
 msgid "No"
 msgstr ""
 
@@ -187,9 +182,8 @@ msgstr ""
 
 #: views/settings.php:69
 msgid ""
-"The robots meta tag lets you use a granular, page-specific approach to "
-"control how an individual page should be indexed and served to users in "
-"search results."
+"The robots meta tag lets you use a granular, page-specific approach to control how an individual page should be indexed and served "
+"to users in search results."
 msgstr ""
 
 #: views/settings.php:73
@@ -197,9 +191,7 @@ msgid "Redirection"
 msgstr ""
 
 #: views/settings.php:76
-msgid ""
-"If you want to redirect a user to a URL (which is not the WordPress "
-"dashboard) after login, then define a URL (incl. http://)"
+msgid "If you want to redirect a user to a URL (which is not the WordPress dashboard) after login, then define a URL (incl. http://)"
 msgstr ""
 
 #: views/settings.php:80
@@ -207,9 +199,7 @@ msgid "Exclude"
 msgstr ""
 
 #: views/settings.php:87
-msgid ""
-"Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
-"IP per line!"
+msgid "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / IP per line!"
 msgstr ""
 
 #: views/settings.php:91
@@ -225,8 +215,7 @@ msgid "Dashboard link"
 msgstr ""
 
 #: views/settings.php:107
-msgid ""
-"Do you want to add a link to the dashboard on your maintenance mode page?"
+msgid "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr ""
 
 #: views/settings.php:115 views/settings.php:218 views/settings.php:421
