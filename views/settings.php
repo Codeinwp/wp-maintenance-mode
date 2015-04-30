@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2 class="wpmm-title">WP Maintenance Mode</h2>
+    <h2 class="wpmm-title"><?php _e('WP Maintenance Mode', $this->plugin_slug); ?></h2>
 
     <?php if (!empty($_POST)) { ?>
         <div class="updated settings-error" id="setting-error-settings_updated"> 
