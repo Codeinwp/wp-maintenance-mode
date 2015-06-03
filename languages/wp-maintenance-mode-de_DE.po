@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.3\n"
 "POT-Creation-Date: 2014-09-26 19:03+0200\n"
-"PO-Revision-Date: 2014-09-26 19:03+0200\n"
-"Last-Translator: Frank Bültge <frank@bueltge.de>\n"
+"PO-Revision-Date: 2015-06-03 14:32+0100\n"
+"Last-Translator: Michael Köhler <michael.koehler@makomi.de>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -45,8 +45,8 @@ msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
-"<p>Enschuldige die Unannehmlichkeiten,<br />unsere Website is aktuell in "
-"Wartungsarbeiten.<br />Vielen Dank für das Verständis.</p>"
+"<p>Entschuldige die Unannehmlichkeiten.<br />Unsere Webseite wird aktuell "
+"gewartet.<br />Vielen Dank für das Verständnis.</p>"
 
 #: includes/classes/wp-maintenance-mode.php:121
 msgid "Notify me when it's ready"
@@ -69,7 +69,7 @@ msgstr "Wartungsmodus"
 #: includes/classes/wp-maintenance-mode.php:630
 #: includes/classes/wp-maintenance-mode.php:658
 msgid "Please enter a valid email address."
-msgstr "Bitte gib eine valide E-Mail-Adresse an."
+msgstr "Bitte gib eine gültige E-Mail-Adresse an."
 
 #: includes/classes/wp-maintenance-mode.php:641
 msgid "You successfuly subscribed. Thanks!"
@@ -85,7 +85,7 @@ msgstr "Mitteilung via Kontakt"
 
 #: includes/classes/wp-maintenance-mode.php:679
 msgid "Your email was sent to the website administrator. Thanks!"
-msgstr "Deine E-Mail wurde an den Administrator der Webiste gesandt. Danke!"
+msgstr "Deine E-Mail wurde an den Administrator der Webseite gesandt. Danke!"
 
 #: views/loginform.php:8
 msgid "Login"
@@ -153,7 +153,7 @@ msgstr "Inaktiv"
 
 #: views/settings.php:31
 msgid "Bypass for Search Bots"
-msgstr "bypass für Such-Bots"
+msgstr "Bypass für Such-Bots"
 
 #: views/settings.php:34 views/settings.php:94 views/settings.php:104
 #: views/settings.php:232 views/settings.php:268 views/settings.php:305
@@ -177,7 +177,7 @@ msgstr "Backend-Rolle"
 
 #: views/settings.php:48
 msgid "Which user role is allowed to access the backend of this blog?"
-msgstr "Mit welcher Rolle soll man Zugang zum Backend der Website erhalten?"
+msgstr "Mit welcher Rolle soll man Zugang zum Backend der Webseite erhalten?"
 
 #: views/settings.php:52
 msgid "Frontend Role"
@@ -185,7 +185,7 @@ msgstr "Frontend-Rolle"
 
 #: views/settings.php:59
 msgid "Which user role is allowed to access the frontend of this blog?"
-msgstr "Mit welcher Rolle soll man Zugang zum Frontend der Website erhalten?"
+msgstr "Mit welcher Rolle soll man Zugang zum Frontend der Webseite erhalten?"
 
 #: views/settings.php:63
 msgid "Robots Meta Tag"
@@ -197,7 +197,7 @@ msgid ""
 "control how an individual page should be indexed and served to users in "
 "search results."
 msgstr ""
-"Mit dem  Robots Meta Tag kannst du steuern, wie die Seite während des "
+"Mit dem Robots Meta Tag kannst du steuern, wie die Seite während des "
 "Wartungsmodus indiziert werden soll."
 
 #: views/settings.php:73
@@ -214,14 +214,14 @@ msgstr ""
 
 #: views/settings.php:80
 msgid "Exclude"
-msgstr "Auschluss"
+msgstr "Ausschluss"
 
 #: views/settings.php:87
 msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
 msgstr ""
-"Auschluss vom Wartungsmodus von Feed, Seiten, Archiven oder IPs möglich. "
+"Ausschluss vom Wartungsmodus von Feed, Seiten, Archiven oder IPs möglich. "
 "Ergänze einen Slug oder die IP pro Zeile."
 
 #: views/settings.php:91
@@ -239,7 +239,7 @@ msgstr ""
 #: views/settings.php:107
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
-msgstr ""
+msgstr "Soll ein Link zum Backend auf der Wartungswebseite angezeigt werden?"
 
 #: views/settings.php:115 views/settings.php:218 views/settings.php:421
 msgid "Save settings"
@@ -255,7 +255,7 @@ msgstr "Inhalt"
 
 #: views/settings.php:126
 msgid "Title (HTML tag)"
-msgstr "Title (html Tag)"
+msgstr "Titel (html Tag)"
 
 #: views/settings.php:132
 msgid "Heading"
@@ -291,7 +291,7 @@ msgstr "Farbe wählen"
 
 #: views/settings.php:180
 msgid "Upload background"
-msgstr "Hintergund laden"
+msgstr "Hintergrund laden"
 
 #: views/settings.php:184
 msgid "Backgrounds should have 1920x1280 px size."
@@ -303,7 +303,7 @@ msgstr "Hintergrund wählen"
 
 #: views/settings.php:191
 msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-msgstr "oorsprong <a href=\"%\" target=\"_blank\">Free Photos</a>"
+msgstr "Quelle <a href=\"%\" target=\"_blank\">Free Photos</a>"
 
 #: views/settings.php:224
 msgid "Countdown"
@@ -364,19 +364,19 @@ msgstr "Zeige soziale Netzwerke?"
 
 #: views/settings.php:311
 msgid "Links target?"
-msgstr ""
+msgstr "Link-Ziel"
 
 #: views/settings.php:314
 msgid "New page"
-msgstr ""
+msgstr "Neue Seite"
 
 #: views/settings.php:315
 msgid "Same page"
-msgstr ""
+msgstr "Selbe Seite"
 
 #: views/settings.php:317
 msgid "Choose how the links will open."
-msgstr ""
+msgstr "Wie soll der Link geöffnet werden?"
 
 #: views/settings.php:365
 msgid "Contact"
@@ -412,7 +412,7 @@ msgstr ""
 
 #: views/settings.php:402
 msgid "Use Google Analytics?"
-msgstr ""
+msgstr "Wird Google Analytics verwendet?"
 
 #: views/settings.php:411
 msgid "Tracking code"
@@ -428,7 +428,7 @@ msgstr "Autor"
 
 #: views/sidebar.php:14
 msgid "Website"
-msgstr "Website"
+msgstr "Webseite"
 
 #: views/sidebar.php:15
 msgid "Twitter"
