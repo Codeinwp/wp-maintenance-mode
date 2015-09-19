@@ -1,0 +1,451 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Maintenance Mode 2.0.3\n"
+"POT-Creation-Date: 2014-09-26 19:03+0200\n"
+"PO-Revision-Date: 2015-09-18 17:54+0200\n"
+"Language-Team: Designmodo <info@designmodo.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"Last-Translator: Fredrik Hugås <fhugas@gmail.com>\n"
+"Language: nb\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: includes/classes\n"
+"X-Poedit-SearchPath-2: views\n"
+
+#: includes/classes/wp-maintenance-mode-admin.php:154
+msgid "WP Maintenance Mode"
+msgstr "WP Vedlikeholdsmodus"
+
+#: includes/classes/wp-maintenance-mode-admin.php:358
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: includes/classes/wp-maintenance-mode-admin.php:377
+#, php-format
+msgid ""
+"The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
+"href=\"%s\">deactivate</a> as soon as you are done."
+msgstr ""
+"Vedlikeholdsmodus er <strong>aktivert</strong>. Husk å <a href=\"%s"
+"\">deaktiver vedlikeholdsmodus</a> når du er ferdig."
+
+#: includes/classes/wp-maintenance-mode.php:100
+#: includes/classes/wp-maintenance-mode.php:101
+msgid "Maintenance mode"
+msgstr "Vedlikehold pågår"
+
+#: includes/classes/wp-maintenance-mode.php:103
+msgid ""
+"<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
+"scheduled maintenance.<br />Thank you for your understanding.</p>"
+msgstr ""
+"<p>Nettsiden gjennomgår for tiden et planlagt vedlikehold.<br />Vi "
+"beklager nedetiden dette medfører.<br />Takk for din forståelse.</p>"
+
+#: includes/classes/wp-maintenance-mode.php:121
+msgid "Notify me when it's ready"
+msgstr "Varsle meg når den er klar"
+
+#: includes/classes/wp-maintenance-mode.php:249
+#, php-format
+msgid ""
+"WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
+"\">settings</a>."
+msgstr ""
+"Utvidelsen WP Maintanance Mode er oppdatert og du må <a href=\"%s\">se "
+"igjennom innstillingene</a>"
+
+#: includes/classes/wp-maintenance-mode.php:425
+#: includes/classes/wp-maintenance-mode.php:439
+msgid "Maintenance Mode"
+msgstr "Vedlikehold pågår"
+
+#: includes/classes/wp-maintenance-mode.php:630
+#: includes/classes/wp-maintenance-mode.php:658
+msgid "Please enter a valid email address."
+msgstr "Vennligst oppgi en gyldig epostadresse."
+
+#: includes/classes/wp-maintenance-mode.php:641
+msgid "You successfuly subscribed. Thanks!"
+msgstr "Du vil nå få oppdateringer om siden. Takk!"
+
+#: includes/classes/wp-maintenance-mode.php:654
+msgid "All fields required."
+msgstr "Alle felt er påkrevd."
+
+#: includes/classes/wp-maintenance-mode.php:675
+msgid "Message via contact"
+msgstr "Melding via kontakt"
+
+#: includes/classes/wp-maintenance-mode.php:679
+msgid "Your email was sent to the website administrator. Thanks!"
+msgstr "Din epost ble sendt til administratoren for nettstedet. Takk!"
+
+#: views/loginform.php:8
+msgid "Login"
+msgstr "Logg inn"
+
+#: views/maintenance.php:41
+msgid "your e-mail..."
+msgstr "Din epostadresse..."
+
+#: views/maintenance.php:42 views/settings.php:260
+msgid "Subscribe"
+msgstr "Få varsling"
+
+#: views/maintenance.php:83 views/sidebar.php:7
+msgid "Name"
+msgstr "Navn"
+
+#: views/maintenance.php:84
+msgid "E-mail"
+msgstr "Epost"
+
+#: views/maintenance.php:86
+msgid "Your message"
+msgstr "Din melding"
+
+#: views/maintenance.php:87
+msgid "Send"
+msgstr "Send"
+
+#: views/maintenance.php:92
+msgid "Contact us"
+msgstr "Kontakt oss"
+
+#: views/maintenance.php:97
+msgid "Dashboard"
+msgstr "Kontrollpanel"
+
+#: views/settings.php:6
+msgid "Settings saved."
+msgstr "Innstillingene ble lagret."
+
+#: views/settings.php:13
+msgid "General"
+msgstr "Generelt"
+
+#: views/settings.php:14
+msgid "Design"
+msgstr "Utseende"
+
+#: views/settings.php:15
+msgid "Modules"
+msgstr "Moduler"
+
+#: views/settings.php:24
+msgid "Status"
+msgstr "Status"
+
+#: views/settings.php:26
+msgid "Activated"
+msgstr "Aktivert"
+
+#: views/settings.php:27
+msgid "Deactivated"
+msgstr "Deaktivert"
+
+#: views/settings.php:31
+msgid "Bypass for Search Bots"
+msgstr "Slipp igjennom søkemotorer"
+
+#: views/settings.php:34 views/settings.php:94 views/settings.php:104
+#: views/settings.php:232 views/settings.php:268 views/settings.php:305
+#: views/settings.php:373 views/settings.php:405
+msgid "Yes"
+msgstr "Ja"
+
+#: views/settings.php:35 views/settings.php:95 views/settings.php:105
+#: views/settings.php:233 views/settings.php:269 views/settings.php:306
+#: views/settings.php:374 views/settings.php:406
+msgid "No"
+msgstr "Nei"
+
+#: views/settings.php:37
+msgid "Allow Search Bots to bypass maintenance mode?"
+msgstr "La søkemotorer slippe forbi vedlikeholdsmodus"
+
+#: views/settings.php:41
+msgid "Backend Role"
+msgstr "Backend Rolle"
+
+#: views/settings.php:48
+msgid "Which user role is allowed to access the backend of this blog?"
+msgstr "Hvilken rolle har tilgang til backend på denne nettsiden?"
+
+#: views/settings.php:52
+msgid "Frontend Role"
+msgstr "Frontend Rolle"
+
+#: views/settings.php:59
+msgid "Which user role is allowed to access the frontend of this blog?"
+msgstr "Hvilken rolle har tilgang til frontend på denne nettsiden?"
+
+#: views/settings.php:63
+msgid "Robots Meta Tag"
+msgstr "Robots Meta Tag"
+
+#: views/settings.php:69
+msgid ""
+"The robots meta tag lets you use a granular, page-specific approach to "
+"control how an individual page should be indexed and served to users in "
+"search results."
+msgstr ""
+"Meta Tagger for roboter lar deg bruke et detaljert, side-spesifikk metode "
+"for å kontrollere hvordan den enkelte siden skal indekseres og vises til "
+"brukere i søkeresultatene."
+
+#: views/settings.php:73
+msgid "Redirection"
+msgstr "Omdirigering"
+
+#: views/settings.php:76
+msgid ""
+"If you want to redirect a user to a URL (which is not the WordPress "
+"dashboard) after login, then define a URL (incl. http://)"
+msgstr ""
+"Hvis du ønsker å omdirigere brukeren til en URL (som ikke er WordPress "
+"kontrollpanelet) etter innlogging, så må denne defineres her (inkluder "
+"http://)"
+
+#: views/settings.php:80
+msgid "Exclude"
+msgstr "Eksluder"
+
+#: views/settings.php:87
+msgid ""
+"Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
+"IP per line!"
+msgstr ""
+"Eksluder feed, sider, arkiv eller IP-er fra vedlikeholdsmodus. Legg inn en "
+"slug / IP per linje."
+
+#: views/settings.php:91
+msgid "Notice"
+msgstr "Notis"
+
+#: views/settings.php:97
+msgid "Do you want to see notices when maintenance mode is activated?"
+msgstr "Ønsker du å se en notis når vedlikeholdsmodus er aktivert?"
+
+#: views/settings.php:101
+msgid "Dashboard link"
+msgstr "Link i kontrollpanelet"
+
+#: views/settings.php:107
+msgid ""
+"Do you want to add a link to the dashboard on your maintenance mode page?"
+msgstr ""
+"Ønsker du å legge inn en link til kontrollpanelet på siden for "
+"vedlikeholdsmodus?"
+
+#: views/settings.php:115 views/settings.php:218 views/settings.php:421
+msgid "Save settings"
+msgstr "Lagre innstillinger"
+
+#: views/settings.php:116 views/settings.php:219 views/settings.php:422
+msgid "Reset settings"
+msgstr "Tilbakestill innstillinger"
+
+#: views/settings.php:121
+msgid "Content"
+msgstr "Innhold"
+
+#: views/settings.php:126
+msgid "Title (HTML tag)"
+msgstr "Tittel (HTML  title tag)"
+
+#: views/settings.php:132
+msgid "Heading"
+msgstr "Overskrift"
+
+#: views/settings.php:139 views/settings.php:274
+msgid "Text"
+msgstr "Tekst"
+
+#: views/settings.php:159
+msgid "Background"
+msgstr "Bakgrunn"
+
+#: views/settings.php:164
+msgid "Choose type"
+msgstr "Velg type"
+
+#: views/settings.php:167
+msgid "Custom color"
+msgstr "Egendefinert farge"
+
+#: views/settings.php:168
+msgid "Uploaded background"
+msgstr "Opplastet bilde"
+
+#: views/settings.php:169
+msgid "Predefined background"
+msgstr "Forhåndsdefinert bilde"
+
+#: views/settings.php:174
+msgid "Choose color"
+msgstr "Velg farge"
+
+#: views/settings.php:180
+msgid "Upload background"
+msgstr "Last opp bakgrunn"
+
+#: views/settings.php:184
+msgid "Backgrounds should have 1920x1280 px size."
+msgstr "Bakgrunnen må være minst 1929x1280px i størrelse."
+
+#: views/settings.php:189
+msgid "Choose background"
+msgstr "Velg bakgrunn"
+
+#: views/settings.php:191
+msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+msgstr "kilde <a href=\"%\" target=\"_blank\">Gratis bilder</a>"
+
+#: views/settings.php:224
+msgid "Countdown"
+msgstr "Nedtelling"
+
+#: views/settings.php:229
+msgid "Show countdown?"
+msgstr "Vis nedtelling?"
+
+#: views/settings.php:238
+msgid "Start date"
+msgstr "Dato for start"
+
+#: views/settings.php:244
+msgid "Countdown (remaining time)"
+msgstr "Nedtelling (gjenstående tid)"
+
+#: views/settings.php:246
+msgid "Days"
+msgstr "Dager"
+
+#: views/settings.php:247
+msgid "Hours"
+msgstr "Timer"
+
+#: views/settings.php:248
+msgid "Minutes"
+msgstr "Minutter"
+
+#: views/settings.php:252
+msgid "Color"
+msgstr "Farge"
+
+#: views/settings.php:265
+msgid "Show subscribe?"
+msgstr "Vis abboner"
+
+#: views/settings.php:281
+msgid "Stats"
+msgstr "Ønsker oppdatering"
+
+#: views/settings.php:285
+#, php-format
+msgid "You have %d subscriber(s)"
+msgstr "Du har %d personer som ønsker oppdatering"
+
+#: views/settings.php:290
+msgid "Export as CSV"
+msgstr "Eksporter som CSV"
+
+#: views/settings.php:297
+msgid "Social Networks"
+msgstr "Sosiale nettverk"
+
+#: views/settings.php:302
+msgid "Show social networks?"
+msgstr "Vis sosiale nettverk?"
+
+#: views/settings.php:311
+msgid "Links target?"
+msgstr "Lenkemål"
+
+#: views/settings.php:314
+msgid "New page"
+msgstr "Ny side"
+
+#: views/settings.php:315
+msgid "Same page"
+msgstr "Samme side"
+
+#: views/settings.php:317
+msgid "Choose how the links will open."
+msgstr "Velg hvordan side lenken skal åpnes i."
+
+#: views/settings.php:365
+msgid "Contact"
+msgstr "Kontakt"
+
+#: views/settings.php:370
+msgid "Show contact?"
+msgstr "Vis kontakt?"
+
+#: views/settings.php:379
+msgid "Email address"
+msgstr "Epost adresse"
+
+#: views/settings.php:385
+msgid "Effects"
+msgstr "Effekt"
+
+#: views/settings.php:388
+msgid "Move top - Move bottom"
+msgstr "Flytt til toppen - Flytt til bunnen"
+
+#: views/settings.php:389
+msgid "Zoom - Zoomed"
+msgstr "Zoom - Zoomet"
+
+#: views/settings.php:390
+msgid "Fold - Unfold"
+msgstr "Brett - Brett ut"
+
+#: views/settings.php:397
+msgid "Google Analytics"
+msgstr "Google Analytics"
+
+#: views/settings.php:402
+msgid "Use Google Analytics?"
+msgstr "Bruk Google Analytics?"
+
+#: views/settings.php:411
+msgid "Tracking code"
+msgstr "Sporingskode"
+
+#: views/sidebar.php:3
+msgid "Plugin Info"
+msgstr "Informasjon om utvidelsen"
+
+#: views/sidebar.php:13
+msgid "Author"
+msgstr "Forfatter"
+
+#: views/sidebar.php:14
+msgid "Website"
+msgstr "Nettside"
+
+#: views/sidebar.php:15
+msgid "Twitter"
+msgstr "Twitter"
+
+#: views/sidebar.php:16
+msgid "GitHub"
+msgstr "GitHub"
+
+#: views/sidebar.php:22
+msgid "WordPress Themes"
+msgstr "WordPress Temaer"
+
+#: views/sidebar.php:31
+msgid "Resources"
+msgstr "Resurser"
