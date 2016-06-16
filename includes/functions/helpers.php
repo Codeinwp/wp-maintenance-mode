@@ -24,8 +24,9 @@ function wpmm_plugin_info($plugin_slug) {
 function wpmm_count_where($table, $field = 'ID', $where = array()) {
     global $wpdb;
 
-    $table = $wpdb->prefix . $table;
-    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT($field) FROM $table " . (!empty($where) ? "WHERE " . implode(" AND ", array_keys($where)) : ""), !empty($where) ? array_values($where) : array()));
+	$table = $wpdb->prefix . $table;
+    if(!empty($where) && is_array($where)) $where = "WHERE " . implode(" AND ", array_keys($where)); else $where = "";
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(%s) FROM %s %s",$field,$table,$where));
 
     return intval($count);
 }
