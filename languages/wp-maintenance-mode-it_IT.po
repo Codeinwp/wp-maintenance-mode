@@ -2,29 +2,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.3\n"
 "POT-Creation-Date: 2014-09-26 19:03+0200\n"
-"PO-Revision-Date: 2014-11-30 15:44+0100\n"
-"Last-Translator: benedettoapp <benedettoapp@gmail.com>\n"
-"Language-Team: Designmodo <info@designmodo.com>\n"
+"PO-Revision-Date: 2016-02-20 10:39+0100\n"
+"Last-Translator: Massimiliano Losego <massimiliano@losego.it>\n"
+"Language-Team: Losego Massimiliano <massimiliano@losego.it>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
-"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"Language: it_IT\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
 #: includes/classes/wp-maintenance-mode-admin.php:154
 msgid "WP Maintenance Mode"
-msgstr "WP modalità di manutenzione"
+msgstr "WP Maintenance Mode"
 
 #: includes/classes/wp-maintenance-mode-admin.php:358
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr "Impotazioni"
 
 #: includes/classes/wp-maintenance-mode-admin.php:377
 #, php-format
@@ -32,13 +32,13 @@ msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
 "href=\"%s\">deactivate</a> as soon as you are done."
 msgstr ""
-"La modalità di manutenzione è <strong>attiva</strong>. Si prega di non "
-"dimenticare di <a href=\"%s\">disattivarla</a> non appena si è finito."
+"La Modalità Manutenzione è <strong>attiva</strong>. Non dimenticarti di <a "
+"href=\"%s\">disattivarla</a> appena avrai finito."
 
 #: includes/classes/wp-maintenance-mode.php:100
 #: includes/classes/wp-maintenance-mode.php:101
 msgid "Maintenance mode"
-msgstr "Modalità di manutenzione"
+msgstr "Modalità Manutenzione"
 
 #: includes/classes/wp-maintenance-mode.php:103
 msgid ""
@@ -46,11 +46,11 @@ msgid ""
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
 "<p>Ci scusiamo per l'inconveniente.<br />Il nostro sito è attualmente in "
-"fase di manutenzione programmata.<br />Grazie per la vostra comprensione.</p>"
+"manutenzione.<br />Grazie per la comprensione.</p>"
 
 #: includes/classes/wp-maintenance-mode.php:121
 msgid "Notify me when it's ready"
-msgstr "Avvisami quando è pronto"
+msgstr "Informatemi quando sarà pronto"
 
 #: includes/classes/wp-maintenance-mode.php:249
 #, php-format
@@ -58,34 +58,34 @@ msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
 "\">settings</a>."
 msgstr ""
-"Il plugin WP modalità di manutenzione è stato rilanciato e DEVI rivedere le "
-"<a href=\"%s\">impostazioni</a>."
+"WP Maintenance Mode plugin è stato ri-lanciato e DOVRAI rivedere le <a "
+"href=\"%s\">impostazioni</a>."
 
 #: includes/classes/wp-maintenance-mode.php:425
 #: includes/classes/wp-maintenance-mode.php:439
 msgid "Maintenance Mode"
-msgstr "Modalità di Manutenzione"
+msgstr "Modalità Manutenzione"
 
 #: includes/classes/wp-maintenance-mode.php:630
 #: includes/classes/wp-maintenance-mode.php:658
 msgid "Please enter a valid email address."
-msgstr "Si prega di inserire un indirizzo email valido."
+msgstr "Per favore inserisci in email corretta."
 
 #: includes/classes/wp-maintenance-mode.php:641
 msgid "You successfuly subscribed. Thanks!"
-msgstr "Sottoscritto con successo. Grazie"
+msgstr "Ti sei iscritto con successo. Grazie!"
 
 #: includes/classes/wp-maintenance-mode.php:654
 msgid "All fields required."
-msgstr "Tutti i campi obbligatori."
+msgstr "Sono richiesti tutti i campi."
 
 #: includes/classes/wp-maintenance-mode.php:675
 msgid "Message via contact"
-msgstr "Messaggio tramite il contatto"
+msgstr "Messaggio via contatto"
 
 #: includes/classes/wp-maintenance-mode.php:679
 msgid "Your email was sent to the website administrator. Thanks!"
-msgstr "La tua email è stata inviata all'amministratore del sito. Grazie!"
+msgstr "La tua email è stata spedita all'amministratore del sito. Grazie!"
 
 #: views/loginform.php:8
 msgid "Login"
@@ -93,11 +93,11 @@ msgstr "Login"
 
 #: views/maintenance.php:41
 msgid "your e-mail..."
-msgstr "La tua email..."
+msgstr "la tua e-mail..."
 
 #: views/maintenance.php:42 views/settings.php:260
 msgid "Subscribe"
-msgstr "Sottoscrizione"
+msgstr "Iscriviti"
 
 #: views/maintenance.php:83 views/sidebar.php:7
 msgid "Name"
@@ -109,11 +109,11 @@ msgstr "E-mail"
 
 #: views/maintenance.php:86
 msgid "Your message"
-msgstr "Il vostro messaggio "
+msgstr "Il tuo messaggio"
 
 #: views/maintenance.php:87
 msgid "Send"
-msgstr "Invia"
+msgstr "Spedisci"
 
 #: views/maintenance.php:92
 msgid "Contact us"
@@ -121,7 +121,7 @@ msgstr "Contattaci"
 
 #: views/maintenance.php:97
 msgid "Dashboard"
-msgstr "Bacheca"
+msgstr "Dashboard"
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -153,7 +153,7 @@ msgstr "Disattivato"
 
 #: views/settings.php:31
 msgid "Bypass for Search Bots"
-msgstr "Bypass per Search Bots"
+msgstr "Bypass per Bot di ricerca"
 
 #: views/settings.php:34 views/settings.php:94 views/settings.php:104
 #: views/settings.php:232 views/settings.php:268 views/settings.php:305
@@ -169,7 +169,7 @@ msgstr "No"
 
 #: views/settings.php:37
 msgid "Allow Search Bots to bypass maintenance mode?"
-msgstr "Consenti ai Search Bots di bypassare la modalità di manutenzione?"
+msgstr "Permetti ai Bot di ricerca di bypassare la modalità manutenzione?"
 
 #: views/settings.php:41
 msgid "Backend Role"
@@ -177,7 +177,7 @@ msgstr "Ruolo Backend"
 
 #: views/settings.php:48
 msgid "Which user role is allowed to access the backend of this blog?"
-msgstr "A quale ruolo utente è consentito accedere al backend di questo blog?"
+msgstr "Che ruolo utente è abilitato all'accesso nel backend di questo blog?"
 
 #: views/settings.php:52
 msgid "Frontend Role"
@@ -185,11 +185,12 @@ msgstr "Ruolo Frontend"
 
 #: views/settings.php:59
 msgid "Which user role is allowed to access the frontend of this blog?"
-msgstr "A quale ruolo utente è consentito accedere al frontend di questo blog?"
+msgstr ""
+"Che ruolo utente è abilitato all'accesso nel frontend di questo blog?"
 
 #: views/settings.php:63
 msgid "Robots Meta Tag"
-msgstr "Robots Meta Tag"
+msgstr "Meta Tag Robots"
 
 #: views/settings.php:69
 msgid ""
@@ -197,21 +198,21 @@ msgid ""
 "control how an individual page should be indexed and served to users in "
 "search results."
 msgstr ""
-"Il meta tag robots ti consentono di utilizzare un granular, approccio "
-"specifico per controllare come una singola pagina dovrebbe essere "
+"I metatag per i robot ti permettono di usare un approccio granulare, "
+"specifico per la pagina per controllare come ogni pagina potrà essere "
 "indicizzata e servita agli utenti nei risultati di ricerca."
 
 #: views/settings.php:73
 msgid "Redirection"
-msgstr "Reindirizzamento"
+msgstr "Redirezione"
 
 #: views/settings.php:76
 msgid ""
 "If you want to redirect a user to a URL (which is not the WordPress "
 "dashboard) after login, then define a URL (incl. http://)"
 msgstr ""
-"Se si desidera reindirizzare un utente ad un URL (che non sia la bacheca di "
-"WordPress) dopo il login, definisci un URL (incluso http: //.)"
+"Se vuoi reindirizzare un utente ad un URL (che non sia la dashboard "
+"WordPress dopo il login, allora definisci un URL includendo http://)"
 
 #: views/settings.php:80
 msgid "Exclude"
@@ -222,8 +223,8 @@ msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
 msgstr ""
-"Escludi feed, pagine, archivi o IP dalla modalità di manutenzione. "
-"Aggiungere uno slug / IP per linea!"
+"Escludi feed, pagine, archivi o IPs dalla modalità manutenzione, Aggiungi "
+"un valore/IP per linea!"
 
 #: views/settings.php:91
 msgid "Notice"
@@ -231,18 +232,19 @@ msgstr "Avviso"
 
 #: views/settings.php:97
 msgid "Do you want to see notices when maintenance mode is activated?"
-msgstr "Vuoi vedere gli avvisi quando la modalità di manutenzione è attivata?"
+msgstr ""
+"Vuoi vedere gli avvisi quando viene attivata la modalità di manutenzione?"
 
 #: views/settings.php:101
 msgid "Dashboard link"
-msgstr "Collegamento alla bacheca"
+msgstr "Link Dashboard"
 
 #: views/settings.php:107
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr ""
-"Vuoi aggiungere un collegamento alla bacheca sulla tua pagina modalità di "
-"manutenzione?"
+"Vuoi aggiungere un collegamento alla dashboard sulla tua pagina modalità "
+"di manutenzione?"
 
 #: views/settings.php:115 views/settings.php:218 views/settings.php:421
 msgid "Save settings"
@@ -250,7 +252,7 @@ msgstr "Salva impostazioni"
 
 #: views/settings.php:116 views/settings.php:219 views/settings.php:422
 msgid "Reset settings"
-msgstr "Ripristino Impostazioni"
+msgstr "Resetta impostazioni"
 
 #: views/settings.php:121
 msgid "Content"
@@ -258,7 +260,7 @@ msgstr "Contenuto"
 
 #: views/settings.php:126
 msgid "Title (HTML tag)"
-msgstr "Titolo (tag HTML)"
+msgstr "Titolo (HTML tag)"
 
 #: views/settings.php:132
 msgid "Heading"
@@ -278,15 +280,15 @@ msgstr "Scegli il tipo"
 
 #: views/settings.php:167
 msgid "Custom color"
-msgstr "Colore personalizzato"
+msgstr "Colore Custom"
 
 #: views/settings.php:168
 msgid "Uploaded background"
-msgstr "Sfondi caricati"
+msgstr "Background caricato"
 
 #: views/settings.php:169
 msgid "Predefined background"
-msgstr "Sfondi predefiniti"
+msgstr "Background predefinito"
 
 #: views/settings.php:174
 msgid "Choose color"
@@ -294,19 +296,19 @@ msgstr "Scegli il colore"
 
 #: views/settings.php:180
 msgid "Upload background"
-msgstr "Carica sfondo"
+msgstr "Carica uno Sfondo"
 
 #: views/settings.php:184
 msgid "Backgrounds should have 1920x1280 px size."
-msgstr "Gli sfondi dovrebbero avere 1920x1280 px di dimensione."
+msgstr "Gli Sfondi dovrebbero avere una dimensione di 1920x1280 px."
 
 #: views/settings.php:189
 msgid "Choose background"
-msgstr "Scegli sfondo"
+msgstr "Scegli lo sfondo"
 
 #: views/settings.php:191
 msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-msgstr "fonte <a href=\"%\" target=\"_blank\">Foto Gratis</a>"
+msgstr "sorgente <a href=\"%\" target=\"_blank\">Foto Free</a>"
 
 #: views/settings.php:224
 msgid "Countdown"
@@ -342,7 +344,7 @@ msgstr "Colore"
 
 #: views/settings.php:265
 msgid "Show subscribe?"
-msgstr "Mostra la sottoscrizione?"
+msgstr "Mostra Sottoscrivi?"
 
 #: views/settings.php:281
 msgid "Stats"
@@ -351,11 +353,11 @@ msgstr "Statistiche"
 #: views/settings.php:285
 #, php-format
 msgid "You have %d subscriber(s)"
-msgstr "Hai %d sottoscritti"
+msgstr "Hai %d iscritti"
 
 #: views/settings.php:290
 msgid "Export as CSV"
-msgstr "Esporta in CSV"
+msgstr "Esporta come CSV"
 
 #: views/settings.php:297
 msgid "Social Networks"
@@ -363,35 +365,35 @@ msgstr "Social Networks"
 
 #: views/settings.php:302
 msgid "Show social networks?"
-msgstr "Mostra i social network?"
+msgstr "Mostra Social Networks?"
 
 #: views/settings.php:311
 msgid "Links target?"
-msgstr "Destinazione collegamento?"
+msgstr "Link di destinazione?"
 
 #: views/settings.php:314
 msgid "New page"
-msgstr "Nuova pagina"
+msgstr "Nuova Pagina"
 
 #: views/settings.php:315
 msgid "Same page"
-msgstr "Stessa pagina"
+msgstr "Stessa Pagina"
 
 #: views/settings.php:317
 msgid "Choose how the links will open."
-msgstr "Scegli come aprire i link."
+msgstr "Scegli come si apriranno i link."
 
 #: views/settings.php:365
 msgid "Contact"
-msgstr "Contatto"
+msgstr "Contatti"
 
 #: views/settings.php:370
 msgid "Show contact?"
-msgstr "Mostra contatto?"
+msgstr "Mostra Contatti?"
 
 #: views/settings.php:379
 msgid "Email address"
-msgstr "Indirizzo e-mail"
+msgstr "Indirizzo Email"
 
 #: views/settings.php:385
 msgid "Effects"
@@ -399,15 +401,15 @@ msgstr "Effetti"
 
 #: views/settings.php:388
 msgid "Move top - Move bottom"
-msgstr "Move top - Move bottom"
+msgstr "Muovi Su - Giù"
 
 #: views/settings.php:389
 msgid "Zoom - Zoomed"
-msgstr "Zoom - Zoomed"
+msgstr "Zoom - Zoomato"
 
 #: views/settings.php:390
 msgid "Fold - Unfold"
-msgstr "Fold - Unfold"
+msgstr "Chiudere - Aprire"
 
 #: views/settings.php:397
 msgid "Google Analytics"
@@ -415,15 +417,15 @@ msgstr "Google Analytics"
 
 #: views/settings.php:402
 msgid "Use Google Analytics?"
-msgstr "Vuoi usare Google Analytics?"
+msgstr "Usa Google Analytics?"
 
 #: views/settings.php:411
 msgid "Tracking code"
-msgstr "Codice di monitoraggio"
+msgstr "Codice di tracciamento"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
-msgstr "Info Plugin"
+msgstr "Info sul Plugin"
 
 #: views/sidebar.php:13
 msgid "Author"
@@ -431,7 +433,7 @@ msgstr "Autore"
 
 #: views/sidebar.php:14
 msgid "Website"
-msgstr "Sito web"
+msgstr "Sito"
 
 #: views/sidebar.php:15
 msgid "Twitter"
