@@ -45,8 +45,8 @@ msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
-"<p>Enschuldige die Unannehmlichkeiten,<br />unsere Website is aktuell in "
-"Wartungsarbeiten.<br />Vielen Dank für das Verständis.</p>"
+"<p>Bitte Entschuldigen Sie die Unannehmlichkeiten,<br />an dieser Website finden aktuell"
+"Wartungsarbeiten statt.<br />Vielen Dank für Ihr Verständnis.</p>"
 
 #: includes/classes/wp-maintenance-mode.php:121
 msgid "Notify me when it's ready"
@@ -85,7 +85,7 @@ msgstr "Mitteilung via Kontakt"
 
 #: includes/classes/wp-maintenance-mode.php:679
 msgid "Your email was sent to the website administrator. Thanks!"
-msgstr "Deine E-Mail wurde an den Administrator der Webiste gesandt. Danke!"
+msgstr "Deine E-Mail wurde an den Administrator der Website gesendet. Danke!"
 
 #: views/loginform.php:8
 msgid "Login"
