@@ -214,7 +214,7 @@ msgstr ""
 
 #: views/settings.php:80
 msgid "Exclude"
-msgstr "Auschluss"
+msgstr "Ausschluss"
 
 #: views/settings.php:87
 msgid ""
