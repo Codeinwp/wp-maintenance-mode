@@ -1,15 +1,25 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
 "Project-Id-Version: WP Maintenance Mode 2.0.4\n"
 "POT-Creation-Date: 2016-06-17 03:28+0300\n"
 "PO-Revision-Date: 2016-06-17 03:28+0300\n"
+=======
+"Project-Id-Version: WP Maintenance Mode 2.0.3\n"
+"POT-Creation-Date: 2015-04-07 14:38-0000\n"
+"PO-Revision-Date: 2015-04-17 11:46-0000\n"
+>>>>>>> master
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+<<<<<<< HEAD
 "X-Generator: Poedit 1.8.8\n"
+=======
+"X-Generator: Poedit 1.7.5\n"
+>>>>>>> master
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -17,6 +27,7 @@ msgstr ""
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
+<<<<<<< HEAD
 "X-Poedit-SearchPath-1: views\n"
 "X-Poedit-SearchPath-2: includes/classes\n"
 
@@ -38,16 +49,26 @@ msgstr ""
 #: includes/classes/wp-maintenance-mode-admin.php:191
 msgid "The tab slug must exist."
 msgstr ""
+=======
+>>>>>>> master
 
 #: includes/classes/wp-maintenance-mode-admin.php:211
 msgid "WP Maintenance Mode"
 msgstr "WP Maintenance Mode"
 
+<<<<<<< HEAD
 #: includes/classes/wp-maintenance-mode-admin.php:425
 msgid "Settings"
 msgstr "Definições"
 
 #: includes/classes/wp-maintenance-mode-admin.php:444
+=======
+#: includes/classes/wp-maintenance-mode-admin.php:367
+msgid "Settings"
+msgstr "Definições"
+
+#: includes/classes/wp-maintenance-mode-admin.php:386
+>>>>>>> master
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -56,6 +77,7 @@ msgstr ""
 "O modo de manutenção está <strong>activo</strong>. Por favor não se esqueça "
 "de <a href=\"%s\">desactivar</a> assim que termine."
 
+<<<<<<< HEAD
 #: includes/classes/wp-maintenance-mode-admin.php:481
 msgid "Notice key cannot be empty."
 msgstr ""
@@ -66,6 +88,14 @@ msgid "Maintenance mode"
 msgstr "Modo de manutenção"
 
 #: includes/classes/wp-maintenance-mode.php:106
+=======
+#: includes/classes/wp-maintenance-mode.php:102
+#: includes/classes/wp-maintenance-mode.php:103
+msgid "Maintenance mode"
+msgstr "Modo de manutenção"
+
+#: includes/classes/wp-maintenance-mode.php:105
+>>>>>>> master
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -73,11 +103,19 @@ msgstr ""
 "<p>Desculpe pela inconveniência.<br />O site está neste momento numa "
 "manutenção agendada.<br />Obrigado pela sua compreensão.</p>"
 
+<<<<<<< HEAD
 #: includes/classes/wp-maintenance-mode.php:124
 msgid "Notify me when it's ready"
 msgstr "Notificar-me quando estiver disponível."
 
 #: includes/classes/wp-maintenance-mode.php:259
+=======
+#: includes/classes/wp-maintenance-mode.php:123
+msgid "Notify me when it's ready"
+msgstr "Notificar-me quando estiver disponível."
+
+#: includes/classes/wp-maintenance-mode.php:258
+>>>>>>> master
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -86,6 +124,7 @@ msgstr ""
 "O plugin WP Maintenance Mode foi reactivado e DEVE rever as suas <a href=\"%s"
 "\">definições</a>."
 
+<<<<<<< HEAD
 #: includes/classes/wp-maintenance-mode.php:449
 #: includes/classes/wp-maintenance-mode.php:463
 msgid "Maintenance Mode"
@@ -128,6 +167,33 @@ msgstr ""
 #: views/contact.php:74
 msgid "Content:"
 msgstr ""
+=======
+#: includes/classes/wp-maintenance-mode.php:444
+#: includes/classes/wp-maintenance-mode.php:458
+msgid "Maintenance Mode"
+msgstr "Modo de manutenção"
+
+#: includes/classes/wp-maintenance-mode.php:655
+#: includes/classes/wp-maintenance-mode.php:685
+msgid "Please enter a valid email address."
+msgstr "Por favor introduza um endereço de email válido."
+
+#: includes/classes/wp-maintenance-mode.php:666
+msgid "You successfuly subscribed. Thanks!"
+msgstr "Subscreveu com sucesso. Obrigado!"
+
+#: includes/classes/wp-maintenance-mode.php:681
+msgid "All fields required."
+msgstr "Todos os campos são necessários."
+
+#: includes/classes/wp-maintenance-mode.php:702
+msgid "Message via contact"
+msgstr "Mensagem via formulário de contacto"
+
+#: includes/classes/wp-maintenance-mode.php:706
+msgid "Your email was sent to the website administrator. Thanks!"
+msgstr "O seu email foi enviado ao administrador do site. Obrigado!"
+>>>>>>> master
 
 #: views/loginform.php:8
 msgid "Login"
@@ -220,26 +286,39 @@ msgstr "Permitir que os robôs de pesquisa ultrapassem o modo de manutenção?"
 #: views/settings.php:41
 msgid "Backend Role"
 msgstr "Perfil de utilizador de administração"
+<<<<<<< HEAD
 
 #: views/settings.php:43 views/settings.php:59
 msgid "Select role(s)"
 msgstr ""
+=======
+>>>>>>> master
 
 #: views/settings.php:53
 msgid ""
 "Which user role is allowed to access the backend of this blog? "
 "Administrators will always have access."
 msgstr ""
+<<<<<<< HEAD
+=======
+"Que perfil de utilizador tem permissão de acesso à administração deste site?"
+>>>>>>> master
 
 #: views/settings.php:57
 msgid "Frontend Role"
 msgstr "Perfil de utilizador da frente do site"
 
+<<<<<<< HEAD
 #: views/settings.php:69
 msgid ""
 "Which user role is allowed to access the frontend of this blog? "
 "Administrators will always have access."
 msgstr ""
+=======
+#: views/settings.php:59
+msgid "Which user role is allowed to access the frontend of this blog?"
+msgstr "Que perfil de utilizador tem permissão de acesso à frente deste site?"
+>>>>>>> master
 
 #: views/settings.php:73
 msgid "Robots Meta Tag"
@@ -265,6 +344,11 @@ msgid ""
 "URL (different from WordPress Dashboard URL) after login, then define a URL "
 "(incl. http://)"
 msgstr ""
+<<<<<<< HEAD
+=======
+"Se pretende redireccionar um utilizador para um URL (que não seja o painel "
+"do WordPress) após início de sessão, insira um URL (incluindo http://)"
+>>>>>>> master
 
 #: views/settings.php:90
 msgid "Exclude"
@@ -358,7 +442,11 @@ msgstr "Fundos deverão ter 1920x1280 px de tamanho."
 msgid "Choose background"
 msgstr "Escolher fundo"
 
+<<<<<<< HEAD
 #: views/settings.php:201
+=======
+#: views/settings.php:191
+>>>>>>> master
 #, php-format
 msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 msgstr "fonte <a href=\"%s\" target=\"_blank\">fotos gratuitas</a>"
@@ -503,6 +591,7 @@ msgstr ""
 msgid "Resources"
 msgstr "Recursos"
 
+<<<<<<< HEAD
 #~ msgid "You successfuly subscribed. Thanks!"
 #~ msgstr "Subscreveu com sucesso. Obrigado!"
 
@@ -526,6 +615,8 @@ msgstr "Recursos"
 #~ msgid "WordPress Themes"
 #~ msgstr "Temas WordPress"
 
+=======
+>>>>>>> master
 #~ msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
 #~ msgstr "fonte <a href=\"%\" target=\"_blank\">fotos gratuitas</a>"
 
