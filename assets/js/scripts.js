@@ -33,8 +33,13 @@ jQuery(function($) {
                 $.post(wpmm_vars.ajax_url, {
                     action: 'wpmm_add_subscriber',
                     email: $('.email_input', $('.subscribe_form')).val()
-                }, function(data) {
-                    $('.subscribe_wrapper').html(data.response);
+                }, function(response) {
+                    if (!response.success) {
+                        alert(response.data);
+                        return false;
+                    }
+                    
+                    $('.subscribe_wrapper').html(response.data);
                 }, 'json');
 
                 return false;
@@ -63,9 +68,15 @@ jQuery(function($) {
                     name: $('.name_input', $('.contact_form')).val(),
                     email: $('.email_input', $('.contact_form')).val(),
                     content: $('.content_textarea', $('.contact_form')).val()
-                }, function(data) {
-                    $('.contact .form').append('<div class="response">' + data.response + '</div>');
+                }, function(response) {
+                    if (!response.success) {
+                        alert(response.data);
+                        return false;
+                    }
+
+                    $('.contact .form').append('<div class="response">' + response.data + '</div>');
                     $('.contact .form .contact_form').hide();
+
                     setTimeout(function() {
                         $('.contact').hide();
                         $('.contact .form .response').remove();

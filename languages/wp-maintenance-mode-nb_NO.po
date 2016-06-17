@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.4\n"
-"POT-Creation-Date: 2016-06-17 03:15+0300\n"
-"PO-Revision-Date: 2016-06-17 03:15+0300\n"
-"Last-Translator: Erick Ruiz de Chavez <erick@erch.co>\n"
+"POT-Creation-Date: 2016-06-17 03:22+0300\n"
+"PO-Revision-Date: 2016-06-17 03:22+0300\n"
+"Last-Translator: Fredrik Hugås <fhugas@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
-"Language: es_ES\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,7 +15,8 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
@@ -29,7 +30,7 @@ msgstr ""
 #: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
-msgstr "Hay %d suscriptor(es)"
+msgstr "Du har %d personer som ønsker oppdatering"
 
 #: includes/classes/wp-maintenance-mode-admin.php:186
 msgid "The tab slug must not be empty."
@@ -41,11 +42,11 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:211
 msgid "WP Maintenance Mode"
-msgstr "Modo de Mantenimiento WP"
+msgstr "WP Vedlikeholdsmodus"
 
 #: includes/classes/wp-maintenance-mode-admin.php:425
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Innstillinger"
 
 #: includes/classes/wp-maintenance-mode-admin.php:444
 #, php-format
@@ -53,8 +54,8 @@ msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
 "href=\"%s\">deactivate</a> as soon as you are done."
 msgstr ""
-"El modo de mantenimiento está <strong>activo</strong>. Por favor no olvides "
-"<a href=\"%s\">desactivarlo</a> tan pronto como termines."
+"Vedlikeholdsmodus er <strong>aktivert</strong>. Husk å <a href=\"%s"
+"\">deaktiver vedlikeholdsmodus</a> når du er ferdig."
 
 #: includes/classes/wp-maintenance-mode-admin.php:481
 msgid "Notice key cannot be empty."
@@ -63,19 +64,19 @@ msgstr ""
 #: includes/classes/wp-maintenance-mode.php:103
 #: includes/classes/wp-maintenance-mode.php:104
 msgid "Maintenance mode"
-msgstr "Modo de mantenimiento"
+msgstr "Vedlikehold pågår"
 
 #: includes/classes/wp-maintenance-mode.php:106
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
-"<p>Disculpa las molestias.<br />Nuestro sitio esta actualmente bajo "
-"mantenimiento programado.<br />Agradecemos tu comprensión.</p>"
+"<p>Nettsiden gjennomgår for tiden et planlagt vedlikehold.<br />Vi beklager "
+"nedetiden dette medfører.<br />Takk for din forståelse.</p>"
 
 #: includes/classes/wp-maintenance-mode.php:124
 msgid "Notify me when it's ready"
-msgstr "Notifícame cuanto este listo"
+msgstr "Varsle meg når den er klar"
 
 #: includes/classes/wp-maintenance-mode.php:259
 #, php-format
@@ -83,18 +84,18 @@ msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
 "\">settings</a>."
 msgstr ""
-"El plugin Modo de Mantenimiento WP fue reactivado y es NECESARIO que revises "
-"los <a href=\"%s\">ajustes</a>."
+"Utvidelsen WP Maintanance Mode er oppdatert og du må <a href=\"%s\">se "
+"igjennom innstillingene</a>"
 
 #: includes/classes/wp-maintenance-mode.php:449
 #: includes/classes/wp-maintenance-mode.php:463
 msgid "Maintenance Mode"
-msgstr "Modo de Mantenimiento"
+msgstr "Vedlikehold pågår"
 
 #: includes/classes/wp-maintenance-mode.php:687
 #: includes/classes/wp-maintenance-mode.php:721 views/maintenance.php:85
 msgid "Please enter a valid email address."
-msgstr "Por favor usa una dirección de correo electrónico valida."
+msgstr "Vennligst oppgi en gyldig epostadresse."
 
 #: includes/classes/wp-maintenance-mode.php:699
 msgid "You successfully subscribed. Thanks!"
@@ -102,15 +103,15 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:717
 msgid "All fields required."
-msgstr "Todos los campos son obligatorios."
+msgstr "Alle felt er påkrevd."
 
 #: includes/classes/wp-maintenance-mode.php:726
 msgid "Message via contact"
-msgstr "Mensaje vía formulario de contacto."
+msgstr "Melding via kontakt"
 
 #: includes/classes/wp-maintenance-mode.php:738
 msgid "Your email was sent to the website administrator. Thanks!"
-msgstr "Tu mensaje ha sido enviado al administrador. ¡Muchas gracias!"
+msgstr "Din epost ble sendt til administratoren for nettstedet. Takk!"
 
 #: views/contact.php:34
 #, php-format
@@ -131,19 +132,19 @@ msgstr ""
 
 #: views/loginform.php:8
 msgid "Login"
-msgstr "Iniciar sesión"
+msgstr "Logg inn"
 
 #: views/maintenance.php:42
 msgid "your e-mail..."
-msgstr "dirección de correo electrónico ..."
+msgstr "Din epostadresse..."
 
 #: views/maintenance.php:43 views/settings.php:270
 msgid "Subscribe"
-msgstr "Suscribirse"
+msgstr "Få varsling"
 
 #: views/maintenance.php:84 views/sidebar.php:7
 msgid "Name"
-msgstr "Nombre"
+msgstr "Navn"
 
 #: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
 msgid "This field is required."
@@ -151,75 +152,75 @@ msgstr ""
 
 #: views/maintenance.php:85
 msgid "E-mail"
-msgstr "Correo electrónico"
+msgstr "Epost"
 
 #: views/maintenance.php:87
 msgid "Your message"
-msgstr "Mensaje"
+msgstr "Din melding"
 
 #: views/maintenance.php:88
 msgid "Send"
-msgstr "Enviar"
+msgstr "Send"
 
 #: views/maintenance.php:93
 msgid "Contact us"
-msgstr "Contáctanos"
+msgstr "Kontakt oss"
 
 #: views/maintenance.php:98
 msgid "Dashboard"
-msgstr "Escritorio"
+msgstr "Kontrollpanel"
 
 #: views/settings.php:6
 msgid "Settings saved."
-msgstr "Ajustes guardados."
+msgstr "Innstillingene ble lagret."
 
 #: views/settings.php:13
 msgid "General"
-msgstr "General"
+msgstr "Generelt"
 
 #: views/settings.php:14
 msgid "Design"
-msgstr "Diseño"
+msgstr "Utseende"
 
 #: views/settings.php:15
 msgid "Modules"
-msgstr "Módulos"
+msgstr "Moduler"
 
 #: views/settings.php:24
 msgid "Status"
-msgstr "Estado"
+msgstr "Status"
 
 #: views/settings.php:26
 msgid "Activated"
-msgstr "Activado"
+msgstr "Aktivert"
 
 #: views/settings.php:27
 msgid "Deactivated"
-msgstr "Desactivado"
+msgstr "Deaktivert"
 
 #: views/settings.php:31
 msgid "Bypass for Search Bots"
-msgstr "Evitar Robots de Búsqueda"
+msgstr "Slipp igjennom søkemotorer"
 
 #: views/settings.php:34 views/settings.php:104 views/settings.php:114
 #: views/settings.php:242 views/settings.php:278 views/settings.php:316
 #: views/settings.php:384 views/settings.php:416
 msgid "Yes"
-msgstr "Si"
+msgstr "Ja"
 
 #: views/settings.php:35 views/settings.php:105 views/settings.php:115
 #: views/settings.php:243 views/settings.php:279 views/settings.php:317
 #: views/settings.php:385 views/settings.php:417
 msgid "No"
-msgstr "No"
+msgstr "Nei"
 
 #: views/settings.php:37
 msgid "Allow Search Bots to bypass maintenance mode?"
-msgstr "¿Permitir a los Robots de Búsqueda evitar el modo de mantenimiento?"
+msgstr "La søkemotorer slippe forbi vedlikeholdsmodus"
 
 #: views/settings.php:41
 msgid "Backend Role"
-msgstr "Rol de administración"
+msgstr "Backend Rolle"
 
 #: views/settings.php:43 views/settings.php:59
 msgid "Select role(s)"
@@ -233,7 +234,7 @@ msgstr ""
 
 #: views/settings.php:57
 msgid "Frontend Role"
-msgstr "Rol de sitio"
+msgstr "Frontend Rolle"
 
 #: views/settings.php:69
 msgid ""
@@ -243,7 +244,7 @@ msgstr ""
 
 #: views/settings.php:73
 msgid "Robots Meta Tag"
-msgstr "Meta Etiqueta Robots"
+msgstr "Robots Meta Tag"
 
 #: views/settings.php:79
 msgid ""
@@ -251,13 +252,13 @@ msgid ""
 "control how an individual page should be indexed and served to users in "
 "search results."
 msgstr ""
-"La meta etiqueta robots le permite definir de manera mas granular como deben "
-"ser indexadas y servidas las paginas a los usuarios en los resultados de "
-"búsqueda. "
+"Meta Tagger for roboter lar deg bruke et detaljert, side-spesifikk metode "
+"for å kontrollere hvordan den enkelte siden skal indekseres og vises til "
+"brukere i søkeresultatene."
 
 #: views/settings.php:83
 msgid "Redirection"
-msgstr "Redirección"
+msgstr "Omdirigering"
 
 #: views/settings.php:86
 msgid ""
@@ -268,92 +269,94 @@ msgstr ""
 
 #: views/settings.php:90
 msgid "Exclude"
-msgstr "Excluir"
+msgstr "Eksluder"
 
 #: views/settings.php:97
 msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
 msgstr ""
-"Excluye feed, paginas, archivos o direcciones IP del modo de mantenimiento. "
-"Agregua un slug por linea!"
+"Eksluder feed, sider, arkiv eller IP-er fra vedlikeholdsmodus. Legg inn en "
+"slug / IP per linje."
 
 #: views/settings.php:101
 msgid "Notice"
-msgstr "Aviso"
+msgstr "Notis"
 
 #: views/settings.php:107
 msgid "Do you want to see notices when maintenance mode is activated?"
-msgstr "¿Deseas ver avisos cuando el modo de mantenimiento esta activo?"
+msgstr "Ønsker du å se en notis når vedlikeholdsmodus er aktivert?"
 
 #: views/settings.php:111
 msgid "Dashboard link"
-msgstr "Enlace al escritorio"
+msgstr "Link i kontrollpanelet"
 
 #: views/settings.php:117
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
-msgstr "¿Deseas agregar un enlace al escritorio en tu página de mantenimiento?"
+msgstr ""
+"Ønsker du å legge inn en link til kontrollpanelet på siden for "
+"vedlikeholdsmodus?"
 
 #: views/settings.php:125 views/settings.php:228 views/settings.php:432
 msgid "Save settings"
-msgstr "Guardar ajustes"
+msgstr "Lagre innstillinger"
 
 #: views/settings.php:126 views/settings.php:229 views/settings.php:433
 msgid "Reset settings"
-msgstr "Restablecer ajustes"
+msgstr "Tilbakestill innstillinger"
 
 #: views/settings.php:131
 msgid "Content"
-msgstr "Contenido"
+msgstr "Innhold"
 
 #: views/settings.php:136
 msgid "Title (HTML tag)"
-msgstr "Título (Etiqueta HTML)"
+msgstr "Tittel (HTML  title tag)"
 
 #: views/settings.php:142
 msgid "Heading"
-msgstr "Encabezado"
+msgstr "Overskrift"
 
 #: views/settings.php:149 views/settings.php:284
 msgid "Text"
-msgstr "Texto"
+msgstr "Tekst"
 
 #: views/settings.php:169
 msgid "Background"
-msgstr "Fondo"
+msgstr "Bakgrunn"
 
 #: views/settings.php:174
 msgid "Choose type"
-msgstr "Seleccionar tipo"
+msgstr "Velg type"
 
 #: views/settings.php:177
 msgid "Custom color"
-msgstr "Color personalizado"
+msgstr "Egendefinert farge"
 
 #: views/settings.php:178
 msgid "Uploaded background"
-msgstr "Fondo cargado"
+msgstr "Opplastet bilde"
 
 #: views/settings.php:179
 msgid "Predefined background"
-msgstr "Fondo predefinido"
+msgstr "Forhåndsdefinert bilde"
 
 #: views/settings.php:184
 msgid "Choose color"
-msgstr "Elige un color"
+msgstr "Velg farge"
 
 #: views/settings.php:190
 msgid "Upload background"
-msgstr "Sube un fondo"
+msgstr "Last opp bakgrunn"
 
 #: views/settings.php:194
 msgid "Backgrounds should have 1920x1280 px size."
-msgstr "El fondo debe medir 1920x1280 pixeles."
+msgstr "Bakgrunnen må være minst 1929x1280px i størrelse."
 
 #: views/settings.php:199
 msgid "Choose background"
-msgstr "Elige el fondo"
+msgstr "Velg bakgrunn"
 
 #: views/settings.php:201
 #, php-format
@@ -362,47 +365,47 @@ msgstr ""
 
 #: views/settings.php:234
 msgid "Countdown"
-msgstr "Contador"
+msgstr "Nedtelling"
 
 #: views/settings.php:239
 msgid "Show countdown?"
-msgstr "¿Mostrar contador?"
+msgstr "Vis nedtelling?"
 
 #: views/settings.php:248
 msgid "Start date"
-msgstr "Fecha de inicio"
+msgstr "Dato for start"
 
 #: views/settings.php:254
 msgid "Countdown (remaining time)"
-msgstr "Contador (tiempo restante)"
+msgstr "Nedtelling (gjenstående tid)"
 
 #: views/settings.php:256
 msgid "Days"
-msgstr "Días"
+msgstr "Dager"
 
 #: views/settings.php:257
 msgid "Hours"
-msgstr "Horas"
+msgstr "Timer"
 
 #: views/settings.php:258
 msgid "Minutes"
-msgstr "Minutos"
+msgstr "Minutter"
 
 #: views/settings.php:262
 msgid "Color"
-msgstr "Color"
+msgstr "Farge"
 
 #: views/settings.php:275
 msgid "Show subscribe?"
-msgstr "¿Mostrar suscribirse?"
+msgstr "Vis abboner"
 
 #: views/settings.php:291
 msgid "Stats"
-msgstr "Estadísticas"
+msgstr "Ønsker oppdatering"
 
 #: views/settings.php:300
 msgid "Export as CSV"
-msgstr "Exportar como CSV"
+msgstr "Eksporter som CSV"
 
 #: views/settings.php:301
 msgid "Empty subscribers list"
@@ -410,55 +413,55 @@ msgstr ""
 
 #: views/settings.php:308
 msgid "Social Networks"
-msgstr "Redes Sociales"
+msgstr "Sosiale nettverk"
 
 #: views/settings.php:313
 msgid "Show social networks?"
-msgstr "¿Mostrar redes sociales?"
+msgstr "Vis sosiale nettverk?"
 
 #: views/settings.php:322
 msgid "Links target?"
-msgstr "¿Destino de enlaces?"
+msgstr "Lenkemål"
 
 #: views/settings.php:325
 msgid "New page"
-msgstr "Página nueva"
+msgstr "Ny side"
 
 #: views/settings.php:326
 msgid "Same page"
-msgstr "Misma página"
+msgstr "Samme side"
 
 #: views/settings.php:328
 msgid "Choose how the links will open."
-msgstr "Selecciona como se abrirán los enlaces."
+msgstr "Velg hvordan side lenken skal åpnes i."
 
 #: views/settings.php:376
 msgid "Contact"
-msgstr "Contacto"
+msgstr "Kontakt"
 
 #: views/settings.php:381
 msgid "Show contact?"
-msgstr "¿Mostrar contacto?"
+msgstr "Vis kontakt?"
 
 #: views/settings.php:390
 msgid "Email address"
-msgstr "Dirección de correo electrónico"
+msgstr "Epost adresse"
 
 #: views/settings.php:396
 msgid "Effects"
-msgstr "Efectos"
+msgstr "Effekt"
 
 #: views/settings.php:399
 msgid "Move top - Move bottom"
-msgstr "Mover al inicio - Mover al final"
+msgstr "Flytt til toppen - Flytt til bunnen"
 
 #: views/settings.php:400
 msgid "Zoom - Zoomed"
-msgstr "Ampliar - Ampliado"
+msgstr "Zoom - Zoomet"
 
 #: views/settings.php:401
 msgid "Fold - Unfold"
-msgstr "Colapsar - Expandir"
+msgstr "Brett - Brett ut"
 
 #: views/settings.php:408
 msgid "Google Analytics"
@@ -466,23 +469,23 @@ msgstr "Google Analytics"
 
 #: views/settings.php:413
 msgid "Use Google Analytics?"
-msgstr "¿Usar Google Analytics?"
+msgstr "Bruk Google Analytics?"
 
 #: views/settings.php:422
 msgid "Tracking code"
-msgstr "Código de rastreo"
+msgstr "Sporingskode"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
-msgstr "Información del plugin"
+msgstr "Informasjon om utvidelsen"
 
 #: views/sidebar.php:13
 msgid "Author"
-msgstr "Autor"
+msgstr "Forfatter"
 
 #: views/sidebar.php:14
 msgid "Website"
-msgstr "Pagina web"
+msgstr "Nettside"
 
 #: views/sidebar.php:15
 msgid "Twitter"
@@ -498,42 +501,27 @@ msgstr ""
 
 #: views/sidebar.php:44
 msgid "Resources"
-msgstr "Recursos"
+msgstr "Resurser"
 
 #~ msgid "You successfuly subscribed. Thanks!"
-#~ msgstr "Te has suscrito exitosamente. ¡Muchas gracias!"
+#~ msgstr "Du vil nå få oppdateringer om siden. Takk!"
 
 #~ msgid "Which user role is allowed to access the backend of this blog?"
-#~ msgstr ""
-#~ "¿Que rol de usuario se requiere para acceder a la administración de este "
-#~ "blog?"
+#~ msgstr "Hvilken rolle har tilgang til backend på denne nettsiden?"
 
 #~ msgid "Which user role is allowed to access the frontend of this blog?"
-#~ msgstr "¿Que rol de usuario se requiere para acceder a este blog?"
+#~ msgstr "Hvilken rolle har tilgang til frontend på denne nettsiden?"
 
 #~ msgid ""
 #~ "If you want to redirect a user to a URL (which is not the WordPress "
 #~ "dashboard) after login, then define a URL (incl. http://)"
 #~ msgstr ""
-#~ "Si deseas enviar a un usuario a una URL (que no forma parte de su sitio "
-#~ "WordPress) después de iniciar sesión, define dicha URL (incluya http://)"
+#~ "Hvis du ønsker å omdirigere brukeren til en URL (som ikke er WordPress "
+#~ "kontrollpanelet) etter innlogging, så må denne defineres her (inkluder "
+#~ "http://)"
 
 #~ msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-#~ msgstr "fuente <a href=\"%\" target=\"_blank\">Fotos Gratis</a>"
+#~ msgstr "kilde <a href=\"%\" target=\"_blank\">Gratis bilder</a>"
 
 #~ msgid "WordPress Themes"
-#~ msgstr "Temas WordPress"
-
-#~ msgid "Developed by <a href=\"%s\">Designmodo</a>"
-#~ msgstr "Desarrollado por <a href=\"%s\">Designmodo</a>"
-
-#~ msgid "Subscribe now for early access to new WordPress themes."
-#~ msgstr ""
-#~ "Suscríbete ahora para obtener acceso preferencial a nuevos temas "
-#~ "WordPress."
-
-#~ msgid "Enter your email address"
-#~ msgstr "Introduce tu dirección de correo electrónico"
-
-#~ msgid "News"
-#~ msgstr "Noticias"
+#~ msgstr "WordPress Temaer"

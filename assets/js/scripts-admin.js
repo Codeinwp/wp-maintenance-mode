@@ -3,7 +3,7 @@ jQuery(function($) {
      * TABS
      */
     var hash = window.location.hash;
-    if (hash != '') {
+    if (hash !== '') {
         $('.nav-tab-wrapper').children().removeClass('nav-tab-active');
         $('.nav-tab-wrapper a[href="' + hash + '"]').addClass('nav-tab-active');
 
@@ -60,7 +60,7 @@ jQuery(function($) {
         image_custom_uploader.on('select', function() {
             attachment = image_custom_uploader.state().get('selection').first().toJSON();
             var url = '';
-            url = attachment['url'];
+            url = attachment.url;
             $('.upload_image_url').val(url);
         });
 
@@ -74,7 +74,8 @@ jQuery(function($) {
     show_bg_type = function(selected_val) {
         $('.design_bg_types').hide();
         $('#show_' + selected_val).show();
-    }
+    };
+    
     show_bg_type($('#design_bg_type').val());
 
     $('#design_bg_type').change(function() {
@@ -99,18 +100,40 @@ jQuery(function($) {
     });
 
     /**
+     * SUBSCRIBERS EMPTY LIST
+     * 
+     * @since 2.0.4
+     */
+    $('#subscribers-empty-list').click(function() {
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_subscribers_empty_list'
+        }, function(response) {
+            if (!response.success) {
+                alert(response.data);
+                return false;
+            }
+
+            $('#subscribers_wrap').html(response.data);
+        }, 'json');
+    });
+
+    /**
      * RESET SETTINGS
      */
     $('.reset_settings').click(function() {
         var tab = $(this).data('tab');
-
-        $.ajax({
-            type: "POST",
-            url: wpmm_vars.ajax_url,
-            data: {action: "wpmm_reset_settings", tab: tab}
-        }).done(function(msg) {
-            window.location.href = wpmm_vars.plugin_url;
-        });
+            
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_reset_settings',
+            tab: tab
+        }, function(response) {
+            if (!response.success) {
+                alert(response.data);
+                return false;
+            }
+            
+            window.location.reload();
+        }, 'json');
     });
 
     /**

@@ -13,29 +13,44 @@
                 <li><?php _e('Author', $this->plugin_slug); ?>: <?php echo!empty($plugin_data['AuthorName']) ? $plugin_data['AuthorName'] : ''; ?></li>
                 <li><?php _e('Website', $this->plugin_slug); ?>: <?php echo!empty($plugin_data['AuthorURI']) ? '<a href="' . $plugin_data['AuthorURI'] . WPMM_AUTHOR_UTM . '" target="_blank">' . $plugin_data['AuthorName'] . '</a>' : ''; ?></li>
                 <li><?php _e('Twitter', $this->plugin_slug); ?>: <?php echo!empty($plugin_data['Twitter']) ? '<a href="http://twitter.com/' . $plugin_data['Twitter'] . '" target="_blank">@' . $plugin_data['Twitter'] . '</a>' : ''; ?></li>
-                <li><?php _e('GitHub', $this->plugin_slug); ?>: <?php echo!empty($plugin_data['GitHub URI']) ? '<a href="' . $plugin_data['GitHub URI'] . '" target="_blank">' . basename($plugin_data['GitHub URI']) . '</a>' : ''; ?></li>
+                <li><?php _e('GitHub', $this->plugin_slug); ?>: <?php echo!empty($plugin_data['GitHub Plugin URI']) ? '<a href="' . $plugin_data['GitHub Plugin URI'] . '" target="_blank">' . basename($plugin_data['GitHub Plugin URI']) . '</a>' : ''; ?></li>
             </ul>
         </div>
     </div>
 
-    <div class="sidebar_box themes_box">
-        <h3><?php _e('WordPress Themes', $this->plugin_slug); ?></h3>
-        <div class="inside">
-            <ul>
-                <li><a href="<?php echo 'http://designmodo.com/qards/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/qards.jpg'; ?>" /></a></li>
-                <li><a href="<?php echo 'http://designmodo.com/startup-wordpress/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/startup-wordpress.jpg'; ?>" /></a></li>
-            </ul>
+    <?php
+    $banners = wpmm_get_banners();
+
+    if (!empty($banners['product'])) {
+        ?>
+        <div class="sidebar_box themes_box">
+            <h3><?php _e('Other products', $this->plugin_slug); ?></h3>
+            <div class="inside">
+                <ul>
+                    <?php
+                    foreach ($banners['product'] as $item) {
+                        printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'] . WPMM_AUTHOR_UTM, $item['title'], $item['image'], $item['title']);
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>     
+    <?php } ?>
+
+    <?php
+    if (!empty($banners['resource'])) {
+        ?>
+        <div class="sidebar_box resources_box">
+            <h3><?php _e('Resources', $this->plugin_slug); ?></h3>
+            <div class="inside">
+                <ul>
+                    <?php
+                    foreach ($banners['resource'] as $item) {
+                        printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'] . WPMM_AUTHOR_UTM, $item['title'], $item['image'], $item['title']);
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
-    </div>     
-    
-    <div class="sidebar_box resources_box">
-        <h3><?php _e('Resources', $this->plugin_slug); ?></h3>
-        <div class="inside">
-            <ul>
-                <li><a href="<?php echo 'http://designmodo.com/free-wordpress-theme/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/ayoshop.jpg'; ?>" /></a></li>
-                <li><a href="<?php echo 'http://designmodo.com/linecons-free/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/linecons.jpg'; ?>" /></a></li>
-                <li><a href="<?php echo 'http://designmodo.com/flat-free/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/flatui.jpg'; ?>" /></a></li>               
-            </ul>
-        </div>
-    </div>     
+    <?php } ?>
 </div>

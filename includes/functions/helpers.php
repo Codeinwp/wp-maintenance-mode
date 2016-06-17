@@ -8,7 +8,7 @@
  * @return array
  */
 function wpmm_plugin_info($plugin_slug) {
-    add_filter('extra_plugin_headers', create_function('', 'return array("GitHub URI","Twitter");'));
+    add_filter('extra_plugin_headers', create_function('', 'return array("GitHub Plugin URI","Twitter");'));
     $plugin_data = get_plugin_data(WPMM_PATH . $plugin_slug . '.php');
 
     return $plugin_data;
@@ -23,14 +23,21 @@ function wpmm_plugin_info($plugin_slug) {
  * @global object $wpdb
  * @param string $table
  * @param string $field
- * @param string $where_string
- * @param array $where_values 
+ * @param array $where eg: array('id_subscriber = %d' => 12)
  */
-function wpmm_count_where($table, $field = 'ID', $where_string = '', $where_values = array()) {
+function wpmm_count_where($table, $field = 'ID', $where = array()) {
     global $wpdb;
 
     $table = $wpdb->prefix . $table;
-    $query = empty($where_string) ? "SELECT COUNT($field) FROM $table" : $wpdb->prepare("SELECT COUNT($field) FROM $table WHERE " . $where_string, $where_values);
+    $where_keys = array_keys($where);
+    $where_values = array_values($where);
+
+    if (!empty($where)) {
+        $query = $wpdb->prepare("SELECT COUNT({$field}) FROM {$table} WHERE " . implode(' AND ', $where_keys), $where_values);
+    } else {
+        $query = "SELECT COUNT({$field}) FROM {$table}";
+    }
+
     $count = $wpdb->get_var($query);
 
     return intval($count);
@@ -53,4 +60,31 @@ function wpmm_multiselect($values, $current) {
             break;
         }
     }
+}
+
+/**
+ * Get banners list from Maintenance Mode API
+ * 
+ * @since 2.0.4
+ * @return array
+ */
+function wpmm_get_banners() {
+    if (false === ($banners = get_transient('wpmm_banners_list'))) {
+        $response = wp_remote_get('http://maintenancemode.co/wp-json/wpmm/v1/banners', array(
+            'timeout' => 10
+        ));
+
+        $banners = array();
+        $items = json_decode(wp_remote_retrieve_body($response), true);
+
+        if (!empty($items) && is_array($items)) {
+            foreach ($items as $item) {
+                $banners[$item['type']][] = $item;
+            }
+        }
+
+        set_transient('wpmm_banners_list', $banners, 3 * HOUR_IN_SECONDS);
+    }
+
+    return $banners;
 }

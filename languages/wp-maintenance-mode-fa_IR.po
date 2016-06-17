@@ -1,21 +1,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.4\n"
-"POT-Creation-Date: 2016-06-17 03:15+0300\n"
-"PO-Revision-Date: 2016-06-17 03:15+0300\n"
-"Last-Translator: Erick Ruiz de Chavez <erick@erch.co>\n"
-"Language-Team: Designmodo <info@designmodo.com>\n"
-"Language: es_ES\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-17 03:17+0300\n"
+"PO-Revision-Date: 2016-06-17 03:17+0300\n"
+"Last-Translator: Milad Nekofar <milad@nekofar.com>\n"
+"Language-Team: Milad Nekofar <milad@nekofar.com>\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.8\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
+"X-Loco-Target-Locale: fa_IR\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
@@ -29,7 +32,7 @@ msgstr ""
 #: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
-msgstr "Hay %d suscriptor(es)"
+msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:186
 msgid "The tab slug must not be empty."
@@ -41,11 +44,11 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:211
 msgid "WP Maintenance Mode"
-msgstr "Modo de Mantenimiento WP"
+msgstr "حالت تعمیر و نگهداری"
 
 #: includes/classes/wp-maintenance-mode-admin.php:425
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "تنظیمات"
 
 #: includes/classes/wp-maintenance-mode-admin.php:444
 #, php-format
@@ -53,8 +56,8 @@ msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
 "href=\"%s\">deactivate</a> as soon as you are done."
 msgstr ""
-"El modo de mantenimiento está <strong>activo</strong>. Por favor no olvides "
-"<a href=\"%s\">desactivarlo</a> tan pronto como termines."
+"حالت حالت تعمیر و نگهداری <strong>فعال</strong> است. فراموش نکنید که در "
+"اولین فرصت ممکن ان را <a href=\"%s\">غیرفعال</a> کنید."
 
 #: includes/classes/wp-maintenance-mode-admin.php:481
 msgid "Notice key cannot be empty."
@@ -63,19 +66,17 @@ msgstr ""
 #: includes/classes/wp-maintenance-mode.php:103
 #: includes/classes/wp-maintenance-mode.php:104
 msgid "Maintenance mode"
-msgstr "Modo de mantenimiento"
+msgstr "حالت تعمیر و نگهداری"
 
 #: includes/classes/wp-maintenance-mode.php:106
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
-"<p>Disculpa las molestias.<br />Nuestro sitio esta actualmente bajo "
-"mantenimiento programado.<br />Agradecemos tu comprensión.</p>"
 
 #: includes/classes/wp-maintenance-mode.php:124
 msgid "Notify me when it's ready"
-msgstr "Notifícame cuanto este listo"
+msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:259
 #, php-format
@@ -83,18 +84,16 @@ msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
 "\">settings</a>."
 msgstr ""
-"El plugin Modo de Mantenimiento WP fue reactivado y es NECESARIO que revises "
-"los <a href=\"%s\">ajustes</a>."
 
 #: includes/classes/wp-maintenance-mode.php:449
 #: includes/classes/wp-maintenance-mode.php:463
 msgid "Maintenance Mode"
-msgstr "Modo de Mantenimiento"
+msgstr "حالت تعمیر و نگهداری"
 
 #: includes/classes/wp-maintenance-mode.php:687
 #: includes/classes/wp-maintenance-mode.php:721 views/maintenance.php:85
 msgid "Please enter a valid email address."
-msgstr "Por favor usa una dirección de correo electrónico valida."
+msgstr "لطفا ایمیل آدرس معتبر وارد نمایید."
 
 #: includes/classes/wp-maintenance-mode.php:699
 msgid "You successfully subscribed. Thanks!"
@@ -102,15 +101,15 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:717
 msgid "All fields required."
-msgstr "Todos los campos son obligatorios."
+msgstr "تمام فیلد ها لازم است."
 
 #: includes/classes/wp-maintenance-mode.php:726
 msgid "Message via contact"
-msgstr "Mensaje vía formulario de contacto."
+msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:738
 msgid "Your email was sent to the website administrator. Thanks!"
-msgstr "Tu mensaje ha sido enviado al administrador. ¡Muchas gracias!"
+msgstr ""
 
 #: views/contact.php:34
 #, php-format
@@ -131,19 +130,19 @@ msgstr ""
 
 #: views/loginform.php:8
 msgid "Login"
-msgstr "Iniciar sesión"
+msgstr "ورود"
 
 #: views/maintenance.php:42
 msgid "your e-mail..."
-msgstr "dirección de correo electrónico ..."
+msgstr "ایمیل شما..."
 
 #: views/maintenance.php:43 views/settings.php:270
 msgid "Subscribe"
-msgstr "Suscribirse"
+msgstr "اشتراک"
 
 #: views/maintenance.php:84 views/sidebar.php:7
 msgid "Name"
-msgstr "Nombre"
+msgstr "نام"
 
 #: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
 msgid "This field is required."
@@ -151,75 +150,75 @@ msgstr ""
 
 #: views/maintenance.php:85
 msgid "E-mail"
-msgstr "Correo electrónico"
+msgstr "ایمیل"
 
 #: views/maintenance.php:87
 msgid "Your message"
-msgstr "Mensaje"
+msgstr "پیام شما"
 
 #: views/maintenance.php:88
 msgid "Send"
-msgstr "Enviar"
+msgstr "ارسال"
 
 #: views/maintenance.php:93
 msgid "Contact us"
-msgstr "Contáctanos"
+msgstr "ارتباط با ما"
 
 #: views/maintenance.php:98
 msgid "Dashboard"
-msgstr "Escritorio"
+msgstr "پیشخوان"
 
 #: views/settings.php:6
 msgid "Settings saved."
-msgstr "Ajustes guardados."
+msgstr "تنظیمات ذخیره شد."
 
 #: views/settings.php:13
 msgid "General"
-msgstr "General"
+msgstr "عمومی"
 
 #: views/settings.php:14
 msgid "Design"
-msgstr "Diseño"
+msgstr "طراحی"
 
 #: views/settings.php:15
 msgid "Modules"
-msgstr "Módulos"
+msgstr "ماژول‌ها"
 
 #: views/settings.php:24
 msgid "Status"
-msgstr "Estado"
+msgstr "وضعیت"
 
 #: views/settings.php:26
 msgid "Activated"
-msgstr "Activado"
+msgstr "فعال‌شده"
 
 #: views/settings.php:27
 msgid "Deactivated"
-msgstr "Desactivado"
+msgstr "غیرفعال‌شده"
 
 #: views/settings.php:31
 msgid "Bypass for Search Bots"
-msgstr "Evitar Robots de Búsqueda"
+msgstr ""
 
 #: views/settings.php:34 views/settings.php:104 views/settings.php:114
 #: views/settings.php:242 views/settings.php:278 views/settings.php:316
 #: views/settings.php:384 views/settings.php:416
 msgid "Yes"
-msgstr "Si"
+msgstr "بله"
 
 #: views/settings.php:35 views/settings.php:105 views/settings.php:115
 #: views/settings.php:243 views/settings.php:279 views/settings.php:317
 #: views/settings.php:385 views/settings.php:417
 msgid "No"
-msgstr "No"
+msgstr "خیر"
 
 #: views/settings.php:37
 msgid "Allow Search Bots to bypass maintenance mode?"
-msgstr "¿Permitir a los Robots de Búsqueda evitar el modo de mantenimiento?"
+msgstr ""
 
 #: views/settings.php:41
 msgid "Backend Role"
-msgstr "Rol de administración"
+msgstr ""
 
 #: views/settings.php:43 views/settings.php:59
 msgid "Select role(s)"
@@ -233,7 +232,7 @@ msgstr ""
 
 #: views/settings.php:57
 msgid "Frontend Role"
-msgstr "Rol de sitio"
+msgstr ""
 
 #: views/settings.php:69
 msgid ""
@@ -243,7 +242,7 @@ msgstr ""
 
 #: views/settings.php:73
 msgid "Robots Meta Tag"
-msgstr "Meta Etiqueta Robots"
+msgstr ""
 
 #: views/settings.php:79
 msgid ""
@@ -251,13 +250,10 @@ msgid ""
 "control how an individual page should be indexed and served to users in "
 "search results."
 msgstr ""
-"La meta etiqueta robots le permite definir de manera mas granular como deben "
-"ser indexadas y servidas las paginas a los usuarios en los resultados de "
-"búsqueda. "
 
 #: views/settings.php:83
 msgid "Redirection"
-msgstr "Redirección"
+msgstr "تغییر مسیر"
 
 #: views/settings.php:86
 msgid ""
@@ -268,92 +264,90 @@ msgstr ""
 
 #: views/settings.php:90
 msgid "Exclude"
-msgstr "Excluir"
+msgstr "مستثنی"
 
 #: views/settings.php:97
 msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
 msgstr ""
-"Excluye feed, paginas, archivos o direcciones IP del modo de mantenimiento. "
-"Agregua un slug por linea!"
 
 #: views/settings.php:101
 msgid "Notice"
-msgstr "Aviso"
+msgstr "توجه"
 
 #: views/settings.php:107
 msgid "Do you want to see notices when maintenance mode is activated?"
-msgstr "¿Deseas ver avisos cuando el modo de mantenimiento esta activo?"
+msgstr ""
 
 #: views/settings.php:111
 msgid "Dashboard link"
-msgstr "Enlace al escritorio"
+msgstr "لینک پیشخوان"
 
 #: views/settings.php:117
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
-msgstr "¿Deseas agregar un enlace al escritorio en tu página de mantenimiento?"
+msgstr ""
 
 #: views/settings.php:125 views/settings.php:228 views/settings.php:432
 msgid "Save settings"
-msgstr "Guardar ajustes"
+msgstr "ذخیره تنظیمات"
 
 #: views/settings.php:126 views/settings.php:229 views/settings.php:433
 msgid "Reset settings"
-msgstr "Restablecer ajustes"
+msgstr "بازنشانی تنظیمات"
 
 #: views/settings.php:131
 msgid "Content"
-msgstr "Contenido"
+msgstr "محتوی"
 
 #: views/settings.php:136
 msgid "Title (HTML tag)"
-msgstr "Título (Etiqueta HTML)"
+msgstr "عنوان"
 
 #: views/settings.php:142
 msgid "Heading"
-msgstr "Encabezado"
+msgstr "عنوان"
 
 #: views/settings.php:149 views/settings.php:284
 msgid "Text"
-msgstr "Texto"
+msgstr "متن"
 
 #: views/settings.php:169
 msgid "Background"
-msgstr "Fondo"
+msgstr "پس‌زمینه"
 
 #: views/settings.php:174
 msgid "Choose type"
-msgstr "Seleccionar tipo"
+msgstr "انتخاب نوع"
 
 #: views/settings.php:177
 msgid "Custom color"
-msgstr "Color personalizado"
+msgstr "رنگ سفارشی"
 
 #: views/settings.php:178
 msgid "Uploaded background"
-msgstr "Fondo cargado"
+msgstr "پس‌زمینه بارگزاری شده"
 
 #: views/settings.php:179
 msgid "Predefined background"
-msgstr "Fondo predefinido"
+msgstr "پس‌زمینه از پیش تعیین شده"
 
 #: views/settings.php:184
 msgid "Choose color"
-msgstr "Elige un color"
+msgstr "انتخاب رنگ"
 
 #: views/settings.php:190
 msgid "Upload background"
-msgstr "Sube un fondo"
+msgstr "بارگزاری پس‌زمینه"
 
 #: views/settings.php:194
 msgid "Backgrounds should have 1920x1280 px size."
-msgstr "El fondo debe medir 1920x1280 pixeles."
+msgstr "پس‌زمینه باید 1920x1280 پیکسل باشد."
 
 #: views/settings.php:199
 msgid "Choose background"
-msgstr "Elige el fondo"
+msgstr "انتخاب پس‌زمینه"
 
 #: views/settings.php:201
 #, php-format
@@ -362,47 +356,47 @@ msgstr ""
 
 #: views/settings.php:234
 msgid "Countdown"
-msgstr "Contador"
+msgstr "شمارش معکوس"
 
 #: views/settings.php:239
 msgid "Show countdown?"
-msgstr "¿Mostrar contador?"
+msgstr "شمارش معکوس نمایش داده شود؟"
 
 #: views/settings.php:248
 msgid "Start date"
-msgstr "Fecha de inicio"
+msgstr "تاریخ شروع"
 
 #: views/settings.php:254
 msgid "Countdown (remaining time)"
-msgstr "Contador (tiempo restante)"
+msgstr "شمارش معکوس (زمان باقی مانده)"
 
 #: views/settings.php:256
 msgid "Days"
-msgstr "Días"
+msgstr "روز"
 
 #: views/settings.php:257
 msgid "Hours"
-msgstr "Horas"
+msgstr "ساعت"
 
 #: views/settings.php:258
 msgid "Minutes"
-msgstr "Minutos"
+msgstr "دیقه"
 
 #: views/settings.php:262
 msgid "Color"
-msgstr "Color"
+msgstr "رنگ"
 
 #: views/settings.php:275
 msgid "Show subscribe?"
-msgstr "¿Mostrar suscribirse?"
+msgstr "اشتراک نمایش داده شود."
 
 #: views/settings.php:291
 msgid "Stats"
-msgstr "Estadísticas"
+msgstr "آمار"
 
 #: views/settings.php:300
 msgid "Export as CSV"
-msgstr "Exportar como CSV"
+msgstr "استخراج به فرمت CSV"
 
 #: views/settings.php:301
 msgid "Empty subscribers list"
@@ -410,87 +404,87 @@ msgstr ""
 
 #: views/settings.php:308
 msgid "Social Networks"
-msgstr "Redes Sociales"
+msgstr "شبکه‌های اجتماعی"
 
 #: views/settings.php:313
 msgid "Show social networks?"
-msgstr "¿Mostrar redes sociales?"
+msgstr ""
 
 #: views/settings.php:322
 msgid "Links target?"
-msgstr "¿Destino de enlaces?"
+msgstr ""
 
 #: views/settings.php:325
 msgid "New page"
-msgstr "Página nueva"
+msgstr "برگه جدید"
 
 #: views/settings.php:326
 msgid "Same page"
-msgstr "Misma página"
+msgstr "همان برگه"
 
 #: views/settings.php:328
 msgid "Choose how the links will open."
-msgstr "Selecciona como se abrirán los enlaces."
+msgstr ""
 
 #: views/settings.php:376
 msgid "Contact"
-msgstr "Contacto"
+msgstr "تماس"
 
 #: views/settings.php:381
 msgid "Show contact?"
-msgstr "¿Mostrar contacto?"
+msgstr "تماس نمایش داده شود؟"
 
 #: views/settings.php:390
 msgid "Email address"
-msgstr "Dirección de correo electrónico"
+msgstr "آدرس ایمیل"
 
 #: views/settings.php:396
 msgid "Effects"
-msgstr "Efectos"
+msgstr "جلوه‌ها"
 
 #: views/settings.php:399
 msgid "Move top - Move bottom"
-msgstr "Mover al inicio - Mover al final"
+msgstr ""
 
 #: views/settings.php:400
 msgid "Zoom - Zoomed"
-msgstr "Ampliar - Ampliado"
+msgstr ""
 
 #: views/settings.php:401
 msgid "Fold - Unfold"
-msgstr "Colapsar - Expandir"
+msgstr ""
 
 #: views/settings.php:408
 msgid "Google Analytics"
-msgstr "Google Analytics"
+msgstr "گوگل انالیتیکس"
 
 #: views/settings.php:413
 msgid "Use Google Analytics?"
-msgstr "¿Usar Google Analytics?"
+msgstr "از گوگل انالیتیکس استفاده شود؟"
 
 #: views/settings.php:422
 msgid "Tracking code"
-msgstr "Código de rastreo"
+msgstr "کد پیگیری"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
-msgstr "Información del plugin"
+msgstr "توضیحات افزونه"
 
 #: views/sidebar.php:13
 msgid "Author"
-msgstr "Autor"
+msgstr "نویسنده"
 
 #: views/sidebar.php:14
 msgid "Website"
-msgstr "Pagina web"
+msgstr "وبسایت"
 
 #: views/sidebar.php:15
 msgid "Twitter"
-msgstr "Twitter"
+msgstr "نوئیتر"
 
 #: views/sidebar.php:16
 msgid "GitHub"
-msgstr "GitHub"
+msgstr "گیت‌هاب"
 
 #: views/sidebar.php:27
 msgid "Other products"
@@ -498,42 +492,7 @@ msgstr ""
 
 #: views/sidebar.php:44
 msgid "Resources"
-msgstr "Recursos"
-
-#~ msgid "You successfuly subscribed. Thanks!"
-#~ msgstr "Te has suscrito exitosamente. ¡Muchas gracias!"
-
-#~ msgid "Which user role is allowed to access the backend of this blog?"
-#~ msgstr ""
-#~ "¿Que rol de usuario se requiere para acceder a la administración de este "
-#~ "blog?"
-
-#~ msgid "Which user role is allowed to access the frontend of this blog?"
-#~ msgstr "¿Que rol de usuario se requiere para acceder a este blog?"
-
-#~ msgid ""
-#~ "If you want to redirect a user to a URL (which is not the WordPress "
-#~ "dashboard) after login, then define a URL (incl. http://)"
-#~ msgstr ""
-#~ "Si deseas enviar a un usuario a una URL (que no forma parte de su sitio "
-#~ "WordPress) después de iniciar sesión, define dicha URL (incluya http://)"
-
-#~ msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-#~ msgstr "fuente <a href=\"%\" target=\"_blank\">Fotos Gratis</a>"
+msgstr "منابع"
 
 #~ msgid "WordPress Themes"
-#~ msgstr "Temas WordPress"
-
-#~ msgid "Developed by <a href=\"%s\">Designmodo</a>"
-#~ msgstr "Desarrollado por <a href=\"%s\">Designmodo</a>"
-
-#~ msgid "Subscribe now for early access to new WordPress themes."
-#~ msgstr ""
-#~ "Suscríbete ahora para obtener acceso preferencial a nuevos temas "
-#~ "WordPress."
-
-#~ msgid "Enter your email address"
-#~ msgstr "Introduce tu dirección de correo electrónico"
-
-#~ msgid "News"
-#~ msgstr "Noticias"
+#~ msgstr "قالب‌های وردپرس"

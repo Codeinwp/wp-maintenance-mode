@@ -1,36 +1,59 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode v2.0.2\n"
+"Project-Id-Version: WP Maintenance Mode v2.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-17 20:47+0200\n"
-"PO-Revision-Date: 2014-12-17 20:48+0200\n"
+"POT-Creation-Date: 2016-06-17 03:27+0300\n"
+"PO-Revision-Date: 2016-06-17 03:27+0300\n"
 "Last-Translator: Jônatas Araújo <jonatasaraujos@live.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.6.7\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
-"X-Poedit-Basepath: ../\n"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: views\n"
+"X-Poedit-SearchPath-2: includes/classes\n"
+
+#: includes/classes/wp-maintenance-mode-admin.php:121
+#: includes/classes/wp-maintenance-mode-admin.php:159
+#: includes/classes/wp-maintenance-mode-admin.php:181
+msgid "You do not have access to this resource."
+msgstr ""
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode-admin.php:156
+#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
+#, php-format
+msgid "You have %d subscriber(s)"
+msgstr "Você tem %d assinante(s)"
+
+#: includes/classes/wp-maintenance-mode-admin.php:186
+msgid "The tab slug must not be empty."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:191
+msgid "The tab slug must exist."
+msgstr ""
+
+# @ wp-maintenance-mode
+#: includes/classes/wp-maintenance-mode-admin.php:211
 msgid "WP Maintenance Mode"
 msgstr "Manutenção Site"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode-admin.php:370
+#: includes/classes/wp-maintenance-mode-admin.php:425
 msgid "Settings"
 msgstr "Configurações"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode-admin.php:389
+#: includes/classes/wp-maintenance-mode-admin.php:444
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -39,14 +62,18 @@ msgstr ""
 "O modo de manutenção está <strong>ativo</strong>. Por favor, não se esqueça "
 "de<a href=\"%s\"> desativar</a> assim que estiver pronto."
 
+#: includes/classes/wp-maintenance-mode-admin.php:481
+msgid "Notice key cannot be empty."
+msgstr ""
+
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:102
 #: includes/classes/wp-maintenance-mode.php:103
+#: includes/classes/wp-maintenance-mode.php:104
 msgid "Maintenance mode"
 msgstr "Modo manutenção"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:105
+#: includes/classes/wp-maintenance-mode.php:106
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -55,12 +82,12 @@ msgstr ""
 "programada.<br/>Obrigado por sua compreensão.</p>"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:123
+#: includes/classes/wp-maintenance-mode.php:124
 msgid "Notify me when it's ready"
 msgstr "Notifique-me quando estiver pronto"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:258
+#: includes/classes/wp-maintenance-mode.php:259
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -70,36 +97,52 @@ msgstr ""
 "\">configurações</a>."
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:445
-#: includes/classes/wp-maintenance-mode.php:459
+#: includes/classes/wp-maintenance-mode.php:449
+#: includes/classes/wp-maintenance-mode.php:463
 msgid "Maintenance Mode"
 msgstr "Modo de Manutenção"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:662
-#: includes/classes/wp-maintenance-mode.php:692
+#: includes/classes/wp-maintenance-mode.php:687
+#: includes/classes/wp-maintenance-mode.php:721 views/maintenance.php:85
 msgid "Please enter a valid email address."
 msgstr "Por favor insira um endereço de e-mail válido."
 
-# @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:673
-msgid "You successfuly subscribed. Thanks!"
-msgstr "Você foi inscrito com sucesso. Obrigado!"
+#: includes/classes/wp-maintenance-mode.php:699
+msgid "You successfully subscribed. Thanks!"
+msgstr ""
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:688
+#: includes/classes/wp-maintenance-mode.php:717
 msgid "All fields required."
 msgstr "Todos os campos são obrigatórios."
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:709
+#: includes/classes/wp-maintenance-mode.php:726
 msgid "Message via contact"
 msgstr "Mensagem via contato"
 
 # @ wp-maintenance-mode
-#: includes/classes/wp-maintenance-mode.php:713
+#: includes/classes/wp-maintenance-mode.php:738
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Seu e-mail foi enviado ao administrador do site. Obrigado!"
+
+#: views/contact.php:34
+#, php-format
+msgid "You have been contacted via %s."
+msgstr ""
+
+#: views/contact.php:50
+msgid "Name:"
+msgstr ""
+
+#: views/contact.php:62
+msgid "Email:"
+msgstr ""
+
+#: views/contact.php:74
+msgid "Content:"
+msgstr ""
 
 #: views/loginform.php:8
 msgid "Login"
@@ -119,6 +162,10 @@ msgstr "Assinante"
 #: views/maintenance.php:84 views/sidebar.php:7
 msgid "Name"
 msgstr "Nome"
+
+#: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
+msgid "This field is required."
+msgstr ""
 
 # @ wp-maintenance-mode
 #: views/maintenance.php:85
@@ -186,15 +233,15 @@ msgstr "Bypass para robôs de busca"
 
 # @ wp-maintenance-mode
 #: views/settings.php:34 views/settings.php:104 views/settings.php:114
-#: views/settings.php:242 views/settings.php:278 views/settings.php:315
-#: views/settings.php:383 views/settings.php:415
+#: views/settings.php:242 views/settings.php:278 views/settings.php:316
+#: views/settings.php:384 views/settings.php:416
 msgid "Yes"
 msgstr "Sim"
 
 # @ wp-maintenance-mode
 #: views/settings.php:35 views/settings.php:105 views/settings.php:115
-#: views/settings.php:243 views/settings.php:279 views/settings.php:316
-#: views/settings.php:384 views/settings.php:416
+#: views/settings.php:243 views/settings.php:279 views/settings.php:317
+#: views/settings.php:385 views/settings.php:417
 msgid "No"
 msgstr "Não"
 
@@ -212,28 +259,22 @@ msgstr ""
 msgid "Select role(s)"
 msgstr ""
 
-# @ wp-maintenance-mode
 #: views/settings.php:53
 msgid ""
 "Which user role is allowed to access the backend of this blog? "
-"Administrators always have access."
+"Administrators will always have access."
 msgstr ""
-"Qual o papel do usuário tem permissão para acessar o backend deste blog? "
-"Administradores sempre têm acesso."
 
 # @ wp-maintenance-mode
 #: views/settings.php:57
 msgid "Frontend Role"
 msgstr ""
 
-# @ wp-maintenance-mode
 #: views/settings.php:69
 msgid ""
 "Which user role is allowed to access the frontend of this blog? "
-"Administrators always have access."
+"Administrators will always have access."
 msgstr ""
-"Qual o papel do usuário tem permissão para acessar a interface deste blog? "
-"Administradores sempre têm acesso."
 
 # @ wp-maintenance-mode
 #: views/settings.php:73
@@ -256,15 +297,12 @@ msgstr ""
 msgid "Redirection"
 msgstr "Redirecionamento"
 
-# @ wp-maintenance-mode
 #: views/settings.php:86
 msgid ""
-"If you want to redirect a user to a URL (which is not the WordPress "
-"dashboard) after login, then define a URL (incl. http://)"
+"If you want to redirect a user (with no access to Dashboard/Backend) to a "
+"URL (different from WordPress Dashboard URL) after login, then define a URL "
+"(incl. http://)"
 msgstr ""
-"Se você deseja redirecionar o usuário para uma URL (que não é o painel "
-"administrativo) após o login, em seguida, definir uma URL (incluindo "
-"http:. //)"
 
 # @ wp-maintenance-mode
 #: views/settings.php:90
@@ -301,12 +339,12 @@ msgid ""
 msgstr ""
 
 # @ wp-maintenance-mode
-#: views/settings.php:125 views/settings.php:228 views/settings.php:431
+#: views/settings.php:125 views/settings.php:228 views/settings.php:432
 msgid "Save settings"
 msgstr ""
 
 # @ wp-maintenance-mode
-#: views/settings.php:126 views/settings.php:229 views/settings.php:432
+#: views/settings.php:126 views/settings.php:229 views/settings.php:433
 msgid "Reset settings"
 msgstr ""
 
@@ -376,7 +414,8 @@ msgid "Choose background"
 msgstr "Escolha o fundo"
 
 #: views/settings.php:201
-msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+#, php-format
+msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 msgstr ""
 
 # @ wp-maintenance-mode
@@ -430,83 +469,81 @@ msgid "Stats"
 msgstr "Estatísticas"
 
 # @ wp-maintenance-mode
-#: views/settings.php:295
-#, php-format
-msgid "You have %d subscriber(s)"
-msgstr "Você tem %d assinante(s)"
-
-# @ wp-maintenance-mode
 #: views/settings.php:300
 msgid "Export as CSV"
 msgstr "Exportar para CSV"
 
+#: views/settings.php:301
+msgid "Empty subscribers list"
+msgstr ""
+
 # @ wp-maintenance-mode
-#: views/settings.php:307
+#: views/settings.php:308
 msgid "Social Networks"
 msgstr "Rede Sociais"
 
 # @ wp-maintenance-mode
-#: views/settings.php:312
+#: views/settings.php:313
 msgid "Show social networks?"
 msgstr "Mostrar Rede Sociais?"
 
-#: views/settings.php:321
+#: views/settings.php:322
 msgid "Links target?"
 msgstr ""
 
-#: views/settings.php:324
+#: views/settings.php:325
 msgid "New page"
 msgstr ""
 
-#: views/settings.php:325
+#: views/settings.php:326
 msgid "Same page"
 msgstr ""
 
-#: views/settings.php:327
+#: views/settings.php:328
 msgid "Choose how the links will open."
 msgstr ""
 
 # @ wp-maintenance-mode
-#: views/settings.php:375
+#: views/settings.php:376
 msgid "Contact"
 msgstr "Contato"
 
 # @ wp-maintenance-mode
-#: views/settings.php:380
+#: views/settings.php:381
 msgid "Show contact?"
 msgstr "Mostrar Contato?"
 
 # @ wp-maintenance-mode
-#: views/settings.php:389
+#: views/settings.php:390
 msgid "Email address"
 msgstr "Endereço de E-mail"
 
 # @ wp-maintenance-mode
-#: views/settings.php:395
+#: views/settings.php:396
 msgid "Effects"
 msgstr "Efeitos"
 
-#: views/settings.php:398
+#: views/settings.php:399
 msgid "Move top - Move bottom"
 msgstr ""
 
-#: views/settings.php:399
+#: views/settings.php:400
 msgid "Zoom - Zoomed"
 msgstr ""
 
-#: views/settings.php:400
+#: views/settings.php:401
 msgid "Fold - Unfold"
 msgstr ""
 
-#: views/settings.php:407
+#: views/settings.php:408
 msgid "Google Analytics"
 msgstr ""
 
-#: views/settings.php:412
+#: views/settings.php:413
 msgid "Use Google Analytics?"
 msgstr ""
 
-#: views/settings.php:421
+#: views/settings.php:422
 msgid "Tracking code"
 msgstr ""
 
@@ -535,11 +572,34 @@ msgstr "Twitter"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: views/sidebar.php:22
-msgid "WordPress Themes"
+#: views/sidebar.php:27
+msgid "Other products"
 msgstr ""
 
 # @ wp-maintenance-mode
-#: views/sidebar.php:32
+#: views/sidebar.php:44
 msgid "Resources"
 msgstr "Recursos"
+
+# @ wp-maintenance-mode
+#~ msgid "You successfuly subscribed. Thanks!"
+#~ msgstr "Você foi inscrito com sucesso. Obrigado!"
+
+# @ wp-maintenance-mode
+#~ msgid "Which user role is allowed to access the backend of this blog?"
+#~ msgstr ""
+#~ "Qual o papel do usuário tem permissão para acessar o backend deste blog?"
+
+# @ wp-maintenance-mode
+#~ msgid "Which user role is allowed to access the frontend of this blog?"
+#~ msgstr ""
+#~ "Qual o papel do usuário tem permissão para acessar a interface deste blog?"
+
+# @ wp-maintenance-mode
+#~ msgid ""
+#~ "If you want to redirect a user to a URL (which is not the WordPress "
+#~ "dashboard) after login, then define a URL (incl. http://)"
+#~ msgstr ""
+#~ "Se você deseja redirecionar o usuário para uma URL (que não é o painel "
+#~ "administrativo) após o login, em seguida, definir uma URL (incluindo "
+#~ "http:. //)"

@@ -1,4 +1,5 @@
 <?php
+
 if (!class_exists('WP_Maintenance_Mode')) {
 
     class WP_Maintenance_Mode {
@@ -37,7 +38,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 add_action('wp_ajax_wpmm_send_contact', array($this, 'send_contact'));
 
                 // Redirect 
-                add_action('admin_init', array($this, 'redirect'));
+                add_action('init', array($this, 'redirect'), 9);
 
                 // Google Analytics tracking script
                 if (!empty($this->plugin_settings['modules']['ga_status']) && $this->plugin_settings['modules']['ga_status'] == 1 && !empty($this->plugin_settings['modules']['ga_code'])) {
@@ -254,7 +255,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
             // set notice if the plugin was installed before & set default settings
             if (!empty($old_options) && empty($v2_options)) {
                 add_option('wpmm_notice', array(
-                    'class' => 'updated',
+                    'class' => 'updated notice',
                     'msg' => sprintf(__('WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', self::get_instance()->plugin_slug), admin_url('options-general.php?page=' . self::get_instance()->plugin_slug))
                 ));
 
@@ -424,6 +425,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     (!$this->check_user_role()) &&
                     !strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
                     !strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
+                    // wp-admin/ is available to everyone only if the user is not loggedin, otherwise.. check_user_role decides 
+                    !(strstr($_SERVER['PHP_SELF'], 'wp-admin/') && !is_user_logged_in()) &&
+//                    !strstr($_SERVER['PHP_SELF'], 'wp-admin/') && 
                     !strstr($_SERVER['PHP_SELF'], 'wp-admin/admin-ajax.php') &&
                     !strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&
                     !(strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_user_role()) &&
@@ -449,8 +453,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 $robots = $this->plugin_settings['general']['meta_robots'] == 1 ? 'noindex, nofollow' : 'index, follow';
                 $robots = apply_filters('wpmm_meta_robots', $robots);
 
-                $author = apply_filters('wm_meta_author', 'Designmodo'); // this hook will be removed in the next versions
-                $author = apply_filters('wpmm_meta_author', 'Designmodo');
+                $author = apply_filters('wm_meta_author', get_bloginfo('name')); // this hook will be removed in the next versions
+                $author = apply_filters('wpmm_meta_author', get_bloginfo('name'));
 
                 $description = get_bloginfo('name') . ' - ' . get_bloginfo('description');
                 $description = apply_filters('wm_meta_description', $description); // this hook will be removed in the next versions
@@ -481,21 +485,21 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 // JS FILES
                 $wp_scripts = new WP_Scripts();
                 $scripts = array(
-                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
-                    'frontend' => WPMM_JS_URL . 'scripts.js'
+                    'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.' . WPMM_ASSETS_SUFFIX . '.js',
+                    'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js'
                 );
                 if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
-                    $scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin.min.js';
-                    $scripts['countdown'] = WPMM_JS_URL . 'jquery.countdown.min.js';
+                    $scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
+                    $scripts['countdown'] = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
                 }
                 if ((!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) || (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1)) {
-                    $scripts['validate'] = WPMM_JS_URL . 'jquery.validate.min.js';
+                    $scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
                 }
                 $scripts = apply_filters('wpmm_scripts', $scripts);
 
                 // CSS FILES
                 $styles = array(
-                    'frontend' => WPMM_CSS_URL . 'style.css'
+                    'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css'
                 );
                 $styles = apply_filters('wpmm_styles', $styles);
 
@@ -517,34 +521,30 @@ if (!class_exists('WP_Maintenance_Mode')) {
         }
 
         /**
-         * Check if the current user has access to backend / frontend based on his role compared with role from settings
+         * Check if the current user has access to backend / frontend based on his role compared with role from settings (refactor @ 2.0.4)
          * 
          * @since 2.0.0
          * @return boolean
          */
         public function check_user_role() {
-            if (is_super_admin()) { // administrators always have access
+            if (is_super_admin()) {
                 return true;
-            }
-
-            // get defined user roles based on location (dashboard / frontend)
-            if (is_admin()) {
-                $settings_roles = $this->plugin_settings['general']['backend_role'];
-            } else {
-                $settings_roles = $this->plugin_settings['general']['frontend_role'];
             }
 
             $user = wp_get_current_user();
             $user_roles = !empty($user->roles) && is_array($user->roles) ? $user->roles : array();
-            
-            $is_allowed = false;
-            foreach ($settings_roles as $role) {
-                if (in_array($role, $user_roles)) {
-                    $is_allowed = true;
-                    break;
-                }
-            }
-            
+            $allowed_roles = is_admin() ? $this->plugin_settings['general']['backend_role'] : $this->plugin_settings['general']['frontend_role'];
+            $is_allowed = (bool) array_intersect($user_roles, $allowed_roles);
+
+//            echo "<pre>";
+//            echo "user roles:";
+//            print_r($user_roles);
+//            echo "allowed roles:";
+//            print_r($allowed_roles);
+//            echo "is allowed:";
+//            var_dump($is_allowed);
+//            die;
+
             return $is_allowed;
         }
 
@@ -615,9 +615,12 @@ if (!class_exists('WP_Maintenance_Mode')) {
          */
         public function check_exclude() {
             $is_excluded = false;
+            $excluded_list = array();
 
             if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
-                foreach ($this->plugin_settings['general']['exclude'] as $item) {
+                $excluded_list = $this->plugin_settings['general']['exclude'];
+
+                foreach ($excluded_list as $item) {
                     if (empty($item)) { // just to be sure :-)
                         continue;
                     }
@@ -629,6 +632,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 }
             }
 
+            $is_excluded = apply_filters('wpmm_is_excluded', $is_excluded, $excluded_list);
+
             return $is_excluded;
         }
 
@@ -639,81 +644,101 @@ if (!class_exists('WP_Maintenance_Mode')) {
          * @return null
          */
         public function redirect() {
-            if (empty($this->plugin_settings['general']['redirection']) || $this->check_user_role() || (defined('DOING_AJAX') && DOING_AJAX)) {
+            // we do not redirect if there's nothing saved in "redirect" input
+            if (empty($this->plugin_settings['general']['redirection'])) {
                 return NULL;
             }
 
-            if (preg_match('#wp-admin/#', $_SERVER['REQUEST_URI'])) {
-                $redirect_to = stripslashes($this->plugin_settings['general']['redirection']);
-                wp_redirect($redirect_to);
+            // we do not redirect ajax calls
+            if ((defined('DOING_AJAX') && DOING_AJAX)) {
+                return NULL;
             }
+
+            // we do not redirect visitors or logged-in users that are not using /wp-admin/
+            if (!is_user_logged_in() || !is_admin()) {
+                return NULL;
+            }
+
+            // we do not redirect users that have access to backend
+            if ($this->check_user_role()) {
+                return NULL;
+            }
+
+            $redirect_to = stripslashes($this->plugin_settings['general']['redirection']);
+            wp_redirect($redirect_to);
+            exit;
         }
 
         /**
-         * Save subscriber into database
+         * Save subscriber into database (refactor @ 2.0.4)
          * 
          * @since 2.0.0
          * @global object $wpdb
+         * @throws Exception
          */
         public function add_subscriber() {
             global $wpdb;
 
-            if (empty($_REQUEST['email']) || !is_email($_REQUEST['email'])) {
-                $response = array('response' => __('Please enter a valid email address.', $this->plugin_slug));
-            } else {
-                $exists = $wpdb->get_row($wpdb->prepare("SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", $_REQUEST['email']), ARRAY_A);
+            try {
+                $_POST = array_map('trim', $_POST);
+
+                // checks
+                if (empty($_POST['email']) || !is_email($_POST['email'])) {
+                    throw new Exception(__('Please enter a valid email address.', $this->plugin_slug));
+                }
+
+                // save
+                $exists = $wpdb->get_row($wpdb->prepare("SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", sanitize_text_field($_POST['email'])), ARRAY_A);
                 if (empty($exists)) {
-                    $wpdb->insert(
-                            $wpdb->prefix . 'wpmm_subscribers', array(
-                        'email' => sanitize_text_field($_REQUEST['email']),
+                    $wpdb->insert($wpdb->prefix . 'wpmm_subscribers', array(
+                        'email' => sanitize_text_field($_POST['email']),
                         'insert_date' => date('Y-m-d H:i:s')
                             ), array('%s', '%s'));
                 }
 
-                $response = array('response' => __('You successfuly subscribed. Thanks!', $this->plugin_slug));
+                wp_send_json_success(__('You successfully subscribed. Thanks!', $this->plugin_slug));
+            } catch (Exception $ex) {
+                wp_send_json_error($ex->getMessage());
             }
-
-            wp_send_json($response);
         }
 
         /**
-         * Send email via contact form
+         * Send email via contact form (refactor @ 2.0.4)
          * 
          * @since 2.0.0
+         * @throws Exception
          */
         public function send_contact() {
-            $errors = array();
+            try {
+                $_POST = array_map('trim', $_POST);
 
-            if (empty($_REQUEST['name']) || empty($_REQUEST['email']) || empty($_REQUEST['content'])) {
-                $errors[] = __('All fields required.', $this->plugin_slug);
-            }
+                // checks
+                if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['content'])) {
+                    throw new Exception(__('All fields required.', $this->plugin_slug));
+                }
 
-            if (!empty($_REQUEST['email']) && !is_email($_REQUEST['email'])) {
-                $errors[] = __('Please enter a valid email address.', $this->plugin_slug);
-            }
+                if (!is_email($_POST['email'])) {
+                    throw new Exception(__('Please enter a valid email address.', $this->plugin_slug));
+                }
 
-            if (!empty($errors)) {
-                $response = array('response' => implode('<br />', $errors));
-            } else {
-                ob_start();
-                ?>
-                Name: <?php echo sanitize_text_field($_REQUEST['name']); ?><br />
-                Email: <?php echo sanitize_text_field($_REQUEST['email']); ?><br />
-                Content: <br /><br />
-                <?php
-                echo nl2br(stripslashes($_REQUEST['content']));
-                $email_content = ob_get_contents();
-                ob_clean();
-
+                // vars
                 $send_to = !empty($this->plugin_settings['modules']['contact_email']) ? stripslashes($this->plugin_settings['modules']['contact_email']) : get_option('admin_email');
                 $subject = __('Message via contact', $this->plugin_slug);
+                $headers = array('Reply-To: ' . sanitize_text_field($_POST['email']));
+                ob_start();
+                include_once(WPMM_VIEWS_PATH . 'contact.php');
+                $message = ob_get_clean();
+
+                // filters
                 add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
+                add_filter('wp_mail_from_name', create_function('', 'return sanitize_text_field($_POST["name"]);'));
 
-                @wp_mail($send_to, $subject, $email_content);
-                $response = array('response' => __('Your email was sent to the website administrator. Thanks!', $this->plugin_slug));
+                // send email
+                @wp_mail($send_to, $subject, $message, $headers);
+                wp_send_json_success(__('Your email was sent to the website administrator. Thanks!', $this->plugin_slug));
+            } catch (Exception $ex) {
+                wp_send_json_error($ex->getMessage());
             }
-
-            wp_send_json($response);
         }
 
     }

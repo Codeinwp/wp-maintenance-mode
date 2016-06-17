@@ -6,7 +6,7 @@ Author: Designmodo
 Author URI: http://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 4.0.1
+Tested up to: 4.5.2
 Stable tag: 2.0.4
 License: GPL-2.0+
 
@@ -41,8 +41,6 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 = Credits =
 Developed by [Designmodo](http://designmodo.com)
 
-WordPress Theme: [Startup Framework for WordPress](http://designmodo.com/startup-wordpress/)
-
 == Installation ==
 
 1. Unpack the download package
@@ -72,17 +70,22 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
-= 2.0.4 (XX/12/2014) =
+= 2.0.4 (17/06/2016) =
 * fixed issue: responsive subscribe form
 * fixed issue: jQuery was loaded from a different folder on some WP installations
 * fixed issue: errors after update (strstr on empty strings because of saving empty lines on exclude list)
 * fixed issue: if "Redirection" from "General" tab is active, also redirects ajax calls
+* fixed issue: settings page title was wrong placed
+* "contact" feature update - nice email template + reply-to email header
+* refactoring for some methods
+* all assets are now minified
 * rewrite count db records function (used on subscribers count)
+* compatible with https://github.com/afragen/github-updater
 * compatible with wp-cli http://wp-cli.org/
 * improved responsivity
-* improved roles access; now you can set multiple roles (editor, author, subscriber, contributor) and administrator always have access to backend and frontend
+* improved roles access; now you can set multiple roles (editor, author, subscriber, contributor) and administrator will always have access to backend and frontend
 * it_IT translation by benedettogit (https://github.com/benedettogit)
-* some translation files are now 100% translated
+* updated all language files (need help for 100% translation)
 
 
 = 2.0.3 (07/10/2014) =
