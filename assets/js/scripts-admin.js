@@ -122,7 +122,7 @@ jQuery(function($) {
      */
     $('.reset_settings').click(function() {
         var tab = $(this).data('tab');
-            
+
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_reset_settings',
             tab: tab
@@ -132,7 +132,7 @@ jQuery(function($) {
                 return false;
             }
             
-            window.location.reload();
+            window.location.reload(true);
         }, 'json');
     });
 
