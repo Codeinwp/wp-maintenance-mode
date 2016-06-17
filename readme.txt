@@ -7,7 +7,7 @@ Author URI: http://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 4.5.2
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
@@ -70,6 +70,9 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.0.5 (17/06/2016) =
+* roles (array) fix
 
 = 2.0.4 (17/06/2016) =
 * fixed issue: responsive subscribe form
