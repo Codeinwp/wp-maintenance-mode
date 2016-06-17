@@ -533,7 +533,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
             $user = wp_get_current_user();
             $user_roles = !empty($user->roles) && is_array($user->roles) ? $user->roles : array();
-            $allowed_roles = is_admin() ? $this->plugin_settings['general']['backend_role'] : $this->plugin_settings['general']['frontend_role'];
+            $allowed_roles = is_admin() ? (array) $this->plugin_settings['general']['backend_role'] : (array) $this->plugin_settings['general']['frontend_role'];
             $is_allowed = (bool) array_intersect($user_roles, $allowed_roles);
 
 //            echo "<pre>";
