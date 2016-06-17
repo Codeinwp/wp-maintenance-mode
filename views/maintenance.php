@@ -2,6 +2,7 @@
 <html>
     <head>
         <title><?php echo stripslashes($title); ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="author" content="<?php echo esc_attr($author); ?>" />
         <meta name="description" content="<?php echo esc_attr($description); ?>" />
         <meta name="keywords" content="<?php echo esc_attr($keywords); ?>" />
@@ -38,7 +39,7 @@
                 <?php if (!empty($this->plugin_settings['modules']['subscribe_text'])) { ?><h3><?php echo stripslashes($this->plugin_settings['modules']['subscribe_text']); ?></h3><?php } ?>
                 <div class="subscribe_wrapper" style="min-height: 100px;">
                     <form class="subscribe_form">
-                        <input type="text" placeholder="<?php _e('your e-mail...', $this->plugin_slug); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" />
+                        <input type="text" placeholder="<?php _e('your e-mail...', $this->plugin_slug); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
                         <input type="submit" value="<?php _e('Subscribe', $this->plugin_slug); ?>" />
                     </form>
                 </div>
@@ -80,10 +81,10 @@
                     <?php list($open, $close) = !empty($this->plugin_settings['modules']['contact_effects']) && strstr($this->plugin_settings['modules']['contact_effects'], '|') ? explode('|', $this->plugin_settings['modules']['contact_effects']) : explode('|', 'move_top|move_bottom'); ?>
                     <div class="form <?php echo esc_attr($open); ?>">
                         <form class="contact_form">
-                            <p class="col"><input type="text" placeholder="<?php _e('Name', $this->plugin_slug); ?>" data-rule-required="true" name="name" class="name_input" /></p>
-                            <p class="col last"><input type="text" placeholder="<?php _e('E-mail', $this->plugin_slug); ?>" data-rule-required="true" data-rule-email="true" name="email" class="email_input" /></p>
+                            <p class="col"><input type="text" placeholder="<?php _e('Name', $this->plugin_slug); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" name="name" class="name_input" /></p>
+                            <p class="col last"><input type="text" placeholder="<?php _e('E-mail', $this->plugin_slug); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" data-msg-email="<?php esc_attr_e('Please enter a valid email address.', $this->plugin_slug); ?>" name="email" class="email_input" /></p>
                             <br clear="all" />
-                            <p><textarea placeholder="<?php _e('Your message', $this->plugin_slug); ?>" data-rule-required="true" name="content" class="content_textarea"></textarea></p>
+                            <p><textarea placeholder="<?php _e('Your message', $this->plugin_slug); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" name="content" class="content_textarea"></textarea></p>
                             <p class="submit"><input type="submit" value="<?php _e('Send', $this->plugin_slug); ?>"></p>
                         </form>
                     </div>

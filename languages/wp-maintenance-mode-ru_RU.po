@@ -1,33 +1,54 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.3\n"
-"POT-Creation-Date: 2014-09-26 19:07+0200\n"
-"PO-Revision-Date: 2014-09-28 11:24+0200\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.4\n"
+"POT-Creation-Date: 2016-06-17 03:35+0300\n"
+"PO-Revision-Date: 2016-06-17 03:35+0300\n"
 "Last-Translator: Constantine Reeves <affectiosus@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
-"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:154
+#: includes/classes/wp-maintenance-mode-admin.php:121
+#: includes/classes/wp-maintenance-mode-admin.php:159
+#: includes/classes/wp-maintenance-mode-admin.php:181
+msgid "You do not have access to this resource."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
+#, php-format
+msgid "You have %d subscriber(s)"
+msgstr "Подписчиков: %d"
+
+#: includes/classes/wp-maintenance-mode-admin.php:186
+msgid "The tab slug must not be empty."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:191
+msgid "The tab slug must exist."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:211
 msgid "WP Maintenance Mode"
 msgstr "Техническое обслуживание"
 
-#: includes/classes/wp-maintenance-mode-admin.php:358
+#: includes/classes/wp-maintenance-mode-admin.php:425
 msgid "Settings"
 msgstr "Настройки"
 
-#: includes/classes/wp-maintenance-mode-admin.php:377
+#: includes/classes/wp-maintenance-mode-admin.php:444
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -36,12 +57,16 @@ msgstr ""
 "Режим технического обслуживания <strong>включён</strong>. Не забудьте <a "
 "href=\"%s\">выключить</a> его, как только закончите."
 
-#: includes/classes/wp-maintenance-mode.php:100
-#: includes/classes/wp-maintenance-mode.php:101
+#: includes/classes/wp-maintenance-mode-admin.php:481
+msgid "Notice key cannot be empty."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode.php:103
+#: includes/classes/wp-maintenance-mode.php:104
 msgid "Maintenance mode"
 msgstr "Режим технического обслуживания"
 
-#: includes/classes/wp-maintenance-mode.php:103
+#: includes/classes/wp-maintenance-mode.php:106
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -49,11 +74,11 @@ msgstr ""
 "<p>В данный момент сайт находится на техническом обслуживании.<br />Приносим "
 "извинения за временные неудобства.<br />Спасибо за понимание.</p>"
 
-#: includes/classes/wp-maintenance-mode.php:121
+#: includes/classes/wp-maintenance-mode.php:124
 msgid "Notify me when it's ready"
 msgstr "Сообщить о готовности"
 
-#: includes/classes/wp-maintenance-mode.php:249
+#: includes/classes/wp-maintenance-mode.php:259
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -62,65 +87,86 @@ msgstr ""
 "Плагин технического обслуживания был перезапущен. Вам НЕОБХОДИМО "
 "пересмотреть <a href=\"%s\">настройки</a>."
 
-#: includes/classes/wp-maintenance-mode.php:425
-#: includes/classes/wp-maintenance-mode.php:439
+#: includes/classes/wp-maintenance-mode.php:449
+#: includes/classes/wp-maintenance-mode.php:463
 msgid "Maintenance Mode"
 msgstr "Режим технического обслуживания"
 
-#: includes/classes/wp-maintenance-mode.php:630
-#: includes/classes/wp-maintenance-mode.php:658
+#: includes/classes/wp-maintenance-mode.php:687
+#: includes/classes/wp-maintenance-mode.php:721 views/maintenance.php:85
 msgid "Please enter a valid email address."
 msgstr "Введите корректный e-mail адрес."
 
-#: includes/classes/wp-maintenance-mode.php:641
-msgid "You successfuly subscribed. Thanks!"
-msgstr "Вы успешно подписались."
+#: includes/classes/wp-maintenance-mode.php:699
+msgid "You successfully subscribed. Thanks!"
+msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:654
+#: includes/classes/wp-maintenance-mode.php:717
 msgid "All fields required."
 msgstr "Все поля обязательны."
 
-#: includes/classes/wp-maintenance-mode.php:675
+#: includes/classes/wp-maintenance-mode.php:726
 msgid "Message via contact"
 msgstr "Сообщение"
 
-#: includes/classes/wp-maintenance-mode.php:679
+#: includes/classes/wp-maintenance-mode.php:738
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Ваше сообщение отправлено администратору сайта. Спасибо!"
+
+#: views/contact.php:34
+#, php-format
+msgid "You have been contacted via %s."
+msgstr ""
+
+#: views/contact.php:50
+msgid "Name:"
+msgstr ""
+
+#: views/contact.php:62
+msgid "Email:"
+msgstr ""
+
+#: views/contact.php:74
+msgid "Content:"
+msgstr ""
 
 #: views/loginform.php:8
 msgid "Login"
 msgstr "Войти"
 
-#: views/maintenance.php:41
+#: views/maintenance.php:42
 msgid "your e-mail..."
 msgstr "ваш e-mail..."
 
-#: views/maintenance.php:42 views/settings.php:260
+#: views/maintenance.php:43 views/settings.php:270
 msgid "Subscribe"
 msgstr "Подписаться"
 
-#: views/maintenance.php:83 views/sidebar.php:7
+#: views/maintenance.php:84 views/sidebar.php:7
 msgid "Name"
 msgstr "Имя"
 
-#: views/maintenance.php:84
+#: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
+msgid "This field is required."
+msgstr ""
+
+#: views/maintenance.php:85
 msgid "E-mail"
 msgstr "E-mail"
 
-#: views/maintenance.php:86
+#: views/maintenance.php:87
 msgid "Your message"
 msgstr "Ваше сообщение"
 
-#: views/maintenance.php:87
+#: views/maintenance.php:88
 msgid "Send"
 msgstr "Отправить"
 
-#: views/maintenance.php:92
+#: views/maintenance.php:93
 msgid "Contact us"
 msgstr "Свяжитесь с нами"
 
-#: views/maintenance.php:97
+#: views/maintenance.php:98
 msgid "Dashboard"
 msgstr "Панель управления"
 
@@ -156,15 +202,15 @@ msgstr "Отключено"
 msgid "Bypass for Search Bots"
 msgstr "Индексация роботами"
 
-#: views/settings.php:34 views/settings.php:94 views/settings.php:104
-#: views/settings.php:232 views/settings.php:268 views/settings.php:305
-#: views/settings.php:373 views/settings.php:405
+#: views/settings.php:34 views/settings.php:104 views/settings.php:114
+#: views/settings.php:242 views/settings.php:278 views/settings.php:316
+#: views/settings.php:384 views/settings.php:416
 msgid "Yes"
 msgstr "Да"
 
-#: views/settings.php:35 views/settings.php:95 views/settings.php:105
-#: views/settings.php:233 views/settings.php:269 views/settings.php:306
-#: views/settings.php:374 views/settings.php:406
+#: views/settings.php:35 views/settings.php:105 views/settings.php:115
+#: views/settings.php:243 views/settings.php:279 views/settings.php:317
+#: views/settings.php:385 views/settings.php:417
 msgid "No"
 msgstr "Нет"
 
@@ -178,23 +224,31 @@ msgstr ""
 msgid "Backend Role"
 msgstr "Доступ к панели управления"
 
-#: views/settings.php:48
-msgid "Which user role is allowed to access the backend of this blog?"
-msgstr "Кому разрешён доступ к backend сайта?"
+#: views/settings.php:43 views/settings.php:59
+msgid "Select role(s)"
+msgstr ""
 
-#: views/settings.php:52
+#: views/settings.php:53
+msgid ""
+"Which user role is allowed to access the backend of this blog? "
+"Administrators will always have access."
+msgstr ""
+
+#: views/settings.php:57
 msgid "Frontend Role"
 msgstr "Доступ к сайту"
 
-#: views/settings.php:59
-msgid "Which user role is allowed to access the frontend of this blog?"
-msgstr "Кому разрешён доступ к frontend сайта?"
+#: views/settings.php:69
+msgid ""
+"Which user role is allowed to access the frontend of this blog? "
+"Administrators will always have access."
+msgstr ""
 
-#: views/settings.php:63
+#: views/settings.php:73
 msgid "Robots Meta Tag"
 msgstr "Метатэг для роботов"
 
-#: views/settings.php:69
+#: views/settings.php:79
 msgid ""
 "The robots meta tag lets you use a granular, page-specific approach to "
 "control how an individual page should be indexed and served to users in "
@@ -203,23 +257,22 @@ msgstr ""
 "Метатэг для роботов позволяет Вам определить специфическое для каждой "
 "страницы индексирование и отображение пользователям в результатах поиска."
 
-#: views/settings.php:73
+#: views/settings.php:83
 msgid "Redirection"
 msgstr "Перенаправление"
 
-#: views/settings.php:76
+#: views/settings.php:86
 msgid ""
-"If you want to redirect a user to a URL (which is not the WordPress "
-"dashboard) after login, then define a URL (incl. http://)"
+"If you want to redirect a user (with no access to Dashboard/Backend) to a "
+"URL (different from WordPress Dashboard URL) after login, then define a URL "
+"(incl. http://)"
 msgstr ""
-"Если вы хотите перенаправить пользователей на другой сайт (и это не панель "
-"управления WordPress) после входа, укажите ссылку (включая http://)"
 
-#: views/settings.php:80
+#: views/settings.php:90
 msgid "Exclude"
 msgstr "Исключения"
 
-#: views/settings.php:87
+#: views/settings.php:97
 msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
@@ -227,201 +280,201 @@ msgstr ""
 "Разрешите доступ к новостям (ленте), страницам, архивам или по IP во время "
 "технического обслуживания. Одна страница/IP на строке!"
 
-#: views/settings.php:91
+#: views/settings.php:101
 msgid "Notice"
 msgstr "Предупреждение"
 
-#: views/settings.php:97
+#: views/settings.php:107
 msgid "Do you want to see notices when maintenance mode is activated?"
 msgstr ""
 "Вы хотите видеть предупреждения, когда режим технического обслуживания "
 "включён?"
 
-#: views/settings.php:101
+#: views/settings.php:111
 msgid "Dashboard link"
 msgstr "Ссылка на панель управления"
 
-#: views/settings.php:107
+#: views/settings.php:117
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr ""
 "Вы хотите добавить ссылку на панель управления на странице технического "
 "обслуживания?"
 
-#: views/settings.php:115 views/settings.php:218 views/settings.php:421
+#: views/settings.php:125 views/settings.php:228 views/settings.php:432
 msgid "Save settings"
 msgstr "Сохранить настройки"
 
-#: views/settings.php:116 views/settings.php:219 views/settings.php:422
+#: views/settings.php:126 views/settings.php:229 views/settings.php:433
 msgid "Reset settings"
 msgstr "Сбросить настройки"
 
-#: views/settings.php:121
+#: views/settings.php:131
 msgid "Content"
 msgstr "Содержимое"
 
-#: views/settings.php:126
+#: views/settings.php:136
 msgid "Title (HTML tag)"
 msgstr "Название (тэг HTML)"
 
-#: views/settings.php:132
+#: views/settings.php:142
 msgid "Heading"
 msgstr "Заголовок"
 
-#: views/settings.php:139 views/settings.php:274
+#: views/settings.php:149 views/settings.php:284
 msgid "Text"
 msgstr "Текст"
 
-#: views/settings.php:159
+#: views/settings.php:169
 msgid "Background"
 msgstr "Фон"
 
-#: views/settings.php:164
+#: views/settings.php:174
 msgid "Choose type"
 msgstr "Выберите тип"
 
-#: views/settings.php:167
+#: views/settings.php:177
 msgid "Custom color"
 msgstr "Другой цвет"
 
-#: views/settings.php:168
+#: views/settings.php:178
 msgid "Uploaded background"
 msgstr "Загруженный фон"
 
-#: views/settings.php:169
+#: views/settings.php:179
 msgid "Predefined background"
 msgstr "Предустановленный фон"
 
-#: views/settings.php:174
+#: views/settings.php:184
 msgid "Choose color"
 msgstr "Выберите цвет"
 
-#: views/settings.php:180
+#: views/settings.php:190
 msgid "Upload background"
 msgstr "Загрузить фон"
 
-#: views/settings.php:184
+#: views/settings.php:194
 msgid "Backgrounds should have 1920x1280 px size."
 msgstr "Фоновое изображение должно быть размера 1920x1080."
 
-#: views/settings.php:189
+#: views/settings.php:199
 msgid "Choose background"
 msgstr "Выберите фон"
 
-#: views/settings.php:191
-msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-msgstr "источник: <a href=\"%\" target=\"_blank\">Free Photos</a>"
+#: views/settings.php:201
+#, php-format
+msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
+msgstr ""
 
-#: views/settings.php:224
+#: views/settings.php:234
 msgid "Countdown"
 msgstr "Обратный отсчёт"
 
-#: views/settings.php:229
+#: views/settings.php:239
 msgid "Show countdown?"
 msgstr "Показывать обратный отсчёт?"
 
-#: views/settings.php:238
+#: views/settings.php:248
 msgid "Start date"
 msgstr "Дата начала"
 
-#: views/settings.php:244
+#: views/settings.php:254
 msgid "Countdown (remaining time)"
 msgstr "Обратный отсчёт (оставшееся время)"
 
-#: views/settings.php:246
+#: views/settings.php:256
 msgid "Days"
 msgstr "Дни"
 
-#: views/settings.php:247
+#: views/settings.php:257
 msgid "Hours"
 msgstr "Часы"
 
-#: views/settings.php:248
+#: views/settings.php:258
 msgid "Minutes"
 msgstr "Минуты"
 
-#: views/settings.php:252
+#: views/settings.php:262
 msgid "Color"
 msgstr "Цвет"
 
-#: views/settings.php:265
+#: views/settings.php:275
 msgid "Show subscribe?"
 msgstr "Отображать возможность подписки?"
 
-#: views/settings.php:281
+#: views/settings.php:291
 msgid "Stats"
 msgstr "Статистика"
 
-#: views/settings.php:285
-#, php-format
-msgid "You have %d subscriber(s)"
-msgstr "Подписчиков: %d"
-
-#: views/settings.php:290
+#: views/settings.php:300
 msgid "Export as CSV"
 msgstr "Экспорт в .csv"
 
-#: views/settings.php:297
+#: views/settings.php:301
+msgid "Empty subscribers list"
+msgstr ""
+
+#: views/settings.php:308
 msgid "Social Networks"
 msgstr "Социальные сети"
 
-#: views/settings.php:302
+#: views/settings.php:313
 msgid "Show social networks?"
 msgstr "Отображать социальные сети?"
 
-#: views/settings.php:311
+#: views/settings.php:322
 msgid "Links target?"
 msgstr "Куда ведут ссылки?"
 
-#: views/settings.php:314
+#: views/settings.php:325
 msgid "New page"
 msgstr "Новая страница"
 
-#: views/settings.php:315
+#: views/settings.php:326
 msgid "Same page"
 msgstr "Такая же страница"
 
-#: views/settings.php:317
+#: views/settings.php:328
 msgid "Choose how the links will open."
 msgstr "Как будут открываться ссылки?"
 
-#: views/settings.php:365
+#: views/settings.php:376
 msgid "Contact"
 msgstr "Обратная связь"
 
-#: views/settings.php:370
+#: views/settings.php:381
 msgid "Show contact?"
 msgstr "Включить обратную связь?"
 
-#: views/settings.php:379
+#: views/settings.php:390
 msgid "Email address"
 msgstr "E-mail адрес"
 
-#: views/settings.php:385
+#: views/settings.php:396
 msgid "Effects"
 msgstr "Эффекты"
 
-#: views/settings.php:388
+#: views/settings.php:399
 msgid "Move top - Move bottom"
 msgstr "Сверху вниз"
 
-#: views/settings.php:389
+#: views/settings.php:400
 msgid "Zoom - Zoomed"
 msgstr "Увеличение"
 
-#: views/settings.php:390
+#: views/settings.php:401
 msgid "Fold - Unfold"
 msgstr "Поворот"
 
-#: views/settings.php:397
+#: views/settings.php:408
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: views/settings.php:402
+#: views/settings.php:413
 msgid "Use Google Analytics?"
 msgstr "Использовать Google Analytics?"
 
-#: views/settings.php:411
+#: views/settings.php:422
 msgid "Tracking code"
 msgstr "Код слежения"
 
@@ -445,13 +498,35 @@ msgstr "Twitter"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: views/sidebar.php:22
-msgid "WordPress Themes"
-msgstr "Темы WordPress"
+#: views/sidebar.php:27
+msgid "Other products"
+msgstr ""
 
-#: views/sidebar.php:31
+#: views/sidebar.php:44
 msgid "Resources"
 msgstr "Ресурсы"
+
+#~ msgid "You successfuly subscribed. Thanks!"
+#~ msgstr "Вы успешно подписались."
+
+#~ msgid "Which user role is allowed to access the backend of this blog?"
+#~ msgstr "Кому разрешён доступ к backend сайта?"
+
+#~ msgid "Which user role is allowed to access the frontend of this blog?"
+#~ msgstr "Кому разрешён доступ к frontend сайта?"
+
+#~ msgid ""
+#~ "If you want to redirect a user to a URL (which is not the WordPress "
+#~ "dashboard) after login, then define a URL (incl. http://)"
+#~ msgstr ""
+#~ "Если вы хотите перенаправить пользователей на другой сайт (и это не "
+#~ "панель управления WordPress) после входа, укажите ссылку (включая http://)"
+
+#~ msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
+#~ msgstr "источник: <a href=\"%\" target=\"_blank\">Free Photos</a>"
+
+#~ msgid "WordPress Themes"
+#~ msgstr "Темы WordPress"
 
 #~ msgid "Subscribe now for early access to new WordPress themes."
 #~ msgstr "Подпишитесь, чтобы заранее узнать о новых темах для WordPress."

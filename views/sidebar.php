@@ -18,23 +18,39 @@
         </div>
     </div>
 
-    <div class="sidebar_box themes_box">
-        <h3><?php _e('WordPress Themes', $this->plugin_slug); ?></h3>
-        <div class="inside">
-            <ul>
-                <li><a href="<?php echo 'http://designmodo.com/startup-wordpress/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/startup-wordpress.jpg'; ?>" /></a></li>
-            </ul>
+    <?php
+    $banners = wpmm_get_banners();
+
+    if (!empty($banners['product'])) {
+        ?>
+        <div class="sidebar_box themes_box">
+            <h3><?php _e('Other products', $this->plugin_slug); ?></h3>
+            <div class="inside">
+                <ul>
+                    <?php
+                    foreach ($banners['product'] as $item) {
+                        printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'] . WPMM_AUTHOR_UTM, $item['title'], $item['image'], $item['title']);
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>     
+    <?php } ?>
+
+    <?php
+    if (!empty($banners['resource'])) {
+        ?>
+        <div class="sidebar_box resources_box">
+            <h3><?php _e('Resources', $this->plugin_slug); ?></h3>
+            <div class="inside">
+                <ul>
+                    <?php
+                    foreach ($banners['resource'] as $item) {
+                        printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'] . WPMM_AUTHOR_UTM, $item['title'], $item['image'], $item['title']);
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
-    </div>     
-    
-    <div class="sidebar_box resources_box">
-        <h3><?php _e('Resources', $this->plugin_slug); ?></h3>
-        <div class="inside">
-            <ul>
-                <li><a href="<?php echo 'http://designmodo.com/free-wordpress-theme/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/ayoshop.jpg'; ?>" /></a></li>
-                <li><a href="<?php echo 'http://designmodo.com/linecons-free/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/linecons.jpg'; ?>" /></a></li>
-                <li><a href="<?php echo 'http://designmodo.com/flat-free/' . WPMM_AUTHOR_UTM; ?>" target="_blank"><img src="<?php echo WPMM_URL . 'assets/images/resources/flatui.jpg'; ?>" /></a></li>               
-            </ul>
-        </div>
-    </div>     
+    <?php } ?>
 </div>

@@ -1,5 +1,9 @@
 <div class="wrap">
+<<<<<<< HEAD
+    <h2 class="wpmm-title"><?php echo get_admin_page_title(); ?></h2>
+=======
     <h2 class="wpmm-title"><?php _e('WP Maintenance Mode', $this->plugin_slug); ?></h2>
+>>>>>>> master
 
     <?php if (!empty($_POST)) { ?>
         <div class="updated settings-error" id="setting-error-settings_updated"> 
@@ -38,25 +42,35 @@
                                     </td>
                                 </tr> 
                                 <tr valign="top">
-                                    <th scope="row"><label for="options[general][backend_role]"><?php _e('Backend Role', $this->plugin_slug); ?></label></th>
+                                    <th scope="row"><label for="options[general][backend_role][]"><?php _e('Backend Role', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <select name="options[general][backend_role]">
-                                            <?php foreach ($wp_roles->roles as $role => $details) { ?>
-                                                <option value="<?php echo esc_attr($role); ?>" <?php selected($this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
+                                        <select name="options[general][backend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php _e('Select role(s)', $this->plugin_slug); ?>">
+                                            <?php
+                                            foreach ($wp_roles->roles as $role => $details) {
+                                                if ($role == 'administrator') {
+                                                    continue;
+                                                }
+                                                ?>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect((array) $this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name']; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <p class="description"><?php _e('Which user role is allowed to access the backend of this blog?', $this->plugin_slug); ?></p>
+                                        <p class="description"><?php _e('Which user role is allowed to access the backend of this blog? Administrators will always have access.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>    
                                 <tr valign="top">
-                                    <th scope="row"><label for="options[general][frontend_role]"><?php _e('Frontend Role', $this->plugin_slug); ?></label></th>
+                                    <th scope="row"><label for="options[general][frontend_role][]"><?php _e('Frontend Role', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <select name="options[general][frontend_role]">
-                                            <?php foreach ($wp_roles->roles as $role => $details) { ?>
-                                                <option value="<?php echo esc_attr($role); ?>" <?php selected($this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name'] . ' (' . $role . ')'; ?></option>
+                                        <select name="options[general][frontend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php _e('Select role(s)', $this->plugin_slug); ?>">
+                                            <?php
+                                            foreach ($wp_roles->roles as $role => $details) {
+                                                if ($role == 'administrator') {
+                                                    continue;
+                                                }
+                                                ?>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect((array) $this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name']; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <p class="description"><?php _e('Which user role is allowed to access the frontend of this blog?', $this->plugin_slug); ?></p>
+                                        <p class="description"><?php _e('Which user role is allowed to access the frontend of this blog? Administrators will always have access.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>   
                                 <tr valign="top">
@@ -73,7 +87,7 @@
                                     <th scope="row"><label for="options[general][redirection]"><?php _e('Redirection', $this->plugin_slug); ?></label></th>
                                     <td>	
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['general']['redirection'])); ?>" name="options[general][redirection]" />
-                                        <p class="description"><?php _e('If you want to redirect a user to a URL (which is not the WordPress dashboard) after login, then define a URL (incl. http://)', $this->plugin_slug); ?></p>
+                                        <p class="description"><?php _e('If you want to redirect a user (with no access to Dashboard/Backend) to a URL (different from WordPress Dashboard URL) after login, then define a URL (incl. http://)', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>                                
                                 <tr valign="top">
@@ -279,7 +293,7 @@
                                 </tr> 
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][stats]"><?php _e('Stats', $this->plugin_slug); ?></label></th>
-                                    <td>	
+                                    <td id="subscribers_wrap">	
                                         <?php
                                         $subscribers_no = wpmm_count_where('wpmm_subscribers', 'id_subscriber');
                                         echo sprintf(__('You have %d subscriber(s)', $this->plugin_slug), $subscribers_no);
@@ -287,7 +301,8 @@
                                         if ($subscribers_no > 0) {
                                             ?>
                                             <br />
-                                            <a class="button button-secondary" id="subscribers-export" href="javascript:void(0);"><?php _e('Export as CSV', $this->plugin_slug); ?></a>
+                                            <a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php _e('Export as CSV', $this->plugin_slug); ?></a>
+                                            <a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php _e('Empty subscribers list', $this->plugin_slug); ?></a>
                                         <?php } ?>
                                     </td>
                                 </tr>                                

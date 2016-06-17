@@ -1,9 +1,9 @@
 h2.wpmm-title {
     background: url('../images/icon-48.png') no-repeat left center;
-    line-height: 42px;
-    margin-bottom: 30px;
+    line-height: 42px !important;
+    margin-bottom: 30px !important;
     height: 48px;
-    padding-left: 55px;
+    padding-left: 55px !important;
 }
 
 /* WRAP*/
@@ -102,6 +102,11 @@ h2.wpmm-title {
     margin-left: 30px;
 }
 
+.tabs-content .wp-picker-holder {
+    position:absolute;
+    z-index:9999999;
+}
+
 /* SIDEBARS */
 #sidebar .info_box ul {
     margin-top: 10px;
@@ -115,4 +120,29 @@ h2.wpmm-title {
 
 #sidebar .resources_box li, #sidebar .themes_box li {
     margin-bottom: 10px;
+}
+
+/* CHOSEN.JS MULTISELECT */
+.chosen-select {
+    width: 195px !important;
+}
+
+.chosen-container {
+    width: 195px !important;
+}
+
+.chosen-container-active .chosen-choices {
+    box-shadow: none !important;
+    background-image: none !important;
+}
+
+.chosen-container-multi .chosen-choices {
+    border: 1px solid #ddd !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset !important; 
+    background-image: none !important;
+}
+
+.chosen-container .chosen-results li.highlighted {
+    background-color: #0074a2 !important;
+    background-image: none !important;
 }
