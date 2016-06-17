@@ -615,7 +615,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
          */
         public function check_exclude() {
             $is_excluded = false;
-<<<<<<< HEAD
             $excluded_list = array();
 
             if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
@@ -626,13 +625,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
                         continue;
                     }
 
-=======
-            $excluded_list = null;
-
-            if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
-                $excluded_list = $this->plugin_settings['general']['exclude'];
-                foreach ($excluded_list as $item) {
->>>>>>> master
                     if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $item))) {
                         $is_excluded = true;
                         break;
@@ -640,11 +632,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 }
             }
 
-<<<<<<< HEAD
             $is_excluded = apply_filters('wpmm_is_excluded', $is_excluded, $excluded_list);
-=======
-            $is_excluded = apply_filters('wp_maintenance_mode_exclude', $is_excluded, $excluded_list);
->>>>>>> master
 
             return $is_excluded;
         }

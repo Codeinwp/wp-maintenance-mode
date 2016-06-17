@@ -1,28 +1,15 @@
 msgid ""
 msgstr ""
-<<<<<<< HEAD
 "Project-Id-Version: WP Maintenance Mode 2.0.4\n"
 "POT-Creation-Date: 2016-06-17 03:11+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
-=======
-"Project-Id-Version: WP Maintenance Mode 2.0.3\n"
-"POT-Creation-Date: 2014-09-26 19:03+0200\n"
-"PO-Revision-Date: 2015-06-03 14:32+0100\n"
-"Last-Translator: Michael Köhler <michael.koehler@makomi.de>\n"
->>>>>>> master
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-<<<<<<< HEAD
 "X-Generator: Poedit 1.8.8\n"
-=======
-"X-Generator: Poedit 1.8.1\n"
-"X-Poedit-Basepath: ../\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
->>>>>>> master
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
@@ -84,16 +71,6 @@ msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-"<p>Bitte Entschuldigen Sie die Unannehmlichkeiten,<br />an dieser Website finden aktuell"
-"Wartungsarbeiten statt.<br />Vielen Dank für Ihr Verständnis.</p>"
-=======
-"<p>Entschuldige die Unannehmlichkeiten.<br />Unsere Webseite wird aktuell "
-"gewartet.<br />Vielen Dank für das Verständnis.</p>"
->>>>>>> c0802a6df287506d618b460a9d896780ef231bfc
->>>>>>> master
 
 #: includes/classes/wp-maintenance-mode.php:124
 msgid "Notify me when it's ready"
@@ -132,7 +109,6 @@ msgstr "Mitteilung via Kontakt"
 
 #: includes/classes/wp-maintenance-mode.php:738
 msgid "Your email was sent to the website administrator. Thanks!"
-<<<<<<< HEAD
 msgstr "Deine E-Mail wurde an den Administrator der Website gesendet. Danke!"
 
 #: views/contact.php:34
@@ -151,13 +127,6 @@ msgstr ""
 #: views/contact.php:74
 msgid "Content:"
 msgstr ""
-=======
-<<<<<<< HEAD
-msgstr "Deine E-Mail wurde an den Administrator der Website gesendet. Danke!"
-=======
-msgstr "Deine E-Mail wurde an den Administrator der Webseite gesandt. Danke!"
->>>>>>> c0802a6df287506d618b460a9d896780ef231bfc
->>>>>>> master
 
 #: views/loginform.php:8
 msgid "Login"
@@ -251,15 +220,9 @@ msgstr "Erlaube Such-Bots den Zugang via Bypass?"
 msgid "Backend Role"
 msgstr "Backend-Rolle"
 
-<<<<<<< HEAD
 #: views/settings.php:43 views/settings.php:59
 msgid "Select role(s)"
 msgstr ""
-=======
-#: views/settings.php:48
-msgid "Which user role is allowed to access the backend of this blog?"
-msgstr "Mit welcher Rolle soll man Zugang zum Backend der Webseite erhalten?"
->>>>>>> master
 
 #: views/settings.php:53
 msgid ""
@@ -271,17 +234,11 @@ msgstr ""
 msgid "Frontend Role"
 msgstr "Frontend-Rolle"
 
-<<<<<<< HEAD
 #: views/settings.php:69
 msgid ""
 "Which user role is allowed to access the frontend of this blog? "
 "Administrators will always have access."
 msgstr ""
-=======
-#: views/settings.php:59
-msgid "Which user role is allowed to access the frontend of this blog?"
-msgstr "Mit welcher Rolle soll man Zugang zum Frontend der Webseite erhalten?"
->>>>>>> master
 
 #: views/settings.php:73
 msgid "Robots Meta Tag"
@@ -396,16 +353,10 @@ msgstr "Hintergründe sollten eine Größe von 1920x1280 px haben."
 msgid "Choose background"
 msgstr "Hintergrund wählen"
 
-<<<<<<< HEAD
 #: views/settings.php:201
 #, php-format
 msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 msgstr ""
-=======
-#: views/settings.php:191
-msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-msgstr "Quelle <a href=\"%\" target=\"_blank\">Free Photos</a>"
->>>>>>> master
 
 #: views/settings.php:234
 msgid "Countdown"

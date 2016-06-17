@@ -39,6 +39,7 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/Designmodocom/WP-Maintenance-Mode).
 
 = Credits =
+
 Developed by [Designmodo](http://designmodo.com)
 
 == Installation ==
