@@ -7,7 +7,11 @@ Author URI: http://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 4.5.2
+<<<<<<< HEAD
+Stable tag: 2.0.6
+=======
 Stable tag: 2.0.5
+>>>>>>> master
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
@@ -71,6 +75,13 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
+<<<<<<< HEAD
+= 2.0.6 (20/06/2016) =
+* notifications update
+* languages update
+
+=======
+>>>>>>> master
 = 2.0.5 (17/06/2016) =
 * roles (array) fix
 

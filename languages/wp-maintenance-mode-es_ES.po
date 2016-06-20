@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.4\n"
-"POT-Creation-Date: 2016-06-17 03:15+0300\n"
-"PO-Revision-Date: 2016-06-17 03:15+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.6\n"
+"POT-Creation-Date: 2016-06-20 13:45+0300\n"
+"PO-Revision-Date: 2016-06-20 13:45+0300\n"
 "Last-Translator: Erick Ruiz de Chavez <erick@erch.co>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: es_ES\n"
@@ -20,34 +20,34 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:121
-#: includes/classes/wp-maintenance-mode-admin.php:159
-#: includes/classes/wp-maintenance-mode-admin.php:181
+#: includes/classes/wp-maintenance-mode-admin.php:123
+#: includes/classes/wp-maintenance-mode-admin.php:161
+#: includes/classes/wp-maintenance-mode-admin.php:183
 msgid "You do not have access to this resource."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
+#: includes/classes/wp-maintenance-mode-admin.php:167 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Hay %d suscriptor(es)"
 
-#: includes/classes/wp-maintenance-mode-admin.php:186
+#: includes/classes/wp-maintenance-mode-admin.php:188
 msgid "The tab slug must not be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:191
+#: includes/classes/wp-maintenance-mode-admin.php:193
 msgid "The tab slug must exist."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:211
+#: includes/classes/wp-maintenance-mode-admin.php:213
 msgid "WP Maintenance Mode"
 msgstr "Modo de Mantenimiento WP"
 
-#: includes/classes/wp-maintenance-mode-admin.php:425
+#: includes/classes/wp-maintenance-mode-admin.php:427
 msgid "Settings"
 msgstr "Ajustes"
 
-#: includes/classes/wp-maintenance-mode-admin.php:444
+#: includes/classes/wp-maintenance-mode-admin.php:446
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -56,8 +56,15 @@ msgstr ""
 "El modo de mantenimiento está <strong>activo</strong>. Por favor no olvides "
 "<a href=\"%s\">desactivarlo</a> tan pronto como termines."
 
-#: includes/classes/wp-maintenance-mode-admin.php:481
+#: includes/classes/wp-maintenance-mode-admin.php:483
 msgid "Notice key cannot be empty."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:531
+#, php-format
+msgid ""
+"If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
+"rating. A huge thank you from WP Maintenance Mode makers in advance!"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:103

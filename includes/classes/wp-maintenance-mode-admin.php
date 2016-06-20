@@ -10,7 +10,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         protected $plugin_default_settings;
         protected $plugin_basename;
         protected $plugin_screen_hook_suffix = null;
-        
         private $dismissed_notices_key = 'wpmm_dismissed_notices';
 
         private function __construct() {
@@ -43,6 +42,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             add_action('wp_ajax_wpmm_subscribers_empty_list', array($this, 'subscribers_empty_list'));
             add_action('wp_ajax_wpmm_dismiss_notices', array($this, 'dismiss_notices'));
             add_action('wp_ajax_wpmm_reset_settings', array($this, 'reset_settings'));
+
+            // Add text to footer
+            add_filter('admin_footer_text', array($this, 'admin_footer_text'), 5);
         }
 
         public static function get_instance() {
@@ -453,19 +455,19 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             } else {
                 // delete wpmm_notice
                 delete_option('wpmm_notice');
-            }
 
-            // notice promo for codepad
-            ob_start();
-            include_once(WPMM_VIEWS_PATH . 'promo-codepad.php');
-            $notices['promo_codepad'] = array(
-                'class' => 'wpmm_notices updated notice' . ($this->plugin_screen_hook_suffix != $screen->id ? ' is-dismissible' : ''),
-                'msg' => ob_get_clean()
-            );
+                // notice promo for codepad
+                ob_start();
+                include_once(WPMM_VIEWS_PATH . 'promo-codepad.php');
+                $notices['promo_codepad'] = array(
+                    'class' => 'wpmm_notices updated notice is-dismissible',
+                    'msg' => ob_get_clean()
+                );
+            }
 
             // get dismissed notices
             $dismissed_notices = $this->get_dismissed_notices(get_current_user_id());
-            
+
             // template
             include_once(WPMM_VIEWS_PATH . 'notice.php');
         }
@@ -515,6 +517,21 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $dismissed_notices[] = $notice_key;
 
             update_user_meta($user_id, $this->dismissed_notices_key, implode(',', $dismissed_notices));
+        }
+
+        /**
+         * Display custom text on plugin settings page
+         * 
+         * @param string $text
+         */
+        public function admin_footer_text($text) {
+            $screen = get_current_screen();
+
+            if ($this->plugin_screen_hook_suffix == $screen->id) {
+                $text = sprintf(__('If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', $this->plugin_slug), '<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>');
+            }
+
+            return $text;
         }
 
     }

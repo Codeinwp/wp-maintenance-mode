@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.4\n"
-"POT-Creation-Date: 2016-06-17 03:34+0300\n"
-"PO-Revision-Date: 2016-06-17 03:34+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.6\n"
+"POT-Creation-Date: 2016-06-20 13:48+0300\n"
+"PO-Revision-Date: 2016-06-20 13:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: ro\n"
@@ -21,34 +21,34 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:121
-#: includes/classes/wp-maintenance-mode-admin.php:159
-#: includes/classes/wp-maintenance-mode-admin.php:181
+#: includes/classes/wp-maintenance-mode-admin.php:123
+#: includes/classes/wp-maintenance-mode-admin.php:161
+#: includes/classes/wp-maintenance-mode-admin.php:183
 msgid "You do not have access to this resource."
 msgstr "Nu aveti acces la aceasta resursa."
 
-#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
+#: includes/classes/wp-maintenance-mode-admin.php:167 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Lista contine %d abonati"
 
-#: includes/classes/wp-maintenance-mode-admin.php:186
+#: includes/classes/wp-maintenance-mode-admin.php:188
 msgid "The tab slug must not be empty."
 msgstr "Identificatorul tabului nu trebuie sa fie gol."
 
-#: includes/classes/wp-maintenance-mode-admin.php:191
+#: includes/classes/wp-maintenance-mode-admin.php:193
 msgid "The tab slug must exist."
 msgstr "Identificatorul tabului trebuie sa existe."
 
-#: includes/classes/wp-maintenance-mode-admin.php:211
+#: includes/classes/wp-maintenance-mode-admin.php:213
 msgid "WP Maintenance Mode"
 msgstr "WP Maintenance Mode"
 
-#: includes/classes/wp-maintenance-mode-admin.php:425
+#: includes/classes/wp-maintenance-mode-admin.php:427
 msgid "Settings"
 msgstr "Setari"
 
-#: includes/classes/wp-maintenance-mode-admin.php:444
+#: includes/classes/wp-maintenance-mode-admin.php:446
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -57,9 +57,18 @@ msgstr ""
 "Modul de mentenanta este <strong>activ</strong>. Nu uita sa-l <a href=\"%s"
 "\">dezactivezi</a> imediat dupa ce termini."
 
-#: includes/classes/wp-maintenance-mode-admin.php:481
+#: includes/classes/wp-maintenance-mode-admin.php:483
 msgid "Notice key cannot be empty."
 msgstr "Cheia de identificare a notificarii nu trebuie sa fie goala."
+
+#: includes/classes/wp-maintenance-mode-admin.php:531
+#, php-format
+msgid ""
+"If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
+"rating. A huge thank you from WP Maintenance Mode makers in advance!"
+msgstr ""
+"Daca iti place <strong>WP Maintenance Mode</strong> te rugam sa ne lasi o "
+"recenzie (%s). Iti multumim in avans!"
 
 #: includes/classes/wp-maintenance-mode.php:103
 #: includes/classes/wp-maintenance-mode.php:104
