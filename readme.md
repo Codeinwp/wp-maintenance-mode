@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Version 2.0.6
-=======
-# Version 2.0.5
->>>>>>> master
 
 # WP Maintenance Mode
 
