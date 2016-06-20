@@ -146,3 +146,9 @@ h2.wpmm-title {
     background-color: #0074a2 !important;
     background-image: none !important;
 }
+
+/* FOOTER RATING */
+#footer-left .wpmm_rating:hover {
+    text-decoration: none !important;
+    color: #FFB900 !important;
+} 

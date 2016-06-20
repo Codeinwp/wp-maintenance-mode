@@ -1,6 +1,6 @@
 <?php
 foreach ($notices as $key => $notice) {
-    if (in_array($key, $dismissed_notices) && $this->plugin_screen_hook_suffix != $screen->id) {
+    if (in_array($key, $dismissed_notices)) {
         continue;
     }
     ?>
