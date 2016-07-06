@@ -4,7 +4,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
     class WP_Maintenance_Mode {
 
-        const VERSION = '2.0.6';
+        const VERSION = '2.0.7';
 
         protected $plugin_slug = 'wp-maintenance-mode';
         protected $plugin_settings;
@@ -41,9 +41,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 add_action('init', array($this, 'redirect'), 9);
 
                 // Google Analytics tracking script
-                if (!empty($this->plugin_settings['modules']['ga_status']) && $this->plugin_settings['modules']['ga_status'] == 1 && !empty($this->plugin_settings['modules']['ga_code'])) {
-                    add_action('wpmm_head', create_function('', 'echo "' . stripslashes($this->plugin_settings['modules']['ga_code']) . '";'));
-                }
+                add_action('wpmm_head', array($this, 'google_analytics_code'));
             }
         }
 
@@ -252,7 +250,11 @@ if (!class_exists('WP_Maintenance_Mode')) {
             $old_options = (is_multisite() && $network_wide) ? get_site_option('wp-maintenance-mode') : get_option('wp-maintenance-mode');
             $default_options = self::get_instance()->default_settings();
 
-            // set notice if the plugin was installed before & set default settings
+            /**
+             * Update from v1.8 to v2.x
+             * 
+             * -  set notice if the plugin was installed before & set default settings
+             */
             if (!empty($old_options) && empty($v2_options)) {
                 add_option('wpmm_notice', array(
                     'class' => 'updated notice',
@@ -370,9 +372,21 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     }
                 }
             }
+            
+            if (empty($v2_options)) {
+                // set options
+                add_option('wpmm_settings', $default_options);
+            }
 
-            // set options
-            add_option('wpmm_settings', $default_options);
+            /**
+             * Update from <= v2.0.6 to v2.0.7
+             */
+            if (!empty($v2_options['modules']['ga_code'])) {
+                $v2_options['modules']['ga_code'] = wpmm_sanitize_ga_code($v2_options['modules']['ga_code']);
+
+                // update options
+                update_option('wpmm_settings', $v2_options);
+            }
 
             // set current version
             update_option('wpmm_version', WP_Maintenance_Mode::VERSION);
@@ -483,7 +497,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                 $countdown_end = strtotime($countdown_start . ' +' . $backtime_seconds . ' seconds');
 
                 // JS FILES
-                $wp_scripts = new WP_Scripts();
+                $wp_scripts = wp_scripts();
                 $scripts = array(
                     'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.' . WPMM_ASSETS_SUFFIX . '.js',
                     'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js'
@@ -667,6 +681,31 @@ if (!class_exists('WP_Maintenance_Mode')) {
             $redirect_to = stripslashes($this->plugin_settings['general']['redirection']);
             wp_redirect($redirect_to);
             exit;
+        }
+
+        /**
+         * Google Analytics code
+         * 
+         * @since 2.0.7
+         */
+        public function google_analytics_code() {
+            // check if module is activated and code exists
+            if (
+                    empty($this->plugin_settings['modules']['ga_status']) ||
+                    $this->plugin_settings['modules']['ga_status'] != 1 ||
+                    empty($this->plugin_settings['modules']['ga_code'])
+            ) {
+                return false;
+            }
+
+            // sanitize code
+            $ga_code = wpmm_sanitize_ga_code($this->plugin_settings['modules']['ga_code']);
+            if (empty($ga_code)) {
+                return false;
+            }
+
+            // show google analytics javascript snippet
+            include_once(WPMM_VIEWS_PATH . 'google-analytics.php');
         }
 
         /**

@@ -6,7 +6,7 @@
  * Plugin Name: WP Maintenance Mode
  * Plugin URI: http://designmodo.com/
  * Description: Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
- * Version: 2.0.6
+ * Version: 2.0.7
  * Author: Designmodo
  * Author URI: http://designmodo.com/
  * Twitter: designmodo

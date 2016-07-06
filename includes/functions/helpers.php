@@ -63,28 +63,60 @@ function wpmm_multiselect($values, $current) {
 }
 
 /**
- * Get banners list from Maintenance Mode API
+ * Return list of banners
  * 
  * @since 2.0.4
  * @return array
  */
 function wpmm_get_banners() {
-    if (false === ($banners = get_transient('wpmm_banners_list'))) {
-        $response = wp_remote_get('http://maintenancemode.co/wp-json/wpmm/v1/banners', array(
-            'timeout' => 10
-        ));
+    $banners_path = WPMM_URL . 'assets/images/resources/';
 
-        $banners = array();
-        $items = json_decode(wp_remote_retrieve_body($response), true);
+    return array(
+        'product' => array(
+            array(
+                'title' => 'Slides',
+                'link' => 'http://designmodo.com/slides/',
+                'image' => $banners_path . 'slides.jpg'
+            ),
+            array(
+                'title' => 'Qards',
+                'link' => 'http://designmodo.com/qards/',
+                'image' => $banners_path . 'qards.jpg'
+            )
+        ),
+        'resource' => array(
+            array(
+                'title' => 'Free WordPress Theme',
+                'link' => 'http://designmodo.com/free-wordpress-theme/',
+                'image' => $banners_path . 'ayoshop.jpg'
+            ),
+            array(
+                'title' => 'Linecons',
+                'link' => 'http://designmodo.com/linecons-free/',
+                'image' => $banners_path . 'linecons.jpg'
+            ),
+            array(
+                'title' => 'Flat UI Free',
+                'link' => 'http://designmodo.com/flat-free/',
+                'image' => $banners_path . 'flatui.jpg'
+            )
+        )
+    );
+}
 
-        if (!empty($items) && is_array($items)) {
-            foreach ($items as $item) {
-                $banners[$item['type']][] = $item;
-            }
-        }
-
-        set_transient('wpmm_banners_list', $banners, 3 * HOUR_IN_SECONDS);
-    }
-
-    return $banners;
+/**
+ * Sanitize Google Analytics SiteID code
+ * 
+ * Valid examples:
+ * UA-..........
+ * UA-..........-....
+ * 
+ * @since 2.0.7
+ * @param string $string
+ * @return string
+ */
+function wpmm_sanitize_ga_code($string) {
+    preg_match('/UA-\d{4,10}(-\d{1,4})?/', $string, $matches);
+   
+    return isset($matches[0]) ? $matches[0] : '';
 }

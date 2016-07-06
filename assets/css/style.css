@@ -92,7 +92,7 @@ body {
 }
 .wrap h3 {
     font-size: 24px;
-    font-weight: 400px;
+    font-weight: 400;
     margin: 0 0 45px;
 }
 .wrap .author_link {
@@ -118,11 +118,13 @@ body {
  **/
 
 .wrap form.subscribe_form {
+    box-sizing: border-box;
     width: 465px;
     margin: 0 0 75px;
     display: inline-block;
     border: 3px solid #e0e0e0;
-    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
 }
 .wrap form.subscribe_form input {
     margin: 0;
@@ -421,15 +423,19 @@ body {
     .wrap h2, .wrap h3 {
         font-size: 18px;
     }
-    .wrap form.subscribe_form { // .wrap form
+    .wrap form.subscribe_form {
         box-sizing: border-box;
         width: 100%;
     }
-    .wrap form.subscribe_form input { // .wrap form
+    .wrap form.subscribe_form input {
         box-sizing: border-box;
     }
     .wrap form input[type="text"], .wrap form input[type="submit"] {
         width: 100%;
+    }
+    .wrap form.subscribe_form input[type="submit"] {
+        padding-left: 0;
+        padding-right: 0;
     }
     .wrap .contact_us {
         margin: 0 0 50px;
