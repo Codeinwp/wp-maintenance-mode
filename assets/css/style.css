@@ -436,6 +436,7 @@ body {
     .wrap form.subscribe_form input[type="submit"] {
         padding-left: 0;
         padding-right: 0;
+        border-left: none;
     }
     .wrap .contact_us {
         margin: 0 0 50px;
