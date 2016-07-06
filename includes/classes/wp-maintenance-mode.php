@@ -371,7 +371,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
                             break;
                     }
                 }
-
+            }
+            
+            if (empty($v2_options)) {
                 // set options
                 add_option('wpmm_settings', $default_options);
             }
@@ -381,7 +383,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
              */
             if (!empty($v2_options['modules']['ga_code'])) {
                 $v2_options['modules']['ga_code'] = wpmm_sanitize_ga_code($v2_options['modules']['ga_code']);
-                
+
                 // update options
                 update_option('wpmm_settings', $v2_options);
             }
