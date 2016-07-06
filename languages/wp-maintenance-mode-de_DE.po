@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.6\n"
-"POT-Creation-Date: 2016-06-20 13:45+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.7\n"
+"POT-Creation-Date: 2016-07-06 14:07+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
@@ -33,22 +33,31 @@ msgid "You have %d subscriber(s)"
 msgstr "Du hast %d Abonnenten"
 
 #: includes/classes/wp-maintenance-mode-admin.php:188
-msgid "The tab slug must not be empty."
+msgid "The nonce field must not be empty."
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:193
+msgid "The tab slug must not be empty."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:198
+#: includes/classes/wp-maintenance-mode-admin.php:252
+msgid "Security check."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:204
 msgid "The tab slug must exist."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:213
+#: includes/classes/wp-maintenance-mode-admin.php:224
 msgid "WP Maintenance Mode"
 msgstr "WP Wartungsmodus"
 
-#: includes/classes/wp-maintenance-mode-admin.php:427
+#: includes/classes/wp-maintenance-mode-admin.php:438
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/classes/wp-maintenance-mode-admin.php:446
+#: includes/classes/wp-maintenance-mode-admin.php:457
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -57,33 +66,33 @@ msgstr ""
 "Der Wartungsmodus ist <strong>aktiv</strong>. Bitte vergiss nicht ihn zu <a "
 "href=\"%s\">deaktivieren</a>, wenn er nicht mehr benötigt wird."
 
-#: includes/classes/wp-maintenance-mode-admin.php:483
+#: includes/classes/wp-maintenance-mode-admin.php:494
 msgid "Notice key cannot be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:531
+#: includes/classes/wp-maintenance-mode-admin.php:542
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
 "rating. A huge thank you from WP Maintenance Mode makers in advance!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:103
-#: includes/classes/wp-maintenance-mode.php:104
+#: includes/classes/wp-maintenance-mode.php:101
+#: includes/classes/wp-maintenance-mode.php:102
 msgid "Maintenance mode"
 msgstr "Wartungsmodus"
 
-#: includes/classes/wp-maintenance-mode.php:106
+#: includes/classes/wp-maintenance-mode.php:104
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:124
+#: includes/classes/wp-maintenance-mode.php:122
 msgid "Notify me when it's ready"
 msgstr "Informiere mich, wenn  die Arbeiten abgeschlossen sind."
 
-#: includes/classes/wp-maintenance-mode.php:259
+#: includes/classes/wp-maintenance-mode.php:261
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -92,29 +101,29 @@ msgstr ""
 "Das WP Wartungsmodus Plugin wurde neu erstellt und du MUSST die <a href=\"%s"
 "\"></a> Einstellungen bearbeiten."
 
-#: includes/classes/wp-maintenance-mode.php:449
-#: includes/classes/wp-maintenance-mode.php:463
+#: includes/classes/wp-maintenance-mode.php:461
+#: includes/classes/wp-maintenance-mode.php:475
 msgid "Maintenance Mode"
 msgstr "Wartungsmodus"
 
-#: includes/classes/wp-maintenance-mode.php:687
-#: includes/classes/wp-maintenance-mode.php:721 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:724
+#: includes/classes/wp-maintenance-mode.php:758 views/maintenance.php:85
 msgid "Please enter a valid email address."
 msgstr "Bitte gib eine gültige E-Mail-Adresse an."
 
-#: includes/classes/wp-maintenance-mode.php:699
+#: includes/classes/wp-maintenance-mode.php:736
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:717
+#: includes/classes/wp-maintenance-mode.php:754
 msgid "All fields required."
 msgstr "Alle Felder sind notwendig."
 
-#: includes/classes/wp-maintenance-mode.php:726
+#: includes/classes/wp-maintenance-mode.php:763
 msgid "Message via contact"
 msgstr "Mitteilung via Kontakt"
 
-#: includes/classes/wp-maintenance-mode.php:738
+#: includes/classes/wp-maintenance-mode.php:775
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Deine E-Mail wurde an den Administrator der Website gesendet. Danke!"
 
@@ -300,11 +309,11 @@ msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr "Soll ein Link zum Backend auf der Wartungswebseite angezeigt werden?"
 
-#: views/settings.php:125 views/settings.php:228 views/settings.php:432
+#: views/settings.php:125 views/settings.php:228 views/settings.php:433
 msgid "Save settings"
 msgstr "Einstellungen speichern"
 
-#: views/settings.php:126 views/settings.php:229 views/settings.php:433
+#: views/settings.php:126 views/settings.php:229 views/settings.php:434
 msgid "Reset settings"
 msgstr "Einstellungen zurücksetzen"
 
@@ -399,7 +408,7 @@ msgstr "Farbe"
 
 #: views/settings.php:275
 msgid "Show subscribe?"
-msgstr "Zeige Abonnenten?"
+msgstr "Abonnieren anbieten?"
 
 #: views/settings.php:291
 msgid "Stats"
@@ -475,6 +484,11 @@ msgstr "Wird Google Analytics verwendet?"
 
 #: views/settings.php:422
 msgid "Tracking code"
+msgstr ""
+
+#: views/settings.php:425
+msgid ""
+"Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid"
 msgstr ""
 
 #: views/sidebar.php:3

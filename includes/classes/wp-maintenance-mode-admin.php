@@ -59,18 +59,16 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          * Load CSS files
          * 
          * @since 2.0.0
-         * @global object $wp_scripts
          * @return type
          */
         public function enqueue_admin_styles() {
-            global $wp_scripts;
-
             if (!isset($this->plugin_screen_hook_suffix)) {
                 return;
             }
 
             $screen = get_current_screen();
             if ($this->plugin_screen_hook_suffix == $screen->id) {
+                $wp_scripts = wp_scripts();
                 $ui = $wp_scripts->query('jquery-ui-core');
 
                 wp_enqueue_style($this->plugin_slug . '-admin-jquery-ui-styles', '//ajax.googleapis.com/ajax/libs/jqueryui/' . (!empty($ui->ver) ? $ui->ver : '1.11.4') . '/themes/smoothness/jquery-ui' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION);
@@ -182,13 +180,24 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 if (!current_user_can('manage_options')) {
                     throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
                 }
-
+                
+                // check nonce existence
+                if (empty($_POST['_wpnonce'])) {
+                    throw new Exception(__('The nonce field must not be empty.', $this->plugin_slug));
+                }
+                
                 // check tab existence
-                if (empty($_REQUEST['tab'])) {
+                if (empty($_POST['tab'])) {
                     throw new Exception(__('The tab slug must not be empty.', $this->plugin_slug));
                 }
+                
+                // check nonce validation
+                if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
+                   throw new Exception(__('Security check.', $this->plugin_slug));
+                }
 
-                $tab = $_REQUEST['tab'];
+                // check existence in plugin default settings
+                $tab = $_POST['tab'];
                 if (empty($this->plugin_default_settings[$tab])) {
                     throw new Exception(__('The tab slug must exist.', $this->plugin_slug));
                 }
@@ -238,7 +247,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function save_plugin_settings() {
             if (!empty($_POST) && !empty($_POST['tab'])) {
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
-                    die('Security check!');
+                    die(__('Security check.', $this->plugin_slug));
                 }
 
                 // DO SOME SANITIZATIONS
@@ -362,7 +371,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                         // GOOGLE ANALYTICS
                         $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
-                        $_POST['options']['modules']['ga_code'] = wp_kses(trim($_POST['options']['modules']['ga_code']), array('script' => array()));
+                        $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
 
                         $_POST['options']['modules']['custom_css'] = $custom_css;
 

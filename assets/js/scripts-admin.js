@@ -75,7 +75,7 @@ jQuery(function($) {
         $('.design_bg_types').hide();
         $('#show_' + selected_val).show();
     };
-    
+
     show_bg_type($('#design_bg_type').val());
 
     $('#design_bg_type').change(function() {
@@ -121,17 +121,19 @@ jQuery(function($) {
      * RESET SETTINGS
      */
     $('.reset_settings').click(function() {
-        var tab = $(this).data('tab');
-
+        var tab = $(this).data('tab'),
+                nonce = $('#tab-' + tab + ' #_wpnonce').val();
+                
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_reset_settings',
-            tab: tab
+            tab: tab,
+            _wpnonce: nonce
         }, function(response) {
             if (!response.success) {
                 alert(response.data);
                 return false;
             }
-            
+
             window.location.reload(true);
         }, 'json');
     });

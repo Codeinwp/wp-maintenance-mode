@@ -421,7 +421,8 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][ga_code]"><?php _e('Tracking code', $this->plugin_slug); ?></label></th>
                                     <td>	
-                                        <textarea rows="7" name="options[modules][ga_code]" style="width: 625px;"><?php echo stripslashes($this->plugin_settings['modules']['ga_code']); ?></textarea>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['ga_code'])); ?>" name="options[modules][ga_code]" />
+                                        <p class="description"><?php _e('Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>                                
                             </tbody>
