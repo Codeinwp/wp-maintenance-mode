@@ -525,6 +525,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
                 if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) {
                     include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
+                } else if (file_exists(get_template_directory()."/wp-maintenance-mode.php")) {
+                    include_once(get_template_directory() . '/wp-maintenance-mode.php');
                 } else {
                     include_once(WPMM_VIEWS_PATH . 'maintenance.php');
                 }
