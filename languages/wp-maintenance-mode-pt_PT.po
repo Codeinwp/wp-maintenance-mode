@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.7\n"
 "POT-Creation-Date: 2016-07-07 10:01+0100\n"
-"PO-Revision-Date: 2016-07-07 10:01+0100\n"
+"PO-Revision-Date: 2016-08-08 09:14+0100\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -150,7 +150,7 @@ msgstr "Conteúdo:"
 
 #: views/loginform.php:8
 msgid "Login"
-msgstr "Iníciar sessão"
+msgstr "Iniciar sessão"
 
 #: views/maintenance.php:42
 msgid "your e-mail..."
