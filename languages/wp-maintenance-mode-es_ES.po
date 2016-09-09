@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.7\n"
-"POT-Creation-Date: 2016-07-06 14:07+0300\n"
-"PO-Revision-Date: 2016-07-06 14:07+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
+"POT-Creation-Date: 2016-09-09 18:22+0300\n"
+"PO-Revision-Date: 2016-09-09 18:22+0300\n"
 "Last-Translator: Erick Ruiz de Chavez <erick@erch.co>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: es_ES\n"
@@ -20,43 +20,43 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:123
-#: includes/classes/wp-maintenance-mode-admin.php:161
-#: includes/classes/wp-maintenance-mode-admin.php:183
+#: includes/classes/wp-maintenance-mode-admin.php:121
+#: includes/classes/wp-maintenance-mode-admin.php:159
+#: includes/classes/wp-maintenance-mode-admin.php:181
 msgid "You do not have access to this resource."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:167 views/settings.php:295
+#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Hay %d suscriptor(es)"
 
-#: includes/classes/wp-maintenance-mode-admin.php:188
+#: includes/classes/wp-maintenance-mode-admin.php:186
 msgid "The nonce field must not be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:193
+#: includes/classes/wp-maintenance-mode-admin.php:191
 msgid "The tab slug must not be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:198
-#: includes/classes/wp-maintenance-mode-admin.php:252
+#: includes/classes/wp-maintenance-mode-admin.php:196
+#: includes/classes/wp-maintenance-mode-admin.php:250
 msgid "Security check."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:204
+#: includes/classes/wp-maintenance-mode-admin.php:202
 msgid "The tab slug must exist."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:224
+#: includes/classes/wp-maintenance-mode-admin.php:222
 msgid "WP Maintenance Mode"
 msgstr "Modo de Mantenimiento WP"
 
-#: includes/classes/wp-maintenance-mode-admin.php:438
+#: includes/classes/wp-maintenance-mode-admin.php:436
 msgid "Settings"
 msgstr "Ajustes"
 
-#: includes/classes/wp-maintenance-mode-admin.php:457
+#: includes/classes/wp-maintenance-mode-admin.php:455
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -65,11 +65,11 @@ msgstr ""
 "El modo de mantenimiento está <strong>activo</strong>. Por favor no olvides "
 "<a href=\"%s\">desactivarlo</a> tan pronto como termines."
 
-#: includes/classes/wp-maintenance-mode-admin.php:494
+#: includes/classes/wp-maintenance-mode-admin.php:492
 msgid "Notice key cannot be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:542
+#: includes/classes/wp-maintenance-mode-admin.php:540
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
@@ -102,29 +102,29 @@ msgstr ""
 "El plugin Modo de Mantenimiento WP fue reactivado y es NECESARIO que revises "
 "los <a href=\"%s\">ajustes</a>."
 
-#: includes/classes/wp-maintenance-mode.php:461
-#: includes/classes/wp-maintenance-mode.php:475
+#: includes/classes/wp-maintenance-mode.php:463
+#: includes/classes/wp-maintenance-mode.php:477
 msgid "Maintenance Mode"
 msgstr "Modo de Mantenimiento"
 
-#: includes/classes/wp-maintenance-mode.php:724
-#: includes/classes/wp-maintenance-mode.php:758 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:725
+#: includes/classes/wp-maintenance-mode.php:759 views/maintenance.php:85
 msgid "Please enter a valid email address."
 msgstr "Por favor usa una dirección de correo electrónico valida."
 
-#: includes/classes/wp-maintenance-mode.php:736
+#: includes/classes/wp-maintenance-mode.php:737
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:754
+#: includes/classes/wp-maintenance-mode.php:755
 msgid "All fields required."
 msgstr "Todos los campos son obligatorios."
 
-#: includes/classes/wp-maintenance-mode.php:763
+#: includes/classes/wp-maintenance-mode.php:764
 msgid "Message via contact"
 msgstr "Mensaje vía formulario de contacto."
 
-#: includes/classes/wp-maintenance-mode.php:775
+#: includes/classes/wp-maintenance-mode.php:778
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Tu mensaje ha sido enviado al administrador. ¡Muchas gracias!"
 
@@ -517,7 +517,7 @@ msgstr "GitHub"
 msgid "Other products"
 msgstr ""
 
-#: views/sidebar.php:44
+#: views/sidebar.php:48
 msgid "Resources"
 msgstr "Recursos"
 

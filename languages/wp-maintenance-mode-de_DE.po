@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.7\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
 "POT-Creation-Date: 2016-07-06 14:07+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"

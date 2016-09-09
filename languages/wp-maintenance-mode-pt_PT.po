@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.7\n"
-"POT-Creation-Date: 2016-07-07 10:01+0100\n"
-"PO-Revision-Date: 2016-08-08 09:14+0100\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
+"POT-Creation-Date: 2016-09-09 18:24+0300\n"
+"PO-Revision-Date: 2016-09-09 18:24+0300\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -110,24 +110,24 @@ msgstr ""
 msgid "Maintenance Mode"
 msgstr "Modo de manutenção"
 
-#: includes/classes/wp-maintenance-mode.php:726
-#: includes/classes/wp-maintenance-mode.php:760 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:725
+#: includes/classes/wp-maintenance-mode.php:759 views/maintenance.php:85
 msgid "Please enter a valid email address."
 msgstr "Por favor introduza um endereço de email válido."
 
-#: includes/classes/wp-maintenance-mode.php:738
+#: includes/classes/wp-maintenance-mode.php:737
 msgid "You successfully subscribed. Thanks!"
 msgstr "Subscreveu com sucesso. Obrigado!"
 
-#: includes/classes/wp-maintenance-mode.php:756
+#: includes/classes/wp-maintenance-mode.php:755
 msgid "All fields required."
 msgstr "Todos os campos são necessários."
 
-#: includes/classes/wp-maintenance-mode.php:765
+#: includes/classes/wp-maintenance-mode.php:764
 msgid "Message via contact"
 msgstr "Mensagem via formulário de contacto"
 
-#: includes/classes/wp-maintenance-mode.php:777
+#: includes/classes/wp-maintenance-mode.php:778
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "O seu email foi enviado ao administrador do site. Obrigado!"
 
@@ -532,7 +532,7 @@ msgstr "GitHub"
 msgid "Other products"
 msgstr "Outros produtos"
 
-#: views/sidebar.php:44
+#: views/sidebar.php:48
 msgid "Resources"
 msgstr "Recursos"
 
