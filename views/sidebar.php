@@ -50,7 +50,11 @@
 				<ul>
 					<?php
 					foreach ($banners['resource'] as $item) {
-						printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'] . WPMM_AUTHOR_UTM, $item['title'], $item['image'], $item['title']);
+						if ($item['utm']) {
+							$item['link'] = $item['link'] . WPMM_AUTHOR_UTM;
+						}
+						
+						printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'], $item['title'], $item['image'], $item['title']);
 					}
 					?>
 				</ul>
