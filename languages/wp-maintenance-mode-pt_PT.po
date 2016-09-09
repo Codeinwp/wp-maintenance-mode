@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.7\n"
-"POT-Creation-Date: 2016-07-06 14:10+0300\n"
-"PO-Revision-Date: 2016-07-06 14:10+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
+"POT-Creation-Date: 2016-09-09 18:24+0300\n"
+"PO-Revision-Date: 2016-09-09 18:24+0300\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -16,47 +16,47 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-WPHeader: wp-maintenance-mode.php\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: views\n"
-"X-Poedit-SearchPath-2: includes/classes\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:123
-#: includes/classes/wp-maintenance-mode-admin.php:161
-#: includes/classes/wp-maintenance-mode-admin.php:183
+#: includes/classes/wp-maintenance-mode-admin.php:121
+#: includes/classes/wp-maintenance-mode-admin.php:159
+#: includes/classes/wp-maintenance-mode-admin.php:181
 msgid "You do not have access to this resource."
-msgstr ""
+msgstr "Não tem permissão para aceder a este recurso."
 
-#: includes/classes/wp-maintenance-mode-admin.php:167 views/settings.php:295
+#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr "Tem %d subscritor(es)"
 
-#: includes/classes/wp-maintenance-mode-admin.php:188
+#: includes/classes/wp-maintenance-mode-admin.php:186
 msgid "The nonce field must not be empty."
-msgstr ""
+msgstr "O campo nonce não pode estar vazio."
 
-#: includes/classes/wp-maintenance-mode-admin.php:193
+#: includes/classes/wp-maintenance-mode-admin.php:191
 msgid "The tab slug must not be empty."
-msgstr ""
+msgstr "A slug do separador não pode estar vazia."
 
-#: includes/classes/wp-maintenance-mode-admin.php:198
-#: includes/classes/wp-maintenance-mode-admin.php:252
+#: includes/classes/wp-maintenance-mode-admin.php:196
+#: includes/classes/wp-maintenance-mode-admin.php:250
 msgid "Security check."
-msgstr ""
+msgstr "Verificação de segurança."
 
-#: includes/classes/wp-maintenance-mode-admin.php:204
+#: includes/classes/wp-maintenance-mode-admin.php:202
 msgid "The tab slug must exist."
-msgstr ""
+msgstr "A slug do separador tem que existir."
 
-#: includes/classes/wp-maintenance-mode-admin.php:224
+#. Plugin Name of the plugin/theme
+#: includes/classes/wp-maintenance-mode-admin.php:222
 msgid "WP Maintenance Mode"
 msgstr "WP Maintenance Mode"
 
-#: includes/classes/wp-maintenance-mode-admin.php:438
+#: includes/classes/wp-maintenance-mode-admin.php:436
 msgid "Settings"
 msgstr "Definições"
 
-#: includes/classes/wp-maintenance-mode-admin.php:457
+#: includes/classes/wp-maintenance-mode-admin.php:455
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -65,16 +65,19 @@ msgstr ""
 "O modo de manutenção está <strong>activo</strong>. Por favor não se esqueça "
 "de <a href=\"%s\">desactivar</a> assim que termine."
 
-#: includes/classes/wp-maintenance-mode-admin.php:494
+#: includes/classes/wp-maintenance-mode-admin.php:492
 msgid "Notice key cannot be empty."
-msgstr ""
+msgstr "A notice key não pode estar vazia."
 
-#: includes/classes/wp-maintenance-mode-admin.php:542
+#: includes/classes/wp-maintenance-mode-admin.php:540
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
 "rating. A huge thank you from WP Maintenance Mode makers in advance!"
 msgstr ""
+"Se gosta do <strong>WP Maintenance Mode</strong> por favor deixe uma "
+"classificação de %s. Os criadores do WP Maintenance Mode agradecem-lhe desde "
+"já!"
 
 #: includes/classes/wp-maintenance-mode.php:101
 #: includes/classes/wp-maintenance-mode.php:102
@@ -102,52 +105,52 @@ msgstr ""
 "O plugin WP Maintenance Mode foi reactivado e DEVE rever as suas <a href=\"%s"
 "\">definições</a>."
 
-#: includes/classes/wp-maintenance-mode.php:461
-#: includes/classes/wp-maintenance-mode.php:475
+#: includes/classes/wp-maintenance-mode.php:463
+#: includes/classes/wp-maintenance-mode.php:477
 msgid "Maintenance Mode"
 msgstr "Modo de manutenção"
 
-#: includes/classes/wp-maintenance-mode.php:724
-#: includes/classes/wp-maintenance-mode.php:758 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:725
+#: includes/classes/wp-maintenance-mode.php:759 views/maintenance.php:85
 msgid "Please enter a valid email address."
 msgstr "Por favor introduza um endereço de email válido."
 
-#: includes/classes/wp-maintenance-mode.php:736
+#: includes/classes/wp-maintenance-mode.php:737
 msgid "You successfully subscribed. Thanks!"
-msgstr ""
+msgstr "Subscreveu com sucesso. Obrigado!"
 
-#: includes/classes/wp-maintenance-mode.php:754
+#: includes/classes/wp-maintenance-mode.php:755
 msgid "All fields required."
 msgstr "Todos os campos são necessários."
 
-#: includes/classes/wp-maintenance-mode.php:763
+#: includes/classes/wp-maintenance-mode.php:764
 msgid "Message via contact"
 msgstr "Mensagem via formulário de contacto"
 
-#: includes/classes/wp-maintenance-mode.php:775
+#: includes/classes/wp-maintenance-mode.php:778
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "O seu email foi enviado ao administrador do site. Obrigado!"
 
 #: views/contact.php:34
 #, php-format
 msgid "You have been contacted via %s."
-msgstr ""
+msgstr "Foi contactado via %s."
 
 #: views/contact.php:50
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: views/contact.php:62
 msgid "Email:"
-msgstr ""
+msgstr "Email:"
 
 #: views/contact.php:74
 msgid "Content:"
-msgstr ""
+msgstr "Conteúdo:"
 
 #: views/loginform.php:8
 msgid "Login"
-msgstr "Iníciar sessão"
+msgstr "Iniciar sessão"
 
 #: views/maintenance.php:42
 msgid "your e-mail..."
@@ -163,7 +166,7 @@ msgstr "Nome"
 
 #: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
 msgid "This field is required."
-msgstr ""
+msgstr "Este campo é obrigatório."
 
 #: views/maintenance.php:85
 msgid "E-mail"
@@ -235,17 +238,19 @@ msgstr "Permitir que os robôs de pesquisa ultrapassem o modo de manutenção?"
 
 #: views/settings.php:41
 msgid "Backend Role"
-msgstr "Perfil de utilizador de administração"
+msgstr "Perfil de utilizador da administração"
 
 #: views/settings.php:43 views/settings.php:59
 msgid "Select role(s)"
-msgstr ""
+msgstr "Seleccione o(s) perfil(s)"
 
 #: views/settings.php:53
 msgid ""
 "Which user role is allowed to access the backend of this blog? "
 "Administrators will always have access."
 msgstr ""
+"Que perfil tem permissão de acesso à administração deste site? Os "
+"administradores terão sempre acesso."
 
 #: views/settings.php:57
 msgid "Frontend Role"
@@ -256,6 +261,8 @@ msgid ""
 "Which user role is allowed to access the frontend of this blog? "
 "Administrators will always have access."
 msgstr ""
+"Que perfil tem permissão de acesso à frente deste site? Os administradores "
+"terão sempre acesso."
 
 #: views/settings.php:73
 msgid "Robots Meta Tag"
@@ -281,6 +288,9 @@ msgid ""
 "URL (different from WordPress Dashboard URL) after login, then define a URL "
 "(incl. http://)"
 msgstr ""
+"Se quiser redireccionar um utilizador (sem permissão de acesso à "
+"administração ou frente do site) para um URL (diferente do URL do painel do "
+"WordPress) depois de iniciar a sessão, defina um URL incluindo http://."
 
 #: views/settings.php:90
 msgid "Exclude"
@@ -425,7 +435,7 @@ msgstr "Exportar como CSV"
 
 #: views/settings.php:301
 msgid "Empty subscribers list"
-msgstr ""
+msgstr "Lista de subscritores vazia"
 
 #: views/settings.php:308
 msgid "Social Networks"
@@ -495,6 +505,8 @@ msgstr "Código de acompanhamento"
 msgid ""
 "Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid"
 msgstr ""
+"Formatos permitidos:: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Por exemplo:: "
+"UA-12345678-1 é válido"
 
 #: views/sidebar.php:3
 msgid "Plugin Info"
@@ -518,47 +530,26 @@ msgstr "GitHub"
 
 #: views/sidebar.php:27
 msgid "Other products"
-msgstr ""
+msgstr "Outros produtos"
 
-#: views/sidebar.php:44
+#: views/sidebar.php:48
 msgid "Resources"
 msgstr "Recursos"
 
-#~ msgid "You successfuly subscribed. Thanks!"
-#~ msgstr "Subscreveu com sucesso. Obrigado!"
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://designmodo.com/"
+msgstr "http://designmodo.com/"
 
-#~ msgid "Which user role is allowed to access the backend of this blog?"
-#~ msgstr ""
-#~ "Que perfil de utilizador tem permissão de acesso à administração deste "
-#~ "site?"
+#. Description of the plugin/theme
+msgid ""
+"Adds a splash page to your site that lets visitors know your site is down "
+"for maintenance. It's perfect for a coming soon page."
+msgstr ""
+"Adiciona uma página de entrada ao seu site que permite informar os "
+"visitantes que o seu site está em baixo para manutenção. É perfeito para uma "
+"página com convite a voltar brevemente."
 
-#~ msgid "Which user role is allowed to access the frontend of this blog?"
-#~ msgstr ""
-#~ "Que perfil de utilizador tem permissão de acesso à frente deste site?"
-
-#~ msgid ""
-#~ "If you want to redirect a user to a URL (which is not the WordPress "
-#~ "dashboard) after login, then define a URL (incl. http://)"
-#~ msgstr ""
-#~ "Se pretende redireccionar um utilizador para um URL (que não seja o "
-#~ "painel do WordPress) após início de sessão, insira um URL (incluindo "
-#~ "http://)"
-
-#~ msgid "WordPress Themes"
-#~ msgstr "Temas WordPress"
-
-#~ msgid "source <a href=\"%\" target=\"_blank\">Free Photos</a>"
-#~ msgstr "fonte <a href=\"%\" target=\"_blank\">fotos gratuitas</a>"
-
-#~ msgid "Subscribe now for early access to new WordPress themes."
-#~ msgstr ""
-#~ "Subscreva agora para ter acesso prioritário aos novos temas do WordPress."
-
-#~ msgid "Enter your email address"
-#~ msgstr "Insira o seu endereço de email"
-
-#~ msgid "News"
-#~ msgstr "Notícias"
-
-#~ msgid "Developed by <a href=\"%s\">Designmodo</a>"
-#~ msgstr "Desenvolvido por <a href=\"%s\">Designmodo</a>"
+#. Author of the plugin/theme
+msgid "Designmodo"
+msgstr "Designmodo"
