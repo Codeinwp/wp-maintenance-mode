@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.0.8\n"
-"POT-Creation-Date: 2016-09-09 18:24+0300\n"
-"PO-Revision-Date: 2016-09-09 16:51+0100\n"
+"POT-Creation-Date: 2016-10-26 15:58+0100\n"
+"PO-Revision-Date: 2016-10-26 15:58+0100\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -435,7 +435,7 @@ msgstr "Exportar como CSV"
 
 #: views/settings.php:301
 msgid "Empty subscribers list"
-msgstr "Lista de subscritores vazia"
+msgstr "Limpar lista de subscritores"
 
 #: views/settings.php:308
 msgid "Social Networks"
