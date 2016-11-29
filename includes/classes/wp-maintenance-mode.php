@@ -524,8 +524,12 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				header("$protocol $status_code Service Unavailable", TRUE, $status_code);
 				header("Retry-After: $backtime");
 
-				if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) {
-					include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
+				if (file_exists(get_stylesheet_directory()."/wp-maintenance-mode.php")) {
+					include_once( get_stylesheet_directory() . '/wp-maintenance-mode.php' );
+				} else if (file_exists(get_template_directory()."/wp-maintenance-mode.php")) {
+					include_once( get_template_directory() . '/wp-maintenance-mode.php' );
+				} else if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) {
+					include_once( WP_CONTENT_DIR . '/wp-maintenance-mode.php' );
 				} else {
 					include_once(WPMM_VIEWS_PATH . 'maintenance.php');
 				}
