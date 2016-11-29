@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
-"POT-Creation-Date: 2016-09-09 18:24+0300\n"
-"PO-Revision-Date: 2016-09-09 18:24+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.9\n"
+"POT-Creation-Date: 2016-11-29 22:04+0200\n"
+"PO-Revision-Date: 2016-11-29 22:04+0200\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -110,24 +110,24 @@ msgstr ""
 msgid "Maintenance Mode"
 msgstr "Modo de manutenção"
 
-#: includes/classes/wp-maintenance-mode.php:725
-#: includes/classes/wp-maintenance-mode.php:759 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:730
+#: includes/classes/wp-maintenance-mode.php:764 views/maintenance.php:89
 msgid "Please enter a valid email address."
 msgstr "Por favor introduza um endereço de email válido."
 
-#: includes/classes/wp-maintenance-mode.php:737
+#: includes/classes/wp-maintenance-mode.php:742
 msgid "You successfully subscribed. Thanks!"
 msgstr "Subscreveu com sucesso. Obrigado!"
 
-#: includes/classes/wp-maintenance-mode.php:755
+#: includes/classes/wp-maintenance-mode.php:760
 msgid "All fields required."
 msgstr "Todos os campos são necessários."
 
-#: includes/classes/wp-maintenance-mode.php:764
+#: includes/classes/wp-maintenance-mode.php:772
 msgid "Message via contact"
 msgstr "Mensagem via formulário de contacto"
 
-#: includes/classes/wp-maintenance-mode.php:778
+#: includes/classes/wp-maintenance-mode.php:786
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "O seu email foi enviado ao administrador do site. Obrigado!"
 
@@ -136,15 +136,15 @@ msgstr "O seu email foi enviado ao administrador do site. Obrigado!"
 msgid "You have been contacted via %s."
 msgstr "Foi contactado via %s."
 
-#: views/contact.php:50
+#: views/contact.php:52
 msgid "Name:"
 msgstr "Nome:"
 
-#: views/contact.php:62
+#: views/contact.php:64
 msgid "Email:"
 msgstr "Email:"
 
-#: views/contact.php:74
+#: views/contact.php:79
 msgid "Content:"
 msgstr "Conteúdo:"
 
@@ -152,41 +152,56 @@ msgstr "Conteúdo:"
 msgid "Login"
 msgstr "Iniciar sessão"
 
-#: views/maintenance.php:42
+#: views/maintenance.php:44
 msgid "your e-mail..."
 msgstr "o seu email..."
 
-#: views/maintenance.php:43 views/settings.php:270
+#: views/maintenance.php:45 views/settings.php:270
 msgid "Subscribe"
 msgstr "Subscrever"
 
-#: views/maintenance.php:84 views/sidebar.php:7
+#: views/maintenance.php:88 views/sidebar.php:7
 msgid "Name"
 msgstr "Nome"
 
-#: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
+#: views/maintenance.php:88 views/maintenance.php:89 views/maintenance.php:94
 msgid "This field is required."
 msgstr "Este campo é obrigatório."
 
-#: views/maintenance.php:85
+#: views/maintenance.php:89
 msgid "E-mail"
 msgstr "Email"
 
-#: views/maintenance.php:87
+#: views/maintenance.php:94
 msgid "Your message"
 msgstr "A sua mensagem"
 
-#: views/maintenance.php:88
+#: views/maintenance.php:98
 msgid "Send"
 msgstr "Enviar"
 
-#: views/maintenance.php:93
+#: views/maintenance.php:105
 msgid "Contact us"
 msgstr "Contacte-nos"
 
-#: views/maintenance.php:98
+#: views/maintenance.php:110
 msgid "Dashboard"
 msgstr "Painel de administração"
+
+#: views/promo-strictthemes.php:1
+msgid "Premium WordPress Themes from WP Maintenance Mode authors!"
+msgstr ""
+
+#: views/promo-strictthemes.php:4
+msgid ""
+"We hope you like the WP Maintenance Mode plugin! Now you can buy WordPress "
+"Themes directly from us on ThemeForest. We're StrictThemes and we create "
+"best designed and coded WordPress Themes."
+msgstr ""
+
+#: views/promo-strictthemes.php:8
+msgid "See our WordPress Themes!"
+msgstr ""
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -435,7 +450,7 @@ msgstr "Exportar como CSV"
 
 #: views/settings.php:301
 msgid "Empty subscribers list"
-msgstr "Lista de subscritores vazia"
+msgstr "Limpar lista de subscritores"
 
 #: views/settings.php:308
 msgid "Social Networks"
@@ -505,7 +520,7 @@ msgstr "Código de acompanhamento"
 msgid ""
 "Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid"
 msgstr ""
-"Formatos permitidos:: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Por exemplo:: "
+"Formatos permitidos: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Por exemplo:: "
 "UA-12345678-1 é válido"
 
 #: views/sidebar.php:3

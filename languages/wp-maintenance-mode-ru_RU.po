@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
-"POT-Creation-Date: 2016-09-09 18:25+0300\n"
-"PO-Revision-Date: 2016-09-09 18:25+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.9\n"
+"POT-Creation-Date: 2016-11-29 22:05+0200\n"
+"PO-Revision-Date: 2016-11-29 22:05+0200\n"
 "Last-Translator: Constantine Reeves <affectiosus@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: ru\n"
@@ -108,24 +108,24 @@ msgstr ""
 msgid "Maintenance Mode"
 msgstr "Режим технического обслуживания"
 
-#: includes/classes/wp-maintenance-mode.php:725
-#: includes/classes/wp-maintenance-mode.php:759 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:730
+#: includes/classes/wp-maintenance-mode.php:764 views/maintenance.php:89
 msgid "Please enter a valid email address."
 msgstr "Введите корректный e-mail адрес."
 
-#: includes/classes/wp-maintenance-mode.php:737
+#: includes/classes/wp-maintenance-mode.php:742
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:755
+#: includes/classes/wp-maintenance-mode.php:760
 msgid "All fields required."
 msgstr "Все поля обязательны."
 
-#: includes/classes/wp-maintenance-mode.php:764
+#: includes/classes/wp-maintenance-mode.php:772
 msgid "Message via contact"
 msgstr "Сообщение"
 
-#: includes/classes/wp-maintenance-mode.php:778
+#: includes/classes/wp-maintenance-mode.php:786
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Ваше сообщение отправлено администратору сайта. Спасибо!"
 
@@ -134,15 +134,15 @@ msgstr "Ваше сообщение отправлено администрат�
 msgid "You have been contacted via %s."
 msgstr ""
 
-#: views/contact.php:50
+#: views/contact.php:52
 msgid "Name:"
 msgstr ""
 
-#: views/contact.php:62
+#: views/contact.php:64
 msgid "Email:"
 msgstr ""
 
-#: views/contact.php:74
+#: views/contact.php:79
 msgid "Content:"
 msgstr ""
 
@@ -150,41 +150,56 @@ msgstr ""
 msgid "Login"
 msgstr "Войти"
 
-#: views/maintenance.php:42
+#: views/maintenance.php:44
 msgid "your e-mail..."
 msgstr "ваш e-mail..."
 
-#: views/maintenance.php:43 views/settings.php:270
+#: views/maintenance.php:45 views/settings.php:270
 msgid "Subscribe"
 msgstr "Подписаться"
 
-#: views/maintenance.php:84 views/sidebar.php:7
+#: views/maintenance.php:88 views/sidebar.php:7
 msgid "Name"
 msgstr "Имя"
 
-#: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
+#: views/maintenance.php:88 views/maintenance.php:89 views/maintenance.php:94
 msgid "This field is required."
 msgstr ""
 
-#: views/maintenance.php:85
+#: views/maintenance.php:89
 msgid "E-mail"
 msgstr "E-mail"
 
-#: views/maintenance.php:87
+#: views/maintenance.php:94
 msgid "Your message"
 msgstr "Ваше сообщение"
 
-#: views/maintenance.php:88
+#: views/maintenance.php:98
 msgid "Send"
 msgstr "Отправить"
 
-#: views/maintenance.php:93
+#: views/maintenance.php:105
 msgid "Contact us"
 msgstr "Свяжитесь с нами"
 
-#: views/maintenance.php:98
+#: views/maintenance.php:110
 msgid "Dashboard"
 msgstr "Панель управления"
+
+#: views/promo-strictthemes.php:1
+msgid "Premium WordPress Themes from WP Maintenance Mode authors!"
+msgstr ""
+
+#: views/promo-strictthemes.php:4
+msgid ""
+"We hope you like the WP Maintenance Mode plugin! Now you can buy WordPress "
+"Themes directly from us on ThemeForest. We're StrictThemes and we create "
+"best designed and coded WordPress Themes."
+msgstr ""
+
+#: views/promo-strictthemes.php:8
+msgid "See our WordPress Themes!"
+msgstr ""
 
 #: views/settings.php:6
 msgid "Settings saved."

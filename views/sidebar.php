@@ -33,7 +33,7 @@
 							$item['link'] = $item['link'] . WPMM_AUTHOR_UTM;
 						}
 
-						printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'], $item['title'], $item['image'], $item['title']);
+						printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" width="280" height="160" /></a></li>', $item['link'], $item['title'], $item['image'], $item['title']);
 					}
 					?>
 				</ul>
@@ -54,7 +54,7 @@
 							$item['link'] = $item['link'] . WPMM_AUTHOR_UTM;
 						}
 						
-						printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" /></a></li>', $item['link'], $item['title'], $item['image'], $item['title']);
+						printf('<li><a href="%s" target="_blank" title="%s"><img src="%s" alt="%s" width="280" height="160" /></a></li>', $item['link'], $item['title'], $item['image'], $item['title']);
 					}
 					?>
 				</ul>

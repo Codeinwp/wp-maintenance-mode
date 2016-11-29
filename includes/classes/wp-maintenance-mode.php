@@ -4,7 +4,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.0.8';
+		const VERSION = '2.0.9';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
@@ -524,9 +524,14 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				header("$protocol $status_code Service Unavailable", TRUE, $status_code);
 				header("Retry-After: $backtime");
 
-				if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) {
+				// load maintenance mode template
+				if (file_exists(get_stylesheet_directory() . '/wp-maintenance-mode.php')) { // check child theme folder
+					include_once(get_stylesheet_directory() . '/wp-maintenance-mode.php');
+				} else if (file_exists(get_template_directory() . "/wp-maintenance-mode.php")) { // check theme folder	
+					include_once(get_template_directory() . '/wp-maintenance-mode.php');
+				} else if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) { // check `wp-content` folder
 					include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
-				} else {
+				} else { // load from plugin `views` folder
 					include_once(WPMM_VIEWS_PATH . 'maintenance.php');
 				}
 				ob_flush();
@@ -758,6 +763,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				if (!is_email($_POST['email'])) {
 					throw new Exception(__('Please enter a valid email address.', $this->plugin_slug));
 				}
+				
+				// if you add new fields to the contact form... you will definitely need to validate their values
+				do_action('wpmm_contact_validation', $_POST);
 
 				// vars
 				$send_to = !empty($this->plugin_settings['modules']['contact_email']) ? stripslashes($this->plugin_settings['modules']['contact_email']) : get_option('admin_email');
