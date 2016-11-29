@@ -2,10 +2,12 @@ jQuery(function($) {
     /**
      * COUNTDOWN
      */
-    if ($('.countdown').length > 0) {
-        var countDate = new Date($('.countdown').data('start'));
-        countDate = new Date($('.countdown').data('end'));
-        $('.countdown').countdown({
+    var countdown_el = $('.countdown');
+
+    if (countdown_el.length > 0) {
+        var countDate = new Date(countdown_el.data('end'));
+
+        countdown_el.countdown({
             until: countDate,
             compact: true,
             layout: '<span class="day">{dn}</span> <span class="separator">:</span> <span class="hour">{hnn}</span> <span class="separator">:</span> <span class="minutes">{mnn}</span> <span class="separator">:</span> <span class="seconds">{snn}</span>'
@@ -15,30 +17,33 @@ jQuery(function($) {
     /**
      * SOCIAL LINKS
      */
-    if ($('.social').length > 0) {
-        var link_target = $('.social').data('target');
+    var social_el = $('.social');
+
+    if (social_el.length > 0) {
+        var link_target = social_el.data('target');
 
         if (link_target == 1) {
-            $('.social a').attr('target', '_blank');
+            social_el.find('a').attr('target', '_blank');
         }
     }
 
     /**
      * SUBSCRIBE FORM
      */
-    if ($('.subscribe_form').length > 0) {
+    var subscribe_form = $('.subscribe_form');
+
+    if (subscribe_form.length > 0) {
         // validate form
-        $('.subscribe_form').validate({
+        subscribe_form.validate({
             submitHandler: function(form) {
-                $.post(wpmm_vars.ajax_url, {
-                    action: 'wpmm_add_subscriber',
-                    email: $('.email_input', $('.subscribe_form')).val()
-                }, function(response) {
+                var subscribe_form_data = 'action=wpmm_add_subscriber&' + subscribe_form.serialize();
+
+                $.post(wpmm_vars.ajax_url, subscribe_form_data, function(response) {
                     if (!response.success) {
                         alert(response.data);
                         return false;
                     }
-                    
+
                     $('.subscribe_wrapper').html(response.data);
                 }, 'json');
 
@@ -61,27 +66,26 @@ jQuery(function($) {
         });
 
         // validate form
-        $('.contact_form').validate({
+        var contact_form = $('.contact_form');
+
+        contact_form.validate({
             submitHandler: function(form) {
-                $.post(wpmm_vars.ajax_url, {
-                    action: 'wpmm_send_contact',
-                    name: $('.name_input', $('.contact_form')).val(),
-                    email: $('.email_input', $('.contact_form')).val(),
-                    content: $('.content_textarea', $('.contact_form')).val()
-                }, function(response) {
+                var contact_form_data = 'action=wpmm_send_contact&' + contact_form.serialize();
+
+                $.post(wpmm_vars.ajax_url, contact_form_data, function(response) {
                     if (!response.success) {
                         alert(response.data);
                         return false;
                     }
 
-                    $('.contact .form').append('<div class="response">' + response.data + '</div>');
-                    $('.contact .form .contact_form').hide();
+                    contact_form.parent().append('<div class="response">' + response.data + '</div>');
+                    contact_form.hide();
 
                     setTimeout(function() {
                         $('.contact').hide();
-                        $('.contact .form .response').remove();
-                        $('.contact .form .contact_form').trigger('reset');
-                        $('.contact .form .contact_form').show();
+                        contact_form.parent().find('.response').remove();
+                        contact_form.trigger('reset');
+                        contact_form.show();
                     }, 2000);
                 }, 'json');
 

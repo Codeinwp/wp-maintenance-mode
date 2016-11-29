@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
-"POT-Creation-Date: 2016-07-06 14:07+0300\n"
-"PO-Revision-Date: 2016-09-09 18:21+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.9\n"
+"POT-Creation-Date: 2016-11-29 21:59+0200\n"
+"PO-Revision-Date: 2016-11-29 21:59+0200\n"
 "Last-Translator: Maciej Gryniuk <maciejka45@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: en\n"
@@ -21,54 +21,54 @@ msgstr ""
 "X-Poedit-SearchPath-1: includes/classes\n"
 "X-Poedit-SearchPath-2: views\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:123
-#: includes/classes/wp-maintenance-mode-admin.php:161
-#: includes/classes/wp-maintenance-mode-admin.php:183
+#: includes/classes/wp-maintenance-mode-admin.php:121
+#: includes/classes/wp-maintenance-mode-admin.php:159
+#: includes/classes/wp-maintenance-mode-admin.php:181
 msgid "You do not have access to this resource."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:167 views/settings.php:295
+#: includes/classes/wp-maintenance-mode-admin.php:165 views/settings.php:295
 #, php-format
 msgid "You have %d subscriber(s)"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:188
+#: includes/classes/wp-maintenance-mode-admin.php:186
 msgid "The nonce field must not be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:193
+#: includes/classes/wp-maintenance-mode-admin.php:191
 msgid "The tab slug must not be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:198
-#: includes/classes/wp-maintenance-mode-admin.php:252
+#: includes/classes/wp-maintenance-mode-admin.php:196
+#: includes/classes/wp-maintenance-mode-admin.php:250
 msgid "Security check."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:204
+#: includes/classes/wp-maintenance-mode-admin.php:202
 msgid "The tab slug must exist."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:224
+#: includes/classes/wp-maintenance-mode-admin.php:222
 msgid "WP Maintenance Mode"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:438
+#: includes/classes/wp-maintenance-mode-admin.php:436
 msgid "Settings"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:457
+#: includes/classes/wp-maintenance-mode-admin.php:455
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
 "href=\"%s\">deactivate</a> as soon as you are done."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:494
+#: includes/classes/wp-maintenance-mode-admin.php:492
 msgid "Notice key cannot be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:542
+#: includes/classes/wp-maintenance-mode-admin.php:540
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
@@ -97,29 +97,29 @@ msgid ""
 "\">settings</a>."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:461
-#: includes/classes/wp-maintenance-mode.php:475
+#: includes/classes/wp-maintenance-mode.php:463
+#: includes/classes/wp-maintenance-mode.php:477
 msgid "Maintenance Mode"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:724
-#: includes/classes/wp-maintenance-mode.php:758 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:730
+#: includes/classes/wp-maintenance-mode.php:764 views/maintenance.php:89
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:736
+#: includes/classes/wp-maintenance-mode.php:742
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:754
+#: includes/classes/wp-maintenance-mode.php:760
 msgid "All fields required."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:763
+#: includes/classes/wp-maintenance-mode.php:772
 msgid "Message via contact"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:775
+#: includes/classes/wp-maintenance-mode.php:786
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr ""
 
@@ -128,15 +128,15 @@ msgstr ""
 msgid "You have been contacted via %s."
 msgstr ""
 
-#: views/contact.php:50
+#: views/contact.php:52
 msgid "Name:"
 msgstr ""
 
-#: views/contact.php:62
+#: views/contact.php:64
 msgid "Email:"
 msgstr ""
 
-#: views/contact.php:74
+#: views/contact.php:79
 msgid "Content:"
 msgstr ""
 
@@ -144,40 +144,55 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: views/maintenance.php:42
+#: views/maintenance.php:44
 msgid "your e-mail..."
 msgstr ""
 
-#: views/maintenance.php:43 views/settings.php:270
+#: views/maintenance.php:45 views/settings.php:270
 msgid "Subscribe"
 msgstr ""
 
-#: views/maintenance.php:84 views/sidebar.php:7
+#: views/maintenance.php:88 views/sidebar.php:7
 msgid "Name"
 msgstr ""
 
-#: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
+#: views/maintenance.php:88 views/maintenance.php:89 views/maintenance.php:94
 msgid "This field is required."
 msgstr ""
 
-#: views/maintenance.php:85
+#: views/maintenance.php:89
 msgid "E-mail"
 msgstr ""
 
-#: views/maintenance.php:87
+#: views/maintenance.php:94
 msgid "Your message"
 msgstr ""
 
-#: views/maintenance.php:88
+#: views/maintenance.php:98
 msgid "Send"
 msgstr ""
 
-#: views/maintenance.php:93
+#: views/maintenance.php:105
 msgid "Contact us"
 msgstr ""
 
-#: views/maintenance.php:98
+#: views/maintenance.php:110
 msgid "Dashboard"
+msgstr ""
+
+#: views/promo-strictthemes.php:1
+msgid "Premium WordPress Themes from WP Maintenance Mode authors!"
+msgstr ""
+
+#: views/promo-strictthemes.php:4
+msgid ""
+"We hope you like the WP Maintenance Mode plugin! Now you can buy WordPress "
+"Themes directly from us on ThemeForest. We're StrictThemes and we create "
+"best designed and coded WordPress Themes."
+msgstr ""
+
+#: views/promo-strictthemes.php:8
+msgid "See our WordPress Themes!"
 msgstr ""
 
 #: views/settings.php:6
@@ -507,6 +522,6 @@ msgstr ""
 msgid "Other products"
 msgstr ""
 
-#: views/sidebar.php:44
+#: views/sidebar.php:48
 msgid "Resources"
 msgstr ""

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.0.8\n"
-"POT-Creation-Date: 2016-09-09 18:25+0300\n"
-"PO-Revision-Date: 2016-09-09 18:25+0300\n"
+"Project-Id-Version: WP Maintenance Mode 2.0.9\n"
+"POT-Creation-Date: 2016-11-29 22:05+0200\n"
+"PO-Revision-Date: 2016-11-29 22:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: ro\n"
@@ -110,24 +110,24 @@ msgstr ""
 msgid "Maintenance Mode"
 msgstr "Mentenanta"
 
-#: includes/classes/wp-maintenance-mode.php:725
-#: includes/classes/wp-maintenance-mode.php:759 views/maintenance.php:85
+#: includes/classes/wp-maintenance-mode.php:730
+#: includes/classes/wp-maintenance-mode.php:764 views/maintenance.php:89
 msgid "Please enter a valid email address."
 msgstr "Te rog sa completezi o adresa de email valida."
 
-#: includes/classes/wp-maintenance-mode.php:737
+#: includes/classes/wp-maintenance-mode.php:742
 msgid "You successfully subscribed. Thanks!"
 msgstr "Te-ai inscris cu succes in lista de contacte. Multumesc!"
 
-#: includes/classes/wp-maintenance-mode.php:755
+#: includes/classes/wp-maintenance-mode.php:760
 msgid "All fields required."
 msgstr "Toate campurile sunt obligatorii."
 
-#: includes/classes/wp-maintenance-mode.php:764
+#: includes/classes/wp-maintenance-mode.php:772
 msgid "Message via contact"
 msgstr "Mesaj trimis prin formularul de contact"
 
-#: includes/classes/wp-maintenance-mode.php:778
+#: includes/classes/wp-maintenance-mode.php:786
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Emailul tau a fost trimis catre administratorul site-ului. Multumim!"
 
@@ -136,15 +136,15 @@ msgstr "Emailul tau a fost trimis catre administratorul site-ului. Multumim!"
 msgid "You have been contacted via %s."
 msgstr "Ai fost contactat de pe blogul %s."
 
-#: views/contact.php:50
+#: views/contact.php:52
 msgid "Name:"
 msgstr "Nume:"
 
-#: views/contact.php:62
+#: views/contact.php:64
 msgid "Email:"
 msgstr "Email:"
 
-#: views/contact.php:74
+#: views/contact.php:79
 msgid "Content:"
 msgstr "Continut:"
 
@@ -152,41 +152,56 @@ msgstr "Continut:"
 msgid "Login"
 msgstr "Autentificare"
 
-#: views/maintenance.php:42
+#: views/maintenance.php:44
 msgid "your e-mail..."
 msgstr "emailul tau..."
 
-#: views/maintenance.php:43 views/settings.php:270
+#: views/maintenance.php:45 views/settings.php:270
 msgid "Subscribe"
 msgstr "Aboneaza-ma"
 
-#: views/maintenance.php:84 views/sidebar.php:7
+#: views/maintenance.php:88 views/sidebar.php:7
 msgid "Name"
 msgstr "Nume"
 
-#: views/maintenance.php:84 views/maintenance.php:85 views/maintenance.php:87
+#: views/maintenance.php:88 views/maintenance.php:89 views/maintenance.php:94
 msgid "This field is required."
 msgstr "Acest camp este obligatoriu."
 
-#: views/maintenance.php:85
+#: views/maintenance.php:89
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: views/maintenance.php:87
+#: views/maintenance.php:94
 msgid "Your message"
 msgstr "Mesajul tau"
 
-#: views/maintenance.php:88
+#: views/maintenance.php:98
 msgid "Send"
 msgstr "Trimite"
 
-#: views/maintenance.php:93
+#: views/maintenance.php:105
 msgid "Contact us"
 msgstr "Contacteaza-ne"
 
-#: views/maintenance.php:98
+#: views/maintenance.php:110
 msgid "Dashboard"
 msgstr "Admin"
+
+#: views/promo-strictthemes.php:1
+msgid "Premium WordPress Themes from WP Maintenance Mode authors!"
+msgstr ""
+
+#: views/promo-strictthemes.php:4
+msgid ""
+"We hope you like the WP Maintenance Mode plugin! Now you can buy WordPress "
+"Themes directly from us on ThemeForest. We're StrictThemes and we create "
+"best designed and coded WordPress Themes."
+msgstr ""
+
+#: views/promo-strictthemes.php:8
+msgid "See our WordPress Themes!"
+msgstr ""
 
 #: views/settings.php:6
 msgid "Settings saved."

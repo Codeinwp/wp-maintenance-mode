@@ -74,16 +74,10 @@ function wpmm_get_banners() {
 	return array(
 		'product' => array(
 			array(
-				'title' => 'Themify Builder',
-				'link' => 'https://themify.me/member/aff/go/maintenance_mode_ad/?cr=aHR0cHM6Ly90aGVtaWZ5Lm1lL2J1aWxkZXI=',
-				'image' => $banners_path . 'themify.jpg',
+				'title' => 'StrictThemes – WordPress Themes',
+				'link' => 'https://themeforest.net/user/strictthemes/portfolio?utf8=%E2%9C%93&order_by=sales&ref=StrictThemes',
+				'image' => $banners_path . 'strictthemes.png',
 				'utm' => false
-			),
-			array(
-				'title' => 'Slides',
-				'link' => 'http://designmodo.com/slides/',
-				'image' => $banners_path . 'slides.jpg',
-				'utm' => true
 			),
 			array(
 				'title' => 'Qards',

@@ -1,4 +1,4 @@
-# Version 2.0.8
+# Version 2.0.9
 
 # WP Maintenance Mode
 
@@ -21,7 +21,7 @@ Adds a splash page to your site that lets visitors know your site is down for ma
 
 **Credits**
 
-Developed by [Designmodo](http://designmodo.com)
+Developed by [Designmodo](http://designmodo.com) & [StrictThemes – WordPress Themes](http://strictthemes.com/)
 
 ## F.A.Q.
 

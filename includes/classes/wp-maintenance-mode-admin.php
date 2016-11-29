@@ -467,8 +467,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                 // notice promo for codepad
                 ob_start();
-                include_once(WPMM_VIEWS_PATH . 'promo-codepad.php');
-                $notices['promo_codepad'] = array(
+                include_once(WPMM_VIEWS_PATH . 'promo-strictthemes.php');
+                $notices['promo-strictthemes'] = array(
                     'class' => 'wpmm_notices updated notice is-dismissible',
                     'msg' => ob_get_clean()
                 );

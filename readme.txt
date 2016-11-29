@@ -7,7 +7,7 @@ Author URI: http://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 4.6.1
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
@@ -40,7 +40,7 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 
 = Credits =
 
-Developed by [Designmodo](http://designmodo.com)
+Developed by [Designmodo](http://designmodo.com) & [StrictThemes – WordPress Themes](http://strictthemes.com/)
 
 == Installation ==
 
@@ -70,6 +70,16 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.0.9 (29/11/2016) = 
+* new hook (`wpmm_after_body`) in maintenance mode template (thanks @ [Karolína Vyskočilová](https://github.com/vyskoczilova))
+* pt_PT (portuguese) language update (thanks @ [Pedro Mendonça](https://github.com/pedro-mendonca))
+* maintenance mode template can also be loaded from theme/child-theme folder (thanks @ [Florian Tiar](https://github.com/Mahjouba91) and [Lachlan Heywood](https://github.com/lachieh))
+* new hooks for contact form (if you want to add new fields): `wpmm_contact_form_start`, `wpmm_contact_form_before_message`, `wpmm_contact_form_after_message`, `wpmm_contact_form_end`
+* new hook for contact form validation (if you want to validate new fields): `wpmm_contact_validation`
+* new hooks for contact form template (if you want to display new fields): `wpmm_contact_template_start`, `wpmm_contact_template_before_message`, `wpmm_contact_template_after_message`, `wpmm_contact_template_end`
+* some javascript improvements
+* small css fix for contact form (thanks @ [frontenddev](https://wordpress.org/support/topic/please-fix-modal-window-of-contact-form/))
 
 = 2.0.8 (09/09/2016) = 
 * add wp_scripts() function (in helpers.php) to maintain backward compatibility (for those with WP < 4.2.0)
