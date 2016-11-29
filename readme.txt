@@ -79,6 +79,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * new hook for contact form validation (if you want to validate new fields): `wpmm_contact_validation`
 * new hooks for contact form template (if you want to display new fields): `wpmm_contact_template_start`, `wpmm_contact_template_before_message`, `wpmm_contact_template_after_message`, `wpmm_contact_template_end`
 * some javascript improvements
+* small css fix for contact form (thanks @ [frontenddev](https://wordpress.org/support/topic/please-fix-modal-window-of-contact-form/))
 
 = 2.0.8 (09/09/2016) = 
 * add wp_scripts() function (in helpers.php) to maintain backward compatibility (for those with WP < 4.2.0)
