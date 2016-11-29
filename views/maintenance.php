@@ -25,6 +25,10 @@
         ?>
     </head>
     <body class="<?php echo $body_classes ? $body_classes : ''; ?>">
+        <?php 
+        // do some actions
+        do_action('wpmm_after_body');
+        ?>
         <div class="wrap">
             <?php if (!empty($heading)) { ?><h1><?php echo stripslashes($heading); ?></h1><?php } ?>
             <?php if (!empty($text)) { ?><h2><?php echo stripslashes($text); ?></h2><?php } ?>
