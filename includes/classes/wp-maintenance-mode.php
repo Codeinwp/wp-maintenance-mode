@@ -127,6 +127,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'social_dribbble' => '',
 					'social_twitter' => '',
 					'social_facebook' => '',
+					'social_instagram' => '',
 					'social_pinterest' => '',
 					'social_google+' => '',
 					'social_linkedin' => '',

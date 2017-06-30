@@ -57,6 +57,10 @@
 						<a class="fb" href="<?php echo stripslashes($this->plugin_settings['modules']['social_facebook']); ?>">facebook</a>
 					<?php } ?>    
 
+					<?php if (!empty($this->plugin_settings['modules']['social_instagram'])) { ?>
+						<a class="instagram" href="<?php echo stripslashes($this->plugin_settings['modules']['social_instagram']); ?>">instagram</a>
+					<?php } ?>    
+
 					<?php if (!empty($this->plugin_settings['modules']['social_pinterest'])) { ?>
 						<a class="pin" href="<?php echo stripslashes($this->plugin_settings['modules']['social_pinterest']); ?>">pinterest</a>
 					<?php } ?>  
