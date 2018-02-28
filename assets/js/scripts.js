@@ -45,6 +45,7 @@ jQuery(function($) {
                     }
 
                     $('.subscribe_wrapper').html(response.data);
+                    
                 }, 'json');
 
                 return false;
@@ -61,7 +62,7 @@ jQuery(function($) {
             var open_contact = $(this).data('open'),
                     close_contact = $(this).data('close');
 
-            $('.contact').fadeIn(200);
+            $('.contact').fadeIn(700);
             $('.' + open_contact).addClass(close_contact);
         });
 
@@ -94,12 +95,16 @@ jQuery(function($) {
         });
 
         // hide form
+        $('.close-contact_form').on('click', function(e) {
+            $('.contact').fadeOut(200);
+        });
+
         $('body').on('click', '.contact', function(e) {
             if ($(e.target).hasClass('contact')) {
                 var close_contact = $('.contact_us').data('close');
                 $('.form', $(this)).removeClass(close_contact);
 
-                $(this).hide();
+                $(this).fadeOut(200);
             }
         });
     }

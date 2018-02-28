@@ -57,7 +57,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Load CSS files
-         * 
+         *
          * @since 2.0.0
          * @return type
          */
@@ -80,7 +80,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Load JS files and their dependencies
-         * 
+         *
          * @since 2.0.0
          * @return
          */
@@ -107,7 +107,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Export subscribers list in CSV format (refactor @ 2.0.4)
-         * 
+         *
          * @since 2.0.0
          * @global object $wpdb
          * @throws Exception
@@ -145,7 +145,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Empty subscribers list
-         * 
+         *
          * @since 2.0.4
          * @global object $wpdb
          * @throws Exception
@@ -170,7 +170,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Reset settings (refactor @ 2.0.4)
-         * 
+         *
          * @since 2.0.0
          * @throws Exception
          */
@@ -180,17 +180,17 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 if (!current_user_can('manage_options')) {
                     throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
                 }
-                
+
                 // check nonce existence
                 if (empty($_POST['_wpnonce'])) {
                     throw new Exception(__('The nonce field must not be empty.', $this->plugin_slug));
                 }
-                
+
                 // check tab existence
                 if (empty($_POST['tab'])) {
                     throw new Exception(__('The tab slug must not be empty.', $this->plugin_slug));
                 }
-                
+
                 // check nonce validation
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
                    throw new Exception(__('Security check.', $this->plugin_slug));
@@ -214,7 +214,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Add plugin in Settings menu
-         * 
+         *
          * @since 2.0.0
          */
         public function add_plugin_menu() {
@@ -225,7 +225,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Settings page
-         * 
+         *
          * @since 2.0.0
          * @global object $wp_roles
          */
@@ -241,7 +241,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Save settings
-         * 
+         *
          * @since 2.0.0
          */
         public function save_plugin_settings() {
@@ -283,7 +283,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         ) {
                             $this->delete_cache();
                         }
-                        break;
+                    break;
                     case 'design':
                         $custom_css = array();
 
@@ -329,7 +329,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                             $this->delete_cache();
                         }
-                        break;
+                    break;
                     case 'modules':
                         $custom_css = array();
 
@@ -379,7 +379,46 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                             $this->delete_cache();
                         }
-                        break;
+                    break;
+                    case 'bot':
+                        $custom_css = array();
+
+                        $_POST['options']['bot']['status']           = (int) $_POST['options']['bot']['status'];
+
+                        $_POST['options']['bot']['name']             = sanitize_text_field($_POST['options']['bot']['name']);
+
+                        if(!empty($_POST['options']['bot']['avatar'])) {
+                            $_POST['options']['bot']['avatar'] = esc_url($_POST['options']['bot']['avatar']);
+                            $custom_css['bot-avatar']          = ".bot-avatar { background-image: url('{$_POST['options']['bot']['avatar']}');}";
+                        }
+
+                        $_POST['options']['bot']['messages']['01']   = sanitize_text_field($_POST['options']['bot']['messages']['01']);
+                        $_POST['options']['bot']['messages']['02']   = sanitize_text_field($_POST['options']['bot']['messages']['02']);
+                        $_POST['options']['bot']['messages']['03']   = sanitize_text_field($_POST['options']['bot']['messages']['03']);
+                        $_POST['options']['bot']['messages']['04']   = sanitize_text_field($_POST['options']['bot']['messages']['04']);
+                        $_POST['options']['bot']['messages']['05']   = sanitize_text_field($_POST['options']['bot']['messages']['05']);
+                        $_POST['options']['bot']['messages']['06']   = sanitize_text_field($_POST['options']['bot']['messages']['06']);
+                        $_POST['options']['bot']['messages']['07']   = sanitize_text_field($_POST['options']['bot']['messages']['07']);
+                        $_POST['options']['bot']['messages']['08_1'] = sanitize_text_field($_POST['options']['bot']['messages']['08_1']);
+                        $_POST['options']['bot']['messages']['08_2'] = sanitize_text_field($_POST['options']['bot']['messages']['08_2']);
+                        $_POST['options']['bot']['messages']['09']   = sanitize_text_field($_POST['options']['bot']['messages']['09']);
+                        $_POST['options']['bot']['messages']['10']   = sanitize_text_field($_POST['options']['bot']['messages']['10']);
+
+                        $_POST['options']['bot']['responses']['01']   = sanitize_text_field($_POST['options']['bot']['responses']['01']);
+                        $_POST['options']['bot']['responses']['02_1'] = sanitize_text_field($_POST['options']['bot']['responses']['02_1']);
+                        $_POST['options']['bot']['responses']['02_2'] = sanitize_text_field($_POST['options']['bot']['responses']['02_2']);
+                        $_POST['options']['bot']['responses']['03']   = sanitize_text_field($_POST['options']['bot']['responses']['03']);
+
+                        $_POST['options']['bot']['custom_css'] = $custom_css;
+
+                        // Write out JS file on saved
+                        $this->set_datajs_file($_POST['options']['bot']);
+
+                        // delete cache when is activated
+                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
+                            $this->delete_cache();
+                        }
+                    break;
                 }
 
                 $this->plugin_settings[$tab] = $_POST['options'][$tab];
@@ -390,7 +429,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         /**
          * Add new safe inline style css (use by wp_kses_attr in wp_kses_post)
          * - bug discovered by cokemorgan: https://github.com/Designmodocom/WP-Maintenance-Mode/issues/56
-         * 
+         *
          * @since 2.0.3
          * @param array $properties
          * @return array
@@ -407,8 +446,53 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         }
 
         /**
+         * Builds the data.js file and writes it into assets/js/
+         * This file is mandatory for the bot to work correctly.
+         *
+         * @param array $messages
+         * @throws Exception
+         */
+        public function set_datajs_file($messages = array()) {
+            $data = "var botName = \"{$messages['name']}\",\n"
+                . "botAvatar = \"{$messages['avatar']}\",\n"
+                ."conversationData = {\"homepage\": {1: { \n"
+                ."\"statement\": [\"{$messages['messages']['01']}\", \n"
+                ."\"{$messages['messages']['02']}\", \n"
+                ."\"{$messages['messages']['03']}\"], \n"
+                ."\"input\": {\"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n"
+                ."\"{$messages['messages']['04']}\", \n"
+                ."\"{$messages['messages']['05']}\", \n"
+                ."\"{$messages['messages']['06']}\", \n"
+                ."\"{$messages['messages']['07']}\"];},\"options\": [{ \n"
+                ."\"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
+                ."\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \n"
+                ."\"statement\": [\"{$messages['messages']['08_1']}\"], \n"
+                ."\"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n"
+                ."\"{$messages['messages']['08_2']}\"];}},1.6: { \n"
+                ."\"statement\": [\"{$messages['messages']['09']}\", \n"
+                ."\"{$messages['messages']['10']}\"]}}};";
+
+            // Merge data partials
+            // $data = $data . $data2;
+
+            // Replace *name of visitor* KEY
+            $data = str_replace('*name of visitor*', "\" + context.name  + \"", $data);
+            // Replace *bot name* KEY
+            $data = str_replace('*bot name*', $messages['name'], $data);
+
+            // Try to write data.js file
+            try {
+                if ( file_put_contents( WPMM_PATH . 'assets/js/data.js', $data) === false ){
+                    throw new Exception(__("The file data.js could not be written, the bot will not work correctly", $this->plugin_slug));
+                }
+            } catch (Exception $ex) {
+                error_log($ex->getMessage());
+            }
+        }
+
+        /**
          * Delete cache if any cache plugin (wp_cache or w3tc) is activated
-         * 
+         *
          * @since 2.0.1
          */
         public function delete_cache() {
@@ -425,7 +509,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Add settings link
-         * 
+         *
          * @since 2.0.0
          * @param array $links
          * @return array
@@ -440,7 +524,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Add notices - will be displayed on dashboard
-         * 
+         *
          * @since 2.0.0
          */
         public function add_notices() {
@@ -483,7 +567,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Dismiss plugin notices via AJAX
-         * 
+         *
          * @throws Exception
          */
         public function dismiss_notices() {
@@ -504,7 +588,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Get dismissed notices
-         * 
+         *
          * @param int $user_id
          * @return array
          */
@@ -517,7 +601,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         /**
          * Save dismissed notices
          * - save as string because of http://wordpress.stackexchange.com/questions/13353/problem-storing-arrays-with-update-user-meta
-         * 
+         *
          * @param int $user_id
          * @param string $notice_key
          */
@@ -530,7 +614,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         /**
          * Display custom text on plugin settings page
-         * 
+         *
          * @param string $text
          */
         public function admin_footer_text($text) {
