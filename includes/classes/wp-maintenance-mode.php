@@ -4,7 +4,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.0.9';
+		const VERSION = '2.1';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
@@ -29,7 +29,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 			if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
 				// INIT
-				add_action('init', array($this, 'init'));
+				add_action((is_admin() ? 'init' : 'template_redirect'), array($this, 'init'));
 
 				// Add ajax methods
 				add_action('wp_ajax_nopriv_wpmm_add_subscriber', array($this, 'add_subscriber'));
@@ -37,7 +37,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				add_action('wp_ajax_nopriv_wpmm_send_contact', array($this, 'send_contact'));
 				add_action('wp_ajax_wpmm_send_contact', array($this, 'send_contact'));
 
-				// Redirect 
+				// Redirect
 				add_action('init', array($this, 'redirect'), 9);
 
 				// Google Analytics tracking script
@@ -55,7 +55,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Return plugin slug
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return string
 		 */
@@ -65,7 +65,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Return plugin settings
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return array
 		 */
@@ -75,7 +75,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Return plugin default settings
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return array
 		 */
@@ -136,7 +136,32 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'ga_status' => 0,
 					'ga_code' => '',
 					'custom_css' => array()
-				)
+				),
+                'bot' => array(
+                    'status'   => 0,
+                    'name'     => 'Admin',
+                    'avatar'   => '',
+                    'messages' => array(
+                        '01'   => __("Hey! My name is *bot name*, I'm the owner of this website and I'd like to be your assistant here.", $this->plugin_slug),
+                        '02'   => __("I have just a few questions.", $this->plugin_slug),
+                        '03'   => __("What is your name?", $this->plugin_slug),
+                        '04'   => __("Nice to meet you here, *name of visitor*!"),
+                        '05'   => __("How you can see, our website will be lauched very soon.", $this->plugin_slug),
+                        '06'   => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
+                        '07'   => __("Would you like to be first to see it?", $this->plugin_slug),
+                        '08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
+                        '08_2' => __("Sad to hear that, *name of visitor* :( See you next time…", $this->plugin_slug),
+                        '09'   => __("Got it! Thank you and see you soon here!", $this->plugin_slug),
+                        '10'   => __("Have a great day!", $this->plugin_slug)
+                    ),
+                    'responses' => array(
+                        '01'    => __("Type your name here…", $this->plugin_slug),
+                        '02_1'  => __("Tell me more", $this->plugin_slug),
+                        '02_2'  => __("Boring", $this->plugin_slug),
+                        '03'    => __("Type your email here…", $this->plugin_slug)
+                    ),
+                    'custom_css' => array()
+                )
 			);
 		}
 
@@ -174,7 +199,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Check plugin version for updating process
-		 * 
+		 *
 		 * @since 2.0.3
 		 */
 		public function check_update() {
@@ -227,7 +252,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * What to do on single activate
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @global object $wpdb
 		 * @param boolean $network_wide
@@ -252,7 +277,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 			/**
 			 * Update from v1.8 to v2.x
-			 * 
+			 *
 			 * -  set notice if the plugin was installed before & set default settings
 			 */
 			if (!empty($old_options) && empty($v2_options)) {
@@ -394,7 +419,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * What to do on single deactivate
-		 * 
+		 *
 		 * @since 2.0.0
 		 */
 		public static function single_deactivate() {
@@ -415,7 +440,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Load languages files
-		 * 
+		 *
 		 * @since 2.0.0
 		 */
 		public function load_plugin_textdomain() {
@@ -428,7 +453,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Initialize when plugin is activated
-		 * 
+		 *
 		 * @since 2.0.0
 		 */
 		public function init() {
@@ -439,9 +464,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					(!$this->check_user_role()) &&
 					!strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
 					!strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
-					// wp-admin/ is available to everyone only if the user is not loggedin, otherwise.. check_user_role decides 
+					// wp-admin/ is available to everyone only if the user is not loggedin, otherwise.. check_user_role decides
 					!(strstr($_SERVER['PHP_SELF'], 'wp-admin/') && !is_user_logged_in()) &&
-//                    !strstr($_SERVER['PHP_SELF'], 'wp-admin/') && 
+//                    !strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
 					!strstr($_SERVER['PHP_SELF'], 'wp-admin/admin-ajax.php') &&
 					!strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&
 					!(strstr($_SERVER['PHP_SELF'], 'upgrade.php') && $this->check_user_role()) &&
@@ -482,7 +507,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
 				$custom_css_design = !empty($this->plugin_settings['design']['custom_css']) && is_array($this->plugin_settings['design']['custom_css']) ? $this->plugin_settings['design']['custom_css'] : array();
 				$custom_css_modules = !empty($this->plugin_settings['modules']['custom_css']) && is_array($this->plugin_settings['modules']['custom_css']) ? $this->plugin_settings['modules']['custom_css'] : array();
-				$custom_css = array_merge($custom_css_design, $custom_css_modules);
+				$custom_css_bot = !empty($this->plugin_settings['bot']['custom_css']) && is_array($this->plugin_settings['bot']['custom_css']) ? $this->plugin_settings['bot']['custom_css'] : array();
+				$custom_css = array_merge($custom_css_design, $custom_css_modules, $custom_css_bot);
 
 				// CONTENT
 				$heading = !empty($this->plugin_settings['design']['heading']) ? $this->plugin_settings['design']['heading'] : '';
@@ -507,15 +533,24 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
 					$scripts['countdown'] = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
 				}
-				if ((!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) || (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1)) {
+				if ((!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) 
+				|| (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1)
+				|| (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) ) {
 					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 				}
+                if(!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
+                    $scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
+                }
 				$scripts = apply_filters('wpmm_scripts', $scripts);
 
 				// CSS FILES
 				$styles = array(
 					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css'
 				);
+                if(!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
+                    $styles['bot'] = WPMM_CSS_URL . 'style.bot'. WPMM_ASSETS_SUFFIX . '.css';
+                    $body_classes .= ' bot';
+                }
 				$styles = apply_filters('wpmm_styles', $styles);
 
 				nocache_headers();
@@ -527,7 +562,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				// load maintenance mode template
 				if (file_exists(get_stylesheet_directory() . '/wp-maintenance-mode.php')) { // check child theme folder
 					include_once(get_stylesheet_directory() . '/wp-maintenance-mode.php');
-				} else if (file_exists(get_template_directory() . "/wp-maintenance-mode.php")) { // check theme folder	
+				} else if (file_exists(get_template_directory() . "/wp-maintenance-mode.php")) { // check theme folder
 					include_once(get_template_directory() . '/wp-maintenance-mode.php');
 				} else if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) { // check `wp-content` folder
 					include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
@@ -542,7 +577,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Check if the current user has access to backend / frontend based on his role compared with role from settings (refactor @ 2.0.4)
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return boolean
 		 */
@@ -568,7 +603,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Calculate backtime based on countdown remaining time if it is activated
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return int
 		 */
@@ -584,7 +619,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Check if the visitor is a bot (using useragent)
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return boolean
 		 */
@@ -627,7 +662,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Check if slug / ip address exists in exclude list
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return boolean
 		 */
@@ -657,7 +692,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Redirect if "Redirection" option is used and users don't have access to WordPress dashboard
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @return null
 		 */
@@ -689,7 +724,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Google Analytics code
-		 * 
+		 *
 		 * @since 2.0.7
 		 */
 		public function google_analytics_code() {
@@ -714,7 +749,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Save subscriber into database (refactor @ 2.0.4)
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @global object $wpdb
 		 * @throws Exception
@@ -747,7 +782,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 		/**
 		 * Send email via contact form (refactor @ 2.0.4)
-		 * 
+		 *
 		 * @since 2.0.0
 		 * @throws Exception
 		 */
@@ -763,7 +798,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				if (!is_email($_POST['email'])) {
 					throw new Exception(__('Please enter a valid email address.', $this->plugin_slug));
 				}
-				
+
 				// if you add new fields to the contact form... you will definitely need to validate their values
 				do_action('wpmm_contact_validation', $_POST);
 

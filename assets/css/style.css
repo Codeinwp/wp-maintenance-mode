@@ -119,7 +119,7 @@ body {
 
 .wrap form.subscribe_form {
     box-sizing: border-box;
-    width: 465px;
+    width: 450px;
     margin: 0 0 75px;
     display: inline-block;
     border: 3px solid #e0e0e0;
@@ -145,6 +145,7 @@ body {
     cursor: pointer;
     padding: 20px 30px;
     border-left: 3px solid #e0e0e0;
+    transition: all .3s;
 }
 .wrap form.subscribe_form input[type="submit"]:hover {
     background: #fff;
@@ -256,9 +257,8 @@ body {
     background: #000;
     color: #fff;
 }
-.contact_us {
-    text-decoration: none;
-}
+.contact_us { text-decoration: none; }
+.contact_us, input[type=submit] { transition: all .3s ease-in-out; }
 .contact {
     position: fixed;
     display: none;
@@ -275,6 +275,13 @@ body {
     font-size: 11px;
     padding-top: 10px;
 }
+.close-contact_form {
+    position: absolute;
+    left: 46%;
+    top: -60px;
+    cursor: pointer;
+}
+.close-contact_form img { width: 40px; height: 40px; }
 .contact .form {
     width: 520px;
     text-align: center;
@@ -392,6 +399,8 @@ body {
     color: #fff;
     border-color: #fff;
 }
+
+
 /**
  * MEDIA QUERIES (RESPONSIVE)
  **/
@@ -432,7 +441,7 @@ body {
         box-sizing: border-box;
     }
     .wrap form input[type="text"], .wrap form input[type="submit"] {
-        width: 100%;
+        width: 100% !important;
     }
     .wrap form.subscribe_form input[type="submit"] {
         padding-left: 0;
