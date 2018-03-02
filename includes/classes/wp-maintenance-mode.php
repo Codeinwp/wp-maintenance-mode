@@ -4,7 +4,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.1';
+		const VERSION = '2.1.1';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
@@ -142,15 +142,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     'name'     => 'Admin',
                     'avatar'   => '',
                     'messages' => array(
-                        '01'   => __("Hey! My name is *bot name*, I'm the owner of this website and I'd like to be your assistant here.", $this->plugin_slug),
+                        '01'   => __("Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be your assistant here.", $this->plugin_slug),
                         '02'   => __("I have just a few questions.", $this->plugin_slug),
                         '03'   => __("What is your name?", $this->plugin_slug),
-                        '04'   => __("Nice to meet you here, *name of visitor*!"),
+                        '04'   => __("Nice to meet you here, {visitor_name}!"),
                         '05'   => __("How you can see, our website will be lauched very soon.", $this->plugin_slug),
                         '06'   => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
                         '07'   => __("Would you like to be first to see it?", $this->plugin_slug),
                         '08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
-                        '08_2' => __("Sad to hear that, *name of visitor* :( See you next time…", $this->plugin_slug),
+                        '08_2' => __("Sad to hear that, {visitor_name} :( See you next time…", $this->plugin_slug),
                         '09'   => __("Got it! Thank you and see you soon here!", $this->plugin_slug),
                         '10'   => __("Have a great day!", $this->plugin_slug)
                     ),
@@ -539,7 +539,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 				}
                 if(!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
-                    $scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
+					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
+					add_action('wpmm_before_scripts', array($this, 'add_bot_extras'));
                 }
 				$scripts = apply_filters('wpmm_scripts', $scripts);
 
@@ -549,7 +550,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				);
                 if(!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
                     $styles['bot'] = WPMM_CSS_URL . 'style.bot'. WPMM_ASSETS_SUFFIX . '.css';
-                    $body_classes .= ' bot';
+					$body_classes .= ' bot';
                 }
 				$styles = apply_filters('wpmm_styles', $styles);
 
@@ -573,6 +574,28 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				exit();
 			}
+		}
+
+		/**
+		 * Extra variables for the bot functionality. Added to the DOM via hooks.
+		 * It has to be called before scripts are loaded so the variables are available globally.
+		 * 
+		 * @todo Maybe we can find a better home for this method
+		 * @since 2.1.1
+		 */
+		public function add_bot_extras(){
+			$upload_dir = wp_upload_dir();
+			$bot_vars = array(
+				'validationName'  => __('Please type in your name.', $this->plugin_slug),
+				'validationEmail' => __('Please type in a valid email address.', $this->plugin_slug),
+				'uploadsBaseUrl'  => trailingslashit($upload_dir['baseurl']),
+				'typeName'        => __('Type your name here…', $this->plugin_slug),
+				'typeEmail'       => __('Type your email here…', $this->plugin_slug),
+				'send'            => __('Send', $this->plugin_slug)
+			);
+			echo "<script type='text/javascript'>" .
+				"var botVars = " . json_encode($bot_vars) .
+				"</script>";
 		}
 
 		/**

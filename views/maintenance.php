@@ -30,11 +30,16 @@
         <div class="wrap">
 			<?php if (!empty($heading)) { ?><h1><?php echo stripslashes($heading); ?></h1><?php } ?>
 
-            <?php // If bot is enabled no text will be shown ?>
-            <?php if (!empty($text)&&$this->plugin_settings['bot']['status'] === 0) { ?><h2><?php echo stripslashes($text); ?></h2><?php } ?>
-		<!-- </div> -->
+			<?php 
+				// If bot is enabled no text will be shown
+				if ( !empty($text) && $this->plugin_settings['bot']['status'] === 0) {
+					echo "<h2>" . stripslashes($text) . "</h2>";
+				}
+			?>
+
 
             <?php if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] === 1) { ?>
+			</div><!-- .wrap -->
 			<div class="bot-container">
                 <!-- WP Bot -->
                 <div class="bot-chat-wrapper">
@@ -48,7 +53,7 @@
                 <!-- /WP Bot -->
 			</div>
 			<div class="bot-error"><p></p></div>
-        <!-- <div class="wrap under-bot"> -->
+        	<div class="wrap under-bot">
             <?php } ?>
 
 			<?php
@@ -141,8 +146,13 @@
 
         <script type='text/javascript'>
 			var wpmm_vars = {"ajax_url": "<?php echo admin_url('admin-ajax.php'); ?>"};
-        </script>
+		</script>
+
 		<?php
+		
+		// Hook before scripts, mostly for internationalization
+		do_action('wpmm_before_scripts');
+
 		if (!empty($scripts) && is_array($scripts)) {
 			foreach ($scripts as $src) {
 				?>

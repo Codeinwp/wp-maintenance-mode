@@ -445,7 +445,8 @@
                                     </th> -->
                                     <td colspan="2">
                                         <h4><?php _e("Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.", $this->plugin_slug) ?></h4>
-                                        <p><?php _e("You may also want to use these wildcards: *bot name* and *name of visitor* to make the conversation even more realistic.", $this->plugin_slug) ?></p>
+                                        <p><?php _e("You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.", $this->plugin_slug) ?></p>
+                                        <p><?php _e("It is also ok if you don't fill in all the conversation steps if you don't need to.", $this->plugin_slug) ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">

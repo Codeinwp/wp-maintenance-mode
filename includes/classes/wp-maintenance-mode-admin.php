@@ -455,35 +455,36 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function set_datajs_file($messages = array()) {
             $data = "var botName = \"{$messages['name']}\",\n"
                 . "botAvatar = \"{$messages['avatar']}\",\n"
-                ."conversationData = {\"homepage\": {1: { \n"
-                ."\"statement\": [\"{$messages['messages']['01']}\", \n"
-                ."\"{$messages['messages']['02']}\", \n"
-                ."\"{$messages['messages']['03']}\"], \n"
-                ."\"input\": {\"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n"
-                ."\"{$messages['messages']['04']}\", \n"
-                ."\"{$messages['messages']['05']}\", \n"
-                ."\"{$messages['messages']['06']}\", \n"
-                ."\"{$messages['messages']['07']}\"];},\"options\": [{ \n"
-                ."\"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
-                ."\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \n"
-                ."\"statement\": [\"{$messages['messages']['08_1']}\"], \n"
-                ."\"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n"
-                ."\"{$messages['messages']['08_2']}\"];}},1.6: { \n"
-                ."\"statement\": [\"{$messages['messages']['09']}\", \n"
-                ."\"{$messages['messages']['10']}\"]}}};";
+                . "conversationData = {\"homepage\": {1: { \"statement\": [ \n";
+                $data .= (!empty($messages['messages']['01'])) ? "\"{$messages['messages']['01']}\", \n" : '';
+                $data .= (!empty($messages['messages']['02'])) ? "\"{$messages['messages']['02']}\", \n" : '';
+                $data .= (!empty($messages['messages']['03'])) ? "\"{$messages['messages']['03']}\", \n" : '';
+                $data .= "], \"input\": {\"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n";
+                $data .= (!empty($messages['messages']['04'])) ? "\"{$messages['messages']['04']}\", \n" : '';
+                $data .= (!empty($messages['messages']['05'])) ? "\"{$messages['messages']['05']}\", \n" : '';
+                $data .= (!empty($messages['messages']['06'])) ? "\"{$messages['messages']['06']}\", \n" : '';
+                $data .= (!empty($messages['messages']['07'])) ? "\"{$messages['messages']['07']}\", \n" : '';
+                $data .= "];},\"options\": [{ \"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
+                . "\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \"statement\": [ \n";
+                $data .= (!empty($messages['messages']['08_1'])) ? "\"{$messages['messages']['08_1']}\", \n" : '';
+                $data .= "], \"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
+                $data .= (!empty($messages['messages']['08_2'])) ? "\"{$messages['messages']['08_2']}\", \n" : '';
+                $data .= "];}},1.6: { \"statement\": [ \n";
+                $data .= (!empty($messages['messages']['09'])) ? "\"{$messages['messages']['09']}\", \n" : '';
+                $data .= (!empty($messages['messages']['10'])) ? "\"{$messages['messages']['10']}\", \n" : '';
+                $data .= "]}}};";
 
-            // Merge data partials
-            // $data = $data . $data2;
-
-            // Replace *name of visitor* KEY
-            $data = str_replace('*name of visitor*', "\" + context.name  + \"", $data);
-            // Replace *bot name* KEY
-            $data = str_replace('*bot name*', $messages['name'], $data);
+            // Replace {visitor_name} KEY
+            $data = str_replace('{visitor_name}', "\" + context.name  + \"", $data);
+            // Replace {bot_name} KEY
+            $data = str_replace('{bot_name}', $messages['name'], $data);
 
             // Try to write data.js file
             try {
-                if ( file_put_contents( WPMM_PATH . 'assets/js/data.js', $data) === false ){
-                    throw new Exception(__("The file data.js could not be written, the bot will not work correctly", $this->plugin_slug));
+                $upload_dir = wp_upload_dir();
+                // if ( file_put_contents( WPMM_PATH . 'assets/js/data.js', $data) === false ){
+                if ( file_put_contents( trailingslashit($upload_dir['basedir']) . 'data.js', $data) === false ){
+                    throw new Exception(__("WPMM: The file data.js could not be written, the bot will not work correctly.", $this->plugin_slug));
                 }
             } catch (Exception $ex) {
                 error_log($ex->getMessage());

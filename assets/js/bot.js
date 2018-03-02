@@ -61,7 +61,7 @@ function checkInput(option) {
     if (input.val().length > 2) {
         showResponse(option);
     } else {
-        inputError('Please type in your name.');
+        inputError(botVars.validationName);
     }
     return false;
 
@@ -91,7 +91,7 @@ function checkEmail(option) {
         showResponse(option);
 
     } else {
-        inputError('Please type in a valid email address.');
+        inputError(botVars.validationEmail);
     }
     return false;
 }
@@ -121,8 +121,7 @@ function startConversation(conv, pos) {
     conversationPos = conv;
 
     // Load conversation data
-    jQuery.getScript( "/wp-content/plugins/wp-maintenance-mode/assets/js/data.js", function( data ) {
-
+    jQuery.getScript( botVars.uploadsBaseUrl + "data.js", function( data ) {
     // Show first bot statement
     showStatement(pos);
 
@@ -281,7 +280,7 @@ function showStatement(pos) {
             // Create an input, append to user bubble
             var input = jQuery('<input/>', {
                 type: 'text',
-                placeholder: 'Type your name here…',
+                placeholder: botVars.typeName,
                 name: option['name'],
                 autocomplete: 'off',
                 required: true
@@ -331,14 +330,14 @@ function showStatement(pos) {
             // Create email input, append to user bubble
             var input = jQuery('<input/>', {
                 type: 'email',
-                placeholder: 'Type your email here…',
+                placeholder: botVars.typeEmail,
                 name: option['email'],
                 autocomplete: 'off'
             }).appendTo(inputBubble);
 
             // Create an input button, append to user bubble
             var button = jQuery('<a/>', {
-                text: 'Send',
+                text: botVars.send,
                 // "class": "user-email-trigger",
                 click: checkEmail.bind(null, option)
             }).appendTo(inputBubble);

@@ -7,7 +7,7 @@ Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 4.9.4
-Stable tag: 2.1
+Stable tag: 2.1.1
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page. The new Bot functionality is here!
@@ -73,6 +73,13 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.1.1 (1/03/2018) =
+* fixed a visual bug with wrap container
+* added internationalization support for bot fixed strings
+* fixed path for loading data.js required for the bot (thanks @ [George Jipa](https://github.com/georgejipa))
+* added wpmm_before_scripts hook, fires just before loading the scripts
+* moved data.js to uploads directory (thanks @ [George Jipa](https://github.com/georgejipa))
 
 = 2.1 (27/02/2018) =
 * added bot feature
