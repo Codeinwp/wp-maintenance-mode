@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.1\n"
-"POT-Creation-Date: 2018-02-28 20:08+0100\n"
-"PO-Revision-Date: 2018-02-28 20:08+0100\n"
+"Project-Id-Version: WP Maintenance Mode 2.1.1\n"
+"POT-Creation-Date: 2018-03-02 10:29+0100\n"
+"PO-Revision-Date: 2018-03-02 10:29+0100\n"
 "Last-Translator: Andréas Lundgren <adevade@gmail.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: sv_SE\n"
@@ -52,15 +52,16 @@ msgstr ""
 msgid "WP Maintenance Mode"
 msgstr "WP Underhållsläge"
 
-#: includes/classes/wp-maintenance-mode-admin.php:486
-msgid "The file data.js could not be written, the bot will not work correctly"
+#: includes/classes/wp-maintenance-mode-admin.php:487
+msgid ""
+"WPMM: The file data.js could not be written, the bot will not work correctly."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:520
+#: includes/classes/wp-maintenance-mode-admin.php:521
 msgid "Settings"
 msgstr "Inställningar"
 
-#: includes/classes/wp-maintenance-mode-admin.php:539
+#: includes/classes/wp-maintenance-mode-admin.php:540
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -69,11 +70,11 @@ msgstr ""
 "Underhållsläget är <strong>aktiverat</strong>. Glöm inte att <a href=\"%s"
 "\">avaktivera</a> det när du är klar."
 
-#: includes/classes/wp-maintenance-mode-admin.php:576
+#: includes/classes/wp-maintenance-mode-admin.php:577
 msgid "Notice key cannot be empty."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:624
+#: includes/classes/wp-maintenance-mode-admin.php:625
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
@@ -99,7 +100,7 @@ msgstr "Meddela mig när sidan är färdig"
 
 #: includes/classes/wp-maintenance-mode.php:145
 msgid ""
-"Hey! My name is *bot name*, I'm the owner of this website and I'd like to be "
+"Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be "
 "your assistant here."
 msgstr ""
 
@@ -112,7 +113,7 @@ msgid "What is your name?"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:148
-msgid "Nice to meet you here, *name of visitor*!"
+msgid "Nice to meet you here, {visitor_name}!"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:149
@@ -135,7 +136,7 @@ msgid ""
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:153
-msgid "Sad to hear that, *name of visitor* :( See you next time…"
+msgid "Sad to hear that, {visitor_name} :( See you next time…"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:154
@@ -147,6 +148,7 @@ msgid "Have a great day!"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:158
+#: includes/classes/wp-maintenance-mode.php:592
 msgid "Type your name here…"
 msgstr ""
 
@@ -159,6 +161,7 @@ msgid "Boring"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:161
+#: includes/classes/wp-maintenance-mode.php:593
 #, fuzzy
 #| msgid "Enter your email address"
 msgid "Type your email here…"
@@ -178,24 +181,38 @@ msgstr ""
 msgid "Maintenance Mode"
 msgstr "Underhållsläge"
 
-#: includes/classes/wp-maintenance-mode.php:765
-#: includes/classes/wp-maintenance-mode.php:799 views/maintenance.php:116
+#: includes/classes/wp-maintenance-mode.php:589
+msgid "Please type in your name."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode.php:590
+#, fuzzy
+#| msgid "Please enter a valid email address."
+msgid "Please type in a valid email address."
+msgstr "Vänligen fyll i en giltig e-postadress. "
+
+#: includes/classes/wp-maintenance-mode.php:594 views/maintenance.php:130
+msgid "Send"
+msgstr "Skicka"
+
+#: includes/classes/wp-maintenance-mode.php:788
+#: includes/classes/wp-maintenance-mode.php:822 views/maintenance.php:121
 msgid "Please enter a valid email address."
 msgstr "Vänligen fyll i en giltig e-postadress. "
 
-#: includes/classes/wp-maintenance-mode.php:777
+#: includes/classes/wp-maintenance-mode.php:800
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:795
+#: includes/classes/wp-maintenance-mode.php:818
 msgid "All fields required."
 msgstr "Vänligen fyll i alla fält."
 
-#: includes/classes/wp-maintenance-mode.php:807
+#: includes/classes/wp-maintenance-mode.php:830
 msgid "Message via contact"
 msgstr "Meddelande från underhållsläget"
 
-#: includes/classes/wp-maintenance-mode.php:821
+#: includes/classes/wp-maintenance-mode.php:844
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Ditt meddelande skickades till hemsidans ägare. Tack! "
 
@@ -220,40 +237,36 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: views/maintenance.php:67
+#: views/maintenance.php:72
 msgid "your e-mail..."
 msgstr "Din e-postadress..."
 
-#: views/maintenance.php:68 views/settings.php:271
+#: views/maintenance.php:73 views/settings.php:271
 msgid "Subscribe"
 msgstr "Prenumerera"
 
-#: views/maintenance.php:115 views/sidebar.php:7
+#: views/maintenance.php:120 views/sidebar.php:7
 msgid "Name"
 msgstr "Namn"
 
-#: views/maintenance.php:115 views/maintenance.php:116
-#: views/maintenance.php:121
+#: views/maintenance.php:120 views/maintenance.php:121
+#: views/maintenance.php:126
 msgid "This field is required."
 msgstr ""
 
-#: views/maintenance.php:116
+#: views/maintenance.php:121
 msgid "E-mail"
 msgstr "E-post"
 
-#: views/maintenance.php:121
+#: views/maintenance.php:126
 msgid "Your message"
 msgstr "Ditt meddelande"
 
-#: views/maintenance.php:125
-msgid "Send"
-msgstr "Skicka"
-
-#: views/maintenance.php:132
+#: views/maintenance.php:137
 msgid "Contact us"
 msgstr "Kontakta oss"
 
-#: views/maintenance.php:137
+#: views/maintenance.php:142
 msgid "Dashboard"
 msgstr ""
 
@@ -292,15 +305,15 @@ msgstr "Moduler"
 msgid "Manage Bot"
 msgstr ""
 
-#: views/settings.php:25 views/settings.php:453
+#: views/settings.php:25 views/settings.php:454
 msgid "Status"
 msgstr "Status"
 
-#: views/settings.php:27 views/settings.php:456
+#: views/settings.php:27 views/settings.php:457
 msgid "Activated"
 msgstr "Aktiverad"
 
-#: views/settings.php:28 views/settings.php:457
+#: views/settings.php:28 views/settings.php:458
 msgid "Deactivated"
 msgstr "Avaktiverad"
 
@@ -403,12 +416,12 @@ msgid ""
 msgstr ""
 
 #: views/settings.php:126 views/settings.php:229 views/settings.php:434
-#: views/settings.php:611
+#: views/settings.php:612
 msgid "Save settings"
 msgstr "Spara"
 
 #: views/settings.php:127 views/settings.php:230 views/settings.php:435
-#: views/settings.php:612
+#: views/settings.php:613
 msgid "Reset settings"
 msgstr "Återställ inställningar"
 
@@ -594,95 +607,101 @@ msgstr ""
 
 #: views/settings.php:448
 msgid ""
-"You may also want to use these wildcards: *bot name* and *name of visitor* "
-"to make the conversation even more realistic."
+"You may also want to use these wildcards: {bot_name} and {visitor_name} to "
+"make the conversation even more realistic."
 msgstr ""
 
-#: views/settings.php:461
+#: views/settings.php:449
+msgid ""
+"It is also ok if you don't fill in all the conversation steps if you don't "
+"need to."
+msgstr ""
+
+#: views/settings.php:462
 #, fuzzy
 #| msgid "Name"
 msgid "Bot Name"
 msgstr "Namn"
 
-#: views/settings.php:464
+#: views/settings.php:465
 msgid "This name will appear when the bot is typing."
 msgstr ""
 
-#: views/settings.php:468
+#: views/settings.php:469
 #, fuzzy
 #| msgid "Upload background"
 msgid "Upload avatar"
 msgstr "Ladda upp bakgrund"
 
-#: views/settings.php:472
+#: views/settings.php:473
 msgid "A 512 x 512 px will work just fine."
 msgstr ""
 
-#: views/settings.php:478
+#: views/settings.php:479
 msgid "Customize Messages"
 msgstr ""
 
-#: views/settings.php:483
+#: views/settings.php:484
 msgid "Message 1"
 msgstr ""
 
-#: views/settings.php:491
+#: views/settings.php:492
 msgid "Message 2"
 msgstr ""
 
-#: views/settings.php:499
+#: views/settings.php:500
 msgid "Message 3"
 msgstr ""
 
-#: views/settings.php:507 views/settings.php:547 views/settings.php:569
+#: views/settings.php:508 views/settings.php:548 views/settings.php:570
 msgid "Response"
 msgstr ""
 
-#: views/settings.php:511 views/settings.php:573
+#: views/settings.php:512 views/settings.php:574
 msgid "Edit the placeholder's text"
 msgstr ""
 
-#: views/settings.php:515
+#: views/settings.php:516
 msgid "Message 4"
 msgstr ""
 
-#: views/settings.php:523
+#: views/settings.php:524
 msgid "Message 5"
 msgstr ""
 
-#: views/settings.php:531
+#: views/settings.php:532
 msgid "Message 6"
 msgstr ""
 
-#: views/settings.php:539
+#: views/settings.php:540
 msgid "Message 7"
 msgstr ""
 
-#: views/settings.php:551
+#: views/settings.php:552
 msgid "Edit button one"
 msgstr ""
 
-#: views/settings.php:555
+#: views/settings.php:556
 msgid "Edit button two"
 msgstr ""
 
-#: views/settings.php:561 views/settings.php:577
+#: views/settings.php:562 views/settings.php:578
 msgid "Message 8"
 msgstr ""
 
-#: views/settings.php:561 views/settings.php:585 views/settings.php:593
+#: views/settings.php:562 views/settings.php:586 views/settings.php:594
 msgid "(click on button one)"
 msgstr ""
 
-#: views/settings.php:577
+#: views/settings.php:578
 msgid "(click on button two)"
 msgstr ""
 
-#: views/settings.php:585
+#: views/settings.php:586
 msgid "Message 9"
 msgstr ""
 
-#: views/settings.php:593
+#: views/settings.php:594
 msgid "Message 10"
 msgstr ""
 
