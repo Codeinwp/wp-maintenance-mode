@@ -162,6 +162,7 @@
                                         ?>
                                         <br />
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" name="options[design][text_color]" class="color_picker_trigger" />
+                                        <p><?php __('This text will not be shown when the bot feature is enabled.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                             </tbody>
