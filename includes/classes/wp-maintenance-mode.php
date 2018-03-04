@@ -4,7 +4,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.1.1';
+		const VERSION = '2.1.2';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
@@ -413,6 +413,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				update_option('wpmm_settings', $v2_options);
 			}
 
+			/**
+			 * Update from <= v2.09 to v^2.1.2
+			 */
+			if(empty($v2_options['bot'])) {
+				$v2_options['bot'] = $default_options['bot'];
+				// update options
+                update_option('wpmm_settings', $v2_options);
+			}
+
 			// set current version
 			update_option('wpmm_version', WP_Maintenance_Mode::VERSION);
 		}
@@ -582,6 +591,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 * 
 		 * @todo Maybe we can find a better home for this method
 		 * @since 2.1.1
+		 * @return string Script tag with all the fixed text strings for the bot.
 		 */
 		public function add_bot_extras(){
 			$upload_dir = wp_upload_dir();

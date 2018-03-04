@@ -1,4 +1,4 @@
-# Version 2.1.1
+# Version 2.1.2
 
 # WP Maintenance Mode
 
@@ -66,7 +66,7 @@ We deleted a bot from list and added a new one.
 
 ```php
 function new_text($text) {
-    $text = str_replace('http://www.designmodo.com', 'http://designmodo.com', $text);
+    $text = str_replace('https://www.designmodo.com', 'https://designmodo.com', $text);
     
 
     return $text;
