@@ -55,11 +55,12 @@ Developed by [Designmodo](https://designmodo.com) & [StrictThemes – WordPress 
 
 1. Maintenance Mode Example
 2. Maintenance Mode Example #2
-3. Contact Form
+3. Bot Example
 4. Dashboard General Settings
 5. Dashboard Design Settings
 6. Dashboard Modules Settings
 7. Dashboard Bot Settings
+8. Contact Form
 
 == Frequently Asked Questions ==
 
