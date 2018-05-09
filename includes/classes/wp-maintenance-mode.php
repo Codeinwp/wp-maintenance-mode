@@ -528,7 +528,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$text = apply_filters('wpmm_text', do_shortcode($text));
 
 				// COUNTDOWN
-				$countdown_start = !empty($this->plugin_settings['modules']['countdown_start']) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_data'];
+				$countdown_start = !empty($this->plugin_settings['modules']['countdown_start']) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_date'];
 				$countdown_end = strtotime($countdown_start . ' +' . $backtime_seconds . ' seconds');
 
 				// JS FILES
