@@ -1,13 +1,14 @@
 === WP Maintenance Mode ===
-Contributors: Designmodo
+Contributors: Designmodo, impresshq
 Plugin Name: WP Maintenance Mode
 Plugin URI: https://designmodo.com/
 Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 4.9.4
-Stable tag: 2.1.2
+Tested up to: 4.9.6
+Stable tag: 2.2
+Requires PHP: 5.6
 License: GPL-2.0+
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page. The new Bot functionality is here!
@@ -35,6 +36,7 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 * SEO options;
 * Exclude URLs from maintenance;
 * Bot functionality to collect the emails in a friendly and efficient way.
+* GDPR Ready
 
 = Bugs, technical hints or contribute =
 
@@ -74,6 +76,9 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.2 (25/05/2018) =
+* added GDPR feature
 
 = 2.1.2 (04/03/2018) =
 * fixed a bug that was breaking the plugin after updating from 2.0.9 to 2.1.1

@@ -69,8 +69,15 @@
 				<?php if (!empty($this->plugin_settings['modules']['subscribe_text'])) { ?><h3><?php echo stripslashes($this->plugin_settings['modules']['subscribe_text']); ?></h3><?php } ?>
 				<div class="subscribe_wrapper" style="min-height: 100px;">
 					<form class="subscribe_form">
-						<input type="text" placeholder="<?php _e('your e-mail...', $this->plugin_slug); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
-						<input type="submit" value="<?php _e('Subscribe', $this->plugin_slug); ?>" />
+						<div class="subscribe_border">
+							<input type="text" placeholder="<?php _e('your e-mail...', $this->plugin_slug); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
+							<input type="submit" value="<?php _e('Subscribe', $this->plugin_slug); ?>" />
+						</div>
+						<?php if (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] == 1) { ?>
+							<div class="privacy_checkbox"><input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>"><label for="acceptance"><?php _e("I've read and agree with the site's privacy policy", $this->plugin_slug); ?></label></div>
+							<?php if(!empty($this->plugin_settings['gdpr']['subscribe_form_tail'])) { ?>
+								<p class="privacy_tail"><?php echo $this->plugin_settings['gdpr']['subscribe_form_tail']; ?></p>
+						<?php }} ?>
 					</form>
 				</div>
 			<?php } ?>
@@ -127,6 +134,11 @@
 
 							<?php do_action('wpmm_contact_form_after_message'); ?>
 
+							<?php if (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] == 1) { ?>
+								<div class="privacy_checkbox"><input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>"><label for="acceptance"><?php _e("I've read and agree with the site's privacy policy", $this->plugin_slug); ?></label></div>
+								<?php if(!empty($this->plugin_settings['gdpr']['contact_form_tail'])) { ?>
+									<p class="privacy_tail"><?php echo $this->plugin_settings['gdpr']['contact_form_tail']; ?></p>
+								<?php }} ?>
 							<p class="submit"><input type="submit" value="<?php _e('Send', $this->plugin_slug); ?>"></p>
 
 							<?php do_action('wpmm_contact_form_end'); ?>
@@ -137,9 +149,15 @@
 				<a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
 			<?php } ?>
 
-			<?php if (!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] == 1) { ?>
+			<?php if ((!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] == 1) ||
+					  (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] == 1)) { ?>
 				<div class="author_link">
-					<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a>
+					<?php if($this->plugin_settings['general']['admin_link'] == 1) { ?>
+						<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a> 
+					<?php } ?>
+					<?php if ($this->plugin_settings['gdpr']['status'] == 1) { ?>
+						<a href="<?php echo $this->plugin_settings['gdpr']['policy_page_link']; ?>"><?php echo $this->plugin_settings['gdpr']['policy_page_label']; ?></a>
+					<?php } ?>
 				</div>
 			<?php } ?>
         </div>

@@ -14,6 +14,7 @@
                 <a class="nav-tab" href="#design"><?php _e('Design', $this->plugin_slug); ?></a>
                 <a class="nav-tab" href="#modules"><?php _e('Modules', $this->plugin_slug); ?></a>
                 <a class="nav-tab" href="#bot"><?php _e('Manage Bot', $this->plugin_slug); ?></a>
+                <a class="nav-tab" href="#gdpr"><?php _e('GDPR', $this->plugin_slug); ?></a>
             </div>
 
             <div class="tabs-content">
@@ -441,9 +442,6 @@
                         <table class="form-table">
                             <tbody>
                                 <tr valign="top">
-                                    <!-- <th valign="top" colspan="2">
-                                        <h4><?php _e("Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.", $this->plugin_slug) ?></h4>
-                                    </th> -->
                                     <td colspan="2">
                                         <h4><?php _e("Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.", $this->plugin_slug) ?></h4>
                                         <p><?php _e("You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.", $this->plugin_slug) ?></p>
@@ -599,12 +597,6 @@
                                         ?></textarea>
                                     </td>
                                 </tr>
-<?php
-/*
-                                <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['general']['redirection'])); ?>" name="options[general][redirection]" />
-                                <p class="description"><?php _e('If you want to redirect a user (with no access to Dashboard/Backend) to a URL (different from WordPress Dashboard URL) after login, then define a URL (incl. http://)', $this->plugin_slug); ?></p>
-*/
-?>
                             </tbody>
                         </table>
 
@@ -612,6 +604,69 @@
                         <input type="hidden" value="bot" name="tab" />
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
                         <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit">
+                    </form>
+                </div>
+                <div id="tab-gdpr" class="hidden">
+                    <form method="post">
+                        <table class="form-table">
+                            <tbody>
+                                <tr valign="top">
+                                    <td colspan="2">
+                                        <h4><?php _e("To make the plugin GDPR compliant, fill in the details and enable this section.", $this->plugin_slug) ?></h4>
+                                        <p><?php _e("Here we added some generic texts that you may want to review, change or remove.", $this->plugin_slug) ?></p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[gdpr][status]"><?php _e('Status', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <label><input type="radio" value="1" name="options[gdpr][status]" <?php checked($this->plugin_settings['gdpr']['status'], 1); ?>> <?php _e('Activated', $this->plugin_slug); ?></label> <br />
+                                        <label><input type="radio" value="0" name="options[gdpr][status]" <?php checked($this->plugin_settings['gdpr']['status'], 0); ?>> <?php _e('Deactivated', $this->plugin_slug); ?></label>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row">
+                                        <label for="options[gdpr][policy_page_label]"><?php _e('Link name', $this->plugin_slug); ?></label>
+                                    </th>
+                                    <td>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['policy_page_label'])); ?>" name="options[gdpr][policy_page_label]" />
+                                        <p class="description"><?php _e('Label the link that will be shown on frontend footer', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row">
+                                        <label for="options[gdpr][policy_page_link]"><?php _e('P. Policy page link', $this->plugin_slug); ?></label>
+                                    </th>
+                                    <td>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['policy_page_link'])); ?>" name="options[gdpr][policy_page_link]" />
+                                        <p class="description"><?php echo $this->get_policy_link_message(); ?></p>
+                                        <p class="description">REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.</p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row">
+                                        <label for="options[gdpr][contact_form_tail]"><?php _e('Contact form \'tail\'', $this->plugin_slug); ?></label>
+                                    </th>
+                                    <td>
+                                        <textarea name="options[gdpr][contact_form_tail]" rows="3" style="width: 600px"><?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['contact_form_tail'])); ?></textarea>
+                                        <p class="description"><?php _e('This will be shown together with the acceptance checkbox below the form', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row">
+                                        <label for="options[gdpr][subscribe_form_tail]"><?php _e('Subscribe form \'tail\'', $this->plugin_slug); ?></label>
+                                    </th>
+                                    <td>
+                                        <textarea name="options[gdpr][subscribe_form_tail]" rows="3" style="width: 600px"><?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['subscribe_form_tail'])); ?></textarea>
+                                        <p class="description"><?php _e('This will be shown together with the acceptance checkbox below the form', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <?php wp_nonce_field('tab-gdpr'); ?>
+                        <input type="hidden" value="gdpr" name="tab" />
+                        <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
+                        <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit">
                     </form>
                 </div>
             </div>

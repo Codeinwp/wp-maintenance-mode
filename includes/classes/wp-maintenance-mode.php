@@ -4,7 +4,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.1.2';
+		const VERSION = '2.2';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
@@ -159,9 +159,16 @@ if (!class_exists('WP_Maintenance_Mode')) {
                         '02_1'  => __("Tell me more", $this->plugin_slug),
                         '02_2'  => __("Boring", $this->plugin_slug),
                         '03'    => __("Type your email here…", $this->plugin_slug)
-                    ),
+					),
                     'custom_css' => array()
-                )
+				),
+				'gdpr' => array(
+					'status' => 0,
+					'policy_page_label' => __('Privacy Policy', $this->plugin_slug),
+					'policy_page_link' => '',
+					'contact_form_tail' => __('This form collects your name and email so that we can reach you back. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', $this->plugin_slug),
+					'subscribe_form_tail' => __('This form collects your email so that we can add you to our newsletter list. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', $this->plugin_slug),
+				),
 			);
 		}
 
@@ -420,6 +427,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$v2_options['bot'] = $default_options['bot'];
 				// update options
                 update_option('wpmm_settings', $v2_options);
+			}
+
+			/**
+			 * Update from =< v2.1.2 to 2.1.5
+			 */
+			if(empty($v2_options['gdpr'])) {
+				$v2_options['gdpr'] = $default_options['gdpr'];
+				// update options
+				update_option('wpmm_settings', $v2_options);
 			}
 
 			// set current version

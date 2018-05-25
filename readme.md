@@ -1,4 +1,4 @@
-# Version 2.1.2
+# Version 2.2
 
 # WP Maintenance Mode
 
@@ -19,6 +19,7 @@ Adds a splash page to your site that lets visitors know your site is down for ma
 * SEO options;
 * Exclude URLs from maintenance.
 * Bot functionality to collect the emails in a friendly and efficient way.
+* GDPR Ready
 
 **Credits**
 

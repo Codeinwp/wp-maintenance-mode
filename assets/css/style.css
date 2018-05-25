@@ -29,7 +29,7 @@ blockquote:before, blockquote:after, q:before, q:after {
     content: none;
 }
 input, button {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     border-radius: 0;
 }
 table {
@@ -116,15 +116,42 @@ body {
 /**
  * SUBSCRIBE FORM
  **/
-
-.wrap form.subscribe_form {
+.wrap div.subscribe_border {
+    border: 3px solid #e0e0e0;
     box-sizing: border-box;
     width: 450px;
-    margin: 0 0 75px;
     display: inline-block;
-    border: 3px solid #e0e0e0;
+}
+.wrap form.subscribe_form {
+    /* box-sizing: border-box;
+    width: 450px; */
+    margin: 0 0 75px;
+    /* display: inline-block; */
+    /* border: 3px solid #e0e0e0; */
     overflow: hidden;
     text-align: center;
+}
+.wrap .subscribe_form .privacy_checkbox {
+    color: #909090;
+    max-width: 450px;
+    margin: 15px auto;
+    position: relative;
+}
+.wrap form.subscribe_form .privacy_checkbox label.error {
+    display: block !important;
+    position: absolute;
+    font-size: 11px;
+    left: 39%;
+}
+.wrap .subscribe_form .privacy_checkbox input {
+    float: none;
+    margin: 3px 4.7px;
+}
+.wrap .subscribe_form .privacy_tail {
+    font-size: 11px;
+    color: #909090;
+    max-width: 450px;
+    margin: 0 auto;
 }
 .wrap form.subscribe_form input {
     margin: 0;
@@ -291,7 +318,9 @@ body {
     margin: 100px auto;
     transition: 0.2s transform ease-in-out;
 }
-.contact .form input, .contact .form textarea {
+.contact .form input[type=text],
+.contact .form input[type=submit],
+.contact .form textarea {
     padding: 15px 20px;
     margin: 0;
     outline: 0;
@@ -302,6 +331,28 @@ body {
     font-family: Helvetica Neue, Arial, sans-serif;
     box-sizing: border-box;
     resize: none;
+}
+.contact .form label#content-error { margin-bottom: 10px; }
+.contact .form .privacy_checkbox {
+    margin-top: 20px;
+    clear: both;
+    color: #909090;
+    font-size: 15px;
+    position: relative;
+}
+.contact .form .privacy_checkbox label#acceptance-error {
+    position: absolute;
+    top: 10px;
+    left: 39%;
+}
+.contact .form .privacy_checkbox input {
+    transform: translatey(-2px);
+}
+.contact .form .privacy_tail {
+    font-size: 11px;
+    color: #c7c7c7;
+    margin-top: 16px;
+    line-height: 14px;
 }
 .contact .form textarea {
     height: 175px;
@@ -475,5 +526,11 @@ body {
     }
     blockquote, q {
         width: 70%;
+    }
+}
+@media only screen and (max-width: 465px) {
+    .contact .form .privacy_checkbox label#acceptance-error {
+        top: 28px;
+        left: 32%;
     }
 }
