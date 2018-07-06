@@ -404,10 +404,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					}
 				}
 			}
-
+			
+			/**
+			 * Set options on first activation
+			 */
 			if (empty($v2_options)) {
+				$v2_options = $default_options;
+				
 				// set options
-				add_option('wpmm_settings', $default_options);
+				add_option('wpmm_settings', $v2_options);
 			}
 
 			/**
@@ -425,6 +430,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			 */
 			if (empty($v2_options['bot'])) {
 				$v2_options['bot'] = $default_options['bot'];
+				
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
@@ -434,6 +440,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			 */
 			if (empty($v2_options['gdpr'])) {
 				$v2_options['gdpr'] = $default_options['gdpr'];
+				
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
