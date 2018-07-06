@@ -19,7 +19,7 @@
  */
 // Exit if accessed directly
 if (!defined('ABSPATH'))
-    exit;
+	exit;
 
 /**
  * DEFINE PATHS
@@ -48,9 +48,10 @@ define('WPMM_ASSETS_SUFFIX', (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.
 /**
  * FUNCTIONS
  */
+require_once(WPMM_FUNCTIONS_PATH . 'hooks.php');
 require_once(WPMM_FUNCTIONS_PATH . 'helpers.php');
 if (is_multisite() && !function_exists('is_plugin_active_for_network')) {
-    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 }
 
 /**
@@ -67,6 +68,6 @@ add_action('plugins_loaded', array('WP_Maintenance_Mode', 'get_instance'));
  * DASHBOARD
  */
 if (is_admin()) {
-    require_once(WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php');
-    add_action('plugins_loaded', array('WP_Maintenance_Mode_Admin', 'get_instance'));
+	require_once(WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php');
+	add_action('plugins_loaded', array('WP_Maintenance_Mode_Admin', 'get_instance'));
 }
