@@ -356,6 +356,12 @@
                                     </td>
                                 </tr>
                                 <tr valign="top">
+                                    <th scope="row"><label for="options[modules][social_instagram]">Instagram</label></th>
+                                    <td>    
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_instagram'])); ?>" name="options[modules][social_instagram]" />
+                                    </td>
+                                </tr>
+                                <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_pinterest]">Pinterest</label></th>
                                     <td>
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_pinterest'])); ?>" name="options[modules][social_pinterest]" />
