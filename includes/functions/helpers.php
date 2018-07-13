@@ -8,7 +8,8 @@
  * @return array
  */
 function wpmm_plugin_info($plugin_slug) {
-	add_filter('extra_plugin_headers', create_function('', 'return array("GitHub Plugin URI","Twitter");'));
+	add_filter('extra_plugin_headers', 'wpmm_add_extra_plugin_headers', 99, 1);
+	
 	$plugin_data = get_plugin_data(WPMM_PATH . $plugin_slug . '.php');
 
 	return $plugin_data;

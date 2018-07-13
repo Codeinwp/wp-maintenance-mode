@@ -137,30 +137,30 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'ga_code' => '',
 					'custom_css' => array()
 				),
-                'bot' => array(
-                    'status'   => 0,
-                    'name'     => 'Admin',
-                    'avatar'   => '',
-                    'messages' => array(
-                        '01'   => __("Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be your assistant here.", $this->plugin_slug),
-                        '02'   => __("I have just a few questions.", $this->plugin_slug),
-                        '03'   => __("What is your name?", $this->plugin_slug),
-                        '04'   => __("Nice to meet you here, {visitor_name}!"),
-                        '05'   => __("How you can see, our website will be lauched very soon.", $this->plugin_slug),
-                        '06'   => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
-                        '07'   => __("Would you like to be first to see it?", $this->plugin_slug),
-                        '08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
-                        '08_2' => __("Sad to hear that, {visitor_name} :( See you next time…", $this->plugin_slug),
-                        '09'   => __("Got it! Thank you and see you soon here!", $this->plugin_slug),
-                        '10'   => __("Have a great day!", $this->plugin_slug)
-                    ),
-                    'responses' => array(
-                        '01'    => __("Type your name here…", $this->plugin_slug),
-                        '02_1'  => __("Tell me more", $this->plugin_slug),
-                        '02_2'  => __("Boring", $this->plugin_slug),
-                        '03'    => __("Type your email here…", $this->plugin_slug)
+				'bot' => array(
+					'status' => 0,
+					'name' => 'Admin',
+					'avatar' => '',
+					'messages' => array(
+						'01' => __("Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be your assistant here.", $this->plugin_slug),
+						'02' => __("I have just a few questions.", $this->plugin_slug),
+						'03' => __("What is your name?", $this->plugin_slug),
+						'04' => __("Nice to meet you here, {visitor_name}!"),
+						'05' => __("How you can see, our website will be lauched very soon.", $this->plugin_slug),
+						'06' => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
+						'07' => __("Would you like to be first to see it?", $this->plugin_slug),
+						'08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
+						'08_2' => __("Sad to hear that, {visitor_name} :( See you next time…", $this->plugin_slug),
+						'09' => __("Got it! Thank you and see you soon here!", $this->plugin_slug),
+						'10' => __("Have a great day!", $this->plugin_slug)
 					),
-                    'custom_css' => array()
+					'responses' => array(
+						'01' => __("Type your name here…", $this->plugin_slug),
+						'02_1' => __("Tell me more", $this->plugin_slug),
+						'02_2' => __("Boring", $this->plugin_slug),
+						'03' => __("Type your email here…", $this->plugin_slug)
+					),
+					'custom_css' => array()
 				),
 				'gdpr' => array(
 					'status' => 0,
@@ -404,10 +404,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					}
 				}
 			}
-
+			
+			/**
+			 * Set options on first activation
+			 */
 			if (empty($v2_options)) {
+				$v2_options = $default_options;
+				
 				// set options
-				add_option('wpmm_settings', $default_options);
+				add_option('wpmm_settings', $v2_options);
 			}
 
 			/**
@@ -423,17 +428,19 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			/**
 			 * Update from <= v2.09 to v^2.1.2
 			 */
-			if(empty($v2_options['bot'])) {
+			if (empty($v2_options['bot'])) {
 				$v2_options['bot'] = $default_options['bot'];
+				
 				// update options
-                update_option('wpmm_settings', $v2_options);
+				update_option('wpmm_settings', $v2_options);
 			}
 
 			/**
 			 * Update from =< v2.1.2 to 2.1.5
 			 */
-			if(empty($v2_options['gdpr'])) {
+			if (empty($v2_options['gdpr'])) {
 				$v2_options['gdpr'] = $default_options['gdpr'];
+				
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
@@ -558,25 +565,23 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
 					$scripts['countdown'] = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
 				}
-				if ((!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) 
-				|| (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1)
-				|| (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) ) {
+				if ((!empty($this->plugin_settings['modules']['contact_status']) && $this->plugin_settings['modules']['contact_status'] == 1) || (!empty($this->plugin_settings['modules']['subscribe_status']) && $this->plugin_settings['modules']['subscribe_status'] == 1) || (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1)) {
 					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 				}
-                if(!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
+				if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
 					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
 					add_action('wpmm_before_scripts', array($this, 'add_bot_extras'));
-                }
+				}
 				$scripts = apply_filters('wpmm_scripts', $scripts);
 
 				// CSS FILES
 				$styles = array(
 					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css'
 				);
-                if(!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
-                    $styles['bot'] = WPMM_CSS_URL . 'style.bot'. WPMM_ASSETS_SUFFIX . '.css';
+				if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
+					$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css';
 					$body_classes .= ' bot';
-                }
+				}
 				$styles = apply_filters('wpmm_styles', $styles);
 
 				nocache_headers();
@@ -609,19 +614,19 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 * @since 2.1.1
 		 * @return string Script tag with all the fixed text strings for the bot.
 		 */
-		public function add_bot_extras(){
+		public function add_bot_extras() {
 			$upload_dir = wp_upload_dir();
 			$bot_vars = array(
-				'validationName'  => __('Please type in your name.', $this->plugin_slug),
+				'validationName' => __('Please type in your name.', $this->plugin_slug),
 				'validationEmail' => __('Please type in a valid email address.', $this->plugin_slug),
-				'uploadsBaseUrl'  => trailingslashit($upload_dir['baseurl']),
-				'typeName'        => __('Type your name here…', $this->plugin_slug),
-				'typeEmail'       => __('Type your email here…', $this->plugin_slug),
-				'send'            => __('Send', $this->plugin_slug)
+				'uploadsBaseUrl' => trailingslashit($upload_dir['baseurl']),
+				'typeName' => __('Type your name here…', $this->plugin_slug),
+				'typeEmail' => __('Type your email here…', $this->plugin_slug),
+				'send' => __('Send', $this->plugin_slug)
 			);
 			echo "<script type='text/javascript'>" .
-				"var botVars = " . json_encode($bot_vars) .
-				"</script>";
+			"var botVars = " . json_encode($bot_vars) .
+			"</script>";
 		}
 
 		/**
@@ -856,14 +861,17 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$subject = apply_filters('wpmm_contact_subject', __('Message via contact', $this->plugin_slug));
 				$headers = apply_filters('wpmm_contact_headers', array('Reply-To: ' . sanitize_text_field($_POST['email'])));
 				$template_path = apply_filters('wpmm_contact_template', WPMM_VIEWS_PATH . 'contact.php');
+				$from_name = sanitize_text_field($_POST['name']);
 
 				ob_start();
 				include_once($template_path);
 				$message = ob_get_clean();
 
 				// filters
-				add_filter('wp_mail_content_type', create_function('', 'return "text/html";'));
-				add_filter('wp_mail_from_name', create_function('', 'return sanitize_text_field($_POST["name"]);'));
+				add_filter('wp_mail_content_type', 'wpmm_change_mail_content_type', 10, 1);
+				add_filter('wp_mail_from_name', function() use ($from_name) {
+							return $from_name;
+						});
 
 				// send email
 				@wp_mail($send_to, $subject, $message, $headers);
