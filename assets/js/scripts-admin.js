@@ -101,7 +101,7 @@ jQuery(function($) {
 
     /**
      * SUBSCRIBERS EMPTY LIST
-     * 
+     *
      * @since 2.0.4
      */
     $('#subscribers-empty-list').click(function() {
@@ -123,7 +123,7 @@ jQuery(function($) {
     $('.reset_settings').click(function() {
         var tab = $(this).data('tab'),
                 nonce = $('#tab-' + tab + ' #_wpnonce').val();
-                
+
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_reset_settings',
             tab: tab,
@@ -142,4 +142,40 @@ jQuery(function($) {
      * COUNTDOWN TIMEPICKER
      */
     $('.countdown_start').datetimepicker({timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy'});
+
+
+    /**
+     * BOT AVATAR UPLOADER
+     */
+    var avatar_custom_uploader;
+    $('#avatar_upload_trigger').click(function(e) {
+        e.preventDefault();
+
+        //If the uploader object has already been created, reopen the dialog
+        if (avatar_custom_uploader) {
+            avatar_custom_uploader.open();
+            return;
+        }
+
+        //Extend the wp.media object
+        avatar_custom_uploader = wp.media.frames.file_frame = wp.media({
+            title: 'Upload Avatar',
+            button: {
+                text: 'Choose picture'
+            },
+            multiple: false
+        });
+
+        //When a file is selected, grab the URL and set it as the text field's value
+        avatar_custom_uploader.on('select', function() {
+            attachment = avatar_custom_uploader.state().get('selection').first().toJSON();
+            var url = '';
+            url = attachment.url;
+            $('.upload_avatar_url').val(url);
+        });
+
+        //Open the uploader dialog
+        avatar_custom_uploader.open();
+    });
+
 });

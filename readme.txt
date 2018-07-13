@@ -1,22 +1,24 @@
 === WP Maintenance Mode ===
-Contributors: Designmodo, GeorgeJipa
+Contributors: Designmodo, impresshq
 Plugin Name: WP Maintenance Mode
-Plugin URI: http://designmodo.com/
+Plugin URI: https://designmodo.com/
 Author: Designmodo
-Author URI: http://designmodo.com/
+Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 4.6.1
-Stable tag: 2.0.9
+Tested up to: 4.9.6
+Stable tag: 2.2
+Requires PHP: 5.6
 License: GPL-2.0+
 
-Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
+Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page. The new Bot functionality is here!
 
 == Description ==
 
 Add a maintenance page to your blog that lets visitors know your blog is down for maintenance, or add a coming soon page for a new website. User with admin rights gets full access to the blog including the front end.
 
 Activate the plugin and your blog is in maintenance-mode, works and only registered users with enough rights can see the front end. You can use a date with a countdown timer for visitor information or set a value and unit for information. 
+
 Also works with WordPress Multisite installs (each blog from the network has it's own maintenance settings).
 
 = Features =
@@ -32,7 +34,9 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 * Social media icons;
 * Works with any WordPress theme;
 * SEO options;
-* Exclude URLs from maintenance.
+* Exclude URLs from maintenance;
+* Bot functionality to collect the emails in a friendly and efficient way.
+* GDPR Ready
 
 = Bugs, technical hints or contribute =
 
@@ -40,7 +44,7 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 
 = Credits =
 
-Developed by [Designmodo](http://designmodo.com) & [StrictThemes – WordPress Themes](http://strictthemes.com/)
+Developed by [Designmodo](https://designmodo.com) & [StrictThemes – WordPress Themes](http://strictthemes.com/)
 
 == Installation ==
 
@@ -51,12 +55,14 @@ Developed by [Designmodo](http://designmodo.com) & [StrictThemes – WordPress T
 
 == Screenshots ==
 
-1. Maintenance Mode example
-2. Maintenance Mode example #2
-3. Contact form
-4. Dashboard General settings
-5. Dashboard Design settings
-6. Dashboard Modules settings
+1. Maintenance Mode Example
+2. Maintenance Mode Example #2
+3. Bot Example
+4. Dashboard General Settings
+5. Dashboard Design Settings
+6. Dashboard Modules Settings
+7. Dashboard Bot Settings
+8. Contact Form
 
 == Frequently Asked Questions ==
 
@@ -70,6 +76,26 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.2 (25/05/2018) =
+* added GDPR feature
+
+= 2.1.2 (04/03/2018) =
+* fixed a bug that was breaking the plugin after updating from 2.0.9 to 2.1.1
+
+= 2.1.1 (01/03/2018) =
+* fixed a visual bug with wrap container
+* added internationalization support for bot fixed strings
+* fixed path for loading data.js required for the bot (thanks @ [George Jipa](https://github.com/georgejipa))
+* added `wpmm_before_scripts` hook, fires just before loading the scripts
+* moved data.js to uploads directory (thanks @ [George Jipa](https://github.com/georgejipa))
+
+= 2.1 (27/02/2018) =
+* added bot feature
+* css fixes
+* new css transitions for buttons
+* fixed https problem (thanks @ [George Jipa](https://github.com/georgejipa))
+* updated translations, help us! :)
 
 = 2.0.9 (29/11/2016) = 
 * new hook (`wpmm_after_body`) in maintenance mode template (thanks @ [Karolína Vyskočilová](https://github.com/vyskoczilova))
