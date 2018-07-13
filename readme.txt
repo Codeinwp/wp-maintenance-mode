@@ -6,8 +6,8 @@ Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 4.9.6
-Stable tag: 2.2
+Tested up to: 4.9.7
+Stable tag: 2.2.1
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -76,6 +76,13 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.2.1 (13/07/2018) =
+* replace create_function; solves [#186](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/186) issue and [ticket](https://wordpress.org/support/topic/create_function-deprecated-in-php-7-2-8/) (thanks @ [George Jipa](https://github.com/georgejipa))
+* solve "set options on first activation" bug [ticket](https://wordpress.org/support/topic/notice-undefined-index-general-in-srv-www-mysite-test-current/) (thanks @ [George Jipa](https://github.com/georgejipa))
+* make (frontend) privacy labels clickable (thanks @ [George Jipa](https://github.com/georgejipa))
+* added array key check to avoid notice (thanks @ [Smiggel](https://github.com/Smiggel))
+* added instagram icon (thanks @ [bozdoz](https://github.com/bozdoz))
 
 = 2.2 (25/05/2018) =
 * added GDPR feature
