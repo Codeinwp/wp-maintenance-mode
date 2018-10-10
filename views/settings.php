@@ -428,6 +428,16 @@
                                     </td>
                                 </tr>
                                 <tr valign="top">
+                                    <th scope="row"><label for="options[modules][ga_anonymize_ip]"><?php _e('Enable IP anonymization?', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <select name="options[modules][ga_anonymize_ip]">
+                                            <option value="1" <?php selected($this->plugin_settings['modules']['ga_anonymize_ip'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['modules']['ga_anonymize_ip'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
+                                        </select>
+										<p class="description"><?php _e(sprintf('Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs.', 'https://support.google.com/analytics/answer/2763052'), $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
                                     <th scope="row"><label for="options[modules][ga_code]"><?php _e('Tracking code', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['ga_code'])); ?>" name="options[modules][ga_code]" />

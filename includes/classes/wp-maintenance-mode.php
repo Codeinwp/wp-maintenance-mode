@@ -135,6 +135,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'contact_email' => get_option('admin_email') ? get_option('admin_email') : '',
 					'contact_effects' => 'move_top|move_bottom',
 					'ga_status' => 0,
+					'ga_anonymize_ip' => 0,
 					'ga_code' => '',
 					'custom_css' => array()
 				),
@@ -405,13 +406,13 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					}
 				}
 			}
-			
+
 			/**
 			 * Set options on first activation
 			 */
 			if (empty($v2_options)) {
 				$v2_options = $default_options;
-				
+
 				// set options
 				add_option('wpmm_settings', $v2_options);
 			}
@@ -431,7 +432,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			 */
 			if (empty($v2_options['bot'])) {
 				$v2_options['bot'] = $default_options['bot'];
-				
+
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
@@ -441,6 +442,16 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			 */
 			if (empty($v2_options['gdpr'])) {
 				$v2_options['gdpr'] = $default_options['gdpr'];
+
+				// update options
+				update_option('wpmm_settings', $v2_options);
+			}
+
+			/**
+			 * Update from =< v2.2.1 to 2.2.2
+			 */
+			if (empty($v2_options['modules']['ga_anonymize_ip'])) {
+				$v2_options['modules']['ga_anonymize_ip'] = $default_options['modules']['ga_anonymize_ip'];
 				
 				// update options
 				update_option('wpmm_settings', $v2_options);
@@ -794,9 +805,22 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 			// sanitize code
 			$ga_code = wpmm_sanitize_ga_code($this->plugin_settings['modules']['ga_code']);
+
 			if (empty($ga_code)) {
 				return false;
 			}
+
+			// set options
+			$ga_options = array();
+
+			if (
+					!empty($this->plugin_settings['modules']['ga_anonymize_ip']) &&
+					$this->plugin_settings['modules']['ga_anonymize_ip'] == 1
+			) {
+				$ga_options['anonymize_ip'] = true;
+			}
+			
+			$ga_options = (object) $ga_options;
 
 			// show google analytics javascript snippet
 			include_once(WPMM_VIEWS_PATH . 'google-analytics.php');
