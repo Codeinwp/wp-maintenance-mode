@@ -690,9 +690,13 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 * @return boolean
 		 */
 		public function check_search_bots() {
-			$is_search_bots = false;
+			$is_search_bot = false;
 
-			if (!empty($this->plugin_settings['general']['bypass_bots']) && $this->plugin_settings['general']['bypass_bots'] == 1) {
+			if (
+					!empty($this->plugin_settings['general']['bypass_bots']) &&
+					$this->plugin_settings['general']['bypass_bots'] == 1 &&
+					isset($_SERVER['HTTP_USER_AGENT'])
+			) {
 				$bots = apply_filters('wpmm_search_bots', array(
 					'Abacho' => 'AbachoBOT',
 					'Accoona' => 'Acoon',
@@ -720,10 +724,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'Yahoo' => 'Yahoo'
 				));
 
-				$is_search_bots = (bool) preg_match('~(' . implode('|', array_values($bots)) . ')~i', $_SERVER['HTTP_USER_AGENT']);
+				$is_search_bot = (bool) preg_match('~(' . implode('|', array_values($bots)) . ')~i', $_SERVER['HTTP_USER_AGENT']);
 			}
 
-			return $is_search_bots;
+			return $is_search_bot;
 		}
 
 		/**
