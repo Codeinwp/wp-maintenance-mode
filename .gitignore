@@ -1,6 +1,9 @@
 ### General CodeKit files to ignore
 *.codekit3
 
+### GruntJS modules
+node_modules/
+
 ### VSCode
 .vscode/*
 !.vscode/settings.json
