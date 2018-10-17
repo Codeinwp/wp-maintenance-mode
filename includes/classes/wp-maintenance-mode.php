@@ -168,6 +168,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'status' => 0,
 					'policy_page_label' => __('Privacy Policy', $this->plugin_slug),
 					'policy_page_link' => '',
+					'policy_page_target' => 0,
 					'contact_form_tail' => __('This form collects your name and email so that we can reach you back. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', $this->plugin_slug),
 					'subscribe_form_tail' => __('This form collects your email so that we can add you to our newsletter list. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', $this->plugin_slug),
 				),
@@ -438,7 +439,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			}
 
 			/**
-			 * Update from =< v2.1.2 to 2.1.5
+			 * Update from <= v2.1.2 to 2.1.5
 			 */
 			if (empty($v2_options['gdpr'])) {
 				$v2_options['gdpr'] = $default_options['gdpr'];
@@ -448,10 +449,17 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			}
 
 			/**
-			 * Update from =< v2.2.1 to 2.2.2
+			 * Update from <= v2.2.1 to 2.2.2
 			 */
 			if (empty($v2_options['modules']['ga_anonymize_ip'])) {
 				$v2_options['modules']['ga_anonymize_ip'] = $default_options['modules']['ga_anonymize_ip'];
+				
+				// update options
+				update_option('wpmm_settings', $v2_options);
+			}
+			
+			if (empty($v2_options['gdpr']['policy_page_target'])) {
+				$v2_options['gdpr']['policy_page_target'] = $default_options['gdpr']['policy_page_target'];
 				
 				// update options
 				update_option('wpmm_settings', $v2_options);
