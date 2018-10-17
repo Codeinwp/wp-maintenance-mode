@@ -84,7 +84,7 @@
 							</div>
 						
 							<?php if(!empty($this->plugin_settings['gdpr']['subscribe_form_tail'])) { ?>
-								<p class="privacy_tail"><?php echo $this->plugin_settings['gdpr']['subscribe_form_tail']; ?></p>
+								<p class="privacy_tail"><?php echo wp_kses($this->plugin_settings['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html()); ?></p>
 						<?php }} ?>
 					</form>
 				</div>
@@ -156,7 +156,7 @@
 								</div>
 							
 								<?php if(!empty($this->plugin_settings['gdpr']['contact_form_tail'])) { ?>
-									<p class="privacy_tail"><?php echo $this->plugin_settings['gdpr']['contact_form_tail']; ?></p>
+									<p class="privacy_tail"><?php echo wp_kses($this->plugin_settings['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html()); ?></p>
 								<?php }} ?>
 							<p class="submit"><input type="submit" value="<?php _e('Send', $this->plugin_slug); ?>"></p>
 
@@ -175,7 +175,7 @@
 						<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a> 
 					<?php } ?>
 					<?php if ($this->plugin_settings['gdpr']['status'] == 1) { ?>
-						<a href="<?php echo $this->plugin_settings['gdpr']['policy_page_link']; ?>"><?php echo $this->plugin_settings['gdpr']['policy_page_label']; ?></a>
+						<a href="<?php echo esc_attr($this->plugin_settings['gdpr']['policy_page_link']); ?>" target="<?php echo !empty($this->plugin_settings['gdpr']['policy_page_target']) && $this->plugin_settings['gdpr']['policy_page_target'] == 1 ? '_blank' : '_self'; ?>"><?php echo esc_html($this->plugin_settings['gdpr']['policy_page_label']); ?></a>
 					<?php } ?>
 				</div>
 			<?php } ?>

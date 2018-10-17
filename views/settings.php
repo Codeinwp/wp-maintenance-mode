@@ -659,6 +659,16 @@
                                     </td>
                                 </tr>
                                 <tr valign="top">
+                                    <th scope="row"><label for="options[gdpr][policy_page_target]"><?php _e('P. Policy link target', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <select name="options[gdpr][policy_page_target]">
+                                            <option value="1" <?php selected($this->plugin_settings['gdpr']['policy_page_target'], 1); ?>><?php _e('New page', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['gdpr']['policy_page_target'], 0); ?>><?php _e('Same page', $this->plugin_slug); ?></option>
+                                        </select>
+                                        <p class="description"><?php _e('Choose how the link will open.', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
                                     <th scope="row">
                                         <label for="options[gdpr][contact_form_tail]"><?php _e('Contact form \'tail\'', $this->plugin_slug); ?></label>
                                     </th>

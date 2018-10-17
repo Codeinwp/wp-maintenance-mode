@@ -427,8 +427,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['gdpr']['status'] = (int)$_POST['options']['gdpr']['status'];
                         $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
                         $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
-                        $_POST['options']['gdpr']['contact_form_tail'] = sanitize_text_field($_POST['options']['gdpr']['contact_form_tail']);
-                        $_POST['options']['gdpr']['subscribe_form_tail'] = sanitize_text_field($_POST['options']['gdpr']['subscribe_form_tail']);
+						$_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
+                        $_POST['options']['gdpr']['contact_form_tail'] = wp_kses($_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html());
+                        $_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses($_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html());
                 }
 
                 $this->plugin_settings[$tab] = $_POST['options'][$tab];
