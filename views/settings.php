@@ -295,7 +295,7 @@
                                     <td id="subscribers_wrap">
                                         <?php
                                         $subscribers_no = wpmm_count_where('wpmm_subscribers', 'id_subscriber');
-                                        echo sprintf(__('You have %d subscriber(s)', $this->plugin_slug), $subscribers_no);
+										echo sprintf(_nx('You have %d subscriber', 'You have %s subscribers', $subscribers_no, 'settings page', $this->plugin_slug), $subscribers_no);
 
                                         if ($subscribers_no > 0) {
                                             ?>

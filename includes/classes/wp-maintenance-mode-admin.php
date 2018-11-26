@@ -161,8 +161,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                 // delete all subscribers
                 $wpdb->query("DELETE FROM {$wpdb->prefix}wpmm_subscribers");
-
-                wp_send_json_success(sprintf(__('You have %d subscriber(s)', $this->plugin_slug), 0));
+		
+				$message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response',$this->plugin_slug), 0);		
+                wp_send_json_success($message);
             } catch (Exception $ex) {
                 wp_send_json_error($ex->getMessage());
             }

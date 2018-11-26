@@ -6,8 +6,8 @@ Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 4.9.7
-Stable tag: 2.2.1
+Tested up to: 5.0-beta5
+Stable tag: 2.2.2
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -76,6 +76,13 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.2.2 (27/11/2018) =
+* Google Analytics module: migrate from analytics.js to gtag.js + add ip anonymization [#178](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/178)
+* GDPR module: accept links inside texareas + add policy link target [#188](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/188)
+* add charset meta tag [#200](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/200)
+* fix PHP Notice:  Undefined index: HTTP_USER_AGENT
+* add plural and single form translation for subscribers number (settings page)
 
 = 2.2.1 (13/07/2018) =
 * replace create_function; solves [#186](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/186) issue and [ticket](https://wordpress.org/support/topic/create_function-deprecated-in-php-7-2-8/) (thanks @ [George Jipa](https://github.com/georgejipa))
