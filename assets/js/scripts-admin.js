@@ -23,6 +23,21 @@ jQuery(function($) {
         $('.tabs-content div' + tab_id).removeClass('hidden');
     });
 
+    /*BUTTONS ENABLED/DISABLED*/
+    $('.switch input').change(function() {
+        if(this.checked) {
+            var text = $(this).parent().find('.text-status span').attr('data-text');
+            var value = $(this).parent().find('.text-status span').text();
+            $(this).parent().find('.text-status span').attr('data-text', value);
+            $(this).parent().find('.text-status span').text(text);
+        } else {
+            var text = $(this).parent().find('.text-status span').attr('data-text');
+            var value = $(this).parent().find('.text-status span').text();
+            $(this).parent().find('.text-status span').attr('data-text', value);
+            $(this).parent().find('.text-status span').text(text);
+        }
+    });
+
     /**
      * COLOR PICKER
      */
@@ -32,7 +47,7 @@ jQuery(function($) {
      * CHOSEN.JS MULTISELECT
      * @used for "Backend role" and "Frontend role" -> General tab
      */
-    $('.chosen-select').chosen({disable_search_threshold: 10});
+    // $('.chosen-select').chosen({disable_search_threshold: 10});
 
     /**
      * BACKGROUND UPLOADER
@@ -76,9 +91,9 @@ jQuery(function($) {
         $('#show_' + selected_val).show();
     };
 
-    show_bg_type($('#design_bg_type').val());
+    show_bg_type($('.design_bg_type:checked').val());
 
-    $('#design_bg_type').change(function() {
+    $('.design_bg_type').change(function() {
         var selected_val = $(this).val();
 
         show_bg_type(selected_val);
@@ -141,7 +156,15 @@ jQuery(function($) {
     /**
      * COUNTDOWN TIMEPICKER
      */
-    $('.countdown_start').datetimepicker({timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy'});
+    $('.countdown_start').datetimepicker({
+        timeFormat: 'HH:mm:ss', 
+        dateFormat: 'dd-mm-yy',
+        showTodayButton: false,
+        showClear: false,
+        changeMonth: true, 
+        changeYear: true, 
+        yearRange: "-90:+00"
+    });
 
 
     /**

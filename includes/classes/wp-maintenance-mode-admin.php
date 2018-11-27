@@ -42,9 +42,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             add_action('wp_ajax_wpmm_subscribers_empty_list', array($this, 'subscribers_empty_list'));
             add_action('wp_ajax_wpmm_dismiss_notices', array($this, 'dismiss_notices'));
             add_action('wp_ajax_wpmm_reset_settings', array($this, 'reset_settings'));
-
-            // Add text to footer
-            add_filter('admin_footer_text', array($this, 'admin_footer_text'), 5);
         }
 
         public static function get_instance() {
@@ -162,7 +159,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 // delete all subscribers
                 $wpdb->query("DELETE FROM {$wpdb->prefix}wpmm_subscribers");
 		
-				$message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response',$this->plugin_slug), 0);		
+				$message = sprintf(_n('You have %d subscriber', 'You have %s subscribers', 0, $this->plugin_slug), 0);		
                 wp_send_json_success($message);
             } catch (Exception $ex) {
                 wp_send_json_error($ex->getMessage());
@@ -425,7 +422,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                     case 'gdpr':
                         //$custom_css = array();
 
-                        $_POST['options']['gdpr']['status'] = (int)$_POST['options']['gdpr']['status'];
+                        $_POST['options']['gdpr']['status'] = (int) $_POST['options']['gdpr']['status'];
                         $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
                         $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
 						$_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
@@ -471,7 +468,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 $data .= (!empty($messages['messages']['01'])) ? "\"{$messages['messages']['01']}\", \n" : '';
                 $data .= (!empty($messages['messages']['02'])) ? "\"{$messages['messages']['02']}\", \n" : '';
                 $data .= (!empty($messages['messages']['03'])) ? "\"{$messages['messages']['03']}\", \n" : '';
-                $data .= "], \"input\": {\"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n";
+                $data .= "], \"input\": {\"label\": \"{$messages['responses']['01']}\", \"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n";
                 $data .= (!empty($messages['messages']['04'])) ? "\"{$messages['messages']['04']}\", \n" : '';
                 $data .= (!empty($messages['messages']['05'])) ? "\"{$messages['messages']['05']}\", \n" : '';
                 $data .= (!empty($messages['messages']['06'])) ? "\"{$messages['messages']['06']}\", \n" : '';
@@ -479,7 +476,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 $data .= "];},\"options\": [{ \"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
                 . "\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \"statement\": [ \n";
                 $data .= (!empty($messages['messages']['08_1'])) ? "\"{$messages['messages']['08_1']}\", \n" : '';
-                $data .= "], \"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
+                $data .= "], \"email\": {\"label\": \"{$messages['responses']['03']}\", \"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
                 $data .= (!empty($messages['messages']['08_2'])) ? "\"{$messages['messages']['08_2']}\", \n" : '';
                 $data .= "];}},1.6: { \"statement\": [ \n";
                 $data .= (!empty($messages['messages']['09'])) ? "\"{$messages['messages']['09']}\", \n" : '';
@@ -624,21 +621,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             update_user_meta($user_id, $this->dismissed_notices_key, implode(',', $dismissed_notices));
         }
 
-        /**
-         * Display custom text on plugin settings page
-         *
-         * @param string $text
-         */
-        public function admin_footer_text($text) {
-            $screen = get_current_screen();
-
-            if ($this->plugin_screen_hook_suffix == $screen->id) {
-                $text = sprintf(__('If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', $this->plugin_slug), '<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>');
-            }
-
-            return $text;
-        }
-
         public function get_is_policy_available() {
             if (function_exists('get_privacy_policy_url')) {
                 return true;
@@ -672,10 +654,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 return __("No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.", $this->plugin_slug);
             }
         }
-    
-    
-    
-    
+
     }
 
 }

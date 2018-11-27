@@ -50,16 +50,39 @@ function wpmm_count_where($table, $field = 'ID', $where = array()) {
  * @since 2.0.4
  * @param array $values
  * @param string $current
- * @param bool $echo
  * @return string html attribute or empty string
  */
 function wpmm_multiselect($values, $current) {
 	foreach ($values as $k => $role) {
 		$is_selected = __checked_selected_helper($role, $current, false, 'selected');
-		if (!empty($is_selected)) {
-			return $is_selected;
-			break;
+
+		if (empty($is_selected)) {
+			continue;
 		}
+
+		return $is_selected;
+		break;
+	}
+}
+
+/**
+ * Output the html checked attribute
+ * 
+ * @since 3.0.0
+ * @param array $values
+ * @param string $current
+ * @return string html attribute or empty string
+ */
+function wpmm_multichecked($values, $current) {
+	foreach ($values as $k => $role) {
+		$is_checked = __checked_selected_helper($role, $current, true, 'checked');
+
+		if (empty($is_checked)) {
+			continue;
+		}
+
+		return $is_checked;
+		break;
 	}
 }
 
@@ -78,18 +101,21 @@ function wpmm_get_banners() {
 				'title' => 'StrictThemes – WordPress Themes',
 				'link' => 'https://themeforest.net/user/strictthemes/portfolio?utf8=%E2%9C%93&order_by=sales&ref=StrictThemes',
 				'image' => $banners_path . 'strictthemes.png',
+				'text' => 'Wordpress Themes Elite Authors',
 				'utm' => false
 			),
 			array(
 				'title' => 'Free Stock Images',
 				'link' => 'https://freephotos.cc/',
 				'image' => $banners_path . 'freephotoscc.jpg',
+				'text' => 'Wordpress Themes Elite Authors', // this description should be changed
 				'utm' => true
 			),
 			array(
 				'title' => 'Postcards',
 				'link' => 'https://designmodo.com/postcards/',
 				'image' => $banners_path . 'postcards.jpg',
+				'text' => 'Email Template Builder',
 				'utm' => true
 			)
 		),
@@ -98,18 +124,21 @@ function wpmm_get_banners() {
 				'title' => 'Free WordPress Theme',
 				'link' => 'https://designmodo.com/free-wordpress-theme/',
 				'image' => $banners_path . 'ayoshop.jpg',
+				'text' => 'Free Wordpress Theme AyoShop',
 				'utm' => true
 			),
 			array(
 				'title' => 'Linecons',
 				'link' => 'https://designmodo.com/linecons-free/',
 				'image' => $banners_path . 'linecons.jpg',
+				'text' => 'Linecons _ Free Vector Icons Pack',
 				'utm' => true
 			),
 			array(
 				'title' => 'Flat UI Free',
 				'link' => 'https://designmodo.com/flat-free/',
 				'image' => $banners_path . 'flatui.jpg',
+				'text' => 'Flat UI Free Framework and Bootstrap Theme Design',
 				'utm' => true
 			)
 		)

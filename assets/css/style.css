@@ -1,3 +1,8 @@
+@font-face{font-family:Ubuntu;src:url(../fonts/Ubuntu/Ubuntu-Regular.woff2) format('woff2'),url(../fonts/Ubuntu/Ubuntu-Regular.woff) format('woff');font-weight:400;font-style:normal}
+@font-face{font-family:Ubuntu;src:url(../fonts/Ubuntu/Ubuntu-Bold.woff2) format('woff2'),url(../fonts/Ubuntu/Ubuntu-Bold.woff) format('woff');font-weight:700;font-style:normal}
+@font-face{font-family:Ubuntu;src:url(../fonts/Ubuntu/Ubuntu-Light.woff2) format('woff2'),url(../fonts/Ubuntu/Ubuntu-Light.woff) format('woff');font-weight:300;font-style:normal}
+@font-face{font-family:Ubuntu;src:url(../fonts/Ubuntu/Ubuntu-Medium.woff2) format('woff2'),url(../fonts/Ubuntu/Ubuntu-Medium.woff) format('woff');font-weight:500;font-style:normal}
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
@@ -72,28 +77,38 @@ body, html {
 body {
     background-color: #fff;
     color: #1b1f23;
-    font-family: Helvetica Neue, Arial, sans-serif;
+    font-family: Ubuntu, Helvetica Neue, Arial, sans-serif;
 }
 .wrap {
-    width: 605px;
+    width: 968px;
     margin: 100px auto 0;
     text-align: center;
 }
 .wrap h1 {
     font-size: 30px;
     font-weight: 700;
-    margin: 0 0 90px;
+    margin: 0 0 60px;
 }
 .wrap h2 {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 400;
-    line-height: 45px;
-    margin: 0 0 80px;
+    line-height: 28px;
+    margin: 0 0 60px;
+    line-height: 40px
 }
+
+.wrap h2 > p:nth-child(1) {
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 40px
+}
+
 .wrap h3 {
-    font-size: 24px;
     font-weight: 400;
     margin: 0 0 45px;
+    text-transform: uppercase;
+    font-size: 18px
 }
 .wrap .author_link {
     margin-top: 15px;
@@ -101,47 +116,84 @@ body {
     margin: 0 0 50px;
 }
 .wrap .author_link a {
-    color: #000;
+    color: #979b9e;
+    margin-right: 5%
+}
+
+.wrap .author_link a:hover {
+    color: #425ceb;
 }
 /**
  * COUNTDOWN
  **/
 
 .wrap .countdown {
-    margin: 0 0 85px;
+    margin: 0 0 60px;
 }
-.wrap .countdown span {
-    font-size: 30px;
+body .wrap .countdown span {
+    /*color: black*/
 }
+
+.countdown-section {
+    display: inline-block;
+    margin: 0 5%
+}
+
+.countdown-section > span {
+    display: block;
+}
+
+.countdown-section > span:nth-child(1) {
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.countdown-section > span:nth-child(2) {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-top: 15px
+}
+
+body .countdown-section .countdown-amount {
+    color: black !important;
+}
+
+body .countdown-section .countdown-period {
+    color: #979b9e !important;
+}
+
 /**
  * SUBSCRIBE FORM
  **/
 .wrap div.subscribe_border {
-    border: 3px solid #e0e0e0;
     box-sizing: border-box;
-    width: 450px;
+    /*width: 450px;*/
     display: inline-block;
 }
 .wrap form.subscribe_form {
-    /* box-sizing: border-box;
-    width: 450px; */
-    margin: 0 0 75px;
-    /* display: inline-block; */
-    /* border: 3px solid #e0e0e0; */
+    margin: 0 0 40px;
     overflow: hidden;
     text-align: center;
+    display: inline-block;
 }
 .wrap .subscribe_form .privacy_checkbox {
     color: #909090;
     max-width: 450px;
-    margin: 15px auto;
+    margin: 15px 0;
     position: relative;
+}
+.privacy_checkbox label {
+    width: 100%;
+    font-size: 14px;
+    display: block;
+    text-align: left;
 }
 .wrap form.subscribe_form .privacy_checkbox label.error {
     display: block !important;
     position: absolute;
     font-size: 11px;
-    left: 39%;
+    top: 17px;
+    color: red;
 }
 .wrap .subscribe_form .privacy_checkbox input {
     float: none;
@@ -149,46 +201,164 @@ body {
 }
 .wrap .subscribe_form .privacy_tail {
     font-size: 11px;
-    color: #909090;
     max-width: 450px;
-    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    line-height: 18px;
+    margin-left: 35px;
+    color: #979b9e;
+
 }
 .wrap form.subscribe_form input {
     margin: 0;
     outline: 0;
     border: 0;
     float: left;
-    font-size: 18px;
-    padding: 20px 25px;
+    color: #979b9e;
+    font-size: 16px;
     box-sizing: content-box;
+    padding-left: 40px;
 }
 .wrap form.subscribe_form input[type="text"] {
-    width: 245px;
+    width: 250px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50px;
+    color: #555;
+    border:1px solid #979b9e;
+    margin-right: 25px;
 }
 .wrap form.subscribe_form input[type="submit"] {
-    background: #000;
+    background: #4361ef;
+    border-radius: 50px;
     color: #fff;
     float: right;
     cursor: pointer;
-    padding: 20px 30px;
-    border-left: 3px solid #e0e0e0;
     transition: all .3s;
+    text-transform: uppercase;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: 500;
+    width: 230px;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+    padding: 0;
 }
-.wrap form.subscribe_form input[type="submit"]:hover {
-    background: #fff;
-    color: #000;
-    border-left: 3px solid #e0e0e0;
-}
+
 .wrap form.subscribe_form input[type="submit"]:active {
     background: #1e1e1e;
     color: #fff;
 }
-.wrap form.subscribe_form .error {
+.wrap form.subscribe_form input[type="text"].error {
     color: red;
+    border: 1px solid red
 }
 .wrap form.subscribe_form label.error {
     display: none !important;
 }
+
+.privacy_checkbox label:not(.error) {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+/*NORMAL CHECKBOX*/
+
+.privacy_checkbox label {
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+    padding-top: 4px;   
+}
+
+.privacy_checkbox input {
+    margin-right: 20px;
+    display: none;
+}
+
+/* Create a custom checkbox */
+.privacy_checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    border:2px solid #979b9e;
+    border-radius:5px;
+    background: transparent;
+}
+
+.background .privacy_checkbox .checkmark {
+    border:2px solid white;
+}
+
+.contact .privacy_checkbox .checkmark {
+    border-color: #909090;
+    border-width: 1px
+}
+
+/* On mouse-over, add a grey background color */
+.privacy_checkbox label:hover input ~ .checkmark {
+}
+
+/* When the checkbox is checked, add a blue background */
+.privacy_checkbox label input:checked ~ .checkmark {
+
+}
+
+.background .contact_form .privacy_checkbox label input:checked ~ .checkmark {
+    background-color: #4361ef;
+    border: 0;
+    height: 20px;
+    width: 20px;
+
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.privacy_checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.privacy_checkbox label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.privacy_checkbox label .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 4px;
+    height: 8px;
+    border: 2px solid #979b9e;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.background .privacy_checkbox label .checkmark:after {
+    border-color: white;
+}
+
+.contact_form .privacy_checkbox label .checkmark:after {
+    left: 7px;
+    top: 4px;
+}
+
 /**
  * LOGIN FORM
  **/
@@ -227,16 +397,13 @@ body {
  **/
 
 .wrap .social {
-    margin: 0 0 70px;
+    margin: 0 0 20px;
 }
 .wrap .social a {
     width: 22px;
     height: 22px;
-    margin: 0 0 20px 55px;
-    background-image: url('../images/icn_sprite.png');
-    background-repeat: no-repeat;
+    margin: 0 0 20px 15px;
     display: inline-block;
-    text-indent: -999em;
 }
 .wrap .social a:first-of-type {
     margin: 0 0 20px 0;
@@ -249,9 +416,6 @@ body {
 }
 .wrap .social .instagram {
     background-position: -707px 0;
-}
-.wrap .social .tw {
-    background-position: -162px 0px;
 }
 .wrap .social .rss {
     background-position: -402px 0;
@@ -271,17 +435,32 @@ body {
 .wrap .social .linkedin {
     background-position: -633px 0;
 }
+
+.wrap .social svg {
+    width: auto;
+    height: 20px;
+}
+
+.background .wrap .social path {
+    fill: #979b9e
+}
 /**
  * CONTACT FORM
  **/
 
 .wrap .contact_us {
-    color: #000;
-    border: 3px solid #000;
-    font-size: 18px;
-    padding: 15px 40px;
+    color: white;
+    background-color: #4361ef;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 230px;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
     display: inline-block;
     margin: 0 0 70px;
+    text-transform: uppercase;
 }
 .wrap .contact_us:hover {
     background: #000;
@@ -299,6 +478,19 @@ body {
     right: 0;
     background: rgba(27, 31, 35, 0.95);
 }
+
+.contact svg {
+    width: 40px;
+    height: 40px;
+}
+
+body .wrap .contact h3 {
+    color: #212121;
+    text-transform: uppercase;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
 .contact label.error {
     color: red;
     float: left;
@@ -307,71 +499,83 @@ body {
 }
 .close-contact_form {
     position: absolute;
-    left: 46%;
-    top: -60px;
+    top: 15px;
+    right: 15px;
     cursor: pointer;
 }
-.close-contact_form img { width: 40px; height: 40px; }
+.close-contact_form img { width: 15px; height: 15px; }
 .contact .form {
-    width: 520px;
+    width: 600px;
     text-align: center;
-    padding: 40px;
+    padding: 40px 60px;
     background: #f9f9f9;
     box-sizing: border-box;
     margin: 100px auto;
     transition: 0.2s transform ease-in-out;
+    border-radius: 20px;
 }
 .contact .form input[type=text],
 .contact .form input[type=submit],
 .contact .form textarea {
-    padding: 15px 20px;
+    padding: 15px 20px 15px 40px;
     margin: 0;
     outline: 0;
     width: 100%;
     background: #f9f9f9;
-    border: 3px solid #e0e0e0;
-    font-size: 18px;
-    font-family: Helvetica Neue, Arial, sans-serif;
+    border: 1px solid #979b9e;
+    font-size: 16px;
     box-sizing: border-box;
     resize: none;
+    font-family: Ubuntu, Helvetica Neue, Arial, sans-serif;
+    color: #979b9e;
 }
+
+.contact .form input[type=text],
+.contact .form input[type=submit] {
+    border-radius: 50px;
+}
+
+.contact .form textarea {
+    border-radius: 20px
+}
+
 .contact .form label#content-error { margin-bottom: 10px; }
 .contact .form .privacy_checkbox {
     margin-top: 20px;
     clear: both;
-    color: #909090;
+    color: #979b9e;
     font-size: 15px;
     position: relative;
 }
 .contact .form .privacy_checkbox label#acceptance-error {
     position: absolute;
     top: 10px;
-    left: 39%;
 }
 .contact .form .privacy_checkbox input {
     transform: translatey(-2px);
 }
 .contact .form .privacy_tail {
-    font-size: 11px;
-    color: #c7c7c7;
+    font-size: 14px;
+    color: #979b9e;
     margin-top: 16px;
-    line-height: 14px;
+    line-height: 18px;
+    text-align: left;
 }
 .contact .form textarea {
     height: 175px;
     padding: 20px;
 }
 .contact .form input[type="text"]::-webkit-input-placeholder, .contact .form textarea::-webkit-input-placeholder {
-    color: #dadada;
+    color: #979b9e;
 }
 .contact .form input[type="text"]::-moz-input-placeholder, .contact .form textarea::-moz-input-placeholder {
-    color: #dadada;
+    color: #979b9e;
 }
 .contact .form input[type="text"]::-ms-input-placeholder, .contact .form textarea::-ms-input-placeholder {
-    color: #dadada;
+    color: #979b9e;
 }
 .contact .form .col {
-    width: 205px;
+    width: 230px;
     margin: 0 0 30px;
     display: inline-block;
     float: left;
@@ -384,14 +588,20 @@ body {
     text-align: center;
     clear: left;
 }
-.contact .form .submit input {
+body .contact .form .submit input[type="submit"] {
     cursor: pointer;
     display: inline-block;
-    background: #1b1f24;
+    background: #4361ef;
     color: #fff;
     border: 0;
-    padding: 20px 45px;
-    width: auto;
+    font-size: 16px;
+    font-weight: 500;
+    width: 230px;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+    text-transform: uppercase;
+    padding: 0;
 }
 /*======= MOVE ANIMATION =======*/
 
@@ -427,15 +637,19 @@ body {
     background-size: cover;
 }
 .background .countdown span {
-    color: #fff;
+    color: #fff !important;
 }
-.background form.subscribe_form input[type="submit"] {
-    color: #000;
-    background: #fff;
+
+.background .wrap h3, .background .wrap h2  {
+    color: white;
 }
+
+.background .subscribe_form .privacy_checkbox label, .background .wrap .subscribe_form .privacy_tail {
+    color: white
+}
+
 .background form.subscribe_form input[type="text"] {
-    background: transparent;
-    color: #fff;
+    border: 0;
 }
 .background form.subscribe_form input.error[type="text"] {
     color: red;
@@ -454,6 +668,17 @@ body {
     border-color: #fff;
 }
 
+.background .wrap .social path, .background .wrap .social rect {
+    fill: white;
+}
+
+.background .wrap .author_link a {
+    color: white
+}
+
+.background .wrap .author_link a:hover {
+    color: #979b9e;
+}
 
 /**
  * MEDIA QUERIES (RESPONSIVE)

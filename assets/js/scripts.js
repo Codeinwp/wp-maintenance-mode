@@ -9,8 +9,6 @@ jQuery(function($) {
 
         countdown_el.countdown({
             until: countDate,
-            compact: true,
-            layout: '<span class="day">{dn}</span> <span class="separator">:</span> <span class="hour">{hnn}</span> <span class="separator">:</span> <span class="minutes">{mnn}</span> <span class="separator">:</span> <span class="seconds">{snn}</span>'
         });
     }
 
