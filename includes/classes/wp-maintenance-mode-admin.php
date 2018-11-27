@@ -252,14 +252,14 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 $tab = $_POST['tab'];
                 switch ($tab) {
                     case 'general':
-                        $_POST['options']['general']['status'] = (int) $_POST['options']['general']['status'];
+                        $_POST['options']['general']['status'] = isset($_POST['options']['general']['status']) ? (int) $_POST['options']['general']['status'] : 0;
                         if (!empty($_POST['options']['general']['status']) && $_POST['options']['general']['status'] == 1) {
                             $_POST['options']['general']['status_date'] = date('Y-m-d H:i:s');
                         }
-                        $_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
+                        $_POST['options']['general']['bypass_bots'] = isset($_POST['options']['general']['bypass_bots']) ? (int) $_POST['options']['general']['bypass_bots'] : 0;
                         $_POST['options']['general']['backend_role'] = !empty($_POST['options']['general']['backend_role']) ? $_POST['options']['general']['backend_role'] : array();
                         $_POST['options']['general']['frontend_role'] = !empty($_POST['options']['general']['frontend_role']) ? $_POST['options']['general']['frontend_role'] : array();
-                        $_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
+                        $_POST['options']['general']['meta_robots'] = isset($_POST['options']['general']['meta_robots']) ? (int) $_POST['options']['general']['meta_robots'] : 0;
                         $_POST['options']['general']['redirection'] = esc_url($_POST['options']['general']['redirection']);
                         if (!empty($_POST['options']['general']['exclude'])) {
                             $exclude_array = explode("\n", $_POST['options']['general']['exclude']);
@@ -268,8 +268,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         } else {
                             $_POST['options']['general']['exclude'] = array();
                         }
-                        $_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
-                        $_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
+                        $_POST['options']['general']['notice'] = isset($_POST['options']['general']['notice']) ? (int) $_POST['options']['general']['notice'] : 0;
+                        $_POST['options']['general']['admin_link'] = isset($_POST['options']['general']['admin_link']) ? (int) $_POST['options']['general']['admin_link'] : 0;
 
                         // delete cache when is already activated, when is activated and when is deactivated
                         if (
@@ -332,7 +332,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $custom_css = array();
 
                         // COUNTDOWN & CUSTOM CSS
-                        $_POST['options']['modules']['countdown_status'] = (int) $_POST['options']['modules']['countdown_status'];
+                        $_POST['options']['modules']['countdown_status'] = isset($_POST['options']['modules']['countdown_status']) ? (int) $_POST['options']['modules']['countdown_status'] : 0;
                         $_POST['options']['modules']['countdown_start'] = sanitize_text_field($_POST['options']['modules']['countdown_start']);
                         $_POST['options']['modules']['countdown_details'] = array_map('trim', $_POST['options']['modules']['countdown_details']);
                         $_POST['options']['modules']['countdown_details']['days'] = isset($_POST['options']['modules']['countdown_details']['days']) && is_numeric($_POST['options']['modules']['countdown_details']['days']) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
@@ -344,7 +344,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         }
 
                         // SUBSCRIBE & CUSTOM CSS
-                        $_POST['options']['modules']['subscribe_status'] = (int) $_POST['options']['modules']['subscribe_status'];
+                        $_POST['options']['modules']['subscribe_status'] = isset($_POST['options']['modules']['subscribe_status']) ? (int) $_POST['options']['modules']['subscribe_status'] : 0;
                         $_POST['options']['modules']['subscribe_text'] = sanitize_text_field($_POST['options']['modules']['subscribe_text']);
                         if (!empty($_POST['options']['modules']['subscribe_text_color'])) {
                             $_POST['options']['modules']['subscribe_text_color'] = sanitize_text_field($_POST['options']['modules']['subscribe_text_color']);
@@ -352,8 +352,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         }
 
                         // SOCIAL NETWORKS
-                        $_POST['options']['modules']['social_status'] = (int) $_POST['options']['modules']['social_status'];
-                        $_POST['options']['modules']['social_target'] = (int) $_POST['options']['modules']['social_target'];
+                        $_POST['options']['modules']['social_status'] = isset($_POST['options']['modules']['social_status']) ? (int) $_POST['options']['modules']['social_status'] : 0;
+                        $_POST['options']['modules']['social_target'] = isset($_POST['options']['modules']['social_target']) ? (int) $_POST['options']['modules']['social_target'] : 0;
                         $_POST['options']['modules']['social_github'] = sanitize_text_field($_POST['options']['modules']['social_github']);
                         $_POST['options']['modules']['social_dribbble'] = sanitize_text_field($_POST['options']['modules']['social_dribbble']);
                         $_POST['options']['modules']['social_twitter'] = sanitize_text_field($_POST['options']['modules']['social_twitter']);
@@ -364,13 +364,13 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['modules']['social_linkedin'] = sanitize_text_field($_POST['options']['modules']['social_linkedin']);
 
                         // CONTACT
-                        $_POST['options']['modules']['contact_status'] = (int) $_POST['options']['modules']['contact_status'];
+                        $_POST['options']['modules']['contact_status'] = isset($_POST['options']['modules']['contact_status']) ? (int) $_POST['options']['modules']['contact_status'] : 0;
                         $_POST['options']['modules']['contact_email'] = sanitize_text_field($_POST['options']['modules']['contact_email']);
                         $_POST['options']['modules']['contact_effects'] = sanitize_text_field($_POST['options']['modules']['contact_effects']);
 
                         // GOOGLE ANALYTICS
-                        $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
-						$_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
+                        $_POST['options']['modules']['ga_status'] = isset($_POST['options']['modules']['ga_status']) ? (int) $_POST['options']['modules']['ga_status'] : 0;
+						$_POST['options']['modules']['ga_anonymize_ip'] = isset($_POST['options']['modules']['ga_anonymize_ip']) ? (int) $_POST['options']['modules']['ga_anonymize_ip'] : 0;
                         $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
 
                         $_POST['options']['modules']['custom_css'] = $custom_css;
@@ -383,7 +383,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                     case 'bot':
                         $custom_css = array();
 
-                        $_POST['options']['bot']['status']           = (int) $_POST['options']['bot']['status'];
+                        $_POST['options']['bot']['status']           = isset($_POST['options']['bot']['status']) ? (int) $_POST['options']['bot']['status'] : 0;
 
                         $_POST['options']['bot']['name']             = sanitize_text_field($_POST['options']['bot']['name']);
 
@@ -422,10 +422,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                     case 'gdpr':
                         //$custom_css = array();
 
-                        $_POST['options']['gdpr']['status'] = (int) $_POST['options']['gdpr']['status'];
+                        $_POST['options']['gdpr']['status'] = isset($_POST['options']['gdpr']['status']) ? (int) $_POST['options']['gdpr']['status'] : 0;
                         $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
                         $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
-						$_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
+						$_POST['options']['gdpr']['policy_page_target'] = isset($_POST['options']['gdpr']['policy_page_target']) ? (int) $_POST['options']['gdpr']['policy_page_target'] : 0;
                         $_POST['options']['gdpr']['contact_form_tail'] = wp_kses($_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html());
                         $_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses($_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html());
                 }
@@ -639,10 +639,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $url = $this->get_policy_link();
             if($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] === '') {
                 if($url === '') { // No value and feature available
-                    return __("Your WordPress version supports Privacy settings but you haven't set any privacy policy page yet. Go to Settings ➡ Privacy to set one.", $this->plugin_slug);
+                    return __("Your WordPress version supports Privacy settings but you haven't set any privacy policy page yet. Go to Settings âž¡ Privacy to set one.", $this->plugin_slug);
                 }
                 else { // Value and feature available
-                    return sprintf(__('The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', $this->plugin_slug), $url, '<button>', '</button>');
+                    return sprintf(__('The plugin detected this Privacy page: %1$s â€“ %2$sUse this url%3$s', $this->plugin_slug), $url, '<button>', '</button>');
                 }
             }
             elseif($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] != '') { // Feature available and value set
