@@ -639,10 +639,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $url = $this->get_policy_link();
             if($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] === '') {
                 if($url === '') { // No value and feature available
-                    return __("Your WordPress version supports Privacy settings but you haven't set any privacy policy page yet. Go to Settings âž¡ Privacy to set one.", $this->plugin_slug);
+                    return __("Your WordPress version supports Privacy settings but you haven't set any privacy policy page yet. Go to Settings ➡ Privacy to set one.", $this->plugin_slug);
                 }
                 else { // Value and feature available
-                    return sprintf(__('The plugin detected this Privacy page: %1$s â€“ %2$sUse this url%3$s', $this->plugin_slug), $url, '<button>', '</button>');
+                    return sprintf(__('The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', $this->plugin_slug), $url, '<button>', '</button>');
                 }
             }
             elseif($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] != '') { // Feature available and value set
