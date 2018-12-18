@@ -47,8 +47,22 @@
    border-radius: 10px;
    background-color: rgb(255, 255, 255);
    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.2);
-   max-width: 720px;
-   padding-left: 110px;
+   max-width: 600px;
+   /*padding-left: 110px;*/
+ }
+
+ .chat-container > .chat-message-wrapper:nth-child(8) {
+  margin-bottom: 0;
+ }
+
+  .chat-container > .chat-message-wrapper:nth-child(8) + p {
+  margin-top: 16px;
+ }
+
+ .chat-container > .chat-message-wrapper:nth-child(8) .chat-message {
+  border-radius: 0;
+  border-top-right-radius: 20px;
+  width: 80%;
  }
 
  .chat-message-wrapper {
@@ -57,11 +71,11 @@
    align-items: center;
    margin-bottom: 16px;
    width: 100%;
-   padding-left: 80px;
+   padding-left: 60px;
  }
  .chat-message-wrapper .chat-message {
-   max-width: 100%;
-   width: 100%;
+   max-width: 80%;
+   width: auto;
    color: #3a3e45;
    line-height: 24px;
  }
@@ -69,7 +83,6 @@
  .absolute-wrapper {
    position: absolute;
    left: 0;
-   bottom: 20%;
  }
 
  .message-details {
@@ -79,7 +92,6 @@
  /* Show bot-avatar on last message. */
  .chat-message-wrapper .bot-avatar {
    display: none;
-   top: -18px;
  }
  .chat-message-wrapper:last-child .bot-avatar {
    display: block;
@@ -89,6 +101,7 @@
  .chat-message-wrapper .message-date {
    font-size: 12px;
    color: #c3c3c3;
+   display: none;
  }
 
  .chat-message-wrapper p,
@@ -107,12 +120,11 @@ CHAT BOT STYLING
   max-width: 700px;
   width: 100%;
   height: 460px;
-  padding-top: 40px;
-  padding-right: 40px;
-  padding-bottom: 40px;
-  padding-left: 75px;
-  overflow-y: scroll;
+  padding: 40px;
+  overflow-y: auto;
   overflow-x: hidden;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px #ccc;
 }
 
 .typing-wrapper {
@@ -124,18 +136,12 @@ CHAT BOT STYLING
 }
 
 .bot-avatar {
-  width: 60px;
-  height: 60px;
-
-  position: absolute;
-  left: -70px;
-  top: -10px;
-
+  width: 50px;
+  height: 50px;
   /*background-image: url(/images/user-avatar.jpg);*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -143,6 +149,12 @@ CHAT BOT STYLING
 .typing-wrapper .bot-name {
   margin-right: 22px;
   font-weight: bold;
+  text-indent: -999px;
+  /*background: url(../images/chat-bot.svg) no-repeat;
+  background-size: 100%;
+  width: 50px;
+  height: 50px;
+  text-indent: -999px*/
 }
 
 
@@ -151,7 +163,8 @@ CHAT BOT STYLING
 */
 .chat-message {
   background-color: #f4f4f4;
-  border-radius: 5px;
+  border-radius: 20px;
+  border-top-left-radius: 0;
   padding: 15px;
   max-width: 75%;
   clear: both;
@@ -160,6 +173,7 @@ CHAT BOT STYLING
   animation: fade-in-left 0.2s linear both;
 }
 
+/*
 .chat-message:before {
   content: ' ';
   position: absolute;
@@ -169,7 +183,7 @@ CHAT BOT STYLING
   bottom: 20%;
   border: 10px solid;
   border-color: transparent #f4f4f4 transparent transparent;
-}
+}*/
 
 
 /*
@@ -196,6 +210,9 @@ CHAT BOT STYLING
   float: right;
   padding: 15px;
   font-size: 14px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0;
+  background: #4361ef;
 }
 
 .chat-message a {
@@ -212,26 +229,39 @@ CHAT BOT STYLING
 // USER CHOICES BUTTONS
 */
 .choices {
-  display: flex !important;
-  justify-content: flex-end;
+  padding-left: 60px;
+  width: 100%;
+
 }
 .choices .chat-message {
   background: none;
-  color: #6ecff9;
-  border: 2px solid #6ecff9;
+  border: 1px solid #d7d7dc;
   cursor: pointer;
   animation: fadeInGrownIn 0.5s ease;
   float: none;
   display: inline-block;
   transition: all 0.3s ease;
+  border-radius: 0;
+  border-bottom-right-radius: 20px;
+  width: 40%;
+  clear: none;
+
 }
 
 .choices .chat-message:first-child {
-  margin-right: 10px;
+  border-bottom-right-radius: 20px;
+  color: #4361ef;
+}
+
+.choices .chat-message:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 0;
+  color: #5f5f67;
+  float: left;
 }
 
 .choices .chat-message:hover {
-  background: #6ecff9;
+  background: #4361ef;
   color: #fff;
 }
 
@@ -240,38 +270,58 @@ CHAT BOT STYLING
 // NAME/EMAIL INPUT
 */
 
+
 .input .chat-message.user {
-  background: transparent;
-  border-bottom: 2px solid #6ecff9;
+  background: #4361ef;
   border-radius: 0;
-  padding: 10px;
+  padding: 15px 25px;
+  border-radius: 20px;
+  border-top-right-radius: 0;  
 }
 
 .input { animation: fadeInGrownIn 0.5s ease; }
 
+.input label {
+	display: block;
+	margin-bottom: 10px
+}
+
 .input input {
   border: none;
   border-color: #fff;
-  color: #000;
-  background: none;
+  color: #cbd3fa;
+  background: #7d91f3;
   box-shadow: none;
-  margin-right: 60px;
+  margin-right: 10px;
   font-size: 14px;
+  border-radius:20px;
+  height: 25px;
+  padding-left: 20px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .input input:focus { outline: none; }
-.input input::-webkit-input-placeholder { color: #c3c3c3; }
-.input input:-ms-input-placeholder { color: #c3c3c3; }
-.input input::-moz-placeholder { color: #c3c3c3; }
-.input input:-moz-placeholder { color: #c3c3c3; }
+.input input::-webkit-input-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
+.input input:-ms-input-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
+.input input::-moz-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
+.input input:-moz-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
 
 .input a {
   color: #6ecff9;
+  display: inline-block;
+  vertical-align: middle;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
+  text-indent: -999px;
+  background: url(../images/paper-lane.svg) no-repeat;
+  background-size: 100%;
+  background-position: 50%;
+  width: 16px;
+  height: 30px;
 }
 
 .bot-error {
@@ -290,10 +340,10 @@ CHAT BOT STYLING
 */
 
 .typing {
-  border-radius: 5px;
-  background-color: #fff;
+  border-radius: 20px;
+  background-color: #4361ef;
   box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.1);
-  width: 120px;
+  width: 100px;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -314,14 +364,14 @@ CHAT BOT STYLING
 }
 
 .typing .dot:nth-child(1) {
-  background-color: #4f3beb;
+  background-color: #6880f2;
 }
 .typing .dot:nth-child(2) {
-  background-color: #6292f3;
+  background-color: #a1b0f7;
   animation-delay: -0.7s;
 }
 .typing .dot:nth-child(3) {
-  background-color: #6ecff9;
+  background-color: #ffffff;
   animation-delay: -0.5s;
   margin-right: 0;
 }
@@ -378,9 +428,9 @@ CHAT BOT STYLING
 
 /* Wave Dots Animation ----- */
 @keyframes wave {
-	0%, 60%, 100% { transform: initial; }
+  0%, 60%, 100% { transform: initial; }
 
-	30% {	transform: translateY(-10px); }
+  30% { transform: translateY(-10px); }
 }
 
 /*

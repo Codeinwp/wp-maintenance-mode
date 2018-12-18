@@ -157,10 +157,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 						'10' => __("Have a great day!", $this->plugin_slug)
 					),
 					'responses' => array(
-						'01' => __("Type your name here…", $this->plugin_slug),
+						'01' => __("Type your name here", $this->plugin_slug),
 						'02_1' => __("Tell me more", $this->plugin_slug),
 						'02_2' => __("Boring", $this->plugin_slug),
-						'03' => __("Type your email here…", $this->plugin_slug)
+						'03' => __("Type your email here", $this->plugin_slug)
 					),
 					'custom_css' => array()
 				),
@@ -417,8 +417,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				// set options
 				add_option('wpmm_settings', $v2_options);
 			}
-			
-			$should_update = false;
 
 			/**
 			 * Update from <= v2.0.6 to v2.0.7
@@ -455,14 +453,14 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			 */
 			if (empty($v2_options['modules']['ga_anonymize_ip'])) {
 				$v2_options['modules']['ga_anonymize_ip'] = $default_options['modules']['ga_anonymize_ip'];
-				
+
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
-			
+
 			if (empty($v2_options['gdpr']['policy_page_target'])) {
 				$v2_options['gdpr']['policy_page_target'] = $default_options['gdpr']['policy_page_target'];
-				
+
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
@@ -591,6 +589,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 				}
 				if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
+					if (WPMM_ASSETS_SUFFIX === '') {
+						$scripts['bot-async'] = WPMM_JS_URL . 'bot.async.js';
+					}
+
 					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
 					add_action('wpmm_before_scripts', array($this, 'add_bot_extras'));
 				}
@@ -642,8 +644,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				'validationName' => __('Please type in your name.', $this->plugin_slug),
 				'validationEmail' => __('Please type in a valid email address.', $this->plugin_slug),
 				'uploadsBaseUrl' => trailingslashit($upload_dir['baseurl']),
-				'typeName' => __('Type your name here…', $this->plugin_slug),
-				'typeEmail' => __('Type your email here…', $this->plugin_slug),
+				'typeName' => __('Type your name here', $this->plugin_slug),
+				'Name' => __('Name', $this->plugin_slug),
+				'NameEmail' => __('Email', $this->plugin_slug),
+				'typeEmail' => __('Type your email here', $this->plugin_slug),
 				'send' => __('Send', $this->plugin_slug)
 			);
 			echo "<script type='text/javascript'>" .
@@ -833,7 +837,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			) {
 				$ga_options['anonymize_ip'] = true;
 			}
-			
+
 			$ga_options = (object) $ga_options;
 
 			// show google analytics javascript snippet

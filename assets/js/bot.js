@@ -29,7 +29,7 @@ function renderStatement(statement) {
 }
 
 function showTyping() {
-    jQuery('.chat-container').append('<div class="typing-wrapper"><div class="bot-avatar"></div><span class="bot-name">' + botName +'</span><p class="chat-message typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></p></div>');
+    jQuery('.chat-container').append('<div class="typing-wrapper"><div class="bot-avatar"></div><span class="bot-name">' + botName + '</span><p class="chat-message typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></p></div>');
 }
 
 function hideTyping() {
@@ -276,11 +276,16 @@ function showStatement(pos) {
             var inputBubble = jQuery('<p/>', {
                 "class": "chat-message user"
             }).appendTo(form);
+            
+            // Create a label, append to user bubble
+            var inputLabel = jQuery('<label/>', {
+                text: option.label,
+            }).appendTo(inputBubble);
 
             // Create an input, append to user bubble
             var input = jQuery('<input/>', {
                 type: 'text',
-                placeholder: botVars.typeName,
+                placeholder: botVars.Name,
                 name: option['name'],
                 autocomplete: 'off',
                 required: true
@@ -325,12 +330,17 @@ function showStatement(pos) {
             // Create a user bubble, append to form
             var inputBubble = jQuery('<p/>', {
                 "class": "chat-message user"
-            }).appendTo(form);
+            }).appendTo(form);         
+            
+            // Create a label, append to user bubble
+            var inputLabel = jQuery('<label/>', {
+                text: option.label,
+            }).appendTo(inputBubble);
 
             // Create email input, append to user bubble
             var input = jQuery('<input/>', {
                 type: 'email',
-                placeholder: botVars.typeEmail,
+                placeholder: botVars.NameEmail,
                 name: option['email'],
                 autocomplete: 'off'
             }).appendTo(inputBubble);
