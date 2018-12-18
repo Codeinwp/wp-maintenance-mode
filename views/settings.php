@@ -99,6 +99,9 @@
 										</label>
 									<?php } ?>
 								</div>
+								<div class="info-role">
+									<span class="backend-info-role">Choose at least one role</span>
+								</div>
 							</td>
 							</tr>
 							<tr valign="top">
@@ -181,8 +184,10 @@
 								<td colspan="2">
 									<?php wp_nonce_field('tab-general'); ?>
 									<div class="action-buttons">
-										<input type="hidden" value="general" name="tab" />
-										<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
+										<div class="save-settings-wrapper">
+											<input type="hidden" value="general" name="tab" />
+											<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
+										</div>
 										<div class="reset-settings-wrapper">
 											<input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="general" name="submit">
 										</div>
@@ -208,7 +213,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Content', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -254,7 +259,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Background', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -316,7 +321,9 @@
 											<tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'predefined' ? 'hidden' : ''; ?>" id="show_predefined">
 												<th scope="row">
 													<label for="options[design][bg_predefined]"><?php _e('Choose background', $this->plugin_slug); ?></label>
-													<span class="info"></span>
+													<div class="info">
+														<span class="tooltip-info">Source free photos</span>
+													</div>
 											<p class="description">
 												* <?php echo sprintf(__('source <a href="%s" target="_blank">Free Photos</a>', $this->plugin_slug), 'http://designmodo.com/free-photos/' . WPMM_AUTHOR_UTM); ?>
 											</p>
@@ -344,8 +351,10 @@
 									<td colspan="2">
 										<?php wp_nonce_field('tab-design'); ?>
 										<div class="action-buttons">
-											<input type="hidden" value="design" name="tab" />
-											<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+											<div class="save-settings-wrapper">
+												<input type="hidden" value="design" name="tab" />
+												<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+											</div>
 											<div class="reset-settings-wrapper">
 												<input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit">
 											</div>
@@ -370,7 +379,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Countdown', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -417,7 +426,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Subscribe', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -468,7 +477,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Social Networks', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -600,7 +609,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Contact', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -668,7 +677,7 @@
 									<td class="wrapper">
 										<table>
 											<tr>
-												<td>
+												<td colspan="2">
 													<h3><?php _e('Google Analytics', $this->plugin_slug); ?></h3>
 												</td>
 											</tr>
@@ -700,7 +709,10 @@
 											<tr valign="top">
 												<th scope="row"><label for="options[modules][ga_code]"><?php _e('Tracking code', $this->plugin_slug); ?></label></th>
 												<td>
-													<input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['ga_code'])); ?>" name="options[modules][ga_code]" />
+													<div class="tracking-info">
+														<span class="tracking-code-info">Paste here your code</span>
+													</div>
+													<input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['ga_code'])); ?>" name="options[modules][ga_code]" placeholder=" UA-XXXXXXXX, UA-XXXXXXXX-XXXX"/>
 													<p class="description"><?php _e('Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid', $this->plugin_slug); ?></p>
 												</td>
 											</tr>
@@ -708,8 +720,10 @@
 												<td colspan="2">
 													<?php wp_nonce_field('tab-modules'); ?>
 													<div class="action-buttons">
-														<input type="hidden" value="modules" name="tab" />
-														<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+														<div class="save-settings-wrapper">
+															<input type="hidden" value="modules" name="tab" />
+															<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+														</div>
 														<div class="reset-settings-wrapper">
 															<input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit">
 														</div>
@@ -934,8 +948,10 @@
 								<td colspan="2">
 									<?php wp_nonce_field('tab-bot'); ?>
 									<div class="action-buttons">
-										<input type="hidden" value="bot" name="tab" />
-										<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+										<div class="save-settings-wrapper">
+											<input type="hidden" value="bot" name="tab" />
+											<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
+										</div>
 										<div class="reset-settings-wrapper">
 											<input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit">
 										</div>
@@ -1043,8 +1059,10 @@
 								<td colspan="2">
 									<?php wp_nonce_field('tab-gdpr'); ?>
 									<div class="action-buttons">
-										<input type="hidden" value="gdpr" name="tab" />
-										<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
+										<div class="save-settings-wrapper">
+											<input type="hidden" value="gdpr" name="tab" />
+											<input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
+										</div>
 										<div class="reset-settings-wrapper">
 											<input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit">
 										</div>

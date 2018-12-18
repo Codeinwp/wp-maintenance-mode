@@ -180,44 +180,44 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 }
 
 .general span {
-    background-position: 2px -30px;
+    background:  url('../images/icons/General.svg') no-repeat;
 }
 
 .general:hover span, .nav-tab-active.general span {
-    background-position: 2px 0;
+	background:  url('../images/icons/General_active.svg') no-repeat;
 }
 
 .bot span {
-  background-position: -32px -30px
+	background:  url('../images/icons/Manage_bot.svg') no-repeat;
 }
 
 .bot:hover span, .nav-tab-active.bot span {
-  background-position: -32px 0
+	background:  url('../images/icons/Manage_bot_active.svg') no-repeat;
 }
 
 
 .modules span {
-    background-position: -66px -30px;
+	background:  url('../images/icons/Modules.svg') no-repeat;
 }
 
 .modules:hover span, .nav-tab-active.modules span {
-    background-position: -66px 0;
+	background:  url('../images/icons/Modules_active.svg') no-repeat;
 }
 
 .design span  {
-    background-position: -95px -30px;
+	background:  url('../images/icons/Design.svg') no-repeat;
 }
 
 .design:hover span, .nav-tab-active.design span {
-    background-position: -95px 0;
+	background:  url('../images/icons/Design_active.svg') no-repeat;
 }
 
 .gdpr span {
-    background-position: -122px -30px;
+	background:  url('../images/icons/GDPR.svg') no-repeat;
 }
 
 .gdpr:hover span, .nav-tab-active.gdpr span {
-    background-position: -122px 0;
+	background:  url('../images/icons/GDPR_active.svg') no-repeat;
 }
 
 .nav-tab-wrapper .nav-tab-active {
@@ -334,7 +334,7 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 
 .form-table td h4 {
   margin-top: 0;
-  width: 45%;
+  width: 70%;
   display: block;
   font-size: 18px;
   color: black;
@@ -342,7 +342,7 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 }
 
 .bot-description, .gdpr-description {
-  width: 45%;
+  width: 75%;
 }
 
 .form-table td .bot-description p, .form-table td .gdpr-description p {
@@ -431,24 +431,26 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 
 .wp-picker-container .wp-color-result.button {
   height: 25px;
-  border-radius: 5px;
   box-shadow: none;
-  border: 0;
   width: 119px;
   position: relative;
   border:1px solid  #d9d9d9;
 }
 
+.wp-picker-container .wp-color-result.button:hover {
+	box-shadow: 0 1px 2px 0 rgba(164,164,164,0.3);
+}
+
 .tabs-content .button-primary {
     border-radius: 50px;
-    background-image: linear-gradient(to right, #76c5ff, #0696ff);
+    background-image: linear-gradient(to right, #78c6ff, #0294ff)!important;
     border: 0;
     box-shadow: none;
     text-shadow: none;
     padding: 10px 20px;
     height: auto;
     line-height: normal;
-    box-shadow: 2px 2px 5px #999;
+    box-shadow: none;
     font-weight: bold;
     display: inline-block;
     vertical-align: middle;
@@ -457,11 +459,13 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 }
 
 .tabs-content .button-primary:active, .tabs-content .button-primary:focus {
-    background-image: linear-gradient(to right, #76c5ff, #0696ff);
+    background-image: linear-gradient(to right, #78c6ff, #0294ff)!important;
+	box-shadow: none;
 }
 
 .tabs-content .button-primary:hover {
-    background-image: linear-gradient(to right, #0696ff, #76c5ff);
+    background-image: linear-gradient(to right, #78c6ff, #0294ff)!important;
+	box-shadow: 0 2px 4px 0 rgba(164,164,164,0.5);
 }
 
 .tabs-content .reset_settings, .tabs-content .reset_settings:hover, .tabs-content .reset_settings:focus, .tabs-content .reset_settings:active {
@@ -483,12 +487,31 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 .tabs-content .reset-settings-wrapper {
     display: inline-block;
     vertical-align: middle;
-    margin-left: 40px;
 }
 
 .action-buttons {
     text-align: center;
     margin:40px 0;
+}
+
+.action-buttons .reset-settings-wrapper {
+	width: 50%;
+	margin-top: 5px;
+}
+
+.action-buttons .save-settings-wrapper {
+	width: 50%;
+	float: left;
+}
+
+.action-buttons .save-settings-wrapper input {
+	float:right;
+	margin-right: 16px;
+}
+
+.action-buttons .reset-settings-wrapper input {
+	margin-left: 16px;
+	float: left;
 }
 
 .rating {
@@ -513,10 +536,10 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
 #avatar_upload_trigger, #upload_image_trigger {
     height: 40px;
     border:1px solid #44affe;
-    box-shadow: 0 2px 2px rgba(164, 164, 164, 0.24), 0 0 2px rgba(164, 164, 164, 0.12);
     background: url('../images/upload.svg') no-repeat;
     background-size: 18%;
     background-position: 15% 50%;
+	box-shadow: none;
     border-radius: 4px;
     margin-left: 20px;
     font-size: 14px;
@@ -524,6 +547,10 @@ body .wpmm-wrapper #sidebar .themes_box ul li a, body .wpmm-wrapper #sidebar .re
     font-weight: 600;
     width: 88px;
     text-align: right;
+}
+
+#avatar_upload_trigger:hover, #upload_image_trigger:hover {
+	box-shadow: 0 2px 2px rgba(164, 164, 164, 0.24), 0 0 2px rgba(164, 164, 164, 0.12);
 }
 
 .tabs-content .button-response {
@@ -616,8 +643,20 @@ body #tab-modules .form-table .social tbody tr td, body #tab-modules .form-table
     margin-right: 10px;
 }
 
+.name-icon {
+	background: url('../images/icons/Name.svg') no-repeat;
+}
+
+.author-icon {
+	background: url('../images/icons/Author.svg') no-repeat;
+}
+
+.website-icon {
+	background: url('../images/icons/Website.svg') no-repeat;
+}
+
 .github-icon {
-    background: url('../images/gitHub.svg') no-repeat;
+    background: url('../images/icons/GitHub.svg') no-repeat;
 
 }
 
@@ -626,7 +665,7 @@ body #tab-modules .form-table .social tbody tr td, body #tab-modules .form-table
 }
 
 .twitter-icon {
-    background: url('../images/Twitter.svg') no-repeat;
+    background: url('../images/icons/Twitter.svg') no-repeat;
 }
 
 .facebook-icon {
@@ -699,13 +738,104 @@ body #tab-modules .form-table .social tbody tr td, body #tab-modules .form-table
   position: relative;
 }
 
+.info-role .backend-info-role {
+	width: 145px;
+	background-color: #FED1E1;
+	color: #000;
+	font-size: 12px;
+	font-weight: 500;
+	text-align: center;
+	border-radius: 6px;
+	padding: 10px 0;
+	z-index: 1;
+	transition: opacity 0.3s;
+	position: absolute;
+	margin-top: -110px;
+	margin-left: 120px;
+}
+
+.info-role .backend-info-role:after {
+	content: "";
+	position: absolute;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #FED1E1 transparent transparent transparent;
+	margin-top: 3px;
+	margin-left: -141px;
+	transform: rotate(90deg);
+}
+
+.tracking-info .tracking-code-info {
+	width: 115px;
+	background-color: #FED1E1;
+	color: #000;
+	font-size: 12px;
+	font-weight: 500;
+	text-align: center;
+	border-radius: 6px;
+	padding: 10px 0;
+	z-index: 1;
+	transition: opacity 0.3s;
+	margin-bottom: 10px;
+	margin-left: 140px;
+}
+
+.tracking-info .tracking-code-info:after {
+	content: "";
+	position: absolute;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #FED1E1 transparent transparent transparent;
+	margin-top: 24px;
+	padding: -66px!important;
+	margin-left: -88px
+}
+
 #show_predefined .info {
     background: url('../images/information.png') no-repeat;
-    width: 15px;
-    height: 15px;
+    width: 11px;
+    height: 11px;
     background-size: 100%;
     cursor: pointer;
-    margin-top: -20px;
+	position: relative;
+	float: right;
+	margin-right: 53%;
+}
+
+#show_predefined .info .tooltip-info {
+	visibility: hidden;
+	width: 120px;
+	background-color: #d9efff;
+	color: #000;
+	font-size: 13px;
+	font-weight: 500;
+	text-align: center;
+	border-radius: 6px;
+	padding: 10px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 160%;
+	left: 0;
+	margin-left: -25px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+#show_predefined .info .tooltip-info::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 25%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #d9efff transparent transparent transparent;
+}
+
+#show_predefined .info:hover .tooltip-info {
+	visibility: visible;
+	opacity: 1;
 }
 
 #show_predefined .info:hover + p.description, #show_predefined p.description:hover  {
@@ -760,7 +890,8 @@ body #tab-modules .form-table .social tbody tr td, body #tab-modules .form-table
 #sidebar ul li span {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 5px
+    margin-right: 5px;
+	margin-bottom: 2px;
 }
 
 #sidebar ul li span svg {
@@ -815,6 +946,10 @@ body #tab-modules .form-table .social tbody tr td, body #tab-modules .form-table
 
 .switch input {display:none;}
 
+.wp-core-ui .button-primary, .wp-core-ui .button-primary:hover, .wp-core-ui .button-primary:active, .wp-core-ui .button-primary:focus {
+	background: none;
+}
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -830,13 +965,13 @@ body #tab-modules .form-table .social tbody tr td, body #tab-modules .form-table
 .slider:before {
     position: absolute;
     content: "";
-    height: 22px;
-    width: 22px;
+    height: 24px;
+    width: 24px;
     bottom: -2px;
     background-color: #f1f1f1;
     -webkit-transition: .4s;
     transition: .4s;
-    box-shadow:1px 4px 10px #888
+    box-shadow:1px 4px 10px rgba(164,164,164,0.5);
 }
 
 input:checked + .slider {
@@ -851,7 +986,7 @@ input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-    background-image: linear-gradient(to right, #76c5ff, #0696ff);
+    background-image: linear-gradient(to right, #78c6ff, #0294ff);
     right: 17px
 }
 
@@ -926,7 +1061,7 @@ input:not(:checked) + .slider:before {
 	width: 13px;
 	height: 13px;
 	border-radius: 50%;
-	background-image: linear-gradient(to right, #76c5ff, #0696ff);
+	background-image: linear-gradient(to right, #78c6ff, #0294ff);
 }
 
 /*NORMAL CHECKBOX*/
@@ -962,7 +1097,7 @@ input:not(:checked) + .slider:before {
 
 /* When the checkbox is checked, add a blue background */
 .multi-checkbox label input:checked ~ .checkmark {
-    background-image: linear-gradient(to right, #76c5ff, #0696ff);
+    background-image: linear-gradient(to right, #78c6ff, #0294ff);
     border: 0;
     height: 20px;
     width: 20px;

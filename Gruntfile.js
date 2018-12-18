@@ -100,7 +100,7 @@ module.exports = function(grunt) {
                     'postcss'
                 ],
                 options: {
-                    debounceDelay: 150
+                    debounceDelay: 0
                 }
             },
             js: {

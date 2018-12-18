@@ -188,7 +188,7 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:160
 #: includes/classes/wp-maintenance-mode.php:645
-msgid "Type your name here…"
+msgid "Type your name here"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:161
@@ -201,7 +201,7 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:163
 #: includes/classes/wp-maintenance-mode.php:646
-msgid "Type your email here…"
+msgid "Type your email here"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:169
