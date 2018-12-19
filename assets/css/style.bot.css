@@ -274,7 +274,7 @@ CHAT BOT STYLING
 .input .chat-message.user {
   background: #4361ef;
   border-radius: 0;
-  padding: 15px;
+  padding: 15px 25px;
   border-radius: 20px;
   border-top-right-radius: 0;  
 }
@@ -292,20 +292,20 @@ CHAT BOT STYLING
   color: #cbd3fa;
   background: #7d91f3;
   box-shadow: none;
-  margin-right: 15px;
+  margin-right: 10px;
   font-size: 14px;
   border-radius:20px;
-  height: 30px;
+  height: 25px;
   padding-left: 20px;
   display: inline-block;
   vertical-align: middle;
 }
 
 .input input:focus { outline: none; }
-.input input::-webkit-input-placeholder { color: #c3c3c3; }
-.input input:-ms-input-placeholder { color: #c3c3c3; }
-.input input::-moz-placeholder { color: #c3c3c3; }
-.input input:-moz-placeholder { color: #c3c3c3; }
+.input input::-webkit-input-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
+.input input:-ms-input-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
+.input input::-moz-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
+.input input:-moz-placeholder { color: #fff; opacity: 0.7; font-size: 12px; }
 
 .input a {
   color: #6ecff9;
@@ -320,7 +320,7 @@ CHAT BOT STYLING
   background: url(../images/paper-lane.svg) no-repeat;
   background-size: 100%;
   background-position: 50%;
-  width: 20px;
+  width: 16px;
   height: 30px;
 }
 

@@ -157,10 +157,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 						'10' => __("Have a great day!", $this->plugin_slug)
 					),
 					'responses' => array(
-						'01' => __("Type your name here…", $this->plugin_slug),
+						'01' => __("Type your name here", $this->plugin_slug),
 						'02_1' => __("Tell me more", $this->plugin_slug),
 						'02_2' => __("Boring", $this->plugin_slug),
-						'03' => __("Type your email here…", $this->plugin_slug)
+						'03' => __("Type your email here", $this->plugin_slug)
 					),
 					'custom_css' => array()
 				),
@@ -647,7 +647,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				'typeName' => __('Type your name here', $this->plugin_slug),
 				'Name' => __('Name', $this->plugin_slug),
 				'NameEmail' => __('Email', $this->plugin_slug),
-				'typeEmail' => __('Type your email here…', $this->plugin_slug),
+				'typeEmail' => __('Type your email here', $this->plugin_slug),
 				'send' => __('Send', $this->plugin_slug)
 			);
 			echo "<script type='text/javascript'>" .
