@@ -7,7 +7,7 @@ Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 5.1.0
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -78,7 +78,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 == Changelog ==
 
 = 2.2.3 (20/02/2019) =
-* bump "Tested up to" to 5.1.0
+* bump "Tested up to" version to 5.1.0
 * replace "wpmu_new_blog" action with "wp_initialize_site" action for WP 5.1.0 users because the first one is deprecated in the new version
 * small improvement to "check_exclude" method from "WP_Maintenance_Mode" class
 
