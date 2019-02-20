@@ -77,6 +77,11 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
+= 2.2.3 (20/02/2019) =
+* bump "Tested up to" to 5.1.0
+* replace "wpmu_new_blog" action with "wp_initialize_site" action for WP 5.1.0 users because the first one is deprecated in the new version
+* small improvement to "check_exclude" method from "WP_Maintenance_Mode" class
+
 = 2.2.2 (27/11/2018) =
 * Google Analytics module: migrate from analytics.js to gtag.js + add ip anonymization [#178](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/178)
 * GDPR module: accept links inside texareas + add policy link target [#188](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/188)

@@ -12,7 +12,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		protected static $instance = null;
 
 		private function __construct() {
-			$this->plugin_settings = get_option('wpmm_settings');
+			$this->plugin_settings = get_option('wpmm_settings', array());
 			$this->plugin_basename = plugin_basename(WPMM_PATH . $this->plugin_slug . '.php');
 
 			// Load plugin text domain
@@ -20,9 +20,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 			// Add shortcodes
 			add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));
-
+			
 			// Activate plugin when new blog is added
-			add_action('wpmu_new_blog', array($this, 'activate_new_site'));
+			$new_blog_action = isset($GLOBALS['wp_version']) && version_compare($GLOBALS['wp_version'], '5.1-RC', '>=') ? 'wp_initialize_site' : 'wpmu_new_blog';
+			add_action($new_blog_action, array($this, 'activate_new_site'), 11, 1);
 
 			// Check update
 			add_action('admin_init', array($this, 'check_update'));
@@ -248,13 +249,17 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 * What to do when a new site is activated (multisite env)
 		 *
 		 * @since 2.0.0
-		 * @param int $blog_id.
+		 * @param int|object $blog
 		 */
-		public function activate_new_site($blog_id) {
-			if (1 !== did_action('wpmu_new_blog')) {
+		public function activate_new_site($blog) {
+			$current_action = current_action();
+			
+			if (1 !== did_action($current_action)) {
 				return;
 			}
-
+			
+			$blog_id = is_object($blog) ? $blog->id : $blog;
+			
 			switch_to_blog($blog_id);
 			self::single_activate();
 			restore_current_blog();
@@ -417,7 +422,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				// set options
 				add_option('wpmm_settings', $v2_options);
 			}
-			
+
 			$should_update = false;
 
 			/**
@@ -455,14 +460,14 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			 */
 			if (empty($v2_options['modules']['ga_anonymize_ip'])) {
 				$v2_options['modules']['ga_anonymize_ip'] = $default_options['modules']['ga_anonymize_ip'];
-				
+
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
-			
+
 			if (empty($v2_options['gdpr']['policy_page_target'])) {
 				$v2_options['gdpr']['policy_page_target'] = $default_options['gdpr']['policy_page_target'];
-				
+
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
@@ -752,13 +757,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 			if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
 				$excluded_list = $this->plugin_settings['general']['exclude'];
-
+				$remote_address = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+				$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+				
 				foreach ($excluded_list as $item) {
 					if (empty($item)) { // just to be sure :-)
 						continue;
 					}
-
-					if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $item))) {
+						
+					if (strstr($remote_address, $item) || strstr($request_uri, $item)) {
 						$is_excluded = true;
 						break;
 					}
@@ -833,7 +840,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			) {
 				$ga_options['anonymize_ip'] = true;
 			}
-			
+
 			$ga_options = (object) $ga_options;
 
 			// show google analytics javascript snippet
