@@ -6,7 +6,7 @@ Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 5.0-RC1
+Tested up to: 5.1.0
 Stable tag: 2.2.2
 Requires PHP: 5.6
 License: GPL-2.0+
