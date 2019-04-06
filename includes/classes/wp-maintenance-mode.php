@@ -184,7 +184,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 */
 		public static function activate($network_wide) {
 			// because we need translated items when activate :)
-			load_plugin_textdomain(self::get_instance()->plugin_slug, FALSE, WPMM_LANGUAGES_PATH);
+			load_plugin_textdomain(self::get_instance()->plugin_slug, false, WPMM_LANGUAGES_PATH);
 
 			// do the job
 			if (function_exists('is_multisite') && is_multisite()) {
@@ -507,7 +507,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			$locale = apply_filters('plugin_locale', get_locale(), $domain);
 
 			load_textdomain($domain, trailingslashit(WP_LANG_DIR) . $domain . '/' . $domain . '-' . $locale . '.mo');
-			load_plugin_textdomain($domain, FALSE, WPMM_LANGUAGES_PATH);
+			load_plugin_textdomain($domain, false, WPMM_LANGUAGES_PATH);
 		}
 
 		/**
@@ -614,7 +614,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				nocache_headers();
 				ob_start();
 				header("Content-type: text/html; charset=$charset");
-				header("$protocol $status_code Service Unavailable", TRUE, $status_code);
+				header("$protocol $status_code Service Unavailable", true, $status_code);
 				header("Retry-After: $backtime");
 
 				// load maintenance mode template
@@ -786,22 +786,22 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		public function redirect() {
 			// we do not redirect if there's nothing saved in "redirect" input
 			if (empty($this->plugin_settings['general']['redirection'])) {
-				return NULL;
+				return null;
 			}
 
 			// we do not redirect ajax calls
 			if ((defined('DOING_AJAX') && DOING_AJAX)) {
-				return NULL;
+				return null;
 			}
 
 			// we do not redirect visitors or logged-in users that are not using /wp-admin/
 			if (!is_user_logged_in() || !is_admin()) {
-				return NULL;
+				return null;
 			}
 
 			// we do not redirect users that have access to backend
 			if ($this->check_user_role()) {
-				return NULL;
+				return null;
 			}
 
 			$redirect_to = stripslashes($this->plugin_settings['general']['redirection']);
