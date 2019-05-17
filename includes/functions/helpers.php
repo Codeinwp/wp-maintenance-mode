@@ -91,15 +91,15 @@ function wpmm_get_banners() {
 				'link' => 'https://designmodo.com/postcards/',
 				'image' => $banners_path . 'postcards.jpg',
 				'utm' => true
+			),
+			array(
+				'title' => 'Blocksy',
+				'link' => 'https://creativethemes.com/blocksy/',
+				'image' => $banners_path . 'blocksy.jpg',
+				'utm' => true
 			)
 		),
 		'resource' => array(
-			array(
-				'title' => 'Free WordPress Theme',
-				'link' => 'https://designmodo.com/free-wordpress-theme/',
-				'image' => $banners_path . 'ayoshop.jpg',
-				'utm' => true
-			),
 			array(
 				'title' => 'Linecons',
 				'link' => 'https://designmodo.com/linecons-free/',
