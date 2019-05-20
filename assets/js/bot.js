@@ -24,7 +24,87 @@ function getCurrentTime() {
   return strTime;
 }
 
+/**
+ * Cast string
+ * 
+ * @param string value
+ * @returns string
+ */
+function _phpCastString (value) {
+    var type = typeof value
+
+    switch (type) {
+      case 'boolean':
+        return value ? '1' : ''
+      case 'string':
+        return value
+      case 'number':
+        if (isNaN(value)) {
+          return 'NAN'
+        }
+
+        if (!isFinite(value)) {
+          return (value < 0 ? '-' : '') + 'INF'
+        }
+
+        return value + ''
+      case 'undefined':
+        return ''
+      case 'object':
+        if (Array.isArray(value)) {
+          return 'Array'
+        }
+
+        if (value !== null) {
+          return 'Object'
+        }
+
+        return ''
+      case 'function':
+        // fall through
+      default:
+        throw new Error('Unsupported value type')
+    }
+}
+
+/**
+ * Strip tags from a string
+ * 
+ * big thanks to http://locutus.io/php/strings/strip_tags/
+ * 
+ * @param string input
+ * @param string allowed
+ * @returns string
+ */
+function strip_tags (input, allowed) {
+    // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+    allowed = (((allowed || '') + '').toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('')
+
+    var tags = /<\/?([a-z0-9]*)\b[^>]*>?/gi
+    var commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi
+
+    var after = _phpCastString(input)
+    // removes tha '<' char at the end of the string to replicate PHP's behaviour
+    after = (after.substring(after.length - 1) === '<') ? after.substring(0, after.length - 1) : after
+
+    // recursively remove tags to ensure that the returned string doesn't contain forbidden tags after previous passes (e.g. '<<bait/>switch/>')
+    while (true) {
+      var before = after
+      after = before.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : ''
+      })
+
+      // return once no more tags are removed
+      if (before === after) {
+        return after
+      }
+    }
+}
+
 function renderStatement(statement) {
+    // Strip html tags from statement
+    statement = strip_tags(statement);
+  
     jQuery('.chat-container').append('<div class="chat-message-wrapper"><div class="absolute-wrapper"><div class="message-details"><div class="bot-avatar"></div><span class="message-date">' + getCurrentTime() + '</span></div></div><p class="chat-message">' + statement + '</p></div>');
 }
 
@@ -56,23 +136,25 @@ function inputError(msg) {
 }
 
 function checkInput(option) {
+    var input = jQuery('.bot-container input[type=text]').val();
+   
+    // Strip html tags from input
+    input = strip_tags(input);
 
-    let input = jQuery('.bot-container input[type=text]');
-    if (input.val().length > 2) {
+    if (input.length > 2) {
         showResponse(option);
     } else {
         inputError(botVars.validationName);
     }
+    
     return false;
-
 }
 
 
 function checkEmail(option) {
-
-    let input = jQuery('.bot-container input[type=email]').val();
-    let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let result = regex.test(String(input.toLowerCase()) );
+    var input = jQuery('.bot-container input[type=email]').val();
+    var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var result = regex.test(String(input.toLowerCase()));
 
     if (input.length > 7 && result === true) {
 
@@ -161,7 +243,6 @@ function showStatement(pos) {
     Run this function over each statement
     */
     async.eachSeries(statements, function(item, callback) {
-
         // Emulate typing then scroll to bottom
         showTyping();
         scrollToBottom();
@@ -377,8 +458,11 @@ function showResponse(option) {
     else {
         feedback = option['choice'];
     }
-
+    
     clearFooter();
+    
+    // Strip html tags from feedback
+    feedback = strip_tags(feedback);
 
     // Show what the user chose
     jQuery(".chat-container").append('<p class="chat-message user">' + feedback + '</p>');
