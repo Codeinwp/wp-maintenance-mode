@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.2.2\n"
-"POT-Creation-Date: 2018-11-26 19:14+0200\n"
-"PO-Revision-Date: 2018-11-26 19:14+0200\n"
+"Project-Id-Version: WP Maintenance Mode 2.2.4\n"
+"POT-Creation-Date: 2019-05-20 10:31+0300\n"
+"PO-Revision-Date: 2019-05-20 10:31+0300\n"
 "Last-Translator: Dennis Hunink <dennishunink@me.com>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -112,12 +112,12 @@ msgid ""
 "your privacy policy page."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:101
 #: includes/classes/wp-maintenance-mode.php:102
+#: includes/classes/wp-maintenance-mode.php:103
 msgid "Maintenance mode"
 msgstr "Onderhoudsmodus"
 
-#: includes/classes/wp-maintenance-mode.php:104
+#: includes/classes/wp-maintenance-mode.php:105
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -125,97 +125,97 @@ msgstr ""
 "<p>Excuus voor het ongemak.<br />Onze website ondergaat op dit moment "
 "gepland onderhoud.<br/>Bedankt voor uw begrip.</p>"
 
-#: includes/classes/wp-maintenance-mode.php:122
+#: includes/classes/wp-maintenance-mode.php:123
 msgid "Notify me when it's ready"
 msgstr "Informeer mij wanneer het is afgerond"
 
-#: includes/classes/wp-maintenance-mode.php:147
+#: includes/classes/wp-maintenance-mode.php:148
 msgid ""
 "Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be "
 "your assistant here."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:148
+#: includes/classes/wp-maintenance-mode.php:149
 msgid "I have just a few questions."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:149
+#: includes/classes/wp-maintenance-mode.php:150
 msgid "What is your name?"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:150
+#: includes/classes/wp-maintenance-mode.php:151
 msgid "Nice to meet you here, {visitor_name}!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:151
+#: includes/classes/wp-maintenance-mode.php:152
 msgid "How you can see, our website will be lauched very soon."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:152
+#: includes/classes/wp-maintenance-mode.php:153
 msgid ""
 "I know, you are very excited to see it, but we need a few days to finish it."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:153
+#: includes/classes/wp-maintenance-mode.php:154
 msgid "Would you like to be first to see it?"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:154
+#: includes/classes/wp-maintenance-mode.php:155
 msgid ""
 "Cool! Please leave your email here and I will send you a message when it's "
 "ready."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:155
+#: includes/classes/wp-maintenance-mode.php:156
 msgid "Sad to hear that, {visitor_name} :( See you next time…"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:156
+#: includes/classes/wp-maintenance-mode.php:157
 msgid "Got it! Thank you and see you soon here!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:157
+#: includes/classes/wp-maintenance-mode.php:158
 msgid "Have a great day!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:160
-#: includes/classes/wp-maintenance-mode.php:645
+#: includes/classes/wp-maintenance-mode.php:161
+#: includes/classes/wp-maintenance-mode.php:650
 msgid "Type your name here…"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:161
+#: includes/classes/wp-maintenance-mode.php:162
 msgid "Tell me more"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:162
+#: includes/classes/wp-maintenance-mode.php:163
 msgid "Boring"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:163
-#: includes/classes/wp-maintenance-mode.php:646
+#: includes/classes/wp-maintenance-mode.php:164
+#: includes/classes/wp-maintenance-mode.php:651
 #, fuzzy
 msgid "Type your email here…"
 msgstr "Voer je e-mailadres in"
 
-#: includes/classes/wp-maintenance-mode.php:169
+#: includes/classes/wp-maintenance-mode.php:170
 msgid "Privacy Policy"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:172
+#: includes/classes/wp-maintenance-mode.php:173
 msgid ""
 "This form collects your name and email so that we can reach you back. Check "
 "out our <a href=\"#\">Privacy Policy</a> page to fully understand how we "
 "protect and manage your submitted data."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:173
+#: includes/classes/wp-maintenance-mode.php:174
 msgid ""
 "This form collects your email so that we can add you to our newsletter list. "
 "Check out our <a href=\"#\">Privacy Policy</a> page to fully understand how "
 "we protect and manage your submitted data."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:296
+#: includes/classes/wp-maintenance-mode.php:301
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -224,42 +224,42 @@ msgstr ""
 "De WP Maintenance Mode Plugin is opnieuw opgestart en je MOET de <a href=\"%s"
 "\">instellingen</a> opnieuw bekijken."
 
-#: includes/classes/wp-maintenance-mode.php:542
-#: includes/classes/wp-maintenance-mode.php:556
+#: includes/classes/wp-maintenance-mode.php:547
+#: includes/classes/wp-maintenance-mode.php:561
 msgid "Maintenance Mode"
 msgstr "Onderhousmodus"
 
-#: includes/classes/wp-maintenance-mode.php:642
+#: includes/classes/wp-maintenance-mode.php:647
 msgid "Please type in your name."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:643
+#: includes/classes/wp-maintenance-mode.php:648
 #, fuzzy
 msgid "Please type in a valid email address."
 msgstr "Voer een geldig e-mailadres in."
 
-#: includes/classes/wp-maintenance-mode.php:647 views/maintenance.php:161
+#: includes/classes/wp-maintenance-mode.php:652 views/maintenance.php:161
 msgid "Send"
 msgstr "Verstuur"
 
-#: includes/classes/wp-maintenance-mode.php:858
-#: includes/classes/wp-maintenance-mode.php:892 views/maintenance.php:140
+#: includes/classes/wp-maintenance-mode.php:865
+#: includes/classes/wp-maintenance-mode.php:899 views/maintenance.php:140
 msgid "Please enter a valid email address."
 msgstr "Voer een geldig e-mailadres in."
 
-#: includes/classes/wp-maintenance-mode.php:870
+#: includes/classes/wp-maintenance-mode.php:877
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:888
+#: includes/classes/wp-maintenance-mode.php:895
 msgid "All fields required."
 msgstr "Alle velden zijn verplicht."
 
-#: includes/classes/wp-maintenance-mode.php:900
+#: includes/classes/wp-maintenance-mode.php:907
 msgid "Message via contact"
 msgstr "Bericht via contact"
 
-#: includes/classes/wp-maintenance-mode.php:917
+#: includes/classes/wp-maintenance-mode.php:924
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Je bericht is verstuurd naar de beheerder. Dankjewel!"
 
@@ -360,15 +360,15 @@ msgstr ""
 msgid "GDPR"
 msgstr ""
 
-#: views/settings.php:26 views/settings.php:469 views/settings.php:636
+#: views/settings.php:26 views/settings.php:470 views/settings.php:637
 msgid "Status"
 msgstr "Status"
 
-#: views/settings.php:28 views/settings.php:472 views/settings.php:638
+#: views/settings.php:28 views/settings.php:473 views/settings.php:639
 msgid "Activated"
 msgstr "Geactiveerd"
 
-#: views/settings.php:29 views/settings.php:473 views/settings.php:639
+#: views/settings.php:29 views/settings.php:474 views/settings.php:640
 msgid "Deactivated"
 msgstr "Gedeactiveerd"
 
@@ -470,12 +470,12 @@ msgid ""
 msgstr ""
 
 #: views/settings.php:127 views/settings.php:231 views/settings.php:452
-#: views/settings.php:621 views/settings.php:694
+#: views/settings.php:622 views/settings.php:695
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
 #: views/settings.php:128 views/settings.php:232 views/settings.php:453
-#: views/settings.php:622 views/settings.php:695
+#: views/settings.php:623 views/settings.php:696
 msgid "Reset settings"
 msgstr "Instellingen herstellen"
 
@@ -608,11 +608,11 @@ msgstr "Toon sociale netwerken?"
 msgid "Links target?"
 msgstr ""
 
-#: views/settings.php:328 views/settings.php:665
+#: views/settings.php:328 views/settings.php:666
 msgid "New page"
 msgstr ""
 
-#: views/settings.php:329 views/settings.php:666
+#: views/settings.php:329 views/settings.php:667
 msgid "Same page"
 msgstr ""
 
@@ -687,133 +687,139 @@ msgid ""
 "need to."
 msgstr ""
 
-#: views/settings.php:477
+#: views/settings.php:465
+msgid ""
+"If you want to see the list of subscribers, go to Modules &raquo; Subscribe "
+"&raquo; Export as CSV."
+msgstr ""
+
+#: views/settings.php:478
 #, fuzzy
 msgid "Bot Name"
 msgstr "Naam"
 
-#: views/settings.php:480
+#: views/settings.php:481
 msgid "This name will appear when the bot is typing."
 msgstr ""
 
-#: views/settings.php:484
+#: views/settings.php:485
 #, fuzzy
 msgid "Upload avatar"
 msgstr "Upload achtergrond"
 
-#: views/settings.php:488
+#: views/settings.php:489
 msgid "A 512 x 512 px will work just fine."
 msgstr ""
 
-#: views/settings.php:494
+#: views/settings.php:495
 msgid "Customize Messages"
 msgstr ""
 
-#: views/settings.php:499
+#: views/settings.php:500
 msgid "Message 1"
 msgstr ""
 
-#: views/settings.php:507
+#: views/settings.php:508
 msgid "Message 2"
 msgstr ""
 
-#: views/settings.php:515
+#: views/settings.php:516
 msgid "Message 3"
 msgstr ""
 
-#: views/settings.php:523 views/settings.php:563 views/settings.php:585
+#: views/settings.php:524 views/settings.php:564 views/settings.php:586
 msgid "Response"
 msgstr ""
 
-#: views/settings.php:527 views/settings.php:589
+#: views/settings.php:528 views/settings.php:590
 msgid "Edit the placeholder's text"
 msgstr ""
 
-#: views/settings.php:531
+#: views/settings.php:532
 msgid "Message 4"
 msgstr ""
 
-#: views/settings.php:539
+#: views/settings.php:540
 msgid "Message 5"
 msgstr ""
 
-#: views/settings.php:547
+#: views/settings.php:548
 msgid "Message 6"
 msgstr ""
 
-#: views/settings.php:555
+#: views/settings.php:556
 msgid "Message 7"
 msgstr ""
 
-#: views/settings.php:567
+#: views/settings.php:568
 msgid "Edit button one"
 msgstr ""
 
-#: views/settings.php:571
+#: views/settings.php:572
 msgid "Edit button two"
 msgstr ""
 
-#: views/settings.php:577 views/settings.php:593
+#: views/settings.php:578 views/settings.php:594
 msgid "Message 8"
 msgstr ""
 
-#: views/settings.php:577 views/settings.php:601 views/settings.php:609
+#: views/settings.php:578 views/settings.php:602 views/settings.php:610
 msgid "(click on button one)"
 msgstr ""
 
-#: views/settings.php:593
+#: views/settings.php:594
 msgid "(click on button two)"
 msgstr ""
 
-#: views/settings.php:601
+#: views/settings.php:602
 msgid "Message 9"
 msgstr ""
 
-#: views/settings.php:609
+#: views/settings.php:610
 msgid "Message 10"
 msgstr ""
 
-#: views/settings.php:631
+#: views/settings.php:632
 msgid ""
 "To make the plugin GDPR compliant, fill in the details and enable this "
 "section."
 msgstr ""
 
-#: views/settings.php:632
+#: views/settings.php:633
 msgid ""
 "Here we added some generic texts that you may want to review, change or "
 "remove."
 msgstr ""
 
-#: views/settings.php:644
+#: views/settings.php:645
 msgid "Link name"
 msgstr ""
 
-#: views/settings.php:648
+#: views/settings.php:649
 msgid "Label the link that will be shown on frontend footer"
 msgstr ""
 
-#: views/settings.php:653
+#: views/settings.php:654
 msgid "P. Policy page link"
 msgstr ""
 
-#: views/settings.php:662
+#: views/settings.php:663
 msgid "P. Policy link target"
 msgstr ""
 
-#: views/settings.php:668
+#: views/settings.php:669
 msgid "Choose how the link will open."
 msgstr ""
 
-#: views/settings.php:673
+#: views/settings.php:674
 msgid "Contact form 'tail'"
 msgstr ""
 
-#: views/settings.php:677 views/settings.php:686
+#: views/settings.php:678 views/settings.php:687
 msgid "This will be shown together with the acceptance checkbox below the form"
 msgstr ""
 
-#: views/settings.php:682
+#: views/settings.php:683
 msgid "Subscribe form 'tail'"
 msgstr ""
 

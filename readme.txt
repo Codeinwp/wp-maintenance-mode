@@ -79,6 +79,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 = 2.2.4 (XX/05/2019) =
 * fix typo in Italian translation (it_IT)
+* add a note about how you can export the list of subscribers to "Manage Bot" section [#195](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/195)
 
 = 2.2.3 (20/02/2019) =
 * bump "Tested up to" version to 5.1.0
