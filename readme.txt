@@ -77,6 +77,9 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
+= 2.2.4 (XX/05/2019) =
+* fix typo in Italian translation (it_IT)
+
 = 2.2.3 (20/02/2019) =
 * bump "Tested up to" version to 5.1.0
 * replace "wpmu_new_blog" action with "wp_initialize_site" action for WP 5.1.0 users because the first one is deprecated in the new version

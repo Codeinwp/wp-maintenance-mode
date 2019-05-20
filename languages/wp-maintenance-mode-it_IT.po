@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.2.2\n"
 "POT-Creation-Date: 2018-11-26 19:12+0200\n"
-"PO-Revision-Date: 2018-11-26 19:12+0200\n"
+"PO-Revision-Date: 2019-05-20 10:04+0300\n"
 "Last-Translator: Massimiliano Losego <massimiliano@losego.it>\n"
 "Language-Team: Losego Massimiliano <massimiliano@losego.it>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:532
 msgid "Settings"
-msgstr "Impotazioni"
+msgstr "Impostazioni"
 
 #: includes/classes/wp-maintenance-mode-admin.php:551
 #, php-format
