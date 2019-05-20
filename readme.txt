@@ -7,7 +7,7 @@ Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 5.1.0
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -77,7 +77,8 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
-= 2.2.4 (XX/05/2019) =
+= 2.2.4 (20/05/2019) =
+* bump "Tested up to" to 5.2.0
 * fix typo in Italian translation (it_IT)
 * Bot: add a note about how you can export the list of subscribers [#195](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/195)
 * Bot: add client-side sanitization to the input fields [#176](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/176)
