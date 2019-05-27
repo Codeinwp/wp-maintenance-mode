@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:35+0300\n"
-"PO-Revision-Date: 2019-05-20 10:35+0300\n"
+"POT-Creation-Date: 2019-05-27 16:51+0300\n"
+"PO-Revision-Date: 2019-05-27 16:51+0300\n"
 "Last-Translator: Serhii Matrunchyk <sergiy.matrunchyk@gmail.com>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -863,12 +863,14 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: views/sidebar.php:27
-msgid "Other products"
-msgstr "Інші продукти"
+msgid "Recommended"
+msgstr ""
 
-#: views/sidebar.php:48
-msgid "Resources"
-msgstr "Ресурси"
+#~ msgid "Other products"
+#~ msgstr "Інші продукти"
+
+#~ msgid "Resources"
+#~ msgstr "Ресурси"
 
 #~ msgid "You have %d subscriber(s)"
 #~ msgstr "Ви маєте %d підписник (ів)"

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.2.4\n"
-"POT-Creation-Date: 2019-05-20 10:30+0300\n"
-"PO-Revision-Date: 2019-05-20 10:30+0300\n"
+"POT-Creation-Date: 2019-05-27 16:47+0300\n"
+"PO-Revision-Date: 2019-05-27 16:47+0300\n"
 "Last-Translator: Erick Ruiz de Chavez <erick@erch.co>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: es_ES\n"
@@ -845,12 +845,11 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: views/sidebar.php:27
-msgid "Other products"
+msgid "Recommended"
 msgstr ""
 
-#: views/sidebar.php:48
-msgid "Resources"
-msgstr "Recursos"
+#~ msgid "Resources"
+#~ msgstr "Recursos"
 
 #~ msgid "You have %d subscriber(s)"
 #~ msgstr "Hay %d suscriptor(es)"

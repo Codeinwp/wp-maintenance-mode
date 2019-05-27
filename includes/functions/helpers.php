@@ -64,54 +64,52 @@ function wpmm_multiselect($values, $current) {
 }
 
 /**
+ * Return banner url
+ * 
+ * @param string $filename
+ * @return string
+ */
+function wpmm_get_banner_url($filename) {
+	return sprintf('%s/assets/images/recommended/%s', untrailingslashit(WPMM_URL), $filename);
+}
+
+/**
  * Return list of banners
  *
  * @since 2.0.4
  * @return array
  */
 function wpmm_get_banners() {
-	$banners_path = WPMM_URL . 'assets/images/resources/';
-
 	return array(
-		'product' => array(
-			array(
-				'title' => 'StrictThemes – WordPress Themes',
-				'link' => 'https://themeforest.net/user/strictthemes/portfolio?utf8=%E2%9C%93&order_by=sales&ref=StrictThemes',
-				'image' => $banners_path . 'strictthemes.png',
-				'utm' => false
-			),
-			array(
-				'title' => 'Free Stock Images',
-				'link' => 'https://freephotos.cc/',
-				'image' => $banners_path . 'freephotoscc.jpg',
-				'utm' => true
-			),
-			array(
-				'title' => 'Postcards',
-				'link' => 'https://designmodo.com/postcards/',
-				'image' => $banners_path . 'postcards.jpg',
-				'utm' => true
-			),
-			array(
-				'title' => 'Blocksy',
-				'link' => 'https://creativethemes.com/blocksy/',
-				'image' => $banners_path . 'blocksy.jpg',
-				'utm' => true
-			)
+		array(
+			'title' => 'StrictThemes – WordPress Themes',
+			'link' => 'https://themeforest.net/user/strictthemes/portfolio?utf8=%E2%9C%93&order_by=sales&ref=StrictThemes',
+			'image' => 'strictthemes.png',
+			'utm' => false
 		),
-		'resource' => array(
-			array(
-				'title' => 'Linecons',
-				'link' => 'https://designmodo.com/linecons-free/',
-				'image' => $banners_path . 'linecons.jpg',
-				'utm' => true
-			),
-			array(
-				'title' => 'Flat UI Free',
-				'link' => 'https://designmodo.com/flat-free/',
-				'image' => $banners_path . 'flatui.jpg',
-				'utm' => true
-			)
+		array(
+			'title' => 'Free Stock Images',
+			'link' => 'https://freephotos.cc/',
+			'image' => 'freephotoscc.jpg',
+			'utm' => true
+		),
+		array(
+			'title' => 'Postcards',
+			'link' => 'https://designmodo.com/postcards/',
+			'image' => 'postcards.jpg',
+			'utm' => true
+		),
+		array(
+			'title' => 'Blocksy',
+			'link' => 'https://creativethemes.com/blocksy/',
+			'image' => 'blocksy.jpg',
+			'utm' => true
+		),
+		array(
+			'title' => 'Static Pages',
+			'link' => 'https://designmodo.com/static-pages/',
+			'image' => 'static-pages.png',
+			'utm' => true
 		)
 	);
 }

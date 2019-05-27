@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode v2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:33+0300\n"
-"PO-Revision-Date: 2019-05-20 10:33+0300\n"
+"POT-Creation-Date: 2019-05-27 16:49+0300\n"
+"PO-Revision-Date: 2019-05-27 16:49+0300\n"
 "Last-Translator: Jônatas Araújo <jonatasaraujos@live.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -926,13 +926,12 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: views/sidebar.php:27
-msgid "Other products"
+msgid "Recommended"
 msgstr ""
 
 # @ wp-maintenance-mode
-#: views/sidebar.php:48
-msgid "Resources"
-msgstr "Recursos"
+#~ msgid "Resources"
+#~ msgstr "Recursos"
 
 # @ wp-maintenance-mode
 #~ msgid "You have %d subscriber(s)"

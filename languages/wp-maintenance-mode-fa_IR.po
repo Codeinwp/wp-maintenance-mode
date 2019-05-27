@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:30+0300\n"
-"PO-Revision-Date: 2019-05-20 10:30+0300\n"
+"POT-Creation-Date: 2019-05-27 16:47+0300\n"
+"PO-Revision-Date: 2019-05-27 16:47+0300\n"
 "Last-Translator: Milad Nekofar <milad@nekofar.com>\n"
 "Language-Team: Milad Nekofar <milad@nekofar.com>\n"
 "Language: fa\n"
@@ -835,12 +835,11 @@ msgid "GitHub"
 msgstr "گیت‌هاب"
 
 #: views/sidebar.php:27
-msgid "Other products"
+msgid "Recommended"
 msgstr ""
 
-#: views/sidebar.php:48
-msgid "Resources"
-msgstr "منابع"
+#~ msgid "Resources"
+#~ msgstr "منابع"
 
 #~ msgid "WordPress Themes"
 #~ msgstr "قالب‌های وردپرس"
