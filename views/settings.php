@@ -155,7 +155,7 @@
                                             'textarea_name' => 'options[design][text]',
                                             'textarea_rows' => 8,
                                             'editor_class' => 'large-text',
-                                            'media_buttons' => false,
+                                            'media_buttons' => true,
                                             'wpautop' => false,
                                             'default_editor' => 'tinymce',
                                             'teeny' => true
