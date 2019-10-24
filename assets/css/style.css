@@ -90,6 +90,12 @@ body {
     line-height: 45px;
     margin: 0 0 80px;
 }
+
+.wrap h2 img {
+    max-width: 100%;
+    height: auto;
+}
+
 .wrap h3 {
     font-size: 24px;
     font-weight: 400;
