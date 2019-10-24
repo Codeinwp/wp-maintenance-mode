@@ -77,6 +77,9 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
+= 2.X.X (XX/XX/2019) =
+* enable media_buttons on wp_editor (`Design > Text`)
+
 = 2.2.4 (20/05/2019) =
 * bump "Tested up to" to 5.2.0
 * fix typo in Italian translation (it_IT)
