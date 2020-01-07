@@ -295,9 +295,9 @@
                                     <td id="subscribers_wrap">
                                         <?php
                                         $subscribers_no = wpmm_count_where('wpmm_subscribers', 'id_subscriber');
-										echo sprintf(_nx('You have %d subscriber', 'You have %s subscribers', $subscribers_no, 'settings page', $this->plugin_slug), $subscribers_no);
+					echo sprintf(_nx('You have %d subscriber', 'You have %s subscribers', $subscribers_no, 'settings page', $this->plugin_slug), $subscribers_no);
 
-                                        if ($subscribers_no > 0) {
+                                        if (current_user_can(wpmm_get_capability('subscribers')) && $subscribers_no > 0) {
                                             ?>
                                             <br />
                                             <a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php _e('Export as CSV', $this->plugin_slug); ?></a>

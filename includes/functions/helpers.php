@@ -154,6 +154,20 @@ function wpmm_gdpr_textarea_allowed_html() {
 	return apply_filters('wpmm_gdpr_textarea_allowed_html', $allowed_html);
 }
 
+/**
+ * Return capability
+ * 
+ * @param string $action
+ * @return string
+ */
+function wpmm_get_capability($action) {
+        if(has_filter('wpmm_all_actions_capability')) {
+            return apply_filters('wpmm_all_actions_capability', 'manage_options');
+        }
+    
+        return apply_filters(sprintf('wpmm_%s_capability', $action), 'manage_options');
+}
+
 if (!function_exists('wp_scripts')) {
 
 	/**
