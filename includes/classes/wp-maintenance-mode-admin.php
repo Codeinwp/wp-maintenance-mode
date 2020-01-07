@@ -117,7 +117,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
             try {
                 // check capabilities
-                if (!current_user_can('manage_options')) {
+                if (!current_user_can(wpmm_get_capability('subscribers'))) {
                     throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
                 }
 
@@ -155,7 +155,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
             try {
                 // check capabilities
-                if (!current_user_can('manage_options')) {
+                if (!current_user_can(wpmm_get_capability('subscribers'))) {
                     throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
                 }
 
@@ -178,7 +178,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function reset_settings() {
             try {
                 // check capabilities
-                if (!current_user_can('manage_options')) {
+                if (!current_user_can(wpmm_get_capability('settings'))) {
                     throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
                 }
 
@@ -220,7 +220,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          */
         public function add_plugin_menu() {
             $this->plugin_screen_hook_suffix = add_options_page(
-                    __('WP Maintenance Mode', $this->plugin_slug), __('WP Maintenance Mode', $this->plugin_slug), 'manage_options', $this->plugin_slug, array($this, 'display_plugin_settings')
+                    __('WP Maintenance Mode', $this->plugin_slug), __('WP Maintenance Mode', $this->plugin_slug), wpmm_get_capability('settings'), $this->plugin_slug, array($this, 'display_plugin_settings')
             );
         }
 
@@ -249,6 +249,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             if (!empty($_POST) && !empty($_POST['tab'])) {
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
                     die(__('Security check.', $this->plugin_slug));
+                }
+                
+                if(!current_user_can(wpmm_get_capability('settings'))) {
+                    die(__('You do not have access to this resource.', $this->plugin_slug));
                 }
 
                 // DO SOME SANITIZATIONS
