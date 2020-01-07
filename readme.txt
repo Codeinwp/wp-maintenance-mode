@@ -77,8 +77,9 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
-= 2.X.X (XX/XX/2019) =
+= 2.X.X (XX/XX/2020) =
 * enable media_buttons on wp_editor ("Design > Text")
+* add filters for capabilities: `wpmm_settings_capability`, `wpmm_subscribers_capability`, and `wpmm_all_actions_capability` (the last one can be used to override all capabilities)
 * bump "Tested up to" WP v5.3
 
 = 2.2.4 (20/05/2019) =
