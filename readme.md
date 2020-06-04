@@ -96,6 +96,20 @@ We embedded a new css style on maintenance page. Same mechanism can be used for 
 
 WP Maintenance Mode can be unstable due the cache plugins, we recommend to deactivate any cache plugin when maintenance mode is active.
 
+**WP-CLI support**
+
+Activation:
+
+`wp option patch update wpmm_settings general status 1`
+
+Deactivation:
+
+`wp option patch update wpmm_settings general status 0`
+
+Options list:
+
+`wp option get wpmm_settings`
+
 ## Other Notes
 ### License
 Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog.
