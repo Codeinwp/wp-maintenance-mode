@@ -88,12 +88,6 @@ function wpmm_get_banners() {
 			'utm' => false
 		),
 		array(
-			'title' => 'Free Stock Images',
-			'link' => 'https://freephotos.cc/',
-			'image' => 'freephotoscc.jpg',
-			'utm' => true
-		),
-		array(
 			'title' => 'Postcards',
 			'link' => 'https://designmodo.com/postcards/',
 			'image' => 'postcards.jpg',
