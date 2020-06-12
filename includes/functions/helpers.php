@@ -82,6 +82,12 @@ function wpmm_get_banner_url($filename) {
 function wpmm_get_banners() {
 	return array(
 		array(
+			'title' => 'Blocksy',
+			'link' => 'https://creativethemes.com/blocksy/',
+			'image' => 'blocksy.jpg',
+			'utm' => true
+		),
+		array(
 			'title' => 'StrictThemes – WordPress Themes',
 			'link' => 'https://themeforest.net/user/strictthemes/portfolio?utf8=%E2%9C%93&order_by=sales&ref=StrictThemes',
 			'image' => 'strictthemes.png',
@@ -91,12 +97,6 @@ function wpmm_get_banners() {
 			'title' => 'Postcards',
 			'link' => 'https://designmodo.com/postcards/',
 			'image' => 'postcards.jpg',
-			'utm' => true
-		),
-		array(
-			'title' => 'Blocksy',
-			'link' => 'https://creativethemes.com/blocksy/',
-			'image' => 'blocksy.jpg',
 			'utm' => true
 		),
 		array(
