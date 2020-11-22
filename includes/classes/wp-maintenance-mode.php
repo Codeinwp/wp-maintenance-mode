@@ -1,4 +1,4 @@
-<?php
+launch<?php
 
 if (!class_exists('WP_Maintenance_Mode')) {
 
@@ -20,7 +20,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 			// Add shortcodes
 			add_action('init', array('WP_Maintenance_Mode_Shortcodes', 'init'));
-			
+
 			// Activate plugin when new blog is added
 			$new_blog_action = isset($GLOBALS['wp_version']) && version_compare($GLOBALS['wp_version'], '5.1-RC', '>=') ? 'wp_initialize_site' : 'wpmu_new_blog';
 			add_action($new_blog_action, array($this, 'activate_new_site'), 11, 1);
@@ -149,7 +149,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 						'02' => __("I have just a few questions.", $this->plugin_slug),
 						'03' => __("What is your name?", $this->plugin_slug),
 						'04' => __("Nice to meet you here, {visitor_name}!"),
-						'05' => __("How you can see, our website will be lauched very soon.", $this->plugin_slug),
+						'05' => __("How you can see, our website will be launch very soon.", $this->plugin_slug),
 						'06' => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
 						'07' => __("Would you like to be first to see it?", $this->plugin_slug),
 						'08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
@@ -253,13 +253,13 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 */
 		public function activate_new_site($blog) {
 			$current_action = current_action();
-			
+
 			if (1 !== did_action($current_action)) {
 				return;
 			}
-			
+
 			$blog_id = is_object($blog) ? $blog->id : $blog;
-			
+
 			switch_to_blog($blog_id);
 			self::single_activate();
 			restore_current_blog();
@@ -636,7 +636,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		/**
 		 * Extra variables for the bot functionality. Added to the DOM via hooks.
 		 * It has to be called before scripts are loaded so the variables are available globally.
-		 * 
+		 *
 		 * @todo Maybe we can find a better home for this method
 		 * @since 2.1.1
 		 * @return string Script tag with all the fixed text strings for the bot.
@@ -759,12 +759,12 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$excluded_list = $this->plugin_settings['general']['exclude'];
 				$remote_address = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
 				$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-				
+
 				foreach ($excluded_list as $item) {
 					if (empty($item)) { // just to be sure :-)
 						continue;
 					}
-						
+
 					if (strstr($remote_address, $item) || strstr($request_uri, $item)) {
 						$is_excluded = true;
 						break;
