@@ -68,11 +68,32 @@ function wpmm_multiselect($values, $current) {
  * 
  * @since 2.3.0
  * @param string $url
- * @param string $source
+ * @param array $utms
  * @return string
  */
-function wpmm_get_utmized_url($url, $source) {
-        return sprintf('%s/?utm_medium=wpmaintenance&utm_source=%s', untrailingslashit($url), $source);
+function wpmm_get_utmized_url($url, $utms = array()) {
+        $utms = wp_parse_args($utms, array(
+                'source' => null,
+                'medium' => 'wpmaintenance',
+                'campaign' => null,
+                'term' => null,
+                'content' => null,
+        ));
+
+        foreach ($utms as $key => $value) {
+                if (empty($value)) {
+                    unset($utms[$key]);
+                    continue;
+                }
+
+                $utms[$key] = sprintf('utm_%s=%s', $key, $value);
+        }
+
+        if (empty($utms)) {
+                return $url;
+        }
+
+        return sprintf('%s/?%s', untrailingslashit($url), implode('&', $utms));
 }
 
 /**
