@@ -4,7 +4,7 @@
   "author": "Designmodo",
   "homepage": "https://designmodo.com/",
   "bugs": {
-    "url": "https://github.com/Designmodocom/WP-Maintenance-Mode/issues"
+    "url": "https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues"
   },
   "main": "Gruntfile.js",
   "devDependencies": {

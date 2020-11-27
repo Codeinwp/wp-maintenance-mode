@@ -10,7 +10,7 @@
  * Author: Designmodo
  * Author URI: https://designmodo.com/
  * Twitter: designmodo
- * GitHub Plugin URI: https://github.com/Designmodocom/WP-Maintenance-Mode
+ * GitHub Plugin URI: https://github.com/andrianvaleanu/WP-Maintenance-Mode
  * GitHub Branch: master
  * Text Domain: wp-maintenance-mode
  * License: GPL-2.0+

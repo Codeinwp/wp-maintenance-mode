@@ -40,7 +40,7 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 
 = Bugs, technical hints or contribute =
 
-Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/Designmodocom/WP-Maintenance-Mode).
+Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/andrianvaleanu/WP-Maintenance-Mode).
 
 = Credits =
 
@@ -67,7 +67,7 @@ Developed by [Designmodo](https://designmodo.com) & [StrictThemes – WordPress 
 == Frequently Asked Questions ==
 
 = How to use plugin filters = 
-See [GitHub Repo] (https://github.com/Designmodocom/WP-Maintenance-Mode) FAQ.
+See [GitHub Repo] (https://github.com/andrianvaleanu/WP-Maintenance-Mode) FAQ.
 
 = Cache Plugin Support =
 WP Maintenance Mode can be unstable due the cache plugins, we recommend to deactivate any cache plugin when maintenance mode is active.
@@ -85,8 +85,8 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 = 2.2.4 (20/05/2019) =
 * bump "Tested up to" to 5.2.0
 * fix typo in Italian translation (it_IT)
-* Bot: add a note about how you can export the list of subscribers [#195](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/195)
-* Bot: add client-side sanitization to the input fields [#176](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/176)
+* Bot: add a note about how you can export the list of subscribers [#195](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/195)
+* Bot: add client-side sanitization to the input fields [#176](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/176)
 
 = 2.2.3 (20/02/2019) =
 * bump "Tested up to" version to 5.1.0
@@ -94,14 +94,14 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * small improvement to "check_exclude" method from "WP_Maintenance_Mode" class
 
 = 2.2.2 (27/11/2018) =
-* Google Analytics module: migrate from analytics.js to gtag.js + add ip anonymization [#178](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/178)
-* GDPR module: accept links inside texareas + add policy link target [#188](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/188)
-* add charset meta tag [#200](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/200)
+* Google Analytics module: migrate from analytics.js to gtag.js + add ip anonymization [#178](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/178)
+* GDPR module: accept links inside texareas + add policy link target [#188](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/188)
+* add charset meta tag [#200](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/200)
 * fix PHP Notice:  Undefined index: HTTP_USER_AGENT
 * add plural and single form translation for subscribers number (settings page)
 
 = 2.2.1 (13/07/2018) =
-* replace create_function; solves [#186](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/186) issue and [ticket](https://wordpress.org/support/topic/create_function-deprecated-in-php-7-2-8/) (thanks @ [George Jipa](https://github.com/georgejipa))
+* replace create_function; solves [#186](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/186) issue and [ticket](https://wordpress.org/support/topic/create_function-deprecated-in-php-7-2-8/) (thanks @ [George Jipa](https://github.com/georgejipa))
 * solve "set options on first activation" bug [ticket](https://wordpress.org/support/topic/notice-undefined-index-general-in-srv-www-mysite-test-current/) (thanks @ [George Jipa](https://github.com/georgejipa))
 * make (frontend) privacy labels clickable (thanks @ [George Jipa](https://github.com/georgejipa))
 * added array key check to avoid notice (thanks @ [Smiggel](https://github.com/Smiggel))
