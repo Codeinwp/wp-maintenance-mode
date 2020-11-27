@@ -38,7 +38,6 @@ define('WPMM_URL', plugin_dir_url(__FILE__));
 define('WPMM_JS_URL', WPMM_URL . 'assets/js/');
 define('WPMM_CSS_URL', WPMM_URL . 'assets/css/');
 define('WPMM_IMAGES_URL', WPMM_URL . 'assets/images/');
-define('WPMM_AUTHOR_UTM', '?utm_source=wpplugin&utm_medium=wpmaintenance');
 
 /**
  * OTHER DEFINES

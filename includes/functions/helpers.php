@@ -64,6 +64,18 @@ function wpmm_multiselect($values, $current) {
 }
 
 /**
+ * Return the UTM'ized url
+ * 
+ * @since 2.3.0
+ * @param string $url
+ * @param string $source
+ * @return string
+ */
+function wpmm_get_utmized_url($url, $source) {
+        return sprintf('%s/?utm_medium=wpmaintenance&utm_source=%s', untrailingslashit($url), $source);
+}
+
+/**
  * Return banner url
  * 
  * @param string $filename
