@@ -565,10 +565,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 // delete wpmm_notice
                 delete_option('wpmm_notice');
 
-                // notice promo for codepad
+                // notice for blocksy
                 ob_start();
-                include_once(WPMM_VIEWS_PATH . 'promo-strictthemes.php');
-                $notices['promo-strictthemes'] = array(
+                include_once(WPMM_VIEWS_PATH . 'promo-blocksy.php');
+                $notices['promo-blocksy'] = array(
                     'class' => 'wpmm_notices updated notice is-dismissible',
                     'msg' => ob_get_clean()
                 );
