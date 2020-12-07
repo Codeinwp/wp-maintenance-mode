@@ -583,10 +583,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				// JS FILES
 				$wp_scripts = wp_scripts();
-
+                                
 				$scripts = array(
-					'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery' . WPMM_ASSETS_SUFFIX . '.js',
-					'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js'
+					'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery' . WPMM_ASSETS_SUFFIX . '.js',
+					'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . WP_Maintenance_Mode::VERSION
 				);
 				if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {
 					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
@@ -600,17 +600,17 @@ if (!class_exists('WP_Maintenance_Mode')) {
                                             $scripts['bot-async'] = WPMM_JS_URL . 'bot.async.js';
                                         }
                                     
-					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
+					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js?ver=' . WP_Maintenance_Mode::VERSION;
 					add_action('wpmm_before_scripts', array($this, 'add_bot_extras'));
 				}
 				$scripts = apply_filters('wpmm_scripts', $scripts);
 
 				// CSS FILES
 				$styles = array(
-					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css'
+					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . WP_Maintenance_Mode::VERSION
 				);
 				if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
-					$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css';
+					$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css?ver=' . WP_Maintenance_Mode::VERSION;
 					$body_classes .= ' bot';
 				}
 				$styles = apply_filters('wpmm_styles', $styles);
