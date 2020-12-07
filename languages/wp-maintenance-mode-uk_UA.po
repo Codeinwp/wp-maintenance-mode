@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.2.4\n"
+"Project-Id-Version: WP Maintenance Mode 2.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 21:50+0200\n"
-"PO-Revision-Date: 2020-01-07 21:50+0200\n"
+"POT-Creation-Date: 2020-12-07 17:19+0200\n"
+"PO-Revision-Date: 2020-12-07 17:19+0200\n"
 "Last-Translator: Serhii Matrunchyk <sergiy.matrunchyk@gmail.com>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: includes/classes/wp-maintenance-mode-admin.php:121
 #: includes/classes/wp-maintenance-mode-admin.php:159
 #: includes/classes/wp-maintenance-mode-admin.php:182
-#: includes/classes/wp-maintenance-mode-admin.php:255
+#: includes/classes/wp-maintenance-mode-admin.php:252
 msgid "You do not have access to this resource."
 msgstr "У вас немає доступу до цього ресурсу."
 
@@ -50,7 +50,7 @@ msgid "The tab slug must not be empty."
 msgstr "Закладка не може бути порожньою."
 
 #: includes/classes/wp-maintenance-mode-admin.php:197
-#: includes/classes/wp-maintenance-mode-admin.php:251
+#: includes/classes/wp-maintenance-mode-admin.php:248
 msgid "Security check."
 msgstr "Перевірка безпеки."
 
@@ -62,16 +62,16 @@ msgstr "Закладка мусить бути заповненою."
 msgid "WP Maintenance Mode"
 msgstr "Режим обслуговування WP"
 
-#: includes/classes/wp-maintenance-mode-admin.php:502
+#: includes/classes/wp-maintenance-mode-admin.php:500
 msgid ""
 "WPMM: The file data.js could not be written, the bot will not work correctly."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:536
+#: includes/classes/wp-maintenance-mode-admin.php:534
 msgid "Settings"
 msgstr "Налаштування"
 
-#: includes/classes/wp-maintenance-mode-admin.php:555
+#: includes/classes/wp-maintenance-mode-admin.php:553
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -80,11 +80,11 @@ msgstr ""
 "Режим обслуговування <strong>активовано</strong>. Будь ласка, не забудьте "
 "його <a href=\"%s\">деактувувати</a> як тільки будете готові."
 
-#: includes/classes/wp-maintenance-mode-admin.php:592
+#: includes/classes/wp-maintenance-mode-admin.php:590
 msgid "Notice key cannot be empty."
 msgstr "Ключ сповіщення не може бути порожнім."
 
-#: includes/classes/wp-maintenance-mode-admin.php:640
+#: includes/classes/wp-maintenance-mode-admin.php:638
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
@@ -93,25 +93,25 @@ msgstr ""
 "Якщо Вам сподобався плагін <strong>Режим обслуговування WP</strong>, будь "
 "ласка, оцініть нас як %s. Велике дякую від нас заздалегідь!"
 
-#: includes/classes/wp-maintenance-mode-admin.php:664
+#: includes/classes/wp-maintenance-mode-admin.php:662
 msgid ""
 "Your WordPress version supports Privacy settings but you haven't set any "
 "privacy policy page yet. Go to Settings ➡ Privacy to set one."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:667
+#: includes/classes/wp-maintenance-mode-admin.php:665
 #, php-format
 msgid "The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:672
+#: includes/classes/wp-maintenance-mode-admin.php:670
 #, php-format
 msgid ""
 "Your Privacy page is pointing to a different URL in WordPress settings. If "
 "that's correct ignore this message, otherwise %s"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:676
+#: includes/classes/wp-maintenance-mode-admin.php:674
 msgid ""
 "No privacy features detected for your WordPress version. Update WordPress to "
 "get this field automatically filled in or type in the URL that points to "
@@ -154,7 +154,7 @@ msgid "Nice to meet you here, {visitor_name}!"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:152
-msgid "How you can see, our website will be lauched very soon."
+msgid "How you can see, our website will be launched very soon."
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:153
@@ -185,7 +185,7 @@ msgid "Have a great day!"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:161
-#: includes/classes/wp-maintenance-mode.php:650
+#: includes/classes/wp-maintenance-mode.php:654
 msgid "Type your name here…"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgid "Boring"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:164
-#: includes/classes/wp-maintenance-mode.php:651
+#: includes/classes/wp-maintenance-mode.php:655
 msgid "Type your email here…"
 msgstr ""
 
@@ -234,37 +234,37 @@ msgstr ""
 msgid "Maintenance Mode"
 msgstr "Режим обслуговування"
 
-#: includes/classes/wp-maintenance-mode.php:647
+#: includes/classes/wp-maintenance-mode.php:651
 msgid "Please type in your name."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:648
+#: includes/classes/wp-maintenance-mode.php:652
 #, fuzzy
 msgid "Please type in a valid email address."
 msgstr "Будь ласка, вкажіть правильну адресу email."
 
-#: includes/classes/wp-maintenance-mode.php:652 views/maintenance.php:161
+#: includes/classes/wp-maintenance-mode.php:656 views/maintenance.php:161
 msgid "Send"
 msgstr "Надіслати"
 
-#: includes/classes/wp-maintenance-mode.php:865
-#: includes/classes/wp-maintenance-mode.php:899 views/maintenance.php:140
+#: includes/classes/wp-maintenance-mode.php:869
+#: includes/classes/wp-maintenance-mode.php:903 views/maintenance.php:140
 msgid "Please enter a valid email address."
 msgstr "Будь ласка, вкажіть правильну адресу email."
 
-#: includes/classes/wp-maintenance-mode.php:877
+#: includes/classes/wp-maintenance-mode.php:881
 msgid "You successfully subscribed. Thanks!"
 msgstr "Дякуємо, ми сповістимо Вас відразу!"
 
-#: includes/classes/wp-maintenance-mode.php:895
+#: includes/classes/wp-maintenance-mode.php:899
 msgid "All fields required."
 msgstr "Всі поля необхідні для заповнення."
 
-#: includes/classes/wp-maintenance-mode.php:907
+#: includes/classes/wp-maintenance-mode.php:911
 msgid "Message via contact"
 msgstr "Повідомити через форму контакту"
 
-#: includes/classes/wp-maintenance-mode.php:924
+#: includes/classes/wp-maintenance-mode.php:928
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Ми отримали Ваше повідомлення, дякуємо!"
 
@@ -293,7 +293,7 @@ msgstr "Логін"
 msgid "your e-mail..."
 msgstr "ваш e-mail..."
 
-#: views/maintenance.php:75 views/settings.php:273
+#: views/maintenance.php:75 views/settings.php:257
 msgid "Subscribe"
 msgstr "Сповістити мене"
 
@@ -326,24 +326,20 @@ msgstr "Зв'язатися з нами"
 msgid "Dashboard"
 msgstr "Головна сторінка"
 
-#: views/promo-strictthemes.php:1
-msgid "Premium WordPress Themes from WP Maintenance Mode authors!"
-msgstr "Преміум теми WordPress від авторів Режиму обслуговування WP!"
-
-#: views/promo-strictthemes.php:4
-msgid ""
-"We hope you like the WP Maintenance Mode plugin! Now you can buy WordPress "
-"Themes directly from us on ThemeForest. We're StrictThemes and we create "
-"best designed and coded WordPress Themes."
+#: views/promo-blocksy.php:1
+msgid "Blocksy - The Most Innovative & Lightning Fast WordPress Theme"
 msgstr ""
-"Ми сподіваємось, вам сподобався плагін режиму технічного обслуговування WP! "
-"Тепер ви можете придбати теми WordPress безпосередньо від нас на "
-"ThemeForest. Ми StrictThemes і ми створюємо найкращі розроблені та кодовані "
-"теми WordPress."
 
-#: views/promo-strictthemes.php:8
-msgid "See our WordPress Themes!"
-msgstr "Перегляньте наші теми WordPress!"
+#: views/promo-blocksy.php:4
+msgid ""
+"A blazing fast and lightweight WordPress theme built with the latest web "
+"technologies. It was built with the Gutenberg editor in mind and has a lot "
+"of options that makes it extendable and customizable."
+msgstr ""
+
+#: views/promo-blocksy.php:8
+msgid "Download for Free Now"
+msgstr ""
 
 #: views/settings.php:6
 msgid "Settings saved."
@@ -369,15 +365,15 @@ msgstr ""
 msgid "GDPR"
 msgstr ""
 
-#: views/settings.php:26 views/settings.php:470 views/settings.php:637
+#: views/settings.php:26 views/settings.php:455 views/settings.php:622
 msgid "Status"
 msgstr "Статус"
 
-#: views/settings.php:28 views/settings.php:473 views/settings.php:639
+#: views/settings.php:28 views/settings.php:458 views/settings.php:624
 msgid "Activated"
 msgstr "Активовано"
 
-#: views/settings.php:29 views/settings.php:474 views/settings.php:640
+#: views/settings.php:29 views/settings.php:459 views/settings.php:625
 msgid "Deactivated"
 msgstr "Деактивовано"
 
@@ -385,15 +381,15 @@ msgstr "Деактивовано"
 msgid "Bypass for Search Bots"
 msgstr "Пропускати пошукових ботів"
 
-#: views/settings.php:36 views/settings.php:106 views/settings.php:116
-#: views/settings.php:245 views/settings.php:281 views/settings.php:319
-#: views/settings.php:393 views/settings.php:425 views/settings.php:434
+#: views/settings.php:36 views/settings.php:96 views/settings.php:106
+#: views/settings.php:229 views/settings.php:265 views/settings.php:304
+#: views/settings.php:378 views/settings.php:410 views/settings.php:419
 msgid "Yes"
 msgstr "Так"
 
-#: views/settings.php:37 views/settings.php:107 views/settings.php:117
-#: views/settings.php:246 views/settings.php:282 views/settings.php:320
-#: views/settings.php:394 views/settings.php:426 views/settings.php:435
+#: views/settings.php:37 views/settings.php:97 views/settings.php:107
+#: views/settings.php:230 views/settings.php:266 views/settings.php:305
+#: views/settings.php:379 views/settings.php:411 views/settings.php:420
 msgid "No"
 msgstr "Ні"
 
@@ -405,11 +401,11 @@ msgstr "Не показувати пошуковим ботам режим об�
 msgid "Backend Role"
 msgstr "Адміністративна роль"
 
-#: views/settings.php:45 views/settings.php:61
+#: views/settings.php:45 views/settings.php:56
 msgid "Select role(s)"
 msgstr "Вказати роль(і)"
 
-#: views/settings.php:55
+#: views/settings.php:50
 msgid ""
 "Which user role is allowed to access the backend of this blog? "
 "Administrators will always have access."
@@ -417,11 +413,11 @@ msgstr ""
 "Якому користувачу дозволено доступ до адміністративної панелі? "
 "Адміністратори завжди мають доступ."
 
-#: views/settings.php:59
+#: views/settings.php:54
 msgid "Frontend Role"
 msgstr "Роль користувацької частини"
 
-#: views/settings.php:71
+#: views/settings.php:61
 msgid ""
 "Which user role is allowed to access the frontend of this blog? "
 "Administrators will always have access."
@@ -429,11 +425,11 @@ msgstr ""
 "Якому користувачу дозволено доступ до користувацької частини? Адміністратори "
 "завжди мають доступ."
 
-#: views/settings.php:75
+#: views/settings.php:65
 msgid "Robots Meta Tag"
 msgstr "Мета тег Robots"
 
-#: views/settings.php:81
+#: views/settings.php:71
 msgid ""
 "The robots meta tag lets you use a granular, page-specific approach to "
 "control how an individual page should be indexed and served to users in "
@@ -443,11 +439,11 @@ msgstr ""
 "кожної спосіб контролювати індексування окремих сторінки та показувати їх в "
 "результатах пошуку."
 
-#: views/settings.php:85
+#: views/settings.php:75
 msgid "Redirection"
 msgstr "Переадресація"
 
-#: views/settings.php:88
+#: views/settings.php:78
 msgid ""
 "If you want to redirect a user (with no access to Dashboard/Backend) to a "
 "URL (different from WordPress Dashboard URL) after login, then define a URL "
@@ -457,11 +453,11 @@ msgstr ""
 "частини) на певний URL (інший, ніж URL адміністративної частини WordPress) "
 "після входу, вкажіть цей URL (включно з http://)"
 
-#: views/settings.php:92
+#: views/settings.php:82
 msgid "Exclude"
 msgstr "Виключення"
 
-#: views/settings.php:99
+#: views/settings.php:89
 msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
@@ -469,135 +465,135 @@ msgstr ""
 "Виключити стрічку, сторінки, архіви ти IP з режиму обслувування. Додавайте "
 "один слаґ/IP на рядок!"
 
-#: views/settings.php:103
+#: views/settings.php:93
 msgid "Notice"
 msgstr "Сповіщення"
 
-#: views/settings.php:109
+#: views/settings.php:99
 msgid "Do you want to see notices when maintenance mode is activated?"
 msgstr "Чи бажаєте бачити сповіщення, коли активовано режим обслуговування?"
 
-#: views/settings.php:113
+#: views/settings.php:103
 msgid "Dashboard link"
 msgstr "Посилання на адміністративну частину"
 
-#: views/settings.php:119
+#: views/settings.php:109
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr "Чи бажаєте додати посилання на адміністративну частину?"
 
-#: views/settings.php:127 views/settings.php:231 views/settings.php:452
-#: views/settings.php:622 views/settings.php:695
+#: views/settings.php:117 views/settings.php:215 views/settings.php:437
+#: views/settings.php:607 views/settings.php:680
 msgid "Save settings"
 msgstr "Зберегти налаштування"
 
-#: views/settings.php:128 views/settings.php:232 views/settings.php:453
-#: views/settings.php:623 views/settings.php:696
+#: views/settings.php:118 views/settings.php:216 views/settings.php:438
+#: views/settings.php:608 views/settings.php:681
 msgid "Reset settings"
 msgstr "Скинути налаштування"
 
-#: views/settings.php:133
+#: views/settings.php:123
 msgid "Content"
 msgstr "Текст"
 
-#: views/settings.php:138
+#: views/settings.php:128
 msgid "Title (HTML tag)"
 msgstr "Назва (HTML тег)"
 
-#: views/settings.php:144
+#: views/settings.php:134
 msgid "Heading"
 msgstr "Заголовок"
 
-#: views/settings.php:151 views/settings.php:287
+#: views/settings.php:141 views/settings.php:271
 msgid "Text"
 msgstr "Текст"
 
-#: views/settings.php:166
+#: views/settings.php:156
 msgid "This text will not be shown when the bot feature is enabled."
 msgstr ""
 
-#: views/settings.php:172
+#: views/settings.php:162
 msgid "Background"
 msgstr "Фон"
 
-#: views/settings.php:177
+#: views/settings.php:167
 msgid "Choose type"
 msgstr "Обрати тип"
 
-#: views/settings.php:180
+#: views/settings.php:170
 msgid "Custom color"
 msgstr "Обрати колір"
 
-#: views/settings.php:181
+#: views/settings.php:171
 msgid "Uploaded background"
 msgstr "Завантажений фон"
 
-#: views/settings.php:182
+#: views/settings.php:172
 msgid "Predefined background"
 msgstr "Стандартний фон"
 
-#: views/settings.php:187
+#: views/settings.php:177
 msgid "Choose color"
 msgstr "Обрати колір"
 
-#: views/settings.php:193
+#: views/settings.php:183
 msgid "Upload background"
 msgstr "Обрати фон"
 
-#: views/settings.php:197
+#: views/settings.php:187
 msgid "Backgrounds should have 1920x1280 px size."
 msgstr "Фон повинен мати розмір 1920x1280 пікс."
 
-#: views/settings.php:202
+#: views/settings.php:192
 msgid "Choose background"
 msgstr "Обрати фон"
 
-#: views/settings.php:204
+#: views/settings.php:194
 #, php-format
 msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 msgstr "джерело: <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 
-#: views/settings.php:237
+#: views/settings.php:221
 msgid "Countdown"
 msgstr "Зворотній відлік"
 
-#: views/settings.php:242
+#: views/settings.php:226
 msgid "Show countdown?"
 msgstr "Показувати зворотній відлік?"
 
-#: views/settings.php:251
+#: views/settings.php:235
 msgid "Start date"
 msgstr "Початкова дата"
 
-#: views/settings.php:257
+#: views/settings.php:241
 msgid "Countdown (remaining time)"
 msgstr "Зворотній відлік (лишилося часу)"
 
-#: views/settings.php:259
+#: views/settings.php:243
 msgid "Days"
 msgstr "Дні"
 
-#: views/settings.php:260
+#: views/settings.php:244
 msgid "Hours"
 msgstr "Години"
 
-#: views/settings.php:261
+#: views/settings.php:245
 msgid "Minutes"
 msgstr "Хвилини"
 
-#: views/settings.php:265
+#: views/settings.php:249
 msgid "Color"
 msgstr "Колір"
 
-#: views/settings.php:278
+#: views/settings.php:262
 msgid "Show subscribe?"
 msgstr "Показувати підписку?"
 
-#: views/settings.php:294
+#: views/settings.php:278
 msgid "Stats"
 msgstr "Статистика"
 
-#: views/settings.php:298
+#: views/settings.php:282
 #, php-format
 msgctxt "settings page"
 msgid "You have %d subscriber"
@@ -606,240 +602,244 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: views/settings.php:303
+#: views/settings.php:287
 msgid "Export as CSV"
 msgstr "Експортувати як CSV"
 
-#: views/settings.php:304
+#: views/settings.php:288
 msgid "Empty subscribers list"
 msgstr "Очистити список підписників"
 
-#: views/settings.php:311
+#: views/settings.php:296
 msgid "Social Networks"
 msgstr "Соціальні мережі"
 
-#: views/settings.php:316
+#: views/settings.php:301
 msgid "Show social networks?"
 msgstr "Показувати соціальні мережі?"
 
-#: views/settings.php:325
+#: views/settings.php:310
 msgid "Links target?"
 msgstr "Посилання відкривати"
 
-#: views/settings.php:328 views/settings.php:666
+#: views/settings.php:313 views/settings.php:651
 msgid "New page"
 msgstr "В новому вікні"
 
-#: views/settings.php:329 views/settings.php:667
+#: views/settings.php:314 views/settings.php:652
 msgid "Same page"
 msgstr "В тому ж вікні"
 
-#: views/settings.php:331
+#: views/settings.php:316
 msgid "Choose how the links will open."
 msgstr "Оберіть, як відкривати посилання."
 
-#: views/settings.php:385
+#: views/settings.php:370
 msgid "Contact"
 msgstr "Форма контакту"
 
-#: views/settings.php:390
+#: views/settings.php:375
 msgid "Show contact?"
 msgstr "Показувати форму контакту?"
 
-#: views/settings.php:399
+#: views/settings.php:384
 msgid "Email address"
 msgstr "Адреса email"
 
-#: views/settings.php:405
+#: views/settings.php:390
 msgid "Effects"
 msgstr "Ефекти"
 
-#: views/settings.php:408
+#: views/settings.php:393
 msgid "Move top - Move bottom"
 msgstr "Move top - Move bottom"
 
-#: views/settings.php:409
+#: views/settings.php:394
 msgid "Zoom - Zoomed"
 msgstr "Zoom - Zoomed"
 
-#: views/settings.php:410
+#: views/settings.php:395
 msgid "Fold - Unfold"
 msgstr "Fold - Unfold"
 
-#: views/settings.php:417
+#: views/settings.php:402
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: views/settings.php:422
+#: views/settings.php:407
 msgid "Use Google Analytics?"
 msgstr "Використовувати Google Analytics?"
 
-#: views/settings.php:431
+#: views/settings.php:416
 msgid "Enable IP anonymization?"
 msgstr ""
 
-#: views/settings.php:441
+#: views/settings.php:426
 msgid "Tracking code"
 msgstr "Код відстеження"
 
-#: views/settings.php:444
+#: views/settings.php:429
+#, fuzzy
+#| msgid ""
+#| "Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid"
 msgid ""
-"Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid"
+"Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX, G-XXXXXXXX. Eg: "
+"UA-12345678-1 is valid"
 msgstr ""
 "Дозволені формати: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Наприклад, UA-12345678-1 "
 "вірний формат"
 
-#: views/settings.php:462
+#: views/settings.php:447
 msgid ""
 "Setup the conversation steps to capture more subscribers with this friendly "
 "way of asking email addresess."
 msgstr ""
 
-#: views/settings.php:463
+#: views/settings.php:448
 msgid ""
 "You may also want to use these wildcards: {bot_name} and {visitor_name} to "
 "make the conversation even more realistic."
 msgstr ""
 
-#: views/settings.php:464
+#: views/settings.php:449
 msgid ""
 "It is also ok if you don't fill in all the conversation steps if you don't "
 "need to."
 msgstr ""
 
-#: views/settings.php:465
+#: views/settings.php:450
 msgid ""
 "If you want to see the list of subscribers, go to Modules &raquo; Subscribe "
 "&raquo; Export as CSV."
 msgstr ""
 
-#: views/settings.php:478
+#: views/settings.php:463
 #, fuzzy
 msgid "Bot Name"
 msgstr "Ім'я"
 
-#: views/settings.php:481
+#: views/settings.php:466
 msgid "This name will appear when the bot is typing."
 msgstr ""
 
-#: views/settings.php:485
+#: views/settings.php:470
 #, fuzzy
 msgid "Upload avatar"
 msgstr "Обрати фон"
 
-#: views/settings.php:489
+#: views/settings.php:474
 msgid "A 512 x 512 px will work just fine."
 msgstr ""
 
-#: views/settings.php:495
+#: views/settings.php:480
 msgid "Customize Messages"
 msgstr ""
 
-#: views/settings.php:500
+#: views/settings.php:485
 msgid "Message 1"
 msgstr ""
 
-#: views/settings.php:508
+#: views/settings.php:493
 msgid "Message 2"
 msgstr ""
 
-#: views/settings.php:516
+#: views/settings.php:501
 msgid "Message 3"
 msgstr ""
 
-#: views/settings.php:524 views/settings.php:564 views/settings.php:586
+#: views/settings.php:509 views/settings.php:549 views/settings.php:571
 msgid "Response"
 msgstr ""
 
-#: views/settings.php:528 views/settings.php:590
+#: views/settings.php:513 views/settings.php:575
 msgid "Edit the placeholder's text"
 msgstr ""
 
-#: views/settings.php:532
+#: views/settings.php:517
 msgid "Message 4"
 msgstr ""
 
-#: views/settings.php:540
+#: views/settings.php:525
 msgid "Message 5"
 msgstr ""
 
-#: views/settings.php:548
+#: views/settings.php:533
 msgid "Message 6"
 msgstr ""
 
-#: views/settings.php:556
+#: views/settings.php:541
 msgid "Message 7"
 msgstr ""
 
-#: views/settings.php:568
+#: views/settings.php:553
 msgid "Edit button one"
 msgstr ""
 
-#: views/settings.php:572
+#: views/settings.php:557
 msgid "Edit button two"
 msgstr ""
 
-#: views/settings.php:578 views/settings.php:594
+#: views/settings.php:563 views/settings.php:579
 msgid "Message 8"
 msgstr ""
 
-#: views/settings.php:578 views/settings.php:602 views/settings.php:610
+#: views/settings.php:563 views/settings.php:587 views/settings.php:595
 msgid "(click on button one)"
 msgstr ""
 
-#: views/settings.php:594
+#: views/settings.php:579
 msgid "(click on button two)"
 msgstr ""
 
-#: views/settings.php:602
+#: views/settings.php:587
 msgid "Message 9"
 msgstr ""
 
-#: views/settings.php:610
+#: views/settings.php:595
 msgid "Message 10"
 msgstr ""
 
-#: views/settings.php:632
+#: views/settings.php:617
 msgid ""
 "To make the plugin GDPR compliant, fill in the details and enable this "
 "section."
 msgstr ""
 
-#: views/settings.php:633
+#: views/settings.php:618
 msgid ""
 "Here we added some generic texts that you may want to review, change or "
 "remove."
 msgstr ""
 
-#: views/settings.php:645
+#: views/settings.php:630
 msgid "Link name"
 msgstr ""
 
-#: views/settings.php:649
+#: views/settings.php:634
 msgid "Label the link that will be shown on frontend footer"
 msgstr ""
 
-#: views/settings.php:654
+#: views/settings.php:639
 msgid "P. Policy page link"
 msgstr ""
 
-#: views/settings.php:663
+#: views/settings.php:648
 msgid "P. Policy link target"
 msgstr ""
 
-#: views/settings.php:669
+#: views/settings.php:654
 msgid "Choose how the link will open."
 msgstr ""
 
-#: views/settings.php:674
+#: views/settings.php:659
 msgid "Contact form 'tail'"
 msgstr ""
 
-#: views/settings.php:678 views/settings.php:687
+#: views/settings.php:663 views/settings.php:672
 msgid "This will be shown together with the acceptance checkbox below the form"
 msgstr ""
 
-#: views/settings.php:683
+#: views/settings.php:668
 msgid "Subscribe form 'tail'"
 msgstr ""
 
@@ -866,6 +866,22 @@ msgstr "GitHub"
 #: views/sidebar.php:27
 msgid "Recommended"
 msgstr ""
+
+#~ msgid "Premium WordPress Themes from WP Maintenance Mode authors!"
+#~ msgstr "Преміум теми WordPress від авторів Режиму обслуговування WP!"
+
+#~ msgid ""
+#~ "We hope you like the WP Maintenance Mode plugin! Now you can buy "
+#~ "WordPress Themes directly from us on ThemeForest. We're StrictThemes and "
+#~ "we create best designed and coded WordPress Themes."
+#~ msgstr ""
+#~ "Ми сподіваємось, вам сподобався плагін режиму технічного обслуговування "
+#~ "WP! Тепер ви можете придбати теми WordPress безпосередньо від нас на "
+#~ "ThemeForest. Ми StrictThemes і ми створюємо найкращі розроблені та "
+#~ "кодовані теми WordPress."
+
+#~ msgid "See our WordPress Themes!"
+#~ msgstr "Перегляньте наші теми WordPress!"
 
 #~ msgid "Other products"
 #~ msgstr "Інші продукти"
