@@ -43,13 +43,8 @@
                                     <th scope="row"><label for="options[general][backend_role][]"><?php _e('Backend Role', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <select name="options[general][backend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php _e('Select role(s)', $this->plugin_slug); ?>">
-                                            <?php
-                                            foreach ($wp_roles->roles as $role => $details) {
-                                                if ($role == 'administrator') {
-                                                    continue;
-                                                }
-                                                ?>
-                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect((array) $this->plugin_settings['general']['backend_role'], $role); ?>><?php echo $details['name']; ?></option>
+                                            <?php foreach (wpmm_get_user_roles() as $role => $role_name) { ?>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect((array) $this->plugin_settings['general']['backend_role'], $role); ?>><?php echo esc_html($role_name); ?></option>
                                             <?php } ?>
                                         </select>
                                         <p class="description"><?php _e('Which user role is allowed to access the backend of this blog? Administrators will always have access.', $this->plugin_slug); ?></p>
@@ -59,13 +54,8 @@
                                     <th scope="row"><label for="options[general][frontend_role][]"><?php _e('Frontend Role', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <select name="options[general][frontend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php _e('Select role(s)', $this->plugin_slug); ?>">
-                                            <?php
-                                            foreach ($wp_roles->roles as $role => $details) {
-                                                if ($role == 'administrator') {
-                                                    continue;
-                                                }
-                                                ?>
-                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect((array) $this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo $details['name']; ?></option>
+                                            <?php foreach (wpmm_get_user_roles() as $role => $role_name) { ?>
+                                                <option value="<?php echo esc_attr($role); ?>" <?php echo wpmm_multiselect((array) $this->plugin_settings['general']['frontend_role'], $role); ?>><?php echo esc_html($role_name); ?></option>
                                             <?php } ?>
                                         </select>
                                         <p class="description"><?php _e('Which user role is allowed to access the frontend of this blog? Administrators will always have access.', $this->plugin_slug); ?></p>
@@ -206,20 +196,14 @@
                             </th>
                             <td>
                                 <ul class="bg_list">
-                                    <?php
-                                    foreach (glob(WPMM_PATH . 'assets/images/backgrounds/*_thumb.jpg') as $filename) {
-                                        $file_thumb = basename($filename);
-                                        $file = str_replace('_thumb', '', $file_thumb);
-                                        ?>
-                                        <li class="<?php echo $this->plugin_settings['design']['bg_predefined'] == $file ? 'active' : ''; ?>">
+                                    <?php foreach (wpmm_get_backgrounds() as $filename) { ?>
+                                        <li class="<?php echo $this->plugin_settings['design']['bg_predefined'] == $filename['big'] ? 'active' : ''; ?>">
                                             <label>
-                                                <input type="radio" value="<?php echo esc_attr($file); ?>" name="options[design][bg_predefined]" <?php checked($this->plugin_settings['design']['bg_predefined'], $file); ?>>
-                                                <img src="<?php echo WPMM_URL . 'assets/images/backgrounds/' . $file_thumb; ?>" width="200" height="150" />
+                                                <input type="radio" value="<?php echo esc_attr($filename['big']); ?>" name="options[design][bg_predefined]" <?php checked($this->plugin_settings['design']['bg_predefined'], $filename['big']); ?>>
+                                                <img src="<?php echo esc_url(WPMM_URL . 'assets/images/backgrounds/' . $filename['small']); ?>" width="200" height="150" />
                                             </label>
                                         </li>
-                                        <?php
-                                    }
-                                    ?>
+                                    <?php } ?>
                                 </ul>
                             </td>
                             </tr>

@@ -144,6 +144,48 @@ function wpmm_get_banners() {
 }
 
 /**
+ * Get list of available backgrounds
+ * 
+ * @since 2.3.0
+ * @return array
+ */
+function wpmm_get_backgrounds() {
+        $backgrounds = array();
+
+        foreach(glob(WPMM_PATH . 'assets/images/backgrounds/*_thumb.jpg') as $file) {
+            $backgrounds[] = array(
+                'big' => str_replace('_thumb', '', basename($file)),
+                'small' => basename($file)
+            );
+        }
+
+        return $backgrounds;
+}
+
+/**
+ * Get list of user roles
+ * 
+ * @since 2.3.0
+ * @global object $wp_roles
+ * @return array
+ */
+function wpmm_get_user_roles() {
+        global $wp_roles;
+
+        $roles = array();
+
+        foreach($wp_roles->roles as $role => $details) {
+            if ($role === 'administrator') {
+                continue;
+            }
+            
+            $roles[$role] = $details['name'];
+        }
+
+        return $roles;
+}
+
+/**
  * Sanitize Google Analytics SiteID code
  *
  * Valid examples:
@@ -187,6 +229,7 @@ function wpmm_gdpr_textarea_allowed_html() {
 /**
  * Return capability
  * 
+ * @since 2.3.0
  * @param string $action
  * @return string
  */

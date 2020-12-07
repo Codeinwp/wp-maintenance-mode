@@ -228,11 +228,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          * Settings page
          *
          * @since 2.0.0
-         * @global object $wp_roles
          */
         public function display_plugin_settings() {
-            global $wp_roles;
-
             // save settings
             $this->save_plugin_settings();
 
