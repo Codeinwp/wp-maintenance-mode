@@ -182,7 +182,7 @@ body {
     border-left: 3px solid #e0e0e0;
     transition: all .3s;
 
-    /* Fix for https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/222#issuecomment-542777163 */
+    /* Fix for https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/222#issuecomment-542777163 @ 2.3.0 */
     border-radius: 0 !important;
     -webkit-appearance: none !important;
 }
