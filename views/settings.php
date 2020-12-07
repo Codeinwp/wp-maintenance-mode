@@ -434,7 +434,7 @@
                                             <option value="1" <?php selected($this->plugin_settings['modules']['ga_anonymize_ip'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
                                             <option value="0" <?php selected($this->plugin_settings['modules']['ga_anonymize_ip'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
                                         </select>
-					<p class="description"><?php _e(sprintf('Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. The anonymization is always enabled on Google Analytics 4.', 'https://support.google.com/analytics/answer/2763052'), $this->plugin_slug); ?></p>
+					<p class="description"><?php _e(sprintf('Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'https://support.google.com/analytics/answer/2763052'), $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">
