@@ -77,7 +77,8 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 == Changelog ==
 
-= 2.X.X (XX/XX/2020) =
+= 2.3.0 (07/12/2020) =
+* fix inline color picker position
 * enable media_buttons on wp_editor ("Design > Text")
 * add filters for capabilities: `wpmm_settings_capability`, `wpmm_subscribers_capability`, and `wpmm_all_actions_capability` (the last one can be used to override all capabilities)
 * bump "Tested up to" version to 5.5
