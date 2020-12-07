@@ -147,13 +147,14 @@ function wpmm_get_banners() {
  * Valid examples:
  * UA-..........
  * UA-..........-....
+ * G-..........
  *
  * @since 2.0.7
  * @param string $string
  * @return string
  */
 function wpmm_sanitize_ga_code($string) {
-	preg_match('/UA-\d{4,10}(-\d{1,4})?/', $string, $matches);
+	preg_match('/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $string, $matches);
 
 	return isset($matches[0]) ? $matches[0] : '';
 }
