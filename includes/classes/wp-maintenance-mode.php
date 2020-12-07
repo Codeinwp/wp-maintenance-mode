@@ -539,7 +539,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$protocol = !empty($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.1', 'HTTP/1.0')) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 				$charset = get_bloginfo('charset') ? get_bloginfo('charset') : 'UTF-8';
 				$status_code = (int) apply_filters('wp_maintenance_mode_status_code', 503); // this hook will be removed in the next versions
-				$status_code = (int) apply_filters('wpmm_status_code', 503);
+				$status_code = (int) apply_filters('wpmm_status_code', $status_code);
 				$backtime_seconds = $this->calculate_backtime();
 				$backtime = (int) apply_filters('wpmm_backtime', $backtime_seconds);
 
@@ -552,7 +552,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$robots = apply_filters('wpmm_meta_robots', $robots);
 
 				$author = apply_filters('wm_meta_author', get_bloginfo('name')); // this hook will be removed in the next versions
-				$author = apply_filters('wpmm_meta_author', get_bloginfo('name'));
+				$author = apply_filters('wpmm_meta_author', $author);
 
 				$description = get_bloginfo('name') . ' - ' . get_bloginfo('description');
 				$description = apply_filters('wm_meta_description', $description); // this hook will be removed in the next versions
