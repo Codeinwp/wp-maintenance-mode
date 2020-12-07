@@ -127,6 +127,7 @@ body {
     box-sizing: border-box;
     width: 450px;
     display: inline-block;
+    background-color: #fff; /*2.3.0*/
 }
 .wrap form.subscribe_form {
     /* box-sizing: border-box;
@@ -171,6 +172,7 @@ body {
 .wrap form.subscribe_form input[type="text"] {
     width: 245px;
 }
+
 .wrap form.subscribe_form input[type="submit"] {
     background: #000;
     color: #fff;
@@ -179,6 +181,10 @@ body {
     padding: 20px 30px;
     border-left: 3px solid #e0e0e0;
     transition: all .3s;
+
+    /* Fix for https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/222#issuecomment-542777163 */
+    border-radius: 0 !important;
+    -webkit-appearance: none !important;
 }
 .wrap form.subscribe_form input[type="submit"]:hover {
     background: #fff;
@@ -455,11 +461,15 @@ body {
 .background form.subscribe_form input[type="text"]::-ms-input-placeholder {
     color: #fff;
 }
+/*2.3.0*/
+.background form.subscribe_form .subscribe_border {
+    background-color: transparent;
+}
+/**/
 .background .contact_us {
     color: #fff;
     border-color: #fff;
 }
-
 
 /**
  * MEDIA QUERIES (RESPONSIVE)
@@ -508,6 +518,17 @@ body {
         padding-right: 0;
         border-left: none;
     }
+
+    /*2.3.0*/
+    .wrap form.subscribe_form input[type="submit"]:hover {
+        border-left: none;
+    }
+
+    .wrap div.subscribe_border {
+        width: 95%;
+    }
+    /**/
+
     .wrap .contact_us {
         margin: 0 0 50px;
     }
