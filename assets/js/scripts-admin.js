@@ -11,7 +11,7 @@ jQuery(function($) {
         $('.tabs-content div' + hash.replace('#', '#tab-')).removeClass('hidden');
     }
 
-    $('.nav-tab-wrapper a').click(function() {
+    $('.nav-tab-wrapper').on('click', 'a', function() {
         var tab_id = $(this).attr('href').replace('#', '#tab-');
 
         // active tab
@@ -38,7 +38,7 @@ jQuery(function($) {
      * BACKGROUND UPLOADER
      */
     var image_custom_uploader;
-    $('#upload_image_trigger').click(function(e) {
+    $('body').on('click', '#upload_image_trigger', function(e) {
         e.preventDefault();
 
         //If the uploader object has already been created, reopen the dialog
@@ -78,7 +78,7 @@ jQuery(function($) {
 
     show_bg_type($('#design_bg_type').val());
 
-    $('#design_bg_type').change(function() {
+    $('body').on('change', '#design_bg_type', function() {
         var selected_val = $(this).val();
 
         show_bg_type(selected_val);
@@ -87,7 +87,7 @@ jQuery(function($) {
     /**
      * PREDEFINED BACKGROUND
      */
-    $('ul.bg_list li').click(function() {
+    $('ul.bg_list').on('click', 'li', function() {
         $(this).parent().children().removeClass('active');
         $(this).addClass('active');
     });
@@ -95,7 +95,7 @@ jQuery(function($) {
     /**
      * SUBSCRIBERS EXPORT
      */
-    $('#subscribers-export').click(function() {
+    $('#subscribers_wrap').on('click', '#subscribers-export', function() {
         $('<iframe />').attr('src', wpmm_vars.ajax_url + '?action=wpmm_subscribers_export').appendTo('body').hide();
     });
 
@@ -104,7 +104,7 @@ jQuery(function($) {
      *
      * @since 2.0.4
      */
-    $('#subscribers-empty-list').click(function() {
+    $('#subscribers_wrap').on('click', '#subscribers-empty-list', function() {
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_subscribers_empty_list'
         }, function(response) {
@@ -120,7 +120,7 @@ jQuery(function($) {
     /**
      * RESET SETTINGS
      */
-    $('.reset_settings').click(function() {
+    $('body').on('click', '.reset_settings', function() {
         var tab = $(this).data('tab'),
                 nonce = $('#tab-' + tab + ' #_wpnonce').val();
 
@@ -148,7 +148,7 @@ jQuery(function($) {
      * BOT AVATAR UPLOADER
      */
     var avatar_custom_uploader;
-    $('#avatar_upload_trigger').click(function(e) {
+    $('body').on('click', '#avatar_upload_trigger', function(e) {
         e.preventDefault();
 
         //If the uploader object has already been created, reopen the dialog

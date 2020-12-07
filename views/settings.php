@@ -283,9 +283,10 @@
 
                                         if (current_user_can(wpmm_get_capability('subscribers')) && $subscribers_no > 0) {
                                             ?>
-                                            <br />
-                                            <a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php _e('Export as CSV', $this->plugin_slug); ?></a>
-                                            <a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php _e('Empty subscribers list', $this->plugin_slug); ?></a>
+                                            <div class="buttons">
+                                                <a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php _e('Export as CSV', $this->plugin_slug); ?></a>
+                                                <a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php _e('Empty subscribers list', $this->plugin_slug); ?></a>
+                                            </div>
                                         <?php } ?>
                                     </td>
                                 </tr>

@@ -136,6 +136,10 @@ h2.wpmm-title {
     z-index:9999999;
 }
 
+.tabs-content #subscribers_wrap .buttons {
+    margin-top: 8px;
+}
+
 .tabs-content .bot-hint {
     background: #9f9f9f;
     padding: 10px;
