@@ -149,7 +149,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 						'02' => __("I have just a few questions.", $this->plugin_slug),
 						'03' => __("What is your name?", $this->plugin_slug),
 						'04' => __("Nice to meet you here, {visitor_name}!"),
-						'05' => __("How you can see, our website will be lauched very soon.", $this->plugin_slug),
+						'05' => __("How you can see, our website will be launched very soon.", $this->plugin_slug),
 						'06' => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
 						'07' => __("Would you like to be first to see it?", $this->plugin_slug),
 						'08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
