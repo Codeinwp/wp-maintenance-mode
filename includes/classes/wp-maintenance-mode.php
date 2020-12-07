@@ -596,6 +596,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 				}
 				if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] == 1) {
+                                        if(WPMM_ASSETS_SUFFIX === '') {
+                                            $scripts['bot-async'] = WPMM_JS_URL . 'bot.async.js';
+                                        }
+                                    
 					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js';
 					add_action('wpmm_before_scripts', array($this, 'add_bot_extras'));
 				}

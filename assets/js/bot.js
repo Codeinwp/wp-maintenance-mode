@@ -164,7 +164,6 @@ function checkEmail(option) {
 
         jQuery.post(wpmm_vars.ajax_url, subscribe_bot_data, function(response) {
             if (!response.success) {
-                // console.log(subscribe_bot_data);
                 alert(response.data);
                 return false;
             }
@@ -369,7 +368,7 @@ function showStatement(pos) {
 
             // Create an input button, append to user bubble
             var button = jQuery('<a/>', {
-                text: 'Send',
+                text: botVars.send,
                 click: checkInput.bind(null, option)
             }).appendTo(inputBubble);
 
