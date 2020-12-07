@@ -6,7 +6,7 @@ Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 5.5
+Tested up to: 5.6
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPL-2.0+
@@ -78,13 +78,13 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 == Changelog ==
 
 = 2.3.0 (07/12/2020) =
-* fix inline color picker position
-* fix [loginform] shortcode redirect attribute
-* fix bot translation issues
-* add support for Google Analytics 4 measurement ID
-* enable media_buttons on wp_editor ("Design > Text")
-* add filters for capabilities: `wpmm_settings_capability`, `wpmm_subscribers_capability`, and `wpmm_all_actions_capability` (the last one can be used to override all capabilities)
-* bump "Tested up to" version to 5.5
+* Modules: add support for Google Analytics 4 measurement ID
+* Design: enable media buttons on wp_editor (now you can add images from the editor)
+* Bot: fix translation issue
+* Misc: add filters for capabilities `wpmm_settings_capability`, `wpmm_subscribers_capability`, and `wpmm_all_actions_capability` (the last one can be used to override all capabilities)
+* Misc: fix [loginform] shortcode redirect attribute
+* Misc: a few CSS & Javascript improvements
+* Misc: bump "Tested up to" version to 5.6
 
 = 2.2.4 (20/05/2019) =
 * bump "Tested up to" to 5.2.0
