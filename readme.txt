@@ -79,6 +79,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 = 2.3.0 (07/12/2020) =
 * fix inline color picker position
+* fix [loginform] shortcode redirect attribute
 * enable media_buttons on wp_editor ("Design > Text")
 * add filters for capabilities: `wpmm_settings_capability`, `wpmm_subscribers_capability`, and `wpmm_all_actions_capability` (the last one can be used to override all capabilities)
 * bump "Tested up to" version to 5.5
