@@ -91,13 +91,26 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
             $screen = get_current_screen();
             if ($this->plugin_screen_hook_suffix == $screen->id) {
+                $editor_settings = false;
+
+                if (isset($GLOBALS['wp_version']) && version_compare($GLOBALS['wp_version'], '4.9.0', '>=') && function_exists('wp_enqueue_code_editor')) {
+                    $editor_settings = wp_enqueue_code_editor(array(
+                        'type' => 'text/css',
+                        'codemirror' => array(
+                            'indentUnit' => 2,
+                            'tabSize' => 2,
+                        ),
+                    ));
+                }
+
                 wp_enqueue_media();
                 wp_enqueue_script($this->plugin_slug . '-admin-timepicker-addon-script', WPMM_JS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.js', array('jquery', 'jquery-ui-datepicker'), WP_Maintenance_Mode::VERSION);
                 wp_enqueue_script($this->plugin_slug . '-admin-script', WPMM_JS_URL . 'scripts-admin' . WPMM_ASSETS_SUFFIX . '.js', array('jquery', 'wp-color-picker'), WP_Maintenance_Mode::VERSION);
                 wp_enqueue_script($this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery' . WPMM_ASSETS_SUFFIX . '.js', array(), WP_Maintenance_Mode::VERSION);
                 wp_localize_script($this->plugin_slug . '-admin-script', 'wpmm_vars', array(
                     'ajax_url' => admin_url('admin-ajax.php'),
-                    'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug)
+                    'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug),
+                    'editor_settings' => $editor_settings,
                 ));
             }
 
@@ -161,8 +174,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                 // delete all subscribers
                 $wpdb->query("DELETE FROM {$wpdb->prefix}wpmm_subscribers");
-		
-				$message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response',$this->plugin_slug), 0);		
+
+                $message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response', $this->plugin_slug), 0);
                 wp_send_json_success($message);
             } catch (Exception $ex) {
                 wp_send_json_error($ex->getMessage());
@@ -194,7 +207,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                 // check nonce validation
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
-                   throw new Exception(__('Security check.', $this->plugin_slug));
+                    throw new Exception(__('Security check.', $this->plugin_slug));
                 }
 
                 // check existence in plugin default settings
@@ -247,8 +260,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
                     die(__('Security check.', $this->plugin_slug));
                 }
-                
-                if(!current_user_can(wpmm_get_capability('settings'))) {
+
+                if (!current_user_can(wpmm_get_capability('settings'))) {
                     die(__('You do not have access to this resource.', $this->plugin_slug));
                 }
 
@@ -285,7 +298,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         ) {
                             $this->delete_cache();
                         }
-                    break;
+                        break;
                     case 'design':
                         $custom_css = array();
 
@@ -327,11 +340,14 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                         $_POST['options']['design']['custom_css'] = $custom_css;
 
+                        // OTHER
+                        $_POST['options']['design']['user_custom_css'] = wp_strip_all_tags($_POST['options']['design']['user_custom_css']);
+
                         // delete cache when is activated
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                             $this->delete_cache();
                         }
-                    break;
+                        break;
                     case 'modules':
                         $custom_css = array();
 
@@ -374,7 +390,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                         // GOOGLE ANALYTICS
                         $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
-						$_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
+                        $_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
                         $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
 
                         $_POST['options']['modules']['custom_css'] = $custom_css;
@@ -383,35 +399,35 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                             $this->delete_cache();
                         }
-                    break;
+                        break;
                     case 'bot':
                         $custom_css = array();
 
-                        $_POST['options']['bot']['status']           = (int) $_POST['options']['bot']['status'];
+                        $_POST['options']['bot']['status'] = (int) $_POST['options']['bot']['status'];
 
-                        $_POST['options']['bot']['name']             = sanitize_text_field($_POST['options']['bot']['name']);
+                        $_POST['options']['bot']['name'] = sanitize_text_field($_POST['options']['bot']['name']);
 
-                        if(!empty($_POST['options']['bot']['avatar'])) {
+                        if (!empty($_POST['options']['bot']['avatar'])) {
                             $_POST['options']['bot']['avatar'] = esc_url($_POST['options']['bot']['avatar']);
-                            $custom_css['bot-avatar']          = ".bot-avatar { background-image: url('{$_POST['options']['bot']['avatar']}');}";
+                            $custom_css['bot-avatar'] = ".bot-avatar { background-image: url('{$_POST['options']['bot']['avatar']}');}";
                         }
 
-                        $_POST['options']['bot']['messages']['01']   = sanitize_text_field($_POST['options']['bot']['messages']['01']);
-                        $_POST['options']['bot']['messages']['02']   = sanitize_text_field($_POST['options']['bot']['messages']['02']);
-                        $_POST['options']['bot']['messages']['03']   = sanitize_text_field($_POST['options']['bot']['messages']['03']);
-                        $_POST['options']['bot']['messages']['04']   = sanitize_text_field($_POST['options']['bot']['messages']['04']);
-                        $_POST['options']['bot']['messages']['05']   = sanitize_text_field($_POST['options']['bot']['messages']['05']);
-                        $_POST['options']['bot']['messages']['06']   = sanitize_text_field($_POST['options']['bot']['messages']['06']);
-                        $_POST['options']['bot']['messages']['07']   = sanitize_text_field($_POST['options']['bot']['messages']['07']);
+                        $_POST['options']['bot']['messages']['01'] = sanitize_text_field($_POST['options']['bot']['messages']['01']);
+                        $_POST['options']['bot']['messages']['02'] = sanitize_text_field($_POST['options']['bot']['messages']['02']);
+                        $_POST['options']['bot']['messages']['03'] = sanitize_text_field($_POST['options']['bot']['messages']['03']);
+                        $_POST['options']['bot']['messages']['04'] = sanitize_text_field($_POST['options']['bot']['messages']['04']);
+                        $_POST['options']['bot']['messages']['05'] = sanitize_text_field($_POST['options']['bot']['messages']['05']);
+                        $_POST['options']['bot']['messages']['06'] = sanitize_text_field($_POST['options']['bot']['messages']['06']);
+                        $_POST['options']['bot']['messages']['07'] = sanitize_text_field($_POST['options']['bot']['messages']['07']);
                         $_POST['options']['bot']['messages']['08_1'] = sanitize_text_field($_POST['options']['bot']['messages']['08_1']);
                         $_POST['options']['bot']['messages']['08_2'] = sanitize_text_field($_POST['options']['bot']['messages']['08_2']);
-                        $_POST['options']['bot']['messages']['09']   = sanitize_text_field($_POST['options']['bot']['messages']['09']);
-                        $_POST['options']['bot']['messages']['10']   = sanitize_text_field($_POST['options']['bot']['messages']['10']);
+                        $_POST['options']['bot']['messages']['09'] = sanitize_text_field($_POST['options']['bot']['messages']['09']);
+                        $_POST['options']['bot']['messages']['10'] = sanitize_text_field($_POST['options']['bot']['messages']['10']);
 
-                        $_POST['options']['bot']['responses']['01']   = sanitize_text_field($_POST['options']['bot']['responses']['01']);
+                        $_POST['options']['bot']['responses']['01'] = sanitize_text_field($_POST['options']['bot']['responses']['01']);
                         $_POST['options']['bot']['responses']['02_1'] = sanitize_text_field($_POST['options']['bot']['responses']['02_1']);
                         $_POST['options']['bot']['responses']['02_2'] = sanitize_text_field($_POST['options']['bot']['responses']['02_2']);
-                        $_POST['options']['bot']['responses']['03']   = sanitize_text_field($_POST['options']['bot']['responses']['03']);
+                        $_POST['options']['bot']['responses']['03'] = sanitize_text_field($_POST['options']['bot']['responses']['03']);
 
                         $_POST['options']['bot']['custom_css'] = $custom_css;
 
@@ -422,17 +438,15 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                             $this->delete_cache();
                         }
-                    break;
+                        break;
                     case 'gdpr':
-                        //$custom_css = array();
-
-                        $_POST['options']['gdpr']['status'] = (int)$_POST['options']['gdpr']['status'];
+                        $_POST['options']['gdpr']['status'] = (int) $_POST['options']['gdpr']['status'];
                         $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
                         $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
-						$_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
+                        $_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
                         $_POST['options']['gdpr']['contact_form_tail'] = wp_kses($_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html());
                         $_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses($_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html());
-                    break;
+                        break;
                 }
 
                 $this->plugin_settings[$tab] = $_POST['options'][$tab];
@@ -468,25 +482,25 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          */
         public function set_datajs_file($messages = array()) {
             $data = "var botName = \"{$messages['name']}\",\n"
-                . "botAvatar = \"{$messages['avatar']}\",\n"
-                . "conversationData = {\"homepage\": {1: { \"statement\": [ \n";
-                $data .= (!empty($messages['messages']['01'])) ? "\"{$messages['messages']['01']}\", \n" : '';
-                $data .= (!empty($messages['messages']['02'])) ? "\"{$messages['messages']['02']}\", \n" : '';
-                $data .= (!empty($messages['messages']['03'])) ? "\"{$messages['messages']['03']}\", \n" : '';
-                $data .= "], \"input\": {\"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n";
-                $data .= (!empty($messages['messages']['04'])) ? "\"{$messages['messages']['04']}\", \n" : '';
-                $data .= (!empty($messages['messages']['05'])) ? "\"{$messages['messages']['05']}\", \n" : '';
-                $data .= (!empty($messages['messages']['06'])) ? "\"{$messages['messages']['06']}\", \n" : '';
-                $data .= (!empty($messages['messages']['07'])) ? "\"{$messages['messages']['07']}\", \n" : '';
-                $data .= "];},\"options\": [{ \"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
-                . "\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \"statement\": [ \n";
-                $data .= (!empty($messages['messages']['08_1'])) ? "\"{$messages['messages']['08_1']}\", \n" : '';
-                $data .= "], \"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
-                $data .= (!empty($messages['messages']['08_2'])) ? "\"{$messages['messages']['08_2']}\", \n" : '';
-                $data .= "];}},1.6: { \"statement\": [ \n";
-                $data .= (!empty($messages['messages']['09'])) ? "\"{$messages['messages']['09']}\", \n" : '';
-                $data .= (!empty($messages['messages']['10'])) ? "\"{$messages['messages']['10']}\", \n" : '';
-                $data .= "]}}};";
+                    . "botAvatar = \"{$messages['avatar']}\",\n"
+                    . "conversationData = {\"homepage\": {1: { \"statement\": [ \n";
+            $data .= (!empty($messages['messages']['01'])) ? "\"{$messages['messages']['01']}\", \n" : '';
+            $data .= (!empty($messages['messages']['02'])) ? "\"{$messages['messages']['02']}\", \n" : '';
+            $data .= (!empty($messages['messages']['03'])) ? "\"{$messages['messages']['03']}\", \n" : '';
+            $data .= "], \"input\": {\"name\": \"name\", \"consequence\": 1.2}},1.2:{\"statement\": function(context) {return [ \n";
+            $data .= (!empty($messages['messages']['04'])) ? "\"{$messages['messages']['04']}\", \n" : '';
+            $data .= (!empty($messages['messages']['05'])) ? "\"{$messages['messages']['05']}\", \n" : '';
+            $data .= (!empty($messages['messages']['06'])) ? "\"{$messages['messages']['06']}\", \n" : '';
+            $data .= (!empty($messages['messages']['07'])) ? "\"{$messages['messages']['07']}\", \n" : '';
+            $data .= "];},\"options\": [{ \"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
+                    . "\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \"statement\": [ \n";
+            $data .= (!empty($messages['messages']['08_1'])) ? "\"{$messages['messages']['08_1']}\", \n" : '';
+            $data .= "], \"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
+            $data .= (!empty($messages['messages']['08_2'])) ? "\"{$messages['messages']['08_2']}\", \n" : '';
+            $data .= "];}},1.6: { \"statement\": [ \n";
+            $data .= (!empty($messages['messages']['09'])) ? "\"{$messages['messages']['09']}\", \n" : '';
+            $data .= (!empty($messages['messages']['10'])) ? "\"{$messages['messages']['10']}\", \n" : '';
+            $data .= "]}}};";
 
             // Replace {visitor_name} KEY
             $data = str_replace('{visitor_name}', "\" + context.name  + \"", $data);
@@ -496,7 +510,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             // Try to write data.js file
             try {
                 $upload_dir = wp_upload_dir();
-                if ( file_put_contents( trailingslashit($upload_dir['basedir']) . 'data.js', $data) === false ){
+                if (file_put_contents(trailingslashit($upload_dir['basedir']) . 'data.js', $data) === false) {
                     throw new Exception(__("WPMM: The file data.js could not be written, the bot will not work correctly.", $this->plugin_slug));
                 }
             } catch (Exception $ex) {
@@ -531,7 +545,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function add_settings_link($links) {
             return array_merge(
                     array(
-                'wpmm_settings' => '<a href="' . admin_url('options-general.php?page=' . $this->plugin_slug) . '">' . __('Settings', $this->plugin_slug) . '</a>'
+                        'wpmm_settings' => '<a href="' . admin_url('options-general.php?page=' . $this->plugin_slug) . '">' . __('Settings', $this->plugin_slug) . '</a>'
                     ), $links
             );
         }
@@ -650,34 +664,28 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
         public function get_policy_link() {
             //Check feature is available
-            if($this->get_is_policy_available()) {
+            if ($this->get_is_policy_available()) {
                 return get_privacy_policy_url();
             }
         }
 
         public function get_policy_link_message() {
             $url = $this->get_policy_link();
-            if($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] === '') {
-                if($url === '') { // No value and feature available
+            if ($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] === '') {
+                if ($url === '') { // No value and feature available
                     return __("Your WordPress version supports Privacy settings but you haven't set any privacy policy page yet. Go to Settings ➡ Privacy to set one.", $this->plugin_slug);
-                }
-                else { // Value and feature available
+                } else { // Value and feature available
                     return sprintf(__('The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', $this->plugin_slug), $url, '<button>', '</button>');
                 }
-            }
-            elseif($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] != '') { // Feature available and value set
-                if($url != $this->plugin_settings['gdpr']['policy_page_link']) { // Current wp privacy page differs from set value
+            } elseif ($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] != '') { // Feature available and value set
+                if ($url != $this->plugin_settings['gdpr']['policy_page_link']) { // Current wp privacy page differs from set value
                     return sprintf(__("Your Privacy page is pointing to a different URL in WordPress settings. If that's correct ignore this message, otherwise %s", $this->plugin_slug), 'UPDATE VALUE TO NEW URL');
                 }
-            }
-            elseif(!$this->get_is_policy_available()) { // No privacy feature available
+            } elseif (!$this->get_is_policy_available()) { // No privacy feature available
                 return __("No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.", $this->plugin_slug);
             }
         }
-    
-    
-    
-    
+
     }
 
 }

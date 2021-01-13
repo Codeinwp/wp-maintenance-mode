@@ -210,6 +210,20 @@
                             </tbody>
                         </table>
 
+                        <h3>&raquo; <?php _e('Other', $this->plugin_slug); ?></h3>
+                        
+                        <table class="form-table">
+                            <tbody>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[design][user_custom_css]"><?php _e('Custom CSS', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <textarea rows="10" name="options[design][user_custom_css]" style="width:625px;" id="user_custom_css"><?php echo stripslashes_deep($this->plugin_settings['design']['user_custom_css']); ?></textarea>
+                                        <p class="description"><?php esc_html_e('Do not include <style> tags.', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                         <?php wp_nonce_field('tab-design'); ?>
                         <input type="hidden" value="design" name="tab" />
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">

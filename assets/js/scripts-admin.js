@@ -1,4 +1,4 @@
-jQuery(function($) {
+jQuery(function ($) {
     /**
      * TABS
      */
@@ -11,7 +11,7 @@ jQuery(function($) {
         $('.tabs-content div' + hash.replace('#', '#tab-')).removeClass('hidden');
     }
 
-    $('.nav-tab-wrapper').on('click', 'a', function() {
+    $('.nav-tab-wrapper').on('click', 'a', function () {
         var tab_id = $(this).attr('href').replace('#', '#tab-');
 
         // active tab
@@ -38,7 +38,7 @@ jQuery(function($) {
      * BACKGROUND UPLOADER
      */
     var image_custom_uploader;
-    $('body').on('click', '#upload_image_trigger', function(e) {
+    $('body').on('click', '#upload_image_trigger', function (e) {
         e.preventDefault();
 
         //If the uploader object has already been created, reopen the dialog
@@ -57,7 +57,7 @@ jQuery(function($) {
         });
 
         //When a file is selected, grab the URL and set it as the text field's value
-        image_custom_uploader.on('select', function() {
+        image_custom_uploader.on('select', function () {
             attachment = image_custom_uploader.state().get('selection').first().toJSON();
             var url = '';
             url = attachment.url;
@@ -71,14 +71,14 @@ jQuery(function($) {
     /**
      * SHOW DESIGN BACKGROUND TYPE BASED ON SELECTED FIELD
      */
-    show_bg_type = function(selected_val) {
+    show_bg_type = function (selected_val) {
         $('.design_bg_types').hide();
         $('#show_' + selected_val).show();
     };
 
     show_bg_type($('#design_bg_type').val());
 
-    $('body').on('change', '#design_bg_type', function() {
+    $('body').on('change', '#design_bg_type', function () {
         var selected_val = $(this).val();
 
         show_bg_type(selected_val);
@@ -87,7 +87,7 @@ jQuery(function($) {
     /**
      * PREDEFINED BACKGROUND
      */
-    $('ul.bg_list').on('click', 'li', function() {
+    $('ul.bg_list').on('click', 'li', function () {
         $(this).parent().children().removeClass('active');
         $(this).addClass('active');
     });
@@ -95,7 +95,7 @@ jQuery(function($) {
     /**
      * SUBSCRIBERS EXPORT
      */
-    $('#subscribers_wrap').on('click', '#subscribers-export', function() {
+    $('#subscribers_wrap').on('click', '#subscribers-export', function () {
         $('<iframe />').attr('src', wpmm_vars.ajax_url + '?action=wpmm_subscribers_export').appendTo('body').hide();
     });
 
@@ -104,10 +104,10 @@ jQuery(function($) {
      *
      * @since 2.0.4
      */
-    $('#subscribers_wrap').on('click', '#subscribers-empty-list', function() {
+    $('#subscribers_wrap').on('click', '#subscribers-empty-list', function () {
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_subscribers_empty_list'
-        }, function(response) {
+        }, function (response) {
             if (!response.success) {
                 alert(response.data);
                 return false;
@@ -120,7 +120,7 @@ jQuery(function($) {
     /**
      * RESET SETTINGS
      */
-    $('body').on('click', '.reset_settings', function() {
+    $('body').on('click', '.reset_settings', function () {
         var tab = $(this).data('tab'),
                 nonce = $('#tab-' + tab + ' #_wpnonce').val();
 
@@ -128,7 +128,7 @@ jQuery(function($) {
             action: 'wpmm_reset_settings',
             tab: tab,
             _wpnonce: nonce
-        }, function(response) {
+        }, function (response) {
             if (!response.success) {
                 alert(response.data);
                 return false;
@@ -148,7 +148,7 @@ jQuery(function($) {
      * BOT AVATAR UPLOADER
      */
     var avatar_custom_uploader;
-    $('body').on('click', '#avatar_upload_trigger', function(e) {
+    $('body').on('click', '#avatar_upload_trigger', function (e) {
         e.preventDefault();
 
         //If the uploader object has already been created, reopen the dialog
@@ -167,7 +167,7 @@ jQuery(function($) {
         });
 
         //When a file is selected, grab the URL and set it as the text field's value
-        avatar_custom_uploader.on('select', function() {
+        avatar_custom_uploader.on('select', function () {
             attachment = avatar_custom_uploader.state().get('selection').first().toJSON();
             var url = '';
             url = attachment.url;
@@ -177,5 +177,12 @@ jQuery(function($) {
         //Open the uploader dialog
         avatar_custom_uploader.open();
     });
+
+    /**
+     * CUSTOM CSS
+     */
+    if(wpmm_vars.editor_settings !== '') {
+        wp.codeEditor.initialize('user_custom_css', wpmm_vars.editor_settings);
+    }
 
 });

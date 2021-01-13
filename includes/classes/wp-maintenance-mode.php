@@ -108,7 +108,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'bg_color' => '',
 					'bg_custom' => '',
 					'bg_predefined' => 'bg1.jpg',
-					'custom_css' => array()
+					'custom_css' => array(),
+                                        'user_custom_css' => ''
 				),
 				'modules' => array(
 					'countdown_status' => 0,
@@ -471,6 +472,16 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				// update options
 				update_option('wpmm_settings', $v2_options);
 			}
+                        
+                        /**
+                         * Update from <= v2.3.0 to 2.4.0
+                         */
+                        if(empty($v2_options['design']['user_custom_css'])) {
+                            $v2_options['design']['user_custom_css'] = $default_options['design']['user_custom_css'];
+                            
+                            // update options
+                            update_option('wpmm_settings', $v2_options);
+                        }
 
 			// set current version
 			update_option('wpmm_version', WP_Maintenance_Mode::VERSION);
@@ -564,11 +575,13 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				// CSS STUFF
 				$body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
+                                
 				$custom_css_design = !empty($this->plugin_settings['design']['custom_css']) && is_array($this->plugin_settings['design']['custom_css']) ? $this->plugin_settings['design']['custom_css'] : array();
 				$custom_css_modules = !empty($this->plugin_settings['modules']['custom_css']) && is_array($this->plugin_settings['modules']['custom_css']) ? $this->plugin_settings['modules']['custom_css'] : array();
 				$custom_css_bot = !empty($this->plugin_settings['bot']['custom_css']) && is_array($this->plugin_settings['bot']['custom_css']) ? $this->plugin_settings['bot']['custom_css'] : array();
-				$custom_css = array_merge($custom_css_design, $custom_css_modules, $custom_css_bot);
-
+                                $user_custom_css = !empty($this->plugin_settings['design']['user_custom_css']) ? (array) $this->plugin_settings['design']['user_custom_css'] : array();
+				$custom_css = array_merge($custom_css_design, $custom_css_modules, $custom_css_bot, $user_custom_css);
+                                
 				// CONTENT
 				$heading = !empty($this->plugin_settings['design']['heading']) ? $this->plugin_settings['design']['heading'] : '';
 				$heading = apply_filters('wm_heading', $heading); // this hook will be removed in the next versions
