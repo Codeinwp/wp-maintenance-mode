@@ -243,6 +243,49 @@ function wpmm_get_capability($action) {
         return apply_filters(sprintf('wpmm_%s_capability', $action), 'manage_options');
 }
 
+/**
+ * Get template path
+ * 
+ * @since 2.4.0
+ * @param string $template_name
+ * @return string
+ */
+function wpmm_get_template_path($template_name) {
+    $file_path = WPMM_VIEWS_PATH . $template_name;
+    $files_list = array(
+        get_stylesheet_directory() . '/wp-maintenance-mode/' . $template_name, // check child theme folder
+        get_template_directory() . '/wp-maintenance-mode/' . $template_name, // check theme folder
+    );
+
+    // maintain backward compatibility
+    if ($template_name === 'maintenance.php') {
+        $files_list = array_merge($files_list, array(
+            get_stylesheet_directory() . '/wp-maintenance-mode.php', // check child theme folder
+            get_template_directory() . '/wp-maintenance-mode.php', // check theme folder
+            WP_CONTENT_DIR . '/wp-maintenance-mode.php', // check `wp-content` folder
+        ));
+    }
+
+    // we need just unique values because get_stylesheet_directory() === get_template_directory() if you don't use a child theme
+    $files_list = array_unique($files_list);
+    
+    foreach ($files_list as $file) {
+        if (file_exists($file)) {
+            $file_path = $file;
+            break;
+        }
+    }
+    
+    error_log($file_path);
+
+    /**
+     * Possible filters:
+     * - wpmm_maintenance_template
+     * - wpmm_contact_template
+     */
+    return apply_filters(sprintf('wpmm_%s_template', basename($template_name, '.php')), $file_path);
+}
+
 if (!function_exists('wp_scripts')) {
 
 	/**

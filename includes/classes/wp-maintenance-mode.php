@@ -639,15 +639,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				header("Retry-After: $backtime");
 
 				// load maintenance mode template
-				if (file_exists(get_stylesheet_directory() . '/wp-maintenance-mode.php')) { // check child theme folder
-					include_once(get_stylesheet_directory() . '/wp-maintenance-mode.php');
-				} else if (file_exists(get_template_directory() . "/wp-maintenance-mode.php")) { // check theme folder
-					include_once(get_template_directory() . '/wp-maintenance-mode.php');
-				} else if (file_exists(WP_CONTENT_DIR . '/wp-maintenance-mode.php')) { // check `wp-content` folder
-					include_once(WP_CONTENT_DIR . '/wp-maintenance-mode.php');
-				} else { // load from plugin `views` folder
-					include_once(WPMM_VIEWS_PATH . 'maintenance.php');
-				}
+                                include_once(wpmm_get_template_path('maintenance.php'));
 				ob_flush();
 
 				exit();
@@ -998,11 +990,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$send_to = !empty($this->plugin_settings['modules']['contact_email']) ? stripslashes($this->plugin_settings['modules']['contact_email']) : get_option('admin_email');
 				$subject = apply_filters('wpmm_contact_subject', __('Message via contact', $this->plugin_slug));
 				$headers = apply_filters('wpmm_contact_headers', array('Reply-To: ' . sanitize_text_field($_POST['email'])));
-				$template_path = apply_filters('wpmm_contact_template', WPMM_VIEWS_PATH . 'contact.php');
 				$from_name = sanitize_text_field($_POST['name']);
 
 				ob_start();
-				include_once($template_path);
+				include_once(wpmm_get_template_path('contact.php'));
 				$message = ob_get_clean();
 
 				// filters
