@@ -41,6 +41,9 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				// Redirect
 				add_action('init', array($this, 'redirect'), 9);
 
+                                // Inline CSS style
+                                add_action('wpmm_head', array($this, 'add_inline_css_style'));
+                                
 				// Google Analytics tracking script
 				add_action('wpmm_head', array($this, 'google_analytics_code'));
 			}
@@ -108,7 +111,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'bg_color' => '',
 					'bg_custom' => '',
 					'bg_predefined' => 'bg1.jpg',
-					'custom_css' => array(),
                                         'user_custom_css' => ''
 				),
 				'modules' => array(
@@ -139,7 +141,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'ga_status' => 0,
 					'ga_anonymize_ip' => 0,
 					'ga_code' => '',
-					'custom_css' => array()
 				),
 				'bot' => array(
 					'status' => 0,
@@ -164,7 +165,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
 						'02_2' => __("Boring", $this->plugin_slug),
 						'03' => __("Type your email here…", $this->plugin_slug)
 					),
-					'custom_css' => array()
 				),
 				'gdpr' => array(
 					'status' => 0,
@@ -576,12 +576,6 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				// CSS STUFF
 				$body_classes = !empty($this->plugin_settings['design']['bg_type']) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
                                 
-				$custom_css_design = !empty($this->plugin_settings['design']['custom_css']) && is_array($this->plugin_settings['design']['custom_css']) ? $this->plugin_settings['design']['custom_css'] : array();
-				$custom_css_modules = !empty($this->plugin_settings['modules']['custom_css']) && is_array($this->plugin_settings['modules']['custom_css']) ? $this->plugin_settings['modules']['custom_css'] : array();
-				$custom_css_bot = !empty($this->plugin_settings['bot']['custom_css']) && is_array($this->plugin_settings['bot']['custom_css']) ? $this->plugin_settings['bot']['custom_css'] : array();
-                                $user_custom_css = !empty($this->plugin_settings['design']['user_custom_css']) ? (array) $this->plugin_settings['design']['user_custom_css'] : array();
-				$custom_css = array_merge($custom_css_design, $custom_css_modules, $custom_css_bot, $user_custom_css);
-                                
 				// CONTENT
 				$heading = !empty($this->plugin_settings['design']['heading']) ? $this->plugin_settings['design']['heading'] : '';
 				$heading = apply_filters('wm_heading', $heading); // this hook will be removed in the next versions
@@ -863,6 +857,72 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			// show google analytics javascript snippet
 			include_once(WPMM_VIEWS_PATH . 'google-analytics.php');
 		}
+                
+                
+                /**
+                 * Add inline CSS style
+                 * 
+                 * @since 2.4.0
+                 * @return
+                 */
+                public function add_inline_css_style() {
+                    $css_rules = array();
+                    
+                    // "Design > Content > Heading" color
+                    if(!empty($this->plugin_settings['design']['heading_color'])) {
+                        $css_rules['design.heading_color'] = sprintf('.wrap h1 { color: %s; }', sanitize_hex_color($this->plugin_settings['design']['heading_color']));
+                    }
+                    
+                    // "Design > Content > Text" color
+                    if(!empty($this->plugin_settings['design']['text_color'])) {
+                        $css_rules['design.text_color'] = sprintf('.wrap h2 { color: %s; }', sanitize_hex_color($this->plugin_settings['design']['text_color']));
+                    }
+                    
+                    // "Design > Background" color
+                    if($this->plugin_settings['design']['bg_type'] === 'color' && !empty($this->plugin_settings['design']['bg_color'])) {
+                        $css_rules['design.bg_color'] = sprintf('body { background-color: %s; }', sanitize_hex_color($this->plugin_settings['design']['bg_color']));
+                    }
+                    
+                    // "Design > Background" custom background url
+                    if($this->plugin_settings['design']['bg_type'] === 'custom' && !empty($this->plugin_settings['design']['bg_custom'])) {
+                        $css_rules['design.bg_custom'] = sprintf('.background { background: url("%s") no-repeat center top fixed; background-size: cover; }', esc_url($this->plugin_settings['design']['bg_custom']));
+                    }
+                    
+                    // "Design > Background" predefined background url
+                    if(
+                            $this->plugin_settings['design']['bg_type'] === 'predefined' && 
+                            !empty($this->plugin_settings['design']['bg_predefined']) && 
+                            in_array($this->plugin_settings['design']['bg_predefined'], wp_list_pluck(wpmm_get_backgrounds(), 'big'))
+                    ) {
+                        $css_rules['design.bg_predefined'] = sprintf('.background { background: url("%s") no-repeat center top fixed; background-size: cover; }', esc_url(WPMM_URL . 'assets/images/backgrounds/' . $this->plugin_settings['design']['bg_predefined']));
+                    }
+                    
+                    // "Modules > Countdown" color
+                    if(!empty($this->plugin_settings['modules']['countdown_color'])) {
+                        $css_rules['modules.countdown_color'] = sprintf('.wrap .countdown span { color: %s; }', sanitize_hex_color($this->plugin_settings['modules']['countdown_color']));
+                    }
+                    
+                    // "Modules > Subscribe > Text" color
+                    if(!empty($this->plugin_settings['modules']['subscribe_text_color'])) {
+                        $css_rules['modules.subscribe_text_color'] = sprintf('.wrap h3, .wrap .subscribe_wrapper { color: %s; }', sanitize_hex_color($this->plugin_settings['modules']['subscribe_text_color']));
+                    }
+                    
+                    // "Manage Bot > Upload avatar" url
+                    if(!empty($this->plugin_settings['bot']['avatar'])) {
+                        $css_rules['bot.avatar'] = sprintf('.bot-avatar { background-image: url("%s"); }', esc_url($this->plugin_settings['bot']['avatar']));
+                    }
+                    
+                    // "Design > Other > Custom CSS"
+                    if(!empty($this->plugin_settings['design']['user_custom_css'])) {
+                        $css_rules['design.user_custom_css'] = wp_strip_all_tags($this->plugin_settings['design']['user_custom_css']);
+                    }
+                    
+                    if(empty($css_rules)) {
+                        return;
+                    }
+                    
+                    printf("<style>\n%s\n</style>\n", implode("\n", $css_rules));
+                }
 
 		/**
 		 * Save subscriber into database (refactor @ 2.0.4)

@@ -16,10 +16,7 @@
 				<?php
 			}
 		}
-		if (!empty($custom_css) && is_array($custom_css)) {
-			echo '<style>' . implode(array_map('stripslashes', $custom_css)) . '</style>';
-		}
-
+                
 		// do some actions
 		do_action('wm_head'); // this hook will be removed in the next versions
 		do_action('wpmm_head');

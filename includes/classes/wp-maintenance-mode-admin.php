@@ -300,45 +300,21 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         }
                         break;
                     case 'design':
-                        $custom_css = array();
-
-                        // CONTENT & CUSTOM CSS
+                        // CONTENT
                         $_POST['options']['design']['title'] = sanitize_text_field($_POST['options']['design']['title']);
                         $_POST['options']['design']['heading'] = sanitize_text_field($_POST['options']['design']['heading']);
-                        if (!empty($_POST['options']['design']['heading_color'])) {
-                            $_POST['options']['design']['heading_color'] = sanitize_text_field($_POST['options']['design']['heading_color']);
-                            $custom_css['heading_color'] = '.wrap h1 { color: ' . $_POST['options']['design']['heading_color'] . '; }';
-                        }
+                        $_POST['options']['design']['heading_color'] = sanitize_hex_color($_POST['options']['design']['heading_color']);
+
                         add_filter('safe_style_css', array($this, 'add_safe_style_css')); // add before we save
                         $_POST['options']['design']['text'] = wp_kses_post($_POST['options']['design']['text']);
+                        $_POST['options']['design']['text_color'] = sanitize_hex_color($_POST['options']['design']['text_color']);
                         remove_filter('safe_style_css', array($this, 'add_safe_style_css')); // remove after we save
 
-                        if (!empty($_POST['options']['design']['text_color'])) {
-                            $_POST['options']['design']['text_color'] = sanitize_text_field($_POST['options']['design']['text_color']);
-                            $custom_css['text_color'] = '.wrap h2 { color: ' . $_POST['options']['design']['text_color'] . '; }';
-                        }
-
-                        // BACKGROUND & CUSTOM CSS
-                        if (!empty($_POST['options']['design']['bg_type'])) {
-                            $_POST['options']['design']['bg_type'] = sanitize_text_field($_POST['options']['design']['bg_type']);
-
-                            if ($_POST['options']['design']['bg_type'] == 'color' && !empty($_POST['options']['design']['bg_color'])) {
-                                $_POST['options']['design']['bg_color'] = sanitize_text_field($_POST['options']['design']['bg_color']);
-                                $custom_css['bg_color'] = 'body { background-color: ' . $_POST['options']['design']['bg_color'] . '; }';
-                            }
-
-                            if ($_POST['options']['design']['bg_type'] == 'custom' && !empty($_POST['options']['design']['bg_custom'])) {
-                                $_POST['options']['design']['bg_custom'] = esc_url($_POST['options']['design']['bg_custom']);
-                                $custom_css['bg_url'] = '.background { background: url(' . $_POST['options']['design']['bg_custom'] . ') no-repeat center top fixed; background-size: cover; }';
-                            }
-
-                            if ($_POST['options']['design']['bg_type'] == 'predefined' && !empty($_POST['options']['design']['bg_predefined'])) {
-                                $_POST['options']['design']['bg_predefined'] = sanitize_text_field($_POST['options']['design']['bg_predefined']);
-                                $custom_css['bg_url'] = '.background { background: url(' . esc_url(WPMM_URL . 'assets/images/backgrounds/' . $_POST['options']['design']['bg_predefined']) . ') no-repeat center top fixed; background-size: cover; }';
-                            }
-                        }
-
-                        $_POST['options']['design']['custom_css'] = $custom_css;
+                        // BACKGROUND
+                        $_POST['options']['design']['bg_type'] = sanitize_text_field($_POST['options']['design']['bg_type']);
+                        $_POST['options']['design']['bg_color'] = sanitize_hex_color($_POST['options']['design']['bg_color']);
+                        $_POST['options']['design']['bg_custom'] = esc_url($_POST['options']['design']['bg_custom']);
+                        $_POST['options']['design']['bg_predefined'] = sanitize_text_field($_POST['options']['design']['bg_predefined']);
 
                         // OTHER
                         $_POST['options']['design']['user_custom_css'] = wp_strip_all_tags($_POST['options']['design']['user_custom_css']);
@@ -349,27 +325,19 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         }
                         break;
                     case 'modules':
-                        $custom_css = array();
-
-                        // COUNTDOWN & CUSTOM CSS
+                        // COUNTDOWN
                         $_POST['options']['modules']['countdown_status'] = (int) $_POST['options']['modules']['countdown_status'];
                         $_POST['options']['modules']['countdown_start'] = sanitize_text_field($_POST['options']['modules']['countdown_start']);
                         $_POST['options']['modules']['countdown_details'] = array_map('trim', $_POST['options']['modules']['countdown_details']);
                         $_POST['options']['modules']['countdown_details']['days'] = isset($_POST['options']['modules']['countdown_details']['days']) && is_numeric($_POST['options']['modules']['countdown_details']['days']) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
                         $_POST['options']['modules']['countdown_details']['hours'] = isset($_POST['options']['modules']['countdown_details']['hours']) && is_numeric($_POST['options']['modules']['countdown_details']['hours']) ? $_POST['options']['modules']['countdown_details']['hours'] : 1;
                         $_POST['options']['modules']['countdown_details']['minutes'] = isset($_POST['options']['modules']['countdown_details']['minutes']) && is_numeric($_POST['options']['modules']['countdown_details']['minutes']) ? $_POST['options']['modules']['countdown_details']['minutes'] : 0;
-                        if (!empty($_POST['options']['modules']['countdown_color'])) {
-                            $_POST['options']['modules']['countdown_color'] = sanitize_text_field($_POST['options']['modules']['countdown_color']);
-                            $custom_css['countdown_color'] = '.wrap .countdown span { color: ' . $_POST['options']['modules']['countdown_color'] . '; }';
-                        }
+                        $_POST['options']['modules']['countdown_color'] = sanitize_hex_color($_POST['options']['modules']['countdown_color']);
 
-                        // SUBSCRIBE & CUSTOM CSS
+                        // SUBSCRIBE
                         $_POST['options']['modules']['subscribe_status'] = (int) $_POST['options']['modules']['subscribe_status'];
                         $_POST['options']['modules']['subscribe_text'] = sanitize_text_field($_POST['options']['modules']['subscribe_text']);
-                        if (!empty($_POST['options']['modules']['subscribe_text_color'])) {
-                            $_POST['options']['modules']['subscribe_text_color'] = sanitize_text_field($_POST['options']['modules']['subscribe_text_color']);
-                            $custom_css['subscribe_text_color'] = '.wrap h3, .wrap .subscribe_wrapper { color: ' . $_POST['options']['modules']['subscribe_text_color'] . '; }';
-                        }
+                        $_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color($_POST['options']['modules']['subscribe_text_color']);
 
                         // SOCIAL NETWORKS
                         $_POST['options']['modules']['social_status'] = (int) $_POST['options']['modules']['social_status'];
@@ -393,24 +361,15 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
                         $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
 
-                        $_POST['options']['modules']['custom_css'] = $custom_css;
-
                         // delete cache when is activated
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
                             $this->delete_cache();
                         }
                         break;
                     case 'bot':
-                        $custom_css = array();
-
                         $_POST['options']['bot']['status'] = (int) $_POST['options']['bot']['status'];
-
                         $_POST['options']['bot']['name'] = sanitize_text_field($_POST['options']['bot']['name']);
-
-                        if (!empty($_POST['options']['bot']['avatar'])) {
-                            $_POST['options']['bot']['avatar'] = esc_url($_POST['options']['bot']['avatar']);
-                            $custom_css['bot-avatar'] = ".bot-avatar { background-image: url('{$_POST['options']['bot']['avatar']}');}";
-                        }
+                        $_POST['options']['bot']['avatar'] = sanitize_text_field($_POST['options']['bot']['avatar']);
 
                         $_POST['options']['bot']['messages']['01'] = sanitize_text_field($_POST['options']['bot']['messages']['01']);
                         $_POST['options']['bot']['messages']['02'] = sanitize_text_field($_POST['options']['bot']['messages']['02']);
@@ -428,8 +387,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['bot']['responses']['02_1'] = sanitize_text_field($_POST['options']['bot']['responses']['02_1']);
                         $_POST['options']['bot']['responses']['02_2'] = sanitize_text_field($_POST['options']['bot']['responses']['02_2']);
                         $_POST['options']['bot']['responses']['03'] = sanitize_text_field($_POST['options']['bot']['responses']['03']);
-
-                        $_POST['options']['bot']['custom_css'] = $custom_css;
 
                         // Write out JS file on saved
                         $this->set_datajs_file($_POST['options']['bot']);
