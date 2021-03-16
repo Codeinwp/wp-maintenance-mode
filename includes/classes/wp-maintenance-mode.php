@@ -45,7 +45,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                                 add_action('wpmm_head', array($this, 'add_inline_css_style'));
                                 
 				// Google Analytics tracking script
-				add_action('wpmm_head', array($this, 'google_analytics_code'));
+				add_action('wpmm_head', array($this, 'add_google_analytics_code'));
 			}
 		}
 
@@ -825,7 +825,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		 *
 		 * @since 2.0.7
 		 */
-		public function google_analytics_code() {
+		public function add_google_analytics_code() {
 			// check if module is activated and code exists
 			if (
 					empty($this->plugin_settings['modules']['ga_status']) ||
