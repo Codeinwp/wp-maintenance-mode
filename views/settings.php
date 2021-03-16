@@ -134,7 +134,7 @@
                                     <th scope="row"><label for="options[design][heading]"><?php _e('Heading', $this->plugin_slug); ?></label></th>
                                     <td class="has-inline-color-picker">
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading'])); ?>" name="options[design][heading]" />
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading_color'])); ?>" name="options[design][heading_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading_color'])); ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading_color'])); ?>" name="options[design][heading_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                                 <tr valign="top">
@@ -152,14 +152,14 @@
                                         ));
                                         ?>
                                         <br />
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" name="options[design][text_color]" class="color_picker_trigger" />
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" name="options[design][text_color]" class="color_picker_trigger" />
                                         <p><?php __('This text will not be shown when the bot feature is enabled.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][footer_links_color]"><?php _e('Footer links', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['footer_links_color'])); ?>" name="options[design][footer_links_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['footer_links_color'])); ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['footer_links_color'])); ?>" name="options[design][footer_links_color]" class="color_picker_trigger"/>
                                         <p class="description"><?php _e('"Dashboard" and "Privacy Policy" links.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -183,7 +183,7 @@
                                 <tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'color' ? 'hidden' : ''; ?>" id="show_color">
                                     <th scope="row"><label for="options[design][bg_color]"><?php _e('Choose color', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo $this->plugin_settings['design']['bg_color']; ?>" data-default-color="<?php echo $this->plugin_settings['design']['bg_color']; ?>" name="options[design][bg_color]" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo $this->plugin_settings['design']['bg_color']; ?>" name="options[design][bg_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                                 <tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'custom' ? 'hidden' : ''; ?>" id="show_custom">
@@ -269,7 +269,7 @@
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_color]"><?php _e('Color', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_color'])); ?>" name="options[modules][countdown_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_color'])); ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_color'])); ?>" name="options[modules][countdown_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -292,7 +292,7 @@
                                     <th scope="row"><label for="options[modules][subscribe_text]"><?php _e('Text', $this->plugin_slug); ?></label></th>
                                     <td class="has-inline-color-picker">
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text'])); ?>" name="options[modules][subscribe_text]" />
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text_color'])); ?>" name="options[modules][subscribe_text_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text_color'])); ?>" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text_color'])); ?>" name="options[modules][subscribe_text_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                                 <tr valign="top">
