@@ -275,8 +275,6 @@ function wpmm_get_template_path($template_name) {
             break;
         }
     }
-    
-    error_log($file_path);
 
     /**
      * Possible filters:
