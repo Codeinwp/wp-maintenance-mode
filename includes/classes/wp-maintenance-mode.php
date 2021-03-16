@@ -777,7 +777,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
 				$excluded_list = $this->plugin_settings['general']['exclude'];
 				$remote_address = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
-				$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+                                $request_uri = isset($_SERVER['REQUEST_URI']) ? rawurldecode($_SERVER['REQUEST_URI']) : '';
 				
 				foreach ($excluded_list as $item) {
 					if (empty($item)) { // just to be sure :-)
