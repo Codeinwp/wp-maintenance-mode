@@ -1,5 +1,5 @@
 === WP Maintenance Mode ===
-Contributors: Designmodo, impresshq
+Contributors: Designmodo
 Plugin Name: WP Maintenance Mode
 Plugin URI: https://designmodo.com/
 Author: Designmodo
