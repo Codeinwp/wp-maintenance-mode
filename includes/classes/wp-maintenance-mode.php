@@ -219,7 +219,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			$version = get_option('wpmm_version', '0');
 
 			if (!version_compare($version, WP_Maintenance_Mode::VERSION, '=')) {
-				self::activate(is_multisite() && is_plugin_active_for_network($this->plugin_basename) ? true : false);
+				self::activate(is_multisite() && is_plugin_active_for_network($this->plugin_basename));
 			}
 		}
 
