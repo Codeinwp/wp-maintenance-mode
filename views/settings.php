@@ -156,6 +156,13 @@
                                         <p><?php __('This text will not be shown when the bot feature is enabled.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[design][footer_links_color]"><?php _e('Footer links', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['footer_links_color'])); ?>" name="options[design][footer_links_color]" data-default-color="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['footer_links_color'])); ?>" class="color_picker_trigger"/>
+                                        <p class="description"><?php _e('"Dashboard" and "Privacy Policy" links.', $this->plugin_slug); ?></p>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 

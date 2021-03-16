@@ -167,7 +167,7 @@
 
 			<?php if ((!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] == 1) ||
 					  (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] == 1)) { ?>
-				<div class="author_link">
+				<div class="footer_links">
 					<?php if($this->plugin_settings['general']['admin_link'] == 1) { ?>
 						<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a> 
 					<?php } ?>

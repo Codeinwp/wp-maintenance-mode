@@ -309,6 +309,8 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['design']['text'] = wp_kses_post($_POST['options']['design']['text']);
                         $_POST['options']['design']['text_color'] = sanitize_hex_color($_POST['options']['design']['text_color']);
                         remove_filter('safe_style_css', array($this, 'add_safe_style_css')); // remove after we save
+                        
+                        $_POST['options']['design']['footer_links_color'] = sanitize_hex_color($_POST['options']['design']['footer_links_color']);
 
                         // BACKGROUND
                         $_POST['options']['design']['bg_type'] = sanitize_text_field($_POST['options']['design']['bg_type']);

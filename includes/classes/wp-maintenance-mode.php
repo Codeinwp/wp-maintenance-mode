@@ -107,6 +107,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'heading_color' => '',
 					'text' => __('<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br />Thank you for your understanding.</p>', $this->plugin_slug),
 					'text_color' => '',
+                                        'footer_links_color' => '',
 					'bg_type' => 'color',
 					'bg_color' => '',
 					'bg_custom' => '',
@@ -478,6 +479,13 @@ if (!class_exists('WP_Maintenance_Mode')) {
                          */
                         if(empty($v2_options['design']['user_custom_css'])) {
                             $v2_options['design']['user_custom_css'] = $default_options['design']['user_custom_css'];
+                            
+                            // update options
+                            update_option('wpmm_settings', $v2_options);
+                        }
+                        
+                        if(empty($v2_options['design']['footer_links_color'])) {
+                            $v2_options['design']['footer_links_color'] = $default_options['design']['footer_links_color'];
                             
                             // update options
                             update_option('wpmm_settings', $v2_options);
@@ -877,6 +885,11 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     if(!empty($this->plugin_settings['design']['text_color'])) {
                         $css_rules['design.text_color'] = sprintf('.wrap h2 { color: %s; }', sanitize_hex_color($this->plugin_settings['design']['text_color']));
                     }
+                    
+                    // "Design > Content > Footer links" color
+                    if(!empty($this->plugin_settings['design']['footer_links_color'])) {
+                        $css_rules['design.footer_links_color'] = sprintf('.wrap .footer_links a { color: %s; }', sanitize_hex_color($this->plugin_settings['design']['footer_links_color']));
+                    }                    
                     
                     // "Design > Background" color
                     if($this->plugin_settings['design']['bg_type'] === 'color' && !empty($this->plugin_settings['design']['bg_color'])) {

@@ -101,14 +101,20 @@ body {
     font-weight: 400;
     margin: 0 0 45px;
 }
+
+/* keep .author_link for backward compatibility */
+.wrap .footer_links,
 .wrap .author_link {
     margin-top: 15px;
     color: #616161;
     margin: 0 0 50px;
 }
+
+.wrap .footer_links a,
 .wrap .author_link a {
     color: #000;
 }
+
 /**
  * COUNTDOWN
  **/
