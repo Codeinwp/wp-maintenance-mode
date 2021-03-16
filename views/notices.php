@@ -1,4 +1,12 @@
 <?php
+/**
+ * Notices
+ * 
+ * @version 2.4.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 foreach ($notices as $key => $notice) {
     if (in_array($key, $dismissed_notices)) {
         continue;

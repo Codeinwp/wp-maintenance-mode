@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Sidebar
+ * 
+ * @version 2.4.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
 <div id="sidebar" class="wrapper-cell">
     <div class="sidebar_box info_box">
         <h3><?php _e('Plugin Info', $this->plugin_slug); ?></h3>

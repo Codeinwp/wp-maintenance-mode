@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Contact email
+ * 
+ * @version 2.4.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
 <!doctype html>
 <html>
     <head>

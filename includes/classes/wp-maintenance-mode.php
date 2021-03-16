@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if (!class_exists('WP_Maintenance_Mode')) {
 
 	class WP_Maintenance_Mode {

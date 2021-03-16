@@ -1,4 +1,4 @@
-# Version 2.3.0 - Work in progress! Do not use it, yet!
+# Version 2.4.0 - Work in progress! Do not use it, yet!
 
 # WP Maintenance Mode
 

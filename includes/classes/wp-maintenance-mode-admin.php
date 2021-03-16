@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
     class WP_Maintenance_Mode_Admin {
@@ -549,7 +551,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $dismissed_notices = $this->get_dismissed_notices(get_current_user_id());
 
             // template
-            include_once(WPMM_VIEWS_PATH . 'notice.php');
+            include_once(WPMM_VIEWS_PATH . 'notices.php');
         }
 
         /**

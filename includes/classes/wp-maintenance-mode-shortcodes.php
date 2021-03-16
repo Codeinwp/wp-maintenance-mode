@@ -1,6 +1,9 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if (!class_exists('WP_Maintenance_Mode_Shortcodes')) {
+    
     class WP_Maintenance_Mode_Shortcodes {
 
         /**

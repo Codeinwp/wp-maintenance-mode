@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Settings
+ * 
+ * @version 2.4.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="wrap">
     <h2 class="wpmm-title"><?php echo get_admin_page_title(); ?></h2>
 

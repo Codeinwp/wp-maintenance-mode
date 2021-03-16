@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Add extra plugin headers (used by get_file_data function)
  * 

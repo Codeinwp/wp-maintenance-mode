@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Promo Blocksy
+ * 
+ * @version 2.4.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
 <strong><?php _e('Blocksy - The Most Innovative & Lightning Fast WordPress Theme', $this->plugin_slug); ?></strong>
 
 <br /><br />

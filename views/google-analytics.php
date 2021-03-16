@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Google Analytics code
+ * 
+ * @version 2.4.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($ga_code); ?>"></script>
 <script>
