@@ -36,8 +36,8 @@ jQuery(function ($) {
         
         var hide_text = $(this).data('hide'),
                 show_text = $(this).data('show'),
-                list = $(this).parent().next('.shortcodes-list');
-                
+                list = $(this).next('.shortcodes-list');
+              
         list.toggleClass('show');   
         
         var current_text = list.hasClass('show')? hide_text : show_text;

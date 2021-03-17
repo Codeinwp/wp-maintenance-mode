@@ -111,8 +111,14 @@ h2.wpmm-title {
     margin: 0 6px 0px 6px;
 }
 
+.tabs-content .shortcodes-list-wrapper {
+    margin-top: 4px;
+    margin-bottom: 0;
+    color: #646970;
+}
+
 .tabs-content ul.shortcodes-list {
-    list-style-type: circle;
+    list-style-type: disc;
     padding-left: 15px;
     font-size: 12px;
     display: none;
@@ -120,7 +126,7 @@ h2.wpmm-title {
 
 .tabs-content ul.shortcodes-list span {
     background-color: #d3d3d3;
-    padding: 1px 3px;
+    padding: 2px 3px;
     margin-top: 4px;
     display: inline-block;
 }
