@@ -112,5 +112,7 @@ jQuery(function($) {
     /**
      * RESPONSIVE VIDEO EMBEDS
      */
-    $('.wrap h2').fitVids();
+    $('.wrap h2').fitVids({
+        customSelector: 'iframe[src*="www.dailymotion.com"]'
+    });
 });

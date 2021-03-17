@@ -160,9 +160,21 @@ defined( 'ABSPATH' ) || exit;
                                             'teeny' => true
                                         ));
                                         ?>
+                                        <p class="description shortcodes-list-wrapper">
+                                            <?php 
+                                                $hide_shortcodes_text = __('Hide available shortcodes', $this->plugin_slug);
+                                                $show_shortcodes_text = __('See available shortcodes', $this->plugin_slug);
+                                            ?>
+                                            <a href="javascript:void(0);" class="button button-small toggle-shortcodes-list" data-hide="<?php echo esc_attr($hide_shortcodes_text); ?>" data-show="<?php echo esc_attr($show_shortcodes_text); ?>" ><?php echo esc_html($show_shortcodes_text); ?></a>
+                                            
+                                            <ul class="shortcodes-list">
+                                                <li><?php _e(sprintf('%s - display a login form', '[loginform]'), $this->plugin_slug); ?></li>
+                                                <li><?php _e(sprintf('%s - responsive video embed. Compatible with %s. Example: %s', '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/embed]</span>'), $this->plugin_slug); ?></li>
+                                            </ul>
+                                        </p>
+                                        <p class="description"><?php _e('This text will not be shown when the bot feature is enabled.', $this->plugin_slug); ?></p>
                                         <br />
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" name="options[design][text_color]" class="color_picker_trigger" />
-                                        <p><?php __('This text will not be shown when the bot feature is enabled.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">

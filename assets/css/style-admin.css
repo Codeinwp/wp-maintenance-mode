@@ -111,6 +111,24 @@ h2.wpmm-title {
     margin: 0 6px 0px 6px;
 }
 
+.tabs-content ul.shortcodes-list {
+    list-style-type: circle;
+    padding-left: 15px;
+    font-size: 12px;
+    display: none;
+}
+
+.tabs-content ul.shortcodes-list span {
+    background-color: #d3d3d3;
+    padding: 1px 3px;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.tabs-content ul.shortcodes-list.show {
+    display: block;
+}
+
 @media screen and (max-width: 782px) {
     .tabs-content td.has-inline-color-picker {
         display: flex;

@@ -29,6 +29,23 @@ jQuery(function ($) {
     $('.color_picker_trigger').wpColorPicker();
 
     /**
+     * AVAILABLE SHORTCODES
+     */
+    $('.shortcodes-list-wrapper').on('click', '.toggle-shortcodes-list', function (e) {
+        e.preventDefault();
+        
+        var hide_text = $(this).data('hide'),
+                show_text = $(this).data('show'),
+                list = $(this).parent().next('.shortcodes-list');
+                
+        list.toggleClass('show');   
+        
+        var current_text = list.hasClass('show')? hide_text : show_text;
+        
+        $(this).text(current_text);
+    });
+
+    /**
      * CHOSEN.JS MULTISELECT
      * @used for "Backend role" and "Frontend role" -> General tab
      */
@@ -181,7 +198,7 @@ jQuery(function ($) {
     /**
      * CUSTOM CSS
      */
-    if(wpmm_vars.editor_settings !== '') {
+    if (wpmm_vars.editor_settings !== '') {
         wp.codeEditor.initialize('user_custom_css', wpmm_vars.editor_settings);
     }
 
