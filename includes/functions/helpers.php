@@ -284,6 +284,28 @@ function wpmm_get_template_path($template_name) {
     return apply_filters(sprintf('wpmm_%s_template', basename($template_name, '.php')), $file_path);
 }
 
+/**
+ * Run shortcodes
+ * 
+ * @since 2.4.0
+ * @global object $post
+ * @param string $content
+ * @return string
+ */
+function wpmm_do_shortcode($content) {
+    global $post;
+
+    // register and run [embed] shortcode
+    if (isset($GLOBALS['wp_embed']) && is_callable(array($GLOBALS['wp_embed'], 'run_shortcode'))) {
+        // $post should be null. this way, the cache will be saved separately, not as a post_meta of the current post
+        $post = null;
+        
+        $content = $GLOBALS['wp_embed']->run_shortcode($content);
+    }
+    
+    return do_shortcode($content);
+}
+
 if (!function_exists('wp_scripts')) {
 
 	/**

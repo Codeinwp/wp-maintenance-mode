@@ -592,7 +592,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$heading = apply_filters('wpmm_heading', $heading);
 
 				$text = !empty($this->plugin_settings['design']['text']) ? stripslashes($this->plugin_settings['design']['text']) : '';
-				$text = apply_filters('wpmm_text', do_shortcode($text));
+				$text = apply_filters('wpmm_text', wpmm_do_shortcode($text));
 
 				// COUNTDOWN
 				$countdown_start = !empty($this->plugin_settings['modules']['countdown_start']) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_date'];
