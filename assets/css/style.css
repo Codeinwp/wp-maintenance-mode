@@ -96,6 +96,11 @@ body {
     height: auto;
 }
 
+.wrap h2 .fluid-width-video-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .wrap h3 {
     font-size: 24px;
     font-weight: 400;
@@ -508,6 +513,10 @@ body {
     }
     .wrap h2, .wrap h3 {
         font-size: 18px;
+    }
+    .wrap h2 .fluid-width-video-wrapper {
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
     .wrap form.subscribe_form {
         box-sizing: border-box;

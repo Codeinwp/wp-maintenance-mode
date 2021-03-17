@@ -603,6 +603,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
                                 
 				$scripts = array(
 					'jquery' => !empty($wp_scripts->registered['jquery-core']) ? site_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery' . WPMM_ASSETS_SUFFIX . '.js',
+                                        'fitvids' => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
 					'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . WP_Maintenance_Mode::VERSION
 				);
 				if (!empty($this->plugin_settings['modules']['countdown_status']) && $this->plugin_settings['modules']['countdown_status'] == 1) {

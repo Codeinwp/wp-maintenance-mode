@@ -108,4 +108,9 @@ jQuery(function($) {
             }
         });
     }
+    
+    /**
+     * RESPONSIVE VIDEO EMBEDS
+     */
+    $('.wrap h2').fitVids();
 });
