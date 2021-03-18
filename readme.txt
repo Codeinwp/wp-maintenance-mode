@@ -75,7 +75,7 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 = Exclude list =
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
-Disclaimer: `wp-cron.php` is excluded by default.
+Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
 
@@ -85,7 +85,7 @@ Disclaimer: `wp-cron.php` is excluded by default.
 * Design: add list of available shortcodes under the "Text" editor
 * Misc: add [embed] shortcode for video embeds; Compatible with YouTube, Vimeo, DailyMotion.
 * Misc: add fitvids.js to have responsive video embeds
-* Misc: make the exclude setting work with cyrillic characters
+* Misc: make the exclude mechanism work with cyrillic characters
 * Misc: add `wpmm_maintenance_template` filter; It works the same way as the `wpmm_contact_template` filter, but for the maintenance template.
 * Misc: now you can override the `contact` email template too; Check `/views/contact.php` for more details.
 
