@@ -47,12 +47,12 @@ defined( 'ABSPATH' ) || exit;
         <div class="wrap">
                         <?php 
                             if(!empty($heading)) {
-                                printf('<h1>%s</h1>', $heading);
+                                printf('<h1>%s</h1>', esc_html($heading));
                             }
                         
                             // If bot is enabled no text will be shown
                             if(!empty($text) && $this->plugin_settings['bot']['status'] === 0) {
-                                printf('<h2>%s</h2>', $text);
+                                printf('<h2>%s</h2>', $text); // wp_kses_post was applied before do_shortcode
                             }
                         ?>
             <?php if (!empty($this->plugin_settings['bot']['status']) && $this->plugin_settings['bot']['status'] === 1) { ?>
@@ -83,7 +83,11 @@ defined( 'ABSPATH' ) || exit;
                       // If the bot is active, legacy subscribe form will be hidden
                       // !empty($this->plugin_settings['bot']['status']) && 
                       && $this->plugin_settings['bot']['status'] === 0 ) { ?>
-				<?php if (!empty($this->plugin_settings['modules']['subscribe_text'])) { ?><h3><?php echo $this->plugin_settings['modules']['subscribe_text']; ?></h3><?php } ?>
+				<?php 
+                                if (!empty($this->plugin_settings['modules']['subscribe_text'])) {
+                                    printf('<h3>%s</h3>', esc_html($this->plugin_settings['modules']['subscribe_text']));
+                                } 
+                                ?>
 				<div class="subscribe_wrapper" style="min-height: 100px;">
 					<form class="subscribe_form">
 						<div class="subscribe_border">

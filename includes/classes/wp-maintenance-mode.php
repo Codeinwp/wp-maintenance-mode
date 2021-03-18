@@ -591,7 +591,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$heading = apply_filters('wm_heading', $heading); // this hook will be removed in the next versions
 				$heading = apply_filters('wpmm_heading', $heading);
 
-				$text = !empty($this->plugin_settings['design']['text']) ? $this->plugin_settings['design']['text'] : '';
+				$text = !empty($this->plugin_settings['design']['text']) ? wp_kses_post($this->plugin_settings['design']['text']) : '';
 				$text = apply_filters('wpmm_text', wpmm_do_shortcode($text));
 
 				// COUNTDOWN
