@@ -14,7 +14,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		protected static $instance = null;
 
 		private function __construct() {
-			$this->plugin_settings = get_option('wpmm_settings', array());
+			$this->plugin_settings = wpmm_get_option('wpmm_settings', array());
 			$this->plugin_basename = plugin_basename(WPMM_PATH . $this->plugin_slug . '.php');
 
 			// Load plugin text domain
@@ -591,7 +591,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$heading = apply_filters('wm_heading', $heading); // this hook will be removed in the next versions
 				$heading = apply_filters('wpmm_heading', $heading);
 
-				$text = !empty($this->plugin_settings['design']['text']) ? stripslashes($this->plugin_settings['design']['text']) : '';
+				$text = !empty($this->plugin_settings['design']['text']) ? $this->plugin_settings['design']['text'] : '';
 				$text = apply_filters('wpmm_text', wpmm_do_shortcode($text));
 
 				// COUNTDOWN
@@ -818,7 +818,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				return null;
 			}
 
-			$redirect_to = stripslashes($this->plugin_settings['general']['redirection']);
+			$redirect_to = $this->plugin_settings['general']['redirection'];
 			wp_redirect($redirect_to);
 			exit;
 		}
@@ -988,7 +988,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				do_action('wpmm_contact_validation', $_POST);
 
 				// vars
-				$send_to = !empty($this->plugin_settings['modules']['contact_email']) ? stripslashes($this->plugin_settings['modules']['contact_email']) : get_option('admin_email');
+				$send_to = !empty($this->plugin_settings['modules']['contact_email']) ? $this->plugin_settings['modules']['contact_email'] : get_option('admin_email');
 				$subject = apply_filters('wpmm_contact_subject', __('Message via contact', $this->plugin_slug));
 				$headers = apply_filters('wpmm_contact_headers', array('Reply-To: ' . sanitize_text_field($_POST['email'])));
 				$from_name = sanitize_text_field($_POST['name']);

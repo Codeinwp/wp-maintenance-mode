@@ -83,7 +83,7 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[general][redirection]"><?php _e('Redirection', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['general']['redirection'])); ?>" name="options[general][redirection]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['general']['redirection']); ?>" name="options[general][redirection]" />
                                         <p class="description"><?php _e('If you want to redirect a user (with no access to Dashboard/Backend) to a URL (different from WordPress Dashboard URL) after login, then define a URL (incl. http://)', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -92,7 +92,7 @@ defined( 'ABSPATH' ) || exit;
                                     <td>
                                         <textarea rows="7" name="options[general][exclude]" style="width: 625px;"><?php
                                             if (!empty($this->plugin_settings['general']['exclude']) && is_array($this->plugin_settings['general']['exclude'])) {
-                                                echo implode("\n", stripslashes_deep($this->plugin_settings['general']['exclude']));
+                                                echo implode("\n", $this->plugin_settings['general']['exclude']);
                                             }
                                             ?></textarea>
                                         <p class="description"><?php _e('Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / IP per line!', $this->plugin_slug); ?></p>
@@ -136,21 +136,21 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][title]"><?php _e('Title (HTML tag)', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['title'])); ?>" name="options[design][title]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['title']); ?>" name="options[design][title]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][heading]"><?php _e('Heading', $this->plugin_slug); ?></label></th>
                                     <td class="has-inline-color-picker">
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading'])); ?>" name="options[design][heading]" />
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['heading_color'])); ?>" name="options[design][heading_color]" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['heading']); ?>" name="options[design][heading]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['heading_color']); ?>" name="options[design][heading_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][text]"><?php _e('Text', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <?php
-                                        wp_editor(stripslashes($this->plugin_settings['design']['text']), 'options_design_text', array(
+                                        wp_editor($this->plugin_settings['design']['text'], 'options_design_text', array(
                                             'textarea_name' => 'options[design][text]',
                                             'textarea_rows' => 8,
                                             'editor_class' => 'large-text',
@@ -174,13 +174,13 @@ defined( 'ABSPATH' ) || exit;
                                         </div>
                                         <p class="description"><?php _e('This text will not be shown when the bot feature is enabled.', $this->plugin_slug); ?></p>
                                         <br />
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['text_color'])); ?>" name="options[design][text_color]" class="color_picker_trigger" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['text_color']); ?>" name="options[design][text_color]" class="color_picker_trigger" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][footer_links_color]"><?php _e('Footer links', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['footer_links_color'])); ?>" name="options[design][footer_links_color]" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['footer_links_color']); ?>" name="options[design][footer_links_color]" class="color_picker_trigger"/>
                                         <p class="description"><?php _e('"Dashboard" and "Privacy Policy" links.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -210,7 +210,7 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'custom' ? 'hidden' : ''; ?>" id="show_custom">
                                     <th scope="row"><label for="options[design][bg_custom]"><?php _e('Upload background', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['design']['bg_custom'])); ?>" name="options[design][bg_custom]" class="upload_image_url" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['bg_custom']); ?>" name="options[design][bg_custom]" class="upload_image_url" />
                                         <input type="button" value="Upload" class="button" id="upload_image_trigger" />
                                         <p class="description"><?php _e('Backgrounds should have 1920x1280 px size.', $this->plugin_slug); ?></p>
                                     </td>
@@ -245,7 +245,7 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[design][user_custom_css]"><?php _e('Custom CSS', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <textarea rows="10" name="options[design][user_custom_css]" style="width:625px;" id="user_custom_css"><?php echo stripslashes_deep($this->plugin_settings['design']['user_custom_css']); ?></textarea>
+                                        <textarea rows="10" name="options[design][user_custom_css]" style="width:625px;" id="user_custom_css"><?php echo ($this->plugin_settings['design']['user_custom_css']); ?></textarea>
                                         <p class="description"><?php esc_html_e('Do not include <style> tags.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -276,21 +276,21 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_start]"><?php _e('Start date', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_start'])); ?>" name="options[modules][countdown_start]" class="countdown_start" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['countdown_start']); ?>" name="options[modules][countdown_start]" class="countdown_start" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_details]"><?php _e('Countdown (remaining time)', $this->plugin_slug); ?></label></th>
                                     <td class="countdown_details">
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_details']['days'])); ?>" name="options[modules][countdown_details][days]" /> <?php _e('Days', $this->plugin_slug); ?>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_details']['hours'])); ?>" name="options[modules][countdown_details][hours]" class="margin_left"/> <?php _e('Hours', $this->plugin_slug); ?>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_details']['minutes'])); ?>" name="options[modules][countdown_details][minutes]" class="margin_left" /> <?php _e('Minutes', $this->plugin_slug); ?>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['countdown_details']['days']); ?>" name="options[modules][countdown_details][days]" /> <?php _e('Days', $this->plugin_slug); ?>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['countdown_details']['hours']); ?>" name="options[modules][countdown_details][hours]" class="margin_left"/> <?php _e('Hours', $this->plugin_slug); ?>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['countdown_details']['minutes']); ?>" name="options[modules][countdown_details][minutes]" class="margin_left" /> <?php _e('Minutes', $this->plugin_slug); ?>
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][countdown_color]"><?php _e('Color', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['countdown_color'])); ?>" name="options[modules][countdown_color]" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['countdown_color']); ?>" name="options[modules][countdown_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -312,8 +312,8 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][subscribe_text]"><?php _e('Text', $this->plugin_slug); ?></label></th>
                                     <td class="has-inline-color-picker">
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text'])); ?>" name="options[modules][subscribe_text]" />
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['subscribe_text_color'])); ?>" name="options[modules][subscribe_text_color]" class="color_picker_trigger"/>
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['subscribe_text']); ?>" name="options[modules][subscribe_text]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['subscribe_text_color']); ?>" name="options[modules][subscribe_text_color]" class="color_picker_trigger"/>
                                     </td>
                                 </tr>
                                 <tr valign="top">
@@ -361,49 +361,49 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_github]">Github</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_github'])); ?>" name="options[modules][social_github]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_github']); ?>" name="options[modules][social_github]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_dribbble]">Dribbble</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_dribbble'])); ?>" name="options[modules][social_dribbble]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_dribbble']); ?>" name="options[modules][social_dribbble]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_twitter]">Twitter</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_twitter'])); ?>" name="options[modules][social_twitter]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_twitter']); ?>" name="options[modules][social_twitter]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_facebook]">Facebook</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_facebook'])); ?>" name="options[modules][social_facebook]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_facebook']); ?>" name="options[modules][social_facebook]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_instagram]">Instagram</label></th>
                                     <td>    
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_instagram'])); ?>" name="options[modules][social_instagram]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_instagram']); ?>" name="options[modules][social_instagram]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_pinterest]">Pinterest</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_pinterest'])); ?>" name="options[modules][social_pinterest]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_pinterest']); ?>" name="options[modules][social_pinterest]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_google+]">Google+</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_google+'])); ?>" name="options[modules][social_google+]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_google+']); ?>" name="options[modules][social_google+]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][social_linkedin]">Linkedin</label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['social_linkedin'])); ?>" name="options[modules][social_linkedin]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['social_linkedin']); ?>" name="options[modules][social_linkedin]" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -425,7 +425,7 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][contact_email]"><?php _e('Email address', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['contact_email'])); ?>" name="options[modules][contact_email]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['contact_email']); ?>" name="options[modules][contact_email]" />
                                     </td>
                                 </tr>
                                 <tr valign="top">
@@ -467,7 +467,7 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[modules][ga_code]"><?php _e('Tracking code', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['modules']['ga_code'])); ?>" name="options[modules][ga_code]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['modules']['ga_code']); ?>" name="options[modules][ga_code]" />
                                         <p class="description"><?php _e('Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX, G-XXXXXXXX. Eg: UA-12345678-1 is valid', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -489,7 +489,7 @@ defined( 'ABSPATH' ) || exit;
                                         <h4><?php _e("Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.", $this->plugin_slug) ?></h4>
                                         <p><?php _e("You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.", $this->plugin_slug) ?></p>
                                         <p><?php _e("It is also ok if you don't fill in all the conversation steps if you don't need to.", $this->plugin_slug) ?></p>
-										<p><?php _e("If you want to see the list of subscribers, go to Modules &raquo; Subscribe &raquo; Export as CSV.", $this->plugin_slug); ?></p>
+					<p><?php _e("If you want to see the list of subscribers, go to Modules &raquo; Subscribe &raquo; Export as CSV.", $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">
@@ -504,14 +504,14 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[bot][name]"><?php _e('Bot Name', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" name="options[bot][name]" id="options[bot][name]" value="<?php esc_attr_e(stripslashes($this->plugin_settings['bot']['name'])); ?>" />
+                                        <input type="text" name="options[bot][name]" id="options[bot][name]" value="<?php echo esc_attr($this->plugin_settings['bot']['name']); ?>" />
                                         <p class="description"><?php _e("This name will appear when the bot is typing.", $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[bot][avatar]"><?php _e('Upload avatar', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['bot']['avatar'])); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="upload_avatar_url" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['bot']['avatar']); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="upload_avatar_url" />
                                         <input type="button" value="Upload" class="button" id="avatar_upload_trigger" />
                                         <p class="description"><?php _e('A 512 x 512 px will work just fine.', $this->plugin_slug); ?></p>
                                     </td>
@@ -527,7 +527,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][01]"><?php _e('Message 1', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][01]" id="options[bot][messages][01]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['01']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['01']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -535,7 +535,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][02]"><?php _e('Message 2', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][02]" id="options[bot][messages][02]" rows="2" style="width: 625px;"><?php
-                                        echo esc_attr(stripslashes($this->plugin_settings['bot']['messages']['02']));
+                                        echo esc_attr($this->plugin_settings['bot']['messages']['02']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -543,14 +543,14 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][03]"><?php _e('Message 3', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][03]" id="options[bot][messages][03]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['03']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['03']);
                                         ?></textarea>
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[bot][responses][01]"><?php _e('Response', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" name="options[bot][responses][01]" id="options[bot][responses][01]" value="<?php esc_attr_e(stripslashes($this->plugin_settings['bot']['responses']['01'])); ?>" />
+                                        <input type="text" name="options[bot][responses][01]" id="options[bot][responses][01]" value="<?php esc_attr_e($this->plugin_settings['bot']['responses']['01']); ?>" />
                                         <span class="bot-hint">Visitor's response will be here.</span>
                                         <p class="description"><?php _e("Edit the placeholder's text", $this->plugin_slug); ?></p>
                                     </td>
@@ -559,7 +559,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][04]"><?php _e('Message 4', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][04]" id="options[bot][messages][04]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['04']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['04']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -567,7 +567,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][05]"><?php _e('Message 5', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][05]" id="options[bot][messages][05]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['05']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['05']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -575,7 +575,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][06]"><?php _e('Message 6', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][06]" id="options[bot][messages][06]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['06']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['06']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -583,7 +583,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][07]"><?php _e('Message 7', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][07]" id="options[bot][messages][07]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['07']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['07']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -591,11 +591,11 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][responses][02_1]"><?php _e('Response', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <div class="bot-button">
-                                            <input type="text" name="options[bot][responses][02_1]" id="options[bot][responses][02_1]" value="<?php esc_attr_e(stripslashes($this->plugin_settings['bot']['responses']['02_1'])); ?>" />
+                                            <input type="text" name="options[bot][responses][02_1]" id="options[bot][responses][02_1]" value="<?php esc_attr_e($this->plugin_settings['bot']['responses']['02_1']); ?>" />
                                             <p class="description"><?php _e("Edit button one", $this->plugin_slug); ?></p>
                                         </div>
                                         <div class="bot-button">
-                                            <input type="text" name="options[bot][responses][02_2]" id="options[bot][responses][02_2]" value="<?php esc_attr_e(stripslashes($this->plugin_settings['bot']['responses']['02_2'])); ?>" />
+                                            <input type="text" name="options[bot][responses][02_2]" id="options[bot][responses][02_2]" value="<?php esc_attr_e($this->plugin_settings['bot']['responses']['02_2']); ?>" />
                                             <p class="description"><?php _e("Edit button two", $this->plugin_slug); ?></p>
                                         </div>
                                         <span class="bot-hint">Visitor's response will be here.</span>
@@ -605,14 +605,14 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][08_1]"><?php _e('Message 8', $this->plugin_slug); ?><br><small><?php _e('(click on button one)', $this->plugin_slug) ?></small></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][08_1]" id="options[bot][messages][08_1]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['08_1']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['08_1']);
                                         ?></textarea>
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <th scope="row"><label for="options[bot][responses][03]"><?php _e('Response', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" name="options[bot][responses][03]" id="options[bot][responses][03]" value="<?php esc_attr_e(stripslashes($this->plugin_settings['bot']['responses']['03'])); ?>" />
+                                        <input type="text" name="options[bot][responses][03]" id="options[bot][responses][03]" value="<?php esc_attr_e($this->plugin_settings['bot']['responses']['03']); ?>" />
                                         <span class="bot-hint">Visitor's response will be here.</span>
                                         <p class="description"><?php _e("Edit the placeholder's text", $this->plugin_slug); ?></p>
                                     </td>
@@ -621,7 +621,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][08_2]"><?php _e('Message 8', $this->plugin_slug); ?><br><small><?php _e('(click on button two)', $this->plugin_slug) ?></small></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][08_2]" id="options[bot][messages][08_2]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['08_2']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['08_2']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -629,7 +629,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][09]"><?php _e('Message 9', $this->plugin_slug); ?><br><small><?php _e('(click on button one)', $this->plugin_slug) ?></small></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][09]" id="options[bot][messages][09]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['09']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['09']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -637,7 +637,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[bot][messages][10]"><?php _e('Message 10', $this->plugin_slug); ?><br><small><?php _e('(click on button one)', $this->plugin_slug) ?></small></label></th>
                                     <td>
                                         <textarea name="options[bot][messages][10]" id="options[bot][messages][10]" rows="2" style="width: 625px;"><?php
-                                        esc_attr_e(stripslashes($this->plugin_settings['bot']['messages']['10']));
+                                        esc_attr_e($this->plugin_settings['bot']['messages']['10']);
                                         ?></textarea>
                                     </td>
                                 </tr>
@@ -672,7 +672,7 @@ defined( 'ABSPATH' ) || exit;
                                         <label for="options[gdpr][policy_page_label]"><?php _e('Link name', $this->plugin_slug); ?></label>
                                     </th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['policy_page_label'])); ?>" name="options[gdpr][policy_page_label]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['gdpr']['policy_page_label']); ?>" name="options[gdpr][policy_page_label]" />
                                         <p class="description"><?php _e('Label the link that will be shown on frontend footer', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -681,7 +681,7 @@ defined( 'ABSPATH' ) || exit;
                                         <label for="options[gdpr][policy_page_link]"><?php _e('P. Policy page link', $this->plugin_slug); ?></label>
                                     </th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['policy_page_link'])); ?>" name="options[gdpr][policy_page_link]" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['gdpr']['policy_page_link']); ?>" name="options[gdpr][policy_page_link]" />
                                         <p class="description"><?php echo $this->get_policy_link_message(); ?></p>
                                         <p class="description">REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.</p>
                                     </td>
@@ -701,7 +701,7 @@ defined( 'ABSPATH' ) || exit;
                                         <label for="options[gdpr][contact_form_tail]"><?php _e('Contact form \'tail\'', $this->plugin_slug); ?></label>
                                     </th>
                                     <td>
-                                        <textarea name="options[gdpr][contact_form_tail]" rows="3" style="width: 600px"><?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['contact_form_tail'])); ?></textarea>
+                                        <textarea name="options[gdpr][contact_form_tail]" rows="3" style="width: 600px"><?php echo esc_attr($this->plugin_settings['gdpr']['contact_form_tail']); ?></textarea>
                                         <p class="description"><?php _e('This will be shown together with the acceptance checkbox below the form', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -710,7 +710,7 @@ defined( 'ABSPATH' ) || exit;
                                         <label for="options[gdpr][subscribe_form_tail]"><?php _e('Subscribe form \'tail\'', $this->plugin_slug); ?></label>
                                     </th>
                                     <td>
-                                        <textarea name="options[gdpr][subscribe_form_tail]" rows="3" style="width: 600px"><?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['subscribe_form_tail'])); ?></textarea>
+                                        <textarea name="options[gdpr][subscribe_form_tail]" rows="3" style="width: 600px"><?php echo esc_attr($this->plugin_settings['gdpr']['subscribe_form_tail']); ?></textarea>
                                         <p class="description"><?php _e('This will be shown together with the acceptance checkbox below the form', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>

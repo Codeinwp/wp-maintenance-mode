@@ -306,6 +306,18 @@ function wpmm_do_shortcode($content) {
     return do_shortcode($content);
 }
 
+/**
+ * Returns the value of the option after `stripslashes_deep` is applied
+ * 
+ * @since 2.4.0
+ * @param string $option
+ * @param mixed $default
+ * @return mixed
+ */
+function wpmm_get_option($option, $default = false) {
+    return stripslashes_deep(get_option($option, $default));
+}
+
 if (!function_exists('wp_scripts')) {
 
 	/**
