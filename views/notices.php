@@ -11,8 +11,6 @@ foreach ($notices as $key => $notice) {
     if (in_array($key, $dismissed_notices)) {
         continue;
     }
-    ?>
-    <div id="message" class="<?php echo $notice['class']; ?>" data-key="<?php echo $key; ?>">
-        <p><?php echo $notice['msg']; ?></p>
-    </div>
-<?php } ?>
+    
+    printf('<div id="message" class="%s" data-key="%s"><p>%s</p></div>', esc_attr($notice['class']), esc_attr($key), wp_kses_post($notice['msg']));
+}
