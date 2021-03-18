@@ -7,7 +7,7 @@
  * - /wp-content/themes/{your_theme}/wp-maintenance-mode/maintenance.php
  * - /wp-content/themes/{your_child_theme}/wp-maintenance-mode.php [deprecated]
  * - /wp-content/themes/{your_theme}/wp-maintenance-mode.php [deprecated]
- * - /wp-content/wp-maintenance-mode.php [deprecated]
+ * - /wp-content/wp-maintenance-mode.php
  * 
  * It can also be overridden by changing the default path. See `wpmm_maintenance_template` hook:
  * https://github.com/WP-Maintenance-Mode/Snippet-Library/blob/master/change-template-path.php
