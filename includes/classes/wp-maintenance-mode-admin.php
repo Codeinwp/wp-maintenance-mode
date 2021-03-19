@@ -93,18 +93,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
             $screen = get_current_screen();
             if ($this->plugin_screen_hook_suffix == $screen->id) {
-                $editor_settings = false;
-
-                if (isset($GLOBALS['wp_version']) && version_compare($GLOBALS['wp_version'], '4.9.0', '>=') && function_exists('wp_enqueue_code_editor')) {
-                    $editor_settings = wp_enqueue_code_editor(array(
-                        'type' => 'text/css',
-                        'codemirror' => array(
-                            'indentUnit' => 2,
-                            'tabSize' => 2,
-                        ),
-                    ));
-                }
-
                 wp_enqueue_media();
                 wp_enqueue_script($this->plugin_slug . '-admin-timepicker-addon-script', WPMM_JS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.js', array('jquery', 'jquery-ui-datepicker'), WP_Maintenance_Mode::VERSION);
                 wp_enqueue_script($this->plugin_slug . '-admin-script', WPMM_JS_URL . 'scripts-admin' . WPMM_ASSETS_SUFFIX . '.js', array('jquery', 'wp-color-picker'), WP_Maintenance_Mode::VERSION);
@@ -112,8 +100,21 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 wp_localize_script($this->plugin_slug . '-admin-script', 'wpmm_vars', array(
                     'ajax_url' => admin_url('admin-ajax.php'),
                     'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug),
-                    'editor_settings' => $editor_settings,
                 ));
+                
+                // add code editor (Code Mirror) to the `user_custom_css` textarea
+                if (isset($GLOBALS['wp_version']) && version_compare($GLOBALS['wp_version'], '4.9.0', '>=') && function_exists('wp_enqueue_code_editor')) {
+                    $settings = wp_enqueue_code_editor(array(
+                        'type' => 'text/css',
+                        'codemirror' => array(
+                            'indentUnit' => 2,
+                            'tabSize' => 2,
+                            'lineNumbers' => true,
+                        ),
+                    ));
+                    
+                    wp_add_inline_script('code-editor', sprintf('jQuery(function() { wp.codeEditor.initialize("user_custom_css", %s); });', wp_json_encode($settings)));
+                }
             }
 
             // For global actions like dismiss notices

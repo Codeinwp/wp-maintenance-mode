@@ -195,11 +195,4 @@ jQuery(function ($) {
         avatar_custom_uploader.open();
     });
 
-    /**
-     * CUSTOM CSS
-     */
-    if (wpmm_vars.editor_settings !== '') {
-        wp.codeEditor.initialize('user_custom_css', wpmm_vars.editor_settings);
-    }
-
 });
