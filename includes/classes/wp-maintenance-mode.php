@@ -482,9 +482,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				update_option( 'wpmm_settings', $v2_options );
 			}
 
-						/**
-						 * Update from <= v2.3.0 to 2.4.0
-						 */
+			/**
+			 * Update from <= v2.3.0 to 2.4.0
+			 */
 			if ( empty( $v2_options['design']['other_custom_css'] ) ) {
 				$v2_options['design']['other_custom_css'] = $default_options['design']['other_custom_css'];
 
@@ -552,7 +552,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! strstr( $_SERVER['PHP_SELF'], 'wp-login.php' ) &&
 					// wp-admin/ is available to everyone only if the user is not loggedin, otherwise.. check_user_role decides
 					! ( strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) && ! is_user_logged_in() ) &&
-			// !strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
+			// ! strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'wp-admin/admin-ajax.php' ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'async-upload.php' ) &&
 					! ( strstr( $_SERVER['PHP_SELF'], 'upgrade.php' ) && $this->check_user_role() ) &&
@@ -646,7 +646,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				header( "Retry-After: $backtime" );
 
 				// load maintenance mode template
-								include_once wpmm_get_template_path( 'maintenance.php' );
+				include_once wpmm_get_template_path( 'maintenance.php' );
 				ob_flush();
 
 				exit();
@@ -858,8 +858,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$ga_options = array();
 
 			if (
-					! empty( $this->plugin_settings['modules']['ga_anonymize_ip'] ) &&
-					$this->plugin_settings['modules']['ga_anonymize_ip'] == 1
+			! empty( $this->plugin_settings['modules']['ga_anonymize_ip'] ) &&
+			$this->plugin_settings['modules']['ga_anonymize_ip'] == 1
 			) {
 				$ga_options['anonymize_ip'] = true;
 			}
