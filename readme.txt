@@ -83,11 +83,13 @@ Notice: `wp-cron.php` is excluded by default.
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add list of available shortcodes under the "Text" editor
-* Misc: add [embed] shortcode for video embeds; Compatible with YouTube, Vimeo, DailyMotion.
-* Misc: add fitvids.js to have responsive video embeds
+* Misc: add [embed] shortcode for responsive video embeds; Compatible with YouTube, Vimeo, DailyMotion.
 * Misc: make the exclude mechanism work with cyrillic characters
 * Misc: add `wpmm_maintenance_template` filter; It works the same way as the `wpmm_contact_template` filter, but for the maintenance template.
 * Misc: now you can override the `contact` email template too; Check `/views/contact.php` for more details.
+* Misc: better compatibility with translation plugins like Loco Translate
+* Misc: the image uploaders (from the dashboard) are now translatable
+* Misc: code improvements
 
 = 2.3.0 (07/12/2020) =
 * Modules: add support for Google Analytics 4 measurement ID
