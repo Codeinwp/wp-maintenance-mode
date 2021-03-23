@@ -4,6 +4,9 @@
 ### GruntJS modules
 node_modules/
 
+### Composer
+vendor/
+
 ### VSCode
 .vscode/*
 !.vscode/settings.json
