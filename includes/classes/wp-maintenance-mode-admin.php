@@ -43,7 +43,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             add_action('wp_ajax_wpmm_subscribers_export', array($this, 'subscribers_export'));
             add_action('wp_ajax_wpmm_subscribers_empty_list', array($this, 'subscribers_empty_list'));
             add_action('wp_ajax_wpmm_dismiss_notices', array($this, 'dismiss_notices'));
-            add_action('wp_ajax_wpmm_reset_settings', array($this, 'reset_settings'));
+            add_action('wp_ajax_wpmm_reset_settings', array($this, 'reset_plugin_settings'));
             
             // Add admin_post_{$action}
             add_action('admin_post_wpmm_save_settings', array($this, 'save_plugin_settings'));
@@ -397,7 +397,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          * @since 2.0.0
          * @throws Exception
          */
-        public function reset_settings() {
+        public function reset_plugin_settings() {
             try {
                 // check capabilities
                 if (!current_user_can(wpmm_get_capability('settings'))) {
