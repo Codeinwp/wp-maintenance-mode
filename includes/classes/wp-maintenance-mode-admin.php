@@ -103,6 +103,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 wp_localize_script($this->plugin_slug . '-admin-script', 'wpmm_vars', array(
                     'ajax_url' => admin_url('admin-ajax.php'),
                     'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug),
+                    'image_uploader_defaults' => array(
+                        'title' => _x('Upload Image', 'image_uploader defaults', $this->plugin_slug),
+                        'button_text' => _x('Choose Image', 'image_uploader defaults', $this->plugin_slug),
+                    )
                 ));
                 
                 // add code editor (Code Mirror) to the `other_custom_css` textarea

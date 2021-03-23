@@ -33,15 +33,15 @@ jQuery(function ($) {
      */
     $('.shortcodes-list-wrapper').on('click', '.toggle-shortcodes-list', function (e) {
         e.preventDefault();
-        
+
         var hide_text = $(this).data('hide'),
                 show_text = $(this).data('show'),
                 list = $(this).next('.shortcodes-list');
-              
-        list.toggleClass('show');   
-        
-        var current_text = list.hasClass('show')? hide_text : show_text;
-        
+
+        list.toggleClass('show');
+
+        var current_text = list.hasClass('show') ? hide_text : show_text;
+
         $(this).text(current_text);
     });
 
@@ -52,37 +52,54 @@ jQuery(function ($) {
     $('.chosen-select').chosen({disable_search_threshold: 10});
 
     /**
-     * BACKGROUND UPLOADER
+     * IMAGE UPLOADER
      */
-    var image_custom_uploader;
-    $('body').on('click', '#upload_image_trigger', function (e) {
+    var image_uploaders = {};
+
+    $('body').on('click', '.image_uploader_trigger', function (e) {
         e.preventDefault();
 
-        //If the uploader object has already been created, reopen the dialog
-        if (image_custom_uploader) {
-            image_custom_uploader.open();
+        var name = $(this).data('name') || '',
+                title = $(this).data('title') || wpmm_vars.image_uploader_defaults.title,
+                button_text = $(this).data('button-text') || wpmm_vars.image_uploader_defaults.button_text,
+                to_selector = $(this).data('to-selector') || '';
+                                
+        if(name === '' || to_selector === '') {
+            alert('Required `data` attributes: name, to-selector');
+            return;
+        }        
+
+        console.log('before: ');
+        console.log(image_uploaders);
+
+        // If the uploader object has already been created, reopen the dialog
+        if(image_uploaders.hasOwnProperty(name)){
+            image_uploaders[name].open();
             return;
         }
 
-        //Extend the wp.media object
-        image_custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: 'Upload Background',
+        // Extend the wp.media object
+        image_uploaders[name] = wp.media.frames.file_frame = wp.media({
+            title: title,
             button: {
-                text: 'Choose Background'
+                text: button_text
             },
             multiple: false
         });
+        
+        console.log('after: ');
+        console.log(image_uploaders);
 
-        //When a file is selected, grab the URL and set it as the text field's value
-        image_custom_uploader.on('select', function () {
-            attachment = image_custom_uploader.state().get('selection').first().toJSON();
-            var url = '';
-            url = attachment.url;
-            $('.upload_image_url').val(url);
+        // When a file is selected, grab the URL and set it as the text field's value
+        image_uploaders[name].on('select', function () {
+            var attachment = image_uploaders[name].state().get('selection').first().toJSON();
+            var url = attachment.url || '';
+
+            $(to_selector).val(url);
         });
 
-        //Open the uploader dialog
-        image_custom_uploader.open();
+        // Open the uploader dialog
+        image_uploaders[name].open();
     });
 
     /**
@@ -164,35 +181,35 @@ jQuery(function ($) {
     /**
      * BOT AVATAR UPLOADER
      */
-    var avatar_custom_uploader;
-    $('body').on('click', '#avatar_upload_trigger', function (e) {
-        e.preventDefault();
-
-        //If the uploader object has already been created, reopen the dialog
-        if (avatar_custom_uploader) {
-            avatar_custom_uploader.open();
-            return;
-        }
-
-        //Extend the wp.media object
-        avatar_custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: 'Upload Avatar',
-            button: {
-                text: 'Choose picture'
-            },
-            multiple: false
-        });
-
-        //When a file is selected, grab the URL and set it as the text field's value
-        avatar_custom_uploader.on('select', function () {
-            attachment = avatar_custom_uploader.state().get('selection').first().toJSON();
-            var url = '';
-            url = attachment.url;
-            $('.upload_avatar_url').val(url);
-        });
-
-        //Open the uploader dialog
-        avatar_custom_uploader.open();
-    });
+//    var avatar_custom_uploader;
+//    $('body').on('click', '#avatar_upload_trigger', function (e) {
+//        e.preventDefault();
+//
+//        //If the uploader object has already been created, reopen the dialog
+//        if (avatar_custom_uploader) {
+//            avatar_custom_uploader.open();
+//            return;
+//        }
+//
+//        //Extend the wp.media object
+//        avatar_custom_uploader = wp.media.frames.file_frame = wp.media({
+//            title: 'Upload Avatar',
+//            button: {
+//                text: 'Choose picture'
+//            },
+//            multiple: false
+//        });
+//
+//        //When a file is selected, grab the URL and set it as the text field's value
+//        avatar_custom_uploader.on('select', function () {
+//            attachment = avatar_custom_uploader.state().get('selection').first().toJSON();
+//            var url = '';
+//            url = attachment.url;
+//            $('.upload_avatar_url').val(url);
+//        });
+//
+//        //Open the uploader dialog
+//        avatar_custom_uploader.open();
+//    });
 
 });

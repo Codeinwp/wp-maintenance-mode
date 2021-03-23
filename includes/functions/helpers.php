@@ -253,23 +253,21 @@ function wpmm_get_capability($action) {
 function wpmm_get_template_path($template_name) {
     $file_path = WPMM_VIEWS_PATH . $template_name;
     $files_list = array(
-        get_stylesheet_directory() . '/wp-maintenance-mode/' . $template_name, // check child theme folder
-        get_template_directory() . '/wp-maintenance-mode/' . $template_name, // check theme folder
+        get_stylesheet_directory() . '/wp-maintenance-mode/' . $template_name, // check child theme
+        get_template_directory() . '/wp-maintenance-mode/' . $template_name, // check theme
     );
 
     // maintain backward compatibility
     if ($template_name === 'maintenance.php') {
         $files_list = array_merge($files_list, array(
-            get_stylesheet_directory() . '/wp-maintenance-mode.php', // check child theme folder
-            get_template_directory() . '/wp-maintenance-mode.php', // check theme folder
-            WP_CONTENT_DIR . '/wp-maintenance-mode.php', // check `wp-content` folder
+            get_stylesheet_directory() . '/wp-maintenance-mode.php', // check child theme
+            get_template_directory() . '/wp-maintenance-mode.php', // check theme
+            WP_CONTENT_DIR . '/wp-maintenance-mode.php', // check `wp-content`
         ));
     }
 
     // we need just unique values because get_stylesheet_directory() === get_template_directory() if you don't use a child theme
-    $files_list = array_unique($files_list);
-    
-    foreach ($files_list as $file) {
+    foreach (array_unique($files_list) as $file) {
         if (file_exists($file)) {
             $file_path = $file;
             break;

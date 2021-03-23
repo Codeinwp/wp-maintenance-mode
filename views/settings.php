@@ -143,7 +143,7 @@ defined( 'ABSPATH' ) || exit;
                                     <th scope="row"><label for="options[design][text]"><?php _e('Text', $this->plugin_slug); ?></label></th>
                                     <td>
                                         <?php
-                                        wp_editor($this->plugin_settings['design']['text'], 'options_design_text', array(
+                                        wp_editor(wp_kses_post($this->plugin_settings['design']['text']), 'options_design_text', array(
                                             'textarea_name' => 'options[design][text]',
                                             'textarea_rows' => 8,
                                             'editor_class' => 'large-text',
@@ -203,8 +203,16 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] != 'custom' ? 'hidden' : ''; ?>" id="show_custom">
                                     <th scope="row"><label for="options[design][bg_custom]"><?php _e('Upload background', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['bg_custom']); ?>" name="options[design][bg_custom]" class="upload_image_url" />
-                                        <input type="button" value="Upload" class="button" id="upload_image_trigger" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['design']['bg_custom']); ?>" name="options[design][bg_custom]" class="background_url" />
+                                        <input
+                                               type="button" 
+                                               value="<?php echo esc_attr_x('Upload', 'upload background button', $this->plugin_slug); ?>" 
+                                               class="button image_uploader_trigger" 
+                                               data-name="background" 
+                                               data-title="<?php esc_attr_e('Upload Background', $this->plugin_slug); ?>" 
+                                               data-button-text="<?php esc_attr_e('Choose Background', $this->plugin_slug); ?>"
+                                               data-to-selector=".background_url"
+                                        />
                                         <p class="description"><?php _e('Backgrounds should have 1920x1280 px size.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
@@ -502,8 +510,16 @@ defined( 'ABSPATH' ) || exit;
                                 <tr valign="top">
                                     <th scope="row"><label for="options[bot][avatar]"><?php _e('Upload avatar', $this->plugin_slug); ?></label></th>
                                     <td>
-                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['bot']['avatar']); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="upload_avatar_url" />
-                                        <input type="button" value="Upload" class="button" id="avatar_upload_trigger" />
+                                        <input type="text" value="<?php echo esc_attr($this->plugin_settings['bot']['avatar']); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
+                                        <input
+                                               type="button" 
+                                               value="<?php echo esc_attr_x('Upload', 'upload avatar button', $this->plugin_slug); ?>" 
+                                               class="button image_uploader_trigger" 
+                                               data-name="avatar" 
+                                               data-title="<?php esc_attr_e('Upload Avatar', $this->plugin_slug); ?>" 
+                                               data-button-text="<?php esc_attr_e('Choose picture', $this->plugin_slug); ?>"
+                                               data-to-selector=".avatar_url"
+                                        />
                                         <p class="description"><?php _e('A 512 x 512 px will work just fine.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
