@@ -114,7 +114,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'bg_color' => '',
 					'bg_custom' => '',
 					'bg_predefined' => 'bg1.jpg',
-                                        'user_custom_css' => ''
+                                        'other_custom_css' => ''
 				),
 				'modules' => array(
 					'countdown_status' => 0,
@@ -479,8 +479,8 @@ if (!class_exists('WP_Maintenance_Mode')) {
                         /**
                          * Update from <= v2.3.0 to 2.4.0
                          */
-                        if(empty($v2_options['design']['user_custom_css'])) {
-                            $v2_options['design']['user_custom_css'] = $default_options['design']['user_custom_css'];
+                        if(empty($v2_options['design']['other_custom_css'])) {
+                            $v2_options['design']['other_custom_css'] = $default_options['design']['other_custom_css'];
                             
                             // update options
                             update_option('wpmm_settings', $v2_options);
@@ -921,15 +921,15 @@ if (!class_exists('WP_Maintenance_Mode')) {
                     }
                     
                     // "Design > Other > Custom CSS"
-                    if(!empty($this->plugin_settings['design']['user_custom_css'])) {
-                        $css_rules['design.user_custom_css'] = wp_strip_all_tags($this->plugin_settings['design']['user_custom_css']);
+                    if(!empty($this->plugin_settings['design']['other_custom_css'])) {
+                        $css_rules['design.other_custom_css'] = wp_strip_all_tags($this->plugin_settings['design']['other_custom_css']);
                     }
                     
                     if(empty($css_rules)) {
                         return;
                     }
                     
-                    printf("<style>\n%s\n</style>\n", implode("\n", $css_rules));
+                    printf("<style type=\"text/css\">\n%s\n</style>\n", implode("\n", $css_rules));
                 }
 
 		/**

@@ -102,7 +102,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                     'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug),
                 ));
                 
-                // add code editor (Code Mirror) to the `user_custom_css` textarea
+                // add code editor (Code Mirror) to the `other_custom_css` textarea
                 if (isset($GLOBALS['wp_version']) && version_compare($GLOBALS['wp_version'], '4.9.0', '>=') && function_exists('wp_enqueue_code_editor')) {
                     $settings = wp_enqueue_code_editor(array(
                         'type' => 'text/css',
@@ -113,7 +113,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         ),
                     ));
                     
-                    wp_add_inline_script('code-editor', sprintf('jQuery(function() { wp.codeEditor.initialize("user_custom_css", %s); });', wp_json_encode($settings)));
+                    wp_add_inline_script('code-editor', sprintf('jQuery(function() { wp.codeEditor.initialize("other_custom_css", %s); });', wp_json_encode($settings)));
                 }
             }
 
@@ -322,7 +322,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['design']['bg_predefined'] = sanitize_text_field($_POST['options']['design']['bg_predefined']);
 
                         // OTHER
-                        $_POST['options']['design']['user_custom_css'] = wp_strip_all_tags($_POST['options']['design']['user_custom_css']);
+                        $_POST['options']['design']['other_custom_css'] = wp_strip_all_tags($_POST['options']['design']['other_custom_css']);
 
                         // delete cache when is activated
                         if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
