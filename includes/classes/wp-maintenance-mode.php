@@ -302,7 +302,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 			if (!empty($old_options) && empty($v2_options)) {
 				add_option('wpmm_notice', array(
 					'class' => 'updated notice',
-					'msg' => sprintf(__('WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', self::get_instance()->plugin_slug), admin_url('options-general.php?page=' . self::get_instance()->plugin_slug))
+					'msg' => sprintf(
+                                                __('WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', 'wp-maintenance-mode'),
+                                                add_query_arg(array('page' => self::get_instance()->plugin_slug), admin_url('options-general.php'))
+                                        )
 				));
 
 				// import old options

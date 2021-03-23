@@ -530,7 +530,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function add_settings_link($links) {
             return array_merge(
                     array(
-                        'wpmm_settings' => '<a href="' . admin_url('options-general.php?page=' . $this->plugin_slug) . '">' . __('Settings', 'wp-maintenance-mode') . '</a>'
+                        'wpmm_settings' => sprintf('<a href="%s">%s</a>', add_query_arg(array('page' => $this->plugin_slug), admin_url('options-general.php')), esc_html__('Settings', 'wp-maintenance-mode')),
                     ), $links
             );
         }
