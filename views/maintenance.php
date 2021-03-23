@@ -91,15 +91,15 @@ defined( 'ABSPATH' ) || exit;
 				<div class="subscribe_wrapper" style="min-height: 100px;">
 					<form class="subscribe_form">
 						<div class="subscribe_border">
-							<input type="text" placeholder="<?php _e('your e-mail...', $this->plugin_slug); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
-							<input type="submit" value="<?php _e('Subscribe', $this->plugin_slug); ?>" />
+							<input type="text" placeholder="<?php _e('your e-mail...', 'wp-maintenance-mode'); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
+							<input type="submit" value="<?php _e('Subscribe', 'wp-maintenance-mode'); ?>" />
 						</div>
 						<?php if (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] === 1) { ?>
 							<div class="privacy_checkbox">
 								<label>
-									<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>">
+									<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', 'wp-maintenance-mode'); ?>">
 									
-									<?php _e("I've read and agree with the site's privacy policy", $this->plugin_slug); ?>
+									<?php _e('I\'ve read and agree with the site\'s privacy policy', 'wp-maintenance-mode'); ?>
 								</label>
 							</div>
 						
@@ -157,43 +157,43 @@ defined( 'ABSPATH' ) || exit;
 						<form class="contact_form">
 							<?php do_action('wpmm_contact_form_start'); ?>
 
-							<p class="col"><input type="text" placeholder="<?php _e('Name', $this->plugin_slug); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" name="name" class="name_input" /></p>
-							<p class="col last"><input type="text" placeholder="<?php _e('E-mail', $this->plugin_slug); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" data-msg-email="<?php esc_attr_e('Please enter a valid email address.', $this->plugin_slug); ?>" name="email" class="email_input" /></p>
+							<p class="col"><input type="text" placeholder="<?php _e('Name', 'wp-maintenance-mode'); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', 'wp-maintenance-mode'); ?>" name="name" class="name_input" /></p>
+							<p class="col last"><input type="text" placeholder="<?php _e('E-mail', 'wp-maintenance-mode'); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e('This field is required.', 'wp-maintenance-mode'); ?>" data-msg-email="<?php esc_attr_e('Please enter a valid email address.', 'wp-maintenance-mode'); ?>" name="email" class="email_input" /></p>
 							<br clear="all" />
 
 							<?php do_action('wpmm_contact_form_before_message'); ?>
 
-							<p><textarea placeholder="<?php _e('Your message', $this->plugin_slug); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>" name="content" class="content_textarea"></textarea></p>
+							<p><textarea placeholder="<?php _e('Your message', 'wp-maintenance-mode'); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', 'wp-maintenance-mode'); ?>" name="content" class="content_textarea"></textarea></p>
 
 							<?php do_action('wpmm_contact_form_after_message'); ?>
 
 							<?php if (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] === 1) { ?>
 								<div class="privacy_checkbox">
 									<label>
-										<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', $this->plugin_slug); ?>">
+										<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e('This field is required.', 'wp-maintenance-mode'); ?>">
 										
-										<?php _e("I've read and agree with the site's privacy policy", $this->plugin_slug); ?>
+										<?php _e("I've read and agree with the site's privacy policy", 'wp-maintenance-mode'); ?>
 									</label>
 								</div>
 							
 								<?php if(!empty($this->plugin_settings['gdpr']['contact_form_tail'])) { ?>
 									<p class="privacy_tail"><?php echo wp_kses($this->plugin_settings['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html()); ?></p>
 								<?php }} ?>
-							<p class="submit"><input type="submit" value="<?php _e('Send', $this->plugin_slug); ?>"></p>
+							<p class="submit"><input type="submit" value="<?php _e('Send', 'wp-maintenance-mode'); ?>"></p>
 
 							<?php do_action('wpmm_contact_form_end'); ?>
 						</form>
 					</div>
 				</div>
 
-				<a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', $this->plugin_slug); ?></a>
+				<a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr($open); ?>" data-close="<?php echo esc_attr($close); ?>"><?php _e('Contact us', 'wp-maintenance-mode'); ?></a>
 			<?php } ?>
 
 			<?php if ((!empty($this->plugin_settings['general']['admin_link']) && $this->plugin_settings['general']['admin_link'] === 1) ||
 					  (!empty($this->plugin_settings['gdpr']['status']) && $this->plugin_settings['gdpr']['status'] === 1)) { ?>
 				<div class="footer_links">
 					<?php if($this->plugin_settings['general']['admin_link'] === 1) { ?>
-						<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', $this->plugin_slug); ?></a> 
+						<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'wp-maintenance-mode'); ?></a> 
 					<?php } ?>
 					<?php if ($this->plugin_settings['gdpr']['status'] === 1) { ?>
 						<a href="<?php echo esc_attr($this->plugin_settings['gdpr']['policy_page_link']); ?>" target="<?php echo !empty($this->plugin_settings['gdpr']['policy_page_target']) && $this->plugin_settings['gdpr']['policy_page_target'] == 1 ? '_blank' : '_self'; ?>"><?php echo esc_html($this->plugin_settings['gdpr']['policy_page_label']); ?></a>

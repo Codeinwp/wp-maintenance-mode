@@ -102,10 +102,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 wp_enqueue_script($this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery' . WPMM_ASSETS_SUFFIX . '.js', array(), WP_Maintenance_Mode::VERSION);
                 wp_localize_script($this->plugin_slug . '-admin-script', 'wpmm_vars', array(
                     'ajax_url' => admin_url('admin-ajax.php'),
-                    'plugin_url' => admin_url('options-general.php?page=' . $this->plugin_slug),
+                    'plugin_url' => add_query_arg(array('page' => $this->plugin_slug), admin_url('options-general.php')),
                     'image_uploader_defaults' => array(
-                        'title' => _x('Upload Image', 'image_uploader defaults', $this->plugin_slug),
-                        'button_text' => _x('Choose Image', 'image_uploader defaults', $this->plugin_slug),
+                        'title' => _x('Upload Image', 'image_uploader defaults', 'wp-maintenance-mode'),
+                        'button_text' => _x('Choose Image', 'image_uploader defaults', 'wp-maintenance-mode'),
                     )
                 ));
                 
@@ -141,7 +141,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             try {
                 // check capabilities
                 if (!current_user_can(wpmm_get_capability('subscribers'))) {
-                    throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
+                    throw new Exception(__('You do not have access to this resource.', 'wp-maintenance-mode'));
                 }
 
                 // get subscribers and export
@@ -179,13 +179,13 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             try {
                 // check capabilities
                 if (!current_user_can(wpmm_get_capability('subscribers'))) {
-                    throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
+                    throw new Exception(__('You do not have access to this resource.', 'wp-maintenance-mode'));
                 }
 
                 // delete all subscribers
                 $wpdb->query("DELETE FROM {$wpdb->prefix}wpmm_subscribers");
 
-                $message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response', $this->plugin_slug), 0);
+                $message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response', 'wp-maintenance-mode'), 0);
                 wp_send_json_success($message);
             } catch (Exception $ex) {
                 wp_send_json_error($ex->getMessage());
@@ -199,7 +199,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
          */
         public function add_plugin_menu() {
             $this->plugin_screen_hook_suffix = add_options_page(
-                    __('WP Maintenance Mode', $this->plugin_slug), __('WP Maintenance Mode', $this->plugin_slug), wpmm_get_capability('settings'), $this->plugin_slug, array($this, 'display_plugin_settings')
+                    __('WP Maintenance Mode', 'wp-maintenance-mode'), __('WP Maintenance Mode', 'wp-maintenance-mode'), wpmm_get_capability('settings'), $this->plugin_slug, array($this, 'display_plugin_settings')
             );
         }
 
@@ -220,28 +220,28 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function save_plugin_settings() {
                  // check capabilities
                 if (!current_user_can(wpmm_get_capability('settings'))) {
-                    die(__('You do not have access to this resource.', $this->plugin_slug));
+                    die(__('You do not have access to this resource.', 'wp-maintenance-mode'));
                 }
                 
                 // check nonce existence
                 if (empty($_POST['_wpnonce'])) {
-                    die(__('The nonce field must not be empty.', $this->plugin_slug));
+                    die(__('The nonce field must not be empty.', 'wp-maintenance-mode'));
                 }
             
                 // check tab existence
                 if (empty($_POST['tab'])) {
-                    die(__('The tab slug must not be empty.', $this->plugin_slug));
+                    die(__('The tab slug must not be empty.', 'wp-maintenance-mode'));
                 }
                 
                  // check nonce validation
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
-                    die(__('Security check.', $this->plugin_slug));
+                    die(__('Security check.', 'wp-maintenance-mode'));
                 }    
                 
                 // check existence in plugin default settings
                 $tab = $_POST['tab'];
                 if (empty($this->plugin_default_settings[$tab])) {
-                    die(__('The tab slug must exist.', $this->plugin_slug));
+                    die(__('The tab slug must exist.', 'wp-maintenance-mode'));
                 }
 
                 // Do some sanitizations
@@ -405,28 +405,28 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             try {
                 // check capabilities
                 if (!current_user_can(wpmm_get_capability('settings'))) {
-                    throw new Exception(__('You do not have access to this resource.', $this->plugin_slug));
+                    throw new Exception(__('You do not have access to this resource.', 'wp-maintenance-mode'));
                 }
 
                 // check nonce existence
                 if (empty($_POST['_wpnonce'])) {
-                    throw new Exception(__('The nonce field must not be empty.', $this->plugin_slug));
+                    throw new Exception(__('The nonce field must not be empty.', 'wp-maintenance-mode'));
                 }
 
                 // check tab existence
                 if (empty($_POST['tab'])) {
-                    throw new Exception(__('The tab slug must not be empty.', $this->plugin_slug));
+                    throw new Exception(__('The tab slug must not be empty.', 'wp-maintenance-mode'));
                 }
 
                 // check nonce validation
                 if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
-                    throw new Exception(__('Security check.', $this->plugin_slug));
+                    throw new Exception(__('Security check.', 'wp-maintenance-mode'));
                 }
 
                 // check existence in plugin default settings
                 $tab = $_POST['tab'];
                 if (empty($this->plugin_default_settings[$tab])) {
-                    throw new Exception(__('The tab slug must exist.', $this->plugin_slug));
+                    throw new Exception(__('The tab slug must exist.', 'wp-maintenance-mode'));
                 }
 
                 // update options using the default values
@@ -496,7 +496,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             try {
                 $upload_dir = wp_upload_dir();
                 if (file_put_contents(trailingslashit($upload_dir['basedir']) . 'data.js', $data) === false) {
-                    throw new Exception(__("WPMM: The file data.js could not be written, the bot will not work correctly.", $this->plugin_slug));
+                    throw new Exception(__("WPMM: The file data.js could not be written, the bot will not work correctly.", "wp-maintenance-mode"));
                 }
             } catch (Exception $ex) {
                 error_log($ex->getMessage());
@@ -530,7 +530,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function add_settings_link($links) {
             return array_merge(
                     array(
-                        'wpmm_settings' => '<a href="' . admin_url('options-general.php?page=' . $this->plugin_slug) . '">' . __('Settings', $this->plugin_slug) . '</a>'
+                        'wpmm_settings' => '<a href="' . admin_url('options-general.php?page=' . $this->plugin_slug) . '">' . __('Settings', 'wp-maintenance-mode') . '</a>'
                     ), $links
             );
         }
@@ -549,7 +549,10 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 if (array_key_exists('general', $this->plugin_settings) && $this->plugin_settings['general']['status'] == 1 && $this->plugin_settings['general']['notice'] == 1) {
                     $notices['is_activated'] = array(
                         'class' => 'error',
-                        'msg' => sprintf(__('The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', $this->plugin_slug), admin_url('options-general.php?page=' . $this->plugin_slug))
+                        'msg' => sprintf(
+                                __('The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', 'wp-maintenance-mode'), 
+                                add_query_arg(array('page' => $this->plugin_slug), admin_url('options-general.php'))
+                        )
                     );
                 }
 
@@ -586,7 +589,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         public function dismiss_notices() {
             try {
                 if (empty($_POST['notice_key'])) {
-                    throw new Exception(__('Notice key cannot be empty.', $this->plugin_slug));
+                    throw new Exception(__('Notice key cannot be empty.', 'wp-maintenance-mode'));
                 }
 
                 // save new notice key
@@ -634,7 +637,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $screen = get_current_screen();
 
             if ($this->plugin_screen_hook_suffix == $screen->id) {
-                $text = sprintf(__('If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', $this->plugin_slug), '<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>');
+                $text = sprintf(__('If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode'), '<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>');
             }
 
             return $text;
@@ -658,16 +661,16 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             $url = $this->get_policy_link();
             if ($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] === '') {
                 if ($url === '') { // No value and feature available
-                    return __("Your WordPress version supports Privacy settings but you haven't set any privacy policy page yet. Go to Settings ➡ Privacy to set one.", $this->plugin_slug);
+                    return __('Your WordPress version supports Privacy settings but you haven\'t set any privacy policy page yet. Go to Settings ➡ Privacy to set one.', 'wp-maintenance-mode');
                 } else { // Value and feature available
-                    return sprintf(__('The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', $this->plugin_slug), $url, '<button>', '</button>');
+                    return sprintf(__('The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', 'wp-maintenance-mode'), $url, '<button>', '</button>');
                 }
             } elseif ($this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] != '') { // Feature available and value set
                 if ($url != $this->plugin_settings['gdpr']['policy_page_link']) { // Current wp privacy page differs from set value
-                    return sprintf(__("Your Privacy page is pointing to a different URL in WordPress settings. If that's correct ignore this message, otherwise %s", $this->plugin_slug), 'UPDATE VALUE TO NEW URL');
+                    return sprintf(__('Your Privacy page is pointing to a different URL in WordPress settings. If that\'s correct ignore this message, otherwise %s', 'wp-maintenance-mode'), 'UPDATE VALUE TO NEW URL');
                 }
             } elseif (!$this->get_is_policy_available()) { // No privacy feature available
-                return __("No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.", $this->plugin_slug);
+                return __('No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode');
             }
         }
 

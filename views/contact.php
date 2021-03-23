@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || exit;
                         </tr>
                         <tr>
                             <td style="color:#747e7e;font-family:Lato, Helvetica, Arial, sans-serif;text-align:center;font-size:18px;font-weight:normal;">
-								<?php printf(__('You have been contacted via %s.', $this->plugin_slug), get_bloginfo('name')); ?>
+								<?php printf(__('You have been contacted via %s.', 'wp-maintenance-mode'), get_bloginfo('name')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +65,7 @@ defined( 'ABSPATH' ) || exit;
                                         </tr>
                                         <tr>
                                             <td width="20%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
-												<?php _e('Name:', $this->plugin_slug); ?>
+												<?php _e('Name:', 'wp-maintenance-mode'); ?>
                                             </td>
                                             <td width="80%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
 												<?php echo sanitize_text_field($_POST['name']); ?>
@@ -77,7 +77,7 @@ defined( 'ABSPATH' ) || exit;
                                         </tr>
                                         <tr>
                                             <td width="20%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
-												<?php _e('Email:', $this->plugin_slug); ?>
+												<?php _e('Email:', 'wp-maintenance-mode'); ?>
                                             </td>
                                             <td width="80%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
 												<?php echo sanitize_text_field($_POST['email']); ?>
@@ -92,7 +92,7 @@ defined( 'ABSPATH' ) || exit;
                                         </tr>
                                         <tr>
                                             <td colspan="2" style="padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
-												<?php _e('Content:', $this->plugin_slug); ?>
+												<?php _e('Content:', 'wp-maintenance-mode'); ?>
                                             </td>
                                         </tr> 
                                         <tr>

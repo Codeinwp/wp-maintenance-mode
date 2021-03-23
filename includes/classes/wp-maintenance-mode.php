@@ -104,10 +104,10 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'admin_link' => 0
 				),
 				'design' => array(
-					'title' => __('Maintenance mode', $this->plugin_slug),
-					'heading' => __('Maintenance mode', $this->plugin_slug),
+					'title' => _x('Maintenance mode', '<title> default','wp-maintenance-mode'),
+					'heading' => _x('Maintenance mode', 'heading default', 'wp-maintenance-mode'),
 					'heading_color' => '',
-					'text' => __('<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br />Thank you for your understanding.</p>', $this->plugin_slug),
+					'text' => __('<p>Sorry for the inconvenience.<br />Our website is currently undergoing scheduled maintenance.<br />Thank you for your understanding.</p>', 'wp-maintenance-mode'),
 					'text_color' => '',
                                         'footer_links_color' => '',
 					'bg_type' => 'color',
@@ -126,7 +126,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					),
 					'countdown_color' => '',
 					'subscribe_status' => 0,
-					'subscribe_text' => __('Notify me when it\'s ready', $this->plugin_slug),
+					'subscribe_text' => __('Notify me when it\'s ready', 'wp-maintenance-mode'),
 					'subscribe_text_color' => '',
 					'social_status' => 0,
 					'social_target' => 1,
@@ -150,32 +150,32 @@ if (!class_exists('WP_Maintenance_Mode')) {
 					'name' => 'Admin',
 					'avatar' => '',
 					'messages' => array(
-						'01' => __("Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be your assistant here.", $this->plugin_slug),
-						'02' => __("I have just a few questions.", $this->plugin_slug),
-						'03' => __("What is your name?", $this->plugin_slug),
-						'04' => __("Nice to meet you here, {visitor_name}!"),
-						'05' => __("How you can see, our website will be launched very soon.", $this->plugin_slug),
-						'06' => __("I know, you are very excited to see it, but we need a few days to finish it.", $this->plugin_slug),
-						'07' => __("Would you like to be first to see it?", $this->plugin_slug),
-						'08_1' => __("Cool! Please leave your email here and I will send you a message when it's ready.", $this->plugin_slug),
-						'08_2' => __("Sad to hear that, {visitor_name} :( See you next time…", $this->plugin_slug),
-						'09' => __("Got it! Thank you and see you soon here!", $this->plugin_slug),
-						'10' => __("Have a great day!", $this->plugin_slug)
+						'01' => __('Hey! My name is {bot_name}, I\'m the owner of this website and I\'d like to be your assistant here.', 'wp-maintenance-mode'),
+						'02' => __('I have just a few questions.', 'wp-maintenance-mode'),
+						'03' => __('What is your name?', 'wp-maintenance-mode', 'wp-maintenance-mode'),
+						'04' => __('Nice to meet you here, {visitor_name}!', 'wp-maintenance-mode'),
+						'05' => __('How you can see, our website will be launched very soon.', 'wp-maintenance-mode'),
+						'06' => __('I know, you are very excited to see it, but we need a few days to finish it.', 'wp-maintenance-mode'),
+						'07' => __('Would you like to be first to see it?', 'wp-maintenance-mode'),
+						'08_1' => __('Cool! Please leave your email here and I will send you a message when it\'s ready.', 'wp-maintenance-mode'),
+						'08_2' => __('Sad to hear that, {visitor_name} :( See you next time…', 'wp-maintenance-mode'),
+						'09' => __('Got it! Thank you and see you soon here!', 'wp-maintenance-mode'),
+						'10' => __('Have a great day!', 'wp-maintenance-mode')
 					),
 					'responses' => array(
-						'01' => __("Type your name here…", $this->plugin_slug),
-						'02_1' => __("Tell me more", $this->plugin_slug),
-						'02_2' => __("Boring", $this->plugin_slug),
-						'03' => __("Type your email here…", $this->plugin_slug)
+						'01' => __('Type your name here…', 'wp-maintenance-mode'),
+						'02_1' => __('Tell me more', 'wp-maintenance-mode'),
+						'02_2' => __('Boring', 'wp-maintenance-mode'),
+						'03' => __('Type your email here…', 'wp-maintenance-mode')
 					),
 				),
 				'gdpr' => array(
 					'status' => 0,
-					'policy_page_label' => __('Privacy Policy', $this->plugin_slug),
+					'policy_page_label' => __('Privacy Policy', 'wp-maintenance-mode'),
 					'policy_page_link' => '',
 					'policy_page_target' => 0,
-					'contact_form_tail' => __('This form collects your name and email so that we can reach you back. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', $this->plugin_slug),
-					'subscribe_form_tail' => __('This form collects your email so that we can add you to our newsletter list. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', $this->plugin_slug),
+					'contact_form_tail' => __('This form collects your name and email so that we can reach you back. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', 'wp-maintenance-mode'),
+					'subscribe_form_tail' => __('This form collects your email so that we can add you to our newsletter list. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', 'wp-maintenance-mode'),
 				),
 			);
 		}
@@ -565,7 +565,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$backtime = (int) apply_filters('wpmm_backtime', $backtime_seconds);
 
 				// META STUFF
-				$title = !empty($this->plugin_settings['design']['title']) ? $this->plugin_settings['design']['title'] : get_bloginfo('name') . ' - ' . __('Maintenance Mode', $this->plugin_slug);
+				$title = !empty($this->plugin_settings['design']['title']) ? $this->plugin_settings['design']['title'] : get_bloginfo('name') . ' - ' . __('Maintenance Mode', 'wp-maintenance-mode');
 				$title = apply_filters('wm_title', $title); // this hook will be removed in the next versions
 				$title = apply_filters('wpmm_meta_title', $title);
 
@@ -579,7 +579,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 				$description = apply_filters('wm_meta_description', $description); // this hook will be removed in the next versions
 				$description = apply_filters('wpmm_meta_description', $description);
 
-				$keywords = __('Maintenance Mode', $this->plugin_slug);
+				$keywords = _x('Maintenance Mode', '<meta> keywords default', 'wp-maintenance-mode');
 				$keywords = apply_filters('wm_meta_keywords', $keywords); // this hook will be removed in the next versions
 				$keywords = apply_filters('wpmm_meta_keywords', $keywords);
 
@@ -658,12 +658,12 @@ if (!class_exists('WP_Maintenance_Mode')) {
 		public function add_bot_extras() {
 			$upload_dir = wp_upload_dir();
 			$bot_vars = array(
-				'validationName' => __('Please type in your name.', $this->plugin_slug),
-				'validationEmail' => __('Please type in a valid email address.', $this->plugin_slug),
+				'validationName' => __('Please type in your name.', 'wp-maintenance-mode'),
+				'validationEmail' => __('Please type in a valid email address.', 'wp-maintenance-mode'),
 				'uploadsBaseUrl' => trailingslashit($upload_dir['baseurl']),
-				'typeName' => __('Type your name here…', $this->plugin_slug),
-				'typeEmail' => __('Type your email here…', $this->plugin_slug),
-				'send' => __('Send', $this->plugin_slug)
+				'typeName' => __('Type your name here…', 'wp-maintenance-mode'),
+				'typeEmail' => __('Type your email here…', 'wp-maintenance-mode'),
+				'send' => __('Send', 'wp-maintenance-mode')
 			);
 			echo "<script type='text/javascript'>" .
 			"var botVars = " . json_encode($bot_vars) .
@@ -947,7 +947,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				// checks
 				if (empty($_POST['email']) || !is_email($_POST['email'])) {
-					throw new Exception(__('Please enter a valid email address.', $this->plugin_slug));
+					throw new Exception(__('Please enter a valid email address.', 'wp-maintenance-mode'));
 				}
 
 				// save
@@ -959,7 +959,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 							), array('%s', '%s'));
 				}
 
-				wp_send_json_success(__('You successfully subscribed. Thanks!', $this->plugin_slug));
+				wp_send_json_success(__('You successfully subscribed. Thanks!', 'wp-maintenance-mode'));
 			} catch (Exception $ex) {
 				wp_send_json_error($ex->getMessage());
 			}
@@ -977,11 +977,11 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				// checks
 				if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['content'])) {
-					throw new Exception(__('All fields required.', $this->plugin_slug));
+					throw new Exception(__('All fields required.', 'wp-maintenance-mode'));
 				}
 
 				if (!is_email($_POST['email'])) {
-					throw new Exception(__('Please enter a valid email address.', $this->plugin_slug));
+					throw new Exception(__('Please enter a valid email address.', 'wp-maintenance-mode'));
 				}
 
 				// if you add new fields to the contact form... you will definitely need to validate their values
@@ -989,7 +989,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				// vars
 				$send_to = !empty($this->plugin_settings['modules']['contact_email']) ? $this->plugin_settings['modules']['contact_email'] : get_option('admin_email');
-				$subject = apply_filters('wpmm_contact_subject', __('Message via contact', $this->plugin_slug));
+				$subject = apply_filters('wpmm_contact_subject', __('Message via contact', 'wp-maintenance-mode'));
 				$headers = apply_filters('wpmm_contact_headers', array('Reply-To: ' . sanitize_text_field($_POST['email'])));
 				$from_name = sanitize_text_field($_POST['name']);
 
@@ -1005,7 +1005,7 @@ if (!class_exists('WP_Maintenance_Mode')) {
 
 				// send email
 				@wp_mail($send_to, $subject, $message, $headers);
-				wp_send_json_success(__('Your email was sent to the website administrator. Thanks!', $this->plugin_slug));
+				wp_send_json_success(__('Your email was sent to the website administrator. Thanks!', 'wp-maintenance-mode'));
 			} catch (Exception $ex) {
 				wp_send_json_error($ex->getMessage());
 			}
