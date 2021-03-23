@@ -318,6 +318,41 @@ function wpmm_get_option($option, $default = false) {
     return stripslashes_deep(get_option($option, $default));
 }
 
+/**
+ * Generate form hidden fields
+ * 
+ * @param string $name
+ */
+function wpmm_form_hidden_fields($name) {
+    $hidden_fields = array(
+        array(
+            'name' => sprintf('tab-%s', $name),
+            'type' => 'nonce',
+        ),
+        array(
+            'name' => 'tab',
+            'value' => $name,
+            'type' => 'custom',
+        ),
+        array(
+            'name' => 'action',
+            'value' => 'wpmm_save_settings',
+            'type' => 'custom',
+        ),
+    );
+
+    foreach ($hidden_fields as $field) {
+        switch ($field['type']) {
+            case 'custom':
+                printf('<input type="hidden" value="%s" name="%s" />', esc_attr($field['value']), esc_attr($field['name']));
+                break;
+            case 'nonce':
+                wp_nonce_field($field['name']);
+                break;
+        }
+    }
+}
+
 if (!function_exists('wp_scripts')) {
 
 	/**

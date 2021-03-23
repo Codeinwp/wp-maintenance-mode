@@ -44,6 +44,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
             add_action('wp_ajax_wpmm_subscribers_empty_list', array($this, 'subscribers_empty_list'));
             add_action('wp_ajax_wpmm_dismiss_notices', array($this, 'dismiss_notices'));
             add_action('wp_ajax_wpmm_reset_settings', array($this, 'reset_settings'));
+            
+            // Add admin_post_{$action}
+            add_action('admin_post_wpmm_save_settings', array($this, 'save_plugin_settings'));
 
             // Add text to footer
             add_filter('admin_footer_text', array($this, 'admin_footer_text'), 5);
@@ -186,6 +189,209 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
         }
 
         /**
+         * Add plugin in Settings menu
+         *
+         * @since 2.0.0
+         */
+        public function add_plugin_menu() {
+            $this->plugin_screen_hook_suffix = add_options_page(
+                    __('WP Maintenance Mode', $this->plugin_slug), __('WP Maintenance Mode', $this->plugin_slug), wpmm_get_capability('settings'), $this->plugin_slug, array($this, 'display_plugin_settings')
+            );
+        }
+
+        /**
+         * Settings page
+         *
+         * @since 2.0.0
+         */
+        public function display_plugin_settings() {
+            include_once(WPMM_VIEWS_PATH . 'settings.php');
+        }
+
+        /**
+         * Save settings
+         *
+         * @since 2.0.0
+         */
+        public function save_plugin_settings() {
+                 // check capabilities
+                if (!current_user_can(wpmm_get_capability('settings'))) {
+                    die(__('You do not have access to this resource.', $this->plugin_slug));
+                }
+                
+                // check nonce existence
+                if (empty($_POST['_wpnonce'])) {
+                    die(__('The nonce field must not be empty.', $this->plugin_slug));
+                }
+            
+                // check tab existence
+                if (empty($_POST['tab'])) {
+                    die(__('The tab slug must not be empty.', $this->plugin_slug));
+                }
+                
+                 // check nonce validation
+                if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
+                    die(__('Security check.', $this->plugin_slug));
+                }    
+                
+                // check existence in plugin default settings
+                $tab = $_POST['tab'];
+                if (empty($this->plugin_default_settings[$tab])) {
+                    die(__('The tab slug must exist.', $this->plugin_slug));
+                }
+
+                // Do some sanitizations
+                switch ($tab) {
+                    case 'general':
+                        $_POST['options']['general']['status'] = (int) $_POST['options']['general']['status'];
+                        if (!empty($_POST['options']['general']['status']) && $_POST['options']['general']['status'] == 1) {
+                            $_POST['options']['general']['status_date'] = date('Y-m-d H:i:s');
+                        }
+                        $_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
+                        $_POST['options']['general']['backend_role'] = !empty($_POST['options']['general']['backend_role']) ? $_POST['options']['general']['backend_role'] : array();
+                        $_POST['options']['general']['frontend_role'] = !empty($_POST['options']['general']['frontend_role']) ? $_POST['options']['general']['frontend_role'] : array();
+                        $_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
+                        $_POST['options']['general']['redirection'] = esc_url($_POST['options']['general']['redirection']);
+                        if (!empty($_POST['options']['general']['exclude'])) {
+                            $exclude_array = explode("\n", $_POST['options']['general']['exclude']);
+                            // we need to be sure that empty lines will not be saved
+                            $_POST['options']['general']['exclude'] = array_filter(array_map('trim', $exclude_array));
+                        } else {
+                            $_POST['options']['general']['exclude'] = array();
+                        }
+                        $_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
+                        $_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
+
+                        // delete cache when is already activated, when is activated and when is deactivated
+                        if (
+                                isset($this->plugin_settings['general']['status']) && isset($_POST['options']['general']['status']) &&
+                                (
+                                ($this->plugin_settings['general']['status'] == 1 && in_array($_POST['options']['general']['status'], array(0, 1))) ||
+                                ($this->plugin_settings['general']['status'] == 0 && $_POST['options']['general']['status'] == 1)
+                                )
+                        ) {
+                            $this->delete_cache();
+                        }
+                        break;
+                    case 'design':
+                        // Content
+                        $_POST['options']['design']['title'] = sanitize_text_field($_POST['options']['design']['title']);
+                        $_POST['options']['design']['heading'] = sanitize_text_field($_POST['options']['design']['heading']);
+                        $_POST['options']['design']['heading_color'] = sanitize_hex_color($_POST['options']['design']['heading_color']);
+
+                        add_filter('safe_style_css', array($this, 'add_safe_style_css')); // add before we save
+                        $_POST['options']['design']['text'] = wp_kses_post($_POST['options']['design']['text']);
+                        $_POST['options']['design']['text_color'] = sanitize_hex_color($_POST['options']['design']['text_color']);
+                        remove_filter('safe_style_css', array($this, 'add_safe_style_css')); // remove after we save
+                        
+                        $_POST['options']['design']['footer_links_color'] = sanitize_hex_color($_POST['options']['design']['footer_links_color']);
+
+                        // Background
+                        $_POST['options']['design']['bg_type'] = sanitize_text_field($_POST['options']['design']['bg_type']);
+                        $_POST['options']['design']['bg_color'] = sanitize_hex_color($_POST['options']['design']['bg_color']);
+                        $_POST['options']['design']['bg_custom'] = esc_url($_POST['options']['design']['bg_custom']);
+                        $_POST['options']['design']['bg_predefined'] = sanitize_text_field($_POST['options']['design']['bg_predefined']);
+
+                        // Other
+                        $_POST['options']['design']['other_custom_css'] = wp_strip_all_tags($_POST['options']['design']['other_custom_css']);
+
+                        // Delete cache when is activated
+                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
+                            $this->delete_cache();
+                        }
+                        break;
+                    case 'modules':
+                        // Countdown
+                        $_POST['options']['modules']['countdown_status'] = (int) $_POST['options']['modules']['countdown_status'];
+                        $_POST['options']['modules']['countdown_start'] = sanitize_text_field($_POST['options']['modules']['countdown_start']);
+                        $_POST['options']['modules']['countdown_details'] = array_map('trim', $_POST['options']['modules']['countdown_details']);
+                        $_POST['options']['modules']['countdown_details']['days'] = isset($_POST['options']['modules']['countdown_details']['days']) && is_numeric($_POST['options']['modules']['countdown_details']['days']) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
+                        $_POST['options']['modules']['countdown_details']['hours'] = isset($_POST['options']['modules']['countdown_details']['hours']) && is_numeric($_POST['options']['modules']['countdown_details']['hours']) ? $_POST['options']['modules']['countdown_details']['hours'] : 1;
+                        $_POST['options']['modules']['countdown_details']['minutes'] = isset($_POST['options']['modules']['countdown_details']['minutes']) && is_numeric($_POST['options']['modules']['countdown_details']['minutes']) ? $_POST['options']['modules']['countdown_details']['minutes'] : 0;
+                        $_POST['options']['modules']['countdown_color'] = sanitize_hex_color($_POST['options']['modules']['countdown_color']);
+
+                        // Subscribe
+                        $_POST['options']['modules']['subscribe_status'] = (int) $_POST['options']['modules']['subscribe_status'];
+                        $_POST['options']['modules']['subscribe_text'] = sanitize_text_field($_POST['options']['modules']['subscribe_text']);
+                        $_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color($_POST['options']['modules']['subscribe_text_color']);
+
+                        // Social networks
+                        $_POST['options']['modules']['social_status'] = (int) $_POST['options']['modules']['social_status'];
+                        $_POST['options']['modules']['social_target'] = (int) $_POST['options']['modules']['social_target'];
+                        $_POST['options']['modules']['social_github'] = sanitize_text_field($_POST['options']['modules']['social_github']);
+                        $_POST['options']['modules']['social_dribbble'] = sanitize_text_field($_POST['options']['modules']['social_dribbble']);
+                        $_POST['options']['modules']['social_twitter'] = sanitize_text_field($_POST['options']['modules']['social_twitter']);
+                        $_POST['options']['modules']['social_facebook'] = sanitize_text_field($_POST['options']['modules']['social_facebook']);
+                        $_POST['options']['modules']['social_instagram'] = sanitize_text_field($_POST['options']['modules']['social_instagram']);
+                        $_POST['options']['modules']['social_pinterest'] = sanitize_text_field($_POST['options']['modules']['social_pinterest']);
+                        $_POST['options']['modules']['social_google+'] = sanitize_text_field($_POST['options']['modules']['social_google+']);
+                        $_POST['options']['modules']['social_linkedin'] = sanitize_text_field($_POST['options']['modules']['social_linkedin']);
+
+                        // Contact
+                        $_POST['options']['modules']['contact_status'] = (int) $_POST['options']['modules']['contact_status'];
+                        $_POST['options']['modules']['contact_email'] = sanitize_text_field($_POST['options']['modules']['contact_email']);
+                        $_POST['options']['modules']['contact_effects'] = sanitize_text_field($_POST['options']['modules']['contact_effects']);
+
+                        // Google analytics
+                        $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
+                        $_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
+                        $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
+
+                        // Delete cache when is activated
+                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
+                            $this->delete_cache();
+                        }
+                        break;
+                    case 'bot':
+                        $_POST['options']['bot']['status'] = (int) $_POST['options']['bot']['status'];
+                        $_POST['options']['bot']['name'] = sanitize_text_field($_POST['options']['bot']['name']);
+                        $_POST['options']['bot']['avatar'] = sanitize_text_field($_POST['options']['bot']['avatar']);
+
+                        $_POST['options']['bot']['messages']['01'] = sanitize_text_field($_POST['options']['bot']['messages']['01']);
+                        $_POST['options']['bot']['messages']['02'] = sanitize_text_field($_POST['options']['bot']['messages']['02']);
+                        $_POST['options']['bot']['messages']['03'] = sanitize_text_field($_POST['options']['bot']['messages']['03']);
+                        $_POST['options']['bot']['messages']['04'] = sanitize_text_field($_POST['options']['bot']['messages']['04']);
+                        $_POST['options']['bot']['messages']['05'] = sanitize_text_field($_POST['options']['bot']['messages']['05']);
+                        $_POST['options']['bot']['messages']['06'] = sanitize_text_field($_POST['options']['bot']['messages']['06']);
+                        $_POST['options']['bot']['messages']['07'] = sanitize_text_field($_POST['options']['bot']['messages']['07']);
+                        $_POST['options']['bot']['messages']['08_1'] = sanitize_text_field($_POST['options']['bot']['messages']['08_1']);
+                        $_POST['options']['bot']['messages']['08_2'] = sanitize_text_field($_POST['options']['bot']['messages']['08_2']);
+                        $_POST['options']['bot']['messages']['09'] = sanitize_text_field($_POST['options']['bot']['messages']['09']);
+                        $_POST['options']['bot']['messages']['10'] = sanitize_text_field($_POST['options']['bot']['messages']['10']);
+
+                        $_POST['options']['bot']['responses']['01'] = sanitize_text_field($_POST['options']['bot']['responses']['01']);
+                        $_POST['options']['bot']['responses']['02_1'] = sanitize_text_field($_POST['options']['bot']['responses']['02_1']);
+                        $_POST['options']['bot']['responses']['02_2'] = sanitize_text_field($_POST['options']['bot']['responses']['02_2']);
+                        $_POST['options']['bot']['responses']['03'] = sanitize_text_field($_POST['options']['bot']['responses']['03']);
+
+                        // Write out JS file on saved
+                        $this->set_datajs_file($_POST['options']['bot']);
+
+                        // Delete cache when is activated
+                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
+                            $this->delete_cache();
+                        }
+                        break;
+                    case 'gdpr':
+                        $_POST['options']['gdpr']['status'] = (int) $_POST['options']['gdpr']['status'];
+                        $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
+                        $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
+                        $_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
+                        $_POST['options']['gdpr']['contact_form_tail'] = wp_kses($_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html());
+                        $_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses($_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html());
+                        break;
+                }
+
+                // save settings
+                $this->plugin_settings[$tab] = $_POST['options'][$tab];
+                update_option('wpmm_settings', $this->plugin_settings);
+
+                // redirect back
+                wp_safe_redirect(add_query_arg(array('page' => $this->plugin_slug, 'updated' => true), admin_url('options-general.php')) . '#' . $tab);
+                exit;
+        }
+        
+/**
          * Reset settings (refactor @ 2.0.4)
          *
          * @since 2.0.0
@@ -226,193 +432,6 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                 wp_send_json_success();
             } catch (Exception $ex) {
                 wp_send_json_error($ex->getMessage());
-            }
-        }
-
-        /**
-         * Add plugin in Settings menu
-         *
-         * @since 2.0.0
-         */
-        public function add_plugin_menu() {
-            $this->plugin_screen_hook_suffix = add_options_page(
-                    __('WP Maintenance Mode', $this->plugin_slug), __('WP Maintenance Mode', $this->plugin_slug), wpmm_get_capability('settings'), $this->plugin_slug, array($this, 'display_plugin_settings')
-            );
-        }
-
-        /**
-         * Settings page
-         *
-         * @since 2.0.0
-         */
-        public function display_plugin_settings() {
-            // save settings
-            $this->save_plugin_settings();
-
-            // show settings
-            include_once(WPMM_VIEWS_PATH . 'settings.php');
-        }
-
-        /**
-         * Save settings
-         *
-         * @since 2.0.0
-         */
-        public function save_plugin_settings() {
-            if (!empty($_POST) && !empty($_POST['tab'])) {
-                if (!wp_verify_nonce($_POST['_wpnonce'], 'tab-' . $_POST['tab'])) {
-                    die(__('Security check.', $this->plugin_slug));
-                }
-
-                if (!current_user_can(wpmm_get_capability('settings'))) {
-                    die(__('You do not have access to this resource.', $this->plugin_slug));
-                }
-
-                // DO SOME SANITIZATIONS
-                $tab = $_POST['tab'];
-                switch ($tab) {
-                    case 'general':
-                        $_POST['options']['general']['status'] = (int) $_POST['options']['general']['status'];
-                        if (!empty($_POST['options']['general']['status']) && $_POST['options']['general']['status'] == 1) {
-                            $_POST['options']['general']['status_date'] = date('Y-m-d H:i:s');
-                        }
-                        $_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
-                        $_POST['options']['general']['backend_role'] = !empty($_POST['options']['general']['backend_role']) ? $_POST['options']['general']['backend_role'] : array();
-                        $_POST['options']['general']['frontend_role'] = !empty($_POST['options']['general']['frontend_role']) ? $_POST['options']['general']['frontend_role'] : array();
-                        $_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
-                        $_POST['options']['general']['redirection'] = esc_url($_POST['options']['general']['redirection']);
-                        if (!empty($_POST['options']['general']['exclude'])) {
-                            $exclude_array = explode("\n", $_POST['options']['general']['exclude']);
-                            // we need to be sure that empty lines will not be saved
-                            $_POST['options']['general']['exclude'] = array_filter(array_map('trim', $exclude_array));
-                        } else {
-                            $_POST['options']['general']['exclude'] = array();
-                        }
-                        $_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
-                        $_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
-
-                        // delete cache when is already activated, when is activated and when is deactivated
-                        if (
-                                isset($this->plugin_settings['general']['status']) && isset($_POST['options']['general']['status']) &&
-                                (
-                                ($this->plugin_settings['general']['status'] == 1 && in_array($_POST['options']['general']['status'], array(0, 1))) ||
-                                ($this->plugin_settings['general']['status'] == 0 && $_POST['options']['general']['status'] == 1)
-                                )
-                        ) {
-                            $this->delete_cache();
-                        }
-                        break;
-                    case 'design':
-                        // CONTENT
-                        $_POST['options']['design']['title'] = sanitize_text_field($_POST['options']['design']['title']);
-                        $_POST['options']['design']['heading'] = sanitize_text_field($_POST['options']['design']['heading']);
-                        $_POST['options']['design']['heading_color'] = sanitize_hex_color($_POST['options']['design']['heading_color']);
-
-                        add_filter('safe_style_css', array($this, 'add_safe_style_css')); // add before we save
-                        $_POST['options']['design']['text'] = wp_kses_post($_POST['options']['design']['text']);
-                        $_POST['options']['design']['text_color'] = sanitize_hex_color($_POST['options']['design']['text_color']);
-                        remove_filter('safe_style_css', array($this, 'add_safe_style_css')); // remove after we save
-                        
-                        $_POST['options']['design']['footer_links_color'] = sanitize_hex_color($_POST['options']['design']['footer_links_color']);
-
-                        // BACKGROUND
-                        $_POST['options']['design']['bg_type'] = sanitize_text_field($_POST['options']['design']['bg_type']);
-                        $_POST['options']['design']['bg_color'] = sanitize_hex_color($_POST['options']['design']['bg_color']);
-                        $_POST['options']['design']['bg_custom'] = esc_url($_POST['options']['design']['bg_custom']);
-                        $_POST['options']['design']['bg_predefined'] = sanitize_text_field($_POST['options']['design']['bg_predefined']);
-
-                        // OTHER
-                        $_POST['options']['design']['other_custom_css'] = wp_strip_all_tags($_POST['options']['design']['other_custom_css']);
-
-                        // delete cache when is activated
-                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
-                            $this->delete_cache();
-                        }
-                        break;
-                    case 'modules':
-                        // COUNTDOWN
-                        $_POST['options']['modules']['countdown_status'] = (int) $_POST['options']['modules']['countdown_status'];
-                        $_POST['options']['modules']['countdown_start'] = sanitize_text_field($_POST['options']['modules']['countdown_start']);
-                        $_POST['options']['modules']['countdown_details'] = array_map('trim', $_POST['options']['modules']['countdown_details']);
-                        $_POST['options']['modules']['countdown_details']['days'] = isset($_POST['options']['modules']['countdown_details']['days']) && is_numeric($_POST['options']['modules']['countdown_details']['days']) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
-                        $_POST['options']['modules']['countdown_details']['hours'] = isset($_POST['options']['modules']['countdown_details']['hours']) && is_numeric($_POST['options']['modules']['countdown_details']['hours']) ? $_POST['options']['modules']['countdown_details']['hours'] : 1;
-                        $_POST['options']['modules']['countdown_details']['minutes'] = isset($_POST['options']['modules']['countdown_details']['minutes']) && is_numeric($_POST['options']['modules']['countdown_details']['minutes']) ? $_POST['options']['modules']['countdown_details']['minutes'] : 0;
-                        $_POST['options']['modules']['countdown_color'] = sanitize_hex_color($_POST['options']['modules']['countdown_color']);
-
-                        // SUBSCRIBE
-                        $_POST['options']['modules']['subscribe_status'] = (int) $_POST['options']['modules']['subscribe_status'];
-                        $_POST['options']['modules']['subscribe_text'] = sanitize_text_field($_POST['options']['modules']['subscribe_text']);
-                        $_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color($_POST['options']['modules']['subscribe_text_color']);
-
-                        // SOCIAL NETWORKS
-                        $_POST['options']['modules']['social_status'] = (int) $_POST['options']['modules']['social_status'];
-                        $_POST['options']['modules']['social_target'] = (int) $_POST['options']['modules']['social_target'];
-                        $_POST['options']['modules']['social_github'] = sanitize_text_field($_POST['options']['modules']['social_github']);
-                        $_POST['options']['modules']['social_dribbble'] = sanitize_text_field($_POST['options']['modules']['social_dribbble']);
-                        $_POST['options']['modules']['social_twitter'] = sanitize_text_field($_POST['options']['modules']['social_twitter']);
-                        $_POST['options']['modules']['social_facebook'] = sanitize_text_field($_POST['options']['modules']['social_facebook']);
-                        $_POST['options']['modules']['social_instagram'] = sanitize_text_field($_POST['options']['modules']['social_instagram']);
-                        $_POST['options']['modules']['social_pinterest'] = sanitize_text_field($_POST['options']['modules']['social_pinterest']);
-                        $_POST['options']['modules']['social_google+'] = sanitize_text_field($_POST['options']['modules']['social_google+']);
-                        $_POST['options']['modules']['social_linkedin'] = sanitize_text_field($_POST['options']['modules']['social_linkedin']);
-
-                        // CONTACT
-                        $_POST['options']['modules']['contact_status'] = (int) $_POST['options']['modules']['contact_status'];
-                        $_POST['options']['modules']['contact_email'] = sanitize_text_field($_POST['options']['modules']['contact_email']);
-                        $_POST['options']['modules']['contact_effects'] = sanitize_text_field($_POST['options']['modules']['contact_effects']);
-
-                        // GOOGLE ANALYTICS
-                        $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
-                        $_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
-                        $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
-
-                        // delete cache when is activated
-                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
-                            $this->delete_cache();
-                        }
-                        break;
-                    case 'bot':
-                        $_POST['options']['bot']['status'] = (int) $_POST['options']['bot']['status'];
-                        $_POST['options']['bot']['name'] = sanitize_text_field($_POST['options']['bot']['name']);
-                        $_POST['options']['bot']['avatar'] = sanitize_text_field($_POST['options']['bot']['avatar']);
-
-                        $_POST['options']['bot']['messages']['01'] = sanitize_text_field($_POST['options']['bot']['messages']['01']);
-                        $_POST['options']['bot']['messages']['02'] = sanitize_text_field($_POST['options']['bot']['messages']['02']);
-                        $_POST['options']['bot']['messages']['03'] = sanitize_text_field($_POST['options']['bot']['messages']['03']);
-                        $_POST['options']['bot']['messages']['04'] = sanitize_text_field($_POST['options']['bot']['messages']['04']);
-                        $_POST['options']['bot']['messages']['05'] = sanitize_text_field($_POST['options']['bot']['messages']['05']);
-                        $_POST['options']['bot']['messages']['06'] = sanitize_text_field($_POST['options']['bot']['messages']['06']);
-                        $_POST['options']['bot']['messages']['07'] = sanitize_text_field($_POST['options']['bot']['messages']['07']);
-                        $_POST['options']['bot']['messages']['08_1'] = sanitize_text_field($_POST['options']['bot']['messages']['08_1']);
-                        $_POST['options']['bot']['messages']['08_2'] = sanitize_text_field($_POST['options']['bot']['messages']['08_2']);
-                        $_POST['options']['bot']['messages']['09'] = sanitize_text_field($_POST['options']['bot']['messages']['09']);
-                        $_POST['options']['bot']['messages']['10'] = sanitize_text_field($_POST['options']['bot']['messages']['10']);
-
-                        $_POST['options']['bot']['responses']['01'] = sanitize_text_field($_POST['options']['bot']['responses']['01']);
-                        $_POST['options']['bot']['responses']['02_1'] = sanitize_text_field($_POST['options']['bot']['responses']['02_1']);
-                        $_POST['options']['bot']['responses']['02_2'] = sanitize_text_field($_POST['options']['bot']['responses']['02_2']);
-                        $_POST['options']['bot']['responses']['03'] = sanitize_text_field($_POST['options']['bot']['responses']['03']);
-
-                        // Write out JS file on saved
-                        $this->set_datajs_file($_POST['options']['bot']);
-
-                        // delete cache when is activated
-                        if (!empty($this->plugin_settings['general']['status']) && $this->plugin_settings['general']['status'] == 1) {
-                            $this->delete_cache();
-                        }
-                        break;
-                    case 'gdpr':
-                        $_POST['options']['gdpr']['status'] = (int) $_POST['options']['gdpr']['status'];
-                        $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
-                        $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
-                        $_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
-                        $_POST['options']['gdpr']['contact_form_tail'] = wp_kses($_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html());
-                        $_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses($_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html());
-                        break;
-                }
-
-                $this->plugin_settings[$tab] = $_POST['options'][$tab];
-                update_option('wpmm_settings', $this->plugin_settings);
             }
         }
 

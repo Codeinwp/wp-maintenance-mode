@@ -10,12 +10,6 @@ defined( 'ABSPATH' ) || exit;
 <div class="wrap">
     <h2 class="wpmm-title"><?php echo get_admin_page_title(); ?></h2>
 
-    <?php if (!empty($_POST)) { ?>
-        <div class="updated settings-error" id="setting-error-settings_updated">
-            <p><strong><?php _e('Settings saved.', $this->plugin_slug); ?></strong></p>
-        </div>
-    <?php } ?>
-
     <div class="wpmm-wrapper">
         <div id="content" class="wrapper-cell">
             <div class="nav-tab-wrapper">
@@ -28,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
             <div class="tabs-content">
                 <div id="tab-general" class="">
-                    <form method="post">
+                    <form action="<?php echo admin_url('admin-post.php'); ?>" method="post" >
                         <table class="form-table">
                             <tbody>
                                 <tr valign="top">
@@ -121,14 +115,13 @@ defined( 'ABSPATH' ) || exit;
                             </tbody>
                         </table>
 
-                        <?php wp_nonce_field('tab-general'); ?>
-                        <input type="hidden" value="general" name="tab" />
+                        <?php wpmm_form_hidden_fields('general'); ?>
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
                         <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="general" name="submit">
                     </form>
                 </div>
                 <div id="tab-design" class="hidden">
-                    <form method="post">
+                    <form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
                         <h3>&raquo; <?php _e('Content', $this->plugin_slug); ?></h3>
 
                         <table class="form-table">
@@ -252,14 +245,13 @@ defined( 'ABSPATH' ) || exit;
                             </tbody>
                         </table>
 
-                        <?php wp_nonce_field('tab-design'); ?>
-                        <input type="hidden" value="design" name="tab" />
+                        <?php wpmm_form_hidden_fields('design'); ?>
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
                         <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit">
                     </form>
                 </div>
                 <div id="tab-modules" class="hidden">
-                    <form method="post">
+                    <form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
                         <h3>&raquo; <?php _e('Countdown', $this->plugin_slug); ?></h3>
 
                         <table class="form-table">
@@ -474,14 +466,13 @@ defined( 'ABSPATH' ) || exit;
                             </tbody>
                         </table>
 
-                        <?php wp_nonce_field('tab-modules'); ?>
-                        <input type="hidden" value="modules" name="tab" />
+                        <?php wpmm_form_hidden_fields('modules'); ?>
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
                         <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit">
                     </form>
                 </div>
                 <div id="tab-bot" class="hidden">
-                    <form method="post">
+                    <form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
                         <table class="form-table">
                             <tbody>
                                 <tr valign="top">
@@ -644,14 +635,13 @@ defined( 'ABSPATH' ) || exit;
                             </tbody>
                         </table>
 
-                        <?php wp_nonce_field('tab-bot'); ?>
-                        <input type="hidden" value="bot" name="tab" />
+                        <?php wpmm_form_hidden_fields('bot'); ?>
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit">
                         <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit">
                     </form>
                 </div>
                 <div id="tab-gdpr" class="hidden">
-                    <form method="post">
+                    <form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
                         <table class="form-table">
                             <tbody>
                                 <tr valign="top">
@@ -717,8 +707,7 @@ defined( 'ABSPATH' ) || exit;
                             </tbody>
                         </table>
 
-                        <?php wp_nonce_field('tab-gdpr'); ?>
-                        <input type="hidden" value="gdpr" name="tab" />
+                        <?php wpmm_form_hidden_fields('gdpr'); ?>
                         <input type="submit" value="<?php _e('Save settings', $this->plugin_slug); ?>" class="button button-primary" name="submit" />
                         <input type="button" value="<?php _e('Reset settings', $this->plugin_slug); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit">
                     </form>
