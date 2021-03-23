@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 foreach ( $notices as $key => $notice ) {
-	if ( in_array( $key, $dismissed_notices ) ) {
+	if ( in_array( $key, $dismissed_notices, true ) ) {
 		continue;
 	}
 

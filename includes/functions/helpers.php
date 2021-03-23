@@ -1,4 +1,7 @@
 <?php
+/**
+ * Helpers
+ */
 
 defined( 'ABSPATH' ) || exit;
 
@@ -243,7 +246,7 @@ function wpmm_get_capability( $action ) {
 		return apply_filters( 'wpmm_all_actions_capability', 'manage_options' );
 	}
 
-		return apply_filters( sprintf( 'wpmm_%s_capability', $action ), 'manage_options' );
+	return apply_filters( sprintf( 'wpmm_%s_capability', $action ), 'manage_options' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 }
 
 /**
@@ -285,7 +288,7 @@ function wpmm_get_template_path( $template_name ) {
 	 * - wpmm_maintenance_template
 	 * - wpmm_contact_template
 	 */
-	return apply_filters( sprintf( 'wpmm_%s_template', basename( $template_name, '.php' ) ), $file_path );
+	return apply_filters( sprintf( 'wpmm_%s_template', basename( $template_name, '.php' ) ), $file_path ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 }
 
 /**
@@ -372,7 +375,7 @@ if ( ! function_exists( 'wp_scripts' ) ) {
 		global $wp_scripts;
 
 		if ( ! ( $wp_scripts instanceof WP_Scripts ) ) {
-			$wp_scripts = new WP_Scripts();
+			$wp_scripts = new WP_Scripts(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		}
 
 		return $wp_scripts;
