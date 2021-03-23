@@ -45,16 +45,16 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'wpmm_after_body' ); ?>
 
 		<div class="wrap">
-						<?php
-						if ( ! empty( $heading ) ) {
-							printf( '<h1>%s</h1>', esc_html( $heading ) );
-						}
+			<?php
+			if ( ! empty( $heading ) ) {
+				printf( '<h1>%s</h1>', esc_html( $heading ) );
+			}
 
-							// If bot is enabled no text will be shown
-						if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
-							printf( '<h2>%s</h2>', $text ); // wp_kses_post was applied before do_shortcode
-						}
-						?>
+			// If bot is enabled no text will be shown
+			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
+				printf( '<h2>%s</h2>', $text ); // wp_kses_post was applied before do_shortcode
+			}
+			?>
 			<?php if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) { ?>
 			</div><!-- .wrap -->
 			<div class="bot-container">
