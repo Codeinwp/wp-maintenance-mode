@@ -233,6 +233,26 @@ function wpmm_gdpr_textarea_allowed_html() {
 }
 
 /**
+ * Return allowed HTML tags for translated strings
+ *
+ * @since 2.4.0
+ * @return array
+ */
+function wpmm_translated_string_allowed_html() {
+	$allowed_html = array(
+		'a' => array(
+			'href'   => array(),
+			'title'  => array(),
+			'class'  => array(),
+			'rel'    => array(),
+			'target' => array(),
+		),
+	);
+
+	return apply_filters( 'wpmm_translated_string_allowed_html', $allowed_html );
+}
+
+/**
  * Return capability
  *
  * @since 2.3.0

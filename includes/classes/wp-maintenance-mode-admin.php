@@ -663,10 +663,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		public function get_is_policy_available() {
-			if ( function_exists( 'get_privacy_policy_url' ) ) {
-				return true;
-			}
-			return false;
+						return function_exists( 'get_privacy_policy_url' );
 		}
 
 		public function get_policy_link() {
@@ -678,14 +675,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 		public function get_policy_link_message() {
 			$url = $this->get_policy_link();
+
 			if ( $this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] === '' ) {
 				if ( $url === '' ) { // No value and feature available
 					return __( 'Your WordPress version supports Privacy settings but you haven\'t set any privacy policy page yet. Go to Settings ➡ Privacy to set one.', 'wp-maintenance-mode' );
 				} else { // Value and feature available
 					return sprintf( __( 'The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', 'wp-maintenance-mode' ), $url, '<button>', '</button>' );
 				}
-			} elseif ( $this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] != '' ) { // Feature available and value set
-				if ( $url != $this->plugin_settings['gdpr']['policy_page_link'] ) { // Current wp privacy page differs from set value
+			} elseif ( $this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] !== '' ) { // Feature available and value set
+				if ( $url !== $this->plugin_settings['gdpr']['policy_page_link'] ) { // Current wp privacy page differs from set value
 					return sprintf( __( 'Your Privacy page is pointing to a different URL in WordPress settings. If that\'s correct ignore this message, otherwise %s', 'wp-maintenance-mode' ), 'UPDATE VALUE TO NEW URL' );
 				}
 			} elseif ( ! $this->get_is_policy_available() ) { // No privacy feature available
