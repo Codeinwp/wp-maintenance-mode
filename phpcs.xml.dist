@@ -20,6 +20,8 @@
         <!-- Temporary excluded rules -->
         <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
         <exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedScript" />
+        <exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet" />
+        <exclude name="WordPress.DateTime.RestrictedFunctions.date_date" /><!-- remove it after the countdown will have timezone support -->
     </rule>
     
     <rule ref="WordPress-Docs">

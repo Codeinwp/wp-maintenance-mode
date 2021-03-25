@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="UTF-8">
+		<meta charset="UTF-8">
 		<title><?php echo esc_html( $title ); ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="author" content="<?php echo esc_attr( $author ); ?>" />
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 		if ( ! empty( $styles ) && is_array( $styles ) ) {
 			foreach ( $styles as $src ) {
 				?>
-				<link rel="stylesheet" href="<?php echo $src; ?>">
+				<link rel="stylesheet" href="<?php echo esc_url( $src ); ?>">
 				<?php
 			}
 		}
@@ -41,24 +41,33 @@ defined( 'ABSPATH' ) || exit;
 		do_action( 'wpmm_head' );
 		?>
 	</head>
-	<body class="<?php echo $body_classes ? $body_classes : ''; ?>">
+	<body class="<?php echo $body_classes ? esc_attr( $body_classes ) : ''; ?>">
 		<?php do_action( 'wpmm_after_body' ); ?>
 
 		<div class="wrap">
-			<?php
-			if ( ! empty( $heading ) ) {
-				printf( '<h1>%s</h1>', esc_html( $heading ) );
-			}
+			<?php if ( ! empty( $heading ) ) { ?>
+				<!-- Heading -->
+				<h1><?php echo esc_html( $heading ); ?></h1>
+			<?php } ?>
 
-			// If bot is enabled no text will be shown
+			<?php
+			/**
+			 * When the bot feature is enabled, the text is not displayed anymore.
+			 * Also, we don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
+			 */
 			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
-				printf( '<h2>%s</h2>', $text ); // wp_kses_post was applied before do_shortcode
+				?>
+				<!-- Text -->
+				<h2><?php echo $text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+				<?php
 			}
 			?>
+
 			<?php if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) { ?>
 			</div><!-- .wrap -->
+
+			<!-- Bot -->
 			<div class="bot-container">
-				<!-- WP Bot -->
 				<div class="bot-chat-wrapper">
 					<!-- Chats -->
 					<div class="chat-container cf"></div>
@@ -67,108 +76,118 @@ defined( 'ABSPATH' ) || exit;
 					<!-- User choices -->
 					<div class="choices cf"></div>
 				</div>
-				<!-- /WP Bot -->
 			</div>
+
 			<div class="bot-error"><p></p></div>
+
 			<div class="wrap under-bot">
 			<?php } ?>
 
-			<?php
-			if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
-				?>
-				<div class="countdown" data-start="<?php echo date( 'F d, Y H:i:s', strtotime( $countdown_start ) ); ?>" data-end="<?php echo date( 'F d, Y H:i:s', $countdown_end ); ?>"></div>
+			<?php if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) { ?>
+				<!-- Countdown -->
+				<div class="countdown" data-start="<?php echo esc_attr( date( 'F d, Y H:i:s', strtotime( $countdown_start ) ) ); ?>" data-end="<?php echo esc_attr( date( 'F d, Y H:i:s', $countdown_end ) ); ?>"></div>
 			<?php } ?>
 
 			<?php
-			if ( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1
-					  // If the bot is active, legacy subscribe form will be hidden
-					  // !empty($this->plugin_settings['bot']['status']) &&
-					  && $this->plugin_settings['bot']['status'] === 0 ) {
+			/**
+			 * When the bot feature is enabled, the subscribe form is not displayed anymore.
+			 */
+			if (
+					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) &&
+					( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 0 )
+			) {
 				?>
-				<?php
-				if ( ! empty( $this->plugin_settings['modules']['subscribe_text'] ) ) {
-					printf( '<h3>%s</h3>', esc_html( $this->plugin_settings['modules']['subscribe_text'] ) );
-				}
-				?>
+				<!-- Subscribe -->
+				<?php if ( ! empty( $this->plugin_settings['modules']['subscribe_text'] ) ) { ?>
+					<h3><?php echo esc_html( $this->plugin_settings['modules']['subscribe_text'] ); ?></h3>
+				<?php } ?>
+
 				<div class="subscribe_wrapper" style="min-height: 100px;">
 					<form class="subscribe_form">
 						<div class="subscribe_border">
-							<input type="text" placeholder="<?php _e( 'your e-mail...', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
-							<input type="submit" value="<?php _e( 'Subscribe', 'wp-maintenance-mode' ); ?>" />
+							<input type="text" placeholder="<?php esc_attr_e( 'your e-mail...', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
+							<input type="submit" value="<?php esc_attr_e( 'Subscribe', 'wp-maintenance-mode' ); ?>" />
 						</div>
 						<?php if ( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
 							<div class="privacy_checkbox">
 								<label>
 									<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>">
-									
-									<?php _e( 'I\'ve read and agree with the site\'s privacy policy', 'wp-maintenance-mode' ); ?>
+
+									<?php echo esc_html_x( 'I\'ve read and agree with the site\'s privacy policy', 'subscribe form', 'wp-maintenance-mode' ); ?>
 								</label>
 							</div>
-						
+
 							<?php if ( ! empty( $this->plugin_settings['gdpr']['subscribe_form_tail'] ) ) { ?>
 								<p class="privacy_tail"><?php echo wp_kses( $this->plugin_settings['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html() ); ?></p>
-								<?php
-							}
-						}
-						?>
+							<?php } ?>
+						<?php } ?>
 					</form>
 				</div>
 			<?php } ?>
 
 			<?php if ( ! empty( $this->plugin_settings['modules']['social_status'] ) && $this->plugin_settings['modules']['social_status'] === 1 ) { ?>
+				<!-- Social networks -->        
 				<div class="social" data-target="<?php echo ! empty( $this->plugin_settings['modules']['social_target'] ) ? 1 : 0; ?>">
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_twitter'] ) ) { ?>
-						<a class="tw" href="<?php echo $this->plugin_settings['modules']['social_twitter']; ?>">twitter</a>
+						<a class="tw" href="<?php echo esc_url( $this->plugin_settings['modules']['social_twitter'] ); ?>">twitter</a>
 					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_facebook'] ) ) { ?>
-						<a class="fb" href="<?php echo $this->plugin_settings['modules']['social_facebook']; ?>">facebook</a>
+						<a class="fb" href="<?php echo esc_url( $this->plugin_settings['modules']['social_facebook'] ); ?>">facebook</a>
 					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_instagram'] ) ) { ?>
-						<a class="instagram" href="<?php echo $this->plugin_settings['modules']['social_instagram']; ?>">instagram</a>
+						<a class="instagram" href="<?php echo esc_url( $this->plugin_settings['modules']['social_instagram'] ); ?>">instagram</a>
 					<?php } ?>    
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_pinterest'] ) ) { ?>
-						<a class="pin" href="<?php echo $this->plugin_settings['modules']['social_pinterest']; ?>">pinterest</a>
+						<a class="pin" href="<?php echo esc_url( $this->plugin_settings['modules']['social_pinterest'] ); ?>">pinterest</a>
 					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_github'] ) ) { ?>
-						<a class="git" href="<?php echo $this->plugin_settings['modules']['social_github']; ?>">github</a>
+						<a class="git" href="<?php echo esc_url( $this->plugin_settings['modules']['social_github'] ); ?>">github</a>
 					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_dribbble'] ) ) { ?>
-						<a class="dribbble" href="<?php echo $this->plugin_settings['modules']['social_dribbble']; ?>">dribbble</a>
+						<a class="dribbble" href="<?php echo esc_url( $this->plugin_settings['modules']['social_dribbble'] ); ?>">dribbble</a>
 					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_google+'] ) ) { ?>
-						<a class="gplus" href="<?php echo $this->plugin_settings['modules']['social_google+']; ?>">google plus</a>
+						<a class="gplus" href="<?php echo esc_url( $this->plugin_settings['modules']['social_google+'] ); ?>">google plus</a>
 					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_linkedin'] ) ) { ?>
-						<a class="linkedin" href="<?php echo $this->plugin_settings['modules']['social_linkedin']; ?>">linkedin</a>
+						<a class="linkedin" href="<?php echo esc_url( $this->plugin_settings['modules']['social_linkedin'] ); ?>">linkedin</a>
 					<?php } ?>
 				</div>
 			<?php } ?>
-								
+
 			<?php if ( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) { ?>
+				<!-- Contact -->
 				<div class="contact">
 					<?php list($open, $close) = ! empty( $this->plugin_settings['modules']['contact_effects'] ) && strstr( $this->plugin_settings['modules']['contact_effects'], '|' ) ? explode( '|', $this->plugin_settings['modules']['contact_effects'] ) : explode( '|', 'move_top|move_bottom' ); ?>
 					<div class="form <?php echo esc_attr( $open ); ?>">
 						<span class="close-contact_form">
-							<img src="<?php echo WPMM_URL; ?>assets/images/close.svg" alt="">
+							<img src="<?php echo esc_url( WPMM_URL . 'assets/images/close.svg' ); ?>" alt="">
 						</span>
 
 						<form class="contact_form">
 							<?php do_action( 'wpmm_contact_form_start' ); ?>
 
-							<p class="col"><input type="text" placeholder="<?php _e( 'Name', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" name="name" class="name_input" /></p>
-							<p class="col last"><input type="text" placeholder="<?php _e( 'E-mail', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" data-msg-email="<?php esc_attr_e( 'Please enter a valid email address.', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" /></p>
+							<p class="col">
+								<input type="text" placeholder="<?php esc_attr_e( 'Name', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" name="name" class="name_input" />
+							</p>
+							<p class="col last">
+								<input type="text" placeholder="<?php esc_attr_e( 'E-mail', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" data-msg-email="<?php esc_attr_e( 'Please enter a valid email address.', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" />
+							</p>
+
 							<br clear="all" />
 
 							<?php do_action( 'wpmm_contact_form_before_message' ); ?>
 
-							<p><textarea placeholder="<?php _e( 'Your message', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" name="content" class="content_textarea"></textarea></p>
+							<p>
+								<textarea placeholder="<?php esc_attr_e( 'Your message', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" name="content" class="content_textarea"></textarea>
+							</p>
 
 							<?php do_action( 'wpmm_contact_form_after_message' ); ?>
 
@@ -176,55 +195,57 @@ defined( 'ABSPATH' ) || exit;
 								<div class="privacy_checkbox">
 									<label>
 										<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>">
-										
-										<?php _e( "I've read and agree with the site's privacy policy", 'wp-maintenance-mode' ); ?>
+
+										<?php echo esc_html_x( 'I\'ve read and agree with the site\'s privacy policy', 'contact form', 'wp-maintenance-mode' ); ?>
 									</label>
 								</div>
-							
+
 								<?php if ( ! empty( $this->plugin_settings['gdpr']['contact_form_tail'] ) ) { ?>
 									<p class="privacy_tail"><?php echo wp_kses( $this->plugin_settings['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html() ); ?></p>
-									<?php
-								}
-							}
-							?>
-							<p class="submit"><input type="submit" value="<?php _e( 'Send', 'wp-maintenance-mode' ); ?>"></p>
+								<?php } ?>
+							<?php } ?>
+
+							<p class="submit"><input type="submit" value="<?php esc_attr_e( 'Send', 'wp-maintenance-mode' ); ?>"></p>
 
 							<?php do_action( 'wpmm_contact_form_end' ); ?>
 						</form>
 					</div>
 				</div>
 
-				<a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr( $open ); ?>" data-close="<?php echo esc_attr( $close ); ?>"><?php _e( 'Contact us', 'wp-maintenance-mode' ); ?></a>
+				<a class="contact_us" href="javascript:void(0);" data-open="<?php echo esc_attr( $open ); ?>" data-close="<?php echo esc_attr( $close ); ?>"><?php esc_html_e( 'Contact us', 'wp-maintenance-mode' ); ?></a>
 			<?php } ?>
 
 			<?php
-			if ( ( ! empty( $this->plugin_settings['general']['admin_link'] ) && $this->plugin_settings['general']['admin_link'] === 1 ) ||
-					  ( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 ) ) {
+			if (
+					( ! empty( $this->plugin_settings['general']['admin_link'] ) && $this->plugin_settings['general']['admin_link'] === 1 ) ||
+					( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 )
+			) {
 				?>
+				<!-- Footer links -->
 				<div class="footer_links">
 					<?php if ( $this->plugin_settings['general']['admin_link'] === 1 ) { ?>
-						<a href="<?php echo admin_url(); ?>"><?php _e( 'Dashboard', 'wp-maintenance-mode' ); ?></a> 
+						<a href="<?php echo esc_url( admin_url() ); ?>"><?php esc_html_e( 'Dashboard', 'wp-maintenance-mode' ); ?></a> 
 					<?php } ?>
+
 					<?php if ( $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
-						<a href="<?php echo esc_attr( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" target="<?php echo ! empty( $this->plugin_settings['gdpr']['policy_page_target'] ) && $this->plugin_settings['gdpr']['policy_page_target'] == 1 ? '_blank' : '_self'; ?>"><?php echo esc_html( $this->plugin_settings['gdpr']['policy_page_label'] ); ?></a>
+						<a href="<?php echo esc_url( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" target="<?php echo ! empty( $this->plugin_settings['gdpr']['policy_page_target'] ) && $this->plugin_settings['gdpr']['policy_page_target'] === 1 ? '_blank' : '_self'; ?>"><?php echo esc_html( $this->plugin_settings['gdpr']['policy_page_label'] ); ?></a>
 					<?php } ?>
 				</div>
 			<?php } ?>
 		</div>
 
 		<script type='text/javascript'>
-			var wpmm_vars = {"ajax_url": "<?php echo admin_url( 'admin-ajax.php' ); ?>"};
+			var wpmm_vars = {"ajax_url": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
 		</script>
 
 		<?php
-
 		// Hook before scripts, mostly for internationalization
 		do_action( 'wpmm_before_scripts' );
 
 		if ( ! empty( $scripts ) && is_array( $scripts ) ) {
 			foreach ( $scripts as $src ) {
 				?>
-				<script src="<?php echo $src; ?>"></script>
+				<script src="<?php echo esc_url( $src ); ?>"></script>
 				<?php
 			}
 		}
@@ -234,7 +255,7 @@ defined( 'ABSPATH' ) || exit;
 		?>
 		<?php if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) { ?>
 			<script type='text/javascript'>
-				jQuery(function($) {
+				jQuery(function ($) {
 					startConversation('homepage', 1);
 				});
 			</script>
