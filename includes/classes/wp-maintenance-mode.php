@@ -952,20 +952,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			global $wpdb;
 
 			try {
-				$_POST = array_map( 'trim', $_POST );
+				$email = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
 
 				// checks
-				if ( empty( $_POST['email'] ) || ! is_email( $_POST['email'] ) ) {
+				if ( empty( $email ) || ! is_email( $email ) ) {
 					throw new Exception( __( 'Please enter a valid email address.', 'wp-maintenance-mode' ) );
 				}
 
 				// save
-				$exists = $wpdb->get_row( $wpdb->prepare( "SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", sanitize_text_field( $_POST['email'] ) ), ARRAY_A );
+				$exists = $wpdb->get_row( $wpdb->prepare( "SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", $email ), ARRAY_A );
 				if ( empty( $exists ) ) {
 					$wpdb->insert(
 						$wpdb->prefix . 'wpmm_subscribers',
 						array(
-							'email'       => sanitize_text_field( $_POST['email'] ),
+							'email'       => $email,
 							'insert_date' => date( 'Y-m-d H:i:s' ),
 						),
 						array( '%s', '%s' )
@@ -986,14 +986,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function send_contact() {
 			try {
-				$_POST = array_map( 'trim', $_POST );
+				$name    = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '';
+				$email   = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
+				$content = isset( $_POST['content'] ) ? wp_strip_all_tags( $_POST['content'] ) : '';
 
 				// checks
-				if ( empty( $_POST['name'] ) || empty( $_POST['email'] ) || empty( $_POST['content'] ) ) {
+				if ( empty( $name ) || empty( $email ) || empty( $content ) ) {
 					throw new Exception( __( 'All fields required.', 'wp-maintenance-mode' ) );
 				}
 
-				if ( ! is_email( $_POST['email'] ) ) {
+				if ( ! is_email( $email ) ) {
 					throw new Exception( __( 'Please enter a valid email address.', 'wp-maintenance-mode' ) );
 				}
 
@@ -1001,26 +1003,32 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				do_action( 'wpmm_contact_validation', $_POST );
 
 				// vars
-				$send_to   = ! empty( $this->plugin_settings['modules']['contact_email'] ) ? $this->plugin_settings['modules']['contact_email'] : get_option( 'admin_email' );
-				$subject   = apply_filters( 'wpmm_contact_subject', __( 'Message via contact', 'wp-maintenance-mode' ) );
-				$headers   = apply_filters( 'wpmm_contact_headers', array( 'Reply-To: ' . sanitize_text_field( $_POST['email'] ) ) );
-				$from_name = sanitize_text_field( $_POST['name'] );
+				$send_to = ! empty( $this->plugin_settings['modules']['contact_email'] ) ? $this->plugin_settings['modules']['contact_email'] : get_option( 'admin_email' );
+				$subject = apply_filters( 'wpmm_contact_subject', __( 'Message via contact', 'wp-maintenance-mode' ) );
+				$headers = apply_filters( 'wpmm_contact_headers', array( 'Reply-To: ' . $email ) );
 
 				ob_start();
 				include_once wpmm_get_template_path( 'contact.php' );
 				$message = ob_get_clean();
 
-				// filters
+				// add temporary filters
+				$from_name = function() use ( $name ) {
+					return $name;
+				};
 				add_filter( 'wp_mail_content_type', 'wpmm_change_mail_content_type', 10, 1 );
-				add_filter(
-					'wp_mail_from_name',
-					function() use ( $from_name ) {
-							return $from_name;
-					}
-				);
+				add_filter( 'wp_mail_from_name', $from_name );
 
 				// send email
-				@wp_mail( $send_to, $subject, $message, $headers );
+				$send = wp_mail( $send_to, $subject, $message, $headers );
+
+                                // remove temporary filters
+				remove_filter( 'wp_mail_content_type', 'wpmm_change_mail_content_type', 10, 1 );
+				remove_filter( 'wp_mail_from_name', $from_name );
+
+				if ( ! $send ) {
+					throw new Exception( __( 'Something happened! Please try again later.', 'wp-maintenance-mode' ) );
+				}
+
 				wp_send_json_success( __( 'Your email was sent to the website administrator. Thanks!', 'wp-maintenance-mode' ) );
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );

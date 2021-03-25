@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 						</tr>
 						<tr>
 							<td style="text-align:center;">
-								<img src="<?php echo WPMM_IMAGES_URL . 'icon-48.png'; ?>" />
+								<img src="<?php echo esc_url( WPMM_IMAGES_URL . 'icon-48.png' ); ?>" />
 							</td>
 						</tr>
 						<tr>
@@ -47,7 +47,15 @@ defined( 'ABSPATH' ) || exit;
 						</tr>
 						<tr>
 							<td style="color:#747e7e;font-family:Lato, Helvetica, Arial, sans-serif;text-align:center;font-size:18px;font-weight:normal;">
-								<?php printf( __( 'You have been contacted via %s.', 'wp-maintenance-mode' ), get_bloginfo( 'name' ) ); ?>
+								<?php
+																echo esc_html(
+																	sprintf(
+																			/* translators: name of the blog */
+																		__( 'You have been contacted via %s.', 'wp-maintenance-mode' ),
+																		get_bloginfo( 'name' )
+																	)
+																);
+																?>
 							</td>
 						</tr>
 						<tr>
@@ -65,10 +73,10 @@ defined( 'ABSPATH' ) || exit;
 										</tr>
 										<tr>
 											<td width="20%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
-												<?php _e( 'Name:', 'wp-maintenance-mode' ); ?>
+												<?php esc_html_e( 'Name:', 'wp-maintenance-mode' ); ?>
 											</td>
 											<td width="80%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
-												<?php echo sanitize_text_field( $_POST['name'] ); ?>
+												<?php echo esc_html( $name ); ?>
 											</td>                                            
 										</tr>
 										<tr>
@@ -77,10 +85,10 @@ defined( 'ABSPATH' ) || exit;
 										</tr>
 										<tr>
 											<td width="20%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
-												<?php _e( 'Email:', 'wp-maintenance-mode' ); ?>
+												<?php esc_html_e( 'Email:', 'wp-maintenance-mode' ); ?>
 											</td>
 											<td width="80%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
-												<?php echo sanitize_text_field( $_POST['email'] ); ?>
+												<?php echo esc_html( $email ); ?>
 											</td>
 										</tr>
 
@@ -92,12 +100,12 @@ defined( 'ABSPATH' ) || exit;
 										</tr>
 										<tr>
 											<td colspan="2" style="padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
-												<?php _e( 'Content:', 'wp-maintenance-mode' ); ?>
+												<?php esc_html_e( 'Content:', 'wp-maintenance-mode' ); ?>
 											</td>
 										</tr> 
 										<tr>
 											<td colspan="2" style="padding:0 0 20px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
-												<?php echo nl2br( stripslashes( $_POST['content'] ) ); ?>
+												<?php echo nl2br( esc_html( $content ) ); ?>
 											</td>
 										</tr> 
 
