@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Helpers
  */
@@ -23,35 +24,6 @@ function wpmm_plugin_info( $plugin_slug ) {
 }
 
 /**
- * Count db records using where
- *
- * EDIT: PHP Notice:  wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder.
- *
- * @since 2.0.0
- * @global object $wpdb
- * @param string $table
- * @param string $field
- * @param array  $where eg: array('id_subscriber = %d' => 12)
- */
-function wpmm_count_where( $table, $field = 'ID', $where = array() ) {
-	global $wpdb;
-
-	$table        = $wpdb->prefix . $table;
-	$where_keys   = array_keys( $where );
-	$where_values = array_values( $where );
-
-	if ( ! empty( $where ) ) {
-		$query = $wpdb->prepare( "SELECT COUNT({$field}) FROM {$table} WHERE " . implode( ' AND ', $where_keys ), $where_values );
-	} else {
-		$query = "SELECT COUNT({$field}) FROM {$table}";
-	}
-
-	$count = $wpdb->get_var( $query );
-
-	return intval( $count );
-}
-
-/**
  * Outputs the html selected attribute
  *
  * @since 2.0.4
@@ -69,6 +41,20 @@ function wpmm_multiselect( $values, $current ) {
 }
 
 /**
+ * Return subscribers count
+ *
+ * @global object $wpdb
+ * @return int
+ */
+function wpmm_get_subscribers_count() {
+	global $wpdb;
+
+	$count = $wpdb->get_var( 'SELECT COUNT(id_subscriber) FROM ' . $wpdb->prefix . 'wpmm_subscribers' );
+
+	return intval( $count );
+}
+
+/**
  * Return the UTM'ized url
  *
  * @since 2.3.0
@@ -77,16 +63,16 @@ function wpmm_multiselect( $values, $current ) {
  * @return string
  */
 function wpmm_get_utmized_url( $url, $utms = array() ) {
-		$utms = wp_parse_args(
-			$utms,
-			array(
-				'source'   => null,
-				'medium'   => 'wpmaintenance',
-				'campaign' => null,
-				'term'     => null,
-				'content'  => null,
-			)
-		);
+	$utms = wp_parse_args(
+		$utms,
+		array(
+			'source'   => null,
+			'medium'   => 'wpmaintenance',
+			'campaign' => null,
+			'term'     => null,
+			'content'  => null,
+		)
+	);
 
 	foreach ( $utms as $key => $value ) {
 		if ( empty( $value ) ) {
@@ -94,14 +80,14 @@ function wpmm_get_utmized_url( $url, $utms = array() ) {
 			continue;
 		}
 
-			$utms[ $key ] = sprintf( 'utm_%s=%s', $key, $value );
+		$utms[ $key ] = sprintf( 'utm_%s=%s', $key, $value );
 	}
 
 	if ( empty( $utms ) ) {
-			return $url;
+		return $url;
 	}
 
-		return sprintf( '%s/?%s', untrailingslashit( $url ), implode( '&', $utms ) );
+	return sprintf( '%s/?%s', untrailingslashit( $url ), implode( '&', $utms ) );
 }
 
 /**
@@ -156,7 +142,7 @@ function wpmm_get_banners() {
  * @return array
  */
 function wpmm_get_backgrounds() {
-		$backgrounds = array();
+	$backgrounds = array();
 
 	foreach ( glob( WPMM_PATH . 'assets/images/backgrounds/*_thumb.jpg' ) as $file ) {
 		$backgrounds[] = array(
@@ -165,7 +151,7 @@ function wpmm_get_backgrounds() {
 		);
 	}
 
-		return $backgrounds;
+	return $backgrounds;
 }
 
 /**
@@ -176,9 +162,9 @@ function wpmm_get_backgrounds() {
  * @return array
  */
 function wpmm_get_user_roles() {
-		global $wp_roles;
+	global $wp_roles;
 
-		$roles = array();
+	$roles = array();
 
 	foreach ( $wp_roles->roles as $role => $details ) {
 		if ( $role === 'administrator' ) {
@@ -188,68 +174,7 @@ function wpmm_get_user_roles() {
 		$roles[ $role ] = $details['name'];
 	}
 
-		return $roles;
-}
-
-/**
- * Sanitize Google Analytics SiteID code
- *
- * Valid examples:
- * UA-..........
- * UA-..........-....
- * G-..........
- *
- * @since 2.0.7
- * @param string $string
- * @return string
- */
-function wpmm_sanitize_ga_code( $string ) {
-	preg_match( '/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $string, $matches );
-
-	return isset( $matches[0] ) ? $matches[0] : '';
-}
-
-/**
- * Return allowed HTML tags for GDPR module textareas
- *
- * @since 2.2.2
- * @return array
- */
-function wpmm_gdpr_textarea_allowed_html() {
-	$allowed_html = array(
-		'a'      => array(
-			'href'   => array(),
-			'title'  => array(),
-			'class'  => array(),
-			'rel'    => array(),
-			'target' => array(),
-		),
-		'strong' => array(),
-		'em'     => array(),
-		'p'      => array(),
-	);
-
-	return apply_filters( 'wpmm_gdpr_textarea_allowed_html', $allowed_html );
-}
-
-/**
- * Return allowed HTML tags for translated strings
- *
- * @since 2.4.0
- * @return array
- */
-function wpmm_translated_string_allowed_html() {
-	$allowed_html = array(
-		'a' => array(
-			'href'   => array(),
-			'title'  => array(),
-			'class'  => array(),
-			'rel'    => array(),
-			'target' => array(),
-		),
-	);
-
-	return apply_filters( 'wpmm_translated_string_allowed_html', $allowed_html );
+	return $roles;
 }
 
 /**
@@ -310,28 +235,6 @@ function wpmm_get_template_path( $template_name ) {
 }
 
 /**
- * Run shortcodes
- *
- * @since 2.4.0
- * @global object $post
- * @param string $content
- * @return string
- */
-function wpmm_do_shortcode( $content ) {
-	global $post;
-
-	// register and run [embed] shortcode
-	if ( isset( $GLOBALS['wp_embed'] ) && is_callable( array( $GLOBALS['wp_embed'], 'run_shortcode' ) ) ) {
-		// $post should be null. this way, the cache will be saved separately, not as a post_meta of the current post
-		$post = null; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-
-		$content = $GLOBALS['wp_embed']->run_shortcode( $content );
-	}
-
-	return do_shortcode( $content );
-}
-
-/**
  * Returns the value of the option after `stripslashes_deep` is applied
  *
  * @since 2.4.0
@@ -344,8 +247,27 @@ function wpmm_get_option( $option, $default = false ) {
 }
 
 /**
+ * Sanitize Google Analytics SiteID code
+ *
+ * Valid examples:
+ * UA-..........
+ * UA-..........-....
+ * G-..........
+ *
+ * @since 2.0.7
+ * @param string $string
+ * @return string
+ */
+function wpmm_sanitize_ga_code( $string ) {
+	preg_match( '/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $string, $matches );
+
+	return isset( $matches[0] ) ? $matches[0] : '';
+}
+
+/**
  * Generate form hidden fields
  *
+ * @since 2.4.0
  * @param string $name
  */
 function wpmm_form_hidden_fields( $name ) {
@@ -378,6 +300,71 @@ function wpmm_form_hidden_fields( $name ) {
 	}
 }
 
+/**
+ * Run shortcodes
+ *
+ * @since 2.4.0
+ * @global object $post
+ * @param string $content
+ * @return string
+ */
+function wpmm_do_shortcode( $content ) {
+	global $post;
+
+	// register and run [embed] shortcode
+	if ( isset( $GLOBALS['wp_embed'] ) && is_callable( array( $GLOBALS['wp_embed'], 'run_shortcode' ) ) ) {
+		// $post should be null. this way, the cache will be saved separately, not as a post_meta of the current post
+		$post = null; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+
+		$content = $GLOBALS['wp_embed']->run_shortcode( $content );
+	}
+
+	return do_shortcode( $content );
+}
+
+/**
+ * Return allowed HTML tags for GDPR module textareas
+ *
+ * @since 2.2.2
+ * @return array
+ */
+function wpmm_gdpr_textarea_allowed_html() {
+	$allowed_html = array(
+		'a'      => array(
+			'href'   => array(),
+			'title'  => array(),
+			'class'  => array(),
+			'rel'    => array(),
+			'target' => array(),
+		),
+		'strong' => array(),
+		'em'     => array(),
+		'p'      => array(),
+	);
+
+	return apply_filters( 'wpmm_gdpr_textarea_allowed_html', $allowed_html );
+}
+
+/**
+ * Return allowed HTML tags for translated strings
+ *
+ * @since 2.4.0
+ * @return array
+ */
+function wpmm_translated_string_allowed_html() {
+	$allowed_html = array(
+		'a' => array(
+			'href'   => array(),
+			'title'  => array(),
+			'class'  => array(),
+			'rel'    => array(),
+			'target' => array(),
+		),
+	);
+
+	return apply_filters( 'wpmm_translated_string_allowed_html', $allowed_html );
+}
+
 if ( ! function_exists( 'wp_scripts' ) ) {
 
 	/**
@@ -402,22 +389,23 @@ if ( ! function_exists( 'wp_scripts' ) ) {
 
 if ( ! function_exists( 'sanitize_hex_color' ) ) {
 
-		/**
-		 * Sanitizes a hex color.
-		 *
-		 * (to maintain backward compatibility for those with WP < 4.6.0)
-		 *
-		 * @param string $color
-		 * @return string|void
-		 */
+	/**
+	 * Sanitizes a hex color.
+	 *
+	 * (to maintain backward compatibility for those with WP < 4.6.0)
+	 *
+	 * @since 2.4.0
+	 * @param string $color
+	 * @return string|void
+	 */
 	function sanitize_hex_color( $color ) {
 		if ( '' === $color ) {
-				return '';
+			return '';
 		}
 
-			// 3 or 6 hex digits, or the empty string.
+		// 3 or 6 hex digits, or the empty string.
 		if ( preg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
-				return $color;
+			return $color;
 		}
 	}
 }

@@ -391,7 +391,7 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td id="subscribers_wrap">
 										<?php
-										$subscribers_no = wpmm_count_where( 'wpmm_subscribers', 'id_subscriber' );
+										$subscribers_no = wpmm_get_subscribers_count();
 
 										/* translators: number of subscribers */
 										echo esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no ) );
