@@ -161,8 +161,8 @@ defined( 'ABSPATH' ) || exit;
 											<a href="javascript:void(0);" class="button button-small toggle-shortcodes-list" data-hide="<?php echo esc_attr( $hide_shortcodes_text ); ?>" data-show="<?php echo esc_attr( $show_shortcodes_text ); ?>" ><?php echo esc_html( $show_shortcodes_text ); ?></a>
 											
 											<ul class="shortcodes-list">
-												<li><?php _e( sprintf( '%s - display a login form', '[loginform]' ), 'wp-maintenance-mode' ); ?></li>
-												<li><?php _e( sprintf( '%s - responsive video embed. Compatible with %s. Example: %s', '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/embed]</span>' ), 'wp-maintenance-mode' ); ?></li>
+												<li><?php printf( esc_html__( '%s - display a login form', 'wp-maintenance-mode' ), '[loginform]' ); ?></li>
+												<li><?php printf( esc_html__( '%1$s - responsive video embed. Compatible with %2$s. Example: %3$s', 'wp-maintenance-mode' ), '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/embed]</span>' ); ?></li>
 											</ul>
 										</div>
 										<p class="description"><?php _e( 'This text will not be shown when the bot feature is enabled.', 'wp-maintenance-mode' ); ?></p>

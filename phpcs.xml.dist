@@ -10,9 +10,16 @@
     <arg name="extensions" value="php"/>
 
     <rule ref="PHPCompatibility"/>
+    
     <rule ref="PHPCompatibilityWP"/>
+    
     <rule ref="WordPress-Core"/>
-    <rule ref="WordPress-Docs"/>
+    
+    <rule ref="WordPress-Docs">
+        <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+        <exclude name="Squiz.Commenting.FileComment.SpacingAfterOpen" />
+    </rule>
+    
     <rule ref="WordPress-Extra"/>
     
     <config name="testVersion" value="5.6-"/>
