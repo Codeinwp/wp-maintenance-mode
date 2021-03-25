@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
 			<div class="tabs-content">
 				<div id="tab-general" class="">
-					<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" >
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" >
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -84,7 +84,10 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row"><label for="options[general][exclude]"><?php esc_html_e( 'Exclude', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea rows="7" name="options[general][exclude]" style="width: 625px;"><?php echo implode( "\n", ! empty( $this->plugin_settings['general']['exclude'] ) && is_array( $this->plugin_settings['general']['exclude'] ) ? $this->plugin_settings['general']['exclude'] : array() ); ?></textarea>
+										<?php
+										$exclude_list = ! empty( $this->plugin_settings['general']['exclude'] ) && is_array( $this->plugin_settings['general']['exclude'] ) ? $this->plugin_settings['general']['exclude'] : array();
+										?>
+										<textarea rows="7" name="options[general][exclude]" style="width: 625px;"><?php echo esc_textarea( implode( "\n", $exclude_list ) ); ?></textarea>
 										<p class="description"><?php esc_html_e( 'Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / IP per line!', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -117,7 +120,7 @@ defined( 'ABSPATH' ) || exit;
 					</form>
 				</div>
 				<div id="tab-design" class="hidden">
-					<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -158,11 +161,20 @@ defined( 'ABSPATH' ) || exit;
 												$hide_shortcodes_text = __( 'Hide available shortcodes', 'wp-maintenance-mode' );
 												$show_shortcodes_text = __( 'See available shortcodes', 'wp-maintenance-mode' );
 											?>
-											<a href="javascript:void(0);" class="button button-small toggle-shortcodes-list" data-hide="<?php echo esc_attr( $hide_shortcodes_text ); ?>" data-show="<?php echo esc_attr( $show_shortcodes_text ); ?>" ><?php echo esc_html( $show_shortcodes_text ); ?></a>
-											
+											<a href="javascript:void(0);" class="button button-small toggle-shortcodes-list" data-hide="<?php echo esc_attr( $hide_shortcodes_text ); ?>" data-show="<?php echo esc_attr( $show_shortcodes_text ); ?>" ><?php echo esc_html( $show_shortcodes_text ); ?></a>											
 											<ul class="shortcodes-list">
-												<li><?php printf( esc_html__( '%s - display a login form', 'wp-maintenance-mode' ), '[loginform]' ); ?></li>
-												<li><?php printf( esc_html__( '%1$s - responsive video embed. Compatible with %2$s. Example: %3$s', 'wp-maintenance-mode' ), '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/embed]</span>' ); ?></li>
+												<li>
+																									<?php
+																									/* translators: shortcode tag */
+																									printf( esc_html__( '%s - display a login form', 'wp-maintenance-mode' ), '[loginform]' );
+																									?>
+																								</li>
+												<li>
+																									<?php
+																									/* translators: 1: shortcode tag, 2: list of compatible services, 3: shortcode example */
+																									printf( esc_html__( '%1$s - responsive video embed. Compatible with %2$s. Example: %3$s', 'wp-maintenance-mode' ), '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/embed]</span>' );
+																									?>
+																								</li>
 											</ul>
 										</div>
 										<p class="description"><?php esc_html_e( 'This text will not be shown when the bot feature is enabled.', 'wp-maintenance-mode' ); ?></p>
@@ -223,6 +235,7 @@ defined( 'ABSPATH' ) || exit;
 																				<?php
 																				printf(
 																					wp_kses(
+																																												/* translators: free photos url */
 																						__( '* source <a href="%s" target="_blank">Free Photos</a>', 'wp-maintenance-mode' ),
 																						wpmm_translated_string_allowed_html()
 																					),
@@ -254,7 +267,7 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row"><label for="options[design][other_custom_css]"><?php esc_html_e( 'Custom CSS', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea rows="10" name="options[design][other_custom_css]" style="width:625px;" id="other_custom_css"><?php echo wp_strip_all_tags( $this->plugin_settings['design']['other_custom_css'] ); ?></textarea>
+																			<textarea rows="10" name="options[design][other_custom_css]" style="width:625px;" id="other_custom_css"><?php echo esc_textarea( wp_strip_all_tags( $this->plugin_settings['design']['other_custom_css'] ) ); ?></textarea>
 										<p class="description"><?php esc_html_e( 'Do not add <style> tags.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -267,7 +280,7 @@ defined( 'ABSPATH' ) || exit;
 					</form>
 				</div>
 				<div id="tab-modules" class="hidden">
-					<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -329,7 +342,9 @@ defined( 'ABSPATH' ) || exit;
 									<td id="subscribers_wrap">
 										<?php
 										$subscribers_no = wpmm_count_where( 'wpmm_subscribers', 'id_subscriber' );
-										echo sprintf( _nx( 'You have %d subscriber', 'You have %s subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no );
+
+																				/* translators: number of subscribers */
+										echo esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no ) );
 
 										if ( current_user_can( wpmm_get_capability( 'subscribers' ) ) && $subscribers_no > 0 ) {
 											?>
@@ -473,6 +488,7 @@ defined( 'ABSPATH' ) || exit;
 																				<?php
 																				printf(
 																					wp_kses(
+																																												/* translators: Google Analytics documentation url */
 																						__( 'Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'wp-maintenance-mode' ),
 																						wpmm_translated_string_allowed_html()
 																					),
@@ -498,7 +514,7 @@ defined( 'ABSPATH' ) || exit;
 					</form>
 				</div>
 				<div id="tab-bot" class="hidden">
-					<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -551,25 +567,25 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][01]"><?php esc_html_e( 'Message 1', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][01]" id="options[bot][messages][01]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['01'] ); ?></textarea>
+										<textarea name="options[bot][messages][01]" id="options[bot][messages][01]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['01'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][02]"><?php esc_html_e( 'Message 2', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][02]" id="options[bot][messages][02]" rows="2" style="width: 625px;"><?php echo esc_attr( $this->plugin_settings['bot']['messages']['02'] ); ?></textarea>
+										<textarea name="options[bot][messages][02]" id="options[bot][messages][02]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['02'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][03]"><?php esc_html_e( 'Message 3', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][03]" id="options[bot][messages][03]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['03'] ); ?></textarea>
+										<textarea name="options[bot][messages][03]" id="options[bot][messages][03]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['03'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][responses][01]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<input type="text" name="options[bot][responses][01]" id="options[bot][responses][01]" value="<?php esc_attr_e( $this->plugin_settings['bot']['responses']['01'] ); ?>" />
+										<input type="text" name="options[bot][responses][01]" id="options[bot][responses][01]" value="<?php esc_attr( $this->plugin_settings['bot']['responses']['01'] ); ?>" />
 										<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 3', 'wp-maintenance-mode' ); ?></span>
 										<p class="description"><?php esc_html_e( 'Edit the placeholder\'s text', 'wp-maintenance-mode' ); ?></p>
 									</td>
@@ -577,36 +593,36 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][04]"><?php esc_html_e( 'Message 4', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][04]" id="options[bot][messages][04]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['04'] ); ?></textarea>
+										<textarea name="options[bot][messages][04]" id="options[bot][messages][04]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['04'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][05]"><?php esc_html_e( 'Message 5', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][05]" id="options[bot][messages][05]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['05'] ); ?></textarea>
+										<textarea name="options[bot][messages][05]" id="options[bot][messages][05]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['05'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][06]"><?php esc_html_e( 'Message 6', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][06]" id="options[bot][messages][06]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['06'] ); ?></textarea>
+										<textarea name="options[bot][messages][06]" id="options[bot][messages][06]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['06'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][07]"><?php esc_html_e( 'Message 7', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<textarea name="options[bot][messages][07]" id="options[bot][messages][07]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['07'] ); ?></textarea>
+										<textarea name="options[bot][messages][07]" id="options[bot][messages][07]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['07'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][responses][02_1]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
 										<div class="bot-button">
-											<input type="text" name="options[bot][responses][02_1]" id="options[bot][responses][02_1]" value="<?php esc_attr_e( $this->plugin_settings['bot']['responses']['02_1'] ); ?>" />
+											<input type="text" name="options[bot][responses][02_1]" id="options[bot][responses][02_1]" value="<?php esc_attr( $this->plugin_settings['bot']['responses']['02_1'] ); ?>" />
 											<p class="description"><?php esc_html_e( 'Edit button one', 'wp-maintenance-mode' ); ?></p>
 										</div>
 										<div class="bot-button">
-											<input type="text" name="options[bot][responses][02_2]" id="options[bot][responses][02_2]" value="<?php esc_attr_e( $this->plugin_settings['bot']['responses']['02_2'] ); ?>" />
+											<input type="text" name="options[bot][responses][02_2]" id="options[bot][responses][02_2]" value="<?php esc_attr( $this->plugin_settings['bot']['responses']['02_2'] ); ?>" />
 											<p class="description"><?php esc_html_e( 'Edit button two', 'wp-maintenance-mode' ); ?></p>
 										</div>
 										<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 7', 'wp-maintenance-mode' ); ?></span>
@@ -615,13 +631,13 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][08_1]"><?php esc_html_e( 'Message 8', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label></th>
 									<td>
-										<textarea name="options[bot][messages][08_1]" id="options[bot][messages][08_1]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['08_1'] ); ?></textarea>
+										<textarea name="options[bot][messages][08_1]" id="options[bot][messages][08_1]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['08_1'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][responses][03]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label></th>
 									<td>
-										<input type="text" name="options[bot][responses][03]" id="options[bot][responses][03]" value="<?php esc_attr_e( $this->plugin_settings['bot']['responses']['03'] ); ?>" />
+										<input type="text" name="options[bot][responses][03]" id="options[bot][responses][03]" value="<?php esc_attr( $this->plugin_settings['bot']['responses']['03'] ); ?>" />
 										<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 8 (click on button one)', 'wp-maintenance-mode' ); ?></span>
 										<p class="description"><?php esc_html_e( 'Edit the placeholder\'s text', 'wp-maintenance-mode' ); ?></p>
 									</td>
@@ -629,19 +645,19 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row"><label for="options[bot][messages][08_2]"><?php esc_html_e( 'Message 8', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button two)', 'wp-maintenance-mode' ); ?></small></label></th>
 									<td>
-										<textarea name="options[bot][messages][08_2]" id="options[bot][messages][08_2]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['08_2'] ); ?></textarea>
+										<textarea name="options[bot][messages][08_2]" id="options[bot][messages][08_2]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['08_2'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
-									<th scope="row"><label for="options[bot][messages][09]"><?php esc_html_e( 'Message 9', 'wp-maintenance-mode' ); ?><br><small><?php _e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label></th>
+									<th scope="row"><label for="options[bot][messages][09]"><?php esc_html_e( 'Message 9', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label></th>
 									<td>
-										<textarea name="options[bot][messages][09]" id="options[bot][messages][09]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['09'] ); ?></textarea>
+										<textarea name="options[bot][messages][09]" id="options[bot][messages][09]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['09'] ); ?></textarea>
 									</td>
 								</tr>
 								<tr valign="top">
-									<th scope="row"><label for="options[bot][messages][10]"><?php esc_html_e( 'Message 10', 'wp-maintenance-mode' ); ?><br><small><?php _e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label></th>
+									<th scope="row"><label for="options[bot][messages][10]"><?php esc_html_e( 'Message 10', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label></th>
 									<td>
-										<textarea name="options[bot][messages][10]" id="options[bot][messages][10]" rows="2" style="width: 625px;"><?php esc_attr_e( $this->plugin_settings['bot']['messages']['10'] ); ?></textarea>
+										<textarea name="options[bot][messages][10]" id="options[bot][messages][10]" rows="2" style="width: 625px;"><?php esc_textarea( $this->plugin_settings['bot']['messages']['10'] ); ?></textarea>
 									</td>
 								</tr>
 							</tbody>
@@ -653,7 +669,7 @@ defined( 'ABSPATH' ) || exit;
 					</form>
 				</div>
 				<div id="tab-gdpr" class="hidden">
-					<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
