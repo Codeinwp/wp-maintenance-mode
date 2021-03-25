@@ -57,7 +57,6 @@ function wpmm_count_where( $table, $field = 'ID', $where = array() ) {
  * @since 2.0.4
  * @param array  $values
  * @param string $current
- * @param bool   $echo
  * @return string html attribute or empty string
  */
 function wpmm_multiselect( $values, $current ) {
@@ -65,7 +64,6 @@ function wpmm_multiselect( $values, $current ) {
 		$is_selected = __checked_selected_helper( $role, $current, false, 'selected' );
 		if ( ! empty( $is_selected ) ) {
 			return $is_selected;
-			break;
 		}
 	}
 }
@@ -305,7 +303,7 @@ function wpmm_do_shortcode( $content ) {
 	// register and run [embed] shortcode
 	if ( isset( $GLOBALS['wp_embed'] ) && is_callable( array( $GLOBALS['wp_embed'], 'run_shortcode' ) ) ) {
 		// $post should be null. this way, the cache will be saved separately, not as a post_meta of the current post
-		$post = null;
+		$post = null; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
 		$content = $GLOBALS['wp_embed']->run_shortcode( $content );
 	}

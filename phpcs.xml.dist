@@ -13,9 +13,17 @@
     
     <rule ref="PHPCompatibilityWP"/>
     
-    <rule ref="WordPress-Core"/>
+    <rule ref="WordPress-Core">
+        <exclude name="WordPress.PHP.YodaConditions.NotYoda" />
+        
+        <!-- Excluded temporarly -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+        <exclude name="WordPress.WP.EnqueuedResources.NonEnqueuedScript" />
+    </rule>
     
     <rule ref="WordPress-Docs">
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
         <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
         <exclude name="Squiz.Commenting.FileComment.SpacingAfterOpen" />
     </rule>

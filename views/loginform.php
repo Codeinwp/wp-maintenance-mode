@@ -14,5 +14,5 @@ defined( 'ABSPATH' ) || exit;
 	<?php if ( ! empty( $redirect ) ) { ?>
 		<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect ); ?>" />
 	<?php } ?>
-	<input type="submit" value="<?php _e( 'Login', 'wp-maintenance-mode' ); ?>" />
+	<input type="submit" value="<?php esc_attr_e( 'Login', 'wp-maintenance-mode' ); ?>" />
 </form>
