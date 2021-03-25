@@ -13,6 +13,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		protected $plugin_basename;
 		protected static $instance = null;
 
+		/**
+		 * 3, 2, 1... Start!
+		 */
 		private function __construct() {
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
@@ -30,7 +33,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// Check update
 			add_action( 'admin_init', array( $this, 'check_update' ) );
 
-			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] == 1 ) {
+			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 				// INIT
 				add_action( ( is_admin() ? 'init' : 'template_redirect' ), array( $this, 'init' ) );
 
@@ -43,16 +46,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// Redirect
 				add_action( 'init', array( $this, 'redirect' ), 9 );
 
-								// Inline CSS style
-								add_action( 'wpmm_head', array( $this, 'add_inline_css_style' ) );
+				// Inline CSS style
+				add_action( 'wpmm_head', array( $this, 'add_inline_css_style' ) );
 
 				// Google Analytics tracking script
 				add_action( 'wpmm_head', array( $this, 'add_google_analytics_code' ) );
 			}
 		}
 
+		/**
+		 * Singleton
+		 *
+		 * @return object
+		 */
 		public static function get_instance() {
-			if ( null == self::$instance ) {
+			if ( null === self::$instance ) {
 				self::$instance = new self();
 			}
 
@@ -152,7 +160,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'messages'  => array(
 						'01'   => __( 'Hey! My name is {bot_name}, I\'m the owner of this website and I\'d like to be your assistant here.', 'wp-maintenance-mode' ),
 						'02'   => __( 'I have just a few questions.', 'wp-maintenance-mode' ),
-						'03'   => __( 'What is your name?', 'wp-maintenance-mode', 'wp-maintenance-mode' ),
+						'03'   => __( 'What is your name?', 'wp-maintenance-mode' ),
 						'04'   => __( 'Nice to meet you here, {visitor_name}!', 'wp-maintenance-mode' ),
 						'05'   => __( 'How you can see, our website will be launched very soon.', 'wp-maintenance-mode' ),
 						'06'   => __( 'I know, you are very excited to see it, but we need a few days to finish it.', 'wp-maintenance-mode' ),
@@ -305,7 +313,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					array(
 						'class' => 'updated notice',
 						'msg'   => sprintf(
-							__( 'WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', 'wp-maintenance-mode' ),
+							wp_kses(
+											/* translators: plugin settings url */
+								__( 'WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', 'wp-maintenance-mode' ),
+								wpmm_translated_string_allowed_html()
+							),
 							add_query_arg( array( 'page' => self::get_instance()->plugin_slug ), admin_url( 'options-general.php' ) )
 						),
 					)
@@ -320,11 +332,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				}
 
 				if ( ! empty( $old_options['role'][0] ) ) {
-					$default_options['general']['backend_role'] = $old_options['role'][0] == 'administrator' ? array() : $old_options['role'];
+					$default_options['general']['backend_role'] = $old_options['role'][0] === 'administrator' ? array() : $old_options['role'];
 				}
 
 				if ( ! empty( $old_options['role_frontend'][0] ) ) {
-					$default_options['general']['frontend_role'] = $old_options['role_frontend'][0] == 'administrator' ? array() : $old_options['role_frontend'];
+					$default_options['general']['frontend_role'] = $old_options['role_frontend'][0] === 'administrator' ? array() : $old_options['role_frontend'];
 				}
 
 				if ( isset( $old_options['index'] ) ) {
@@ -389,6 +401,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 								'hours'   => $old_options['time'],
 								'minutes' => 0,
 							);
+							break;
 						case 3: // days
 							$default_options['modules']['countdown_details'] = array(
 								'days'    => $old_options['time'],
@@ -552,7 +565,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! strstr( $_SERVER['PHP_SELF'], 'wp-login.php' ) &&
 					// wp-admin/ is available to everyone only if the user is not loggedin, otherwise.. check_user_role decides
 					! ( strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) && ! is_user_logged_in() ) &&
-			// ! strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) &&
+					// ! strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'wp-admin/admin-ajax.php' ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'async-upload.php' ) &&
 					! ( strstr( $_SERVER['PHP_SELF'], 'upgrade.php' ) && $this->check_user_role() ) &&
@@ -563,7 +576,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! ( defined( 'WP_CLI' ) && WP_CLI )
 			) {
 				// HEADER STUFF
-				$protocol         = ! empty( $_SERVER['SERVER_PROTOCOL'] ) && in_array( $_SERVER['SERVER_PROTOCOL'], array( 'HTTP/1.1', 'HTTP/1.0' ) ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+				$protocol         = ! empty( $_SERVER['SERVER_PROTOCOL'] ) && in_array( $_SERVER['SERVER_PROTOCOL'], array( 'HTTP/1.1', 'HTTP/1.0' ), true ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 				$charset          = get_bloginfo( 'charset' ) ? get_bloginfo( 'charset' ) : 'UTF-8';
 				$status_code      = (int) apply_filters( 'wp_maintenance_mode_status_code', 503 ); // this hook will be removed in the next versions
 				$status_code      = (int) apply_filters( 'wpmm_status_code', $status_code );
@@ -575,7 +588,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$title = apply_filters( 'wm_title', $title ); // this hook will be removed in the next versions
 				$title = apply_filters( 'wpmm_meta_title', $title );
 
-				$robots = $this->plugin_settings['general']['meta_robots'] == 1 ? 'noindex, nofollow' : 'index, follow';
+				$robots = $this->plugin_settings['general']['meta_robots'] === 1 ? 'noindex, nofollow' : 'index, follow';
 				$robots = apply_filters( 'wpmm_meta_robots', $robots );
 
 				$author = apply_filters( 'wm_meta_author', get_bloginfo( 'name' ) ); // this hook will be removed in the next versions
@@ -590,7 +603,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$keywords = apply_filters( 'wpmm_meta_keywords', $keywords );
 
 				// CSS STUFF
-				$body_classes = ! empty( $this->plugin_settings['design']['bg_type'] ) && $this->plugin_settings['design']['bg_type'] != 'color' ? 'background' : '';
+				$body_classes = ! empty( $this->plugin_settings['design']['bg_type'] ) && $this->plugin_settings['design']['bg_type'] !== 'color' ? 'background' : '';
 
 				// CONTENT
 				$heading = ! empty( $this->plugin_settings['design']['heading'] ) ? $this->plugin_settings['design']['heading'] : '';
@@ -612,14 +625,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
 					'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
 				);
-				if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] == 1 ) {
+				if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
 					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
 					$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
 				}
-				if ( ( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] == 1 ) || ( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] == 1 ) || ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] == 1 ) ) {
+				if (
+						( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
+						( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ||
+						( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 )
+				) {
 					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 				}
-				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] == 1 ) {
+				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 					if ( WPMM_ASSETS_SUFFIX === '' ) {
 						$scripts['bot-async'] = WPMM_JS_URL . 'bot.async.js';
 					}
@@ -633,7 +650,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$styles = array(
 					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
 				);
-				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] == 1 ) {
+				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 					$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION;
 					$body_classes .= ' bot';
 				}
@@ -659,7 +676,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 *
 		 * @todo Maybe we can find a better home for this method
 		 * @since 2.1.1
-		 * @return string Script tag with all the fixed text strings for the bot.
 		 */
 		public function add_bot_extras() {
 			$upload_dir = wp_upload_dir();
@@ -672,7 +688,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				'send'            => __( 'Send', 'wp-maintenance-mode' ),
 			);
 			echo "<script type='text/javascript'>" .
-			'var botVars = ' . json_encode( $bot_vars ) .
+			'var botVars = ' . wp_json_encode( $bot_vars ) .
 			'</script>';
 		}
 
@@ -711,7 +727,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		public function calculate_backtime() {
 			$backtime = 3600;
 
-			if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] == 1 ) {
+			if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
 				$backtime = ( $this->plugin_settings['modules']['countdown_details']['days'] * DAY_IN_SECONDS ) + ( $this->plugin_settings['modules']['countdown_details']['hours'] * HOUR_IN_SECONDS ) + ( $this->plugin_settings['modules']['countdown_details']['minutes'] * MINUTE_IN_SECONDS );
 			}
 
@@ -729,7 +745,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			if (
 					! empty( $this->plugin_settings['general']['bypass_bots'] ) &&
-					$this->plugin_settings['general']['bypass_bots'] == 1 &&
+					$this->plugin_settings['general']['bypass_bots'] === 1 &&
 					isset( $_SERVER['HTTP_USER_AGENT'] )
 			) {
 				$bots = apply_filters(
@@ -779,9 +795,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$excluded_list = array();
 
 			if ( ! empty( $this->plugin_settings['general']['exclude'] ) && is_array( $this->plugin_settings['general']['exclude'] ) ) {
-				$excluded_list               = $this->plugin_settings['general']['exclude'];
-				$remote_address              = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
-								$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? rawurldecode( $_SERVER['REQUEST_URI'] ) : '';
+				$excluded_list  = $this->plugin_settings['general']['exclude'];
+				$remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+				$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? rawurldecode( $_SERVER['REQUEST_URI'] ) : '';
 
 				foreach ( $excluded_list as $item ) {
 					if ( empty( $item ) ) { // just to be sure :-)
@@ -841,7 +857,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// check if module is activated and code exists
 			if (
 					empty( $this->plugin_settings['modules']['ga_status'] ) ||
-					$this->plugin_settings['modules']['ga_status'] != 1 ||
+					$this->plugin_settings['modules']['ga_status'] !== 1 ||
 					empty( $this->plugin_settings['modules']['ga_code'] )
 			) {
 				return false;
@@ -858,8 +874,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$ga_options = array();
 
 			if (
-			! empty( $this->plugin_settings['modules']['ga_anonymize_ip'] ) &&
-			$this->plugin_settings['modules']['ga_anonymize_ip'] == 1
+					! empty( $this->plugin_settings['modules']['ga_anonymize_ip'] ) &&
+					$this->plugin_settings['modules']['ga_anonymize_ip'] === 1
 			) {
 				$ga_options['anonymize_ip'] = true;
 			}
@@ -870,13 +886,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			include_once WPMM_VIEWS_PATH . 'google-analytics.php';
 		}
 
-
-				/**
-				 * Add inline CSS style
-				 *
-				 * @since 2.4.0
-				 * @return
-				 */
+		/**
+		 * Add inline CSS style
+		 *
+		 * @since 2.4.0
+		 */
 		public function add_inline_css_style() {
 			$css_rules = array();
 
@@ -909,7 +923,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			if (
 					$this->plugin_settings['design']['bg_type'] === 'predefined' &&
 					! empty( $this->plugin_settings['design']['bg_predefined'] ) &&
-					in_array( $this->plugin_settings['design']['bg_predefined'], wp_list_pluck( wpmm_get_backgrounds(), 'big' ) )
+					in_array( $this->plugin_settings['design']['bg_predefined'], wp_list_pluck( wpmm_get_backgrounds(), 'big' ), true )
 			) {
 				$css_rules['design.bg_predefined'] = sprintf( '.background { background: url("%s") no-repeat center top fixed; background-size: cover; }', esc_url( WPMM_URL . 'assets/images/backgrounds/' . $this->plugin_settings['design']['bg_predefined'] ) );
 			}
@@ -952,8 +966,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			global $wpdb;
 
 			try {
-				$email = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
-
+				$email = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				// checks
 				if ( empty( $email ) || ! is_email( $email ) ) {
 					throw new Exception( __( 'Please enter a valid email address.', 'wp-maintenance-mode' ) );
@@ -986,10 +999,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function send_contact() {
 			try {
-				$name    = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '';
-				$email   = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
-				$content = isset( $_POST['content'] ) ? wp_strip_all_tags( $_POST['content'] ) : '';
-
+				$name    = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$email   = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$content = isset( $_POST['content'] ) ? wp_strip_all_tags( $_POST['content'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				// checks
 				if ( empty( $name ) || empty( $email ) || empty( $content ) ) {
 					throw new Exception( __( 'All fields required.', 'wp-maintenance-mode' ) );
@@ -1000,8 +1012,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				}
 
 				// if you add new fields to the contact form... you will definitely need to validate their values
-				do_action( 'wpmm_contact_validation', $_POST );
-
+				do_action( 'wpmm_contact_validation', $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				// vars
 				$send_to = ! empty( $this->plugin_settings['modules']['contact_email'] ) ? $this->plugin_settings['modules']['contact_email'] : get_option( 'admin_email' );
 				$subject = apply_filters( 'wpmm_contact_subject', __( 'Message via contact', 'wp-maintenance-mode' ) );
@@ -1021,7 +1032,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// send email
 				$send = wp_mail( $send_to, $subject, $message, $headers );
 
-                                // remove temporary filters
+				// remove temporary filters
 				remove_filter( 'wp_mail_content_type', 'wpmm_change_mail_content_type', 10, 1 );
 				remove_filter( 'wp_mail_from_name', $from_name );
 

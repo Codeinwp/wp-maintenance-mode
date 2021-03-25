@@ -14,6 +14,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		protected $plugin_screen_hook_suffix = null;
 		private $dismissed_notices_key       = 'wpmm_dismissed_notices';
 
+		/**
+		 * 3, 2, 1... Start!
+		 */
 		private function __construct() {
 			$plugin                        = WP_Maintenance_Mode::get_instance();
 			$this->plugin_slug             = $plugin->get_plugin_slug();
@@ -45,15 +48,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_dismiss_notices', array( $this, 'dismiss_notices' ) );
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
 
-			// Add admin_post_{$action}
+			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
 
 			// Add text to footer
 			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 5 );
 		}
 
+		/**
+		 * Singleton
+		 *
+		 * @return object
+		 */
 		public static function get_instance() {
-			if ( null == self::$instance ) {
+			if ( null === self::$instance ) {
 				self::$instance = new self();
 			}
 
@@ -72,7 +80,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$screen = get_current_screen();
-			if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				$wp_scripts = wp_scripts();
 				$ui         = $wp_scripts->query( 'jquery-ui-core' );
 
@@ -87,7 +95,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * Load JS files and their dependencies
 		 *
 		 * @since 2.0.0
-		 * @return
 		 */
 		public function enqueue_admin_scripts() {
 			if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
@@ -95,11 +102,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$screen = get_current_screen();
-			if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				wp_enqueue_media();
-				wp_enqueue_script( $this->plugin_slug . '-admin-timepicker-addon-script', WPMM_JS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.js', array( 'jquery', 'jquery-ui-datepicker' ), WP_Maintenance_Mode::VERSION );
-				wp_enqueue_script( $this->plugin_slug . '-admin-script', WPMM_JS_URL . 'scripts-admin' . WPMM_ASSETS_SUFFIX . '.js', array( 'jquery', 'wp-color-picker' ), WP_Maintenance_Mode::VERSION );
-				wp_enqueue_script( $this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery' . WPMM_ASSETS_SUFFIX . '.js', array(), WP_Maintenance_Mode::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-admin-timepicker-addon-script', WPMM_JS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.js', array( 'jquery', 'jquery-ui-datepicker' ), WP_Maintenance_Mode::VERSION, true );
+				wp_enqueue_script( $this->plugin_slug . '-admin-script', WPMM_JS_URL . 'scripts-admin' . WPMM_ASSETS_SUFFIX . '.js', array( 'jquery', 'wp-color-picker' ), WP_Maintenance_Mode::VERSION, true );
+				wp_enqueue_script( $this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery' . WPMM_ASSETS_SUFFIX . '.js', array(), WP_Maintenance_Mode::VERSION, true );
 				wp_localize_script(
 					$this->plugin_slug . '-admin-script',
 					'wpmm_vars',
@@ -131,7 +138,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			// For global actions like dismiss notices
-			wp_enqueue_script( $this->plugin_slug . '-admin-global', WPMM_JS_URL . 'scripts-admin-global' . WPMM_ASSETS_SUFFIX . '.js', array( 'jquery' ), WP_Maintenance_Mode::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-global', WPMM_JS_URL . 'scripts-admin-global' . WPMM_ASSETS_SUFFIX . '.js', array( 'jquery' ), WP_Maintenance_Mode::VERSION, true );
 		}
 
 		/**
@@ -165,7 +172,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						fputcsv( $fp, $item );
 					}
 
-					fclose( $fp );
+					fclose( $fp ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 				}
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
@@ -191,7 +198,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				// delete all subscribers
 				$wpdb->query( "DELETE FROM {$wpdb->prefix}wpmm_subscribers" );
 
-				$message = sprintf( _nx( 'You have %d subscriber', 'You have %s subscribers', 0, 'ajax response', 'wp-maintenance-mode' ), 0 );
+				/* translators: number of subscribers */
+				$message = esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', 0, 'ajax response', 'wp-maintenance-mode' ), 0 ) );
+
 				wp_send_json_success( $message );
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
@@ -228,37 +237,37 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function save_plugin_settings() {
-				 // check capabilities
+			// check capabilities
 			if ( ! current_user_can( wpmm_get_capability( 'settings' ) ) ) {
 				die( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
 			}
 
-				// check nonce existence
+			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
 				die( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
-				// check tab existence
+			// check tab existence
 			if ( empty( $_POST['tab'] ) ) {
 				die( __( 'The tab slug must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
-				 // check nonce validation
+			// check nonce validation
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-' . $_POST['tab'] ) ) {
 				die( __( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
-				// check existence in plugin default settings
-				$tab = $_POST['tab'];
+			// check existence in plugin default settings
+			$tab = $_POST['tab'];
 			if ( empty( $this->plugin_default_settings[ $tab ] ) ) {
 				die( __( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 			}
 
-				// Do some sanitizations
+			// Do some sanitizations
 			switch ( $tab ) {
 				case 'general':
 					$_POST['options']['general']['status'] = (int) $_POST['options']['general']['status'];
-					if ( ! empty( $_POST['options']['general']['status'] ) && $_POST['options']['general']['status'] == 1 ) {
+					if ( ! empty( $_POST['options']['general']['status'] ) && $_POST['options']['general']['status'] === 1 ) {
 						$_POST['options']['general']['status_date'] = date( 'Y-m-d H:i:s' );
 					}
 					$_POST['options']['general']['bypass_bots']   = (int) $_POST['options']['general']['bypass_bots'];
@@ -280,8 +289,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					if (
 							isset( $this->plugin_settings['general']['status'] ) && isset( $_POST['options']['general']['status'] ) &&
 							(
-							( $this->plugin_settings['general']['status'] == 1 && in_array( $_POST['options']['general']['status'], array( 0, 1 ) ) ) ||
-							( $this->plugin_settings['general']['status'] == 0 && $_POST['options']['general']['status'] == 1 )
+							( $this->plugin_settings['general']['status'] === 1 && in_array( $_POST['options']['general']['status'], array( 0, 1 ), true ) ) ||
+							( $this->plugin_settings['general']['status'] === 0 && $_POST['options']['general']['status'] === 1 )
 							)
 					) {
 						$this->delete_cache();
@@ -310,7 +319,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['design']['other_custom_css'] = wp_strip_all_tags( $_POST['options']['design']['other_custom_css'] );
 
 					// Delete cache when is activated
-					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] == 1 ) {
+					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 						$this->delete_cache();
 					}
 					break;
@@ -352,7 +361,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['modules']['ga_code']         = wpmm_sanitize_ga_code( $_POST['options']['modules']['ga_code'] );
 
 					// Delete cache when is activated
-					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] == 1 ) {
+					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 						$this->delete_cache();
 					}
 					break;
@@ -382,7 +391,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->set_datajs_file( $_POST['options']['bot'] );
 
 					// Delete cache when is activated
-					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] == 1 ) {
+					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 						$this->delete_cache();
 					}
 					break;
@@ -393,24 +402,29 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['gdpr']['policy_page_target']  = (int) $_POST['options']['gdpr']['policy_page_target'];
 					$_POST['options']['gdpr']['contact_form_tail']   = wp_kses( $_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html() );
 					$_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses( $_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html() );
+
+					// Delete cache when is activated
+					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
+						$this->delete_cache();
+					}
 					break;
 			}
 
-				// save settings
-				$this->plugin_settings[ $tab ] = $_POST['options'][ $tab ];
-				update_option( 'wpmm_settings', $this->plugin_settings );
+			// save settings
+			$this->plugin_settings[ $tab ] = $_POST['options'][ $tab ];
+			update_option( 'wpmm_settings', $this->plugin_settings );
 
-				// redirect back
-				wp_safe_redirect(
-					add_query_arg(
-						array(
-							'page'    => $this->plugin_slug,
-							'updated' => true,
-						),
-						admin_url( 'options-general.php' )
-					) . '#' . $tab
-				);
-				exit;
+			// redirect back
+			wp_safe_redirect(
+				add_query_arg(
+					array(
+						'page'    => $this->plugin_slug,
+						'updated' => true,
+					),
+					admin_url( 'options-general.php' )
+				) . '#' . $tab
+			);
+			exit;
 		}
 
 		/**
@@ -513,11 +527,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			// Try to write data.js file
 			try {
 				$upload_dir = wp_upload_dir();
-				if ( file_put_contents( trailingslashit( $upload_dir['basedir'] ) . 'data.js', $data ) === false ) {
+				if ( file_put_contents( trailingslashit( $upload_dir['basedir'] ) . 'data.js', $data ) === false ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 					throw new Exception( __( 'WPMM: The file data.js could not be written, the bot will not work correctly.', 'wp-maintenance-mode' ) );
 				}
 			} catch ( Exception $ex ) {
-				error_log( $ex->getMessage() );
+				// remove error_log when rewrite bot feature
+				error_log( $ex->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			}
 		}
 
@@ -563,9 +578,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$screen  = get_current_screen();
 			$notices = array();
 
-			if ( $this->plugin_screen_hook_suffix != $screen->id ) {
+			if ( $this->plugin_screen_hook_suffix !== $screen->id ) {
 				// notice if plugin is activated
-				if ( array_key_exists( 'general', $this->plugin_settings ) && $this->plugin_settings['general']['status'] == 1 && $this->plugin_settings['general']['notice'] == 1 ) {
+				if ( array_key_exists( 'general', $this->plugin_settings ) && $this->plugin_settings['general']['status'] === 1 && $this->plugin_settings['general']['notice'] === 1 ) {
 					$notices['is_activated'] = array(
 						'class' => 'error',
 						'msg'   => sprintf(
@@ -607,12 +622,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 */
 		public function dismiss_notices() {
 			try {
-				if ( empty( $_POST['notice_key'] ) ) {
+				$notice_key = isset( $_POST['notice_key'] ) ? sanitize_key( $_POST['notice_key'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+				if ( empty( $notice_key ) ) {
 					throw new Exception( __( 'Notice key cannot be empty.', 'wp-maintenance-mode' ) );
 				}
 
-				// save new notice key
-				$notice_key = sanitize_text_field( $_POST['notice_key'] );
 				$this->save_dismissed_notices( get_current_user_id(), $notice_key );
 
 				wp_send_json_success();
@@ -655,7 +670,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function admin_footer_text( $text ) {
 			$screen = get_current_screen();
 
-			if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				$text = sprintf( __( 'If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ), '<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>' );
 			}
 
@@ -663,7 +678,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		public function get_is_policy_available() {
-						return function_exists( 'get_privacy_policy_url' );
+			return function_exists( 'get_privacy_policy_url' );
 		}
 
 		public function get_policy_link() {
