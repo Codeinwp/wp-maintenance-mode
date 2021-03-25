@@ -48,14 +48,14 @@ defined( 'ABSPATH' ) || exit;
 						<tr>
 							<td style="color:#747e7e;font-family:Lato, Helvetica, Arial, sans-serif;text-align:center;font-size:18px;font-weight:normal;">
 								<?php
-																echo esc_html(
-																	sprintf(
-																			/* translators: name of the blog */
-																		__( 'You have been contacted via %s.', 'wp-maintenance-mode' ),
-																		get_bloginfo( 'name' )
-																	)
-																);
-																?>
+								echo esc_html(
+									sprintf(
+												/* translators: name of the blog */
+										__( 'You have been contacted via %s.', 'wp-maintenance-mode' ),
+										get_bloginfo( 'name' )
+									)
+								);
+								?>
 							</td>
 						</tr>
 						<tr>
