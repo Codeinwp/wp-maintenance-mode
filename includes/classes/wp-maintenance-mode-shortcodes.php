@@ -2,6 +2,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+require_once WPMM_CLASSES_PATH . 'shortcodes/wp-maintenance-mode-shortcode-loginform.php';
+
 if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 
 	class WP_Maintenance_Mode_Shortcodes {
@@ -36,9 +38,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 		) ) {
 			ob_start();
 
+                        // @codingStandardsIgnoreStart
 			echo $wrapper['before'];
 			call_user_func( $function, $atts );
 			echo $wrapper['after'];
+                        // @codingStandardsIgnoreEnd
 
 			return ob_get_clean();
 		}
@@ -51,30 +55,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 		 * @return string
 		 */
 		public static function loginform( $atts ) {
-			return self::shortcode_wrapper( array( 'WP_Maintenance_Mode_Shortcode_Login', 'display' ), $atts );
-		}
-
-	}
-
-}
-
-if ( ! class_exists( 'WP_Maintenance_Mode_Shortcode_Login' ) ) {
-
-	class WP_Maintenance_Mode_Shortcode_Login {
-
-		public function __construct() { }
-
-		/**
-		 * Show login form
-		 *
-		 * @since 2.0.3
-		 * @param array  $atts
-		 * @param string $content
-		 */
-		public static function display( $atts ) {
-			extract( shortcode_atts( array( 'redirect' => '' ), $atts ) );
-
-			include_once WPMM_VIEWS_PATH . 'loginform.php';
+			return self::shortcode_wrapper( array( 'WP_Maintenance_Mode_Shortcode_Loginform', 'output' ), $atts );
 		}
 
 	}
