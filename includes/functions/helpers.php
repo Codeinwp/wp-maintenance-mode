@@ -196,11 +196,20 @@ function wpmm_get_capability( $action ) {
  * Get template path
  *
  * @since 2.4.0
- * @param string $template_name
+ * @param string  $template_name
+ * @param boolean $overrideable
  * @return string
  */
-function wpmm_get_template_path( $template_name ) {
-	$file_path  = WPMM_VIEWS_PATH . $template_name;
+function wpmm_get_template_path( $template_name, $overrideable = false ) {
+	$file_path = WPMM_VIEWS_PATH . $template_name;
+
+	if ( $overrideable === false ) {
+		return $file_path;
+	}
+
+	/**
+	 * Continue to check if the template is overridden...
+	 */
 	$files_list = array(
 		get_stylesheet_directory() . '/wp-maintenance-mode/' . $template_name, // check child theme
 		get_template_directory() . '/wp-maintenance-mode/' . $template_name, // check theme

@@ -228,7 +228,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function display_plugin_settings() {
-			include_once WPMM_VIEWS_PATH . 'settings.php';
+			include_once wpmm_get_template_path( 'settings.php' );
 		}
 
 		/**
@@ -601,7 +601,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 				// notice for blocksy
 				ob_start();
-				include_once WPMM_VIEWS_PATH . 'promo-blocksy.php';
+				include_once wpmm_get_template_path( 'promo-blocksy.php' );
 				$notices['promo-blocksy'] = array(
 					'class' => 'wpmm_notices updated notice is-dismissible',
 					'msg'   => ob_get_clean(),
@@ -612,7 +612,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$dismissed_notices = $this->get_dismissed_notices( get_current_user_id() );
 
 			// template
-			include_once WPMM_VIEWS_PATH . 'notices.php';
+			include_once wpmm_get_template_path( 'notices.php' );
 		}
 
 		/**

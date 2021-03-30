@@ -663,7 +663,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				header( "Retry-After: $backtime" );
 
 				// load maintenance mode template
-				include_once wpmm_get_template_path( 'maintenance.php' );
+				include_once wpmm_get_template_path( 'maintenance.php', true );
 				ob_flush();
 
 				exit();
@@ -883,7 +883,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$ga_options = (object) $ga_options;
 
 			// show google analytics javascript snippet
-			include_once WPMM_VIEWS_PATH . 'google-analytics.php';
+			include_once wpmm_get_template_path( 'google-analytics.php' );
 		}
 
 		/**
@@ -1019,7 +1019,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$headers = apply_filters( 'wpmm_contact_headers', array( 'Reply-To: ' . $email ) );
 
 				ob_start();
-				include_once wpmm_get_template_path( 'contact.php' );
+				include_once wpmm_get_template_path( 'contact.php', true );
 				$message = ob_get_clean();
 
 				// add temporary filters

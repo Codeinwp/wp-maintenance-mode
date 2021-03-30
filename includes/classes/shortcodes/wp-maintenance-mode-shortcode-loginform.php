@@ -20,7 +20,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcode_Loginform' ) ) {
 				$atts
 			);
 
-			include_once WPMM_VIEWS_PATH . 'loginform.php';
+			include_once wpmm_get_template_path( 'loginform.php' );
 		}
 
 	}
