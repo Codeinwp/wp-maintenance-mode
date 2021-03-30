@@ -683,8 +683,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				'validationName'  => __( 'Please type in your name.', 'wp-maintenance-mode' ),
 				'validationEmail' => __( 'Please type in a valid email address.', 'wp-maintenance-mode' ),
 				'uploadsBaseUrl'  => trailingslashit( $upload_dir['baseurl'] ),
-				'typeName'        => !empty($this->plugin_settings['bot']['responses']['01']) ? $this->plugin_settings['bot']['responses']['01'] : __( 'Type your name here…', 'wp-maintenance-mode' ),
-				'typeEmail'       => !empty($this->plugin_settings['bot']['responses']['03']) ? $this->plugin_settings['bot']['responses']['03'] : __( 'Type your email here…', 'wp-maintenance-mode' ),
+				'typeName'        => ! empty( $this->plugin_settings['bot']['responses']['01'] ) ? $this->plugin_settings['bot']['responses']['01'] : __( 'Type your name here…', 'wp-maintenance-mode' ),
+				'typeEmail'       => ! empty( $this->plugin_settings['bot']['responses']['03'] ) ? $this->plugin_settings['bot']['responses']['03'] : __( 'Type your email here…', 'wp-maintenance-mode' ),
 				'send'            => __( 'Send', 'wp-maintenance-mode' ),
 			);
 			echo "<script type='text/javascript'>" .
