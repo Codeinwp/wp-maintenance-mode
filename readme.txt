@@ -83,6 +83,7 @@ Notice: `wp-cron.php` is excluded by default.
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add list of available shortcodes under the "Text" editor
+* Bot: make {visitor_name} placeholder work in all messages after the visitor types his name
 * Misc: add [embed] shortcode for responsive video embeds; Compatible with YouTube, Vimeo, DailyMotion.
 * Misc: make the exclude mechanism work with cyrillic characters
 * Misc: add `wpmm_maintenance_template` filter; It works the same way as the `wpmm_contact_template` filter, but for the maintenance template.

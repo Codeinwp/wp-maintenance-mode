@@ -510,19 +510,22 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$data .= ( ! empty( $messages['messages']['06'] ) ) ? "\"{$messages['messages']['06']}\", \n" : '';
 			$data .= ( ! empty( $messages['messages']['07'] ) ) ? "\"{$messages['messages']['07']}\", \n" : '';
 			$data .= "];},\"options\": [{ \"choice\": \"{$messages['responses']['02_1']}\",\"consequence\": 1.4},{ \n"
-					. "\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \"statement\": [ \n";
+					. "\"choice\": \"{$messages['responses']['02_2']}\",\"consequence\": 1.5}]},1.4: { \"statement\": function(context) {return [ \n";
 			$data .= ( ! empty( $messages['messages']['08_1'] ) ) ? "\"{$messages['messages']['08_1']}\", \n" : '';
-			$data .= "], \"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
+			$data .= "];}, \"email\": {\"email\": \"email\", \"consequence\": 1.6}},1.5: {\"statement\": function(context) {return [ \n";
 			$data .= ( ! empty( $messages['messages']['08_2'] ) ) ? "\"{$messages['messages']['08_2']}\", \n" : '';
-			$data .= "];}},1.6: { \"statement\": [ \n";
+			$data .= "];}},1.6: { \"statement\": function(context) {return [ \n";
 			$data .= ( ! empty( $messages['messages']['09'] ) ) ? "\"{$messages['messages']['09']}\", \n" : '';
 			$data .= ( ! empty( $messages['messages']['10'] ) ) ? "\"{$messages['messages']['10']}\", \n" : '';
-			$data .= ']}}};';
+			$data .= '];}}}};';
 
-			// Replace {visitor_name} KEY
-			$data = str_replace( '{visitor_name}', '" + context.name  + "', $data );
-			// Replace {bot_name} KEY
-			$data = str_replace( '{bot_name}', $messages['name'], $data );
+			// Replace placeholders
+			$placeholders = array(
+				'{visitor_name}' => '" + ( ( typeof context === \'object\' && context !== null && context.hasOwnProperty(\'name\') ) ? context.name : \'\' )  + "',
+				'{bot_name}'     => $messages['name'],
+			);
+
+			$data = str_replace( array_keys( $placeholders ), $placeholders, $data );
 
 			// Try to write data.js file
 			try {
