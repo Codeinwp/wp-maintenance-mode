@@ -494,6 +494,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * Builds the data.js file and writes it into uploads
 		 * This file is mandatory for the bot to work correctly.
 		 *
+		 * @todo rewrite bot functionality. instead of saving the settings to a file, we should add them to the maintenance mode page using `wpmm_before_scripts` action
 		 * @param array $messages
 		 * @throws Exception
 		 */
