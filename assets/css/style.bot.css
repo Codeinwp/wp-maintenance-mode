@@ -418,6 +418,13 @@ CHAT BOT STYLING
 /*
 // CUSTOM SCROLL BAR
 */
+
+/* Hide scrollbar in Chrome (Webkit) */
 .bot-chat-wrapper::-webkit-scrollbar {
   width: 0px;
+}
+
+/* Hide scrollbar in Firefox */
+.bot-chat-wrapper {
+  scrollbar-width: none;
 }
