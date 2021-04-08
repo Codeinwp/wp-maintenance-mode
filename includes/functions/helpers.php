@@ -362,13 +362,15 @@ function wpmm_gdpr_textarea_allowed_html() {
  */
 function wpmm_translated_string_allowed_html() {
 	$allowed_html = array(
-		'a' => array(
+		'a'      => array(
 			'href'   => array(),
 			'title'  => array(),
 			'class'  => array(),
 			'rel'    => array(),
 			'target' => array(),
 		),
+		'strong' => array(),
+		'button' => array(),
 	);
 
 	return apply_filters( 'wpmm_translated_string_allowed_html', $allowed_html );

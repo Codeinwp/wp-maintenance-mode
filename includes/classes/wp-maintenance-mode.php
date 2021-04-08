@@ -313,11 +313,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					array(
 						'class' => 'updated notice',
 						'msg'   => sprintf(
-							wp_kses(
-											/* translators: plugin settings url */
-								__( 'WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', 'wp-maintenance-mode' ),
-								wpmm_translated_string_allowed_html()
-							),
+									/* translators: plugin settings url */
+							__( 'WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', 'wp-maintenance-mode' ),
 							add_query_arg( array( 'page' => self::get_instance()->plugin_slug ), admin_url( 'options-general.php' ) )
 						),
 					)
@@ -565,7 +562,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! strstr( $_SERVER['PHP_SELF'], 'wp-login.php' ) &&
 					// wp-admin/ is available to everyone only if the user is not loggedin, otherwise.. check_user_role decides
 					! ( strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) && ! is_user_logged_in() ) &&
-					// ! strstr( $_SERVER['PHP_SELF'], 'wp-admin/' ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'wp-admin/admin-ajax.php' ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'async-upload.php' ) &&
 					! ( strstr( $_SERVER['PHP_SELF'], 'upgrade.php' ) && $this->check_user_role() ) &&
@@ -844,7 +840,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			$redirect_to = $this->plugin_settings['general']['redirection'];
-			wp_redirect( $redirect_to );
+			wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 			exit;
 		}
 
@@ -952,7 +948,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				return;
 			}
 
-			printf( "<style type=\"text/css\">\n%s\n</style>\n", implode( "\n", $css_rules ) );
+			printf( "<style type=\"text/css\">\n%s\n</style>\n", implode( "\n", $css_rules ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**

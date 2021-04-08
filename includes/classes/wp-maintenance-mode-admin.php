@@ -239,28 +239,28 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function save_plugin_settings() {
 			// check capabilities
 			if ( ! current_user_can( wpmm_get_capability( 'settings' ) ) ) {
-				die( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
+				die( esc_html__( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
 			}
 
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
-				die( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
 			// check tab existence
 			if ( empty( $_POST['tab'] ) ) {
-				die( __( 'The tab slug must not be empty.', 'wp-maintenance-mode' ) );
+				die( esc_html__( 'The tab slug must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
 			// check nonce validation
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-' . $_POST['tab'] ) ) {
-				die( __( 'Security check.', 'wp-maintenance-mode' ) );
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
 			// check existence in plugin default settings
 			$tab = $_POST['tab'];
 			if ( empty( $this->plugin_default_settings[ $tab ] ) ) {
-				die( __( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
+				die( esc_html__( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 			}
 
 			// Do some sanitizations
@@ -588,6 +588,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$notices['is_activated'] = array(
 						'class' => 'error',
 						'msg'   => sprintf(
+								/* translators: plugin settings url */
 							__( 'The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', 'wp-maintenance-mode' ),
 							add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) )
 						),
@@ -675,16 +676,30 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$screen = get_current_screen();
 
 			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
-				$text = sprintf( __( 'If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ), '<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>' );
+				$text = sprintf(
+						/* translators: link to plugin reviews page on wp.org */
+					__( 'If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ),
+					'<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#postform" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
+				);
 			}
 
 			return $text;
 		}
 
+		/**
+		 * Return if policy is available. Useful for older WordPress versions.
+		 *
+		 * @return boolean
+		 */
 		public function get_is_policy_available() {
 			return function_exists( 'get_privacy_policy_url' );
 		}
 
+		/**
+		 * Return privacy policy link
+		 *
+		 * @return string
+		 */
 		public function get_policy_link() {
 			// Check feature is available
 			if ( $this->get_is_policy_available() ) {
@@ -692,6 +707,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 		}
 
+		/**
+		 * Return message about privacy policy link
+		 *
+		 * @return string
+		 */
 		public function get_policy_link_message() {
 			$url = $this->get_policy_link();
 
@@ -699,11 +719,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( $url === '' ) { // No value and feature available
 					return __( 'Your WordPress version supports Privacy settings but you haven\'t set any privacy policy page yet. Go to Settings ➡ Privacy to set one.', 'wp-maintenance-mode' );
 				} else { // Value and feature available
-					return sprintf( __( 'The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s', 'wp-maintenance-mode' ), $url, '<button>', '</button>' );
+					return sprintf(
+							/* translators: privacy policy url */
+						__( 'The plugin detected this Privacy page: %s – <button>Use this url</button>', 'wp-maintenance-mode' ),
+						$url
+					);
 				}
 			} elseif ( $this->get_is_policy_available() && $this->plugin_settings['gdpr']['policy_page_link'] !== '' ) { // Feature available and value set
 				if ( $url !== $this->plugin_settings['gdpr']['policy_page_link'] ) { // Current wp privacy page differs from set value
-					return sprintf( __( 'Your Privacy page is pointing to a different URL in WordPress settings. If that\'s correct ignore this message, otherwise %s', 'wp-maintenance-mode' ), 'UPDATE VALUE TO NEW URL' );
+					return __( 'Your Privacy page is pointing to a different URL in WordPress settings. If that\'s correct ignore this message, otherwise UPDATE VALUE TO NEW URL', 'wp-maintenance-mode' );
 				}
 			} elseif ( ! $this->get_is_policy_available() ) { // No privacy feature available
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );

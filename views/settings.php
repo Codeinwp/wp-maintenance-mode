@@ -816,7 +816,7 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" name="options[gdpr][policy_page_link]" />
-										<p class="description"><?php echo esc_html( $this->get_policy_link_message() ); ?></p>
+										<p class="description"><?php echo wp_kses( $this->get_policy_link_message(), wpmm_translated_string_allowed_html() ); ?></p>
 										<p class="description"><?php esc_html_e( 'REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
