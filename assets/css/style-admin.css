@@ -19,6 +19,7 @@ h2.wpmm-title {
 .wpmm-wrapper #sidebar {
     padding: 0 0 0 20px;
     width: 280px;
+    vertical-align: top;
 }
 
 .wpmm-wrapper #sidebar .sidebar_box {
@@ -57,6 +58,7 @@ h2.wpmm-title {
     border-bottom: 1px solid #ccc;
     padding-bottom: 0;
     padding-left: 10px;
+    padding-top: 0 !important;
 }
 
 .nav-tab-wrapper a {
