@@ -13,9 +13,35 @@ function single_uninstall() {
 	$GLOBALS['wpdb']->query( "DROP TABLE IF EXISTS {$GLOBALS['wpdb']->prefix}wpmm_subscribers" );
 
 	// delete options
-	delete_option( 'wpmm_settings' );
-	delete_option( 'wpmm_notice' );
-	delete_option( 'wpmm_version' );
+	$options_to_delete = array(
+		'wpmm_settings',
+		'wpmm_notice',
+		'wpmm_version',
+	);
+
+	foreach ( $options_to_delete as $option ) {
+		delete_option( $option );
+	}
+
+	// delete dismissed notices meta key
+	$users_with_dismissed_notices = (array) get_users(
+		array(
+			'fields'   => 'ids',
+			'meta_key' => 'wpmm_dismissed_notices',
+		)
+	);
+
+	foreach ( $users_with_dismissed_notices as $user_id ) {
+		delete_user_meta( $user_id, 'wpmm_dismissed_notices' );
+	}
+
+	// delete bot settings file (data.js)
+	$upload_dir        = wp_upload_dir();
+	$bot_settings_file = ! empty( $upload_dir['basedir'] ) ? trailingslashit( $upload_dir['basedir'] ) . 'data.js' : false;
+
+	if ( file_exists( $bot_settings_file ) ) {
+		@unlink( $bot_settings_file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+	}
 }
 
 // Let's do it!

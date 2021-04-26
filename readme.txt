@@ -79,7 +79,7 @@ Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
 
-= 2.4.0 (xx/03/2021) =
+= 2.4.0 (xx/04/2021) =
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add list of available shortcodes under the "Text" editor
@@ -90,6 +90,7 @@ Notice: `wp-cron.php` is excluded by default.
 * Misc: now you can override the `contact` email template too; Check `/views/contact.php` for more details.
 * Misc: better compatibility with translation plugins like Loco Translate
 * Misc: the image uploaders (from the dashboard) are now translatable
+* Misc: improve uninstall routine
 * Misc: code improvements
 
 = 2.3.0 (07/12/2020) =
