@@ -34,15 +34,6 @@
      align-items: center;
 }
 
-/*TODO: Remove this rule*/
- /* With Image on Background ---- */
- /*.bg-image {
-   background-image: url(http://static.simpledesktops.com/uploads/desktops/2011/09/01/urso_polar-10.png);
-   background-size: cover;
-   background-position: center;
-   background-repeat: no-repeat;
- }*/
-
  .background .bot-chat-wrapper {
    border-radius: 10px;
    background-color: rgb(255, 255, 255);
@@ -131,7 +122,6 @@ CHAT BOT STYLING
   left: -70px;
   top: -10px;
 
-  /*background-image: url(/images/user-avatar.jpg);*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
