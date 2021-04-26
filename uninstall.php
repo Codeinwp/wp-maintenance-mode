@@ -40,7 +40,7 @@ function single_uninstall() {
 	$bot_settings_file = ! empty( $upload_dir['basedir'] ) ? trailingslashit( $upload_dir['basedir'] ) . 'data.js' : false;
 
 	if ( file_exists( $bot_settings_file ) ) {
-		@unlink( $bot_settings_file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		wp_delete_file( $bot_settings_file );
 	}
 }
 
