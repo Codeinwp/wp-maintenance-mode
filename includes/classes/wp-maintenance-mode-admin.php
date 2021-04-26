@@ -133,7 +133,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						)
 					);
 
-					wp_add_inline_script( 'code-editor', sprintf( 'jQuery(function() { wp.codeEditor.initialize("other_custom_css", %s); });', wp_json_encode( $settings ) ) );
+					wp_add_inline_script( 'code-editor', sprintf( 'jQuery(function ($) { var custom_css_editor = wp.codeEditor.initialize("other_custom_css", %s); $("body").on("show_design_tab_content", function () { custom_css_editor.codemirror.refresh(); }); });', wp_json_encode( $settings ) ) );
 				}
 			}
 

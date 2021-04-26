@@ -7,12 +7,17 @@ jQuery(function ($) {
         $('.nav-tab-wrapper').children().removeClass('nav-tab-active');
         $('.nav-tab-wrapper a[href="' + hash + '"]').addClass('nav-tab-active');
 
+        // active tab content
         $('.tabs-content').children().addClass('hidden');
         $('.tabs-content div' + hash.replace('#', '#tab-')).removeClass('hidden');
+
+        // trigger `show_{name}_tab_content` event (we use it to refresh codemirror instance on design tab)
+        $('body').trigger('show_' + hash.replace('#', '') + '_tab_content');
     }
 
     $('.nav-tab-wrapper').on('click', 'a', function () {
-        var tab_id = $(this).attr('href').replace('#', '#tab-');
+        var tab_hash = $(this).attr('href'),
+                tab_id = tab_hash.replace('#', '#tab-');
 
         // active tab
         $(this).parent().children().removeClass('nav-tab-active');
@@ -21,6 +26,9 @@ jQuery(function ($) {
         // active tab content
         $('.tabs-content').children().addClass('hidden');
         $('.tabs-content div' + tab_id).removeClass('hidden');
+
+        // trigger `show_{name}_tab_content` event (we use it to refresh codemirror instance on design tab)
+        $('body').trigger('show_' + tab_hash.replace('#', '') + '_tab_content');
     });
 
     /**
