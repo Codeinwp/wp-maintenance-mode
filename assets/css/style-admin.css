@@ -64,6 +64,15 @@ h2.wpmm-title {
     font-weight: 700;
     line-height: 24px;
     padding: 6px 10px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.nav-tab-wrapper a .nav-tab-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
 }
 
 /* TABS CONTENT */
