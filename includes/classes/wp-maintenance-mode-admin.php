@@ -584,7 +584,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			if ( $this->plugin_screen_hook_suffix !== $screen->id ) {
 				// notice if plugin is activated
-				if ( isset($this->plugin_settings['general']) && $this->plugin_settings['general']['status'] === 1 && $this->plugin_settings['general']['notice'] === 1 ) {
+				if (
+						isset( $this->plugin_settings['general'] ) && is_array( $this->plugin_settings['general'] ) &&
+						$this->plugin_settings['general']['status'] === 1 &&
+						$this->plugin_settings['general']['notice'] === 1
+				) {
 					$notices['is_activated'] = array(
 						'class' => 'error',
 						'msg'   => sprintf(
