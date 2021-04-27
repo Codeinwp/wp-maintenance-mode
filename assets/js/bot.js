@@ -1,4 +1,4 @@
-var DEBUG = true;
+var DEBUG = false;
 
 // User info retrieved from chats is store in this object
 var context = {};
