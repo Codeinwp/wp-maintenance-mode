@@ -28,15 +28,6 @@ defined( 'ABSPATH' ) || exit;
 		<meta name="keywords" content="<?php echo esc_attr( $keywords ); ?>" />
 		<meta name="robots" content="<?php echo esc_attr( $robots ); ?>" />
 		<?php
-		if ( ! empty( $styles ) && is_array( $styles ) ) {
-			foreach ( $styles as $src ) {
-				?>
-				<link rel="stylesheet" href="<?php echo esc_url( $src ); ?>">
-				<?php
-			}
-		}
-
-		// do some actions
 		do_action( 'wm_head' ); // this hook will be removed in the next versions
 		do_action( 'wpmm_head' );
 		?>
@@ -239,26 +230,8 @@ defined( 'ABSPATH' ) || exit;
 		</script>
 
 		<?php
-		// Hook before scripts, mostly for internationalization
-		do_action( 'wpmm_before_scripts' );
-
-		if ( ! empty( $scripts ) && is_array( $scripts ) ) {
-			foreach ( $scripts as $src ) {
-				?>
-				<script src="<?php echo esc_url( $src ); ?>"></script>
-				<?php
-			}
-		}
-		// Do some actions
 		do_action( 'wm_footer' ); // this hook will be removed in the next versions
 		do_action( 'wpmm_footer' );
 		?>
-		<?php if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) { ?>
-			<script type='text/javascript'>
-				jQuery(function ($) {
-					startConversation('homepage', 1);
-				});
-			</script>
-		<?php } ?>
 	</body>
 </html>

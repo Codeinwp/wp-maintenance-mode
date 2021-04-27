@@ -46,11 +46,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// Redirect
 				add_action( 'init', array( $this, 'redirect' ), 9 );
 
-				// Inline CSS style
-				add_action( 'wpmm_head', array( $this, 'add_inline_css_style' ) );
+				// Enqueue CSS files and add inline css
+				add_action( 'wpmm_head', array( $this, 'add_css_files' ) );
+				add_action( 'wpmm_head', array( $this, 'add_inline_css_style' ), 11 );
 
 				// Google Analytics tracking script
 				add_action( 'wpmm_head', array( $this, 'add_google_analytics_code' ) );
+
+				// Enqueue Javascript files and add inline javascript
+								add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
+				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
 			}
 		}
 
@@ -601,6 +606,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// CSS STUFF
 				$body_classes = ! empty( $this->plugin_settings['design']['bg_type'] ) && $this->plugin_settings['design']['bg_type'] !== 'color' ? 'background' : '';
 
+				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
+					$body_classes .= ' bot';
+				}
+
 				// CONTENT
 				$heading = ! empty( $this->plugin_settings['design']['heading'] ) ? $this->plugin_settings['design']['heading'] : '';
 				$heading = apply_filters( 'wm_heading', $heading ); // this hook will be removed in the next versions
@@ -612,45 +621,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// COUNTDOWN
 				$countdown_start = ! empty( $this->plugin_settings['modules']['countdown_start'] ) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_date'];
 				$countdown_end   = strtotime( $countdown_start . ' +' . $backtime_seconds . ' seconds' );
-
-				// JS FILES
-				$wp_scripts = wp_scripts();
-
-				$scripts = array(
-					'jquery'   => ! empty( $wp_scripts->registered['jquery-core'] ) ? site_url( $wp_scripts->registered['jquery-core']->src ) : '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery' . WPMM_ASSETS_SUFFIX . '.js',
-					'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
-					'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
-				);
-				if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
-					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
-					$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
-				}
-				if (
-						( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
-						( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ||
-						( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 )
-				) {
-					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
-				}
-				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
-					if ( WPMM_ASSETS_SUFFIX === '' ) {
-						$scripts['bot-async'] = WPMM_JS_URL . 'bot.async.js';
-					}
-
-					$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION;
-					add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
-				}
-				$scripts = apply_filters( 'wpmm_scripts', $scripts );
-
-				// CSS FILES
-				$styles = array(
-					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
-				);
-				if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
-					$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION;
-					$body_classes .= ' bot';
-				}
-				$styles = apply_filters( 'wpmm_styles', $styles );
 
 				nocache_headers();
 				ob_start();
@@ -674,6 +644,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.1.1
 		 */
 		public function add_bot_extras() {
+			if ( empty( $this->plugin_settings['bot']['status'] ) || $this->plugin_settings['bot']['status'] !== 1 ) {
+				return;
+			}
+
 			$upload_dir = wp_upload_dir();
 			$bot_vars   = array(
 				'validationName'  => __( 'Please type in your name.', 'wp-maintenance-mode' ),
@@ -883,6 +857,25 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		}
 
 		/**
+		 * Add CSS files
+		 *
+		 * @since 2.4.0
+		 */
+		public function add_css_files() {
+			$styles = array(
+				'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
+			);
+
+			if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
+				$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION;
+			}
+
+			foreach ( apply_filters( 'wpmm_styles', $styles ) as $handle => $href ) {
+				printf( "<link rel=\"stylesheet\" id=\"%s-css\" href=\"%s\" media=\"all\">\n", esc_attr( $handle ), esc_url( $href ) );
+			}
+		}
+
+		/**
 		 * Add inline CSS style
 		 *
 		 * @since 2.4.0
@@ -949,6 +942,50 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			printf( "<style type=\"text/css\">\n%s\n</style>\n", implode( "\n", $css_rules ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+		/**
+		 * Add Javascript files
+		 *
+		 * @since 2.4.0
+		 */
+		public function add_js_files() {
+			$wp_scripts = wp_scripts();
+
+			$scripts = array(
+				'jquery'   => ! empty( $wp_scripts->registered['jquery-core'] ) ? site_url( $wp_scripts->registered['jquery-core']->src ) : '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery' . WPMM_ASSETS_SUFFIX . '.js',
+				'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
+				'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
+			);
+
+			if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
+				$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
+				$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
+			}
+
+			if (
+					( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
+					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ||
+					( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 )
+			) {
+				$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
+			}
+
+			if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
+				if ( WPMM_ASSETS_SUFFIX === '' ) {
+					$scripts['bot-async'] = WPMM_JS_URL . 'bot.async.js';
+				}
+
+				$scripts['bot'] = WPMM_JS_URL . 'bot' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION;
+			}
+
+			if ( ! did_action( 'wpmm_before_scripts' ) ) {
+				do_action( 'wpmm_before_scripts' );
+			}
+
+			foreach ( apply_filters( 'wpmm_scripts', $scripts ) as $handle => $src ) {
+				printf( "<script type=\"text/javascript\" src=\"%s\" id=\"%s-js\"></script>\n", esc_url( $src ), esc_attr( $handle ) );
+			}
 		}
 
 		/**
