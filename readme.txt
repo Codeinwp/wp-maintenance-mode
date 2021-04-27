@@ -91,6 +91,7 @@ Notice: `wp-cron.php` is excluded by default.
 * Misc: better compatibility with translation plugins like Loco Translate
 * Misc: the image uploaders (from the dashboard) are now translatable
 * Misc: improve uninstall routine
+* Misc: remove `wpmm_count_where` helper function
 * Misc: code improvements
 
 = 2.3.0 (07/12/2020) =
