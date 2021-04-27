@@ -839,7 +839,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				return null;
 			}
 
-			$redirect_to = $this->plugin_settings['general']['redirection'];
+			$redirect_to = esc_url_raw( $this->plugin_settings['general']['redirection'] );
 			wp_redirect( $redirect_to ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 			exit;
 		}

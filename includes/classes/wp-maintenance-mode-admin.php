@@ -274,7 +274,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['general']['backend_role']  = ! empty( $_POST['options']['general']['backend_role'] ) ? $_POST['options']['general']['backend_role'] : array();
 					$_POST['options']['general']['frontend_role'] = ! empty( $_POST['options']['general']['frontend_role'] ) ? $_POST['options']['general']['frontend_role'] : array();
 					$_POST['options']['general']['meta_robots']   = (int) $_POST['options']['general']['meta_robots'];
-					$_POST['options']['general']['redirection']   = esc_url( $_POST['options']['general']['redirection'] );
+					$_POST['options']['general']['redirection']   = esc_url_raw( $_POST['options']['general']['redirection'] );
 					if ( ! empty( $_POST['options']['general']['exclude'] ) ) {
 						$exclude_array = explode( "\n", $_POST['options']['general']['exclude'] );
 						// we need to be sure that empty lines will not be saved
@@ -312,7 +312,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					// Background
 					$_POST['options']['design']['bg_type']       = sanitize_text_field( $_POST['options']['design']['bg_type'] );
 					$_POST['options']['design']['bg_color']      = sanitize_hex_color( $_POST['options']['design']['bg_color'] );
-					$_POST['options']['design']['bg_custom']     = esc_url( $_POST['options']['design']['bg_custom'] );
+					$_POST['options']['design']['bg_custom']     = esc_url_raw( $_POST['options']['design']['bg_custom'] );
 					$_POST['options']['design']['bg_predefined'] = sanitize_text_field( $_POST['options']['design']['bg_predefined'] );
 
 					// Other
@@ -368,7 +368,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				case 'bot':
 					$_POST['options']['bot']['status'] = (int) $_POST['options']['bot']['status'];
 					$_POST['options']['bot']['name']   = sanitize_text_field( $_POST['options']['bot']['name'] );
-					$_POST['options']['bot']['avatar'] = sanitize_text_field( $_POST['options']['bot']['avatar'] );
+					$_POST['options']['bot']['avatar'] = esc_url_raw( $_POST['options']['bot']['avatar'] );
 
 					$_POST['options']['bot']['messages']['01']   = sanitize_text_field( $_POST['options']['bot']['messages']['01'] );
 					$_POST['options']['bot']['messages']['02']   = sanitize_text_field( $_POST['options']['bot']['messages']['02'] );
@@ -398,7 +398,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				case 'gdpr':
 					$_POST['options']['gdpr']['status']              = (int) $_POST['options']['gdpr']['status'];
 					$_POST['options']['gdpr']['policy_page_label']   = sanitize_text_field( $_POST['options']['gdpr']['policy_page_label'] );
-					$_POST['options']['gdpr']['policy_page_link']    = sanitize_text_field( $_POST['options']['gdpr']['policy_page_link'] );
+					$_POST['options']['gdpr']['policy_page_link']    = esc_url_raw( $_POST['options']['gdpr']['policy_page_link'] );
 					$_POST['options']['gdpr']['policy_page_target']  = (int) $_POST['options']['gdpr']['policy_page_target'];
 					$_POST['options']['gdpr']['contact_form_tail']   = wp_kses( $_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html() );
 					$_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses( $_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html() );

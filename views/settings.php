@@ -113,7 +113,7 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[general][redirection]"><?php esc_html_e( 'Redirection', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['general']['redirection'] ); ?>" name="options[general][redirection]" />
+										<input type="text" value="<?php echo esc_url( $this->plugin_settings['general']['redirection'] ); ?>" name="options[general][redirection]" />
 										<p class="description"><?php esc_html_e( 'If you want to redirect a user (with no access to Dashboard/Backend) to a URL (different from WordPress Dashboard URL) after login, then define a URL (incl. http://)', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -272,7 +272,7 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[design][bg_custom]"><?php esc_html_e( 'Upload background', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['bg_custom'] ); ?>" name="options[design][bg_custom]" class="background_url" />
+										<input type="text" value="<?php echo esc_url( $this->plugin_settings['design']['bg_custom'] ); ?>" name="options[design][bg_custom]" class="background_url" />
 										<input
 											type="button" 
 											value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>" 
@@ -654,7 +654,7 @@ defined( 'ABSPATH' ) || exit;
 																		<label for="options[bot][avatar]"><?php esc_html_e( 'Upload avatar', 'wp-maintenance-mode' ); ?></label>
 																	</th>
 																	<td>
-																		<input type="text" value="<?php echo esc_attr( $this->plugin_settings['bot']['avatar'] ); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
+																		<input type="text" value="<?php echo esc_url( $this->plugin_settings['bot']['avatar'] ); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
 																		<input
 																			type="button" 
 																			value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>" 
@@ -839,7 +839,7 @@ defined( 'ABSPATH' ) || exit;
 																						<label for="options[gdpr][policy_page_link]"><?php esc_html_e( 'P. Policy page link', 'wp-maintenance-mode' ); ?></label>
 																					</th>
 																					<td>
-																						<input type="text" value="<?php echo esc_attr( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" name="options[gdpr][policy_page_link]" />
+																						<input type="text" value="<?php echo esc_url( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" name="options[gdpr][policy_page_link]" />
 																						<p class="description"><?php echo wp_kses( $this->get_policy_link_message(), wpmm_translated_string_allowed_html() ); ?></p>
 																						<p class="description"><?php esc_html_e( 'REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.', 'wp-maintenance-mode' ); ?></p>
 																					</td>
