@@ -54,8 +54,8 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[general][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<label><input type="radio" value="1" name="options[general][status]" <?php checked( $this->plugin_settings['general']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-										<label><input type="radio" value="0" name="options[general][status]" <?php checked( $this->plugin_settings['general']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+										<label><input type="radio" value="1" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+										<label><input type="radio" value="0" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
 									</td>
 								</tr>
 								<tr valign="top">
@@ -64,8 +64,8 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<select name="options[general][bypass_bots]">
-											<option value="1" <?php selected( $this->plugin_settings['general']['bypass_bots'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-											<option value="0" <?php selected( $this->plugin_settings['general']['bypass_bots'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+											<option value="1"<?php selected( $this->plugin_settings['general']['bypass_bots'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['general']['bypass_bots'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 										</select>
 										<p class="description"><?php esc_html_e( 'Allow Search Bots to bypass maintenance mode?', 'wp-maintenance-mode' ); ?></p>
 									</td>
@@ -77,7 +77,7 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<select name="options[general][backend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php esc_attr_e( 'Select role(s)', 'wp-maintenance-mode' ); ?>">
 											<?php foreach ( wpmm_get_user_roles() as $role_key => $role_name ) { ?>
-												<option value="<?php echo esc_attr( $role_key ); ?>" <?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['backend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
+												<option value="<?php echo esc_attr( $role_key ); ?>"<?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['backend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
 											<?php } ?>
 										</select>
 										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the backend of this blog? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
@@ -90,7 +90,7 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<select name="options[general][frontend_role][]" multiple="multiple" class="chosen-select" data-placeholder="<?php esc_attr_e( 'Select role(s)', 'wp-maintenance-mode' ); ?>">
 											<?php foreach ( wpmm_get_user_roles() as $role_key => $role_name ) { ?>
-												<option value="<?php echo esc_attr( $role_key ); ?>" <?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['frontend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
+												<option value="<?php echo esc_attr( $role_key ); ?>"<?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['frontend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
 											<?php } ?>
 										</select>
 										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the frontend of this blog? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
@@ -102,8 +102,8 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<select name="options[general][meta_robots]">
-											<option value="1" <?php selected( $this->plugin_settings['general']['meta_robots'], 1 ); ?>>noindex, nofollow</option>
-											<option value="0" <?php selected( $this->plugin_settings['general']['meta_robots'], 0 ); ?>>index, follow</option>
+											<option value="1"<?php selected( $this->plugin_settings['general']['meta_robots'], 1 ); ?>>noindex, nofollow</option>
+											<option value="0"<?php selected( $this->plugin_settings['general']['meta_robots'], 0 ); ?>>index, follow</option>
 										</select>
 										<p class="description"><?php esc_html_e( 'The robots meta tag lets you use a granular, page-specific approach to control how an individual page should be indexed and served to users in search results.', 'wp-maintenance-mode' ); ?></p>
 									</td>
@@ -135,8 +135,8 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<select name="options[general][notice]">
-											<option value="1" <?php selected( $this->plugin_settings['general']['notice'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-											<option value="0" <?php selected( $this->plugin_settings['general']['notice'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+											<option value="1"<?php selected( $this->plugin_settings['general']['notice'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['general']['notice'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 										</select>
 										<p class="description"><?php esc_html_e( 'Do you want to see notices when maintenance mode is activated?', 'wp-maintenance-mode' ); ?></p>
 									</td>
@@ -147,8 +147,8 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<select name="options[general][admin_link]">
-											<option value="1" <?php selected( $this->plugin_settings['general']['admin_link'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-											<option value="0" <?php selected( $this->plugin_settings['general']['admin_link'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+											<option value="1"<?php selected( $this->plugin_settings['general']['admin_link'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['general']['admin_link'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 										</select>
 										<p class="description"><?php esc_html_e( 'Do you want to add a link to the dashboard on your maintenance mode page?', 'wp-maintenance-mode' ); ?></p>
 									</td>
@@ -253,9 +253,9 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<select name="options[design][bg_type]" id="design_bg_type">
-											<option value="color" <?php selected( $this->plugin_settings['design']['bg_type'], 'color' ); ?>><?php esc_html_e( 'Custom color', 'wp-maintenance-mode' ); ?></option>
-											<option value="custom" <?php selected( $this->plugin_settings['design']['bg_type'], 'custom' ); ?>><?php esc_html_e( 'Uploaded background', 'wp-maintenance-mode' ); ?></option>
-											<option value="predefined" <?php selected( $this->plugin_settings['design']['bg_type'], 'predefined' ); ?>><?php esc_html_e( 'Predefined background', 'wp-maintenance-mode' ); ?></option>
+											<option value="color"<?php selected( $this->plugin_settings['design']['bg_type'], 'color' ); ?>><?php esc_html_e( 'Custom color', 'wp-maintenance-mode' ); ?></option>
+											<option value="custom"<?php selected( $this->plugin_settings['design']['bg_type'], 'custom' ); ?>><?php esc_html_e( 'Uploaded background', 'wp-maintenance-mode' ); ?></option>
+											<option value="predefined"<?php selected( $this->plugin_settings['design']['bg_type'], 'predefined' ); ?>><?php esc_html_e( 'Predefined background', 'wp-maintenance-mode' ); ?></option>
 										</select>
 									</td>
 								</tr>
@@ -307,7 +307,7 @@ defined( 'ABSPATH' ) || exit;
 											<?php foreach ( wpmm_get_backgrounds() as $filename ) { ?>
 												<li class="<?php echo $this->plugin_settings['design']['bg_predefined'] === $filename['big'] ? 'active' : ''; ?>">
 													<label>
-														<input type="radio" value="<?php echo esc_attr( $filename['big'] ); ?>" name="options[design][bg_predefined]" <?php checked( $this->plugin_settings['design']['bg_predefined'], $filename['big'] ); ?>>
+														<input type="radio" value="<?php echo esc_attr( $filename['big'] ); ?>" name="options[design][bg_predefined]"<?php checked( $this->plugin_settings['design']['bg_predefined'], $filename['big'] ); ?>>
 															<img src="<?php echo esc_url( WPMM_URL . 'assets/images/backgrounds/' . $filename['small'] ); ?>" width="200" height="150" />
 													</label>
 												</li>
@@ -351,8 +351,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][countdown_status]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['countdown_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['countdown_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['countdown_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['countdown_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 														</select>
 													</td>
 												</tr>
@@ -395,8 +395,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][subscribe_status]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['subscribe_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['subscribe_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['subscribe_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['subscribe_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 														</select>
 													</td>
 												</tr>
@@ -442,8 +442,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][social_status]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['social_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['social_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['social_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['social_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 														</select>
 													</td>
 												</tr>
@@ -453,8 +453,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][social_target]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['social_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['social_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['social_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['social_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
 														</select>
 														<p class="description"><?php esc_html_e( 'Choose how the links will open.', 'wp-maintenance-mode' ); ?></p>
 													</td>
@@ -536,8 +536,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][contact_status]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['contact_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['contact_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['contact_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['contact_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 														</select>
 													</td>
 												</tr>
@@ -555,9 +555,9 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][contact_effects]">
-															<option value="move_top|move_bottom" <?php selected( $this->plugin_settings['modules']['contact_effects'], 'move_top|move_bottom' ); ?>><?php esc_html_e( 'Move top - Move bottom', 'wp-maintenance-mode' ); ?></option>
-															<option value="zoom|zoomed" <?php selected( $this->plugin_settings['modules']['contact_effects'], 'zoom|zoomed' ); ?>><?php esc_html_e( 'Zoom - Zoomed', 'wp-maintenance-mode' ); ?></option>
-															<option value="fold|unfold" <?php selected( $this->plugin_settings['modules']['contact_effects'], 'fold|unfold' ); ?>><?php esc_html_e( 'Fold - Unfold', 'wp-maintenance-mode' ); ?></option>
+															<option value="move_top|move_bottom"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'move_top|move_bottom' ); ?>><?php esc_html_e( 'Move top - Move bottom', 'wp-maintenance-mode' ); ?></option>
+															<option value="zoom|zoomed"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'zoom|zoomed' ); ?>><?php esc_html_e( 'Zoom - Zoomed', 'wp-maintenance-mode' ); ?></option>
+															<option value="fold|unfold"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'fold|unfold' ); ?>><?php esc_html_e( 'Fold - Unfold', 'wp-maintenance-mode' ); ?></option>
 														</select>
 													</td>
 												</tr>
@@ -574,8 +574,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][ga_status]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['ga_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['ga_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['ga_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['ga_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 														</select>
 													</td>
 												</tr>
@@ -585,8 +585,8 @@ defined( 'ABSPATH' ) || exit;
 													</th>
 													<td>
 														<select name="options[modules][ga_anonymize_ip]">
-															<option value="1" <?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0" <?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+															<option value="1"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+															<option value="0"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 														</select>
 														<p class="description">
 															<?php
@@ -636,8 +636,8 @@ defined( 'ABSPATH' ) || exit;
 																		<label for="options[bot][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 																	</th>
 																	<td>
-																		<label><input type="radio" value="1" name="options[bot][status]" <?php checked( $this->plugin_settings['bot']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-																		<label><input type="radio" value="0" name="options[bot][status]" <?php checked( $this->plugin_settings['bot']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+																		<label><input type="radio" value="1" name="options[bot][status]"<?php checked( $this->plugin_settings['bot']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+																		<label><input type="radio" value="0" name="options[bot][status]"<?php checked( $this->plugin_settings['bot']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
 																	</td>
 																</tr>
 																<tr valign="top">
@@ -821,8 +821,8 @@ defined( 'ABSPATH' ) || exit;
 																						<label for="options[gdpr][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 																					</th>
 																					<td>
-																						<label><input type="radio" value="1" name="options[gdpr][status]" <?php checked( $this->plugin_settings['gdpr']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-																						<label><input type="radio" value="0" name="options[gdpr][status]" <?php checked( $this->plugin_settings['gdpr']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+																						<label><input type="radio" value="1" name="options[gdpr][status]"<?php checked( $this->plugin_settings['gdpr']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+																						<label><input type="radio" value="0" name="options[gdpr][status]"<?php checked( $this->plugin_settings['gdpr']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
 																					</td>
 																				</tr>
 																				<tr valign="top">
@@ -850,8 +850,8 @@ defined( 'ABSPATH' ) || exit;
 																					</th>
 																					<td>
 																						<select name="options[gdpr][policy_page_target]">
-																							<option value="1" <?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
-																							<option value="0" <?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
+																							<option value="1"<?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
+																							<option value="0"<?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
 																						</select>
 																						<p class="description"><?php esc_html_e( 'Choose how the link will open.', 'wp-maintenance-mode' ); ?></p>
 																					</td>
