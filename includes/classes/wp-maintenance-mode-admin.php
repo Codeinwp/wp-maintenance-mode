@@ -555,6 +555,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			if ( function_exists( 'w3tc_pgcache_flush' ) ) {
 				w3tc_pgcache_flush();
 			}
+
+			// Feel free to use it if you have a custom cache mechanism
+			do_action( 'wpmm_delete_cache' );
 		}
 
 		/**

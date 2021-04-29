@@ -91,6 +91,7 @@ Notice: `wp-cron.php` is excluded by default.
 * Misc: better compatibility with translation plugins like Loco Translate
 * Misc: the image uploaders (from the dashboard) are now translatable
 * Misc: improve uninstall routine
+* Misc: add `wpmm_delete_cache` action; It is called after each setting change.
 * Misc: remove `wpmm_count_where` helper function
 * Misc: code improvements
 
