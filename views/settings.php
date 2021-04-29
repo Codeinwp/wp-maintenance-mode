@@ -17,36 +17,41 @@ defined( 'ABSPATH' ) || exit;
 					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
 					</svg>
+
 					<?php esc_html_e( 'General', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#design">
 					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 					</svg>
+
 					<?php esc_html_e( 'Design', 'wp-maintenance-mode' ); ?></a>
 				<a class="nav-tab" href="#modules">
 					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
 					</svg>
+
 					<?php esc_html_e( 'Modules', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#bot">
 					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 					</svg>
+
 					<?php esc_html_e( 'Manage Bot', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#gdpr">
 					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 					</svg>
+
 					<?php esc_html_e( 'GDPR', 'wp-maintenance-mode' ); ?>
 				</a>
 			</div>
 
 			<div class="tabs-content">
 				<div id="tab-general" class="">
-					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" >
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -54,8 +59,8 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[general][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<label><input type="radio" value="1" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-										<label><input type="radio" value="0" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+										<label><input type="radio" value="1" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 1 ); ?> /> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+										<label><input type="radio" value="0" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 0 ); ?> /> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
 									</td>
 								</tr>
 								<tr valign="top">
@@ -158,9 +163,10 @@ defined( 'ABSPATH' ) || exit;
 
 						<?php wpmm_form_hidden_fields( 'general' ); ?>
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
-						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="general" name="submit">
+						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="general" name="submit" />
 					</form>
 				</div>
+
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
@@ -181,7 +187,7 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td class="has-inline-color-picker">
 										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['heading'] ); ?>" name="options[design][heading]" />
-										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['heading_color'] ); ?>" name="options[design][heading_color]" class="color_picker_trigger"/>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['heading_color'] ); ?>" name="options[design][heading_color]" class="color_picker_trigger" />
 									</td>
 								</tr>
 								<tr valign="top">
@@ -236,7 +242,7 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[design][footer_links_color]"><?php esc_html_e( 'Footer links', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['footer_links_color'] ); ?>" name="options[design][footer_links_color]" class="color_picker_trigger"/>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['footer_links_color'] ); ?>" name="options[design][footer_links_color]" class="color_picker_trigger" />
 										<p class="description"><?php esc_html_e( '"Dashboard" and "Privacy Policy" links.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -264,7 +270,7 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[design][bg_color]"><?php esc_html_e( 'Choose color', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['bg_color'] ); ?>" name="options[design][bg_color]" class="color_picker_trigger"/>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['design']['bg_color'] ); ?>" name="options[design][bg_color]" class="color_picker_trigger" />
 									</td>
 								</tr>
 								<tr valign="top" class="design_bg_types <?php echo $this->plugin_settings['design']['bg_type'] !== 'custom' ? 'hidden' : ''; ?>" id="show_custom">
@@ -307,8 +313,8 @@ defined( 'ABSPATH' ) || exit;
 											<?php foreach ( wpmm_get_backgrounds() as $filename ) { ?>
 												<li class="<?php echo $this->plugin_settings['design']['bg_predefined'] === $filename['big'] ? 'active' : ''; ?>">
 													<label>
-														<input type="radio" value="<?php echo esc_attr( $filename['big'] ); ?>" name="options[design][bg_predefined]"<?php checked( $this->plugin_settings['design']['bg_predefined'], $filename['big'] ); ?>>
-															<img src="<?php echo esc_url( WPMM_URL . 'assets/images/backgrounds/' . $filename['small'] ); ?>" width="200" height="150" />
+														<input type="radio" value="<?php echo esc_attr( $filename['big'] ); ?>" name="options[design][bg_predefined]"<?php checked( $this->plugin_settings['design']['bg_predefined'], $filename['big'] ); ?> />
+														<img src="<?php echo esc_url( WPMM_URL . 'assets/images/backgrounds/' . $filename['small'] ); ?>" width="200" height="150" />
 													</label>
 												</li>
 											<?php } ?>
@@ -335,556 +341,557 @@ defined( 'ABSPATH' ) || exit;
 						</table>
 
 						<?php wpmm_form_hidden_fields( 'design' ); ?>
-						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit">
-							<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit">
-								</form>
-								</div>
-								<div id="tab-modules" class="hidden">
-									<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-										<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
+						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
+						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit" />
+					</form>
+				</div>
 
-										<table class="form-table">
-											<tbody>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][countdown_status]"><?php esc_html_e( 'Show countdown?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][countdown_status]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['countdown_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['countdown_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
-														</select>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][countdown_start]"><?php esc_html_e( 'Start date', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_start'] ); ?>" name="options[modules][countdown_start]" class="countdown_start" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][countdown_details]"><?php esc_html_e( 'Countdown (remaining time)', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td class="countdown_details">
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_details']['days'] ); ?>" name="options[modules][countdown_details][days]" /> <?php esc_html_e( 'Days', 'wp-maintenance-mode' ); ?>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_details']['hours'] ); ?>" name="options[modules][countdown_details][hours]" class="margin_left"/> <?php esc_html_e( 'Hours', 'wp-maintenance-mode' ); ?>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_details']['minutes'] ); ?>" name="options[modules][countdown_details][minutes]" class="margin_left" /> <?php esc_html_e( 'Minutes', 'wp-maintenance-mode' ); ?>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][countdown_color]"><?php esc_html_e( 'Color', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_color'] ); ?>" name="options[modules][countdown_color]" class="color_picker_trigger"/>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+				<div id="tab-modules" class="hidden">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
-										<h3>&raquo; <?php esc_html_e( 'Subscribe', 'wp-maintenance-mode' ); ?></h3>
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][countdown_status]"><?php esc_html_e( 'Show countdown?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][countdown_status]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['countdown_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['countdown_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][countdown_start]"><?php esc_html_e( 'Start date', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_start'] ); ?>" name="options[modules][countdown_start]" class="countdown_start" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][countdown_details]"><?php esc_html_e( 'Countdown (remaining time)', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td class="countdown_details">
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_details']['days'] ); ?>" name="options[modules][countdown_details][days]" /> <?php esc_html_e( 'Days', 'wp-maintenance-mode' ); ?>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_details']['hours'] ); ?>" name="options[modules][countdown_details][hours]" class="margin_left" /> <?php esc_html_e( 'Hours', 'wp-maintenance-mode' ); ?>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_details']['minutes'] ); ?>" name="options[modules][countdown_details][minutes]" class="margin_left" /> <?php esc_html_e( 'Minutes', 'wp-maintenance-mode' ); ?>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][countdown_color]"><?php esc_html_e( 'Color', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['countdown_color'] ); ?>" name="options[modules][countdown_color]" class="color_picker_trigger" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-										<table class="form-table">
-											<tbody>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][subscribe_status]"><?php esc_html_e( 'Show subscribe?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][subscribe_status]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['subscribe_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['subscribe_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
-														</select>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][subscribe_text]"><?php esc_html_e( 'Text', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td class="has-inline-color-picker">
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['subscribe_text'] ); ?>" name="options[modules][subscribe_text]" />
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['subscribe_text_color'] ); ?>" name="options[modules][subscribe_text_color]" class="color_picker_trigger"/>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][stats]"><?php esc_html_e( 'Stats', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td id="subscribers_wrap">
-														<?php
-														$subscribers_no = wpmm_get_subscribers_count();
+						<h3>&raquo; <?php esc_html_e( 'Subscribe', 'wp-maintenance-mode' ); ?></h3>
 
-														/* translators: number of subscribers */
-														echo esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no ) );
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][subscribe_status]"><?php esc_html_e( 'Show subscribe?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][subscribe_status]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['subscribe_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['subscribe_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][subscribe_text]"><?php esc_html_e( 'Text', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td class="has-inline-color-picker">
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['subscribe_text'] ); ?>" name="options[modules][subscribe_text]" />
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['subscribe_text_color'] ); ?>" name="options[modules][subscribe_text_color]" class="color_picker_trigger" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][stats]"><?php esc_html_e( 'Stats', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td id="subscribers_wrap">
+										<?php
+										$subscribers_no = wpmm_get_subscribers_count();
 
-														if ( current_user_can( wpmm_get_capability( 'subscribers' ) ) && $subscribers_no > 0 ) {
-															?>
-															<div class="buttons">
-																<a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php esc_html_e( 'Export as CSV', 'wp-maintenance-mode' ); ?></a>
-																<a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php esc_html_e( 'Empty subscribers list', 'wp-maintenance-mode' ); ?></a>
-															</div>
-														<?php } ?>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+										/* translators: number of subscribers */
+										echo esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no ) );
 
-										<h3>&raquo; <?php esc_html_e( 'Social Networks', 'wp-maintenance-mode' ); ?></h3>
+										if ( current_user_can( wpmm_get_capability( 'subscribers' ) ) && $subscribers_no > 0 ) {
+											?>
+											<div class="buttons">
+												<a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php esc_html_e( 'Export as CSV', 'wp-maintenance-mode' ); ?></a>
+												<a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php esc_html_e( 'Empty subscribers list', 'wp-maintenance-mode' ); ?></a>
+											</div>
+										<?php } ?>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-										<table class="form-table">
-											<tbody>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_status]"><?php esc_html_e( 'Show social networks?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][social_status]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['social_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['social_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
-														</select>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_target]"><?php esc_html_e( 'Links target?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][social_target]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['social_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['social_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
-														</select>
-														<p class="description"><?php esc_html_e( 'Choose how the links will open.', 'wp-maintenance-mode' ); ?></p>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_github]">Github</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_github'] ); ?>" name="options[modules][social_github]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_dribbble]">Dribbble</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_dribbble'] ); ?>" name="options[modules][social_dribbble]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_twitter]">Twitter</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_twitter'] ); ?>" name="options[modules][social_twitter]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_facebook]">Facebook</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_facebook'] ); ?>" name="options[modules][social_facebook]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_instagram]">Instagram</label>
-													</th>
-													<td>    
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_instagram'] ); ?>" name="options[modules][social_instagram]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_pinterest]">Pinterest</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_pinterest'] ); ?>" name="options[modules][social_pinterest]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_google+]">Google+</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_google+'] ); ?>" name="options[modules][social_google+]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][social_linkedin]">Linkedin</label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_linkedin'] ); ?>" name="options[modules][social_linkedin]" />
-													</td>
-												</tr>
-											</tbody>
-										</table>
+						<h3>&raquo; <?php esc_html_e( 'Social Networks', 'wp-maintenance-mode' ); ?></h3>
 
-										<h3>&raquo; <?php esc_html_e( 'Contact', 'wp-maintenance-mode' ); ?></h3>
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_status]"><?php esc_html_e( 'Show social networks?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][social_status]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['social_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['social_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_target]"><?php esc_html_e( 'Links target?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][social_target]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['social_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['social_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
+										</select>
+										<p class="description"><?php esc_html_e( 'Choose how the links will open.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_github]">Github</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_github'] ); ?>" name="options[modules][social_github]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_dribbble]">Dribbble</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_dribbble'] ); ?>" name="options[modules][social_dribbble]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_twitter]">Twitter</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_twitter'] ); ?>" name="options[modules][social_twitter]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_facebook]">Facebook</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_facebook'] ); ?>" name="options[modules][social_facebook]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_instagram]">Instagram</label>
+									</th>
+									<td>    
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_instagram'] ); ?>" name="options[modules][social_instagram]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_pinterest]">Pinterest</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_pinterest'] ); ?>" name="options[modules][social_pinterest]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_google+]">Google+</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_google+'] ); ?>" name="options[modules][social_google+]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_linkedin]">Linkedin</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_linkedin'] ); ?>" name="options[modules][social_linkedin]" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-										<table class="form-table">
-											<tbody>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][contact_status]"><?php esc_html_e( 'Show contact?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][contact_status]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['contact_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['contact_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
-														</select>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][contact_email]"><?php esc_html_e( 'Email address', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['contact_email'] ); ?>" name="options[modules][contact_email]" />
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][contact_effects]"><?php esc_html_e( 'Effects', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][contact_effects]">
-															<option value="move_top|move_bottom"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'move_top|move_bottom' ); ?>><?php esc_html_e( 'Move top - Move bottom', 'wp-maintenance-mode' ); ?></option>
-															<option value="zoom|zoomed"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'zoom|zoomed' ); ?>><?php esc_html_e( 'Zoom - Zoomed', 'wp-maintenance-mode' ); ?></option>
-															<option value="fold|unfold"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'fold|unfold' ); ?>><?php esc_html_e( 'Fold - Unfold', 'wp-maintenance-mode' ); ?></option>
-														</select>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+						<h3>&raquo; <?php esc_html_e( 'Contact', 'wp-maintenance-mode' ); ?></h3>
 
-										<h3>&raquo; <?php esc_html_e( 'Google Analytics', 'wp-maintenance-mode' ); ?></h3>
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][contact_status]"><?php esc_html_e( 'Show contact?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][contact_status]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['contact_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['contact_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][contact_email]"><?php esc_html_e( 'Email address', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['contact_email'] ); ?>" name="options[modules][contact_email]" />
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][contact_effects]"><?php esc_html_e( 'Effects', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][contact_effects]">
+											<option value="move_top|move_bottom"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'move_top|move_bottom' ); ?>><?php esc_html_e( 'Move top - Move bottom', 'wp-maintenance-mode' ); ?></option>
+											<option value="zoom|zoomed"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'zoom|zoomed' ); ?>><?php esc_html_e( 'Zoom - Zoomed', 'wp-maintenance-mode' ); ?></option>
+											<option value="fold|unfold"<?php selected( $this->plugin_settings['modules']['contact_effects'], 'fold|unfold' ); ?>><?php esc_html_e( 'Fold - Unfold', 'wp-maintenance-mode' ); ?></option>
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-										<table class="form-table">
-											<tbody>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][ga_status]"><?php esc_html_e( 'Use Google Analytics?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][ga_status]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['ga_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['ga_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
-														</select>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][ga_anonymize_ip]"><?php esc_html_e( 'Enable IP anonymization?', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<select name="options[modules][ga_anonymize_ip]">
-															<option value="1"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
-															<option value="0"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
-														</select>
-														<p class="description">
-															<?php
-															printf(
-																wp_kses(
-																			/* translators: Google Analytics documentation url */
-																	__( 'Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'wp-maintenance-mode' ),
-																	wpmm_translated_string_allowed_html()
-																),
-																esc_url( 'https://support.google.com/analytics/answer/2763052' )
-															);
-															?>
-														</p>
-													</td>
-												</tr>
-												<tr valign="top">
-													<th scope="row">
-														<label for="options[modules][ga_code]"><?php esc_html_e( 'Tracking code', 'wp-maintenance-mode' ); ?></label>
-													</th>
-													<td>
-														<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['ga_code'] ); ?>" name="options[modules][ga_code]" />
-														<p class="description"><?php esc_html_e( 'Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX, G-XXXXXXXX. Eg: UA-12345678-1 is valid', 'wp-maintenance-mode' ); ?></p>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+						<h3>&raquo; <?php esc_html_e( 'Google Analytics', 'wp-maintenance-mode' ); ?></h3>
 
-										<?php wpmm_form_hidden_fields( 'modules' ); ?>
-										<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit">
-											<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit">
-												</form>
-												</div>
-												<div id="tab-bot" class="hidden">
-													<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-														<table class="form-table">
-															<tbody>
-																<tr valign="top">
-																	<td colspan="2">
-																		<h4><?php esc_html_e( 'Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.', 'wp-maintenance-mode' ); ?></h4>
-																		<p><?php esc_html_e( 'You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.', 'wp-maintenance-mode' ); ?></p>
-																		<p><?php esc_html_e( 'It is also ok if you don\'t fill in all the conversation steps if you don\'t need to.', 'wp-maintenance-mode' ); ?></p>
-																		<p><?php esc_html_e( 'If you want to see the list of subscribers, go to Modules &raquo; Subscribe &raquo; Export as CSV.', 'wp-maintenance-mode' ); ?></p>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<label><input type="radio" value="1" name="options[bot][status]"<?php checked( $this->plugin_settings['bot']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-																		<label><input type="radio" value="0" name="options[bot][status]"<?php checked( $this->plugin_settings['bot']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][name]"><?php esc_html_e( 'Bot Name', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<input type="text" name="options[bot][name]" id="options[bot][name]" value="<?php echo esc_attr( $this->plugin_settings['bot']['name'] ); ?>" />
-																		<p class="description"><?php esc_html_e( 'This name will appear when the bot is typing.', 'wp-maintenance-mode' ); ?></p>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][avatar]"><?php esc_html_e( 'Upload avatar', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<input type="text" value="<?php echo esc_url( $this->plugin_settings['bot']['avatar'] ); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
-																		<input
-																			type="button" 
-																			value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>" 
-																			class="button image_uploader_trigger" 
-																			data-name="avatar" 
-																			data-title="<?php esc_attr_e( 'Upload Avatar', 'wp-maintenance-mode' ); ?>" 
-																			data-button-text="<?php esc_attr_e( 'Choose picture', 'wp-maintenance-mode' ); ?>"
-																			data-to-selector=".avatar_url"
-																			/>
-																		<p class="description"><?php esc_html_e( 'A 512 x 512 px will work just fine.', 'wp-maintenance-mode' ); ?></p>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][ga_status]"><?php esc_html_e( 'Use Google Analytics?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][ga_status]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['ga_status'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['ga_status'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][ga_anonymize_ip]"><?php esc_html_e( 'Enable IP anonymization?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[modules][ga_anonymize_ip]">
+											<option value="1"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 1 ); ?>><?php esc_html_e( 'Yes', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
+										</select>
+										<p class="description">
+											<?php
+											printf(
+												wp_kses(
+															/* translators: Google Analytics documentation url */
+													__( 'Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'wp-maintenance-mode' ),
+													wpmm_translated_string_allowed_html()
+												),
+												esc_url( 'https://support.google.com/analytics/answer/2763052' )
+											);
+											?>
+										</p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][ga_code]"><?php esc_html_e( 'Tracking code', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['ga_code'] ); ?>" name="options[modules][ga_code]" />
+										<p class="description"><?php esc_html_e( 'Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX, G-XXXXXXXX. Eg: UA-12345678-1 is valid', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-														<h3>&raquo; <?php esc_html_e( 'Customize Messages', 'wp-maintenance-mode' ); ?></h3>
+						<?php wpmm_form_hidden_fields( 'modules' ); ?>
+						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
+						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit" />
+					</form>
+				</div>
+				<div id="tab-bot" class="hidden">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<td colspan="2">
+										<h4><?php esc_html_e( 'Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.', 'wp-maintenance-mode' ); ?></h4>
+										<p><?php esc_html_e( 'You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.', 'wp-maintenance-mode' ); ?></p>
+										<p><?php esc_html_e( 'It is also ok if you don\'t fill in all the conversation steps if you don\'t need to.', 'wp-maintenance-mode' ); ?></p>
+										<p><?php esc_html_e( 'If you want to see the list of subscribers, go to Modules &raquo; Subscribe &raquo; Export as CSV.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<label><input type="radio" value="1" name="options[bot][status]"<?php checked( $this->plugin_settings['bot']['status'], 1 ); ?> /> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+										<label><input type="radio" value="0" name="options[bot][status]"<?php checked( $this->plugin_settings['bot']['status'], 0 ); ?> /> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][name]"><?php esc_html_e( 'Bot Name', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" name="options[bot][name]" id="options[bot][name]" value="<?php echo esc_attr( $this->plugin_settings['bot']['name'] ); ?>" />
+										<p class="description"><?php esc_html_e( 'This name will appear when the bot is typing.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][avatar]"><?php esc_html_e( 'Upload avatar', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_url( $this->plugin_settings['bot']['avatar'] ); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
+										<input
+											type="button" 
+											value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>" 
+											class="button image_uploader_trigger" 
+											data-name="avatar" 
+											data-title="<?php esc_attr_e( 'Upload Avatar', 'wp-maintenance-mode' ); ?>" 
+											data-button-text="<?php esc_attr_e( 'Choose picture', 'wp-maintenance-mode' ); ?>"
+											data-to-selector=".avatar_url"
+											/>
+										<p class="description"><?php esc_html_e( 'A 512 x 512 px will work just fine.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-														<table class="form-table">
-															<tbody>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][01]"><?php esc_html_e( 'Message 1', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][01]" id="options[bot][messages][01]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['01'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][02]"><?php esc_html_e( 'Message 2', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][02]" id="options[bot][messages][02]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['02'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][03]"><?php esc_html_e( 'Message 3', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][03]" id="options[bot][messages][03]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['03'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][responses][01]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<input type="text" name="options[bot][responses][01]" id="options[bot][responses][01]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['01'] ); ?>" />
-																		<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 3', 'wp-maintenance-mode' ); ?></span>
-																		<p class="description"><?php esc_html_e( 'Edit the placeholder\'s text', 'wp-maintenance-mode' ); ?></p>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][04]"><?php esc_html_e( 'Message 4', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][04]" id="options[bot][messages][04]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['04'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][05]"><?php esc_html_e( 'Message 5', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][05]" id="options[bot][messages][05]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['05'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][06]"><?php esc_html_e( 'Message 6', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][06]" id="options[bot][messages][06]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['06'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][07]"><?php esc_html_e( 'Message 7', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][07]" id="options[bot][messages][07]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['07'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][responses][02_1]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<div class="bot-button">
-																			<input type="text" name="options[bot][responses][02_1]" id="options[bot][responses][02_1]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['02_1'] ); ?>" />
-																			<p class="description"><?php esc_html_e( 'Edit button one', 'wp-maintenance-mode' ); ?></p>
-																		</div>
-																		<div class="bot-button">
-																			<input type="text" name="options[bot][responses][02_2]" id="options[bot][responses][02_2]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['02_2'] ); ?>" />
-																			<p class="description"><?php esc_html_e( 'Edit button two', 'wp-maintenance-mode' ); ?></p>
-																		</div>
-																		<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 7', 'wp-maintenance-mode' ); ?></span>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][08_1]"><?php esc_html_e( 'Message 8', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][08_1]" id="options[bot][messages][08_1]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['08_1'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][responses][03]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label>
-																	</th>
-																	<td>
-																		<input type="text" name="options[bot][responses][03]" id="options[bot][responses][03]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['03'] ); ?>" />
-																		<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 8 (click on button one)', 'wp-maintenance-mode' ); ?></span>
-																		<p class="description"><?php esc_html_e( 'Edit the placeholder\'s text', 'wp-maintenance-mode' ); ?></p>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][08_2]"><?php esc_html_e( 'Message 8', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button two)', 'wp-maintenance-mode' ); ?></small></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][08_2]" id="options[bot][messages][08_2]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['08_2'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][09]"><?php esc_html_e( 'Message 9', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][09]" id="options[bot][messages][09]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['09'] ); ?></textarea>
-																	</td>
-																</tr>
-																<tr valign="top">
-																	<th scope="row">
-																		<label for="options[bot][messages][10]"><?php esc_html_e( 'Message 10', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label>
-																	</th>
-																	<td>
-																		<textarea name="options[bot][messages][10]" id="options[bot][messages][10]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['10'] ); ?></textarea>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
+						<h3>&raquo; <?php esc_html_e( 'Customize Messages', 'wp-maintenance-mode' ); ?></h3>
 
-														<?php wpmm_form_hidden_fields( 'bot' ); ?>
-														<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit">
-															<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit">
-																</form>
-																</div>
-																<div id="tab-gdpr" class="hidden">
-																	<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-																		<table class="form-table">
-																			<tbody>
-																				<tr valign="top">
-																					<td colspan="2">
-																						<h4><?php esc_html_e( 'To make the plugin GDPR compliant, fill in the details and enable this section.', 'wp-maintenance-mode' ); ?></h4>
-																						<p><?php esc_html_e( 'Here we added some generic texts that you may want to review, change or remove.', 'wp-maintenance-mode' ); ?></p>
-																					</td>
-																				</tr>
-																				<tr valign="top">
-																					<th scope="row">
-																						<label for="options[gdpr][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
-																					</th>
-																					<td>
-																						<label><input type="radio" value="1" name="options[gdpr][status]"<?php checked( $this->plugin_settings['gdpr']['status'], 1 ); ?>> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-																						<label><input type="radio" value="0" name="options[gdpr][status]"<?php checked( $this->plugin_settings['gdpr']['status'], 0 ); ?>> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
-																					</td>
-																				</tr>
-																				<tr valign="top">
-																					<th scope="row">
-																						<label for="options[gdpr][policy_page_label]"><?php esc_html_e( 'Link name', 'wp-maintenance-mode' ); ?></label>
-																					</th>
-																					<td>
-																						<input type="text" value="<?php echo esc_attr( $this->plugin_settings['gdpr']['policy_page_label'] ); ?>" name="options[gdpr][policy_page_label]" />
-																						<p class="description"><?php esc_html_e( 'Label the link that will be shown on frontend footer', 'wp-maintenance-mode' ); ?></p>
-																					</td>
-																				</tr>
-																				<tr valign="top">
-																					<th scope="row">
-																						<label for="options[gdpr][policy_page_link]"><?php esc_html_e( 'P. Policy page link', 'wp-maintenance-mode' ); ?></label>
-																					</th>
-																					<td>
-																						<input type="text" value="<?php echo esc_url( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" name="options[gdpr][policy_page_link]" />
-																						<p class="description"><?php echo wp_kses( $this->get_policy_link_message(), wpmm_translated_string_allowed_html() ); ?></p>
-																						<p class="description"><?php esc_html_e( 'REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.', 'wp-maintenance-mode' ); ?></p>
-																					</td>
-																				</tr>
-																				<tr valign="top">
-																					<th scope="row">
-																						<label for="options[gdpr][policy_page_target]"><?php esc_html_e( 'P. Policy link target', 'wp-maintenance-mode' ); ?></label>
-																					</th>
-																					<td>
-																						<select name="options[gdpr][policy_page_target]">
-																							<option value="1"<?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
-																							<option value="0"<?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
-																						</select>
-																						<p class="description"><?php esc_html_e( 'Choose how the link will open.', 'wp-maintenance-mode' ); ?></p>
-																					</td>
-																				</tr>
-																				<tr valign="top">
-																					<th scope="row">
-																						<label for="options[gdpr][contact_form_tail]"><?php esc_html_e( 'Contact form \'tail\'', 'wp-maintenance-mode' ); ?></label>
-																					</th>
-																					<td>
-																						<textarea name="options[gdpr][contact_form_tail]" rows="3" style="width: 600px"><?php echo esc_textarea( wp_kses( $this->plugin_settings['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html() ) ); ?></textarea>
-																						<p class="description"><?php esc_html_e( 'This will be shown together with the acceptance checkbox below the form', 'wp-maintenance-mode' ); ?></p>
-																					</td>
-																				</tr>
-																				<tr valign="top">
-																					<th scope="row">
-																						<label for="options[gdpr][subscribe_form_tail]"><?php esc_html_e( 'Subscribe form \'tail\'', 'wp-maintenance-mode' ); ?></label>
-																					</th>
-																					<td>
-																						<textarea name="options[gdpr][subscribe_form_tail]" rows="3" style="width: 600px"><?php echo esc_textarea( wp_kses( $this->plugin_settings['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html() ) ); ?></textarea>
-																						<p class="description"><?php esc_html_e( 'This will be shown together with the acceptance checkbox below the form', 'wp-maintenance-mode' ); ?></p>
-																					</td>
-																				</tr>
-																			</tbody>
-																		</table>
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][01]"><?php esc_html_e( 'Message 1', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][01]" id="options[bot][messages][01]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['01'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][02]"><?php esc_html_e( 'Message 2', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][02]" id="options[bot][messages][02]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['02'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][03]"><?php esc_html_e( 'Message 3', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][03]" id="options[bot][messages][03]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['03'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][responses][01]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" name="options[bot][responses][01]" id="options[bot][responses][01]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['01'] ); ?>" />
+										<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 3', 'wp-maintenance-mode' ); ?></span>
+										<p class="description"><?php esc_html_e( 'Edit the placeholder\'s text', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][04]"><?php esc_html_e( 'Message 4', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][04]" id="options[bot][messages][04]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['04'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][05]"><?php esc_html_e( 'Message 5', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][05]" id="options[bot][messages][05]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['05'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][06]"><?php esc_html_e( 'Message 6', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][06]" id="options[bot][messages][06]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['06'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][07]"><?php esc_html_e( 'Message 7', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][07]" id="options[bot][messages][07]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['07'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][responses][02_1]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<div class="bot-button">
+											<input type="text" name="options[bot][responses][02_1]" id="options[bot][responses][02_1]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['02_1'] ); ?>" />
+											<p class="description"><?php esc_html_e( 'Edit button one', 'wp-maintenance-mode' ); ?></p>
+										</div>
+										<div class="bot-button">
+											<input type="text" name="options[bot][responses][02_2]" id="options[bot][responses][02_2]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['02_2'] ); ?>" />
+											<p class="description"><?php esc_html_e( 'Edit button two', 'wp-maintenance-mode' ); ?></p>
+										</div>
+										<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 7', 'wp-maintenance-mode' ); ?></span>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][08_1]"><?php esc_html_e( 'Message 8', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][08_1]" id="options[bot][messages][08_1]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['08_1'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][responses][03]"><?php esc_html_e( 'Response', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" name="options[bot][responses][03]" id="options[bot][responses][03]" value="<?php echo esc_attr( $this->plugin_settings['bot']['responses']['03'] ); ?>" />
+										<span class="bot-hint"><?php echo esc_html_x( 'Visitor\'s response will be here.', 'response for message 8 (click on button one)', 'wp-maintenance-mode' ); ?></span>
+										<p class="description"><?php esc_html_e( 'Edit the placeholder\'s text', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][08_2]"><?php esc_html_e( 'Message 8', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button two)', 'wp-maintenance-mode' ); ?></small></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][08_2]" id="options[bot][messages][08_2]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['08_2'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][09]"><?php esc_html_e( 'Message 9', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][09]" id="options[bot][messages][09]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['09'] ); ?></textarea>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[bot][messages][10]"><?php esc_html_e( 'Message 10', 'wp-maintenance-mode' ); ?><br><small><?php esc_html_e( '(click on button one)', 'wp-maintenance-mode' ); ?></small></label>
+									</th>
+									<td>
+										<textarea name="options[bot][messages][10]" id="options[bot][messages][10]" rows="2" style="width: 625px;"><?php echo esc_textarea( $this->plugin_settings['bot']['messages']['10'] ); ?></textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-																		<?php wpmm_form_hidden_fields( 'gdpr' ); ?>
-																		<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
-																		<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit">
-																	</form>
-																</div>
-																</div>
-																</div>
+						<?php wpmm_form_hidden_fields( 'bot' ); ?>
+						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
+						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit" />
+					</form>
+				</div>
+				<div id="tab-gdpr" class="hidden">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<table class="form-table">
+							<tbody>
+								<tr valign="top">
+									<td colspan="2">
+										<h4><?php esc_html_e( 'To make the plugin GDPR compliant, fill in the details and enable this section.', 'wp-maintenance-mode' ); ?></h4>
+										<p><?php esc_html_e( 'Here we added some generic texts that you may want to review, change or remove.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<label><input type="radio" value="1" name="options[gdpr][status]"<?php checked( $this->plugin_settings['gdpr']['status'], 1 ); ?> /> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+										<label><input type="radio" value="0" name="options[gdpr][status]"<?php checked( $this->plugin_settings['gdpr']['status'], 0 ); ?> /> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][policy_page_label]"><?php esc_html_e( 'Link name', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['gdpr']['policy_page_label'] ); ?>" name="options[gdpr][policy_page_label]" />
+										<p class="description"><?php esc_html_e( 'Label the link that will be shown on frontend footer', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][policy_page_link]"><?php esc_html_e( 'P. Policy page link', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_url( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" name="options[gdpr][policy_page_link]" />
+										<p class="description"><?php echo wp_kses( $this->get_policy_link_message(), wpmm_translated_string_allowed_html() ); ?></p>
+										<p class="description"><?php esc_html_e( 'REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][policy_page_target]"><?php esc_html_e( 'P. Policy link target', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[gdpr][policy_page_target]">
+											<option value="1"<?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['gdpr']['policy_page_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
+										</select>
+										<p class="description"><?php esc_html_e( 'Choose how the link will open.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][contact_form_tail]"><?php esc_html_e( 'Contact form \'tail\'', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[gdpr][contact_form_tail]" rows="3" style="width: 600px"><?php echo esc_textarea( wp_kses( $this->plugin_settings['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html() ) ); ?></textarea>
+										<p class="description"><?php esc_html_e( 'This will be shown together with the acceptance checkbox below the form', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][subscribe_form_tail]"><?php esc_html_e( 'Subscribe form \'tail\'', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<textarea name="options[gdpr][subscribe_form_tail]" rows="3" style="width: 600px"><?php echo esc_textarea( wp_kses( $this->plugin_settings['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html() ) ); ?></textarea>
+										<p class="description"><?php esc_html_e( 'This will be shown together with the acceptance checkbox below the form', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-																<?php require_once 'sidebar.php'; ?>
-																</div>
-																</div>
+						<?php wpmm_form_hidden_fields( 'gdpr' ); ?>
+						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
+						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit" />
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<?php require_once 'sidebar.php'; ?>
+	</div>
+</div>

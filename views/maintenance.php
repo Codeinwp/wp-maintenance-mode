@@ -102,7 +102,7 @@ defined( 'ABSPATH' ) || exit;
 						<?php if ( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
 							<div class="privacy_checkbox">
 								<label>
-									<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>">
+									<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" />
 
 									<?php echo esc_html_x( 'I\'ve read and agree with the site\'s privacy policy', 'subscribe form', 'wp-maintenance-mode' ); ?>
 								</label>
@@ -185,7 +185,7 @@ defined( 'ABSPATH' ) || exit;
 							<?php if ( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
 								<div class="privacy_checkbox">
 									<label>
-										<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>">
+										<input type="checkbox" name="acceptance" value="YES" data-rule-required="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" />
 
 										<?php echo esc_html_x( 'I\'ve read and agree with the site\'s privacy policy', 'contact form', 'wp-maintenance-mode' ); ?>
 									</label>
@@ -196,7 +196,7 @@ defined( 'ABSPATH' ) || exit;
 								<?php } ?>
 							<?php } ?>
 
-							<p class="submit"><input type="submit" value="<?php esc_attr_e( 'Send', 'wp-maintenance-mode' ); ?>"></p>
+							<p class="submit"><input type="submit" value="<?php esc_attr_e( 'Send', 'wp-maintenance-mode' ); ?>" /></p>
 
 							<?php do_action( 'wpmm_contact_form_end' ); ?>
 						</form>
