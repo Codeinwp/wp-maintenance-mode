@@ -3,7 +3,6 @@
 /**
  * Helpers
  */
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -374,6 +373,69 @@ function wpmm_translated_string_allowed_html() {
 	);
 
 	return apply_filters( 'wpmm_translated_string_allowed_html', $allowed_html );
+}
+
+/**
+ * Delete object cache & page cache (if the cache plugin is supported)
+ *
+ * @since 2.4.0
+ */
+function wpmm_delete_cache() {
+	// Object cache (WordPress built-in)
+	if ( function_exists( 'wp_cache_flush' ) ) {
+		wp_cache_flush();
+	}
+
+	// Super Cache Plugin - https://wordpress.org/plugins/wp-super-cache/
+	if ( function_exists( 'wp_cache_clear_cache' ) ) {
+		$plugin_basename = plugin_basename( WPMM_PATH . 'wp-maintenance-mode.php' );
+
+		wp_cache_clear_cache( is_multisite() && is_plugin_active_for_network( $plugin_basename ) ? get_current_blog_id() : 0 );
+	}
+
+	// W3 Total Cache Plugin - https://wordpress.org/plugins/w3-total-cache/
+	if ( function_exists( 'w3tc_flush_all' ) ) {
+		w3tc_flush_all();
+	}
+
+	// WP Rocket Plugin - https://wp-rocket.me/
+	if ( function_exists( 'rocket_clean_domain' ) ) {
+		rocket_clean_domain();
+	}
+
+	// WP Fastest Cache Plugin - https://wordpress.org/plugins/wp-fastest-cache/
+	if ( isset( $GLOBALS['wp_fastest_cache'] ) && method_exists( $GLOBALS['wp_fastest_cache'], 'deleteCache' ) ) {
+		$GLOBALS['wp_fastest_cache']->deleteCache( true );
+	}
+
+	// Endurance Page Cache Plugin - https://github.com/bluehost/endurance-page-cache
+	if ( class_exists( 'Endurance_Page_Cache' ) && method_exists( 'Endurance_Page_Cache', 'purge_all' ) ) {
+		$epc = new Endurance_Page_Cache();
+		$epc->purge_all();
+	}
+
+	// Swift Performance Lite Plugin - https://wordpress.org/plugins/swift-performance-lite/
+	if ( class_exists( 'Swift_Performance_Cache' ) && method_exists( 'Swift_Performance_Cache', 'clear_all_cache' ) ) {
+		Swift_Performance_Cache::clear_all_cache();
+	}
+
+	// Cache Enabler Plugin - https://wordpress.org/plugins/cache-enabler/
+	if ( class_exists( 'Cache_Enabler' ) && method_exists( 'Cache_Enabler', 'clear_site_cache' ) ) {
+		Cache_Enabler::clear_site_cache();
+	}
+
+	// SG Optimizer Plugin - https://wordpress.org/plugins/sg-cachepress/
+	if ( class_exists( '\\SiteGround_Optimizer\\Supercacher\\Supercacher' ) && method_exists( '\\SiteGround_Optimizer\\Supercacher\\Supercacher', 'purge_cache' ) ) {
+		\SiteGround_Optimizer\Supercacher\Supercacher::purge_cache();
+	}
+
+	// LiteSpeed Cache Plugin - https://wordpress.org/plugins/litespeed-cache/
+	if ( class_exists( '\\LiteSpeed\\Purge' ) && method_exists( '\\LiteSpeed\\Purge', 'purge_all' ) ) {
+		\LiteSpeed\Purge::purge_all( 'Purged by WP Maintenance Mode' );
+	}
+
+	// Feel free to use it if you have a custom cache mechanism
+	do_action( 'wpmm_delete_cache' );
 }
 
 if ( ! function_exists( 'wp_scripts' ) ) {

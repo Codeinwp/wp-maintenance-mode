@@ -293,7 +293,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							( $this->plugin_settings['general']['status'] === 0 && $_POST['options']['general']['status'] === 1 )
 							)
 					) {
-						$this->delete_cache();
+						wpmm_delete_cache();
 					}
 					break;
 				case 'design':
@@ -320,7 +320,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
-						$this->delete_cache();
+						wpmm_delete_cache();
 					}
 					break;
 				case 'modules':
@@ -362,7 +362,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
-						$this->delete_cache();
+						wpmm_delete_cache();
 					}
 					break;
 				case 'bot':
@@ -392,7 +392,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
-						$this->delete_cache();
+						wpmm_delete_cache();
 					}
 					break;
 				case 'gdpr':
@@ -405,7 +405,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
-						$this->delete_cache();
+						wpmm_delete_cache();
 					}
 					break;
 			}
@@ -541,23 +541,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		/**
-		 * Delete cache if any cache plugin (wp_cache or w3tc) is activated
+		 * Delete object cache & page cache (if the cache plugin is supported)
+		 *
+		 * ! the method is deprecated, but we keep it for backward compatibility !
 		 *
 		 * @since 2.0.1
 		 */
 		public function delete_cache() {
-			// Super Cache Plugin
-			if ( function_exists( 'wp_cache_clear_cache' ) ) {
-				wp_cache_clear_cache( is_multisite() && is_plugin_active_for_network( $this->plugin_basename ) ? get_current_blog_id() : '' );
+			if ( function_exists( '_deprecated_function' ) ) {
+				_deprecated_function( __METHOD__, '2.4.0', 'wpmm_delete_cache()' );
 			}
 
-			// W3 Total Cache Plugin
-			if ( function_exists( 'w3tc_pgcache_flush' ) ) {
-				w3tc_pgcache_flush();
-			}
-
-			// Feel free to use it if you have a custom cache mechanism
-			do_action( 'wpmm_delete_cache' );
+			wpmm_delete_cache();
 		}
 
 		/**
