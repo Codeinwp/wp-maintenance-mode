@@ -12,7 +12,7 @@
     <rule ref="PHPCompatibility"/>
     
     <rule ref="PHPCompatibilityWP"/>
-    
+
     <rule ref="WordPress-Core">
         <exclude name="WordPress.PHP.YodaConditions.NotYoda" />
         <exclude name="Squiz.Commenting.FileComment.WrongStyle" />
@@ -37,7 +37,7 @@
     
     <rule ref="WordPress-Extra"/>
     
-    <!-- Customize rules -->
+    <!-- Customize rules properties -->
     <rule ref="WordPress.Security.EscapeOutput">
         <properties>
             <property name="customAutoEscapedFunctions" type="array">
@@ -54,5 +54,15 @@
         </properties>
     </rule>
     
-    <config name="testVersion" value="5.6-"/>
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="wp-maintenance-mode"/>
+            </property>
+        </properties>
+    </rule>
+    
+    <!-- Configs -->
+    <config name="testVersion" value="5.6-"/><!-- used by PHPCompatibility & PHPCompatibilityWP -->
+    <config name="minimum_supported_wp_version" value="3.5"/>
 </ruleset>
