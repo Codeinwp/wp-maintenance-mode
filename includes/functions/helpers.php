@@ -3,6 +3,7 @@
 /**
  * Helpers
  */
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -432,6 +433,13 @@ function wpmm_delete_cache() {
 	// LiteSpeed Cache Plugin - https://wordpress.org/plugins/litespeed-cache/
 	if ( class_exists( '\\LiteSpeed\\Purge' ) && method_exists( '\\LiteSpeed\\Purge', 'purge_all' ) ) {
 		\LiteSpeed\Purge::purge_all( 'Purged by WP Maintenance Mode' );
+	}
+
+	// Nginx Helper Plugin - https://ro.wordpress.org/plugins/nginx-helper/
+	global $nginx_purger;
+
+	if ( is_a( $nginx_purger, 'Purger' ) && method_exists( $nginx_purger, 'purge_all' ) ) {
+		$nginx_purger->purge_all();
 	}
 
 	// Feel free to use it if you have a custom cache mechanism
