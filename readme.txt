@@ -79,7 +79,7 @@ Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
 
-= 2.4.0 (xx/04/2021) =
+= 2.4.0 (xx/05/2021) =
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add list of available shortcodes under the "Text" editor
@@ -92,6 +92,7 @@ Notice: `wp-cron.php` is excluded by default.
 * Misc: the image uploaders (from the dashboard) are now translatable
 * Misc: improve uninstall routine
 * Misc: add `wpmm_delete_cache` action; It is called after each setting change.
+* Misc: add support for cache plugins like: WP Rocket, WP Fastest Cache, Endurance Page Cache, Swift Performance Lite, Cache Enabler, SG Optimizer, LiteSpeed Cache, Nginx Helper;
 * Misc: remove `wpmm_count_where` helper function
 * Misc: code improvements
 
