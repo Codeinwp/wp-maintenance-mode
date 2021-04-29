@@ -435,7 +435,7 @@ function wpmm_delete_cache() {
 		\LiteSpeed\Purge::purge_all( 'Purged by WP Maintenance Mode' );
 	}
 
-	// Nginx Helper Plugin - https://ro.wordpress.org/plugins/nginx-helper/
+	// Nginx Helper Plugin - https://wordpress.org/plugins/nginx-helper/
 	global $nginx_purger;
 
 	if ( is_a( $nginx_purger, 'Purger' ) && method_exists( $nginx_purger, 'purge_all' ) ) {
