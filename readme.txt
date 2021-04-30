@@ -7,7 +7,7 @@ Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
 Tested up to: 5.6
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -82,17 +82,17 @@ Notice: `wp-cron.php` is excluded by default.
 = 2.4.0 (xx/05/2021) =
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
-* Design: add list of available shortcodes under the "Text" editor
+* Design: add a list of available shortcodes under the "Text" editor
 * Bot: make {visitor_name} placeholder work in all messages after the visitor types his name
 * Misc: add [embed] shortcode for responsive video embeds; Compatible with YouTube, Vimeo, DailyMotion.
-* Misc: make the exclude mechanism work with cyrillic characters
+* Misc: make the exclude mechanism work with Cyrillic characters
 * Misc: add `wpmm_maintenance_template` filter; It works the same way as the `wpmm_contact_template` filter, but for the maintenance template.
 * Misc: now you can override the `contact` email template too; Check `/views/contact.php` for more details.
 * Misc: better compatibility with translation plugins like Loco Translate
 * Misc: the image uploaders (from the dashboard) are now translatable
 * Misc: improve uninstall routine
 * Misc: add `wpmm_delete_cache` action; It is called after each setting change.
-* Misc: add support for cache plugins like: WP Rocket, WP Fastest Cache, Endurance Page Cache, Swift Performance Lite, Cache Enabler, SG Optimizer, LiteSpeed Cache, Nginx Helper;
+* Misc: add support for cache plugins like WP Rocket, WP Fastest Cache, Endurance Page Cache, Swift Performance Lite, Cache Enabler, SG Optimizer, LiteSpeed Cache, Nginx Helper;
 * Misc: remove `wpmm_count_where` helper function
 * Misc: code improvements
 
