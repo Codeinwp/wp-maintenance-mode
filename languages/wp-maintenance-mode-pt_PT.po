@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.4.0\n"
 "POT-Creation-Date: 2021-04-30 12:32+0300\n"
-"PO-Revision-Date: 2021-04-30 12:32+0300\n"
+"PO-Revision-Date: 2021-04-30 12:47+0300\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -437,30 +437,30 @@ msgstr "Permitir que os robôs de pesquisa ultrapassem o modo de manutenção?"
 
 #: views/settings.php:80
 msgid "Backend Role"
-msgstr "Perfil de utilizador da administração"
+msgstr "Papel de utilizador da administração"
 
 #: views/settings.php:83 views/settings.php:96
 msgid "Select role(s)"
-msgstr "Seleccione o(s) perfil(s)"
+msgstr "Seleccione os papéis"
 
 #: views/settings.php:88
 msgid ""
 "Which user role is allowed to access the backend of this blog? "
 "Administrators will always have access."
 msgstr ""
-"Que perfil tem permissão de acesso à administração deste site? Os "
+"Que papel tem permissão de acesso à administração deste site? Os "
 "administradores terão sempre acesso."
 
 #: views/settings.php:93
 msgid "Frontend Role"
-msgstr "Perfil de utilizador da frente do site"
+msgstr "Papel de utilizador da frente do site"
 
 #: views/settings.php:101
 msgid ""
 "Which user role is allowed to access the frontend of this blog? "
 "Administrators will always have access."
 msgstr ""
-"Que perfil tem permissão de acesso à frente deste site? Os administradores "
+"Que papel tem permissão de acesso à frente deste site? Os administradores "
 "terão sempre acesso."
 
 #: views/settings.php:106
