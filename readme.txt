@@ -35,8 +35,8 @@ Also works with WordPress Multisite installs (each blog from the network has it'
 * Works with any WordPress theme;
 * SEO options;
 * Exclude URLs from maintenance;
-* Bot functionality to collect the emails in a friendly and efficient way.
-* GDPR Ready
+* Bot functionality to collect the emails in a friendly and efficient way;
+* GDPR Ready;
 
 = Bugs, technical hints or contribute =
 
@@ -79,7 +79,7 @@ Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
 
-= 2.4.0 (xx/05/2021) =
+= 2.4.0 (13/05/2021) =
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add a list of available shortcodes under the "Text" editor

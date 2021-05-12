@@ -1,4 +1,4 @@
-= 2.4.0 (xx/05/2021) =
+= 2.4.0 (13/05/2021) =
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add a list of available shortcodes under the "Text" editor
