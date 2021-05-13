@@ -114,8 +114,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'ajax_url'                => admin_url( 'admin-ajax.php' ),
 						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
 						'image_uploader_defaults' => array(
-							'title'       => _x( 'Upload Image', 'image_uploader defaults', 'wp-maintenance-mode' ),
-							'button_text' => _x( 'Choose Image', 'image_uploader defaults', 'wp-maintenance-mode' ),
+							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
+							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
 					)
 				);

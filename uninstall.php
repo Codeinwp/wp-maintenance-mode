@@ -39,7 +39,7 @@ function single_uninstall() {
 	$upload_dir        = wp_upload_dir();
 	$bot_settings_file = ! empty( $upload_dir['basedir'] ) ? trailingslashit( $upload_dir['basedir'] ) . 'data.js' : false;
 
-	if ( file_exists( $bot_settings_file ) ) {
+	if ( $bot_settings_file !== false && file_exists( $bot_settings_file ) ) {
 		wp_delete_file( $bot_settings_file );
 	}
 }

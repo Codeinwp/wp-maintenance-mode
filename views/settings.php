@@ -467,6 +467,20 @@ defined( 'ABSPATH' ) || exit;
 									</td>
 								</tr>
 								<tr valign="top">
+									<th scope="row" colspan="2" style="font-weight: normal;">
+										<?php
+										printf(
+												/* translators: 1: start code tag, 2: end code tag, 3: start code tag, 4: end code tag */
+											esc_html__( 'You have to use full URLs. For example: if your Twitter username is %1$sWordPress%2$s, the URL should be %3$shttps://twitter.com/WordPress%4$s.', 'wp-maintenance-mode' ),
+											'<code>',
+											'</code>',
+											'<code>',
+											'</code>'
+										);
+										?>
+									</th>
+								</tr>
+								<tr valign="top">
 									<th scope="row">
 										<label for="options[modules][social_github]">Github</label>
 									</th>

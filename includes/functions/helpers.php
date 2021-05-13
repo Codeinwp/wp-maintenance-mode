@@ -377,6 +377,33 @@ function wpmm_translated_string_allowed_html() {
 }
 
 /**
+ * Define a constant if it is not already defined
+ * (inspired by WooCommerce)
+ *
+ * @since 2.4.0
+ * @param string $name
+ * @param mixed  $value
+ */
+function wpmm_maybe_define_constant( $name, $value ) {
+	if ( ! defined( $name ) ) {
+		define( $name, $value );
+	}
+}
+
+/**
+ * Set nocache constants
+ *
+ * @since 2.4.0
+ */
+function wpmm_set_nocache_constants() {
+	wpmm_maybe_define_constant( 'DONOTCACHEPAGE', true );
+	wpmm_maybe_define_constant( 'DONOTCACHEOBJECT', true );
+	wpmm_maybe_define_constant( 'DONOTCACHEDB', true );
+	wpmm_maybe_define_constant( 'DONOTMINIFY', true );
+	wpmm_maybe_define_constant( 'DONOTCDN', true );
+}
+
+/**
  * Delete object cache & page cache (if the cache plugin is supported)
  *
  * @since 2.4.0

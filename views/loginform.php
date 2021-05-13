@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 	<input type="password" placeholder="password" name="pwd" />
 
 	<?php if ( ! empty( $atts['redirect'] ) ) { ?>
-		<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $atts['redirect'] ); ?>" />
+		<input type="hidden" name="redirect_to" value="<?php echo esc_url( $atts['redirect'] ); ?>" />
 	<?php } ?>
 	<input type="submit" value="<?php esc_attr_e( 'Login', 'wp-maintenance-mode' ); ?>" />
 </form>

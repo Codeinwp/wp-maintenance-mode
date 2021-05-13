@@ -54,7 +54,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wpmm_head', array( $this, 'add_google_analytics_code' ) );
 
 				// Enqueue Javascript files and add inline javascript
-								add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
+				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
 			}
 		}
@@ -622,7 +622,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$countdown_start = ! empty( $this->plugin_settings['modules']['countdown_start'] ) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_date'];
 				$countdown_end   = strtotime( $countdown_start . ' +' . $backtime_seconds . ' seconds' );
 
+				wpmm_set_nocache_constants();
 				nocache_headers();
+
 				ob_start();
 				header( "Content-type: text/html; charset=$charset" );
 				header( "$protocol $status_code Service Unavailable", true, $status_code );
