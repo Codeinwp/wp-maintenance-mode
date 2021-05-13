@@ -23,7 +23,7 @@ Adds a splash page to your site that lets visitors know your site is down for ma
 
 **Credits**
 
-Developed by [Designmodo](https://designmodo.com) & [StrictThemes – WordPress Themes](http://strictthemes.com/)
+Developed by [Designmodo](https://designmodo.com)
 
 ## F.A.Q.
 

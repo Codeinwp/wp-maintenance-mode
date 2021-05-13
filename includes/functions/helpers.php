@@ -115,12 +115,6 @@ function wpmm_get_banners() {
 			'utm'   => true,
 		),
 		array(
-			'title' => 'StrictThemes – WordPress Themes',
-			'link'  => 'https://themeforest.net/user/strictthemes/portfolio?utf8=%E2%9C%93&order_by=sales&ref=StrictThemes',
-			'image' => 'strictthemes.png',
-			'utm'   => false,
-		),
-		array(
 			'title' => 'Postcards',
 			'link'  => 'https://designmodo.com/postcards/',
 			'image' => 'postcards.jpg',

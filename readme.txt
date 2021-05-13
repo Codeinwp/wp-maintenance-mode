@@ -44,7 +44,7 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 
 = Credits =
 
-Developed by [Designmodo](https://designmodo.com) & [StrictThemes – WordPress Themes](http://strictthemes.com/)
+Developed by [Designmodo](https://designmodo.com)
 
 == Installation ==
 
