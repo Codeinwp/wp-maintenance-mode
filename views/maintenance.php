@@ -85,7 +85,7 @@ defined( 'ABSPATH' ) || exit;
 			 */
 			if (
 					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) &&
-					( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 0 )
+					( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 0 )
 			) {
 				?>
 				<!-- Subscribe -->
