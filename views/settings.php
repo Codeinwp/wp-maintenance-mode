@@ -227,7 +227,7 @@ defined( 'ABSPATH' ) || exit;
 												<li>
 													<?php
 													/* translators: 1: shortcode tag, 2: list of compatible services, 3: shortcode example */
-													printf( esc_html__( '%1$s - responsive video embed. Compatible with %2$s. Example: %3$s', 'wp-maintenance-mode' ), '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/embed]</span>' );
+													printf( esc_html__( '%1$s - responsive video embed. Compatible with %2$s. Example: %3$s', 'wp-maintenance-mode' ), '[embed]', 'YouTube, Vimeo, DailyMotion', '<span>[embed]https://www.youtube.com/watch?v=HCfPhZQz2CE[/embed]</span>' );
 													?>
 												</li>
 											</ul>
