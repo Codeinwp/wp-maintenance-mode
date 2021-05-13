@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Maintenance Mode 2.4.0\n"
-"POT-Creation-Date: 2021-04-30 12:21+0300\n"
-"PO-Revision-Date: 2021-04-30 12:21+0300\n"
+"POT-Creation-Date: 2021-05-13 15:51+0300\n"
+"PO-Revision-Date: 2021-05-13 15:52+0300\n"
 "Last-Translator: Erick Ruiz de Chavez <erick@erch.co>\n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: es_ES\n"
@@ -26,14 +26,14 @@ msgstr ""
 
 #: includes/classes/wp-maintenance-mode-admin.php:117
 #, fuzzy
-msgctxt "image_uploader defaults"
+msgctxt "image_uploader default title"
 msgid "Upload Image"
 msgstr "Sube un fondo"
 
 #: includes/classes/wp-maintenance-mode-admin.php:118
 #, fuzzy
 #| msgid "Choose type"
-msgctxt "image_uploader defaults"
+msgctxt "image_uploader default button_text"
 msgid "Choose Image"
 msgstr "Seleccionar tipo"
 
@@ -207,7 +207,7 @@ msgid "Have a great day!"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:179
-#: includes/classes/wp-maintenance-mode.php:656
+#: includes/classes/wp-maintenance-mode.php:658
 msgid "Type your name here…"
 msgstr ""
 
@@ -220,7 +220,7 @@ msgid "Boring"
 msgstr ""
 
 #: includes/classes/wp-maintenance-mode.php:182
-#: includes/classes/wp-maintenance-mode.php:657
+#: includes/classes/wp-maintenance-mode.php:659
 #, fuzzy
 msgid "Type your email here…"
 msgstr "Introduce tu dirección de correo electrónico"
@@ -263,41 +263,41 @@ msgctxt "<meta> keywords default"
 msgid "Maintenance Mode"
 msgstr "Modo de Mantenimiento"
 
-#: includes/classes/wp-maintenance-mode.php:653
+#: includes/classes/wp-maintenance-mode.php:655
 msgid "Please type in your name."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:654
+#: includes/classes/wp-maintenance-mode.php:656
 #, fuzzy
 msgid "Please type in a valid email address."
 msgstr "Por favor usa una dirección de correo electrónico valida."
 
-#: includes/classes/wp-maintenance-mode.php:658 views/maintenance.php:199
+#: includes/classes/wp-maintenance-mode.php:660 views/maintenance.php:199
 msgid "Send"
 msgstr "Enviar"
 
-#: includes/classes/wp-maintenance-mode.php:1005
-#: includes/classes/wp-maintenance-mode.php:1044 views/maintenance.php:172
+#: includes/classes/wp-maintenance-mode.php:1007
+#: includes/classes/wp-maintenance-mode.php:1046 views/maintenance.php:172
 msgid "Please enter a valid email address."
 msgstr "Por favor usa una dirección de correo electrónico valida."
 
-#: includes/classes/wp-maintenance-mode.php:1021
+#: includes/classes/wp-maintenance-mode.php:1023
 msgid "You successfully subscribed. Thanks!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:1040
+#: includes/classes/wp-maintenance-mode.php:1042
 msgid "All fields required."
 msgstr "Todos los campos son obligatorios."
 
-#: includes/classes/wp-maintenance-mode.php:1051
+#: includes/classes/wp-maintenance-mode.php:1053
 msgid "Message via contact"
 msgstr "Mensaje vía formulario de contacto."
 
-#: includes/classes/wp-maintenance-mode.php:1073
+#: includes/classes/wp-maintenance-mode.php:1075
 msgid "Something happened! Please try again later."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:1076
+#: includes/classes/wp-maintenance-mode.php:1078
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Tu mensaje ha sido enviado al administrador. ¡Muchas gracias!"
 
@@ -401,15 +401,15 @@ msgstr ""
 msgid "GDPR"
 msgstr ""
 
-#: views/settings.php:59 views/settings.php:643 views/settings.php:828
+#: views/settings.php:59 views/settings.php:653 views/settings.php:838
 msgid "Status"
 msgstr "Estado"
 
-#: views/settings.php:62 views/settings.php:646 views/settings.php:831
+#: views/settings.php:62 views/settings.php:656 views/settings.php:841
 msgid "Activated"
 msgstr "Activado"
 
-#: views/settings.php:63 views/settings.php:647 views/settings.php:832
+#: views/settings.php:63 views/settings.php:657 views/settings.php:842
 msgid "Deactivated"
 msgstr "Desactivado"
 
@@ -419,13 +419,13 @@ msgstr "Evitar Robots de Búsqueda"
 
 #: views/settings.php:72 views/settings.php:143 views/settings.php:155
 #: views/settings.php:361 views/settings.php:405 views/settings.php:452
-#: views/settings.php:546 views/settings.php:584 views/settings.php:595
+#: views/settings.php:556 views/settings.php:594 views/settings.php:605
 msgid "Yes"
 msgstr "Si"
 
 #: views/settings.php:73 views/settings.php:144 views/settings.php:156
 #: views/settings.php:362 views/settings.php:406 views/settings.php:453
-#: views/settings.php:547 views/settings.php:585 views/settings.php:596
+#: views/settings.php:557 views/settings.php:595 views/settings.php:606
 msgid "No"
 msgstr "No"
 
@@ -511,13 +511,13 @@ msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr "¿Deseas agregar un enlace al escritorio en tu página de mantenimiento?"
 
-#: views/settings.php:165 views/settings.php:344 views/settings.php:625
-#: views/settings.php:812 views/settings.php:888
+#: views/settings.php:165 views/settings.php:344 views/settings.php:635
+#: views/settings.php:822 views/settings.php:898
 msgid "Save settings"
 msgstr "Guardar ajustes"
 
-#: views/settings.php:166 views/settings.php:345 views/settings.php:626
-#: views/settings.php:813 views/settings.php:889
+#: views/settings.php:166 views/settings.php:345 views/settings.php:636
+#: views/settings.php:823 views/settings.php:899
 msgid "Reset settings"
 msgstr "Restablecer ajustes"
 
@@ -709,11 +709,11 @@ msgstr "¿Mostrar redes sociales?"
 msgid "Links target?"
 msgstr "¿Destino de enlaces?"
 
-#: views/settings.php:463 views/settings.php:860
+#: views/settings.php:463 views/settings.php:870
 msgid "New page"
 msgstr "Página nueva"
 
-#: views/settings.php:464 views/settings.php:861
+#: views/settings.php:464 views/settings.php:871
 msgid "Same page"
 msgstr "Misma página"
 
@@ -721,47 +721,54 @@ msgstr "Misma página"
 msgid "Choose how the links will open."
 msgstr "Selecciona como se abrirán los enlaces."
 
-#: views/settings.php:536
+#: views/settings.php:473
+msgid ""
+"You have to use full URLs. For example: if your Twitter username is "
+"<code>WordPress</code>, the URL should be <code>https://twitter.com/"
+"WordPress</code>."
+msgstr ""
+
+#: views/settings.php:546
 msgid "Contact"
 msgstr "Contacto"
 
-#: views/settings.php:542
+#: views/settings.php:552
 msgid "Show contact?"
 msgstr "¿Mostrar contacto?"
 
-#: views/settings.php:553
+#: views/settings.php:563
 msgid "Email address"
 msgstr "Dirección de correo electrónico"
 
-#: views/settings.php:561
+#: views/settings.php:571
 msgid "Effects"
 msgstr "Efectos"
 
-#: views/settings.php:565
+#: views/settings.php:575
 msgid "Move top - Move bottom"
 msgstr "Mover al inicio - Mover al final"
 
-#: views/settings.php:566
+#: views/settings.php:576
 msgid "Zoom - Zoomed"
 msgstr "Ampliar - Ampliado"
 
-#: views/settings.php:567
+#: views/settings.php:577
 msgid "Fold - Unfold"
 msgstr "Colapsar - Expandir"
 
-#: views/settings.php:574
+#: views/settings.php:584
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: views/settings.php:580
+#: views/settings.php:590
 msgid "Use Google Analytics?"
 msgstr "¿Usar Google Analytics?"
 
-#: views/settings.php:591
+#: views/settings.php:601
 msgid "Enable IP anonymization?"
 msgstr ""
 
-#: views/settings.php:603
+#: views/settings.php:613
 #, php-format
 msgid ""
 "Read about IP anonymization on <a href=\"%s\" rel=\"noreferrer\" target="
@@ -769,205 +776,205 @@ msgid ""
 "Analytics 4."
 msgstr ""
 
-#: views/settings.php:614
+#: views/settings.php:624
 msgid "Tracking code"
 msgstr "Código de rastreo"
 
-#: views/settings.php:618
+#: views/settings.php:628
 msgid ""
 "Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX, G-XXXXXXXX. Eg: "
 "UA-12345678-1 is valid"
 msgstr ""
 
-#: views/settings.php:635
+#: views/settings.php:645
 msgid ""
 "Setup the conversation steps to capture more subscribers with this friendly "
 "way of asking email addresess."
 msgstr ""
 
-#: views/settings.php:636
+#: views/settings.php:646
 msgid ""
 "You may also want to use these wildcards: {bot_name} and {visitor_name} to "
 "make the conversation even more realistic."
 msgstr ""
 
-#: views/settings.php:637
+#: views/settings.php:647
 msgid ""
 "It is also ok if you don't fill in all the conversation steps if you don't "
 "need to."
 msgstr ""
 
-#: views/settings.php:638
+#: views/settings.php:648
 msgid ""
 "If you want to see the list of subscribers, go to Modules &raquo; Subscribe "
 "&raquo; Export as CSV."
 msgstr ""
 
-#: views/settings.php:652
+#: views/settings.php:662
 #, fuzzy
 msgid "Bot Name"
 msgstr "Nombre"
 
-#: views/settings.php:656
+#: views/settings.php:666
 msgid "This name will appear when the bot is typing."
 msgstr ""
 
-#: views/settings.php:661
+#: views/settings.php:671
 #, fuzzy
 msgid "Upload avatar"
 msgstr "Sube un fondo"
 
-#: views/settings.php:667
+#: views/settings.php:677
 #, fuzzy
 msgctxt "upload avatar button"
 msgid "Upload"
 msgstr "Sube un fondo"
 
-#: views/settings.php:670
+#: views/settings.php:680
 #, fuzzy
 msgid "Upload Avatar"
 msgstr "Sube un fondo"
 
-#: views/settings.php:671
+#: views/settings.php:681
 #, fuzzy
 #| msgid "Choose type"
 msgid "Choose picture"
 msgstr "Seleccionar tipo"
 
-#: views/settings.php:674
+#: views/settings.php:684
 msgid "A 512 x 512 px will work just fine."
 msgstr ""
 
-#: views/settings.php:680
+#: views/settings.php:690
 msgid "Customize Messages"
 msgstr ""
 
-#: views/settings.php:686
+#: views/settings.php:696
 msgid "Message 1"
 msgstr ""
 
-#: views/settings.php:694
+#: views/settings.php:704
 msgid "Message 2"
 msgstr ""
 
-#: views/settings.php:702
+#: views/settings.php:712
 msgid "Message 3"
 msgstr ""
 
-#: views/settings.php:710 views/settings.php:752 views/settings.php:776
+#: views/settings.php:720 views/settings.php:762 views/settings.php:786
 msgid "Response"
 msgstr ""
 
-#: views/settings.php:714
+#: views/settings.php:724
 msgctxt "response for message 3"
 msgid "Visitor's response will be here."
 msgstr ""
 
-#: views/settings.php:715 views/settings.php:781
+#: views/settings.php:725 views/settings.php:791
 msgid "Edit the placeholder's text"
 msgstr ""
 
-#: views/settings.php:720
+#: views/settings.php:730
 msgid "Message 4"
 msgstr ""
 
-#: views/settings.php:728
+#: views/settings.php:738
 msgid "Message 5"
 msgstr ""
 
-#: views/settings.php:736
+#: views/settings.php:746
 msgid "Message 6"
 msgstr ""
 
-#: views/settings.php:744
+#: views/settings.php:754
 msgid "Message 7"
 msgstr ""
 
-#: views/settings.php:757
+#: views/settings.php:767
 msgid "Edit button one"
 msgstr ""
 
-#: views/settings.php:761
+#: views/settings.php:771
 msgid "Edit button two"
 msgstr ""
 
-#: views/settings.php:763
+#: views/settings.php:773
 msgctxt "response for message 7"
 msgid "Visitor's response will be here."
 msgstr ""
 
-#: views/settings.php:768 views/settings.php:786
+#: views/settings.php:778 views/settings.php:796
 msgid "Message 8"
 msgstr ""
 
-#: views/settings.php:768 views/settings.php:794 views/settings.php:802
+#: views/settings.php:778 views/settings.php:804 views/settings.php:812
 msgid "(click on button one)"
 msgstr ""
 
-#: views/settings.php:780
+#: views/settings.php:790
 msgctxt "response for message 8 (click on button one)"
 msgid "Visitor's response will be here."
 msgstr ""
 
-#: views/settings.php:786
+#: views/settings.php:796
 msgid "(click on button two)"
 msgstr ""
 
-#: views/settings.php:794
+#: views/settings.php:804
 msgid "Message 9"
 msgstr ""
 
-#: views/settings.php:802
+#: views/settings.php:812
 msgid "Message 10"
 msgstr ""
 
-#: views/settings.php:822
+#: views/settings.php:832
 msgid ""
 "To make the plugin GDPR compliant, fill in the details and enable this "
 "section."
 msgstr ""
 
-#: views/settings.php:823
+#: views/settings.php:833
 msgid ""
 "Here we added some generic texts that you may want to review, change or "
 "remove."
 msgstr ""
 
-#: views/settings.php:837
+#: views/settings.php:847
 msgid "Link name"
 msgstr ""
 
-#: views/settings.php:841
+#: views/settings.php:851
 msgid "Label the link that will be shown on frontend footer"
 msgstr ""
 
-#: views/settings.php:846
+#: views/settings.php:856
 msgid "P. Policy page link"
 msgstr ""
 
-#: views/settings.php:851
+#: views/settings.php:861
 msgid ""
 "REMEMBER: In order to make the privacy policy page accessible you need to "
 "add it in General -> Exclude."
 msgstr ""
 
-#: views/settings.php:856
+#: views/settings.php:866
 msgid "P. Policy link target"
 msgstr ""
 
-#: views/settings.php:863
+#: views/settings.php:873
 msgid "Choose how the link will open."
 msgstr ""
 
-#: views/settings.php:868
+#: views/settings.php:878
 msgid "Contact form 'tail'"
 msgstr ""
 
-#: views/settings.php:872 views/settings.php:881
+#: views/settings.php:882 views/settings.php:891
 msgid "This will be shown together with the acceptance checkbox below the form"
 msgstr ""
 
-#: views/settings.php:877
+#: views/settings.php:887
 msgid "Subscribe form 'tail'"
 msgstr ""
 
