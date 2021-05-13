@@ -371,6 +371,7 @@ function wpmm_translated_string_allowed_html() {
 		),
 		'strong' => array(),
 		'button' => array(),
+		'code'   => array(),
 	);
 
 	return apply_filters( 'wpmm_translated_string_allowed_html', $allowed_html );

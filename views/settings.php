@@ -469,13 +469,9 @@ defined( 'ABSPATH' ) || exit;
 								<tr valign="top">
 									<th scope="row" colspan="2" style="font-weight: normal;">
 										<?php
-										printf(
-												/* translators: 1: start code tag, 2: end code tag, 3: start code tag, 4: end code tag */
-											esc_html__( 'You have to use full URLs. For example: if your Twitter username is %1$sWordPress%2$s, the URL should be %3$shttps://twitter.com/WordPress%4$s.', 'wp-maintenance-mode' ),
-											'<code>',
-											'</code>',
-											'<code>',
-											'</code>'
+										echo wp_kses(
+											__( 'You have to use full URLs. For example: if your Twitter username is <code>WordPress</code>, the URL should be <code>https://twitter.com/WordPress</code>.', 'wp-maintenance-mode' ),
+											wpmm_translated_string_allowed_html()
 										);
 										?>
 									</th>
@@ -610,16 +606,16 @@ defined( 'ABSPATH' ) || exit;
 											<option value="0"<?php selected( $this->plugin_settings['modules']['ga_anonymize_ip'], 0 ); ?>><?php esc_html_e( 'No', 'wp-maintenance-mode' ); ?></option>
 										</select>
 										<p class="description">
-											<?php
-											printf(
-												wp_kses(
-															/* translators: Google Analytics documentation url */
-													__( 'Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'wp-maintenance-mode' ),
-													wpmm_translated_string_allowed_html()
-												),
-												esc_url( 'https://support.google.com/analytics/answer/2763052' )
-											);
-											?>
+<?php
+printf(
+	wp_kses(
+				/* translators: Google Analytics documentation url */
+		__( 'Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'wp-maintenance-mode' ),
+		wpmm_translated_string_allowed_html()
+	),
+	esc_url( 'https://support.google.com/analytics/answer/2763052' )
+);
+?>
 										</p>
 									</td>
 								</tr>
@@ -635,7 +631,7 @@ defined( 'ABSPATH' ) || exit;
 							</tbody>
 						</table>
 
-						<?php wpmm_form_hidden_fields( 'modules' ); ?>
+<?php wpmm_form_hidden_fields( 'modules' ); ?>
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit" />
 					</form>
@@ -822,7 +818,7 @@ defined( 'ABSPATH' ) || exit;
 							</tbody>
 						</table>
 
-						<?php wpmm_form_hidden_fields( 'bot' ); ?>
+<?php wpmm_form_hidden_fields( 'bot' ); ?>
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit" />
 					</form>
@@ -898,7 +894,7 @@ defined( 'ABSPATH' ) || exit;
 							</tbody>
 						</table>
 
-						<?php wpmm_form_hidden_fields( 'gdpr' ); ?>
+<?php wpmm_form_hidden_fields( 'gdpr' ); ?>
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit" />
 					</form>
@@ -906,6 +902,6 @@ defined( 'ABSPATH' ) || exit;
 			</div>
 		</div>
 
-		<?php require_once 'sidebar.php'; ?>
+<?php require_once 'sidebar.php'; ?>
 	</div>
 </div>
