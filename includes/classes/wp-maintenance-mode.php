@@ -524,7 +524,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function single_deactivate() {
-			// nothing
+			wpmm_delete_cache();
 		}
 
 		/**
