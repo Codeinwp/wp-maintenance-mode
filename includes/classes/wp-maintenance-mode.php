@@ -897,7 +897,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			// "Design > Content > Footer links" color
 			if ( ! empty( $this->plugin_settings['design']['footer_links_color'] ) ) {
-				$css_rules['design.footer_links_color'] = sprintf( '.wrap .footer_links a { color: %s; }', sanitize_hex_color( $this->plugin_settings['design']['footer_links_color'] ) );
+				$css_rules['design.footer_links_color'] = sprintf( '.wrap .footer_links a, .wrap .author_link a { color: %s; }', sanitize_hex_color( $this->plugin_settings['design']['footer_links_color'] ) );
 			}
 
 			// "Design > Background" color
