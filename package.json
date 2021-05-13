@@ -1,6 +1,6 @@
 {
   "name": "wp-maintenance-mode",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "author": "Designmodo",
   "homepage": "https://designmodo.com/",
   "bugs": {
@@ -9,8 +9,8 @@
   "main": "Gruntfile.js",
   "devDependencies": {
     "autoprefixer": "^9.8.6",
-    "cssnano": "^4.1.10",
-    "grunt": "^1.3.0",
+    "cssnano": "^4.1.11",
+    "grunt": "^1.4.0",
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-contrib-watch": "^1.1.0",

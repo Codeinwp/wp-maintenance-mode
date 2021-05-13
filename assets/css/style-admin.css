@@ -19,6 +19,7 @@ h2.wpmm-title {
 .wpmm-wrapper #sidebar {
     padding: 0 0 0 20px;
     width: 280px;
+    vertical-align: top;
 }
 
 .wpmm-wrapper #sidebar .sidebar_box {
@@ -56,7 +57,7 @@ h2.wpmm-title {
 .nav-tab-wrapper {
     border-bottom: 1px solid #ccc;
     padding-bottom: 0;
-    padding-left: 10px;
+    padding-top: 0 !important;
 }
 
 .nav-tab-wrapper a {
@@ -64,6 +65,15 @@ h2.wpmm-title {
     font-weight: 700;
     line-height: 24px;
     padding: 6px 10px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.nav-tab-wrapper a .nav-tab-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
 }
 
 /* TABS CONTENT */
@@ -109,6 +119,30 @@ h2.wpmm-title {
 
 .tabs-content td.has-inline-color-picker .wp-picker-container .wp-color-result {
     margin: 0 6px 0px 6px;
+}
+
+.tabs-content .shortcodes-list-wrapper {
+    margin-top: 4px;
+    margin-bottom: 0;
+    color: #646970;
+}
+
+.tabs-content ul.shortcodes-list {
+    list-style-type: disc;
+    padding-left: 15px;
+    font-size: 12px;
+    display: none;
+}
+
+.tabs-content ul.shortcodes-list span {
+    background-color: #d3d3d3;
+    padding: 2px 3px;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.tabs-content ul.shortcodes-list.show {
+    display: block;
 }
 
 @media screen and (max-width: 782px) {

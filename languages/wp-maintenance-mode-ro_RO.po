@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Maintenance Mode 2.3.0\n"
-"POT-Creation-Date: 2020-12-07 17:18+0200\n"
-"PO-Revision-Date: 2020-12-07 17:18+0200\n"
+"Project-Id-Version: WP Maintenance Mode 2.4.0\n"
+"POT-Creation-Date: 2021-05-13 15:58+0300\n"
+"PO-Revision-Date: 2021-05-13 15:58+0300\n"
 "Last-Translator: \n"
 "Language-Team: Designmodo <info@designmodo.com>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
@@ -23,54 +23,72 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: .git\n"
 "X-Poedit-SearchPathExcluded-1: assets\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
+"X-Poedit-SearchPathExcluded-3: vendor\n"
 
-#: includes/classes/wp-maintenance-mode-admin.php:121
-#: includes/classes/wp-maintenance-mode-admin.php:159
-#: includes/classes/wp-maintenance-mode-admin.php:182
-#: includes/classes/wp-maintenance-mode-admin.php:252
+#: includes/classes/wp-maintenance-mode-admin.php:117
+#, fuzzy
+msgctxt "image_uploader default title"
+msgid "Upload Image"
+msgstr "Incarca imagine"
+
+#: includes/classes/wp-maintenance-mode-admin.php:118
+#, fuzzy
+#| msgid "Choose type"
+msgctxt "image_uploader default button_text"
+msgid "Choose Image"
+msgstr "Alege tip"
+
+#: includes/classes/wp-maintenance-mode-admin.php:157
+#: includes/classes/wp-maintenance-mode-admin.php:195
+#: includes/classes/wp-maintenance-mode-admin.php:242
+#: includes/classes/wp-maintenance-mode-admin.php:440
 msgid "You do not have access to this resource."
 msgstr "Nu aveti acces la aceasta resursa."
 
-#: includes/classes/wp-maintenance-mode-admin.php:165
+#: includes/classes/wp-maintenance-mode-admin.php:202
 #, php-format
 msgctxt "ajax response"
 msgid "You have %d subscriber"
-msgid_plural "You have %s subscribers"
+msgid_plural "You have %d subscribers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:187
-msgid "The nonce field must not be empty."
-msgstr "Campul nonce nu trebuie sa fie gol."
-
-#: includes/classes/wp-maintenance-mode-admin.php:192
-msgid "The tab slug must not be empty."
-msgstr "Identificatorul tabului nu trebuie sa fie gol."
-
-#: includes/classes/wp-maintenance-mode-admin.php:197
-#: includes/classes/wp-maintenance-mode-admin.php:248
-msgid "Security check."
-msgstr "Verificare securitate."
-
-#: includes/classes/wp-maintenance-mode-admin.php:203
-msgid "The tab slug must exist."
-msgstr "Identificatorul tabului trebuie sa existe."
-
-#: includes/classes/wp-maintenance-mode-admin.php:223
+#: includes/classes/wp-maintenance-mode-admin.php:217
+#: includes/classes/wp-maintenance-mode-admin.php:218
 msgid "WP Maintenance Mode"
 msgstr "WP Maintenance Mode"
 
-#: includes/classes/wp-maintenance-mode-admin.php:500
+#: includes/classes/wp-maintenance-mode-admin.php:247
+#: includes/classes/wp-maintenance-mode-admin.php:445
+msgid "The nonce field must not be empty."
+msgstr "Campul nonce nu trebuie sa fie gol."
+
+#: includes/classes/wp-maintenance-mode-admin.php:252
+#: includes/classes/wp-maintenance-mode-admin.php:450
+msgid "The tab slug must not be empty."
+msgstr "Identificatorul tabului nu trebuie sa fie gol."
+
+#: includes/classes/wp-maintenance-mode-admin.php:257
+#: includes/classes/wp-maintenance-mode-admin.php:455
+msgid "Security check."
+msgstr "Verificare securitate."
+
+#: includes/classes/wp-maintenance-mode-admin.php:263
+#: includes/classes/wp-maintenance-mode-admin.php:461
+msgid "The tab slug must exist."
+msgstr "Identificatorul tabului trebuie sa existe."
+
+#: includes/classes/wp-maintenance-mode-admin.php:535
 msgid ""
 "WPMM: The file data.js could not be written, the bot will not work correctly."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:534
+#: includes/classes/wp-maintenance-mode-admin.php:568
 msgid "Settings"
 msgstr "Setari"
 
-#: includes/classes/wp-maintenance-mode-admin.php:553
+#: includes/classes/wp-maintenance-mode-admin.php:594
 #, php-format
 msgid ""
 "The Maintenance Mode is <strong>active</strong>. Please don't forget to <a "
@@ -79,11 +97,11 @@ msgstr ""
 "Modul de mentenanta este <strong>activ</strong>. Nu uita sa-l <a href=\"%s"
 "\">dezactivezi</a> imediat dupa ce termini."
 
-#: includes/classes/wp-maintenance-mode-admin.php:590
+#: includes/classes/wp-maintenance-mode-admin.php:635
 msgid "Notice key cannot be empty."
 msgstr "Cheia de identificare a notificarii nu trebuie sa fie goala."
 
-#: includes/classes/wp-maintenance-mode-admin.php:638
+#: includes/classes/wp-maintenance-mode-admin.php:683
 #, php-format
 msgid ""
 "If you like <strong>WP Maintenance Mode</strong> please leave us a %s "
@@ -92,37 +110,46 @@ msgstr ""
 "Daca iti place <strong>WP Maintenance Mode</strong> te rugam sa ne lasi o "
 "recenzie (%s). Iti multumim in avans!"
 
-#: includes/classes/wp-maintenance-mode-admin.php:662
+#: includes/classes/wp-maintenance-mode-admin.php:722
 msgid ""
 "Your WordPress version supports Privacy settings but you haven't set any "
 "privacy policy page yet. Go to Settings ➡ Privacy to set one."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:665
-#, php-format
-msgid "The plugin detected this Privacy page: %1$s – %2$sUse this url%3$s"
-msgstr ""
-
-#: includes/classes/wp-maintenance-mode-admin.php:670
+#: includes/classes/wp-maintenance-mode-admin.php:726
 #, php-format
 msgid ""
-"Your Privacy page is pointing to a different URL in WordPress settings. If "
-"that's correct ignore this message, otherwise %s"
+"The plugin detected this Privacy page: %s – <button>Use this url</button>"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode-admin.php:674
+#: includes/classes/wp-maintenance-mode-admin.php:732
+msgid ""
+"Your Privacy page is pointing to a different URL in WordPress settings. If "
+"that's correct ignore this message, otherwise UPDATE VALUE TO NEW URL"
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode-admin.php:735
 msgid ""
 "No privacy features detected for your WordPress version. Update WordPress to "
 "get this field automatically filled in or type in the URL that points to "
 "your privacy policy page."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:102
-#: includes/classes/wp-maintenance-mode.php:103
+#: includes/classes/wp-maintenance-mode.php:120
+#, fuzzy
+#| msgid "Maintenance mode"
+msgctxt "<title> default"
 msgid "Maintenance mode"
 msgstr "Mentenanta"
 
-#: includes/classes/wp-maintenance-mode.php:105
+#: includes/classes/wp-maintenance-mode.php:121
+#, fuzzy
+#| msgid "Maintenance mode"
+msgctxt "heading default"
+msgid "Maintenance mode"
+msgstr "Mentenanta"
+
+#: includes/classes/wp-maintenance-mode.php:123
 msgid ""
 "<p>Sorry for the inconvenience.<br />Our website is currently undergoing "
 "scheduled maintenance.<br />Thank you for your understanding.</p>"
@@ -130,97 +157,97 @@ msgstr ""
 "<p>Ne cerem scuze pentru inconvenienta.<br />Site-ul nostru se afla in "
 "mentenanta.<br />Multumim pentru intelegere.</p>"
 
-#: includes/classes/wp-maintenance-mode.php:123
+#: includes/classes/wp-maintenance-mode.php:142
 msgid "Notify me when it's ready"
 msgstr "Notifica-ma atunci cand procesul de mentenanta este gata"
 
-#: includes/classes/wp-maintenance-mode.php:148
+#: includes/classes/wp-maintenance-mode.php:166
 msgid ""
 "Hey! My name is {bot_name}, I'm the owner of this website and I'd like to be "
 "your assistant here."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:149
+#: includes/classes/wp-maintenance-mode.php:167
 msgid "I have just a few questions."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:150
+#: includes/classes/wp-maintenance-mode.php:168
 msgid "What is your name?"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:151
+#: includes/classes/wp-maintenance-mode.php:169
 msgid "Nice to meet you here, {visitor_name}!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:152
+#: includes/classes/wp-maintenance-mode.php:170
 msgid "How you can see, our website will be launched very soon."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:153
+#: includes/classes/wp-maintenance-mode.php:171
 msgid ""
 "I know, you are very excited to see it, but we need a few days to finish it."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:154
+#: includes/classes/wp-maintenance-mode.php:172
 msgid "Would you like to be first to see it?"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:155
+#: includes/classes/wp-maintenance-mode.php:173
 msgid ""
 "Cool! Please leave your email here and I will send you a message when it's "
 "ready."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:156
+#: includes/classes/wp-maintenance-mode.php:174
 msgid "Sad to hear that, {visitor_name} :( See you next time…"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:157
+#: includes/classes/wp-maintenance-mode.php:175
 msgid "Got it! Thank you and see you soon here!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:158
+#: includes/classes/wp-maintenance-mode.php:176
 msgid "Have a great day!"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:161
-#: includes/classes/wp-maintenance-mode.php:654
+#: includes/classes/wp-maintenance-mode.php:179
+#: includes/classes/wp-maintenance-mode.php:658
 msgid "Type your name here…"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:162
+#: includes/classes/wp-maintenance-mode.php:180
 msgid "Tell me more"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:163
+#: includes/classes/wp-maintenance-mode.php:181
 msgid "Boring"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:164
-#: includes/classes/wp-maintenance-mode.php:655
+#: includes/classes/wp-maintenance-mode.php:182
+#: includes/classes/wp-maintenance-mode.php:659
 #, fuzzy
 msgid "Type your email here…"
 msgstr "Completeaza adresa de email"
 
-#: includes/classes/wp-maintenance-mode.php:170
+#: includes/classes/wp-maintenance-mode.php:187
 msgid "Privacy Policy"
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:173
+#: includes/classes/wp-maintenance-mode.php:190
 msgid ""
 "This form collects your name and email so that we can reach you back. Check "
 "out our <a href=\"#\">Privacy Policy</a> page to fully understand how we "
 "protect and manage your submitted data."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:174
+#: includes/classes/wp-maintenance-mode.php:191
 msgid ""
 "This form collects your email so that we can add you to our newsletter list. "
 "Check out our <a href=\"#\">Privacy Policy</a> page to fully understand how "
 "we protect and manage your submitted data."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:301
+#: includes/classes/wp-maintenance-mode.php:322
 #, php-format
 msgid ""
 "WP Maintenance Mode plugin was relaunched and you MUST revise <a href=\"%s"
@@ -229,185 +256,198 @@ msgstr ""
 "Plugin-ul WP Maintenance Mode a fost relansat si TREBUIE sa revedeti <a href="
 "\"%s\">setarile</a> acestuia."
 
-#: includes/classes/wp-maintenance-mode.php:547
-#: includes/classes/wp-maintenance-mode.php:561
+#: includes/classes/wp-maintenance-mode.php:588
 msgid "Maintenance Mode"
 msgstr "Mentenanta"
 
-#: includes/classes/wp-maintenance-mode.php:651
+#: includes/classes/wp-maintenance-mode.php:602
+#, fuzzy
+#| msgid "Maintenance Mode"
+msgctxt "<meta> keywords default"
+msgid "Maintenance Mode"
+msgstr "Mentenanta"
+
+#: includes/classes/wp-maintenance-mode.php:655
 msgid "Please type in your name."
 msgstr ""
 
-#: includes/classes/wp-maintenance-mode.php:652
+#: includes/classes/wp-maintenance-mode.php:656
 #, fuzzy
 msgid "Please type in a valid email address."
 msgstr "Te rog sa completezi o adresa de email valida."
 
-#: includes/classes/wp-maintenance-mode.php:656 views/maintenance.php:161
+#: includes/classes/wp-maintenance-mode.php:660 views/maintenance.php:199
 msgid "Send"
 msgstr "Trimite"
 
-#: includes/classes/wp-maintenance-mode.php:869
-#: includes/classes/wp-maintenance-mode.php:903 views/maintenance.php:140
+#: includes/classes/wp-maintenance-mode.php:1007
+#: includes/classes/wp-maintenance-mode.php:1046 views/maintenance.php:172
 msgid "Please enter a valid email address."
 msgstr "Te rog sa completezi o adresa de email valida."
 
-#: includes/classes/wp-maintenance-mode.php:881
+#: includes/classes/wp-maintenance-mode.php:1023
 msgid "You successfully subscribed. Thanks!"
 msgstr "Te-ai inscris cu succes in lista de contacte. Multumesc!"
 
-#: includes/classes/wp-maintenance-mode.php:899
+#: includes/classes/wp-maintenance-mode.php:1042
 msgid "All fields required."
 msgstr "Toate campurile sunt obligatorii."
 
-#: includes/classes/wp-maintenance-mode.php:911
+#: includes/classes/wp-maintenance-mode.php:1053
 msgid "Message via contact"
 msgstr "Mesaj trimis prin formularul de contact"
 
-#: includes/classes/wp-maintenance-mode.php:928
+#: includes/classes/wp-maintenance-mode.php:1075
+msgid "Something happened! Please try again later."
+msgstr ""
+
+#: includes/classes/wp-maintenance-mode.php:1078
 msgid "Your email was sent to the website administrator. Thanks!"
 msgstr "Emailul tau a fost trimis catre administratorul site-ului. Multumim!"
 
-#: views/contact.php:34
+#: views/contact.php:54
 #, php-format
 msgid "You have been contacted via %s."
 msgstr "Ai fost contactat de pe blogul %s."
 
-#: views/contact.php:52
+#: views/contact.php:76
 msgid "Name:"
 msgstr "Nume:"
 
-#: views/contact.php:64
+#: views/contact.php:88
 msgid "Email:"
 msgstr "Email:"
 
-#: views/contact.php:79
+#: views/contact.php:103
 msgid "Content:"
 msgstr "Continut:"
 
-#: views/loginform.php:8
+#: views/loginform.php:17
 msgid "Login"
 msgstr "Autentificare"
 
-#: views/maintenance.php:74
+#: views/maintenance.php:99
 msgid "your e-mail..."
 msgstr "emailul tau..."
 
-#: views/maintenance.php:75 views/settings.php:257
+#: views/maintenance.php:100 views/settings.php:395
 msgid "Subscribe"
 msgstr "Aboneaza-ma"
 
-#: views/maintenance.php:80 views/maintenance.php:139 views/maintenance.php:140
-#: views/maintenance.php:145 views/maintenance.php:152
+#: views/maintenance.php:105 views/maintenance.php:169
+#: views/maintenance.php:172 views/maintenance.php:180
+#: views/maintenance.php:188
 msgid "This field is required."
 msgstr "Acest camp este obligatoriu."
 
-#: views/maintenance.php:82 views/maintenance.php:154
+#: views/maintenance.php:107
+msgctxt "subscribe form"
 msgid "I've read and agree with the site's privacy policy"
 msgstr ""
 
-#: views/maintenance.php:139 views/sidebar.php:7
+#: views/maintenance.php:169 views/sidebar.php:16
 msgid "Name"
 msgstr "Nume"
 
-#: views/maintenance.php:140
+#: views/maintenance.php:172
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: views/maintenance.php:145
+#: views/maintenance.php:180
 msgid "Your message"
 msgstr "Mesajul tau"
 
-#: views/maintenance.php:168
+#: views/maintenance.php:190
+msgctxt "contact form"
+msgid "I've read and agree with the site's privacy policy"
+msgstr ""
+
+#: views/maintenance.php:206
 msgid "Contact us"
 msgstr "Contacteaza-ne"
 
-#: views/maintenance.php:175
+#: views/maintenance.php:218
 msgid "Dashboard"
 msgstr "Admin"
 
-#: views/promo-blocksy.php:1
+#: views/promo-blocksy.php:10
 msgid "Blocksy - The Most Innovative & Lightning Fast WordPress Theme"
 msgstr ""
 
-#: views/promo-blocksy.php:4
+#: views/promo-blocksy.php:13
 msgid ""
 "A blazing fast and lightweight WordPress theme built with the latest web "
 "technologies. It was built with the Gutenberg editor in mind and has a lot "
 "of options that makes it extendable and customizable."
 msgstr ""
 
-#: views/promo-blocksy.php:8
+#: views/promo-blocksy.php:17
 msgid "Download for Free Now"
 msgstr ""
 
-#: views/settings.php:6
-msgid "Settings saved."
-msgstr "Setarile au fost salvate."
-
-#: views/settings.php:13
+#: views/settings.php:21
 msgid "General"
 msgstr "General"
 
-#: views/settings.php:14
+#: views/settings.php:28
 msgid "Design"
 msgstr "Design"
 
-#: views/settings.php:15
+#: views/settings.php:34
 msgid "Modules"
 msgstr "Module"
 
-#: views/settings.php:16
+#: views/settings.php:41
 msgid "Manage Bot"
 msgstr ""
 
-#: views/settings.php:17
+#: views/settings.php:48
 msgid "GDPR"
 msgstr ""
 
-#: views/settings.php:26 views/settings.php:455 views/settings.php:622
+#: views/settings.php:59 views/settings.php:653 views/settings.php:838
 msgid "Status"
 msgstr "Status"
 
-#: views/settings.php:28 views/settings.php:458 views/settings.php:624
+#: views/settings.php:62 views/settings.php:656 views/settings.php:841
 msgid "Activated"
 msgstr "Activat"
 
-#: views/settings.php:29 views/settings.php:459 views/settings.php:625
+#: views/settings.php:63 views/settings.php:657 views/settings.php:842
 msgid "Deactivated"
 msgstr "Dezactivat"
 
-#: views/settings.php:33
+#: views/settings.php:68
 msgid "Bypass for Search Bots"
 msgstr "Nu afisa pagina de mentenanta robotilor motoarelor de cautare"
 
-#: views/settings.php:36 views/settings.php:96 views/settings.php:106
-#: views/settings.php:229 views/settings.php:265 views/settings.php:304
-#: views/settings.php:378 views/settings.php:410 views/settings.php:419
+#: views/settings.php:72 views/settings.php:143 views/settings.php:155
+#: views/settings.php:361 views/settings.php:405 views/settings.php:452
+#: views/settings.php:556 views/settings.php:594 views/settings.php:605
 msgid "Yes"
 msgstr "Da"
 
-#: views/settings.php:37 views/settings.php:97 views/settings.php:107
-#: views/settings.php:230 views/settings.php:266 views/settings.php:305
-#: views/settings.php:379 views/settings.php:411 views/settings.php:420
+#: views/settings.php:73 views/settings.php:144 views/settings.php:156
+#: views/settings.php:362 views/settings.php:406 views/settings.php:453
+#: views/settings.php:557 views/settings.php:595 views/settings.php:606
 msgid "No"
 msgstr "Nu"
 
-#: views/settings.php:39
+#: views/settings.php:75
 msgid "Allow Search Bots to bypass maintenance mode?"
 msgstr ""
 "Dai voie robotilor motoarelor de cautare sa acceseze site-ul, fara a vedea "
 "pagina de mentenanta?"
 
-#: views/settings.php:43
+#: views/settings.php:80
 msgid "Backend Role"
 msgstr "Rol interfata administrare"
 
-#: views/settings.php:45 views/settings.php:56
+#: views/settings.php:83 views/settings.php:96
 msgid "Select role(s)"
 msgstr "Selecteaza rol(urile)"
 
-#: views/settings.php:50
+#: views/settings.php:88
 msgid ""
 "Which user role is allowed to access the backend of this blog? "
 "Administrators will always have access."
@@ -415,11 +455,11 @@ msgstr ""
 "Care rol are acces la partea de backend a acestui blog? Administratorii vor "
 "avea intotdeauna acces."
 
-#: views/settings.php:54
+#: views/settings.php:93
 msgid "Frontend Role"
 msgstr "Rol interfata publica"
 
-#: views/settings.php:61
+#: views/settings.php:101
 msgid ""
 "Which user role is allowed to access the frontend of this blog? "
 "Administrators will always have access."
@@ -427,11 +467,11 @@ msgstr ""
 "Care rol are acces la partea de frontend a acestui blog? Administratorii vor "
 "avea intotdeauna acces."
 
-#: views/settings.php:65
+#: views/settings.php:106
 msgid "Robots Meta Tag"
 msgstr "Meta Tag-ul \"robots\""
 
-#: views/settings.php:71
+#: views/settings.php:113
 msgid ""
 "The robots meta tag lets you use a granular, page-specific approach to "
 "control how an individual page should be indexed and served to users in "
@@ -440,11 +480,11 @@ msgstr ""
 "Meta tag-ul \"robots\" permite controlul asupra felului in care motoarele de "
 "cautare indexeaza si servesc rezultatele pentru o anumita pagina."
 
-#: views/settings.php:75
+#: views/settings.php:118
 msgid "Redirection"
 msgstr "Redirectionare"
 
-#: views/settings.php:78
+#: views/settings.php:122
 msgid ""
 "If you want to redirect a user (with no access to Dashboard/Backend) to a "
 "URL (different from WordPress Dashboard URL) after login, then define a URL "
@@ -454,233 +494,307 @@ msgstr ""
 "Backend) catre un URL (diferit de URL-ul Wordpress Dashboard) dupa "
 "autentificare, atunci defineste un URL (incepe cu http://)"
 
-#: views/settings.php:82
+#: views/settings.php:127
 msgid "Exclude"
 msgstr "Exclude"
 
-#: views/settings.php:89
+#: views/settings.php:134
 msgid ""
 "Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / "
 "IP per line!"
 msgstr ""
 "Exclude rss feed, pagini, arhive ori IP-uri din modul de mentenanta. Adauga "
-"cate slug/IP pe linie."
+"cate slug/IP pe linie!"
 
-#: views/settings.php:93
+#: views/settings.php:139
 msgid "Notice"
 msgstr "Atentionare"
 
-#: views/settings.php:99
+#: views/settings.php:146
 msgid "Do you want to see notices when maintenance mode is activated?"
 msgstr ""
 "Doresti sa vezi atentionarea atunci cand modul de mentenanta este activat?"
 
-#: views/settings.php:103
+#: views/settings.php:151
 msgid "Dashboard link"
 msgstr "Link catre admin"
 
-#: views/settings.php:109
+#: views/settings.php:158
 msgid ""
 "Do you want to add a link to the dashboard on your maintenance mode page?"
 msgstr "Doresti sa adaugi un link catre admin pe pagina de mentenanta?"
 
-#: views/settings.php:117 views/settings.php:215 views/settings.php:437
-#: views/settings.php:607 views/settings.php:680
+#: views/settings.php:165 views/settings.php:344 views/settings.php:635
+#: views/settings.php:822 views/settings.php:898
 msgid "Save settings"
 msgstr "Salveaza setari"
 
-#: views/settings.php:118 views/settings.php:216 views/settings.php:438
-#: views/settings.php:608 views/settings.php:681
+#: views/settings.php:166 views/settings.php:345 views/settings.php:636
+#: views/settings.php:823 views/settings.php:899
 msgid "Reset settings"
 msgstr "Reseteaza setari"
 
-#: views/settings.php:123
+#: views/settings.php:172
 msgid "Content"
 msgstr "Continut"
 
-#: views/settings.php:128
+#: views/settings.php:178
 msgid "Title (HTML tag)"
 msgstr "Titlu (tag HTML)"
 
-#: views/settings.php:134
+#: views/settings.php:186
 msgid "Heading"
 msgstr "Subtitlu"
 
-#: views/settings.php:141 views/settings.php:271
+#: views/settings.php:195 views/settings.php:412
 msgid "Text"
 msgstr "Text"
 
-#: views/settings.php:156
+#: views/settings.php:215
+msgid "Hide available shortcodes"
+msgstr ""
+
+#: views/settings.php:216
+msgid "See available shortcodes"
+msgstr ""
+
+#: views/settings.php:224
+#, php-format
+msgid "%s - display a login form"
+msgstr ""
+
+#: views/settings.php:230
+#, php-format
+msgid "%1$s - responsive video embed. Compatible with %2$s. Example: %3$s"
+msgstr ""
+
+#: views/settings.php:235
 msgid "This text will not be shown when the bot feature is enabled."
 msgstr ""
 
-#: views/settings.php:162
+#: views/settings.php:242
+msgid "Footer links"
+msgstr ""
+
+#: views/settings.php:246
+msgid "\"Dashboard\" and \"Privacy Policy\" links."
+msgstr ""
+
+#: views/settings.php:252
 msgid "Background"
 msgstr "Fundal"
 
-#: views/settings.php:167
+#: views/settings.php:258
 msgid "Choose type"
 msgstr "Alege tip"
 
-#: views/settings.php:170
+#: views/settings.php:262
 msgid "Custom color"
 msgstr "Culoare"
 
-#: views/settings.php:171
+#: views/settings.php:263
 msgid "Uploaded background"
 msgstr "Imagine de fundal urcata de utilizator"
 
-#: views/settings.php:172
+#: views/settings.php:264
 msgid "Predefined background"
 msgstr "Imagine de fundal predefinita"
 
-#: views/settings.php:177
+#: views/settings.php:270
 msgid "Choose color"
 msgstr "Alege culoare"
 
-#: views/settings.php:183
+#: views/settings.php:278
 msgid "Upload background"
 msgstr "Incarca imagine"
 
-#: views/settings.php:187
-msgid "Backgrounds should have 1920x1280 px size."
-msgstr "Imaginea ar trebui sa fie 1920x1280 px"
+#: views/settings.php:284
+#, fuzzy
+msgctxt "upload background button"
+msgid "Upload"
+msgstr "Incarca imagine"
 
-#: views/settings.php:192
+#: views/settings.php:287
+#, fuzzy
+#| msgid "Upload background"
+msgid "Upload Background"
+msgstr "Incarca imagine"
+
+#: views/settings.php:288
+#, fuzzy
+#| msgid "Choose background"
+msgid "Choose Background"
+msgstr "Alege imagine"
+
+#: views/settings.php:291
+msgid "Backgrounds should have 1920x1280 px size."
+msgstr "Imaginea ar trebui sa fie 1920x1280 px."
+
+#: views/settings.php:296
 msgid "Choose background"
 msgstr "Alege imagine"
 
-#: views/settings.php:194
-#, php-format
-msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
+#: views/settings.php:303
+#, fuzzy, php-format
+#| msgid "source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
+msgid "* source <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 msgstr "sursa <a href=\"%s\" target=\"_blank\">Free Photos</a>"
 
-#: views/settings.php:221
+#: views/settings.php:327
+msgid "Other"
+msgstr ""
+
+#: views/settings.php:333
+#, fuzzy
+#| msgid "Custom color"
+msgid "Custom CSS"
+msgstr "Culoare"
+
+#: views/settings.php:337
+msgid "Do not add <style> tags."
+msgstr ""
+
+#: views/settings.php:351
 msgid "Countdown"
 msgstr "Countdown"
 
-#: views/settings.php:226
+#: views/settings.php:357
 msgid "Show countdown?"
 msgstr "Afiseaza countdown?"
 
-#: views/settings.php:235
+#: views/settings.php:368
 msgid "Start date"
 msgstr "Data de inceput"
 
-#: views/settings.php:241
+#: views/settings.php:376
 msgid "Countdown (remaining time)"
 msgstr "Countdown (timpul ramas)"
 
-#: views/settings.php:243
+#: views/settings.php:379
 msgid "Days"
 msgstr "Zile"
 
-#: views/settings.php:244
+#: views/settings.php:380
 msgid "Hours"
 msgstr "Ore"
 
-#: views/settings.php:245
+#: views/settings.php:381
 msgid "Minutes"
 msgstr "Minute"
 
-#: views/settings.php:249
+#: views/settings.php:386
 msgid "Color"
 msgstr "Culoare"
 
-#: views/settings.php:262
+#: views/settings.php:401
 msgid "Show subscribe?"
 msgstr "Afiseaza formular abonare?"
 
-#: views/settings.php:278
+#: views/settings.php:421
 msgid "Stats"
 msgstr "Statistici"
 
-#: views/settings.php:282
+#: views/settings.php:428
 #, php-format
 msgctxt "settings page"
 msgid "You have %d subscriber"
-msgid_plural "You have %s subscribers"
+msgid_plural "You have %d subscribers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: views/settings.php:287
+#: views/settings.php:433
 msgid "Export as CSV"
 msgstr "Exporta lista in format CSV"
 
-#: views/settings.php:288
+#: views/settings.php:434
 msgid "Empty subscribers list"
 msgstr "Goleste lista de contacte"
 
-#: views/settings.php:296
+#: views/settings.php:442
 msgid "Social Networks"
 msgstr "Retele sociale"
 
-#: views/settings.php:301
+#: views/settings.php:448
 msgid "Show social networks?"
 msgstr "Afiseaza butoane retele sociale?"
 
-#: views/settings.php:310
+#: views/settings.php:459
 msgid "Links target?"
-msgstr "Target-ul link-urilor"
+msgstr "Target-ul link-urilor?"
 
-#: views/settings.php:313 views/settings.php:651
+#: views/settings.php:463 views/settings.php:870
 msgid "New page"
 msgstr "Pagina noua"
 
-#: views/settings.php:314 views/settings.php:652
+#: views/settings.php:464 views/settings.php:871
 msgid "Same page"
 msgstr "Aceeasi pagina"
 
-#: views/settings.php:316
+#: views/settings.php:466
 msgid "Choose how the links will open."
 msgstr "Alege felul in care link-urile se vor deschide."
 
-#: views/settings.php:370
+#: views/settings.php:473
+msgid ""
+"You have to use full URLs. For example: if your Twitter username is "
+"<code>WordPress</code>, the URL should be <code>https://twitter.com/"
+"WordPress</code>."
+msgstr ""
+
+#: views/settings.php:546
 msgid "Contact"
 msgstr "Contact"
 
-#: views/settings.php:375
+#: views/settings.php:552
 msgid "Show contact?"
 msgstr "Afiseaza contact ?"
 
-#: views/settings.php:384
+#: views/settings.php:563
 msgid "Email address"
 msgstr "Adresa de email"
 
-#: views/settings.php:390
+#: views/settings.php:571
 msgid "Effects"
 msgstr "Efecte"
 
-#: views/settings.php:393
+#: views/settings.php:575
 msgid "Move top - Move bottom"
 msgstr "Move top - Move bottom"
 
-#: views/settings.php:394
+#: views/settings.php:576
 msgid "Zoom - Zoomed"
 msgstr "Zoom - Zoomed"
 
-#: views/settings.php:395
+#: views/settings.php:577
 msgid "Fold - Unfold"
 msgstr "Fold - Unfold"
 
-#: views/settings.php:402
+#: views/settings.php:584
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: views/settings.php:407
+#: views/settings.php:590
 msgid "Use Google Analytics?"
 msgstr "Folosesti Google Analytics?"
 
-#: views/settings.php:416
+#: views/settings.php:601
 msgid "Enable IP anonymization?"
 msgstr ""
 
-#: views/settings.php:426
+#: views/settings.php:613
+#, php-format
+msgid ""
+"Read about IP anonymization on <a href=\"%s\" rel=\"noreferrer\" target="
+"\"_blank\">Google Analytics</a> docs. It is always enabled on Google "
+"Analytics 4."
+msgstr ""
+
+#: views/settings.php:624
 msgid "Tracking code"
 msgstr "Cod de monitorizare"
 
-#: views/settings.php:429
+#: views/settings.php:628
 #, fuzzy
 #| msgid ""
 #| "Allowed formats: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Eg: UA-12345678-1 is valid"
@@ -690,183 +804,224 @@ msgid ""
 msgstr ""
 "Formate permise: UA-XXXXXXXX, UA-XXXXXXXX-XXXX. Ex: UA-12345678-1 este valid."
 
-#: views/settings.php:447
+#: views/settings.php:645
 msgid ""
 "Setup the conversation steps to capture more subscribers with this friendly "
 "way of asking email addresess."
 msgstr ""
 
-#: views/settings.php:448
+#: views/settings.php:646
 msgid ""
 "You may also want to use these wildcards: {bot_name} and {visitor_name} to "
 "make the conversation even more realistic."
 msgstr ""
 
-#: views/settings.php:449
+#: views/settings.php:647
 msgid ""
 "It is also ok if you don't fill in all the conversation steps if you don't "
 "need to."
 msgstr ""
 
-#: views/settings.php:450
+#: views/settings.php:648
 msgid ""
 "If you want to see the list of subscribers, go to Modules &raquo; Subscribe "
 "&raquo; Export as CSV."
 msgstr ""
 
-#: views/settings.php:463
+#: views/settings.php:662
 #, fuzzy
 msgid "Bot Name"
 msgstr "Nume"
 
-#: views/settings.php:466
+#: views/settings.php:666
 msgid "This name will appear when the bot is typing."
 msgstr ""
 
-#: views/settings.php:470
+#: views/settings.php:671
 #, fuzzy
 msgid "Upload avatar"
 msgstr "Incarca imagine"
 
-#: views/settings.php:474
+#: views/settings.php:677
+#, fuzzy
+msgctxt "upload avatar button"
+msgid "Upload"
+msgstr "Incarca imagine"
+
+#: views/settings.php:680
+#, fuzzy
+msgid "Upload Avatar"
+msgstr "Incarca imagine"
+
+#: views/settings.php:681
+#, fuzzy
+#| msgid "Choose type"
+msgid "Choose picture"
+msgstr "Alege tip"
+
+#: views/settings.php:684
 msgid "A 512 x 512 px will work just fine."
 msgstr ""
 
-#: views/settings.php:480
+#: views/settings.php:690
 msgid "Customize Messages"
 msgstr ""
 
-#: views/settings.php:485
+#: views/settings.php:696
 msgid "Message 1"
 msgstr ""
 
-#: views/settings.php:493
+#: views/settings.php:704
 msgid "Message 2"
 msgstr ""
 
-#: views/settings.php:501
+#: views/settings.php:712
 msgid "Message 3"
 msgstr ""
 
-#: views/settings.php:509 views/settings.php:549 views/settings.php:571
+#: views/settings.php:720 views/settings.php:762 views/settings.php:786
 msgid "Response"
 msgstr ""
 
-#: views/settings.php:513 views/settings.php:575
+#: views/settings.php:724
+msgctxt "response for message 3"
+msgid "Visitor's response will be here."
+msgstr ""
+
+#: views/settings.php:725 views/settings.php:791
 msgid "Edit the placeholder's text"
 msgstr ""
 
-#: views/settings.php:517
+#: views/settings.php:730
 msgid "Message 4"
 msgstr ""
 
-#: views/settings.php:525
+#: views/settings.php:738
 msgid "Message 5"
 msgstr ""
 
-#: views/settings.php:533
+#: views/settings.php:746
 msgid "Message 6"
 msgstr ""
 
-#: views/settings.php:541
+#: views/settings.php:754
 msgid "Message 7"
 msgstr ""
 
-#: views/settings.php:553
+#: views/settings.php:767
 msgid "Edit button one"
 msgstr ""
 
-#: views/settings.php:557
+#: views/settings.php:771
 msgid "Edit button two"
 msgstr ""
 
-#: views/settings.php:563 views/settings.php:579
+#: views/settings.php:773
+msgctxt "response for message 7"
+msgid "Visitor's response will be here."
+msgstr ""
+
+#: views/settings.php:778 views/settings.php:796
 msgid "Message 8"
 msgstr ""
 
-#: views/settings.php:563 views/settings.php:587 views/settings.php:595
+#: views/settings.php:778 views/settings.php:804 views/settings.php:812
 msgid "(click on button one)"
 msgstr ""
 
-#: views/settings.php:579
+#: views/settings.php:790
+msgctxt "response for message 8 (click on button one)"
+msgid "Visitor's response will be here."
+msgstr ""
+
+#: views/settings.php:796
 msgid "(click on button two)"
 msgstr ""
 
-#: views/settings.php:587
+#: views/settings.php:804
 msgid "Message 9"
 msgstr ""
 
-#: views/settings.php:595
+#: views/settings.php:812
 msgid "Message 10"
 msgstr ""
 
-#: views/settings.php:617
+#: views/settings.php:832
 msgid ""
 "To make the plugin GDPR compliant, fill in the details and enable this "
 "section."
 msgstr ""
 
-#: views/settings.php:618
+#: views/settings.php:833
 msgid ""
 "Here we added some generic texts that you may want to review, change or "
 "remove."
 msgstr ""
 
-#: views/settings.php:630
+#: views/settings.php:847
 msgid "Link name"
 msgstr ""
 
-#: views/settings.php:634
+#: views/settings.php:851
 msgid "Label the link that will be shown on frontend footer"
 msgstr ""
 
-#: views/settings.php:639
+#: views/settings.php:856
 msgid "P. Policy page link"
 msgstr ""
 
-#: views/settings.php:648
+#: views/settings.php:861
+msgid ""
+"REMEMBER: In order to make the privacy policy page accessible you need to "
+"add it in General -> Exclude."
+msgstr ""
+
+#: views/settings.php:866
 msgid "P. Policy link target"
 msgstr ""
 
-#: views/settings.php:654
+#: views/settings.php:873
 msgid "Choose how the link will open."
 msgstr ""
 
-#: views/settings.php:659
+#: views/settings.php:878
 msgid "Contact form 'tail'"
 msgstr ""
 
-#: views/settings.php:663 views/settings.php:672
+#: views/settings.php:882 views/settings.php:891
 msgid "This will be shown together with the acceptance checkbox below the form"
 msgstr ""
 
-#: views/settings.php:668
+#: views/settings.php:887
 msgid "Subscribe form 'tail'"
 msgstr ""
 
-#: views/sidebar.php:3
+#: views/sidebar.php:12
 msgid "Plugin Info"
 msgstr "Informatii plugin"
 
-#: views/sidebar.php:13
+#: views/sidebar.php:22
 msgid "Author"
 msgstr "Autor"
 
-#: views/sidebar.php:14
+#: views/sidebar.php:23
 msgid "Website"
 msgstr "Website"
 
-#: views/sidebar.php:15
+#: views/sidebar.php:24
 msgid "Twitter"
 msgstr "Twitter"
 
-#: views/sidebar.php:16
+#: views/sidebar.php:25
 msgid "GitHub"
 msgstr "GitHub"
 
-#: views/sidebar.php:27
+#: views/sidebar.php:36
 msgid "Recommended"
 msgstr ""
+
+#~ msgid "Settings saved."
+#~ msgstr "Setarile au fost salvate."
 
 #~ msgid "Other products"
 #~ msgstr "Alte produse"

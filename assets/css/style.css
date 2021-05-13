@@ -96,19 +96,30 @@ body {
     height: auto;
 }
 
+.wrap h2 .fluid-width-video-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .wrap h3 {
     font-size: 24px;
     font-weight: 400;
     margin: 0 0 45px;
 }
+
+/* keep .author_link for backward compatibility */
+.wrap .footer_links,
 .wrap .author_link {
     margin-top: 15px;
     color: #616161;
     margin: 0 0 50px;
 }
+
+.wrap .footer_links a,
 .wrap .author_link a {
     color: #000;
 }
+
 /**
  * COUNTDOWN
  **/
@@ -477,19 +488,16 @@ body {
 
 @media only screen and (max-width: 700px) {
     .wrap form.login_form {
-        width: 80%;
+        width: 90%;
         margin: 15px auto 0;
     }
     .wrap form.login_form input {
-        width: 49%;
-        margin: 0 2% 0 0;
-    }
-    .wrap form.login_form input[type="password"] {
-        margin: 0;
+        width: 100%;
+        margin: 0 0 10px 0;
     }
     .wrap form.login_form input[type="submit"] {
         width: 100%;
-        margin: 15px 0 0;
+        margin: 5px 0 5px;
     }
 }
 @media only screen and (max-width: 550px) {
@@ -502,6 +510,10 @@ body {
     }
     .wrap h2, .wrap h3 {
         font-size: 18px;
+    }
+    .wrap h2 .fluid-width-video-wrapper {
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
     .wrap form.subscribe_form {
         box-sizing: border-box;
@@ -540,16 +552,6 @@ body {
     }
     .contact .form input[type="submit"] {
         width: 100%;
-    }
-    .wrap form.login_form {
-        width: 90%;
-    }
-    .wrap form.login_form input {
-        width: 100%;
-        margin: 0 0 10px 0;
-    }
-    .wrap form.login_form input[type="submit"] {
-        margin: 10px 0 0;
     }
     ul, ol {
         width: 80%;
