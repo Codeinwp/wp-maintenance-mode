@@ -1,3 +1,6 @@
+= 2.4.1 (20/07/2021) =
+* Misc: WordPress 5.8 compatibility
+
 = 2.4.0 (13/05/2021) =
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
