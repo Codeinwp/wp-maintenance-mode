@@ -1,4 +1,4 @@
-# Version 2.4.0
+# Version 2.4.1
 
 # WP Maintenance Mode
 
