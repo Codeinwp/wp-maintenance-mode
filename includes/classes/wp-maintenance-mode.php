@@ -772,6 +772,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? rawurldecode( $_SERVER['REQUEST_URI'] ) : '';
 
 				foreach ( $excluded_list as $item ) {
+					if ( false !== strpos( $item, '#' ) ) {
+						$item = trim( substr( $item, 0, strpos( $item, '#' ) ) );
+					}
+
 					if ( empty( $item ) ) { // just to be sure :-)
 						continue;
 					}
