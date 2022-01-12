@@ -109,6 +109,12 @@ function wpmm_get_banner_url( $filename ) {
 function wpmm_get_banners() {
 	return array(
 		array(
+			'title' => 'Pulsetic',
+			'link'  => 'https://pulsetic.com/',
+			'image' => 'pulsetic.jpeg',
+			'utm'   => true,
+		),
+		array(
 			'title' => 'Blocksy',
 			'link'  => 'https://creativethemes.com/blocksy/',
 			'image' => 'blocksy.jpg',

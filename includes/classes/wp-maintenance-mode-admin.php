@@ -606,10 +606,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				// delete wpmm_notice
 				delete_option( 'wpmm_notice' );
 
-				// notice for blocksy
+				// notice for pulsetic
 				ob_start();
-				include_once wpmm_get_template_path( 'promo-blocksy.php' );
-				$notices['promo-blocksy'] = array(
+				include_once wpmm_get_template_path( 'promo-pulsetic.php' );
+				$notices['promo-pulsetic'] = array(
 					'class' => 'wpmm_notices updated notice is-dismissible',
 					'msg'   => ob_get_clean(),
 				);
