@@ -1,3 +1,9 @@
+= 2.4.2 (18/01/2022) =
+* Misc: 900 000 Active Installs Celebrations!
+* Misc: WordPress 5.9 compatibility
+* Fix: jQuery UI CSS theme reference from jQuery CDN
+* Misc: Text fixes in the dashboard
+
 = 2.4.1 (20/07/2021) =
 * Misc: WordPress 5.8 compatibility
 

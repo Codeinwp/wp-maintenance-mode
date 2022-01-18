@@ -85,7 +85,7 @@ defined( 'ABSPATH' ) || exit;
 												<option value="<?php echo esc_attr( $role_key ); ?>"<?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['backend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
 											<?php } ?>
 										</select>
-										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the backend of this blog? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
+										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the backend of the website? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
 								<tr valign="top">
@@ -98,7 +98,7 @@ defined( 'ABSPATH' ) || exit;
 												<option value="<?php echo esc_attr( $role_key ); ?>"<?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['frontend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
 											<?php } ?>
 										</select>
-										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the frontend of this blog? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
+										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the frontend of the website? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
 								<tr valign="top">
@@ -119,7 +119,7 @@ defined( 'ABSPATH' ) || exit;
 									</th>
 									<td>
 										<input type="text" value="<?php echo esc_url( $this->plugin_settings['general']['redirection'] ); ?>" name="options[general][redirection]" />
-										<p class="description"><?php esc_html_e( 'If you want to redirect a user (with no access to Dashboard/Backend) to a URL (different from WordPress Dashboard URL) after login, then define a URL (incl. http://)', 'wp-maintenance-mode' ); ?></p>
+										<p class="description"><?php esc_html_e( 'If you want to redirect a user (with no access to Dashboard/Backend) to a URL (different from WordPress Dashboard URL) after login, then define a URL (incl. https://)', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
 								<tr valign="top">
@@ -642,7 +642,7 @@ defined( 'ABSPATH' ) || exit;
 							<tbody>
 								<tr valign="top">
 									<td colspan="2">
-										<h4><?php esc_html_e( 'Setup the conversation steps to capture more subscribers with this friendly way of asking email addresess.', 'wp-maintenance-mode' ); ?></h4>
+										<h4><?php esc_html_e( 'Setup the conversation steps to capture more subscribers with this friendly way of asking email addresses.', 'wp-maintenance-mode' ); ?></h4>
 										<p><?php esc_html_e( 'You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.', 'wp-maintenance-mode' ); ?></p>
 										<p><?php esc_html_e( 'It is also ok if you don\'t fill in all the conversation steps if you don\'t need to.', 'wp-maintenance-mode' ); ?></p>
 										<p><?php esc_html_e( 'If you want to see the list of subscribers, go to Modules &raquo; Subscribe &raquo; Export as CSV.', 'wp-maintenance-mode' ); ?></p>

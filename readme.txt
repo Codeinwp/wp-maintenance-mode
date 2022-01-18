@@ -6,8 +6,8 @@ Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 5.8
-Stable tag: 2.4.1
+Tested up to: 5.9
+Stable tag: 2.4.2
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -78,6 +78,12 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
+
+= 2.4.2 (18/01/2022) =
+* Misc: 900 000 Active Installs Celebrations!
+* Misc: WordPress 5.9 compatibility
+* Fix: jQuery UI CSS theme reference from jQuery CDN
+* Misc: Text fixes in the dashboard
 
 = 2.4.1 (20/07/2021) =
 * Misc: WordPress 5.8 compatibility
