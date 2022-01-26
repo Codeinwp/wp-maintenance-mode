@@ -68,3 +68,23 @@ if ( is_admin() ) {
 	require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
 	add_action( 'plugins_loaded', array( 'WP_Maintenance_Mode_Admin', 'get_instance' ) );
 }
+
+add_filter( 'themeisle_sdk_products', 'wpmm_load_sdk' );
+
+
+/**
+ * Filter products array.
+ *
+ * @param array $products products array.
+ *
+ * @return array
+ */
+function wpmm_load_sdk( $products ) {
+	$products[] = __FILE__;
+	return $products;
+}
+
+$autoload_path = __DIR__ . '/vendor/autoload.php';
+if ( is_file( $autoload_path ) ) {
+	require_once $autoload_path;
+}

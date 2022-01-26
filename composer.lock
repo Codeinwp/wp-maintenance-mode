@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c73aaaefd6dd07ba7d070102ad63d3f6",
-    "packages": [],
+    "content-hash": "2f3a5416f09f61c4b831226618af4c16",
+    "packages": [
+        {
+            "name": "codeinwp/themeisle-sdk",
+            "version": "3.2.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeinwp/themeisle-sdk.git",
+                "reference": "394d0f27e17dab350efa7e91bffff31f4b451fec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/394d0f27e17dab350efa7e91bffff31f4b451fec",
+                "reference": "394d0f27e17dab350efa7e91bffff31f4b451fec",
+                "shasum": ""
+            },
+            "require-dev": {
+                "codeinwp/phpcs-ruleset": "dev-main"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "ThemeIsle team",
+                    "email": "friends@themeisle.com",
+                    "homepage": "https://themeisle.com"
+                }
+            ],
+            "description": "ThemeIsle SDK",
+            "homepage": "https://github.com/Codeinwp/themeisle-sdk",
+            "keywords": [
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/Codeinwp/themeisle-sdk/issues",
+                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.2.22"
+            },
+            "time": "2021-10-27T10:27:45+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "automattic/vipwpcs",
@@ -578,9 +619,10 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": "^5.6 || ^7.0"
-    },
+    "platform": [],
     "platform-dev": [],
+    "platform-overrides": {
+        "php": "5.6"
+    },
     "plugin-api-version": "2.0.0"
 }

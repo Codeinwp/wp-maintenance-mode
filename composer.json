@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0"
+        "codeinwp/themeisle-sdk": "^3.2"
     },
     "require-dev": {
         "codeinwp/phpcs-ruleset": "dev-main",
@@ -26,6 +26,17 @@
         "phpcompatibility/php-compatibility": "^9.3",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
         "wp-coding-standards/wpcs": "*"
+    },
+    "autoload": {
+        "files": [
+            "vendor/codeinwp/themeisle-sdk/load.php"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "5.6"
+        }
     },
     "keywords": [
         "maintenance",
