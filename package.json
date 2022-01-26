@@ -3,15 +3,22 @@
   "version": "2.4.2",
   "author": "Themeisle",
   "homepage": "https://themeisle.com/",
+  "license": "GPL-3.0+",
   "bugs": {
     "url": "https://github.com/codeinwp/WP-Maintenance-Mode/issues"
   },
   "scripts": {
-    "build": "grunt"
+    "build": "grunt",
+    "dist": "bash ./bin/dist.sh",
+    "release": "npx semantic-release --dry-run"
   },
   "main": "Gruntfile.js",
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
     "autoprefixer": "^9.8.6",
+    "conventional-changelog-simple-preset": "^1.0.14",
     "cssnano": "^4.1.11",
     "grunt": "^1.4.0",
     "grunt-contrib-jshint": "^2.1.0",
@@ -20,6 +27,8 @@
     "grunt-postcss": "^0.9.0",
     "grunt-version": "^3.0.0",
     "grunt-wp-readme-to-markdown": "^2.1.0",
+    "replace-in-file": "^6.1.0",
+    "semantic-release": "^17.3.7",
     "time-grunt": "^2.0.0"
   }
 }
