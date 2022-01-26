@@ -10,6 +10,7 @@
     <exclude-pattern type="relative">vendor</exclude-pattern>
     <exclude-pattern type="relative">node_modules</exclude-pattern>
     <exclude-pattern type="relative">**/build</exclude-pattern>
+    <exclude-pattern type="relative">tests</exclude-pattern>
 
     <rule ref="WordPress-Core">
         <exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
