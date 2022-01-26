@@ -1,10 +1,13 @@
 {
   "name": "wp-maintenance-mode",
   "version": "2.4.2",
-  "author": "Designmodo",
-  "homepage": "https://designmodo.com/",
+  "author": "Themeisle",
+  "homepage": "https://themeisle.com/",
   "bugs": {
-    "url": "https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues"
+    "url": "https://github.com/codeinwp/WP-Maintenance-Mode/issues"
+  },
+  "scripts": {
+    "build": "grunt"
   },
   "main": "Gruntfile.js",
   "devDependencies": {
@@ -15,6 +18,8 @@
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-postcss": "^0.9.0",
+    "grunt-version": "^3.0.0",
+    "grunt-wp-readme-to-markdown": "^2.1.0",
     "time-grunt": "^2.0.0"
   }
 }

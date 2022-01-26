@@ -1,24 +1,26 @@
 {
-    "name": "andrianvaleanu/wp-maintenance-mode",
+    "name": "codeinwp/wp-maintenance-mode",
     "description": "Adds a splash page to your site that lets visitors know your site is down for maintenance. Full access to the back- & front-end is optional.",
     "type": "wordpress-plugin",
-    "homepage": "https://designmodo.com",
+    "version": "2.4.2",
     "license": "GPL-2.0+",
+    "homepage": "https://themeisle.com",
     "support": {
-        "source": "https://github.com/andrianvaleanu/WP-Maintenance-Mode",
+        "source": "https://github.com/codeinwp/WP-Maintenance-Mode",
         "forum": "https://wordpress.org/support/plugin/wp-maintenance-mode/",
-        "issues": "https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues"
+        "issues": "https://github.com/codeinwp/WP-Maintenance-Mode/issues"
     },
     "authors": [
         {
-            "name": "Designmodo",
-            "homepage": "https://designmodo.com/"
+            "name": "Themeisle",
+            "homepage": "https://themeisle.com/"
         }
     ],
     "require": {
         "php": "^5.6 || ^7.0"
     },
     "require-dev": {
+        "codeinwp/phpcs-ruleset": "dev-main",
         "squizlabs/php_codesniffer": "^3.5",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
         "phpcompatibility/php-compatibility": "^9.3",
@@ -31,7 +33,10 @@
         "plugin"
     ],
     "scripts": {
-        "lint": "./vendor/bin/phpcs -p -s",
-        "fix": "./vendor/bin/phpcbf -p"
+        "format": "./vendor/bin/phpcbf --standard=phpcs.xml --report-summary --report-source -s  --runtime-set testVersion 7.0- ",
+        "format-fix-exit": "./vendor/bin/phpcbf-fix-exit-0 --standard=phpcs.xml --report-summary --report-source -s  --runtime-set testVersion 7.0- ",
+        "phpcs": "phpcs --standard=phpcs.xml -s  --runtime-set testVersion 7.0-",
+        "lint": "composer run-script phpcs",
+        "phpcs-i": "phpcs -i"
     }
 }

@@ -116,7 +116,41 @@ module.exports = function(grunt) {
                     debounceDelay: 150
                 }
             }
-        }
+        },
+        version: {
+            project: {
+                src: [
+                    'package.json'
+                ]
+            },
+            composer: {
+                src: [
+                    'composer.json'
+                ]
+            },
+            mainClass: {
+                options: {
+                    prefix: '\\.*\\VERSION\.*\\s=\.*\\s\''
+                },
+                src: [
+                    'includes/classes/wp-maintenance-mode.php'
+                ]
+            },
+            metatag: {
+                options: {
+                    prefix: 'Version:\\s*',
+                    flags: ''
+                },
+                src: [ 'wp-maintenance-mode.php' ]
+            },
+        },
+        wp_readme_to_markdown: {
+            plugin: {
+                files: {
+                    'README.md': 'readme.txt'
+                },
+            },
+        },
     });
 
 
@@ -127,6 +161,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify-es');
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-version');
+    grunt.loadNpmTasks('grunt-wp-readme-to-markdown');
 
     /**
      * Register tasks
