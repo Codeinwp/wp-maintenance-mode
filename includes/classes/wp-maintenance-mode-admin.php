@@ -79,7 +79,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				return;
 			}
 
-
 			$screen = get_current_screen();
 			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				$wp_scripts = wp_scripts();
@@ -606,14 +605,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} else {
 				// delete wpmm_notice
 				delete_option( 'wpmm_notice' );
-
-				// notice for pulsetic
-				ob_start();
-				include_once wpmm_get_template_path( 'promo-pulsetic.php' );
-				$notices['promo-pulsetic'] = array(
-					'class' => 'wpmm_notices updated notice is-dismissible',
-					'msg'   => ob_get_clean(),
-				);
 			}
 
 			// get dismissed notices

@@ -215,7 +215,7 @@ defined( 'ABSPATH' ) || exit;
 											$hide_shortcodes_text = __( 'Hide available shortcodes', 'wp-maintenance-mode' );
 											$show_shortcodes_text = __( 'See available shortcodes', 'wp-maintenance-mode' );
 											?>
-											<a href="javascript:void(0);" class="button button-small toggle-shortcodes-list" data-hide="<?php echo esc_attr( $hide_shortcodes_text ); ?>" data-show="<?php echo esc_attr( $show_shortcodes_text ); ?>" ><?php echo esc_html( $show_shortcodes_text ); ?></a>											
+											<a href="javascript:void(0);" class="button button-small toggle-shortcodes-list" data-hide="<?php echo esc_attr( $hide_shortcodes_text ); ?>" data-show="<?php echo esc_attr( $show_shortcodes_text ); ?>" ><?php echo esc_html( $show_shortcodes_text ); ?></a>
 
 											<ul class="shortcodes-list">
 												<li>
@@ -280,11 +280,11 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<input type="text" value="<?php echo esc_url( $this->plugin_settings['design']['bg_custom'] ); ?>" name="options[design][bg_custom]" class="background_url" />
 										<input
-											type="button" 
-											value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>" 
-											class="button image_uploader_trigger" 
-											data-name="background" 
-											data-title="<?php esc_attr_e( 'Upload Background', 'wp-maintenance-mode' ); ?>" 
+											type="button"
+											value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>"
+											class="button image_uploader_trigger"
+											data-name="background"
+											data-title="<?php esc_attr_e( 'Upload Background', 'wp-maintenance-mode' ); ?>"
 											data-button-text="<?php esc_attr_e( 'Choose Background', 'wp-maintenance-mode' ); ?>"
 											data-to-selector=".background_url"
 											/>
@@ -295,7 +295,7 @@ defined( 'ABSPATH' ) || exit;
 									<th scope="row">
 										<label for="options[design][bg_predefined]"><?php esc_html_e( 'Choose background', 'wp-maintenance-mode' ); ?></label>
 
-										<p class="description">                                                                              
+										<p class="description">
 											<?php
 											printf(
 												wp_kses(
@@ -303,7 +303,7 @@ defined( 'ABSPATH' ) || exit;
 													__( '* source <a href="%s" target="_blank">Free Photos</a>', 'wp-maintenance-mode' ),
 													wpmm_translated_string_allowed_html()
 												),
-												esc_url( wpmm_get_utmized_url( 'http://designmodo.com/free-photos/', array( 'source' => 'settings' ) ) )
+												esc_url( wpmm_get_utmized_url( 'https://themeisle.com/blog/wordpress-stock-photos/', array( 'source' => 'settings' ) ) )
 											);
 											?>
 										</p>
@@ -512,7 +512,7 @@ defined( 'ABSPATH' ) || exit;
 									<th scope="row">
 										<label for="options[modules][social_instagram]">Instagram</label>
 									</th>
-									<td>    
+									<td>
 										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_instagram'] ); ?>" name="options[modules][social_instagram]" />
 									</td>
 								</tr>
@@ -673,11 +673,11 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<input type="text" value="<?php echo esc_url( $this->plugin_settings['bot']['avatar'] ); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
 										<input
-											type="button" 
-											value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>" 
-											class="button image_uploader_trigger" 
-											data-name="avatar" 
-											data-title="<?php esc_attr_e( 'Upload Avatar', 'wp-maintenance-mode' ); ?>" 
+											type="button"
+											value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>"
+											class="button image_uploader_trigger"
+											data-name="avatar"
+											data-title="<?php esc_attr_e( 'Upload Avatar', 'wp-maintenance-mode' ); ?>"
 											data-button-text="<?php esc_attr_e( 'Choose picture', 'wp-maintenance-mode' ); ?>"
 											data-to-selector=".avatar_url"
 											/>

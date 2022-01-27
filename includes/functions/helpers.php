@@ -109,27 +109,21 @@ function wpmm_get_banner_url( $filename ) {
 function wpmm_get_banners() {
 	return array(
 		array(
-			'title' => 'Pulsetic',
-			'link'  => 'https://pulsetic.com/',
-			'image' => 'pulsetic.jpeg',
+			'title' => 'Neve',
+			'link'  => 'https://themeisle.com/themes/neve/',
+			'image' => 'neve.jpg',
 			'utm'   => true,
 		),
 		array(
-			'title' => 'Blocksy',
-			'link'  => 'https://creativethemes.com/blocksy/',
-			'image' => 'blocksy.jpg',
+			'title' => 'Optimole',
+			'link'  => 'https://optimole.com/wordpress/',
+			'image' => 'optimole.jpg',
 			'utm'   => true,
 		),
 		array(
-			'title' => 'Postcards',
-			'link'  => 'https://designmodo.com/postcards/',
-			'image' => 'postcards.jpg',
-			'utm'   => true,
-		),
-		array(
-			'title' => 'Static Pages',
-			'link'  => 'https://designmodo.com/static-pages/',
-			'image' => 'static-pages.png',
+			'title' => 'Otter Blocks',
+			'link'  => 'https://themeisle.com/plugins/otter-blocks/',
+			'image' => 'otter.jpg',
 			'utm'   => true,
 		),
 	);
