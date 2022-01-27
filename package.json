@@ -10,7 +10,7 @@
   "scripts": {
     "build": "grunt",
     "dist": "bash ./bin/dist.sh",
-    "release": "npx semantic-release --dry-run"
+    "release": "npx semantic-release"
   },
   "main": "Gruntfile.js",
   "devDependencies": {
