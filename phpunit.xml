@@ -1,0 +1,18 @@
+<phpunit
+        bootstrap="tests/bootstrap.php"
+        backupGlobals="false"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+>
+    <php>
+        <const name="FS_METHOD" value="direct"/>
+    </php>
+    <testsuites>
+        <testsuite name="default">
+            <directory phpVersion="5.4.0" phpVersionOperator=">=" suffix="-test.php">./tests/</directory>
+            <exclude>./tests/old/</exclude>
+        </testsuite>
+    </testsuites>
+</phpunit>

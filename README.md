@@ -1,27 +1,27 @@
-=== WP Maintenance Mode ===
-Contributors: Themeisle
-Plugin Name: WP Maintenance Mode
-Plugin URI: https://themeisle.com/
-Author: Themeisle
-Author URI: https://themeisle.com/
-Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
-Requires at least: 3.5
-Tested up to: 5.9
-Stable tag: trunk
-Requires PHP: 5.6
-License: GPL-2.0+
+# WP Maintenance Mode #
+**Contributors:** [themeisle](https://profiles.wordpress.org/themeisle/)  
+**Plugin Name:** WP Maintenance Mode  
+**Plugin URI:** https://themeisle.com/  
+**Author:** Themeisle  
+**Author URI:** https://themeisle.com/  
+**Tags:** maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown  
+**Requires at least:** 3.5  
+**Tested up to:** 5.9  
+**Stable tag:** trunk  
+**Requires PHP:** 5.6  
+**License:** GPL-2.0+  
 
 Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page. The new Bot functionality is here!
 
-== Description ==
+## Description ##
 
 Add a maintenance page to your blog that lets visitors know your blog is down for maintenance, or add a coming soon page for a new website. User with admin rights gets full access to the blog including the front end.
 
 Activate the plugin and your blog is in maintenance-mode, works and only registered users with enough rights can see the front end. You can use a date with a countdown timer for visitor information or set a value and unit for information.
 
-Also works with WordPress Multisite installs (each blog from the network has its own maintenance settings).
+Also works with WordPress Multisite installs (each blog from the network has it's own maintenance settings).
 
-= Features =
+### Features ###
 
 * Fully customizable (change colors, texts and backgrounds);
 * Subscription form (export emails to .csv file);
@@ -38,22 +38,22 @@ Also works with WordPress Multisite installs (each blog from the network has its
 * Bot functionality to collect the emails in a friendly and efficient way;
 * GDPR Ready;
 
-= Bugs, technical hints or contribute =
+### Bugs, technical hints or contribute ###
 
 Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/andrianvaleanu/WP-Maintenance-Mode).
 
-= Credits =
+### Credits ###
 
 Developed by [Themeisle](https://themeisle.com)
 
-== Installation ==
+## Installation ##
 
 1. Unpack the download package
 2. Upload all files to the `/wp-content/plugins/` directory, include folders
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Go to `Settings` page, where you can change what settings you need (pay attention to **Exclude** option!)
 
-== Screenshots ==
+## Screenshots ##
 
 1. Maintenance Mode Example
 2. Maintenance Mode Example #2
@@ -64,31 +64,31 @@ Developed by [Themeisle](https://themeisle.com)
 7. Dashboard Bot Settings
 8. Contact Form
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
-= How to use plugin filters =
-Check out our [Snippet Library](https://github.com/codeinwp/Snippet-Library/).
+### How to use plugin filters ###
+Check out our [Snippet Library](https://github.com/WP-Maintenance-Mode/Snippet-Library/).
 
-= Cache Plugin Support =
+### Cache Plugin Support ###
 WP Maintenance Mode can be unstable due to the cache plugins; we recommend deactivating any cache plugin when maintenance mode is active. If you **really** want to use a cache plugin, make sure you delete the entire cache after each change.
 
-= Exclude list =
+### Exclude list ###
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 Notice: `wp-cron.php` is excluded by default.
 
-== Changelog ==
+## Changelog ##
 
-= 2.4.2 (18/01/2022) =
+### 2.4.2 (18/01/2022) ###
 * Misc: 900 000 Active Installs Celebrations!
 * Misc: WordPress 5.9 compatibility
 * Fix: jQuery UI CSS theme reference from jQuery CDN
 * Misc: Text fixes in the dashboard
 
-= 2.4.1 (20/07/2021) =
+### 2.4.1 (20/07/2021) ###
 * Misc: WordPress 5.8 compatibility
 
-= 2.4.0 (13/05/2021) =
+### 2.4.0 (13/05/2021) ###
 * Design: add "Custom CSS" setting; Finally! :)
 * Design: add "Footer links" color setting
 * Design: add a list of available shortcodes under the "Text" editor
@@ -105,7 +105,7 @@ Notice: `wp-cron.php` is excluded by default.
 * Misc: remove `wpmm_count_where` helper function
 * Misc: code improvements
 
-= 2.3.0 (07/12/2020) =
+### 2.3.0 (07/12/2020) ###
 * Modules: add support for Google Analytics 4 measurement ID
 * Design: enable media buttons on wp_editor (now you can add images from the editor)
 * Bot: fix translation issue
@@ -114,23 +114,23 @@ Notice: `wp-cron.php` is excluded by default.
 * Misc: a few CSS & Javascript improvements
 * Misc: bump "Tested up to" version to 5.6
 
-= 2.2.4 (20/05/2019) =
+### 2.2.4 (20/05/2019) ###
 * bump "Tested up to" to 5.2.0
 * fix typo in Italian translation (it_IT)
 * Bot: add a note about how you can export the list of subscribers [#195](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/195)
 * Bot: add client-side sanitization to the input fields [#176](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/176)
 
-= 2.2.3 (20/02/2019) =
+### 2.2.3 (20/02/2019) ###
 * bump "Tested up to" version to 5.1.0
 * replace "wpmu_new_blog" action with "wp_initialize_site" action for WP 5.1.0 users because the first one is deprecated in the new version
 * small improvement to "check_exclude" method from "WP_Maintenance_Mode" class
 
-= 2.2.2 (27/11/2018) =
+### 2.2.2 (27/11/2018) ###
 * Google Analytics module: migrate from analytics.js to gtag.js + add ip anonymization [#178](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/178)
 * GDPR module: accept links inside texareas + add policy link target [#188](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/188)
 * add charset meta tag [#200](https://github.com/andrianvaleanu/WP-Maintenance-Mode/issues/200)
 * fix PHP Notice:  Undefined index: HTTP_USER_AGENT
 * add plural and single form translation for subscribers number (settings page)
 
-= Earlier versions =
+### Earlier versions ###
 For the changelog of earlier versions, please refer to the [full changelog](http://plugins.svn.wordpress.org/wp-maintenance-mode/trunk/changelog.txt).
