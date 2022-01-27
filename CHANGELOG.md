@@ -1,3 +1,7 @@
+##### [Version 2.4.3](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.2...v2.4.3) (2022-01-27)
+
+- Change ownership to Themeisle
+
 = 2.4.2 (18/01/2022) =
 * Misc: 900 000 Active Installs Celebrations!
 * Misc: WordPress 5.9 compatibility

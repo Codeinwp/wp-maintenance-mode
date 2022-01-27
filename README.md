@@ -19,7 +19,7 @@ Add a maintenance page to your blog that lets visitors know your blog is down fo
 
 Activate the plugin and your blog is in maintenance-mode, works and only registered users with enough rights can see the front end. You can use a date with a countdown timer for visitor information or set a value and unit for information.
 
-Also works with WordPress Multisite installs (each blog from the network has it's own maintenance settings).
+Also works with WordPress Multisite installs (each blog from the network has its own maintenance settings).
 
 ### Features ###
 
@@ -67,7 +67,7 @@ Developed by [Themeisle](https://themeisle.com)
 ## Frequently Asked Questions ##
 
 ### How to use plugin filters ###
-Check out our [Snippet Library](https://github.com/WP-Maintenance-Mode/Snippet-Library/).
+Check out our [Snippet Library](https://github.com/codeinwp/Snippet-Library/).
 
 ### Cache Plugin Support ###
 WP Maintenance Mode can be unstable due to the cache plugins; we recommend deactivating any cache plugin when maintenance mode is active. If you **really** want to use a cache plugin, make sure you delete the entire cache after each change.
@@ -78,6 +78,13 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 Notice: `wp-cron.php` is excluded by default.
 
 ## Changelog ##
+
+##### [Version 2.4.3](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.2...v2.4.3) (2022-01-27)
+
+- Change ownership to Themeisle
+
+
+
 
 ### 2.4.2 (18/01/2022) ###
 * Misc: 900 000 Active Installs Celebrations!
