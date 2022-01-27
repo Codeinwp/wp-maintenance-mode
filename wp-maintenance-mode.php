@@ -8,7 +8,7 @@
  * Author: Themeisle
  * Author URI: https://themeisle.com/
  * Twitter: themeisle
- * GitHub Plugin URI: https://github.com/codeinwp/WP-Maintenance-Mode
+ * GitHub Plugin URI: https://github.com/codeinwp/wp-maintenance-mode
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: wp-maintenance-mode
