@@ -79,6 +79,13 @@ Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
 
+####   Version 1.0.0 (2022-01-27)
+
+- Change ownership to Themeisle
+
+
+
+
 = 2.4.2 (18/01/2022) =
 * Misc: 900 000 Active Installs Celebrations!
 * Misc: WordPress 5.9 compatibility
