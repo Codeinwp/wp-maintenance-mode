@@ -56,7 +56,7 @@ If you like this plugin, then consider checking out our other projects:
 * <a href="https://domainwheel.com">DomainWheel</a> - Free Short Website name generator, with the help of AI, for instant ideas.
 
 
-Visit <a href="https://themeisle.com/blog/" title="Themeisle blog">our blog</a> to learn from our <a href="https://themeisle.com/blog/category/wordpress/reviews/" title="WordPress Reviews">WordPress Reviews</a> and check-out our  <a href="https://themeisle.com/blog/category/wordpress-hosting/hosting-comparisons/" title="Hosting Comparisons">hosting tests</a>.
+Check-out <a href="https://themeisle.com/blog/" title="Themeisle blog">our blog</a> to learn from our <a href="https://themeisle.com/blog/category/wordpress/reviews/" title="WordPress Reviews">WordPress Reviews</a> and see other <a href="https://themeisle.com/blog/category/wordpress-plugins/" title="WordPress Plugins Comparisons">WordPress plugins</a>.
 
 == Installation ==
 
