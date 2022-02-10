@@ -1,0 +1,14 @@
+name: Move new issues into Triage
+
+on:
+  issues:
+    types: [opened,reopened]
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.2.2
+        with:
+          project: Products(Extended)
+          column: Triage
+          repo-token: ${{ secrets.BOT_TOKEN }}
