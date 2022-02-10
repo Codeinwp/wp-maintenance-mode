@@ -1,0 +1,9 @@
+
+version: 2
+updates:
+
+  # Maintain dependencies for Composer
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
