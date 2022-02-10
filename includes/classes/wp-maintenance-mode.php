@@ -6,7 +6,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.4.3';
+		const VERSION = '2.4.4';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;

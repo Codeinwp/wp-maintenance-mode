@@ -1,6 +1,6 @@
-# WP Maintenance Mode #
+# WP Maintenance Mode & Coming Soon#
 **Contributors:** [themeisle](https://profiles.wordpress.org/themeisle/)  
-**Plugin Name:** WP Maintenance Mode  
+**Plugin Name:** WP Maintenance Mode & Coming Soon  
 **Plugin URI:** https://themeisle.com/  
 **Author:** Themeisle  
 **Author URI:** https://themeisle.com/  
@@ -46,6 +46,18 @@ Please give us feedback, contribute and file technical bugs on [GitHub Repo](htt
 
 Developed by [Themeisle](https://themeisle.com)
 
+### What's Next ###
+
+If you like this plugin, then consider checking out our other projects:
+
+* <a href="https://optimole.com/">Optimole</a> - Optimole is your all-in-one image optimization solution for WordPress & beyond.
+* <a href="https://revive.social/">Revive Social</a> - Revive Old Posts helps you keep your content alive and in front the audiences that matter.
+* <a href="https://www.codeinwp.com/">CodeinWP</a> - CodeinWP stands for all-things-WordPress. From web design to freelancing and from development to business, your questions are covered.
+* <a href="https://domainwheel.com">DomainWheel</a> - Free Short Website name generator, with the help of AI, for instant ideas.
+
+
+Check-out <a href="https://themeisle.com/blog/" title="Themeisle blog">our blog</a> to learn from our <a href="https://themeisle.com/blog/category/wordpress/reviews/" title="WordPress Reviews">WordPress Reviews</a> and see other <a href="https://themeisle.com/blog/category/wordpress-plugins/" title="WordPress Plugins Comparisons">WordPress plugins</a>.
+
 ## Installation ##
 
 1. Unpack the download package
@@ -78,6 +90,13 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 Notice: `wp-cron.php` is excluded by default.
 
 ## Changelog ##
+
+##### [Version 2.4.4](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.3...v2.4.4) (2022-02-10)
+
+Update dependencies
+
+
+
 
 ##### [Version 2.4.3](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.2...v2.4.3) (2022-01-27)
 
