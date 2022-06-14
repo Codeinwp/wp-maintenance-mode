@@ -83,8 +83,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				$wp_scripts = wp_scripts();
 				$ui         = $wp_scripts->query( 'jquery-ui-core' );
-
-				wp_enqueue_style( $this->plugin_slug . '-admin-jquery-ui-styles', '//code.jquery.com/ui/' . ( ! empty( $ui->ver ) ? $ui->ver : '1.11.4' ) . '/themes/smoothness/jquery-ui' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
+				$allowed_versions = [
+					'1.11.4' => true,
+					'1.12.1' => true,
+					'1.13.0' => true,
+					'1.13.1' => true,
+				];
+				wp_enqueue_style( $this->plugin_slug . '-admin-jquery-ui-styles', WPMM_CSS_URL . 'jquery-ui-styles/' . ( ! empty( $ui->ver ) ? ( isset( $allowed_versions[ $ui->ver ] ) ? $ui->ver : '1.13.1' ) : '1.11.4' ) . '/jquery-ui' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-chosen', WPMM_CSS_URL . 'chosen' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-timepicker-addon-script', WPMM_CSS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-styles', WPMM_CSS_URL . 'style-admin' . WPMM_ASSETS_SUFFIX . '.css', array( 'wp-color-picker' ), WP_Maintenance_Mode::VERSION );

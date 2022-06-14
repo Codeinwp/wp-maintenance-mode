@@ -955,7 +955,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$wp_scripts = wp_scripts();
 
 			$scripts = array(
-				'jquery'   => ! empty( $wp_scripts->registered['jquery-core'] ) ? site_url( $wp_scripts->registered['jquery-core']->src ) : '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery' . WPMM_ASSETS_SUFFIX . '.js',
+				'jquery' => site_url( "/wp-includes/js/jquery/jquery" . WPMM_ASSETS_SUFFIX . ".js" ),
 				'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
 				'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
 			);
