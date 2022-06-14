@@ -136,6 +136,14 @@ module.exports = function(grunt) {
                     'includes/classes/wp-maintenance-mode.php'
                 ]
             },
+            readmetxt: {
+                options: {
+                    prefix: 'Stable tag:\\s*'
+                },
+                src: [
+                    'readme.txt'
+                ]
+            },
             metatag: {
                 options: {
                     prefix: 'Version:\\s*',

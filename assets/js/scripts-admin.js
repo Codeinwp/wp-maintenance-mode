@@ -132,7 +132,8 @@ jQuery(function ($) {
      * SUBSCRIBERS EXPORT
      */
     $('#subscribers_wrap').on('click', '#subscribers-export', function () {
-        $('<iframe />').attr('src', wpmm_vars.ajax_url + '?action=wpmm_subscribers_export').appendTo('body').hide();
+        var nonce = $('#tab-modules #_wpnonce').val();
+        $('<iframe />').attr('src', wpmm_vars.ajax_url + '?action=wpmm_subscribers_export&_wpnonce='+encodeURI( nonce )).appendTo('body').hide();
     });
 
     /**
@@ -141,8 +142,12 @@ jQuery(function ($) {
      * @since 2.0.4
      */
     $('#subscribers_wrap').on('click', '#subscribers-empty-list', function () {
+
+        var nonce = $('#tab-modules #_wpnonce').val();
+
         $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_subscribers_empty_list'
+            action: 'wpmm_subscribers_empty_list',
+            _wpnonce: nonce
         }, function (response) {
             if (!response.success) {
                 alert(response.data);

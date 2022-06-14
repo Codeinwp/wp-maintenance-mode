@@ -1006,7 +1006,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				if ( empty( $email ) || ! is_email( $email ) ) {
 					throw new Exception( __( 'Please enter a valid email address.', 'wp-maintenance-mode' ) );
 				}
-
+				if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wpmts_nonce_subscribe' )
+				) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
+				}
 				// save
 				$exists = $wpdb->get_row( $wpdb->prepare( "SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", $email ), ARRAY_A );
 				if ( empty( $exists ) ) {
@@ -1041,7 +1044,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				if ( empty( $name ) || empty( $email ) || empty( $content ) ) {
 					throw new Exception( __( 'All fields required.', 'wp-maintenance-mode' ) );
 				}
-
+				if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wpmts_nonce_contact' )
+				) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
+				}
 				if ( ! is_email( $email ) ) {
 					throw new Exception( __( 'Please enter a valid email address.', 'wp-maintenance-mode' ) );
 				}

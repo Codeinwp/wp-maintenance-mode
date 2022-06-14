@@ -156,7 +156,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( ! current_user_can( wpmm_get_capability( 'subscribers' ) ) ) {
 					throw new Exception( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
 				}
+				// check nonce existence
+				if ( empty( $_GET['_wpnonce'] ) ) {
+					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				}
 
+				// check nonce validation
+				if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'tab-modules' ) ) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
+				}
 				// get subscribers and export
 				$results = $wpdb->get_results( "SELECT email, insert_date FROM {$wpdb->prefix}wpmm_subscribers ORDER BY id_subscriber DESC", ARRAY_A );
 				if ( ! empty( $results ) ) {
@@ -174,6 +182,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					fclose( $fp ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 				}
+				die();
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
 			}
@@ -194,7 +203,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( ! current_user_can( wpmm_get_capability( 'subscribers' ) ) ) {
 					throw new Exception( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
 				}
+				// check nonce existence
+				if ( empty( $_POST['_wpnonce'] ) ) {
+					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				}
 
+				// check nonce validation
+				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-modules' ) ) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
+				}
 				// delete all subscribers
 				$wpdb->query( "DELETE FROM {$wpdb->prefix}wpmm_subscribers" );
 
@@ -625,6 +642,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 				if ( empty( $notice_key ) ) {
 					throw new Exception( __( 'Notice key cannot be empty.', 'wp-maintenance-mode' ) );
+				}
+				if ( empty( $_POST['_wpnonce'] ) ) {
+					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				}
+
+
+				// check nonce validation
+				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $notice_key ) ) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
 				}
 
 				$this->save_dismissed_notices( get_current_user_id(), $notice_key );
