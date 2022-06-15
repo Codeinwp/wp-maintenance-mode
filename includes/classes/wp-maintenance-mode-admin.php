@@ -81,10 +81,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$screen = get_current_screen();
 			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
-				$wp_scripts = wp_scripts();
-				$ui         = $wp_scripts->query( 'jquery-ui-core' );
-
-				wp_enqueue_style( $this->plugin_slug . '-admin-jquery-ui-styles', '//code.jquery.com/ui/' . ( ! empty( $ui->ver ) ? $ui->ver : '1.11.4' ) . '/themes/smoothness/jquery-ui' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
+				$wp_scripts       = wp_scripts();
+				$ui               = $wp_scripts->query( 'jquery-ui-core' );
+				$allowed_versions = array(
+					'1.11.4' => true,
+					'1.12.1' => true,
+					'1.13.0' => true,
+					'1.13.1' => true,
+				);
+				wp_enqueue_style( $this->plugin_slug . '-admin-jquery-ui-styles', WPMM_CSS_URL . 'jquery-ui-styles/' . ( ! empty( $ui->ver ) ? ( isset( $allowed_versions[ $ui->ver ] ) ? $ui->ver : '1.13.1' ) : '1.11.4' ) . '/jquery-ui' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-chosen', WPMM_CSS_URL . 'chosen' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-timepicker-addon-script', WPMM_CSS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-styles', WPMM_CSS_URL . 'style-admin' . WPMM_ASSETS_SUFFIX . '.css', array( 'wp-color-picker' ), WP_Maintenance_Mode::VERSION );
@@ -156,7 +161,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( ! current_user_can( wpmm_get_capability( 'subscribers' ) ) ) {
 					throw new Exception( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
 				}
+				// check nonce existence
+				if ( empty( $_GET['_wpnonce'] ) ) {
+					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				}
 
+				// check nonce validation
+				if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'tab-modules' ) ) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
+				}
 				// get subscribers and export
 				$results = $wpdb->get_results( "SELECT email, insert_date FROM {$wpdb->prefix}wpmm_subscribers ORDER BY id_subscriber DESC", ARRAY_A );
 				if ( ! empty( $results ) ) {
@@ -174,6 +187,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					fclose( $fp ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 				}
+				die();
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
 			}
@@ -194,7 +208,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( ! current_user_can( wpmm_get_capability( 'subscribers' ) ) ) {
 					throw new Exception( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
 				}
+				// check nonce existence
+				if ( empty( $_POST['_wpnonce'] ) ) {
+					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				}
 
+				// check nonce validation
+				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-modules' ) ) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
+				}
 				// delete all subscribers
 				$wpdb->query( "DELETE FROM {$wpdb->prefix}wpmm_subscribers" );
 
@@ -258,7 +280,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			// check existence in plugin default settings
-			$tab = $_POST['tab'];
+			$tab = sanitize_key( $_POST['tab'] );
 			if ( empty( $this->plugin_default_settings[ $tab ] ) ) {
 				die( esc_html__( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 			}
@@ -270,15 +292,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					if ( ! empty( $_POST['options']['general']['status'] ) && $_POST['options']['general']['status'] === 1 ) {
 						$_POST['options']['general']['status_date'] = date( 'Y-m-d H:i:s' );
 					}
-					$_POST['options']['general']['bypass_bots']   = (int) $_POST['options']['general']['bypass_bots'];
-					$_POST['options']['general']['backend_role']  = ! empty( $_POST['options']['general']['backend_role'] ) ? $_POST['options']['general']['backend_role'] : array();
-					$_POST['options']['general']['frontend_role'] = ! empty( $_POST['options']['general']['frontend_role'] ) ? $_POST['options']['general']['frontend_role'] : array();
-					$_POST['options']['general']['meta_robots']   = (int) $_POST['options']['general']['meta_robots'];
-					$_POST['options']['general']['redirection']   = esc_url_raw( $_POST['options']['general']['redirection'] );
+					$_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
+
+					$_POST['options']['general']['backend_role']  = ! empty( $_POST['options']['general']['backend_role'] ) ? array_map( 'sanitize_text_field', $_POST['options']['general']['backend_role'] ) : array();
+					$_POST['options']['general']['frontend_role'] = ! empty( $_POST['options']['general']['frontend_role'] ) ? array_map( 'sanitize_text_field', $_POST['options']['general']['frontend_role'] ) : array();
+
+					$_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
+					$_POST['options']['general']['redirection'] = esc_url_raw( $_POST['options']['general']['redirection'] );
 					if ( ! empty( $_POST['options']['general']['exclude'] ) ) {
 						$exclude_array = explode( "\n", $_POST['options']['general']['exclude'] );
 						// we need to be sure that empty lines will not be saved
 						$_POST['options']['general']['exclude'] = array_filter( array_map( 'trim', $exclude_array ) );
+						$_POST['options']['general']['exclude'] = array_map( 'sanitize_textarea_field', $_POST['options']['general']['exclude'] );
 					} else {
 						$_POST['options']['general']['exclude'] = array();
 					}
@@ -325,13 +350,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					break;
 				case 'modules':
 					// Countdown
-					$_POST['options']['modules']['countdown_status']             = (int) $_POST['options']['modules']['countdown_status'];
-					$_POST['options']['modules']['countdown_start']              = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
-					$_POST['options']['modules']['countdown_details']            = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
-					$_POST['options']['modules']['countdown_details']['days']    = isset( $_POST['options']['modules']['countdown_details']['days'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['days'] ) ? $_POST['options']['modules']['countdown_details']['days'] : 0;
-					$_POST['options']['modules']['countdown_details']['hours']   = isset( $_POST['options']['modules']['countdown_details']['hours'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['hours'] ) ? $_POST['options']['modules']['countdown_details']['hours'] : 1;
-					$_POST['options']['modules']['countdown_details']['minutes'] = isset( $_POST['options']['modules']['countdown_details']['minutes'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['minutes'] ) ? $_POST['options']['modules']['countdown_details']['minutes'] : 0;
-					$_POST['options']['modules']['countdown_color']              = sanitize_hex_color( $_POST['options']['modules']['countdown_color'] );
+					$_POST['options']['modules']['countdown_status']  = (int) $_POST['options']['modules']['countdown_status'];
+					$_POST['options']['modules']['countdown_start']   = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
+					$_POST['options']['modules']['countdown_details'] = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
+					$_POST['options']['modules']['countdown_details'] = array(
+						'days'    => isset( $_POST['options']['modules']['countdown_details']['days'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['days'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['days'] ) : 0,
+						'hours'   => isset( $_POST['options']['modules']['countdown_details']['hours'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['hours'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['hours'] ) : 1,
+						'minutes' => isset( $_POST['options']['modules']['countdown_details']['minutes'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['minutes'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['minutes'] ) : 0,
+					);
+
+					$_POST['options']['modules']['countdown_color'] = sanitize_hex_color( $_POST['options']['modules']['countdown_color'] );
 
 					// Subscribe
 					$_POST['options']['modules']['subscribe_status']     = (int) $_POST['options']['modules']['subscribe_status'];
@@ -456,7 +484,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				}
 
 				// check existence in plugin default settings
-				$tab = $_POST['tab'];
+				$tab = sanitize_key( $_POST['tab'] );
 				if ( empty( $this->plugin_default_settings[ $tab ] ) ) {
 					throw new Exception( __( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 				}
@@ -625,6 +653,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 				if ( empty( $notice_key ) ) {
 					throw new Exception( __( 'Notice key cannot be empty.', 'wp-maintenance-mode' ) );
+				}
+				if ( empty( $_POST['_wpnonce'] ) ) {
+					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+				}
+
+				// check nonce validation
+				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $notice_key ) ) {
+					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
 				}
 
 				$this->save_dismissed_notices( get_current_user_id(), $notice_key );

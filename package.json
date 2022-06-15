@@ -22,7 +22,7 @@
     "cssnano": "^4.1.11",
     "grunt": "^1.4.0",
     "grunt-contrib-jshint": "^2.1.0",
-    "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
+    "grunt-contrib-uglify-es": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-postcss": "^0.9.0",
     "grunt-version": "^3.0.0",

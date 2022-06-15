@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
 				?>
 				<!-- Text -->
-				<h2><?php echo $text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+				<h2><?php echo wp_kses_post( $text ); ?></h2>
 				<?php
 			}
 			?>
@@ -97,6 +97,7 @@ defined( 'ABSPATH' ) || exit;
 					<form class="subscribe_form">
 						<div class="subscribe_border">
 							<input type="text" placeholder="<?php esc_attr_e( 'your e-mail...', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
+							<?php wp_nonce_field( 'wpmts_nonce_subscribe' ); ?>
 							<input type="submit" value="<?php esc_attr_e( 'Subscribe', 'wp-maintenance-mode' ); ?>" />
 						</div>
 						<?php if ( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
@@ -171,7 +172,7 @@ defined( 'ABSPATH' ) || exit;
 							<p class="col last">
 								<input type="text" placeholder="<?php esc_attr_e( 'E-mail', 'wp-maintenance-mode' ); ?>" data-rule-required="true" data-rule-email="true" data-msg-required="<?php esc_attr_e( 'This field is required.', 'wp-maintenance-mode' ); ?>" data-msg-email="<?php esc_attr_e( 'Please enter a valid email address.', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" />
 							</p>
-
+							<?php wp_nonce_field( 'wpmts_nonce_contact' ); ?>
 							<br clear="all" />
 
 							<?php do_action( 'wpmm_contact_form_before_message' ); ?>

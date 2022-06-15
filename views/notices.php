@@ -12,5 +12,5 @@ foreach ( $notices as $key => $notice ) {
 		continue;
 	}
 
-	printf( '<div id="message" class="%s" data-key="%s"><p>%s</p></div>', esc_attr( $notice['class'] ), esc_attr( $key ), wp_kses_post( $notice['msg'] ) );
+	printf( '<div id="message" class="%s" data-key="%s" data-nonce="%s"><p>%s</p></div>', esc_attr( $notice['class'] ), esc_attr( $key ), esc_attr( wp_create_nonce( 'notice_nonce_' . $key ) ), wp_kses_post( $notice['msg'] ) );
 }
