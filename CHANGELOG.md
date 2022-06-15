@@ -1,3 +1,7 @@
+##### [Version 2.4.6](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.5...v2.4.6) (2022-06-15)
+
+* Improve data sanitizations for custom css and contact module
+
 ##### [Version 2.4.5](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.4...v2.4.5) (2022-06-15)
 
 * Harden security and improve release process
