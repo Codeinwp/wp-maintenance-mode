@@ -341,7 +341,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['design']['bg_predefined'] = sanitize_text_field( $_POST['options']['design']['bg_predefined'] );
 
 					// Other
-					$_POST['options']['design']['other_custom_css'] = wp_strip_all_tags( $_POST['options']['design']['other_custom_css'] );
+					$_POST['options']['design']['other_custom_css'] = sanitize_textarea_field( $_POST['options']['design']['other_custom_css'] );
 
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {

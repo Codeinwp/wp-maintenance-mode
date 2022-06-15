@@ -947,7 +947,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			// "Design > Other > Custom CSS"
 			if ( ! empty( $this->plugin_settings['design']['other_custom_css'] ) ) {
-				$css_rules['design.other_custom_css'] = wp_strip_all_tags( $this->plugin_settings['design']['other_custom_css'] );
+				$css_rules['design.other_custom_css'] = sanitize_textarea_field( $this->plugin_settings['design']['other_custom_css'] );
 			}
 
 			if ( empty( $css_rules ) ) {
@@ -1049,7 +1049,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			try {
 				$name    = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$email   = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				$content = isset( $_POST['content'] ) ? wp_strip_all_tags( $_POST['content'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$content = isset( $_POST['content'] ) ? sanitize_textarea_field( $_POST['content'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				// checks
 				if ( empty( $name ) || empty( $email ) || empty( $content ) ) {
 					throw new Exception( __( 'All fields required.', 'wp-maintenance-mode' ) );
