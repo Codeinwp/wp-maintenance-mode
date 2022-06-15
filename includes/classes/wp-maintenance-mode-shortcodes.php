@@ -39,9 +39,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 			ob_start();
 
                         // @codingStandardsIgnoreStart
-			echo $wrapper['before'];
+			echo wp_kses_post( $wrapper['before'] );
 			call_user_func( $function, $atts );
-			echo $wrapper['after'];
+			echo wp_kses_post( $wrapper['after'] );
                         // @codingStandardsIgnoreEnd
 
 			return ob_get_clean();

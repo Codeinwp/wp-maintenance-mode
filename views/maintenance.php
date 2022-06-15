@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
 				?>
 				<!-- Text -->
-				<h2><?php echo $text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+				<h2><?php echo wp_kses_post( $text ); ?></h2>
 				<?php
 			}
 			?>
@@ -98,7 +98,7 @@ defined( 'ABSPATH' ) || exit;
 						<div class="subscribe_border">
 							<input type="text" placeholder="<?php esc_attr_e( 'your e-mail...', 'wp-maintenance-mode' ); ?>" name="email" class="email_input" data-rule-required="true" data-rule-email="true" data-rule-required="true" data-rule-email="true" />
 							<?php wp_nonce_field( 'wpmts_nonce_subscribe' ); ?>
-                            <input type="submit" value="<?php esc_attr_e( 'Subscribe', 'wp-maintenance-mode' ); ?>" />
+							<input type="submit" value="<?php esc_attr_e( 'Subscribe', 'wp-maintenance-mode' ); ?>" />
 						</div>
 						<?php if ( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
 							<div class="privacy_checkbox">

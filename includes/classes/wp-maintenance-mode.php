@@ -757,6 +757,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		}
 
 		/**
+		 * Sanitize IP adress.
+		 *
+		 * @param string $ip Ip string.
+		 *
+		 * @return array|string|string[]|null
+		 */
+		public static function sanitize_ip( $ip ) {
+			return preg_replace( '/[^0-9a-fA-F:., ]/', '', $ip );
+		}
+		/**
 		 * Check if slug / ip address exists in exclude list
 		 *
 		 * @since 2.0.0
@@ -769,8 +779,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			if ( ! empty( $this->plugin_settings['general']['exclude'] ) && is_array( $this->plugin_settings['general']['exclude'] ) ) {
 				$excluded_list  = $this->plugin_settings['general']['exclude'];
 				$remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+				$remote_address = self::sanitize_ip( $remote_address );
 				$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? rawurldecode( $_SERVER['REQUEST_URI'] ) : '';
-
+				$request_uri    = wp_sanitize_redirect( $request_uri );
 				foreach ( $excluded_list as $item ) {
 					if ( empty( $item ) ) { // just to be sure :-)
 						continue;
@@ -943,7 +954,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				return;
 			}
 
-			printf( "<style type=\"text/css\">\n%s\n</style>\n", implode( "\n", $css_rules ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			printf( "<style type=\"text/css\">\n%s\n</style>\n", wp_strip_all_tags( implode( "\n", $css_rules ) ) );
 		}
 
 		/**
@@ -952,10 +963,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_js_files() {
-			$wp_scripts = wp_scripts();
 
 			$scripts = array(
-				'jquery' => site_url( "/wp-includes/js/jquery/jquery" . WPMM_ASSETS_SUFFIX . ".js" ),
+				'jquery'   => site_url( '/wp-includes/js/jquery/jquery' . WPMM_ASSETS_SUFFIX . '.js' ),
 				'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
 				'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
 			);
