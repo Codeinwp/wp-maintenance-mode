@@ -241,12 +241,18 @@ function wpmm_get_template_path( $template_name, $overrideable = false ) {
  * Returns the value of the option after `stripslashes_deep` is applied
  *
  * @since 2.4.0
- * @param string $option
- * @param mixed  $default
+ * @param string $option Option name.
+ * @param mixed  $default Default value.
  * @return mixed
  */
 function wpmm_get_option( $option, $default = false ) {
-	return stripslashes_deep( get_option( $option, $default ) );
+	$settings = get_option( $option, $default );
+	if ( ! is_admin() && is_multisite() ) {
+		if ( empty( $settings['general']['status'] ) ) {
+			$settings = get_blog_option( get_main_site_id(), $option, $default );
+		}
+	}
+	return stripslashes_deep( $settings );
 }
 
 /**
@@ -396,6 +402,17 @@ function wpmm_set_nocache_constants() {
 	wpmm_maybe_define_constant( 'DONOTCACHEDB', true );
 	wpmm_maybe_define_constant( 'DONOTMINIFY', true );
 	wpmm_maybe_define_constant( 'DONOTCDN', true );
+}
+
+/**
+ * Get option page URL.
+ */
+function wpmm_option_page_url() {
+	$option_page = admin_url( 'options-general.php' );
+	if ( is_multisite() && is_network_admin() ) {
+		$option_page = network_admin_url( 'settings.php' );
+	}
+	return $option_page;
 }
 
 /**

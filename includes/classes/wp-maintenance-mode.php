@@ -320,7 +320,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 						'msg'   => sprintf(
 									/* translators: plugin settings url */
 							__( 'WP Maintenance Mode plugin was relaunched and you MUST revise <a href="%s">settings</a>.', 'wp-maintenance-mode' ),
-							add_query_arg( array( 'page' => self::get_instance()->plugin_slug ), admin_url( 'options-general.php' ) )
+							add_query_arg( array( 'page' => self::get_instance()->plugin_slug ), wpmm_option_page_url() )
 						),
 					)
 				);

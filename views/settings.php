@@ -52,6 +52,7 @@ defined( 'ABSPATH' ) || exit;
 			<div class="tabs-content">
 				<div id="tab-general" class="">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -169,6 +170,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -348,6 +350,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-modules" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -638,6 +641,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 				<div id="tab-bot" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -825,6 +829,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 				<div id="tab-gdpr" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">

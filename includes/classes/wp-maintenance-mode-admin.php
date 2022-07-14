@@ -30,6 +30,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add the options page and menu item.
 			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
+			add_action( 'network_admin_menu', array( $this, 'add_plugin_menu' ) );
 
 			// Add an action link pointing to the options page
 			if ( is_multisite() && is_plugin_active_for_network( $this->plugin_basename ) ) {
@@ -41,6 +42,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add admin notices
 			add_action( 'admin_notices', array( $this, 'add_notices' ) );
+			// Add network admin notices.
+			add_action( 'network_admin_notices', array( $this, 'add_notices' ) );
+			add_action( 'network_admin_notices', array( $this, 'save_plugin_settings_notice' ) );
 
 			// Add ajax methods
 			add_action( 'wp_ajax_wpmm_subscribers_export', array( $this, 'subscribers_export' ) );
@@ -117,7 +121,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					'wpmm_vars',
 					array(
 						'ajax_url'                => admin_url( 'admin-ajax.php' ),
-						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), wpmm_option_page_url() ),
 						'image_uploader_defaults' => array(
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
@@ -235,13 +239,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function add_plugin_menu() {
-			$this->plugin_screen_hook_suffix = add_options_page(
+			$parent_menu              = 'options-general.php';
+			$network_menu_hook_suffix = '';
+			if ( is_multisite() && is_network_admin() ) {
+				$parent_menu              = 'settings.php';
+				$network_menu_hook_suffix = '-network';
+			}
+			$this->plugin_screen_hook_suffix = add_submenu_page(
+				$parent_menu,
 				__( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
 				__( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
 				wpmm_get_capability( 'settings' ),
 				$this->plugin_slug,
 				array( $this, 'display_plugin_settings' )
 			);
+			$this->plugin_screen_hook_suffix = $this->plugin_screen_hook_suffix . $network_menu_hook_suffix;
 		}
 
 		/**
@@ -437,11 +449,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					}
 					break;
 			}
-
 			// save settings
-			$this->plugin_settings[ $tab ] = $_POST['options'][ $tab ];
+			$this->plugin_settings[ $tab ]         = $_POST['options'][ $tab ];
+			$this->plugin_settings['is_main_site'] = ! empty( boolval( $_POST['options']['is_main_site'] ) );
 			update_option( 'wpmm_settings', $this->plugin_settings );
 
+			$redirect_to = wpmm_option_page_url();
+			if ( $this->plugin_settings['is_main_site'] ) {
+				$redirect_to = network_admin_url( 'settings.php' );
+			}
 			// redirect back
 			wp_safe_redirect(
 				add_query_arg(
@@ -449,7 +465,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'page'    => $this->plugin_slug,
 						'updated' => true,
 					),
-					admin_url( 'options-general.php' )
+					$redirect_to
 				) . '#' . $tab
 			);
 			exit;
@@ -593,7 +609,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function add_settings_link( $links ) {
 			return array_merge(
 				array(
-					'wpmm_settings' => sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ), esc_html__( 'Settings', 'wp-maintenance-mode' ) ),
+					'wpmm_settings' => sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'page' => $this->plugin_slug ), wpmm_option_page_url() ), esc_html__( 'Settings', 'wp-maintenance-mode' ) ),
 				),
 				$links
 			);
@@ -620,7 +636,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'msg'   => sprintf(
 								/* translators: plugin settings url */
 							__( 'The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', 'wp-maintenance-mode' ),
-							add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) )
+							add_query_arg( array( 'page' => $this->plugin_slug ), wpmm_option_page_url() )
 						),
 					);
 				}
@@ -761,6 +777,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				}
 			} elseif ( ! $this->get_is_policy_available() ) { // No privacy feature available
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );
+			}
+		}
+
+		/**
+		 * Display save plugin settings notice.
+		 */
+		public function save_plugin_settings_notice() {
+			$screen  = get_current_screen();
+			$notices = array();
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! empty( $_GET['updated'] ) && $this->plugin_screen_hook_suffix === $screen->id ) { ?>
+				<div id="message" class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Settings saved.', 'wp-maintenance-mode' ); ?></strong></p></div>
+				<?php
 			}
 		}
 
