@@ -515,9 +515,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$page_title = $_POST['post_title'];
 
 			$new_post = array(
-				'post_type'     => 'page',
-				'post_title'    => wp_strip_all_tags( $page_title ),
-				'post_status'   => 'publish',
+				'post_type'   => 'page',
+				'post_title'  => wp_strip_all_tags( $page_title ),
+				'post_status' => 'publish',
 			);
 
 			$post_id = wp_insert_post( $new_post );
