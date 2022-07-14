@@ -14,34 +14,34 @@ defined( 'ABSPATH' ) || exit;
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="#general">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
 					</svg>
 
 					<?php esc_html_e( 'General', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#design">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 					</svg>
 
 					<?php esc_html_e( 'Design', 'wp-maintenance-mode' ); ?></a>
 				<a class="nav-tab" href="#modules">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
 					</svg>
 
 					<?php esc_html_e( 'Modules', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#bot">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 					</svg>
 
 					<?php esc_html_e( 'Manage Bot', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#gdpr">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 					</svg>
 
@@ -168,11 +168,22 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 
 				<div id="tab-design" class="hidden">
-					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
+					<?php if (  $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'OTTER_COMPATIBLE' ) ) {
+						?>
+							<h1><?php esc_html_e( 'Choose a page template', 'wp-maintenance-mode' ) ?></h1>
+							<div id="templates-wrap">
+								<button class="button button-primary" id="import-page" data-tab="design"><?php esc_attr_e( 'Import Template', 'wp-maintenance-mode' ); ?></button>
+								<button class="button button-secondary" id="create-page" data-tab="design"><?php esc_attr_e( 'Create your own', 'wp-maintenance-mode' ); ?></button>
+							</div>
+							<?php wpmm_form_hidden_fields( 'design' ); ?>
+						<?php
+					} else {
+						?>
+						<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+							<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
 
-						<table class="form-table">
-							<tbody>
+							<table class="form-table">
+								<tbody>
 								<tr valign="top">
 									<th scope="row">
 										<label for="options[design][title]"><?php esc_html_e( 'Title (HTML tag)', 'wp-maintenance-mode' ); ?></label>
@@ -246,13 +257,13 @@ defined( 'ABSPATH' ) || exit;
 										<p class="description"><?php esc_html_e( '"Dashboard" and "Privacy Policy" links.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
-							</tbody>
-						</table>
+								</tbody>
+							</table>
 
-						<h3>&raquo; <?php esc_html_e( 'Background', 'wp-maintenance-mode' ); ?></h3>
+							<h3>&raquo; <?php esc_html_e( 'Background', 'wp-maintenance-mode' ); ?></h3>
 
-						<table class="form-table">
-							<tbody>
+							<table class="form-table">
+								<tbody>
 								<tr valign="top">
 									<th scope="row">
 										<label for="options[design][bg_type]"><?php esc_html_e( 'Choose type', 'wp-maintenance-mode' ); ?></label>
@@ -280,14 +291,14 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<input type="text" value="<?php echo esc_url( $this->plugin_settings['design']['bg_custom'] ); ?>" name="options[design][bg_custom]" class="background_url" />
 										<input
-											type="button"
-											value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>"
-											class="button image_uploader_trigger"
-											data-name="background"
-											data-title="<?php esc_attr_e( 'Upload Background', 'wp-maintenance-mode' ); ?>"
-											data-button-text="<?php esc_attr_e( 'Choose Background', 'wp-maintenance-mode' ); ?>"
-											data-to-selector=".background_url"
-											/>
+												type="button"
+												value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>"
+												class="button image_uploader_trigger"
+												data-name="background"
+												data-title="<?php esc_attr_e( 'Upload Background', 'wp-maintenance-mode' ); ?>"
+												data-button-text="<?php esc_attr_e( 'Choose Background', 'wp-maintenance-mode' ); ?>"
+												data-to-selector=".background_url"
+										/>
 										<p class="description"><?php esc_html_e( 'Backgrounds should have 1920x1280 px size.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -299,7 +310,7 @@ defined( 'ABSPATH' ) || exit;
 											<?php
 											printf(
 												wp_kses(
-															/* translators: free photos url */
+												/* translators: free photos url */
 													__( '* source <a href="%s" target="_blank">Free Photos</a>', 'wp-maintenance-mode' ),
 													wpmm_translated_string_allowed_html()
 												),
@@ -321,13 +332,13 @@ defined( 'ABSPATH' ) || exit;
 										</ul>
 									</td>
 								</tr>
-							</tbody>
-						</table>
+								</tbody>
+							</table>
 
-						<h3>&raquo; <?php esc_html_e( 'Other', 'wp-maintenance-mode' ); ?></h3>
+							<h3>&raquo; <?php esc_html_e( 'Other', 'wp-maintenance-mode' ); ?></h3>
 
-						<table class="form-table">
-							<tbody>
+							<table class="form-table">
+								<tbody>
 								<tr valign="top">
 									<th scope="row">
 										<label for="options[design][other_custom_css]"><?php esc_html_e( 'Custom CSS', 'wp-maintenance-mode' ); ?></label>
@@ -337,13 +348,15 @@ defined( 'ABSPATH' ) || exit;
 										<p class="description"><?php esc_html_e( 'Do not add <style> tags.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
-							</tbody>
-						</table>
+								</tbody>
+							</table>
 
-						<?php wpmm_form_hidden_fields( 'design' ); ?>
-						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
-						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit" />
-					</form>
+							<?php wpmm_form_hidden_fields( 'design' ); ?>
+							<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
+							<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit" />
+						</form>
+						<?php
+					}?>
 				</div>
 
 				<div id="tab-modules" class="hidden">
@@ -636,6 +649,7 @@ defined( 'ABSPATH' ) || exit;
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit" />
 					</form>
 				</div>
+
 				<div id="tab-bot" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
@@ -823,6 +837,7 @@ defined( 'ABSPATH' ) || exit;
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit" />
 					</form>
 				</div>
+
 				<div id="tab-gdpr" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">

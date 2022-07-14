@@ -47,6 +47,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_subscribers_empty_list', array( $this, 'subscribers_empty_list' ) );
 			add_action( 'wp_ajax_wpmm_dismiss_notices', array( $this, 'dismiss_notices' ) );
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
+			add_action( 'wp_ajax_wpmm_create_custom_page', array( $this, 'create_custom_page' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
@@ -116,6 +117,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->plugin_slug . '-admin-script',
 					'wpmm_vars',
 					array(
+						'nonce'                   => 'aaaa',
 						'ajax_url'                => admin_url( 'admin-ajax.php' ),
 						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
 						'image_uploader_defaults' => array(
@@ -497,6 +499,29 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
 			}
+		}
+
+		public function create_custom_page() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-design' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			$page_title = $_POST['post_title'];
+
+			$new_post = array(
+				'post_type'     => 'page',
+				'post_title'    => wp_strip_all_tags( $page_title ),
+				'post_status'   => 'publish',
+			);
+
+			$post_id = wp_insert_post( $new_post );
+			wp_send_json_success( array( 'postURL' => get_edit_post_link( $post_id ) ) );
 		}
 
 		/**

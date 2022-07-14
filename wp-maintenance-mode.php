@@ -41,6 +41,7 @@ define( 'WPMM_IMAGES_URL', WPMM_URL . 'assets/images/' );
  * OTHER DEFINES
  */
 define( 'WPMM_ASSETS_SUFFIX', ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min' );
+define( 'GUTENBERG_COMPATIBLE', true );
 
 /**
  * FUNCTIONS

@@ -1,3 +1,5 @@
+/* global wp */
+
 jQuery(function ($) {
     /**
      * TABS
@@ -183,5 +185,21 @@ jQuery(function ($) {
      * COUNTDOWN TIMEPICKER
      */
     $('.countdown_start').datetimepicker({timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy'});
+
+    /**
+     * TEMPLATES
+     */
+    $('#templates-wrap').on('click', '#create-page', function () {
+        const nonce = $('#tab-design #_wpnonce').val();
+
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_create_custom_page',
+            post_title: "Maintenance Page",
+            _wpnonce: nonce
+        }, function (response) {
+            location.replace( response.data['postURL'].replaceAll('&amp;', '&') );
+        },
+        'json');
+    });
 
 });
