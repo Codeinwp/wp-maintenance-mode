@@ -36,6 +36,7 @@ define( 'WPMM_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPMM_JS_URL', WPMM_URL . 'assets/js/' );
 define( 'WPMM_CSS_URL', WPMM_URL . 'assets/css/' );
 define( 'WPMM_IMAGES_URL', WPMM_URL . 'assets/images/' );
+define( 'WPMM_TEMPLATES_URL', WPMM_URL . 'assets/templates/' );
 
 /**
  * OTHER DEFINES

@@ -169,11 +169,11 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-design" class="hidden">
 					<?php
-					if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'OTTER_COMPATIBLE' ) ) {
+					if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) {
 						?>
 							<h1><?php esc_html_e( 'Choose a page template', 'wp-maintenance-mode' ); ?></h1>
 							<div id="templates-wrap">
-								<button class="button button-primary" id="import-page" data-tab="design"><?php esc_attr_e( 'Import Template', 'wp-maintenance-mode' ); ?></button>
+								<button class="button button-primary" id="import-template" data-tab="design"><?php esc_attr_e( 'Import Template', 'wp-maintenance-mode' ); ?></button>
 								<button class="button button-secondary" id="create-page" data-tab="design"><?php esc_attr_e( 'Create your own', 'wp-maintenance-mode' ); ?></button>
 							</div>
 							<?php wpmm_form_hidden_fields( 'design' ); ?>

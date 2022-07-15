@@ -189,6 +189,17 @@ jQuery(function ($) {
     /**
      * TEMPLATES
      */
+    $('#templates-wrap').on('click', '#import-template', function () {
+        const nonce = $('#tab-design #_wpnonce').val();
+
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_insert_template',
+            template_slug: "dummy-1",
+            _wpnonce: nonce
+        },
+        'json');
+    });
+
     $('#templates-wrap').on('click', '#create-page', function () {
         const nonce = $('#tab-design #_wpnonce').val();
 

@@ -48,6 +48,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_dismiss_notices', array( $this, 'dismiss_notices' ) );
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
 			add_action( 'wp_ajax_wpmm_create_custom_page', array( $this, 'create_custom_page' ) );
+			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
@@ -117,7 +118,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->plugin_slug . '-admin-script',
 					'wpmm_vars',
 					array(
-						'nonce'                   => 'aaaa',
 						'ajax_url'                => admin_url( 'admin-ajax.php' ),
 						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
 						'image_uploader_defaults' => array(
@@ -521,7 +521,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			);
 
 			$post_id = wp_insert_post( $new_post );
+
+			$this->plugin_settings[ 'design' ][ 'page_id' ] = $post_id;
+			update_option( 'wpmm_settings', $this->plugin_settings );
+
 			wp_send_json_success( array( 'postURL' => get_edit_post_link( $post_id ) ) );
+		}
+
+		public function insert_template() {
+			$template_slug = $_POST['template_slug'];
+			$template = file_get_contents( WPMM_TEMPLATES_URL . $template_slug . '/blocks-export.json' ); // todo: doesn't work
 		}
 
 		/**

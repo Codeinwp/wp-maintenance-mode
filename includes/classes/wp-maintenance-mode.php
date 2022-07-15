@@ -561,6 +561,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			/**
 			 * CHECKS
 			 */
+//			wp_redirect( get_permalink( $this->plugin_settings['design']['page_id'] ) );
+//			exit;
+
 			if (
 					( ! $this->check_user_role() ) &&
 					! strstr( $_SERVER['PHP_SELF'], 'wp-cron.php' ) &&
@@ -634,7 +637,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				include_once wpmm_get_template_path( 'maintenance.php', true );
 				ob_flush();
 
-				exit();
+				// exit();
 			}
 		}
 
