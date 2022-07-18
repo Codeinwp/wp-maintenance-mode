@@ -23,7 +23,6 @@ if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings
 	$current_url = home_url( $wp->request );
 	$maintenance_url = get_permalink( $this->plugin_settings['design']['page_id'] );
 
-	// TODO: idk?
 	if ( $maintenance_url !== $current_url . '/' ) {
 		wp_redirect( $maintenance_url );
 	}
@@ -257,6 +256,6 @@ if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings
 	</body>
 	</html>
 	<?php
+	exit();
 }
-exit();
 ?>

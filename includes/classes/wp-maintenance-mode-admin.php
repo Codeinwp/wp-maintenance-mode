@@ -47,7 +47,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_subscribers_empty_list', array( $this, 'subscribers_empty_list' ) );
 			add_action( 'wp_ajax_wpmm_dismiss_notices', array( $this, 'dismiss_notices' ) );
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
-			add_action( 'wp_ajax_wpmm_create_custom_page', array( $this, 'create_custom_page' ) );
+			add_action( 'wp_ajax_wpmm_select_page', array( $this, 'select_page' ) );
 			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
 
 			// Add admin_post_$action
@@ -501,7 +501,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 		}
 
-		public function create_custom_page() {
+		public function select_page() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
 				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
@@ -512,25 +512,40 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
-			$page_title = $_POST['post_title'];
-
-			$new_post = array(
-				'post_type'   => 'page',
-				'post_title'  => wp_strip_all_tags( $page_title ),
-				'post_status' => 'publish',
-			);
-
-			$post_id = wp_insert_post( $new_post );
-
-			$this->plugin_settings[ 'design' ][ 'page_id' ] = $post_id;
+			$this->plugin_settings['design']['page_id'] = $_POST['page_id'];
 			update_option( 'wpmm_settings', $this->plugin_settings );
 
-			wp_send_json_success( array( 'postURL' => get_edit_post_link( $post_id ) ) );
+			wp_send_json_success();
 		}
 
 		public function insert_template() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-design' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
 			$template_slug = $_POST['template_slug'];
-			$template = file_get_contents( WPMM_TEMPLATES_URL . $template_slug . '/blocks-export.json' ); // todo: doesn't work
+			$template = wp_json_file_decode( WPMM_TEMPLATES_PATH . $template_slug . '/blocks-export.json' );
+
+			$blocks = $template->content;
+
+			$new_post = array(
+				'ID'           => isset( $this->plugin_settings['design']['page_id'] ) ? $this->plugin_settings['design']['page_id'] : 0,
+				'post_type'    => 'page',
+				'post_title'   => 'Maintenance Page',
+				'post_status'  => 'publish',
+				'post_content' => $blocks,
+			);
+
+			$this->plugin_settings['design']['page_id'] = wp_insert_post( $new_post );
+			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			wp_send_json_success();
 		}
 
 		/**

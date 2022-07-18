@@ -171,14 +171,29 @@ defined( 'ABSPATH' ) || exit;
 					<?php
 					if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) {
 						?>
+							<div id="select-page">
+								<label for="pages">
+									<?php echo __( 'Custom Page' ) ?>
+									<select name="pages">
+										<option value=""><?php echo '--' . __( 'Select a custom page' ) . '--'?></option>
+										<?php
+										$pages = get_pages();
+										foreach ( $pages as $page ) {
+											?><option value="<?php echo $page->ID; ?>"><?php echo esc_html( $page->post_title ); ?></option><?php
+										}
+										?>
+									</select>
+								</label>
+								<a href="<?php get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"> <?php echo __( 'Edit page' ) ?> </a>
+							</div>
 							<h1><?php esc_html_e( 'Choose a page template', 'wp-maintenance-mode' ); ?></h1>
 							<div id="templates-wrap">
 								<button class="button button-primary" id="import-template" data-tab="design"><?php esc_attr_e( 'Import Template', 'wp-maintenance-mode' ); ?></button>
-								<button class="button button-secondary" id="create-page" data-tab="design"><?php esc_attr_e( 'Create your own', 'wp-maintenance-mode' ); ?></button>
 							</div>
 							<?php wpmm_form_hidden_fields( 'design' ); ?>
 						<?php
 					} else {
+						// legacy design tab here
 						?>
 						<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 							<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
