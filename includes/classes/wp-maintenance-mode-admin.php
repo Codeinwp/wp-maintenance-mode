@@ -134,7 +134,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
-						'is_network_site' => is_multisite() && is_network_admin(),
+						'is_network_site'         => is_multisite() && is_network_admin(),
 					)
 				);
 
@@ -459,7 +459,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					break;
 			}
 			// save settings
-			$this->plugin_settings[ $tab ]         = $_POST['options'][ $tab ];
+			$this->plugin_settings[ $tab ] = $_POST['options'][ $tab ];
 
 			$redirect_to = wpmm_option_page_url();
 			if ( ! empty( $_POST['options']['is_network_site'] ) ) {
