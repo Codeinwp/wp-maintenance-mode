@@ -15,13 +15,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		private $dismissed_notices_key       = 'wpmm_dismissed_notices';
 
 		/**
+		 * Plugin Instance.
+		 *
+		 * @access private
+		 * @var WP_Maintenance_Mode $plugin_instance
+		 */
+		private $plugin_instance;
+
+		/**
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
-			$plugin                        = WP_Maintenance_Mode::get_instance();
-			$this->plugin_slug             = $plugin->get_plugin_slug();
-			$this->plugin_settings         = $plugin->get_plugin_settings();
-			$this->plugin_default_settings = $plugin->default_settings();
+			$this->plugin_instance         = WP_Maintenance_Mode::get_instance();
+			$this->plugin_slug             = $this->plugin_instance->get_plugin_slug();
+			$this->plugin_settings         = $this->plugin_instance->get_plugin_settings();
+			$this->plugin_default_settings = $this->plugin_instance->default_settings();
 			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
 			// Load admin style sheet and JavaScript.
@@ -126,6 +134,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
+						'is_network_site' => is_multisite() && is_network_admin(),
 					)
 				);
 
@@ -451,13 +460,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 			// save settings
 			$this->plugin_settings[ $tab ]         = $_POST['options'][ $tab ];
-			$this->plugin_settings['is_main_site'] = ! empty( boolval( $_POST['options']['is_main_site'] ) );
-			update_option( 'wpmm_settings', $this->plugin_settings );
 
 			$redirect_to = wpmm_option_page_url();
-			if ( $this->plugin_settings['is_main_site'] ) {
+			if ( ! empty( $_POST['options']['is_network_site'] ) ) {
 				$redirect_to = network_admin_url( 'settings.php' );
 			}
+			update_option( $this->plugin_instance->settings_name, $this->plugin_settings );
+
 			// redirect back
 			wp_safe_redirect(
 				add_query_arg(
@@ -507,7 +516,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 				// update options using the default values
 				$this->plugin_settings[ $tab ] = $this->plugin_default_settings[ $tab ];
-				update_option( 'wpmm_settings', $this->plugin_settings );
+				update_option( $this->plugin_instance->settings_name, $this->plugin_settings );
 
 				wp_send_json_success();
 			} catch ( Exception $ex ) {

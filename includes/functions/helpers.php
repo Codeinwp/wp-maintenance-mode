@@ -249,6 +249,7 @@ function wpmm_get_option( $option, $default = false ) {
 	$settings = get_option( $option, $default );
 	if ( ! is_admin() && is_multisite() ) {
 		if ( empty( $settings['general']['status'] ) ) {
+			$option  .= '-network';
 			$settings = get_blog_option( get_main_site_id(), $option, $default );
 		}
 	}
@@ -413,6 +414,20 @@ function wpmm_option_page_url() {
 		$option_page = network_admin_url( 'settings.php' );
 	}
 	return $option_page;
+}
+
+/**
+ * Get option name.
+ */
+function wpmm_option_name() {
+	if ( is_admin() && is_network_admin() ) {
+		return 'wpmm_settings-network';
+	}
+	// phpcs:ignore WordPress.Security.NonceVerification.Missing
+	if ( ! empty( $_POST['options']['is_network_site'] ) || ! empty( $_POST['is_network_site'] ) ) {
+		return 'wpmm_settings-network';
+	}
+	return 'wpmm_settings';
 }
 
 /**

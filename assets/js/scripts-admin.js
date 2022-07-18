@@ -168,7 +168,8 @@ jQuery(function ($) {
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_reset_settings',
             tab: tab,
-            _wpnonce: nonce
+            _wpnonce: nonce,
+            is_network_site: wpmm_vars.is_network_site
         }, function (response) {
             if (!response.success) {
                 alert(response.data);

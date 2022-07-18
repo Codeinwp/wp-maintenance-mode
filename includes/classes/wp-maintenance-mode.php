@@ -14,10 +14,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		protected static $instance = null;
 
 		/**
+		 * Setting name.
+		 *
+		 * @access public
+		 * @var string $settings_name
+		 */
+		public $settings_name;
+
+		/**
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
-			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
+			$this->settings_name   = wpmm_option_name();
+			$this->plugin_settings = wpmm_get_option( $this->settings_name, array() );
+			if ( is_admin() && is_network_admin() ) {
+				if ( empty( $this->plugin_settings ) ) {
+					$this->plugin_settings = $this->default_settings();
+				}
+			}
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
 			// Load plugin text domain
