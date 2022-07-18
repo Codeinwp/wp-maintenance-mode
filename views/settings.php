@@ -52,7 +52,7 @@ defined( 'ABSPATH' ) || exit;
 			<div class="tabs-content">
 				<div id="tab-general" class="">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
+						<input type="hidden" name="options[is_network_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -60,8 +60,8 @@ defined( 'ABSPATH' ) || exit;
 										<label for="options[general][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>
-										<label><input type="radio" value="1" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 1 ); ?> /> <?php esc_html_e( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
-										<label><input type="radio" value="0" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 0 ); ?> /> <?php esc_html_e( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
+										<label><input type="radio" value="1" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 1 ); ?> /> <?php echo is_multisite() && is_network_admin() ? esc_html__( 'Activated on all sites', 'wp-maintenance-mode' ) : esc_html__( 'Activated', 'wp-maintenance-mode' ); ?></label> <br />
+										<label><input type="radio" value="0" name="options[general][status]"<?php checked( $this->plugin_settings['general']['status'], 0 ); ?> /> <?php echo is_multisite() && is_network_admin() ? esc_html__( 'Deactivated on all sites', 'wp-maintenance-mode' ) : esc_html__( 'Deactivated', 'wp-maintenance-mode' ); ?></label>
 									</td>
 								</tr>
 								<tr valign="top">
@@ -170,7 +170,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
+						<input type="hidden" name="options[is_network_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -350,7 +350,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-modules" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
+						<input type="hidden" name="options[is_network_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -641,7 +641,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 				<div id="tab-bot" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
+						<input type="hidden" name="options[is_network_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -829,7 +829,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 				<div id="tab-gdpr" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<input type="hidden" name="options[is_main_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
+						<input type="hidden" name="options[is_network_site]" value="<?php echo (bool) is_multisite() && is_network_admin(); ?>">
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
