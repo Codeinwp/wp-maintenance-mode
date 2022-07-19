@@ -1,0 +1,5 @@
+{
+  "__file": "wp_export",
+  "version": 2,
+  "content": "<!-- wp:themeisle-blocks/advanced-columns {\"id\":\"wp-block-themeisle-blocks-advanced-columns-9c58eefc\",\"columns\":1,\"layout\":\"equal\"} -->\n<div id=\"wp-block-themeisle-blocks-advanced-columns-9c58eefc\" class=\"wp-block-themeisle-blocks-advanced-columns has-1-columns has-desktop-equal-layout has-tablet-equal-layout has-mobile-equal-layout has-vertical-unset\"><div class=\"wp-block-themeisle-blocks-advanced-columns-overlay\"></div><div class=\"innerblocks-wrap\"><!-- wp:themeisle-blocks/advanced-column {\"id\":\"wp-block-themeisle-blocks-advanced-column-2b2e43d8\",\"columnWidth\":\"100\"} -->\n<div id=\"wp-block-themeisle-blocks-advanced-column-2b2e43d8\" class=\"wp-block-themeisle-blocks-advanced-column\"><!-- wp:heading {\"textAlign\":\"center\"} -->\n<h2 class=\"has-text-align-center\">dummy-2</h2>\n<!-- /wp:heading --></div>\n<!-- /wp:themeisle-blocks/advanced-column --></div></div>\n<!-- /wp:themeisle-blocks/advanced-columns -->"
+}

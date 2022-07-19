@@ -542,10 +542,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				'post_content' => $blocks,
 			);
 
-			$this->plugin_settings['design']['page_id'] = wp_insert_post( $new_post );
+			$page_id = wp_insert_post( $new_post );
+			$this->plugin_settings['design']['page_id'] = $page_id;
 			update_option( 'wpmm_settings', $this->plugin_settings );
 
-			wp_send_json_success();
+			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
 		/**

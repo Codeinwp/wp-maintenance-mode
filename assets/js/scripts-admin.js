@@ -191,16 +191,36 @@ jQuery(function ($) {
      */
     $('#templates-wrap').on('click', '#import-template', function () {
         const nonce = $('#tab-design #_wpnonce').val();
+        const templateSlug = $('input[name="template"]:checked').val();
 
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_insert_template',
-            template_slug: "dummy-1",
+            template_slug: templateSlug,
             _wpnonce: nonce
-        },
-        'json');
+        }, function(response) {
+            if (!response.success) {
+                alert(response.data);
+                return false;
+            }
+
+            window.location.href = response.data['pageEditURL'].replace(/&amp;/g, '&');
+        }, 'json');
     });
 
-    $('select[name="pages"]').on('change', function () {
-        // todo: use select_page()
+    $('select[name="options[design][page_id]"]').on('change', function () {
+        const nonce = $('#tab-design #_wpnonce').val();
+
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_select_page',
+            page_id: this.value,
+            _wpnonce: nonce
+        }, function (response) {
+            if (!response.success) {
+                alert(response.data);
+                return false;
+            }
+
+            window.location.reload();
+        }, 'json');
     });
 });

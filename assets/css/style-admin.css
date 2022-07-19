@@ -114,7 +114,7 @@ h2.wpmm-title {
 
 .tabs-content td.has-inline-color-picker {
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
 .tabs-content td.has-inline-color-picker .wp-picker-container .wp-color-result {
@@ -143,6 +143,25 @@ h2.wpmm-title {
 
 .tabs-content ul.shortcodes-list.show {
     display: block;
+}
+
+#templates-radio [type=radio] {
+    position: absolute;
+    opacity: 0;
+}
+
+#templates-radio [type=radio] + img {
+    cursor: pointer;
+    object-fit: cover;
+    margin-right: 5px;
+    width: 230px;
+    height: 190px;
+    background: #d9d9d9 no-repeat fixed center;
+}
+
+#templates-radio [type=radio]:checked + img {
+    outline: 2px solid #0065A6;
+    box-shadow: 0 9px 23px 2px #aaa;
 }
 
 @media screen and (max-width: 782px) {
@@ -182,8 +201,8 @@ h2.wpmm-title {
     color: #fff;
 }
 
-.tabs-content .bot-button { 
-    display: inline-block; 
+.tabs-content .bot-button {
+    display: inline-block;
 }
 
 /* SIDEBARS */
