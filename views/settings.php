@@ -224,7 +224,7 @@ defined( 'ABSPATH' ) || exit;
 									</tr>
 								</tbody>
 							</table>
-						<?php } else { /* legacy code */?>
+						<?php } else { /* legacy code */ ?>
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -254,13 +254,13 @@ defined( 'ABSPATH' ) || exit;
 											wp_kses_post( $this->plugin_settings['design']['text'] ),
 											'options_design_text',
 											array(
-												'textarea_name'  => 'options[design][text]',
-												'textarea_rows'  => 8,
-												'editor_class'   => 'large-text',
-												'media_buttons'  => true,
-												'wpautop'        => false,
+												'textarea_name' => 'options[design][text]',
+												'textarea_rows' => 8,
+												'editor_class' => 'large-text',
+												'media_buttons' => true,
+												'wpautop' => false,
 												'default_editor' => 'tinymce',
-												'teeny'          => true,
+												'teeny'   => true,
 											)
 										);
 										?>
