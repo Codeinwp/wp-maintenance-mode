@@ -530,7 +530,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$template_slug = $_POST['template_slug'];
-			$template = wp_json_file_decode( WPMM_TEMPLATES_PATH . $template_slug . '/blocks-export.json' );
+			$template      = wp_json_file_decode( WPMM_TEMPLATES_PATH . $template_slug . '/blocks-export.json' );
 
 			$blocks = $template->content;
 
@@ -543,6 +543,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			);
 
 			$page_id = wp_insert_post( $new_post );
+
 			$this->plugin_settings['design']['page_id'] = $page_id;
 			update_option( 'wpmm_settings', $this->plugin_settings );
 
