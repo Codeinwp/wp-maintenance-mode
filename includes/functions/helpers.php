@@ -249,7 +249,7 @@ function wpmm_get_option( $option, $default = false ) {
 	$settings = get_option( $option, $default );
 	if ( ! is_admin() && is_multisite() ) {
 		if ( empty( $settings['general']['status'] ) ) {
-			$option  .= '-network';
+			$option  .= '_network';
 			$settings = get_blog_option( get_main_site_id(), $option, $default );
 		}
 	}
@@ -421,13 +421,20 @@ function wpmm_option_page_url() {
  */
 function wpmm_option_name() {
 	if ( is_admin() && is_network_admin() ) {
-		return 'wpmm_settings-network';
+		return 'wpmm_settings_network';
 	}
 	// phpcs:ignore WordPress.Security.NonceVerification.Missing
 	if ( ! empty( $_POST['options']['is_network_site'] ) || ! empty( $_POST['is_network_site'] ) ) {
-		return 'wpmm_settings-network';
+		return 'wpmm_settings_network';
 	}
 	return 'wpmm_settings';
+}
+
+/**
+ * Check is network dashboard
+ */
+function wpmm_is_network_admin() {
+	return 'wpmm_settings_network' === wpmm_option_name();
 }
 
 /**

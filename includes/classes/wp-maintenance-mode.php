@@ -27,9 +27,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		private function __construct() {
 			$this->settings_name   = wpmm_option_name();
 			$this->plugin_settings = wpmm_get_option( $this->settings_name, array() );
-			if ( is_admin() && is_network_admin() ) {
+			if ( wpmm_is_network_admin() ) {
+				$default_settings = $this->default_settings();
 				if ( empty( $this->plugin_settings ) ) {
-					$this->plugin_settings = $this->default_settings();
+					$this->plugin_settings = $default_settings;
 				}
 			}
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
