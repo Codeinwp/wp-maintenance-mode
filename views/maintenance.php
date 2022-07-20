@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 
-if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) {
+if ( isset( $this->plugin_settings['design']['page_id'] ) && ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) ) {
 	global $wp;
 	$current_url     = home_url( $wp->request );
 	$maintenance_url = get_permalink( $this->plugin_settings['design']['page_id'] );

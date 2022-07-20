@@ -145,21 +145,20 @@ h2.wpmm-title {
     display: block;
 }
 
-#templates-radio [type=radio] {
+.templates-radio [type=radio] {
     position: absolute;
     opacity: 0;
 }
 
-#templates-radio [type=radio] + img {
+.templates-radio [type=radio] + .template {
     cursor: pointer;
     object-fit: cover;
-    margin-right: 5px;
     width: 230px;
     height: 190px;
     background: #d9d9d9 no-repeat fixed center;
 }
 
-#templates-radio [type=radio]:checked + img {
+.templates-radio [type=radio]:checked + .template {
     outline: 2px solid #0065A6;
     box-shadow: 0 9px 23px 2px #aaa;
 }
@@ -249,4 +248,62 @@ h2.wpmm-title {
 #footer-left .wpmm_rating:hover {
     text-decoration: none !important;
     color: #FFB900 !important;
+}
+
+.modal-overlay {
+    opacity: 0.5;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+
+#wpmm-wizard-wrapper {
+    width: 480px;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%);
+    background: #fff;
+    padding: 20px 45px 45px;
+}
+
+#wpmm-wizard-wrapper .header {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+#wpmm-wizard-wrapper .description {
+    line-height: 30px;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+#wpmm-wizard-wrapper form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+#wpmm-wizard-wrapper .template {
+    position: relative;
+}
+
+#wpmm-wizard-wrapper .template img {
+    width: 230px;
+    height: 190px;
+    object-fit: cover;
+}
+
+#wpmm-wizard-wrapper .template .tag {
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    padding: 5px 8px;
+    left: 50%;
+    bottom: -30px;
+    transform: translate(-50%, -50%);
+}
+
+#wpmm-wizard-wrapper .buttons-wrap {
+    margin-top: 45px;
 }

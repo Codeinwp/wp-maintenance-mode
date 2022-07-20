@@ -223,6 +223,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// delete old options
 			delete_option( 'wp-maintenance-mode' );
 			delete_option( 'wp-maintenance-mode-msqld' );
+
+			update_option( 'wpmm_fresh_install', true );
 		}
 
 		/**

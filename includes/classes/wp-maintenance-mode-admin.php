@@ -120,6 +120,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					array(
 						'ajax_url'                => admin_url( 'admin-ajax.php' ),
 						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'wizard_nonce'            => wp_create_nonce( 'wizard' ),
 						'image_uploader_defaults' => array(
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
@@ -525,7 +526,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			// check nonce validation
-			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-design' ) ) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], $_POST['source'] ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
@@ -546,6 +547,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
 			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			if ( 'wizard' === $_POST['source'] ) {
+				update_option( 'wpmm_fresh_install', false );
+			}
 
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
