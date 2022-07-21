@@ -134,6 +134,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				),
 				'modules' => array(
 					'countdown_status'     => 0,
+					'auto_disabled'        => 0,
 					'countdown_start'      => date( 'Y-m-d H:i:s' ),
 					'countdown_details'    => array(
 						'days'    => 0,
@@ -1117,6 +1118,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				return $this->plugin_settings;
 			}
 
+			if ( empty( $this->plugin_settings['modules']['auto_disabled'] ) ) {
+				return $this->plugin_settings;
+			}
+
 			if ( empty( $this->plugin_settings['modules']['countdown_status'] ) ) {
 				return $this->plugin_settings;
 			}
@@ -1125,6 +1130,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$countdown_end_time = strtotime( wp_sprintf( '+ %s days %s hours %s minutes', $countdown_details['days'], $countdown_details['hours'], $countdown_details['minutes'] ), strtotime( $countdown_end_time ) );
 			if ( strtotime( current_time( 'mysql' ) ) > $countdown_end_time ) {
 				$this->plugin_settings['modules']['countdown_status'] = 0;
+				$this->plugin_settings['modules']['auto_disabled']    = 0;
 				$this->plugin_settings['general']['status']           = 0;
 				update_option( $option_name, $this->plugin_settings );
 			}

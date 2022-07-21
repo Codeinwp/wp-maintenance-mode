@@ -365,6 +365,15 @@ defined( 'ABSPATH' ) || exit;
 								</tr>
 								<tr valign="top">
 									<th scope="row">
+										<label for="options[modules][auto_disabled]"><?php esc_html_e( 'Automatically disabled maintenance mode?', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<?php $auto_disabled = ! empty( $this->plugin_settings['modules']['auto_disabled'] ) ? 1 : 0; ?>
+										<input type="checkbox" name="options[modules][auto_disabled]" value="1" <?php checked( $auto_disabled, 1 ); ?>>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
 										<label for="options[modules][countdown_start]"><?php esc_html_e( 'Start date', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>

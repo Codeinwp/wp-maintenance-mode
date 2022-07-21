@@ -351,6 +351,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				case 'modules':
 					// Countdown
 					$_POST['options']['modules']['countdown_status']  = (int) $_POST['options']['modules']['countdown_status'];
+					$_POST['options']['modules']['auto_disabled']     = (int) $_POST['options']['modules']['auto_disabled'];
 					$_POST['options']['modules']['countdown_start']   = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
 					$_POST['options']['modules']['countdown_details'] = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
 					$_POST['options']['modules']['countdown_details'] = array(
