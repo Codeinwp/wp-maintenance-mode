@@ -189,7 +189,7 @@ jQuery(function ($) {
     /**
      * TEMPLATES
      */
-    $('#templates-wrap').on('click', '#import-template', function () {
+    $('#templates-import-wrap').on('click', '#import-template', function () {
         const nonce = $('#tab-design #_wpnonce').val();
         const templateSlug = $('input[name="template"]:checked').val();
 

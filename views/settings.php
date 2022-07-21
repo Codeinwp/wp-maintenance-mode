@@ -15,32 +15,32 @@ defined( 'ABSPATH' ) || exit;
 		$maintenance_thumbnail = WPMM_TEMPLATES_URL . $maintenance_slug . '/screenshot.png';
 		$coming_soon_thumbnail = WPMM_TEMPLATES_URL . $coming_soon_slug . '/screenshot.png';
 		?>
-        <div class="modal-overlay" style="background-image: url(<?php echo esc_url( WPMM_IMAGES_URL . 'background.png' ) ?>)"></div>
-        <div id="wpmm-wizard-wrapper">
-            <h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
-            <p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
-            <div class="templates-radio templates-wrap">
-                <form>
-                    <label>
-                        <input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>">
-                        <div class="template">
-                            <img src="<?php echo $maintenance_thumbnail ?>" alt="<?php echo $maintenance_slug ?>"/>
-                            <div class="tag"><?php esc_attr_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
-                        </div>
-                    </label>
-                    <label>
-                        <input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>">
-                        <div class="template">
-                            <img src="<?php echo $coming_soon_thumbnail ?>" alt="<?php echo $coming_soon_slug ?>"/>
-                            <div class="tag"><?php esc_attr_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
-                        </div>
-                    </label>
-                </form>
-            </div>
-            <div class="buttons-wrap">
-                <a class="button button-primary disabled button-import"><?php esc_html_e( 'Import & Activate' ); ?></a>
-            </div>
-        </div>
+		<div class="modal-overlay" style="background-image: url(<?php echo esc_url( WPMM_IMAGES_URL . 'background.png' ) ?>)"></div>
+		<div id="wpmm-wizard-wrapper">
+			<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
+			<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+			<div class="templates-radio">
+				<form>
+					<label>
+						<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>">
+						<div class="template">
+							<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
+							<div class="tag"><?php esc_attr_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
+						</div>
+					</label>
+					<label>
+						<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>">
+						<div class="template">
+							<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
+							<div class="tag"><?php esc_attr_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
+						</div>
+					</label>
+				</form>
+			</div>
+			<div class="buttons-wrap">
+				<a class="button button-primary disabled button-import"><?php esc_html_e( 'Import & Activate', 'wp-maintenance-mode' ); ?></a>
+			</div>
+		</div>
 		<?php } else { ?>
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
@@ -252,7 +252,7 @@ defined( 'ABSPATH' ) || exit;
 										</td>
 									</tr>
 									<tr>
-										<td id="templates-wrap">
+										<td id="templates-import-wrap">
 											<input type="button" class="button button-primary" id="import-template" data-tab="design" value="<?php esc_attr_e( 'Import', 'wp-maintenance-mode' ); ?>" />
 										</td>
 									</tr>
