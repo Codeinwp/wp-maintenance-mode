@@ -8,14 +8,15 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <div class="wrap">
-	<?php if ( get_option( 'wpmm_fresh_install', false ) ) {
+	<?php
+	if ( get_option( 'wpmm_fresh_install', false ) ) {
 		$maintenance_slug = 'dummy-2';
 		$coming_soon_slug = 'dummy-1';
 
 		$maintenance_thumbnail = WPMM_TEMPLATES_URL . $maintenance_slug . '/screenshot.png';
 		$coming_soon_thumbnail = WPMM_TEMPLATES_URL . $coming_soon_slug . '/screenshot.png';
 		?>
-		<div class="modal-overlay" style="background-image: url(<?php echo esc_url( WPMM_IMAGES_URL . 'background.png' ) ?>)"></div>
+		<div class="modal-overlay" style="background-image: url(<?php echo esc_url( WPMM_IMAGES_URL . 'background.png' ); ?>)"></div>
 		<div id="wpmm-wizard-wrapper">
 			<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
 			<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
@@ -209,10 +210,11 @@ defined( 'ABSPATH' ) || exit;
 								<tbody>
 									<tr valign="top">
 										<th scope="row">
-											<label for="options[design][page_id]"><?php esc_html_e( 'Custom Page', 'wp-maintenance-mode' ); ?></label>
+											<label for="design_page_id"><?php esc_html_e( 'Custom Page', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td>
 											<select name="options[design][page_id]" id="design_page_id">
+												<option value="" disabled="disabled"><?php esc_html_e( 'Select page', 'wp-maintenance-mode' ); ?></option>
 												<?php
 												$pages = get_pages();
 												foreach ( $pages as $page ) {
@@ -220,7 +222,11 @@ defined( 'ABSPATH' ) || exit;
 													<option value="<?php echo $page->ID; ?>" <?php selected( $this->plugin_settings['design']['page_id'], $page->ID ); ?>><?php echo esc_html( $page->post_title ); ?></option>
 												<?php } ?>
 											</select>
-											<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a>
+											<?php
+											$page_status = get_post_status( $this->plugin_settings['design']['page_id'] );
+											if ( $page_status && $page_status !== 'trash' ) {
+												?>
+												<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a> <?php } ?>
 											<p class="description"><?php esc_html_e( 'Select the page that will be used as your maintenance or coming soon page', 'wp-maintenance-mode' ); ?></p>
 										</td>
 									</tr>
@@ -238,14 +244,14 @@ defined( 'ABSPATH' ) || exit;
 											<form>
 												<?php
 												$templates = list_files( WPMM_TEMPLATES_PATH, 1 );
-												foreach ( $templates as $index => $template ) {
+												foreach ( $templates as $template ) {
 													$name      = basename( $template );
 													$thumbnail = WPMM_TEMPLATES_URL . $name . '/screenshot.png';
 													$content   = WPMM_TEMPLATES_URL . $name . '/blocks-export.json';
 													?>
 													<label>
 														<input type="radio" name="template" value="<?php echo $name; ?>">
-														<img class="template" src="<?php echo $thumbnail; ?>" alt="template-<?php echo $index; ?>">
+														<img class="template" src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>">
 													</label>
 												<?php } ?>
 											</form>

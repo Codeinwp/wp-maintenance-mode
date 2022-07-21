@@ -121,6 +121,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'ajax_url'                => admin_url( 'admin-ajax.php' ),
 						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
 						'wizard_nonce'            => wp_create_nonce( 'wizard' ),
+						'plugin_install_nonce'    => wp_create_nonce( 'updates' ),
 						'image_uploader_defaults' => array(
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
@@ -553,6 +554,40 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
+		}
+
+		private function get_otter_plugin() {
+			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+			$call_api = get_transient( 'ti_plugin_info_' . 'otter-blocks' );
+
+			if ( false === $call_api ) {
+				$call_api = plugins_api(
+					'plugin_information',
+					array(
+						'slug'   => 'otter-blocks',
+						'fields' => array(
+							'downloaded'        => false,
+							'rating'            => false,
+							'description'       => false,
+							'short_description' => false,
+							'donate_link'       => false,
+							'tags'              => false,
+							'sections'          => false,
+							'homepage'          => false,
+							'added'             => false,
+							'last_updated'      => false,
+							'compatibility'     => false,
+							'tested'            => false,
+							'requires'          => false,
+							'downloadlink'      => true,
+							'icons'             => false,
+							'banners'           => false,
+						),
+					)
+				);
+				set_transient( 'ti_plugin_info_' . $slug, $call_api, 1 * DAY_IN_SECONDS );
+			}
 		}
 
 		/**

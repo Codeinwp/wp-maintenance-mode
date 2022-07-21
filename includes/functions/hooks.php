@@ -30,3 +30,5 @@ function wpmm_add_extra_plugin_headers( $headers ) {
 function wpmm_change_mail_content_type( $content_type ) {
 	return 'text/html';
 }
+
+add_action( 'wp_ajax_wp_ajax_install_plugin', 'wp_ajax_install_plugin' );

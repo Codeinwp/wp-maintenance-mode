@@ -193,19 +193,21 @@ jQuery(function ($) {
         const nonce = $('#tab-design #_wpnonce').val();
         const templateSlug = $('input[name="template"]:checked').val();
 
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_insert_template',
-            template_slug: templateSlug,
-            _wpnonce: nonce,
-            source: 'tab-design'
-        }, function(response) {
-            if (!response.success) {
-                alert(response.data);
-                return false;
-            }
+        install_otter();
 
-            window.location.href = response.data['pageEditURL'].replace(/&amp;/g, '&');
-        }, 'json');
+        // $.post(wpmm_vars.ajax_url, {
+        //     action: 'wpmm_insert_template',
+        //     template_slug: templateSlug,
+        //     _wpnonce: nonce,
+        //     source: 'tab-design'
+        // }, function(response) {
+        //     if (!response.success) {
+        //         alert(response.data);
+        //         return false;
+        //     }
+        //
+        //     // window.location.href = response.data['pageEditURL'].replace(/&amp;/g, '&');
+        // }, 'json');
     });
 
     $('select[name="options[design][page_id]"]').on('change', function () {
@@ -240,6 +242,8 @@ jQuery(function ($) {
     $('#wpmm-wizard-wrapper').on('click', '.button-import:not(.disabled)', function() {
         const templateSlug = $('input[name="wizard-template"]:checked').val();
 
+        install_otter();
+
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_insert_template',
             template_slug: templateSlug,
@@ -253,4 +257,15 @@ jQuery(function ($) {
             window.location.reload(true);
         }, 'json');
     })
+
+    function install_otter() {
+        // todo: add some kind of loading state
+        jQuery.post(wpmm_vars.ajax_url, {
+            action: 'wp_ajax_install_plugin',
+            _ajax_nonce: wpmm_vars.plugin_install_nonce,
+            slug: 'otter-blocks',
+        }, function(response) {
+            console.log(response);
+        });
+    }
 });
