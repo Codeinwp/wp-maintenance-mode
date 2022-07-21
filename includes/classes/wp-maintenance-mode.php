@@ -20,6 +20,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
+			// Automatically disable the maintenance mode when the countdown is finished.
+			$this->plugin_settings = $this->force_update_plugin_settings();
+
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
@@ -1095,6 +1098,37 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
 			}
+		}
+
+		/**
+		 * Auto deactivate maintenance mode.
+		 *
+		 * @access private
+		 * @param string $option_name Option name.
+		 * @return array Plugin settings.
+		 */
+		private function force_update_plugin_settings( $option_name = 'wpmm_settings' ) {
+			// we do not redirect ajax calls.
+			if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+				return $this->plugin_settings;
+			}
+
+			if ( empty( $this->plugin_settings ) || empty( $this->plugin_settings['general']['status'] ) ) {
+				return $this->plugin_settings;
+			}
+
+			if ( empty( $this->plugin_settings['modules']['countdown_status'] ) ) {
+				return $this->plugin_settings;
+			}
+			$countdown_end_time = $this->plugin_settings['modules']['countdown_start'];
+			$countdown_details  = $this->plugin_settings['modules']['countdown_details'];
+			$countdown_end_time = strtotime( wp_sprintf( '+ %s days %s hours %s minutes', $countdown_details['days'], $countdown_details['hours'], $countdown_details['minutes'] ), strtotime( $countdown_end_time ) );
+			if ( strtotime( current_time( 'mysql' ) ) > $countdown_end_time ) {
+				$this->plugin_settings['modules']['countdown_status'] = 0;
+				$this->plugin_settings['general']['status']           = 0;
+				update_option( $option_name, $this->plugin_settings );
+			}
+			return $this->plugin_settings;
 		}
 
 	}
