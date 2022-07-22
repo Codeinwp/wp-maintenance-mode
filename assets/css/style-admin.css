@@ -304,6 +304,22 @@ h2.wpmm-title {
     transform: translate(-50%, -50%);
 }
 
-#wpmm-wizard-wrapper .buttons-wrap {
+#wizard-import-button, #dashboard-import-button {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+#wizard-import-button {
     margin-top: 45px;
+}
+
+.button-import + .dashicons-update {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform:rotate(360deg);
+    }
 }

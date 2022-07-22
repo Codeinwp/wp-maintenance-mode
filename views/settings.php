@@ -38,8 +38,8 @@ defined( 'ABSPATH' ) || exit;
 					</label>
 				</form>
 			</div>
-			<div class="buttons-wrap">
-				<a class="button button-primary disabled button-import"><?php esc_html_e( 'Import & Activate', 'wp-maintenance-mode' ); ?></a>
+			<div id="wizard-import-button">
+				<input type="button" class="button button-primary disabled button-import" value="<?php echo $this->get_import_button_text(); ?>"/>
 			</div>
 		</div>
 		<?php } else { ?>
@@ -236,7 +236,7 @@ defined( 'ABSPATH' ) || exit;
 								<tbody>
 									<tr valign="top">
 										<th scope="row">
-											<label for="templates"><?php esc_html_e( 'Import a template', 'wp-maintenance-mode' ); ?></label>
+											<label for="dashboard-template"><?php esc_html_e( 'Import a template', 'wp-maintenance-mode' ); ?></label>
 										</th>
 									</tr>
 									<tr>
@@ -250,7 +250,7 @@ defined( 'ABSPATH' ) || exit;
 													$content   = WPMM_TEMPLATES_URL . $name . '/blocks-export.json';
 													?>
 													<label>
-														<input type="radio" name="template" value="<?php echo $name; ?>">
+														<input type="radio" name="dashboard-template" value="<?php echo $name; ?>">
 														<img class="template" src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>">
 													</label>
 												<?php } ?>
@@ -258,8 +258,8 @@ defined( 'ABSPATH' ) || exit;
 										</td>
 									</tr>
 									<tr>
-										<td id="templates-import-wrap">
-											<input type="button" class="button button-primary" id="import-template" data-tab="design" value="<?php esc_attr_e( 'Import', 'wp-maintenance-mode' ); ?>" />
+										<td id="dashboard-import-button">
+											<input type="button" class="button button-primary button-import disabled" data-tab="design" value="<?php echo $this->get_import_button_text(); ?>" />
 										</td>
 									</tr>
 								</tbody>

@@ -189,25 +189,13 @@ jQuery(function ($) {
     /**
      * TEMPLATES
      */
-    $('#templates-import-wrap').on('click', '#import-template', function () {
+    $('#dashboard-import-button').on('click', '.button-import', function () {
         const nonce = $('#tab-design #_wpnonce').val();
         const templateSlug = $('input[name="template"]:checked').val();
 
-        install_otter();
-
-        // $.post(wpmm_vars.ajax_url, {
-        //     action: 'wpmm_insert_template',
-        //     template_slug: templateSlug,
-        //     _wpnonce: nonce,
-        //     source: 'tab-design'
-        // }, function(response) {
-        //     if (!response.success) {
-        //         alert(response.data);
-        //         return false;
-        //     }
-        //
-        //     // window.location.href = response.data['pageEditURL'].replace(/&amp;/g, '&');
-        // }, 'json');
+        import_template( templateSlug, 'tab-design', nonce, function( data ) {
+            window.location.href = data['pageEditURL'].replace(/&amp;/g, '&');
+        } );
     });
 
     $('select[name="options[design][page_id]"]').on('change', function () {
@@ -239,33 +227,73 @@ jQuery(function ($) {
         });
     }
 
-    $('#wpmm-wizard-wrapper').on('click', '.button-import:not(.disabled)', function() {
+    if ( $('input[name="dashboard-template"]:checked').val() ) {
+        $('#dashboard-import-button .button-import').removeClass('disabled');
+    } else {
+        $('input[name="dashboard-template"]').on('change', function () {
+            $('#dashboard-import-button .button-import').removeClass('disabled');
+            $('input[name="dashboard-template"]').off('change');
+        });
+    }
+
+    $('#wizard-import-button').on('click', '.button-import:not(.disabled)', function() {
         const templateSlug = $('input[name="wizard-template"]:checked').val();
 
-        install_otter();
-
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_insert_template',
-            template_slug: templateSlug,
-            _wpnonce:  wpmm_vars.wizard_nonce,
-            source: 'wizard',
-        }, function(response) {
-            if (!response.success) {
-                alert(response.data);
-                return false;
-            }
+        import_template( templateSlug, 'wizard', wpmm_vars.wizard_nonce, function () {
             window.location.reload(true);
-        }, 'json');
+        } );
     })
 
-    function install_otter() {
-        // todo: add some kind of loading state
+    function import_template ( slug, source, nonce, callback ) {
+        $('.button-import').addClass( 'loading' );
+        $('.button-import').attr( 'disabled', 'disabled' );
+        $('<span class="dashicons dashicons-update"></span>').insertAfter( $('.button-import') );
+
+        if ( ! wpmm_vars.is_otter_installed ) {
+            install_and_activate_otter( () => add_to_page(slug, nonce, source, callback) );
+        } else if ( ! wpmm_vars.is_otter_activated ) {
+            activate_otter( () => add_to_page(slug, nonce, source, callback) );
+        }
+    }
+
+    function add_to_page(slug, nonce, source, callback) {
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_insert_template',
+            template_slug: slug,
+            _wpnonce:  nonce,
+            source: source,
+        }, function(response) {
+            if (!response.success) {
+                console.log(response.data);
+                return false;
+            }
+
+            $('.button-import').removeClass( 'loading' );
+            $('.button-import').removeAttr( 'disabled' );
+            $('.dashicons-update').remove();
+
+            callback( response.data );
+        }, 'json');
+    }
+
+    function install_and_activate_otter( callback ) {
         jQuery.post(wpmm_vars.ajax_url, {
             action: 'wp_ajax_install_plugin',
             _ajax_nonce: wpmm_vars.plugin_install_nonce,
             slug: 'otter-blocks',
         }, function(response) {
-            console.log(response);
+            if (!response.success) {
+                console.log(response.data);
+                return false;
+            }
+
+            activate_otter( callback );
         });
+    }
+
+    function activate_otter( callback ) {
+        jQuery.get( wpmm_vars.otter_activation_link, function() {
+            callback();
+        } )
     }
 });
