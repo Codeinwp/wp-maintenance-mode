@@ -548,15 +548,19 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$blocks = $template->content;
 
-			$new_post = array(
-				'ID'           => isset( $this->plugin_settings['design']['page_id'] ) ? $this->plugin_settings['design']['page_id'] : 0,
+			$post_arr = array(
 				'post_type'    => 'page',
-				'post_title'   => 'Maintenance Page',
 				'post_status'  => 'publish',
 				'post_content' => $blocks,
 			);
 
-			$page_id = wp_insert_post( $new_post );
+			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {
+				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
+				$page_id        = wp_update_post( $post_arr );
+			} else {
+				$post_arr['post_title'] = 'Maintenance Page';
+				$page_id                = wp_insert_post( $post_arr );
+			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
 			update_option( 'wpmm_settings', $this->plugin_settings );

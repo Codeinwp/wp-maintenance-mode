@@ -6,6 +6,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+// update_option( 'wpmm_fresh_install', true );
 ?>
 <div class="wrap">
 	<?php
@@ -213,16 +214,17 @@ defined( 'ABSPATH' ) || exit;
 											<label for="design_page_id"><?php esc_html_e( 'Custom Page', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td>
-											<select name="options[design][page_id]" id="design_page_id">
-												<option value="" disabled="disabled"><?php esc_html_e( 'Select page', 'wp-maintenance-mode' ); ?></option>
-												<?php
-												$pages = get_pages();
-												foreach ( $pages as $page ) {
-													?>
-													<option value="<?php echo $page->ID; ?>" <?php selected( $this->plugin_settings['design']['page_id'], $page->ID ); ?>><?php echo esc_html( $page->post_title ); ?></option>
-												<?php } ?>
-											</select>
 											<?php
+											wp_dropdown_pages(
+												array(
+													'selected' => $this->plugin_settings['design']['page_id'],
+													'name' => 'options[design][page_id]',
+													'id'   => 'design_page_id',
+													'option_none_value' => '',
+													'show_option_no_change' => 'Select page',
+												)
+											);
+
 											$page_status = get_post_status( $this->plugin_settings['design']['page_id'] );
 											if ( $page_status && $page_status !== 'trash' ) {
 												?>

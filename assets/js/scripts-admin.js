@@ -191,7 +191,7 @@ jQuery(function ($) {
      */
     $('#dashboard-import-button').on('click', '.button-import', function () {
         const nonce = $('#tab-design #_wpnonce').val();
-        const templateSlug = $('input[name="template"]:checked').val();
+        const templateSlug = $('input[name="dashboard-template"]:checked').val();
 
         import_template( templateSlug, 'tab-design', nonce, function( data ) {
             window.location.href = data['pageEditURL'].replace(/&amp;/g, '&');
@@ -265,6 +265,8 @@ jQuery(function ($) {
         }, function(response) {
             if (!response.success) {
                 console.log(response.data);
+                $('.dashicons-update').remove();
+                $('<p class="error import-error">Something went wrong, please try again.</p>').insertAfter('#wizard-import-button');
                 return false;
             }
 
@@ -277,13 +279,15 @@ jQuery(function ($) {
     }
 
     function install_and_activate_otter( callback ) {
-        jQuery.post(wpmm_vars.ajax_url, {
+        $.post(wpmm_vars.ajax_url, {
             action: 'wp_ajax_install_plugin',
             _ajax_nonce: wpmm_vars.plugin_install_nonce,
             slug: 'otter-blocks',
         }, function(response) {
             if (!response.success) {
                 console.log(response.data);
+                $('.dashicons-update').remove();
+                $('<p class="error import-error">Something went wrong, please try again.</p>').insertAfter('#wizard-import-button');
                 return false;
             }
 
@@ -292,7 +296,7 @@ jQuery(function ($) {
     }
 
     function activate_otter( callback ) {
-        jQuery.get( wpmm_vars.otter_activation_link, function() {
+        $.get( wpmm_vars.otter_activation_link, function() {
             callback();
         } )
     }
