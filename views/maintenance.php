@@ -26,6 +26,22 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && ( $this->plugin_set
 	if ( $maintenance_url !== $current_url . '/' ) {
 		wp_redirect( $maintenance_url );
 	}
+
+	do_action( 'wpmm_head' );
+
+	if ( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
+		?>
+		<div class="bot-container">
+			<div class="bot-chat-wrapper">
+				<div class="chat-container cf"></div>
+				<div class="input"></div>
+				<div class="choices cf"></div>
+			</div>
+		</div>
+		<?php
+	}
+
+	do_action( 'wpmm_footer' );
 	?>
 
 	<style>

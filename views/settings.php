@@ -6,7 +6,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-// update_option( 'wpmm_fresh_install', true );
 ?>
 <div class="wrap">
 	<?php

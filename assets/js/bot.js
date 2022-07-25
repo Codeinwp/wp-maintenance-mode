@@ -29,7 +29,7 @@ function getCurrentTime() {
 
 /**
  * Cast string
- * 
+ *
  * @param string value
  * @returns string
  */
@@ -72,9 +72,9 @@ function _phpCastString(value) {
 
 /**
  * Strip tags from a string
- * 
+ *
  * big thanks to http://locutus.io/php/strings/strip_tags/
- * 
+ *
  * @param string input
  * @param string allowed
  * @returns string

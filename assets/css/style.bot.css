@@ -29,9 +29,12 @@
 }
 
 .bot-container {
-     display: flex;
-     justify-content: center;
-     align-items: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
 }
 
  .background .bot-chat-wrapper {
@@ -384,10 +387,7 @@ CHAT BOT STYLING
 
   .bot-chat-wrapper,
   .bg-image .bot-chat-wrapper {
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+      padding: 20px;
   }
 
   .bg-image .bot-chat-wrapper  {

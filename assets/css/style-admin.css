@@ -145,6 +145,11 @@ h2.wpmm-title {
     display: block;
 }
 
+.templates-radio {
+    gap: 30px;
+    display: flex;
+}
+
 .templates-radio [type=radio] {
     position: absolute;
     opacity: 0;
