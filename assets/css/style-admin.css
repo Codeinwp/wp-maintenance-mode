@@ -287,6 +287,7 @@ h2.wpmm-title {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    width: 100%;
 }
 
 #wpmm-wizard-wrapper .template {

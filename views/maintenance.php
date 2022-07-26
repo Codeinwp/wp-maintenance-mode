@@ -17,39 +17,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-
 if ( isset( $this->plugin_settings['design']['page_id'] ) && ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) ) {
-	global $wp;
-	$current_url     = home_url( $wp->request );
-	$maintenance_url = get_permalink( $this->plugin_settings['design']['page_id'] );
-
-	if ( $maintenance_url !== $current_url . '/' ) {
-		wp_redirect( $maintenance_url );
-	}
-
-	do_action( 'wpmm_head' );
-
-	if ( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
-		?>
-		<div class="bot-container">
-			<div class="bot-chat-wrapper">
-				<div class="chat-container cf"></div>
-				<div class="input"></div>
-				<div class="choices cf"></div>
-			</div>
-		</div>
-		<?php
-	}
-
-	do_action( 'wpmm_footer' );
-	?>
-
-	<style>
-		header, footer {
-			display: none;
+	add_filter(
+		'page_template',
+		function() {
+			return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
 		}
-	</style>
-	<?php
+	);
 } else {
 	?>
 <!DOCTYPE html>
