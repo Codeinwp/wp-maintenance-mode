@@ -33,6 +33,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// Check update
 			add_action( 'admin_init', array( $this, 'check_update' ) );
 
+			add_filter(
+				'page_template',
+				function( $page_template ) {
+					global $wp_query;
+					$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
+					$page_id  = $settings['design']['page_id'];
+
+					if ( $wp_query->post->ID == $page_id ) {
+						return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
+					}
+
+					return $page_template;
+				}
+			);
+
 			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 				// INIT
 				add_action( ( is_admin() ? 'init' : 'template_redirect' ), array( $this, 'init' ) );

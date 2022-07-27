@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for the maintenance page
+ * Template Name: Full Width for Maintenance Page
  */
 
 ?><!DOCTYPE html>
@@ -19,10 +19,11 @@
 	<?php
 	wp_body_open();
 
-	$page_id = WP_Maintenance_Mode::get_instance()->get_plugin_settings()['design']['page_id'];
-	echo apply_filters( 'the_content', get_post( $page_id )->post_content );
+	the_post();
+	the_content();
 
-	if ( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
+	$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
+	if ( isset( $settings['bot']['status'] ) && $settings['bot']['status'] === 1 ) {
 		?>
 		<div class="bot-container">
 			<div class="bot-chat-wrapper">

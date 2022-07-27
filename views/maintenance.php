@@ -25,13 +25,6 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && ( $this->plugin_set
 	if ( $maintenance_url !== $current_url . '/' ) {
 		wp_redirect( $maintenance_url );
 	}
-
-	add_filter(
-		'page_template',
-		function() {
-			return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
-		}
-	);
 } else {
 	?>
 <!DOCTYPE html>
