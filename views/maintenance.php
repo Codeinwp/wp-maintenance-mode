@@ -18,6 +18,14 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( isset( $this->plugin_settings['design']['page_id'] ) && ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) ) {
+	global $wp;
+	$current_url     = home_url( $wp->request );
+	$maintenance_url = get_permalink( $this->plugin_settings['design']['page_id'] );
+
+	if ( $maintenance_url !== $current_url . '/' ) {
+		wp_redirect( $maintenance_url );
+	}
+
 	add_filter(
 		'page_template',
 		function() {

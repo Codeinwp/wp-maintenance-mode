@@ -17,14 +17,10 @@
 </head>
 <body  <?php body_class(); ?>>
 	<?php
-	// todo: otter css is not loaded
 	wp_body_open();
+
 	$page_id = WP_Maintenance_Mode::get_instance()->get_plugin_settings()['design']['page_id'];
-
-	$query   = get_post( $page_id );
-	$content = apply_filters( 'the_content', $query->post_content );
-
-	echo $content;
+	echo apply_filters( 'the_content', get_post( $page_id )->post_content );
 
 	if ( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 		?>
