@@ -447,7 +447,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-modules" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-                        <?php if ( ! ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) ) {  ?>
+						<?php if ( ! ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) ) { ?>
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -680,7 +680,7 @@ defined( 'ABSPATH' ) || exit;
 								</tr>
 							</tbody>
 						</table>
-                        <?php } ?>
+						<?php } ?>
 
 						<h3>&raquo; <?php esc_html_e( 'Google Analytics', 'wp-maintenance-mode' ); ?></h3>
 
