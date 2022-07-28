@@ -6,46 +6,60 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+update_option( 'wpmm_fresh_install', true );
 ?>
 <div class="wrap">
-	<?php
-	if ( get_option( 'wpmm_fresh_install', false ) ) {
-		$maintenance_slug = 'dummy-2';
-		$coming_soon_slug = 'dummy-1';
-
-		$maintenance_thumbnail = WPMM_TEMPLATES_URL . $maintenance_slug . '/screenshot.png';
-		$coming_soon_thumbnail = WPMM_TEMPLATES_URL . $coming_soon_slug . '/screenshot.png';
-		?>
-		<div class="modal-overlay" style="background-image: url(<?php echo esc_url( WPMM_IMAGES_URL . 'background.png' ); ?>)"></div>
-		<div id="wpmm-wizard-wrapper">
-			<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
-			<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
-			<div class="templates-radio">
-				<form>
-					<label>
-						<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>">
-						<div class="template">
-							<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
-							<div class="tag"><?php esc_attr_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
-						</div>
-					</label>
-					<label>
-						<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>">
-						<div class="template">
-							<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
-							<div class="tag"><?php esc_attr_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
-						</div>
-					</label>
-				</form>
-			</div>
-			<div id="wizard-import-button">
-				<input type="button" class="button button-primary disabled button-import" value="<?php echo $this->get_import_button_text(); ?>"/>
-			</div>
-		</div>
-		<?php } else { ?>
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
 	<div class="wpmm-wrapper">
+		<?php
+		if ( get_option( 'wpmm_fresh_install', false ) ) {
+			$maintenance_slug = 'dummy-2';
+			$coming_soon_slug = 'dummy-1';
+
+			$maintenance_thumbnail = WPMM_TEMPLATES_URL . $maintenance_slug . '/screenshot.png';
+			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . $coming_soon_slug . '/screenshot.png';
+			?>
+			<div class="modal-overlay"></div>
+			<div id="wpmm-wizard-wrapper">
+				<div class="slider-wrap">
+					<div class="step first-step">
+						<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
+						<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+						<div class="templates-radio">
+							<form>
+								<label>
+									<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>">
+									<div class="template">
+										<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
+										<div class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
+									</div>
+								</label>
+								<label>
+									<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>">
+									<div class="template">
+										<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
+										<div class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
+									</div>
+								</label>
+							</form>
+						</div>
+						<p><i><?php esc_html_e( 'Otter Blocks plugin is required for this templates in order to work properly.', 'wp-maintenance-mode' ); ?></i></p>
+						<div id="wizard-import-button">
+							<input type="button" class="button button-primary disabled button-import" value="<?php echo $this->get_import_button_text(); ?>"/>
+						</div>
+					</div>
+					<div class="step second-step">
+						<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
+						<h4><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+					</div>
+				</div>
+				<div class="bullets-wrap">
+					<div class="bullet active"></div>
+					<div class="bullet"></div>
+				</div>
+			</div>
+		<?php } else { ?>
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="#general">
@@ -250,10 +264,12 @@ defined( 'ABSPATH' ) || exit;
 													$thumbnail = WPMM_TEMPLATES_URL . $name . '/screenshot.png';
 													$content   = WPMM_TEMPLATES_URL . $name . '/blocks-export.json';
 													?>
-													<label>
-														<input type="radio" name="dashboard-template" value="<?php echo $name; ?>">
-														<img class="template" src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>">
-													</label>
+														<label>
+															<input type="radio" name="dashboard-template" value="<?php echo $name; ?>">
+															<div class="template">
+																<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
+															</div>
+														</label>
 												<?php } ?>
 											</form>
 										</td>

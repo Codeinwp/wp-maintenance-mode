@@ -244,14 +244,19 @@ jQuery(function ($) {
         } );
     })
 
-    function import_template ( slug, source, nonce, callback ) {
-        $('.button-import').addClass( 'loading' );
+    function import_in_progress(slug) {
+        $('input[value=' + slug + '] + div').addClass( 'loading' );
         $('.button-import').attr( 'disabled', 'disabled' );
-        $('<span class="dashicons dashicons-update"></span>').insertAfter( $('.button-import') );
+        $('input[value=' + slug + '] + .template').append( '<span class="dashicons dashicons-update"></span>' );
+        $('input[value=' + slug + '] + .template').append( '<p><i>' + wpmm_vars.loading_string + '</i></p>' );
+        $('#wpmm-wizard-wrapper label').css('pointer-events', 'none');
+    }
 
-        if ( ! wpmm_vars.is_otter_installed ) {
+    function import_template ( slug, source, nonce, callback ) {
+        import_in_progress( slug );
+        if ( !wpmm_vars.is_otter_installed ) {
             install_and_activate_otter( () => add_to_page(slug, nonce, source, callback) );
-        } else if ( ! wpmm_vars.is_otter_activated ) {
+        } else if ( !wpmm_vars.is_otter_activated ) {
             activate_otter( () => add_to_page(slug, nonce, source, callback) );
         }
     }
@@ -266,13 +271,9 @@ jQuery(function ($) {
             if (!response.success) {
                 console.log(response.data);
                 $('.dashicons-update').remove();
-                $('<p class="error import-error">Something went wrong, please try again.</p>').insertAfter('#wizard-import-button');
+                $('<p class="error import-error">' + wpmm_vars.error_string + '</p>').insertAfter('#wizard-import-button');
                 return false;
             }
-
-            $('.button-import').removeClass( 'loading' );
-            $('.button-import').removeAttr( 'disabled' );
-            $('.dashicons-update').remove();
 
             callback( response.data );
         }, 'json');
@@ -287,7 +288,7 @@ jQuery(function ($) {
             if (!response.success) {
                 console.log(response.data);
                 $('.dashicons-update').remove();
-                $('<p class="error import-error">Something went wrong, please try again.</p>').insertAfter('#wizard-import-button');
+                $('<p class="error import-error">' + wpmm_vars.error_string + '</p>').insertAfter('#wizard-import-button');
                 return false;
             }
 

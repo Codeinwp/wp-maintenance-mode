@@ -124,6 +124,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'plugin_install_nonce'    => wp_create_nonce( 'updates' ),
 						'is_otter_installed'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
 						'is_otter_active'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'error_string'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loading_string'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
 						'otter_activation_link'   => add_query_arg(
 							array(
 								'action'        => 'activate',
