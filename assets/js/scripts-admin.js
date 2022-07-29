@@ -189,12 +189,14 @@ jQuery(function ($) {
     /**
      * TEMPLATES
      */
+    let pageEditURL = '#';
     $('#dashboard-import-button').on('click', '.button-import', function () {
         const nonce = $('#tab-design #_wpnonce').val();
         const templateSlug = $('input[name="dashboard-template"]:checked').val();
 
         import_template( templateSlug, 'tab-design', nonce, function( data ) {
-            window.location.href = data['pageEditURL'].replace(/&amp;/g, '&');
+            pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
+            window.location.href = pageEditURL;
         } );
     });
 
@@ -239,9 +241,25 @@ jQuery(function ($) {
     $('#wizard-import-button').on('click', '.button-import:not(.disabled)', function() {
         const templateSlug = $('input[name="wizard-template"]:checked').val();
 
-        import_template( templateSlug, 'wizard', wpmm_vars.wizard_nonce, function () {
-            window.location.reload(true);
+        import_template( templateSlug, 'wizard', wpmm_vars.wizard_nonce, function (data) {
+            $('.slider-wrap').addClass('move-right');
+            $('.bullets-wrap .step-1').removeClass('active');
+            $('.bullets-wrap .step-2').addClass('active');
+
+            pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
         } );
+    });
+
+    $('.view-page-button').on('click', function() {
+        window.location.href = pageEditURL;
+    });
+
+    $('.refresh-button').on('click', function() {
+        window.location.reload();
+    });
+
+    $('.view-page-button, .refresh-button').on('click', function() {
+        // todo: take email and subscribe depending on the checkbox
     })
 
     function import_in_progress(slug) {
@@ -249,7 +267,7 @@ jQuery(function ($) {
         $('.button-import').attr( 'disabled', 'disabled' );
         $('input[value=' + slug + '] + .template').append( '<span class="dashicons dashicons-update"></span>' );
         $('input[value=' + slug + '] + .template').append( '<p><i>' + wpmm_vars.loading_string + '</i></p>' );
-        $('#wpmm-wizard-wrapper label').css('pointer-events', 'none');
+        $('#wpmm-wizard-wrapper .templates-radio label').css('pointer-events', 'none');
     }
 
     function import_template ( slug, source, nonce, callback ) {

@@ -150,7 +150,7 @@ h2.wpmm-title {
     display: flex;
 }
 
-.templates-radio [type=radio] {
+.templates-radio [type=radio], .bullets-wrap [type=radio] {
     position: absolute;
     opacity: 0;
 }
@@ -158,9 +158,9 @@ h2.wpmm-title {
 .templates-radio [type=radio] + .template {
     cursor: pointer;
     object-fit: cover;
-    width: 230px;
-    height: 190px;
-    background: #d9d9d9 no-repeat fixed center;
+    width: 224px;
+    height: 280px;
+    background-color: #fff;
 }
 
 .templates-radio [type=radio]:checked + .template {
@@ -256,25 +256,43 @@ h2.wpmm-title {
 }
 
 .modal-overlay {
-    opacity: 0.5;
-    width: 100vw;
-    height: 100vh;
     position: absolute;
 }
 
 #wpmm-wizard-wrapper {
-    width: 480px;
+    width: 900px;
     position: absolute;
     left: 50%;
     top: 100px;
     transform: translate(-50%);
-    background: #fff;
-    padding: 20px 45px 45px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#wpmm-wizard-wrapper .slider-wrap {
+    width: 200%;
+    display: flex;
+    transition: 0.4s ease-in-out;
+}
+
+.move-right {
+    transform: translateX(-50%);
+}
+
+#wpmm-wizard-wrapper .step {
+    width: 50%;
+    padding: 60px 80px;
+}
+#wpmm-wizard-wrapper .second-step {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 #wpmm-wizard-wrapper .header {
     font-size: 24px;
     line-height: 28px;
+    margin-top: 0;
 }
 
 #wpmm-wizard-wrapper .description {
@@ -283,49 +301,115 @@ h2.wpmm-title {
     font-weight: 400;
 }
 
-#wpmm-wizard-wrapper form {
+.templates-radio form {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
-    width: 100%;
+    width: 500px;
 }
 
-#wpmm-wizard-wrapper .template {
+.templates-radio .template {
     position: relative;
+    /*background-color: #fff;*/
 }
 
-#wpmm-wizard-wrapper .template img {
-    width: 230px;
-    height: 190px;
+.templates-radio .template img {
+    width: 224px;
+    height: 280px;
     object-fit: cover;
 }
 
-#wpmm-wizard-wrapper .template .tag {
+.templates-radio .template p {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(50%);
+}
+
+.templates-radio .template .tag {
     position: absolute;
     background-color: #000;
     color: #fff;
     padding: 5px 8px;
-    left: 50%;
-    bottom: -30px;
-    transform: translate(-50%, -50%);
+    right: -30px;
+    top: 15px;
 }
 
 #wizard-import-button, #dashboard-import-button {
     display: flex;
     align-items: center;
     column-gap: 10px;
-}
-
-#wizard-import-button {
     margin-top: 45px;
 }
 
-.button-import + .dashicons-update {
+.dashicons-update {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     animation: spin 2s linear infinite;
 }
 
+.templates-radio .template.loading img {
+    opacity: .2;
+}
+
+.step-2-header {
+    font-size: 24px;
+}
+
+.bullets-wrap {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+    column-gap: 8px;
+    bottom: 0;
+    right: 40px;
+}
+
+.bullets-wrap .bullet {
+    width: 0;
+    border: 4px solid #d9d9d9;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+.bullets-wrap .bullet.active {
+    border: 4px solid #135e96;
+}
+
+.subscribe-checkbox {
+    margin-top: 20px;
+}
+
+.second-step .buttons-wrap {
+    margin-top: 30px;
+    display: flex;
+    column-gap: 15px;
+}
+
+.second-step {
+    max-width: 440px;
+    text-align: center;
+}
+
+.second-step p {
+    font-size: 18px;
+}
+
+.button-big {
+    min-height: 40px !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    line-height: 18px !important;
+    font-weight: 700;
+}
+
 @keyframes spin {
-    100% {
-        transform:rotate(360deg);
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }

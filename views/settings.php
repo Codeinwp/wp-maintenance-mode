@@ -6,7 +6,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-update_option( 'wpmm_fresh_install', true );
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
@@ -44,19 +43,28 @@ update_option( 'wpmm_fresh_install', true );
 								</label>
 							</form>
 						</div>
-						<p><i><?php esc_html_e( 'Otter Blocks plugin is required for this templates in order to work properly.', 'wp-maintenance-mode' ); ?></i></p>
 						<div id="wizard-import-button">
-							<input type="button" class="button button-primary disabled button-import" value="<?php echo $this->get_import_button_text(); ?>"/>
+							<input type="button" class="button button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
 						</div>
+						<p><i><?php esc_html_e( 'Otter Blocks plugin is required for this templates in order to work properly.', 'wp-maintenance-mode' ); ?></i></p>
 					</div>
 					<div class="step second-step">
 						<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
-						<h4><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+						<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+						<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
+						<div class="buttons-wrap">
+							<input type="button" class="button-big button button-primary view-page-button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+							<input type="button" class="button-big button refresh-button" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+						</div>
+						<div class="subscribe-checkbox">
+							<input type="checkbox" name="subscribe">
+							<label for="subscribe"><i><?php esc_html_e( 'Keep me up to date on news, features and new templates.', 'wp-maintenance-mode' ); ?></i></label>
+						</div>
 					</div>
 				</div>
 				<div class="bullets-wrap">
-					<div class="bullet active"></div>
-					<div class="bullet"></div>
+					<div class="bullet step-1 active"></div>
+					<div class="bullet step-2"></div>
 				</div>
 			</div>
 		<?php } else { ?>
