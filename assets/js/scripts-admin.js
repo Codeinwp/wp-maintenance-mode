@@ -258,6 +258,8 @@ jQuery(function ($) {
         window.location.reload();
     });
 
+    $('input[type=checkbox][name=subscribe]').prop('checked', true);
+
     $('.view-page-button, .refresh-button').on('click', function() {
         // todo: take email and subscribe depending on the checkbox
     })

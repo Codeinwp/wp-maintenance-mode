@@ -131,11 +131,12 @@ function scrollToBottom() {
  * Input checking
  */
 function inputError(msg) {
+    jQuery('<div class="bot-error"><p></p></div>').insertAfter('.bot-container');
     jQuery('.bot-error p').text(msg);
-    jQuery('.bot-error')
-            .animate({bottom: 0}, 500)
-            .delay(3000)
-            .animate({bottom: "-70px"}, 500);
+
+    setTimeout(function() {
+        jQuery('.bot-error p').remove();
+    }, 3000);
 }
 
 function checkInput(option) {

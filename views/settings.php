@@ -53,11 +53,11 @@ defined( 'ABSPATH' ) || exit;
 						<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
 						<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
 						<div class="buttons-wrap">
-							<input type="button" class="button-big button button-primary view-page-button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
-							<input type="button" class="button-big button refresh-button" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+							<input type="button" class="button-big button view-page-button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+							<input type="button" class="button-big button button-primary refresh-button" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
 						</div>
 						<div class="subscribe-checkbox">
-							<input type="checkbox" name="subscribe">
+							<input type="checkbox" name="subscribe" checked="checked">
 							<label for="subscribe"><i><?php esc_html_e( 'Keep me up to date on news, features and new templates.', 'wp-maintenance-mode' ); ?></i></label>
 						</div>
 					</div>
