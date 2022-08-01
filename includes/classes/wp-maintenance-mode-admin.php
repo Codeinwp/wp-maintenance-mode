@@ -6,6 +6,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 	class WP_Maintenance_Mode_Admin {
 
+		const SUBSCRIBE_ROUTE = 'https://api.themeisle.com/tracking/subscribe';
+
 		protected static $instance = null;
 		protected $plugin_slug;
 		protected $plugin_settings;
@@ -49,6 +51,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
 			add_action( 'wp_ajax_wpmm_select_page', array( $this, 'select_page' ) );
 			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
+			add_action( 'wp_ajax_wpmm_subscribe', array( $this, 'subscribe_newsletter' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
@@ -572,6 +575,40 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
+		}
+
+		public function subscribe_newsletter() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wizard' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			$response = wp_remote_post(
+				self::SUBSCRIBE_ROUTE,
+				array(
+					'headers' => array(
+						'Content-Type' => 'application/json',
+					),
+					'body'    => wp_json_encode(
+						array(
+							'slug'  => 'wp-maintenance-mode',
+							'site'  => get_site_url(),
+							'email' => get_bloginfo( 'admin_email' ),
+						)
+					),
+				)
+			);
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error( $response->get_error_message() );
+			}
+
+			wp_send_json_success( $response );
 		}
 
 		/**

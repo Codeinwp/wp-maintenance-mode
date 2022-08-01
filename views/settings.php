@@ -6,13 +6,17 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+update_option( 'wpmm_fresh_install', true );
+if ( $this->plugin_settings['general']['status'] === 0 ) {
+	define( 'WPMM_NEW_LOOK', true);
+}
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
 	<div class="wpmm-wrapper">
 		<?php
-		if ( get_option( 'wpmm_fresh_install', false ) ) {
+		if ( get_option( 'wpmm_fresh_install', false ) && defined( 'WPMM_NEW_LOOK' ) ) {
 			$maintenance_slug = 'dummy-2';
 			$coming_soon_slug = 'dummy-1';
 
@@ -53,8 +57,8 @@ defined( 'ABSPATH' ) || exit;
 						<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
 						<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
 						<div class="buttons-wrap">
-							<input type="button" class="button-big button view-page-button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
-							<input type="button" class="button-big button button-primary refresh-button" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+							<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+							<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
 						</div>
 						<div class="subscribe-checkbox">
 							<input type="checkbox" name="subscribe" checked="checked">
@@ -227,7 +231,7 @@ defined( 'ABSPATH' ) || exit;
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
-						<?php if ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) { ?>
+						<?php if ( defined( 'WPMM_NEW_LOOK' ) ) { ?>
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
@@ -471,7 +475,7 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-modules" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<?php if ( ! ( $this->plugin_settings['general']['status'] === 0 || $this->plugin_settings['general']['status'] === 1 && defined( 'GUTENBERG_COMPATIBLE' ) ) ) { ?>
+						<?php if ( ! defined( 'WPMM_NEW_LOOK' ) ) { ?>
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">

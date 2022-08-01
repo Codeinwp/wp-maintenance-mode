@@ -250,18 +250,35 @@ jQuery(function ($) {
         } );
     });
 
-    $('.view-page-button').on('click', function() {
-        window.location.href = pageEditURL;
-    });
-
-    $('.refresh-button').on('click', function() {
-        window.location.reload();
-    });
-
     $('input[type=checkbox][name=subscribe]').prop('checked', true);
 
-    $('.view-page-button, .refresh-button').on('click', function() {
-        // todo: take email and subscribe depending on the checkbox
+    $('#view-page-button, #refresh-button').on('click', function() {
+        const elementId = $(this).attr('id');
+
+        if ( $('input[type=checkbox][name=subscribe]').is(":checked") ) {
+            $.post( wpmm_vars.ajax_url, {
+                action: 'wpmm_subscribe',
+                _wpnonce: wpmm_vars.wizard_nonce
+            }, function (response) {
+                if(!response.success) {
+                    console.log(response.data);
+                }
+
+                if ( elementId === 'view-page-button' ) {
+                    window.location.href = pageEditURL;
+                } else if ( elementId === 'refresh-button' ) {
+                    window.location.reload();
+                }
+            });
+
+            return;
+        }
+
+        if ( elementId === 'view-page-button' ) {
+            window.location.href = pageEditURL;
+        } else if ( elementId === 'refresh-button' ) {
+            window.location.reload();
+        }
     })
 
     function import_in_progress(slug) {

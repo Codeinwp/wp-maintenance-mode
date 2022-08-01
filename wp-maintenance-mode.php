@@ -39,12 +39,10 @@ define( 'WPMM_CSS_URL', WPMM_URL . 'assets/css/' );
 define( 'WPMM_IMAGES_URL', WPMM_URL . 'assets/images/' );
 define( 'WPMM_TEMPLATES_URL', WPMM_URL . 'assets/templates/' );
 
-
 /**
  * OTHER DEFINES
  */
 define( 'WPMM_ASSETS_SUFFIX', ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min' );
-define( 'GUTENBERG_COMPATIBLE', true );
 
 /**
  * FUNCTIONS
