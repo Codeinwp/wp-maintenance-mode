@@ -20,6 +20,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
+			if ( $this->plugin_settings['general']['status'] === 0 ) {
+				update_option( 'wpmm_new_look', true );
+			}
+
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
@@ -95,6 +99,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function get_plugin_slug() {
 			return $this->plugin_slug;
+		}
+
+		/**
+		 * Return new look
+		 *
+		 * @return bool
+		 */
+		public function get_new_look() {
+			return $this->new_look;
 		}
 
 		/**

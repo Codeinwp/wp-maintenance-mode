@@ -6,16 +6,13 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-if ( $this->plugin_settings['general']['status'] === 0 ) {
-	define( 'WPMM_NEW_LOOK', true );
-}
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
 	<div class="wpmm-wrapper">
 		<?php
-		if ( get_option( 'wpmm_fresh_install', false ) && defined( 'WPMM_NEW_LOOK' ) ) {
+		if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
 			$maintenance_slug = 'dummy-2';
 			$coming_soon_slug = 'dummy-1';
 
@@ -239,7 +236,7 @@ if ( $this->plugin_settings['general']['status'] === 0 ) {
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
-						<?php if ( defined( 'WPMM_NEW_LOOK' ) ) { ?>
+						<?php if ( get_option( 'wpmm_new_look' ) ) { ?>
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
@@ -483,7 +480,7 @@ if ( $this->plugin_settings['general']['status'] === 0 ) {
 
 				<div id="tab-modules" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<?php if ( ! defined( 'WPMM_NEW_LOOK' ) ) { ?>
+						<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
