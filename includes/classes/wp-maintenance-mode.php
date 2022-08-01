@@ -102,15 +102,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		}
 
 		/**
-		 * Return new look
-		 *
-		 * @return bool
-		 */
-		public function get_new_look() {
-			return $this->new_look;
-		}
-
-		/**
 		 * Return plugin settings
 		 *
 		 * @since 2.0.0

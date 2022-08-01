@@ -18,8 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
-	global $wp;
-	$current_url     = home_url( add_query_arg( array( $_GET ), $wp->request ) );
+	$current_url     = home_url( add_query_arg() );
 	$maintenance_url = get_permalink( $this->plugin_settings['design']['page_id'] );
 
 	if ( $maintenance_url !== $current_url . '/' && $maintenance_url !== $current_url ) {
