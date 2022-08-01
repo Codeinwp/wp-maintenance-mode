@@ -6,9 +6,8 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-update_option( 'wpmm_fresh_install', true );
 if ( $this->plugin_settings['general']['status'] === 0 ) {
-	define( 'WPMM_NEW_LOOK', true);
+	define( 'WPMM_NEW_LOOK', true );
 }
 ?>
 <div class="wrap">
@@ -71,6 +70,15 @@ if ( $this->plugin_settings['general']['status'] === 0 ) {
 					<div class="bullet step-2"></div>
 				</div>
 			</div>
+			<style>
+				.notice, .wrap .notice, .wrap .error, .wrap .updated {
+					display: none;
+				}
+
+				#wpfooter {
+					position: absolute !important;
+				}
+			</style>
 		<?php } else { ?>
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">

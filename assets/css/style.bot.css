@@ -29,9 +29,6 @@
 }
 
 .bot-container {
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
     position: absolute;
     bottom: 30px;
     left: 30px;

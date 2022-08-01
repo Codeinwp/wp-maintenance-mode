@@ -255,10 +255,6 @@ h2.wpmm-title {
     color: #FFB900 !important;
 }
 
-.modal-overlay {
-    position: absolute;
-}
-
 #wpmm-wizard-wrapper {
     width: 900px;
     position: absolute;
@@ -310,7 +306,6 @@ h2.wpmm-title {
 
 .templates-radio .template {
     position: relative;
-    /*background-color: #fff;*/
 }
 
 .templates-radio .template img {
