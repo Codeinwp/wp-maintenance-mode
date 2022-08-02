@@ -279,8 +279,11 @@ h2.wpmm-title {
     transform: translateX(-50%);
 }
 
-#wpmm-wizard-wrapper .step {
+#wpmm-wizard-wrapper .step-wrap {
     width: 50%;
+}
+
+#wpmm-wizard-wrapper .step {
     padding: 60px 80px;
 }
 #wpmm-wizard-wrapper .second-step {
@@ -385,7 +388,6 @@ h2.wpmm-title {
 }
 
 .second-step {
-    max-width: 440px;
     text-align: center;
 }
 

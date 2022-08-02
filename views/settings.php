@@ -22,43 +22,47 @@ defined( 'ABSPATH' ) || exit;
 			<div class="modal-overlay"></div>
 			<div id="wpmm-wizard-wrapper">
 				<div class="slider-wrap">
-					<div class="step first-step">
-						<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
-						<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
-						<div class="templates-radio">
-							<form>
-								<label>
-									<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>" data-category="maintenance">
-									<div class="template">
-										<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
-										<div class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
-									</div>
-								</label>
-								<label>
-									<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>" data-category="coming-soon">
-									<div class="template">
-										<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
-										<div class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
-									</div>
-								</label>
-							</form>
+					<div class="step-wrap">
+						<div class="step first-step">
+							<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
+							<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+							<div class="templates-radio">
+								<form>
+									<label>
+										<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>" data-category="maintenance">
+										<div class="template">
+											<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
+											<div class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
+										</div>
+									</label>
+									<label>
+										<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>" data-category="coming-soon">
+										<div class="template">
+											<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
+											<div class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
+										</div>
+									</label>
+								</form>
+							</div>
+							<div id="wizard-import-button">
+								<input type="button" class="button button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
+							</div>
+							<p><i><?php esc_html_e( 'Otter Blocks plugin is required for this templates in order to work properly.', 'wp-maintenance-mode' ); ?></i></p>
 						</div>
-						<div id="wizard-import-button">
-							<input type="button" class="button button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
-						</div>
-						<p><i><?php esc_html_e( 'Otter Blocks plugin is required for this templates in order to work properly.', 'wp-maintenance-mode' ); ?></i></p>
 					</div>
-					<div class="step second-step">
-						<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
-						<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
-						<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
-						<div class="buttons-wrap">
-							<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
-							<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
-						</div>
-						<div class="subscribe-checkbox">
-							<input type="checkbox" name="subscribe" checked="checked">
-							<label for="subscribe"><i><?php esc_html_e( 'Keep me up to date on news, features and new templates.', 'wp-maintenance-mode' ); ?></i></label>
+					<div class="step-wrap">
+						<div class="step second-step">
+							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
+							<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
+							<div class="buttons-wrap">
+								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+								<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+							</div>
+							<div class="subscribe-checkbox">
+								<input type="checkbox" name="subscribe" checked="checked">
+								<label for="subscribe"><i><?php esc_html_e( 'Keep me up to date on news, features and new templates.', 'wp-maintenance-mode' ); ?></i></label>
+							</div>
 						</div>
 					</div>
 				</div>
