@@ -16,8 +16,8 @@ defined( 'ABSPATH' ) || exit;
 			$maintenance_slug = 'dummy-2';
 			$coming_soon_slug = 'dummy-1';
 
-			$maintenance_thumbnail = WPMM_TEMPLATES_URL . $maintenance_slug . '/screenshot.png';
-			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . $coming_soon_slug . '/screenshot.png';
+			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
+			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
 			?>
 			<div class="modal-overlay"></div>
 			<div id="wpmm-wizard-wrapper">
@@ -28,14 +28,14 @@ defined( 'ABSPATH' ) || exit;
 						<div class="templates-radio">
 							<form>
 								<label>
-									<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>">
+									<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>" data-category="maintenance">
 									<div class="template">
 										<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
 										<div class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
 									</div>
 								</label>
 								<label>
-									<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>">
+									<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>" data-category="coming-soon">
 									<div class="template">
 										<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
 										<div class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
@@ -270,7 +270,7 @@ defined( 'ABSPATH' ) || exit;
 										<th scope="row">
 											<label for="dashboard-template"><?php esc_html_e( 'Import a template', 'wp-maintenance-mode' ); ?></label>
 										</th>
-										<td>
+										<td class="category-select-wrap">
 											<select name="options[design][template_category]" id="template-category">
 												<option value="all"<?php selected( $this->plugin_settings['design']['template_category'], 'all' ); ?>><?php esc_html_e( 'All Templates', 'wp-maintenance-mode' ); ?></option>
 												<option value="coming-soon"<?php selected( $this->plugin_settings['design']['template_category'], 'coming-soon' ); ?>><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></option>
@@ -278,39 +278,40 @@ defined( 'ABSPATH' ) || exit;
 											</select>
 										</td>
 									</tr>
-									<tr>
-										<td class="templates-radio">
-											<form>
-												<?php
-												if ( $this->plugin_settings['design']['template_category'] === 'all' ) {
-													$templates = list_files( WPMM_TEMPLATES_PATH, 2 );
-												} else {
-													$templates = list_files( WPMM_TEMPLATES_PATH . $this->plugin_settings['design']['template_category'] . '/', 1 );
-												}
-
-												foreach ( $templates as $template ) {
-													$name      = basename( $template );
-													$category  = basename( dirname( $template ) );
-													$thumbnail = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/screenshot.png';
-													$content   = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/blocks-export.json';
-													?>
-														<label>
-															<input type="radio" name="dashboard-template" value="<?php echo $name; ?>">
-															<div class="template">
-																<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-															</div>
-														</label>
-												<?php } ?>
-											</form>
-										</td>
-									</tr>
-									<tr>
-										<td id="dashboard-import-button">
-											<input type="button" class="button button-primary button-import disabled" data-tab="design" value="<?php echo $this->get_import_button_text(); ?>" />
-										</td>
-									</tr>
 								</tbody>
 							</table>
+							<div class="templates-radio">
+								<form>
+									<?php
+									if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
+										$this->plugin_settings['design']['template_category'] = 'all';
+										update_option( 'wpmm_settings', $this->plugin_settings );
+									}
+
+									if ( $this->plugin_settings['design']['template_category'] === 'all' ) {
+										$templates = list_files( WPMM_TEMPLATES_PATH, 2 );
+									} else {
+										$templates = list_files( WPMM_TEMPLATES_PATH . $this->plugin_settings['design']['template_category'] . '/', 1 );
+									}
+
+									foreach ( $templates as $template ) {
+										$name      = basename( $template );
+										$category  = basename( dirname( $template ) );
+										$thumbnail = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/screenshot.png';
+										$content   = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/blocks-export.json';
+										?>
+											<label>
+												<input type="radio" name="dashboard-template" value="<?php echo $name; ?>" data-category="<?php echo esc_attr( $category ); ?>" >
+												<div class="template">
+													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
+												</div>
+											</label>
+									<?php } ?>
+								</form>
+							</div>
+							<div id="dashboard-import-button">
+								<input type="button" class="button button-primary button-import disabled" data-tab="design" value="<?php echo $this->get_import_button_text(); ?>" />
+							</div>
 						<?php } else { /* legacy code */ ?>
 						<table class="form-table">
 							<tbody>

@@ -550,7 +550,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$template_slug = $_POST['template_slug'];
-			$template      = wp_json_file_decode( WPMM_TEMPLATES_PATH . $template_slug . '/blocks-export.json' );
+			$category      = $_POST['category'];
+			$template      = wp_json_file_decode( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' );
 
 			$blocks = $template->content;
 

@@ -193,8 +193,16 @@ jQuery(function ($) {
     $('#dashboard-import-button').on('click', '.button-import', function () {
         const nonce = $('#tab-design #_wpnonce').val();
         const templateSlug = $('input[name="dashboard-template"]:checked').val();
+        const category = $('input[name="dashboard-template"]:checked')[0].dataset.category;
 
-        import_template( templateSlug, 'tab-design', nonce, function( data ) {
+        const data = {
+            _wpnonce: nonce,
+            source: 'tab-design',
+            template_slug: templateSlug,
+            category: category
+        }
+
+        import_template( data, function( data ) {
             pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
             window.location.href = pageEditURL;
         } );
@@ -257,8 +265,18 @@ jQuery(function ($) {
 
     $('#wizard-import-button').on('click', '.button-import:not(.disabled)', function() {
         const templateSlug = $('input[name="wizard-template"]:checked').val();
+        const category = $('input[name="wizard-template"]:checked')[0].dataset.category;
 
-        import_template( templateSlug, 'wizard', wpmm_vars.wizard_nonce, function (data) {
+        const data = {
+            _wpnonce: wpmm_vars.wizard_nonce,
+            source: 'wizard',
+            template_slug: templateSlug,
+            category: category
+        };
+
+        console.log(data);
+
+        import_template( data, function (data) {
             $('.slider-wrap').addClass('move-right');
             $('.bullets-wrap .step-1').removeClass('active');
             $('.bullets-wrap .step-2').addClass('active');
@@ -299,29 +317,25 @@ jQuery(function ($) {
     })
 
     function import_in_progress(slug) {
-        $('input[value=' + slug + '] + div').addClass( 'loading' );
+        $('input[value=' + slug + '] + .template').addClass( 'loading' );
         $('.button-import').attr( 'disabled', 'disabled' );
         $('input[value=' + slug + '] + .template').append( '<span class="dashicons dashicons-update"></span>' );
         $('input[value=' + slug + '] + .template').append( '<p><i>' + wpmm_vars.loading_string + '</i></p>' );
         $('#wpmm-wizard-wrapper .templates-radio label').css('pointer-events', 'none');
     }
 
-    function import_template ( slug, source, nonce, callback ) {
-        import_in_progress( slug );
+    function import_template ( data, callback ) {
+        import_in_progress( data.template_slug );
         if ( !wpmm_vars.is_otter_installed ) {
-            install_and_activate_otter( () => add_to_page(slug, nonce, source, callback) );
+            install_and_activate_otter( () => add_to_page(data, callback) );
         } else if ( !wpmm_vars.is_otter_activated ) {
-            activate_otter( () => add_to_page(slug, nonce, source, callback) );
+            activate_otter( () => add_to_page(data, callback) );
         }
     }
 
-    function add_to_page(slug, nonce, source, callback) {
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_insert_template',
-            template_slug: slug,
-            _wpnonce:  nonce,
-            source: source,
-        }, function(response) {
+    function add_to_page(data, callback) {
+        data['action'] = 'wpmm_insert_template';
+        $.post(wpmm_vars.ajax_url, data, function(response) {
             if (!response.success) {
                 console.log(response.data);
                 $('.dashicons-update').remove();

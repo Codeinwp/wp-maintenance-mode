@@ -17,6 +17,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			if ( ! get_option( 'wpmm_settings' ) ) {
+				update_option( 'wpmm_fresh_install', true );
+			}
+
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
@@ -243,8 +247,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// delete old options
 			delete_option( 'wp-maintenance-mode' );
 			delete_option( 'wp-maintenance-mode-msqld' );
-
-			update_option( 'wpmm_fresh_install', true );
 		}
 
 		/**
