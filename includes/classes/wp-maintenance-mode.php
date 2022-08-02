@@ -147,6 +147,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'bg_custom'          => '',
 					'bg_predefined'      => 'bg1.jpg',
 					'other_custom_css'   => '',
+					'template_category'  => 'all',
 				),
 				'modules' => array(
 					'countdown_status'     => 0,

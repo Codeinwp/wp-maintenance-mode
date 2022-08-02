@@ -52,6 +52,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_select_page', array( $this, 'select_page' ) );
 			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
 			add_action( 'wp_ajax_wpmm_subscribe', array( $this, 'subscribe_newsletter' ) );
+			add_action( 'wp_ajax_wpmm_change_template_category', array( $this, 'change_template_category' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
@@ -609,6 +610,27 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			wp_send_json_success( $response );
+		}
+
+		public function change_template_category() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-design' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			if ( empty( $_POST['category'] ) ) {
+				die( esc_html__( 'Empty field: category.', 'wp-maintenance-mode' ) );
+			}
+
+			$this->plugin_settings['design']['template_category'] = $_POST['category'];
+			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			wp_send_json_success();
 		}
 
 		/**

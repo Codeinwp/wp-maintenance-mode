@@ -200,6 +200,23 @@ jQuery(function ($) {
         } );
     });
 
+    $('select[name="options[design][template_category]"]').on('change', function () {
+        const nonce = $('#tab-design #_wpnonce').val();
+
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_change_template_category',
+            category: this.value,
+            _wpnonce: nonce
+        }, function (response) {
+            if (!response.success) {
+                alert(response);
+                return false;
+            }
+
+            window.location.reload();
+        }, 'json');
+    });
+
     $('select[name="options[design][page_id]"]').on('change', function () {
         const nonce = $('#tab-design #_wpnonce').val();
 

@@ -316,7 +316,7 @@ h2.wpmm-title {
 
 .templates-radio .template p {
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     transform: translateX(50%);
 }
 
@@ -329,11 +329,14 @@ h2.wpmm-title {
     top: 15px;
 }
 
+#wizard-import-button {
+    margin-top: 45px;
+}
+
 #wizard-import-button, #dashboard-import-button {
     display: flex;
     align-items: center;
     column-gap: 10px;
-    margin-top: 45px;
 }
 
 .dashicons-update {
