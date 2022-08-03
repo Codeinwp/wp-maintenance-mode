@@ -162,8 +162,8 @@ function checkEmail(option) {
     if (input.length > 7 && result === true) {
 
         // Add new entry to our db
-        var bot_user_email = jQuery('.bot-container input[type=email]').serialize();
-        var subscribe_bot_data = 'action=wpmm_add_subscriber&' + bot_user_email;
+        var bot_subscribe_form = jQuery('.bot_subscribe_form').serialize();
+        var subscribe_bot_data = 'action=wpmm_add_subscriber&' + bot_subscribe_form;
 
         jQuery.post(wpmm_vars.ajax_url, subscribe_bot_data, function (response) {
             if (!response.success) {
@@ -416,6 +416,13 @@ function showStatement(pos) {
                             var inputBubble = jQuery('<p/>', {
                                 "class": "chat-message user"
                             }).appendTo(form);
+
+                            // Create hidden input, append to user bubble
+                            var input = jQuery('<input/>', {
+                                type: 'hidden',
+                                name: '_wpnonce',
+                                value: botVars.wpnonce
+                            }).appendTo(inputBubble);
 
                             // Create email input, append to user bubble
                             var input = jQuery('<input/>', {
