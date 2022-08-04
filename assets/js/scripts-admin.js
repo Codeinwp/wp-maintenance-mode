@@ -1,6 +1,13 @@
 /* global wp */
 
 jQuery(function ($) {
+    function isEmailValid( email ) {
+        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const result = regex.test( String( email.toLowerCase() ) );
+
+        return email.length > 7 && result === true
+    }
+
     /**
      * TABS
      */
@@ -274,8 +281,6 @@ jQuery(function ($) {
             category: category
         };
 
-        console.log(data);
-
         import_template( data, function (data) {
             $('.slider-wrap').addClass('move-right');
             $('.bullets-wrap .step-1').removeClass('active');
@@ -285,46 +290,65 @@ jQuery(function ($) {
         } );
     });
 
-    $('input[type=checkbox][name=subscribe]').prop('checked', true);
+    $('#view-page-button').on('click', function() {
+        window.location.href = pageEditURL;
+    })
 
-    $('#view-page-button, #refresh-button').on('click', function() {
-        const elementId = $(this).attr('id');
 
-        if ( $('input[type=checkbox][name=subscribe]').is(":checked") ) {
-            $.post( wpmm_vars.ajax_url, {
-                action: 'wpmm_subscribe',
-                _wpnonce: wpmm_vars.wizard_nonce
-            }, function (response) {
-                if(!response.success) {
-                    console.log(response.data);
-                }
+    $('#refresh-button').on('click', function() {
+        window.location.reload();
+    })
 
-                if ( elementId === 'view-page-button' ) {
-                    window.location.href = pageEditURL;
-                } else if ( elementId === 'refresh-button' ) {
-                    window.location.reload();
-                }
-            });
-
-            return;
-        }
-
-        if ( elementId === 'view-page-button' ) {
-            window.location.href = pageEditURL;
-        } else if ( elementId === 'refresh-button' ) {
-            window.location.reload();
+    $('#email-input-wrap input[type="text"]').on( 'keypress', (e) => {
+        if (e.key === 'Enter') {
+            const button = $('#email-input-wrap .subscribe-button');
+            button.trigger('focus').trigger( 'click' );
         }
     })
 
+    $('#email-input-wrap').on('click', '.subscribe-button', function(event) {
+        event.preventDefault();
+
+        const emailInput = $('#email-input-wrap input[type="text"]');
+        const email = emailInput.val();
+
+        if ( !isEmailValid( email ) ) {
+            $('#email-input-wrap + p').remove();
+            $(`<p class="subscribe-message email-error"><i>${ wpmm_vars.invalid_email_string }</i></p>`).insertAfter('#email-input-wrap');
+            emailInput.addClass( 'invalid' );
+            return;
+        }
+
+        emailInput.removeClass( 'invalid' );
+
+        $.post( wpmm_vars.ajax_url, {
+            action: 'wpmm_subscribe',
+            email: email,
+            _wpnonce: wpmm_vars.wizard_nonce
+        }, function (response) {
+            if(!response.success) {
+                console.log(response.data);
+            }
+
+            $('#email-input-wrap + p').remove();
+            $(`<p class="subscribe-message email-succes"><i>${ wpmm_vars.confirmation_string }</i></p>`).insertAfter('#email-input-wrap');
+        });
+
+        return false;
+    })
+
     function import_in_progress(slug) {
-        $('input[value=' + slug + '] + .template').addClass( 'loading' );
+        const template = $('input[value=' + slug + '] + .template');
+
+        template.addClass( 'loading' );
+        template.append( '<span class="dashicons dashicons-update"></span>' );
+        template.append( '<p><i>' + wpmm_vars.loading_string + '</i></p>' );
+
         $('.button-import').attr( 'disabled', 'disabled' );
-        $('input[value=' + slug + '] + .template').append( '<span class="dashicons dashicons-update"></span>' );
-        $('input[value=' + slug + '] + .template').append( '<p><i>' + wpmm_vars.loading_string + '</i></p>' );
         $('#wpmm-wizard-wrapper .templates-radio label').css('pointer-events', 'none');
     }
 
-    function import_template ( data, callback ) {
+    function import_template( data, callback ) {
         import_in_progress( data.template_slug );
         if ( !wpmm_vars.is_otter_installed ) {
             install_and_activate_otter( () => add_to_page(data, callback) );

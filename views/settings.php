@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) || exit;
 	<div class="wpmm-wrapper">
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
-			$maintenance_slug = 'dummy-2';
-			$coming_soon_slug = 'dummy-1';
+			$maintenance_slug = 'maintenance-default';
+			$coming_soon_slug = 'coming-soon-default';
 
 			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
 			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
@@ -44,7 +44,7 @@ defined( 'ABSPATH' ) || exit;
 								</form>
 							</div>
 							<div id="wizard-import-button" class="import-button">
-								<input type="button" class="button button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
+								<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
 							</div>
 							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 						</div>
@@ -65,8 +65,8 @@ defined( 'ABSPATH' ) || exit;
 									<h6><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h6>
 									<p><?php esc_html_e( 'Keep me up to date on news, features and new templates', 'wp-maintenance-mode' ); ?></p>
 									<div id="email-input-wrap">
-										<input type="text" value="<?php /* get admin email */ ?>" />
-										<input type="button" class="button button-big" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
+										<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
+										<input type="button" class="button button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
 									</div>
 								</div>
 							</div>
@@ -232,7 +232,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 
 				<div id="tab-design" class="hidden">
-					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post"></form>
 						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
 						<?php if ( get_option( 'wpmm_new_look' ) ) { ?>
 							<table class="form-table">

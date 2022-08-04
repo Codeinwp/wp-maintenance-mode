@@ -20,8 +20,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
-			update_option( 'wpmm_fresh_install', true );
-
 			$plugin                        = WP_Maintenance_Mode::get_instance();
 			$this->plugin_slug             = $plugin->get_plugin_slug();
 			$this->plugin_settings         = $plugin->get_plugin_settings();
@@ -83,7 +81,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * Load CSS files
 		 *
 		 * @since 2.0.0
-		 * @return type
+		 * @return void
 		 */
 		public function enqueue_admin_styles() {
 			if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
@@ -140,6 +138,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'is_otter_active'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
 						'error_string'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
 						'loading_string'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'invalid_email_string'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'confirmation_string'     => __( 'Thank you for subscribing! You have received an email. Please click on the confirmation link.', 'wp-maintenance-mode' ),
 						'otter_activation_link'   => add_query_arg(
 							array(
 								'action'        => 'activate',
@@ -600,6 +600,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
+			if ( ! isset( $_POST['email'] ) ) {
+				die( esc_html__( 'Empty field: email', 'wp-maintenance-mode' ) );
+			}
+
 			$response = wp_remote_post(
 				self::SUBSCRIBE_ROUTE,
 				array(
@@ -610,7 +614,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						array(
 							'slug'  => 'wp-maintenance-mode',
 							'site'  => get_site_url(),
-							'email' => get_bloginfo( 'admin_email' ),
+							'email' => $_POST['email'],
 						)
 					),
 				)
