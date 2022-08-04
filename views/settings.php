@@ -19,67 +19,61 @@ defined( 'ABSPATH' ) || exit;
 			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
 			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
 			?>
-			<div class="modal-overlay"></div>
 			<div id="wpmm-wizard-wrapper">
 				<div class="slider-wrap">
 					<div class="step-wrap">
 						<div class="step first-step">
-							<h4 class="header"><?php esc_html_e( 'Would you like to activate a maintenance or coming soon page for your website?', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Pick the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+							<h4 class="header"><?php esc_html_e( 'Select the type of page you want.', 'wp-maintenance-mode' ); ?></h4>
+							<p class="description"><?php esc_html_e( 'Choose the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
 								<form>
 									<label>
+										<h6 class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></h6>
 										<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>" data-category="maintenance">
 										<div class="template">
 											<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
-											<div class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></div>
 										</div>
 									</label>
 									<label>
+										<h6 class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></h6>
 										<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>" data-category="coming-soon">
 										<div class="template">
 											<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
-											<div class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></div>
 										</div>
 									</label>
 								</form>
 							</div>
-							<div id="wizard-import-button">
+							<div id="wizard-import-button" class="import-button">
 								<input type="button" class="button button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
 							</div>
-							<p><i><?php esc_html_e( 'Otter Blocks plugin is required for this templates in order to work properly.', 'wp-maintenance-mode' ); ?></i></p>
+							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 						</div>
 					</div>
 					<div class="step-wrap">
 						<div class="step second-step">
-							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
-							<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
-							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
-							<div class="buttons-wrap">
-								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
-								<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+							<div class="upper-half">
+								<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
+								<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+								<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
+								<div class="buttons-wrap">
+									<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+									<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+								</div>
 							</div>
-							<div class="subscribe-checkbox">
-								<input type="checkbox" name="subscribe" checked="checked">
-								<label for="subscribe"><i><?php esc_html_e( 'Keep me up to date on news, features and new templates.', 'wp-maintenance-mode' ); ?></i></label>
+							<div class="subscribe-news">
+								<div class="subscribe-news-content">
+									<h6><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h6>
+									<p><?php esc_html_e( 'Keep me up to date on news, features and new templates', 'wp-maintenance-mode' ); ?></p>
+									<div id="email-input-wrap">
+										<input type="text" value="<?php /* get admin email */ ?>" />
+										<input type="button" class="button button-big" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="bullets-wrap">
-					<div class="bullet step-1 active"></div>
-					<div class="bullet step-2"></div>
-				</div>
 			</div>
-			<style>
-				.notice, .wrap .notice, .wrap .error, .wrap .updated {
-					display: none;
-				}
-
-				#wpfooter {
-					position: absolute !important;
-				}
-			</style>
 		<?php } else { ?>
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">
@@ -313,9 +307,10 @@ defined( 'ABSPATH' ) || exit;
 									<?php } ?>
 								</form>
 							</div>
-							<div id="dashboard-import-button">
+							<div id="dashboard-import-button" class="import-button">
 								<input type="button" class="button button-primary button-import disabled" data-tab="design" value="<?php echo $this->get_import_button_text(); ?>" />
 							</div>
+							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 						<?php } else { /* legacy code */ ?>
 						<table class="form-table">
 							<tbody>

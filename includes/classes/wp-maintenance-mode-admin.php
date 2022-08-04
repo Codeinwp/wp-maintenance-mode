@@ -20,6 +20,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			update_option( 'wpmm_fresh_install', true );
+
 			$plugin                        = WP_Maintenance_Mode::get_instance();
 			$this->plugin_slug             = $plugin->get_plugin_slug();
 			$this->plugin_settings         = $plugin->get_plugin_settings();
@@ -59,6 +61,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add text to footer
 			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 5 );
+
+			// Wizard screen setup
+			add_filter( 'admin_body_class', array( $this, 'add_wizard_classes' ) );
 		}
 
 		/**
@@ -99,6 +104,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				wp_enqueue_style( $this->plugin_slug . '-admin-chosen', WPMM_CSS_URL . 'chosen' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-timepicker-addon-script', WPMM_CSS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-styles', WPMM_CSS_URL . 'style-admin' . WPMM_ASSETS_SUFFIX . '.css', array( 'wp-color-picker' ), WP_Maintenance_Mode::VERSION );
+
+				// wizard stylesheet
+				if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
+					wp_enqueue_style( $this->plugin_slug . '-wizard-styles', WPMM_CSS_URL . 'style-wizard' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
+				}
 			}
 		}
 
@@ -849,6 +859,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			return $text;
+		}
+
+		/**
+		 * Add classes to make the wizard full screen
+		 *
+		 * @param string $classes Body classes.
+		 * @return string
+		 */
+		public function add_wizard_classes( $classes ) {
+			if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
+				$classes .= 'wpmm-wizard-fullscreen';
+			}
+
+			return $classes;
 		}
 
 		/**

@@ -169,7 +169,6 @@ h2.wpmm-title {
 
 .templates-radio [type=radio]:checked + .template {
     outline: 2px solid #0065A6;
-    box-shadow: 0 9px 23px 2px #aaa;
 }
 
 @media screen and (max-width: 782px) {
@@ -259,51 +258,6 @@ h2.wpmm-title {
     color: #FFB900 !important;
 }
 
-#wpmm-wizard-wrapper {
-    width: 900px;
-    position: absolute;
-    left: 50%;
-    top: 100px;
-    transform: translate(-50%);
-    background-color: #fff;
-    overflow: hidden;
-}
-
-#wpmm-wizard-wrapper .slider-wrap {
-    width: 200%;
-    display: flex;
-    transition: 0.4s ease-in-out;
-}
-
-.move-right {
-    transform: translateX(-50%);
-}
-
-#wpmm-wizard-wrapper .step-wrap {
-    width: 50%;
-}
-
-#wpmm-wizard-wrapper .step {
-    padding: 60px 80px;
-}
-#wpmm-wizard-wrapper .second-step {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-#wpmm-wizard-wrapper .header {
-    font-size: 24px;
-    line-height: 28px;
-    margin-top: 0;
-}
-
-#wpmm-wizard-wrapper .description {
-    line-height: 30px;
-    font-size: 17px;
-    font-weight: 400;
-}
-
 .templates-radio form {
     display: flex;
     justify-content: space-between;
@@ -321,22 +275,7 @@ h2.wpmm-title {
     object-fit: cover;
 }
 
-.templates-radio .template p {
-    position: absolute;
-    bottom: 15px;
-    transform: translateX(50%);
-}
-
-.templates-radio .template .tag {
-    position: absolute;
-    background-color: #000;
-    color: #fff;
-    padding: 5px 8px;
-    right: -30px;
-    top: 15px;
-}
-
-#wizard-import-button, #dashboard-import-button {
+.import-button {
     margin-top: 45px;
 }
 
@@ -351,56 +290,8 @@ h2.wpmm-title {
     opacity: .2;
 }
 
-.step-2-header {
-    font-size: 24px;
-}
-
-.bullets-wrap {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 35px;
-    column-gap: 8px;
-    bottom: 0;
-    right: 40px;
-}
-
-.bullets-wrap .bullet {
-    width: 0;
-    border: 4px solid #d9d9d9;
-    border-radius: 50%;
-    margin: 0;
-    padding: 0;
-}
-
-.bullets-wrap .bullet.active {
-    border: 4px solid #135e96;
-}
-
-.subscribe-checkbox {
-    margin-top: 20px;
-}
-
-.second-step .buttons-wrap {
-    margin-top: 30px;
-    display: flex;
-    column-gap: 15px;
-}
-
-.second-step {
-    text-align: center;
-}
-
-.second-step p {
-    font-size: 18px;
-}
-
-.button-big {
-    min-height: 40px !important;
-    padding: 12px 30px !important;
-    font-size: 16px !important;
-    line-height: 18px !important;
-    font-weight: 700;
+.import-text {
+    color: #717A84;
 }
 
 @keyframes spin {
