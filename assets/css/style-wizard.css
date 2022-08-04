@@ -1,0 +1,169 @@
+.wpmm-wizard-fullscreen #adminmenumain,
+.wpmm-wizard-fullscreen .notice,
+.wpmm-wizard-fullscreen .wrap .notice,
+.wpmm-wizard-fullscreen .wrap .error,
+.wpmm-wizard-fullscreen .wrap .updated,
+.wpmm-wizard-fullscreen #wpfooter{
+    display: none;
+}
+
+#wpwrap {
+    height: 100%;
+}
+
+#wp-content {
+    height: 100%;
+}
+
+#wpbody {
+    height: 100%;
+}
+
+#wpbody-content {
+    height: 100%;
+    padding: 0;
+}
+
+.wrap {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wpmm-wrapper {
+    flex-grow: 1;
+    display: flex;
+}
+
+h2.wpmm-title {
+    margin: 0 !important;
+    padding: 8px 48px 8px 100px !important;
+    background-color: #fff;
+    background-position: 48px;
+}
+
+.wpmm-wizard-fullscreen #wpcontent {
+    margin: 0;
+    padding: 0;
+}
+
+#wpmm-wizard-wrapper {
+    background-color: #f4f4f4;
+    overflow: hidden;
+    color: #1b1b1b;
+}
+
+#wpmm-wizard-wrapper .slider-wrap {
+    width: 200%;
+    display: flex;
+    transition: 0.4s ease-in-out;
+}
+
+.move-right {
+    transform: translateX(-50%);
+}
+
+#wpmm-wizard-wrapper .step-wrap {
+    width: 50%;
+}
+
+#wpmm-wizard-wrapper .step {
+    padding: 100px 130px;
+    height: 100%;
+}
+#wpmm-wizard-wrapper .second-step {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#wpmm-wizard-wrapper .header {
+    font-size: 24px;
+    line-height: 28px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#wpmm-wizard-wrapper .description {
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: 400;
+    color: currentColor;
+    max-width: 480px;
+}
+
+.templates-radio .template p {
+    position: absolute;
+    bottom: 15px;
+    transform: translateX(50%);
+}
+
+.templates-radio form {
+    margin-top: 68px;
+}
+
+.templates-radio .tag {
+    font-size: 15px;
+    margin: 0 0 12px 0;
+    color: #7a7979;
+}
+
+.upper-half {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-2-header {
+    font-size: 24px;
+    max-width: 360px;
+    line-height: 28px;
+}
+
+.subscribe-checkbox {
+    margin-top: 20px;
+}
+
+.second-step .buttons-wrap {
+    margin-top: 30px;
+    display: flex;
+    column-gap: 15px;
+}
+
+#view-page-button{
+    color: #555D66;
+    border-color: #555D66;
+}
+
+.second-step {
+    text-align: center;
+}
+
+.second-step .upper-half p {
+    font-size: 18px;
+    max-width: 440px;
+    line-height: 31px;
+}
+
+.button-big {
+    min-height: 40px !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    line-height: 18px !important;
+    font-weight: 700;
+}
+
+.subscribe-news {
+    width: 100vw;
+    flex-grow: 1;
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.03);
+    text-align: left;
+}
+
+.subscribe-news-content {
+    max-width: 385px;
+    margin-left: auto;
+    margin-right: auto;
+}
