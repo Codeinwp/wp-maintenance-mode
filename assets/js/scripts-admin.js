@@ -270,6 +270,10 @@ jQuery(function ($) {
         });
     }
 
+    $('h2.wpmm-title span').on('click', function() {
+        window.location.href = wpmm_vars.admin_url;
+    });
+
     $('#wizard-import-button').on('click', '.button-import:not(.disabled)', function() {
         const templateSlug = $('input[name="wizard-template"]:checked').val();
         const category = $('input[name="wizard-template"]:checked')[0].dataset.category;

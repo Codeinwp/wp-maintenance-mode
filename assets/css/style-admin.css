@@ -157,8 +157,8 @@ h2.wpmm-title {
 .templates-radio [type=radio] + .template {
     cursor: pointer;
     background-color: #fff;
-    width: 340px;
-    height: 357px;
+    width: 240px;
+    height: 250px;
 }
 
 .templates-radio [type=radio]:checked + .template {
@@ -262,6 +262,7 @@ h2.wpmm-title {
 
 .templates-radio .template {
     position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .templates-radio .template img {

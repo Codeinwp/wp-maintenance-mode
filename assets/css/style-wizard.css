@@ -41,6 +41,18 @@ h2.wpmm-title {
     padding: 8px 48px 8px 100px !important;
     background-color: #fff;
     background-position: 48px;
+    position: relative;
+}
+
+h2.wpmm-title .dashicons {
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    position: absolute;
+    right: 75px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .wpmm-wizard-fullscreen #wpcontent {
@@ -96,6 +108,11 @@ h2.wpmm-title {
 
 .templates-radio form {
     margin-top: 65px;
+}
+
+.templates-radio [type=radio] + .template {
+    width: 340px;
+    height: 357px;
 }
 
 .templates-radio .tag {
