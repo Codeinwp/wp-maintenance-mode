@@ -581,12 +581,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-			update_option( 'wpmm_settings', $this->plugin_settings );
 
 			if ( 'wizard' === $_POST['source'] ) {
+				$this->plugin_settings['general']['status'] = 1;
 				update_option( 'wpmm_fresh_install', false );
 			}
 
+			update_option( 'wpmm_settings', $this->plugin_settings );
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
