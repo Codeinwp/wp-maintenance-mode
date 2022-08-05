@@ -802,6 +802,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				}
 			}
 
+			if ( ! isset( $this->plugin_settings['design']['page_id'] ) || $this->plugin_settings['design']['page_id'] === '-1' ) {
+				$notices['maintenance_page_not_found'] = array(
+					'class' => 'error',
+					'msg'   => __( 'Action required: you don\'t have a page as Maintenance page. Visit settings page to select one.', 'wp-maintenance-mode' ),
+				);
+			}
+
 			// get dismissed notices
 			$dismissed_notices = $this->get_dismissed_notices( get_current_user_id() );
 
@@ -891,7 +898,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return array
 		 */
 		public function add_display_post_states( $post_states, $post ) {
-			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] === $post->ID ) {
+			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] == $post->ID ) {
 				$post_states['wpmm_for_maintenance'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
 			}
 
