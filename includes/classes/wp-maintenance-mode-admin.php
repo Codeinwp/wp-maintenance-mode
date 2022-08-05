@@ -789,6 +789,19 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				delete_option( 'wpmm_notice' );
 			}
 
+			if ( $this->plugin_settings['general']['status'] === 1 && isset( $this->plugin_settings['design']['page_id'] ) ) {
+				$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
+
+				if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' ) {
+					$notices['maintenance_page_deleted'] = array(
+						'class' => 'error',
+						'msg'   => $maintenance_page->post_status === 'draft' ?
+							__( 'Action required: your Maintenance page is drafted. Visit settings page to address this issue.', 'wp-maintenance-mode' ) :
+							__( 'Action required: your Maintenance page has been deleted. Visit settings page to address this issue.', 'wp-maintenance-mode' ),
+					);
+				}
+			}
+
 			// get dismissed notices
 			$dismissed_notices = $this->get_dismissed_notices( get_current_user_id() );
 
@@ -877,7 +890,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @param WP_Post $post Current post.
 		 * @return array
 		 */
-		function add_display_post_states( $post_states, $post ) {
+		public function add_display_post_states( $post_states, $post ) {
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] === $post->ID ) {
 				$post_states['wpmm_for_maintenance'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
 			}
