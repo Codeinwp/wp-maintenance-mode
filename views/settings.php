@@ -733,6 +733,33 @@ defined( 'ABSPATH' ) || exit;
 						</table>
 						<?php } ?>
 
+						<h3>&raquo; <?php esc_html_e( 'Subscribe', 'wp-maintenance-mode' ); ?></h3>
+
+						<table class="form-table">
+							<tbody>
+							<tr valign="top">
+								<th scope="row">
+									<label for="options[modules][stats]"><?php esc_html_e( 'Stats', 'wp-maintenance-mode' ); ?></label>
+								</th>
+								<td id="subscribers_wrap">
+									<?php
+									$subscribers_no = wpmm_get_subscribers_count();
+
+									/* translators: number of subscribers */
+									echo esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no ) );
+
+									if ( current_user_can( wpmm_get_capability( 'subscribers' ) ) && $subscribers_no > 0 ) {
+										?>
+										<div class="buttons">
+											<a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php esc_html_e( 'Export as CSV', 'wp-maintenance-mode' ); ?></a>
+											<a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php esc_html_e( 'Empty subscribers list', 'wp-maintenance-mode' ); ?></a>
+										</div>
+									<?php } ?>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+
 						<h3>&raquo; <?php esc_html_e( 'Google Analytics', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">

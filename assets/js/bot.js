@@ -164,9 +164,10 @@ function checkEmail(option) {
 
         // Add new entry to our db
         var bot_user_email = jQuery('.bot-container input[type=email]').serialize();
-        var subscribe_bot_data = 'action=wpmm_add_subscriber&' + bot_user_email;
+        var subscribe_bot_data = `action=wpmm_add_subscriber&${bot_user_email}&_wpnonce=${subscribe_nonce}`;
 
-        jQuery.post(wpmm_vars.ajax_url, subscribe_bot_data, function (response) {
+        jQuery.post(ajax_url, subscribe_bot_data, function (response) {
+            console.log( subscribe_bot_data );
             if (!response.success) {
                 alert(response.data);
                 return false;

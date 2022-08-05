@@ -1018,6 +1018,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			foreach ( apply_filters( 'wpmm_scripts', $scripts ) as $handle => $src ) {
+				if ( $handle === 'bot' ) {
+					?><script type="text/javascript">
+						const subscribe_nonce = "<?php echo wp_create_nonce( 'wpmts_nonce_subscribe' ); ?>";
+						const ajax_url = "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>";
+					</script>
+					<?php
+				}
 				printf( "<script type=\"text/javascript\" src=\"%s\" id=\"%s-js\"></script>\n", esc_url( $src ), esc_attr( $handle ) );
 			}
 		}
