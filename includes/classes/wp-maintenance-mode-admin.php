@@ -62,6 +62,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Wizard screen setup
 			add_filter( 'admin_body_class', array( $this, 'add_wizard_classes' ) );
+
+			// Display custom page state
+			add_filter( 'display_post_states', array( $this, 'add_display_post_states' ), 10, 2 );
 		}
 
 		/**
@@ -865,6 +868,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			return $text;
+		}
+
+		/**
+		 * Add custom state to the maintenance page
+		 *
+		 * @param array $post_states Post states.
+		 * @param WP_Post $post Current post.
+		 * @return array
+		 */
+		function add_display_post_states( $post_states, $post ) {
+			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] === $post->ID ) {
+				$post_states['wpmm_for_maintenance'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
+			}
+
+			return $post_states;
 		}
 
 		/**

@@ -167,7 +167,6 @@ function checkEmail(option) {
         var subscribe_bot_data = `action=wpmm_add_subscriber&${bot_user_email}&_wpnonce=${subscribe_nonce}`;
 
         jQuery.post(ajax_url, subscribe_bot_data, function (response) {
-            console.log( subscribe_bot_data );
             if (!response.success) {
                 alert(response.data);
                 return false;
