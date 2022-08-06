@@ -32,20 +32,20 @@ defined( 'ABSPATH' ) || exit;
 							<p class="description"><?php esc_html_e( 'Choose the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
 								<form>
-									<label>
+									<div>
 										<h6 class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></h6>
-										<input type="radio" name="wizard-template" value="<?php echo $maintenance_slug; ?>" data-category="maintenance">
-										<div class="template">
-											<img src="<?php echo $maintenance_thumbnail; ?>" alt="<?php echo $maintenance_slug; ?>"/>
-										</div>
-									</label>
-									<label>
+										<input id="<?php echo esc_attr( $maintenance_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $maintenance_slug ); ?>" data-category="maintenance" checked="checked">
+										<label for="<?php echo esc_attr( $maintenance_slug ); ?>" class="template">
+											<img src="<?php echo esc_url( $maintenance_thumbnail ); ?>" alt="<?php echo esc_attr( $maintenance_slug ); ?>"/>
+										</label>
+									</div>
+									<div>
 										<h6 class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></h6>
-										<input type="radio" name="wizard-template" value="<?php echo $coming_soon_slug; ?>" data-category="coming-soon">
-										<div class="template">
-											<img src="<?php echo $coming_soon_thumbnail; ?>" alt="<?php echo $coming_soon_slug; ?>"/>
-										</div>
-									</label>
+										<input id="<?php echo esc_attr( $coming_soon_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $coming_soon_slug ); ?>" data-category="coming-soon">
+										<label for="<?php echo esc_attr( $coming_soon_slug ); ?>" class="template">
+											<img src="<?php echo esc_url( $coming_soon_thumbnail ); ?>" alt="<?php echo esc_attr( $coming_soon_slug ); ?>"/>
+										</label>
+									</div>
 								</form>
 							</div>
 							<div id="wizard-import-button" class="import-button">
@@ -303,12 +303,12 @@ defined( 'ABSPATH' ) || exit;
 										$thumbnail = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/screenshot.png';
 										$content   = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/blocks-export.json';
 										?>
-											<label>
-												<input type="radio" name="dashboard-template" value="<?php echo $name; ?>" data-category="<?php echo esc_attr( $category ); ?>" >
-												<div class="template">
+											<div>
+												<input id="<?php echo esc_attr( $name ); ?>" type="radio" name="dashboard-template" value="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" >
+												<label for="<?php echo esc_attr( $name ); ?>" class="template">
 													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-												</div>
-											</label>
+												</label>
+											</div>
 									<?php } ?>
 								</form>
 							</div>

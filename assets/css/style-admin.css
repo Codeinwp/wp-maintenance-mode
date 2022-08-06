@@ -159,6 +159,7 @@ h2.wpmm-title {
     background-color: #fff;
     width: 240px;
     height: 250px;
+    display: block;
 }
 
 .templates-radio [type=radio]:checked + .template {
@@ -276,6 +277,7 @@ h2.wpmm-title {
     bottom: 15px;
     transform: translateX(-50%);
     left: 50%;
+    white-space: nowrap;
 }
 
 .import-button {
