@@ -18,11 +18,11 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <!DOCTYPE html>
-<html>
+<html <?php language_attributes(); ?> >
 	<head>
 		<meta charset="UTF-8">
 		<title><?php echo esc_html( $title ); ?></title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="author" content="<?php echo esc_attr( $author ); ?>" />
 		<meta name="description" content="<?php echo esc_attr( $description ); ?>" />
 		<meta name="keywords" content="<?php echo esc_attr( $keywords ); ?>" />
@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
 	<body class="<?php echo $body_classes ? esc_attr( $body_classes ) : ''; ?>">
 		<?php do_action( 'wpmm_after_body' ); ?>
 
-		<div class="wrap">
+		<div class="wrap" role="main">
 			<?php if ( ! empty( $heading ) ) { ?>
 				<!-- Heading -->
 				<h1><?php echo esc_html( $heading ); ?></h1>
