@@ -47,9 +47,25 @@ defined( 'ABSPATH' ) || exit;
 			 * Also, we don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
 			 */
 			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
+				$allowed_html = wp_kses_allowed_html( 'post' );
+
+				$allowed_html['form']  = array(
+					'id'     => array(),
+					'class'  => array(),
+					'action' => array(),
+					'method' => array(),
+				);
+				$allowed_html['input'] = array(
+					'type'        => array(),
+					'id'          => array(),
+					'name'        => array(),
+					'value'       => array(),
+					'class'       => array(),
+					'placeholder' => array(),
+				);
 				?>
 				<!-- Text -->
-				<h2><?php echo wp_kses_post( $text ); ?></h2>
+				<h2><?php echo wp_kses( $text, $allowed_html ); ?></h2>
 				<?php
 			}
 			?>
