@@ -658,6 +658,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				'typeName'        => ! empty( $this->plugin_settings['bot']['responses']['01'] ) ? $this->plugin_settings['bot']['responses']['01'] : __( 'Type your name here…', 'wp-maintenance-mode' ),
 				'typeEmail'       => ! empty( $this->plugin_settings['bot']['responses']['03'] ) ? $this->plugin_settings['bot']['responses']['03'] : __( 'Type your email here…', 'wp-maintenance-mode' ),
 				'send'            => __( 'Send', 'wp-maintenance-mode' ),
+				'wpnonce'         => wp_create_nonce( 'wpmts_nonce_subscribe' ),
 			);
 			echo "<script type='text/javascript'>" .
 			'var botVars = ' . wp_json_encode( $bot_vars ) .
