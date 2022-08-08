@@ -18,15 +18,17 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		private function __construct() {
 			if ( ! get_option( 'wpmm_settings' ) ) {
+				update_option( 'wpmm_show_migration', false );
 				update_option( 'wpmm_fresh_install', true );
+				update_option( 'wpmm_new_look', true );
+			}
+
+			if ( get_option( 'wpmm_migration_time' ) && ( time() - intval( get_option( 'wpmm_migration_time' ) ) > WEEK_IN_SECONDS ) ) {
+				update_option( 'wpmm_show_migration', false );
 			}
 
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
-
-			if ( $this->plugin_settings['general']['status'] === 0 ) {
-				update_option( 'wpmm_new_look', true );
-			}
 
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );

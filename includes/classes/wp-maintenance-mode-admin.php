@@ -53,6 +53,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
 			add_action( 'wp_ajax_wpmm_subscribe', array( $this, 'subscribe_newsletter' ) );
 			add_action( 'wp_ajax_wpmm_change_template_category', array( $this, 'change_template_category' ) );
+			add_action( 'wp_ajax_wpmm_toggle_gutenberg', array( $this, 'toggle_gutenberg' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
@@ -107,7 +108,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				wp_enqueue_style( $this->plugin_slug . '-admin-styles', WPMM_CSS_URL . 'style-admin' . WPMM_ASSETS_SUFFIX . '.css', array( 'wp-color-picker' ), WP_Maintenance_Mode::VERSION );
 
 				// wizard stylesheet
-				if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
+				if ( get_option( 'wpmm_fresh_install', false ) ) {
 					wp_enqueue_style( $this->plugin_slug . '-wizard-styles', WPMM_CSS_URL . 'style-wizard' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				}
 			}
@@ -572,7 +573,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$post_arr = array(
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
-				'post_content' => $blocks,
+				'post_content' => ! is_null( $blocks ) ? $blocks : '',
 			);
 
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {
@@ -581,6 +582,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} else {
 				$post_arr['post_title'] = 'Maintenance Page';
 				$page_id                = wp_insert_post( $post_arr );
+			}
+
+			if ( $page_id === 0 || $page_id instanceof WP_Error ) {
+				wp_send_json_error( array( 'error' => 'Could not get the page' ) );
 			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
@@ -649,6 +654,31 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$this->plugin_settings['design']['template_category'] = $_POST['category'];
 			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			wp_send_json_success();
+		}
+
+		public function toggle_gutenberg() {
+			if ( empty( $_POST['source'] ) ) {
+				die( esc_html__( 'The source filed must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $_POST['source'] ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			$current_option = get_option( 'wpmm_new_look', false );
+			update_option( 'wpmm_new_look', ! $current_option );
+
+			if ( ! $current_option && ! get_option( 'wpmm_migration_time' ) ) {
+				update_option( 'wpmm_migration_time', time() );
+			}
 
 			wp_send_json_success();
 		}
@@ -770,7 +800,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						$this->plugin_settings['general']['notice'] === 1
 				) {
 					$notices['is_activated'] = array(
-						'class' => 'error',
+						'class' => 'error is-dismissible',
 						'msg'   => sprintf(
 								/* translators: plugin settings url */
 							__( 'The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', 'wp-maintenance-mode' ),
@@ -785,28 +815,44 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$notices['other'] = $wpmm_notice;
 				}
 			} else {
+				if ( get_option( 'wpmm_show_migration', true ) ) {
+					if ( ! get_option( 'wpmm_new_look', false ) ) {
+						$notices['migration'] = array(
+							'class' => 'notice notice-success',
+							'msg'   => __( 'We upgraded the way maintenance pages are build. Migrate to use Gutenberg for your page!&emsp;<button id="wpmm-migrate" class="button button-primary">Migrate</button>', 'wp-maintenance-mode' ),
+						);
+					} else {
+						$notices['rollback'] = array(
+							'class' => 'notice notice-info is-dismissible',
+							'msg'   => __( 'You migrated to use Gutenberg for building the Maintenance page.&emsp;<button id="wpmm-rollback" class="button button-link button-link-delete">Rollback</button>', 'wp-maintenance-mode' ),
+						);
+					}
+				}
+
 				// delete wpmm_notice
 				delete_option( 'wpmm_notice' );
 			}
 
-			if ( $this->plugin_settings['general']['status'] === 1 && isset( $this->plugin_settings['design']['page_id'] ) ) {
-				$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
+			if ( ! get_option( 'wpmm_fresh_install' ) && get_option( 'wpmm_new_look' ) && $this->plugin_settings['general']['status'] === 1 ) {
+				if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
+					$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
 
-				if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' ) {
-					$notices['maintenance_page_deleted'] = array(
+					if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' ) {
+						$notices['maintenance_page_deleted'] = array(
+							'class' => 'error',
+							'msg'   => $maintenance_page->post_status === 'draft' ?
+								__( 'Action required: your Maintenance page is drafted. Visit settings page to address this issue.', 'wp-maintenance-mode' ) :
+								__( 'Action required: your Maintenance page has been deleted. Visit settings page to address this issue.', 'wp-maintenance-mode' ),
+						);
+					}
+				}
+
+				if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
+					$notices['maintenance_page_not_found'] = array(
 						'class' => 'error',
-						'msg'   => $maintenance_page->post_status === 'draft' ?
-							__( 'Action required: your Maintenance page is drafted. Visit settings page to address this issue.', 'wp-maintenance-mode' ) :
-							__( 'Action required: your Maintenance page has been deleted. Visit settings page to address this issue.', 'wp-maintenance-mode' ),
+						'msg'   => __( 'Action required: you don\'t have a page as Maintenance page. Visit settings page to select one.', 'wp-maintenance-mode' ),
 					);
 				}
-			}
-
-			if ( ! isset( $this->plugin_settings['design']['page_id'] ) || $this->plugin_settings['design']['page_id'] === '-1' ) {
-				$notices['maintenance_page_not_found'] = array(
-					'class' => 'error',
-					'msg'   => __( 'Action required: you don\'t have a page as Maintenance page. Visit settings page to select one.', 'wp-maintenance-mode' ),
-				);
 			}
 
 			// get dismissed notices
@@ -912,7 +958,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return string
 		 */
 		public function add_wizard_classes( $classes ) {
-			if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
+			if ( get_option( 'wpmm_fresh_install', false ) ) {
 				$classes .= 'wpmm-wizard-fullscreen';
 			}
 

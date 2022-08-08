@@ -9,6 +9,40 @@ jQuery(function ($) {
     }
 
     /**
+     * Notice dismissal
+     */
+    $('button.notice-dismiss').on('click', function() {
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_dismiss_notices',
+            notice_key: this.parentElement.dataset.key,
+            _wpnonce: this.parentElement.dataset.nonce
+        }, function (response) {
+            if (!response.success) {
+                alert(response);
+                return false;
+            }
+        })
+    })
+
+    /**
+     * Migration & Rollback
+     */
+    $('#wpmm-migrate, #wpmm-rollback').on('click', function() {
+        $.post(wpmm_vars.ajax_url, {
+            action: 'wpmm_toggle_gutenberg',
+            source: this.parentElement.parentElement.dataset.key,
+            _wpnonce: this.parentElement.parentElement.dataset.nonce,
+        }, function (response) {
+            if (!response.success) {
+                alert(response);
+                return false;
+            }
+
+            window.location.reload();
+        }, 'json');
+    })
+
+    /**
      * TABS
      */
     var hash = window.location.hash;

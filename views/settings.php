@@ -10,14 +10,14 @@ defined( 'ABSPATH' ) || exit;
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
 		<?php
-		if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
+		if ( get_option( 'wpmm_fresh_install', false ) ) {
 			?>
 			<span class="dashicons dashicons-external"></span><?php } ?>
 	</h2>
 
 	<div class="wpmm-wrapper">
 		<?php
-		if ( get_option( 'wpmm_fresh_install', false ) && get_option( 'wpmm_new_look' ) ) {
+		if ( get_option( 'wpmm_fresh_install', false ) ) {
 			$maintenance_slug = 'maintenance-default';
 			$coming_soon_slug = 'coming-soon-default';
 
