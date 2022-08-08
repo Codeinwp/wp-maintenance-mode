@@ -800,7 +800,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						$this->plugin_settings['general']['notice'] === 1
 				) {
 					$notices['is_activated'] = array(
-						'class' => 'error is-dismissible',
+						'class' => 'error',
 						'msg'   => sprintf(
 								/* translators: plugin settings url */
 							__( 'The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', 'wp-maintenance-mode' ),

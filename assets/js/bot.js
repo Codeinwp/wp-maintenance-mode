@@ -131,12 +131,11 @@ function scrollToBottom() {
  * Input checking
  */
 function inputError(msg) {
-    jQuery('<div class="bot-error"><p></p></div>').insertAfter('.bot-container');
     jQuery('.bot-error p').text(msg);
-
-    setTimeout(function() {
-        jQuery('.bot-error p').remove();
-    }, 3000);
+    jQuery('.bot-error')
+            .animate({bottom: 0}, 500)
+            .delay(3000)
+            .animate({bottom: "-70px"}, 500);
 }
 
 function checkInput(option) {
@@ -163,10 +162,10 @@ function checkEmail(option) {
     if (input.length > 7 && result === true) {
 
         // Add new entry to our db
-        var bot_user_email = jQuery('.bot-container input[type=email]').serialize();
-        var subscribe_bot_data = `action=wpmm_add_subscriber&${bot_user_email}&_wpnonce=${subscribe_nonce}`;
+        var bot_subscribe_form = jQuery('.bot_subscribe_form').serialize();
+        var subscribe_bot_data = 'action=wpmm_add_subscriber&' + bot_subscribe_form;
 
-        jQuery.post(ajax_url, subscribe_bot_data, function (response) {
+        jQuery.post(wpmm_vars.ajax_url, subscribe_bot_data, function (response) {
             if (!response.success) {
                 alert(response.data);
                 return false;
@@ -417,6 +416,13 @@ function showStatement(pos) {
                             var inputBubble = jQuery('<p/>', {
                                 "class": "chat-message user"
                             }).appendTo(form);
+
+                            // Create hidden input, append to user bubble
+                            var input = jQuery('<input/>', {
+                                type: 'hidden',
+                                name: '_wpnonce',
+                                value: botVars.wpnonce
+                            }).appendTo(inputBubble);
 
                             // Create email input, append to user bubble
                             var input = jQuery('<input/>', {

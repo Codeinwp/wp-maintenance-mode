@@ -6,7 +6,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.4.5';
+		const VERSION = '2.4.6';
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
@@ -682,6 +682,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				'typeName'        => ! empty( $this->plugin_settings['bot']['responses']['01'] ) ? $this->plugin_settings['bot']['responses']['01'] : __( 'Type your name here…', 'wp-maintenance-mode' ),
 				'typeEmail'       => ! empty( $this->plugin_settings['bot']['responses']['03'] ) ? $this->plugin_settings['bot']['responses']['03'] : __( 'Type your email here…', 'wp-maintenance-mode' ),
 				'send'            => __( 'Send', 'wp-maintenance-mode' ),
+				'wpnonce'         => wp_create_nonce( 'wpmts_nonce_subscribe' ),
 			);
 			echo "<script type='text/javascript'>" .
 			'var botVars = ' . wp_json_encode( $bot_vars ) .
@@ -1020,13 +1021,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			foreach ( apply_filters( 'wpmm_scripts', $scripts ) as $handle => $src ) {
-				if ( $handle === 'bot' ) {
-					?><script type="text/javascript">
-						const subscribe_nonce = "<?php echo wp_create_nonce( 'wpmts_nonce_subscribe' ); ?>";
-						const ajax_url = "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>";
-					</script>
-					<?php
-				}
 				printf( "<script type=\"text/javascript\" src=\"%s\" id=\"%s-js\"></script>\n", esc_url( $src ), esc_attr( $handle ) );
 			}
 		}

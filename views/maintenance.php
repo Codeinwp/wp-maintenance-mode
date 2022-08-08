@@ -27,11 +27,11 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 } else {
 	?>
 <!DOCTYPE html>
-<html>
+<html <?php language_attributes(); ?> >
 	<head>
 		<meta charset="UTF-8">
 		<title><?php echo esc_html( $title ); ?></title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="author" content="<?php echo esc_attr( $author ); ?>" />
 		<meta name="description" content="<?php echo esc_attr( $description ); ?>" />
 		<meta name="keywords" content="<?php echo esc_attr( $keywords ); ?>" />
@@ -44,7 +44,7 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 	<body class="<?php echo $body_classes ? esc_attr( $body_classes ) : ''; ?>">
 		<?php do_action( 'wpmm_after_body' ); ?>
 
-		<div class="wrap">
+		<div class="wrap" role="main">
 			<?php if ( ! empty( $heading ) ) { ?>
 				<!-- Heading -->
 				<h1><?php echo esc_html( $heading ); ?></h1>
@@ -56,9 +56,25 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 			 * Also, we don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
 			 */
 			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
+				$allowed_html = wp_kses_allowed_html( 'post' );
+
+				$allowed_html['form']  = array(
+					'id'     => array(),
+					'class'  => array(),
+					'action' => array(),
+					'method' => array(),
+				);
+				$allowed_html['input'] = array(
+					'type'        => array(),
+					'id'          => array(),
+					'name'        => array(),
+					'value'       => array(),
+					'class'       => array(),
+					'placeholder' => array(),
+				);
 				?>
 				<!-- Text -->
-				<h2><?php echo wp_kses_post( $text ); ?></h2>
+				<h2><?php echo wp_kses( $text, $allowed_html ); ?></h2>
 				<?php
 			}
 			?>
