@@ -17,14 +17,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
-			if ( ! get_option( 'wpmm_settings' ) ) {
-				update_option( 'wpmm_show_migration', false );
-				update_option( 'wpmm_fresh_install', true );
-				update_option( 'wpmm_new_look', true );
+			if ( ! get_option( 'wpmm_settings' ) || get_option( 'wpmm_settings' ) === '' ) {
+				update_option( 'wpmm_show_migration', '0' );
+				update_option( 'wpmm_fresh_install', '1' );
+				update_option( 'wpmm_new_look', '1' );
 			}
 
-			if ( get_option( 'wpmm_migration_time' ) && ( time() - intval( get_option( 'wpmm_migration_time' ) ) > WEEK_IN_SECONDS ) ) {
-				update_option( 'wpmm_show_migration', false );
+			if ( get_option( 'wpmm_migration_time' ) && ( ( time() - intval( get_option( 'wpmm_migration_time' ) ) > WEEK_IN_SECONDS ) ) ) {
+				update_option( 'wpmm_show_migration', '0' );
 			}
 
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
@@ -245,6 +245,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			} else {
 				self::single_activate();
 			}
+
+			update_option( 'wpmm_activated', time() );
 
 			// delete old options
 			delete_option( 'wp-maintenance-mode' );

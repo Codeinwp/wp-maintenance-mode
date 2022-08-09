@@ -816,7 +816,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				}
 			} else {
 				if ( get_option( 'wpmm_show_migration', true ) ) {
-					if ( ! get_option( 'wpmm_new_look', false ) ) {
+					if ( ! get_option( 'wpmm_new_look' ) ) {
 						$notices['migration'] = array(
 							'class' => 'notice notice-success',
 							'msg'   => __( 'We upgraded the way maintenance pages are build. Migrate to use Gutenberg for your page!&emsp;<button id="wpmm-migrate" class="button button-primary">Migrate</button>', 'wp-maintenance-mode' ),
