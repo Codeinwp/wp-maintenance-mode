@@ -428,6 +428,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['gdpr']['policy_page_label']   = sanitize_text_field( $_POST['options']['gdpr']['policy_page_label'] );
 					$_POST['options']['gdpr']['policy_page_link']    = esc_url_raw( $_POST['options']['gdpr']['policy_page_link'] );
 					$_POST['options']['gdpr']['policy_page_target']  = (int) $_POST['options']['gdpr']['policy_page_target'];
+					$_POST['options']['gdpr']['imprint_page_label']   = sanitize_text_field( $_POST['options']['gdpr']['imprint_page_label'] );
+					$_POST['options']['gdpr']['imprint_page_link']    = esc_url_raw( $_POST['options']['gdpr']['imprint_page_link'] );
+					$_POST['options']['gdpr']['imprint_page_target']  = (int) $_POST['options']['gdpr']['imprint_page_target'];
 					$_POST['options']['gdpr']['contact_form_tail']   = wp_kses( $_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html() );
 					$_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses( $_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html() );
 

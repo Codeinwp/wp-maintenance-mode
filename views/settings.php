@@ -875,6 +875,36 @@ defined( 'ABSPATH' ) || exit;
 								</tr>
 								<tr valign="top">
 									<th scope="row">
+										<label for="options[gdpr][imprint_page_label]"><?php esc_html_e( 'Imprint Link name', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['gdpr']['imprint_page_label'] ); ?>" name="options[gdpr][imprint_page_label]" />
+										<p class="description"><?php esc_html_e( 'Label the link that will be shown on frontend footer', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][imprint_page_link]"><?php esc_html_e( 'Imprint page link', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_url( $this->plugin_settings['gdpr']['imprint_page_link'] ); ?>" name="options[gdpr][imprint_page_link]" />
+										<p class="description"><?php esc_html_e( 'REMEMBER: In order to make the imprint page accessible you need to add it in General -> Exclude.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[gdpr][imprint_page_target]"><?php esc_html_e( 'Imprint link target', 'wp-maintenance-mode' ); ?></label>
+									</th>
+									<td>
+										<select name="options[gdpr][imprint_page_target]">
+											<option value="1"<?php selected( $this->plugin_settings['gdpr']['imprint_page_target'], 1 ); ?>><?php esc_html_e( 'New page', 'wp-maintenance-mode' ); ?></option>
+											<option value="0"<?php selected( $this->plugin_settings['gdpr']['imprint_page_target'], 0 ); ?>><?php esc_html_e( 'Same page', 'wp-maintenance-mode' ); ?></option>
+										</select>
+										<p class="description"><?php esc_html_e( 'Choose how the link will open.', 'wp-maintenance-mode' ); ?></p>
+									</td>
+								</tr>
+								<tr valign="top">
+									<th scope="row">
 										<label for="options[gdpr][contact_form_tail]"><?php esc_html_e( 'Contact form \'tail\'', 'wp-maintenance-mode' ); ?></label>
 									</th>
 									<td>

@@ -235,8 +235,18 @@ defined( 'ABSPATH' ) || exit;
 						<a href="<?php echo esc_url( admin_url() ); ?>"><?php esc_html_e( 'Dashboard', 'wp-maintenance-mode' ); ?></a> 
 					<?php } ?>
 
-					<?php if ( $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
+					<?php if ( $this->plugin_settings['gdpr']['status'] === 1 && 
+					           ! empty( $this->plugin_settings['gdpr']['policy_page_link'] ) ) { ?>
 						<a href="<?php echo esc_url( $this->plugin_settings['gdpr']['policy_page_link'] ); ?>" target="<?php echo ! empty( $this->plugin_settings['gdpr']['policy_page_target'] ) && $this->plugin_settings['gdpr']['policy_page_target'] === 1 ? '_blank' : '_self'; ?>"><?php echo esc_html( $this->plugin_settings['gdpr']['policy_page_label'] ); ?></a>
+					<?php } ?>
+					<?php if ( $this->plugin_settings['gdpr']['status'] === 1 &&
+					           ! empty( $this->plugin_settings['gdpr']['policy_page_link'] ) && 
+							   ! empty( $this->plugin_settings['gdpr']['imprint_page_link'] ) ) { ?>
+						 |
+					<?php } ?>
+					<?php if ( $this->plugin_settings['gdpr']['status'] === 1 && 
+							   ! empty( $this->plugin_settings['gdpr']['imprint_page_link'] ) ) { ?>
+						<a href="<?php echo esc_url( $this->plugin_settings['gdpr']['imprint_page_link'] ); ?>" target="<?php echo ! empty( $this->plugin_settings['gdpr']['imprint_page_target'] ) && $this->plugin_settings['gdpr']['imprint_page_target'] === 1 ? '_blank' : '_self'; ?>"><?php echo esc_html( $this->plugin_settings['gdpr']['imprint_page_label'] ); ?></a>
 					<?php } ?>
 				</div>
 			<?php } ?>

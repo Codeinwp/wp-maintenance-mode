@@ -187,6 +187,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'policy_page_label'   => __( 'Privacy Policy', 'wp-maintenance-mode' ),
 					'policy_page_link'    => '',
 					'policy_page_target'  => 0,
+					'imprint_page_label'  => __( 'Imprint', 'wp-maintenance-mode' ),
+					'imprint_page_link'   => '',
+					'imprint_page_target' => 0,
 					'contact_form_tail'   => __( 'This form collects your name and email so that we can reach you back. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', 'wp-maintenance-mode' ),
 					'subscribe_form_tail' => __( 'This form collects your email so that we can add you to our newsletter list. Check out our <a href="#">Privacy Policy</a> page to fully understand how we protect and manage your submitted data.', 'wp-maintenance-mode' ),
 				),
@@ -509,6 +512,30 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			if ( empty( $v2_options['design']['footer_links_color'] ) ) {
 				$v2_options['design']['footer_links_color'] = $default_options['design']['footer_links_color'];
+
+				// update options
+				update_option( 'wpmm_settings', $v2_options );
+			}
+
+			/**
+			 * Update from <= v2.4.7 to 2.4.8
+			 */
+			if ( empty( $v2_options['gdpr']['imprint_page_target'] ) ) {
+				$v2_options['gdpr']['imprint_page_target'] = $default_options['gdpr']['imprint_page_target'];
+
+				// update options
+				update_option( 'wpmm_settings', $v2_options );
+			}
+
+			if ( empty( $v2_options['gdpr']['imprint_page_link'] ) ) {
+				$v2_options['gdpr']['imprint_page_link'] = $default_options['gdpr']['imprint_page_link'];
+
+				// update options
+				update_option( 'wpmm_settings', $v2_options );
+			}
+			
+			if ( empty( $v2_options['gdpr']['imprint_page_label'] ) ) {
+				$v2_options['gdpr']['imprint_page_label'] = $default_options['gdpr']['imprint_page_label'];
 
 				// update options
 				update_option( 'wpmm_settings', $v2_options );
@@ -909,7 +936,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			// "Design > Content > Footer links" color
 			if ( ! empty( $this->plugin_settings['design']['footer_links_color'] ) ) {
-				$css_rules['design.footer_links_color'] = sprintf( '.wrap .footer_links a, .wrap .author_link a { color: %s; }', sanitize_hex_color( $this->plugin_settings['design']['footer_links_color'] ) );
+				$css_rules['design.footer_links_color'] = sprintf( '.wrap .footer_links, .wrap .footer_links a, .wrap .author_link a { color: %s; }', sanitize_hex_color( $this->plugin_settings['design']['footer_links_color'] ) );
 			}
 
 			// "Design > Background" color
