@@ -286,6 +286,12 @@ jQuery(function ($) {
     /**
      * WIZARD
      */
+    const slider = $('.slider-wrap');
+
+    $('h2.wpmm-title span').on('click', function() {
+        window.location.href = wpmm_vars.admin_url;
+    });
+
     if ( $('input[name="wizard-template"]:checked').val() ) {
         $('#wpmm-wizard-wrapper .button-import').removeClass('disabled');
     } else {
@@ -304,13 +310,10 @@ jQuery(function ($) {
         });
     }
 
-    $('h2.wpmm-title span').on('click', function() {
-        window.location.href = wpmm_vars.admin_url;
-    });
-
     $('#wizard-import-button').on('click', '.button-import:not(.disabled)', function() {
-        const templateSlug = $('input[name="wizard-template"]:checked').val();
-        const category = $('input[name="wizard-template"]:checked')[0].dataset.category;
+        const templateSelect = $('input[name="wizard-template"]:checked')
+        const templateSlug = templateSelect.val();
+        const category = templateSelect[0].dataset.category;
 
         const data = {
             _wpnonce: wpmm_vars.wizard_nonce,
@@ -320,22 +323,10 @@ jQuery(function ($) {
         };
 
         import_template( data, function (data) {
-            $('.slider-wrap').addClass('move-right');
-            $('.bullets-wrap .step-1').removeClass('active');
-            $('.bullets-wrap .step-2').addClass('active');
-
+            move_to_step( 'import', 'subscribe' );
             pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
         } );
     });
-
-    $('#view-page-button').on('click', function() {
-        window.location.href = pageEditURL;
-    })
-
-
-    $('#refresh-button').on('click', function() {
-        window.location.reload();
-    })
 
     $('#email-input-wrap input[type="text"]').on( 'keypress', (e) => {
         if (e.key === 'Enter') {
@@ -351,9 +342,13 @@ jQuery(function ($) {
         const email = emailInput.val();
 
         if ( !isEmailValid( email ) ) {
-            $('#email-input-wrap + p').remove();
-            $(`<p class="subscribe-message email-error"><i>${ wpmm_vars.invalid_email_string }</i></p>`).insertAfter('#email-input-wrap');
+            $('#email-input-wrap').append(`<p class="subscribe-message email-error"><i>${ wpmm_vars.invalid_email_string }</i></p>`);
             emailInput.addClass( 'invalid' );
+
+            setTimeout(function() {
+                $('.email-error').remove();
+            }, 1500);
+
             return;
         }
 
@@ -365,14 +360,26 @@ jQuery(function ($) {
             _wpnonce: wpmm_vars.wizard_nonce
         }, function (response) {
             if(!response.success) {
-                console.log(response.data);
+                alert(response.data);
             }
 
-            $('#email-input-wrap + p').remove();
-            $(`<p class="subscribe-message email-succes"><i>${ wpmm_vars.confirmation_string }</i></p>`).insertAfter('#email-input-wrap');
+            move_to_step( 'subscribe', 'finish' );
         });
 
         return false;
+    })
+
+    $('#skip-subscribe').on('click', function() {
+        move_to_step('subscribe', 'finish');
+    })
+
+    $('#view-page-button').on('click', function() {
+        window.location.href = pageEditURL;
+    })
+
+
+    $('#refresh-button').on('click', function() {
+        window.location.reload();
     })
 
     function import_in_progress(slug) {
@@ -384,6 +391,20 @@ jQuery(function ($) {
 
         $('.button-import').attr( 'disabled', 'disabled' );
         $('#wpmm-wizard-wrapper .templates-radio label').css('pointer-events', 'none');
+    }
+
+    function move_to_step( prevStep, nextStep ) {
+        slider.removeClass(`move-to-${prevStep}`);
+        slider.addClass(`move-to-${nextStep}`);
+
+        const prevStepElement = $(`.${prevStep}-step`);
+        const nextStepElement = $(`.${nextStep}-step`);
+
+        prevStepElement.attr('aria-hidden', 'true');
+        prevStepElement.css( 'display', 'none' );
+
+        nextStepElement.removeAttr( 'aria-hidden' );
+        nextStepElement.removeAttr('style');
     }
 
     function import_template( data, callback ) {
@@ -399,7 +420,7 @@ jQuery(function ($) {
         data['action'] = 'wpmm_insert_template';
         $.post(wpmm_vars.ajax_url, data, function(response) {
             if (!response.success) {
-                console.log(response.data);
+                alert(response.data);
                 $('.dashicons-update').remove();
                 $('<p class="error import-error">' + wpmm_vars.error_string + '</p>').insertAfter('#wizard-import-button');
                 return false;
@@ -416,7 +437,7 @@ jQuery(function ($) {
             slug: 'otter-blocks',
         }, function(response) {
             if (!response.success) {
-                console.log(response.data);
+                alert(response.data);
                 $('.dashicons-update').remove();
                 $('<p class="error import-error">' + wpmm_vars.error_string + '</p>').insertAfter('#wizard-import-button');
                 return false;

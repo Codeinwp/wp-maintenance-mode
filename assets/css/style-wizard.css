@@ -44,15 +44,16 @@ h2.wpmm-title {
     position: relative;
 }
 
-h2.wpmm-title .dashicons {
-    width: 25px;
-    height: 25px;
-    font-size: 25px;
+h2.wpmm-title span {
     position: absolute;
     right: 75px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+}
+
+h2.wpmm-title span img {
+    width: 25px;
 }
 
 .wpmm-wizard-fullscreen #wpcontent {
@@ -64,41 +65,42 @@ h2.wpmm-title .dashicons {
     background-color: #f4f4f4;
     overflow: hidden;
     color: #1b1b1b;
+    width: 100%;
 }
 
 #wpmm-wizard-wrapper .slider-wrap {
-    width: 200%;
+    width: 300%;
     display: flex;
     transition: 0.4s ease-in-out;
     height: 100%;
 }
 
-.move-right {
-    transform: translateX(-50%);
+.move-to-subscribe {
+    transform: translateX( calc( -100% / 3 ) );
+}
+
+.move-to-finish {
+    transform: translateX( calc( -100% / 3 * 2 ) );
 }
 
 #wpmm-wizard-wrapper .step-wrap {
-    width: 50%;
-}
-
-#wpmm-wizard-wrapper .step {
-    padding: 100px 130px;
-    height: 100%;
-}
-#wpmm-wizard-wrapper .second-step {
+    width: calc( 100% / 3 );
     display: flex;
-    align-items: center;
-    flex-direction: column;
 }
 
-#wpmm-wizard-wrapper .header {
+.step.import-step {
+    margin-left: 130px;
+    margin-top: 100px;
+}
+
+.import-step .header {
     font-size: 24px;
     line-height: 28px;
     margin-top: 0;
     margin-bottom: 10px;
 }
 
-#wpmm-wizard-wrapper .description {
+.import-step .description {
     line-height: 30px;
     font-size: 18px;
     font-weight: 400;
@@ -121,23 +123,23 @@ h2.wpmm-title .dashicons {
     color: #7a7979;
 }
 
-.upper-half {
+.finish-step, .subscribe-step {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.step-2-header {
+.finish-step h4 {
     font-size: 24px;
     max-width: 350px;
     line-height: 28px;
 }
 
-.subscribe-checkbox {
-    margin-top: 20px;
-}
-
-.second-step .buttons-wrap {
+.finish-step .buttons-wrap {
     margin-top: 30px;
     display: flex;
     column-gap: 15px;
@@ -148,11 +150,7 @@ h2.wpmm-title .dashicons {
     border-color: #555D66;
 }
 
-.second-step {
-    text-align: center;
-}
-
-.second-step .upper-half p {
+.finish-step p {
     font-size: 18px;
     max-width: 440px;
     line-height: 31px;
@@ -167,38 +165,37 @@ h2.wpmm-title .dashicons {
     font-weight: 700;
 }
 
-.subscribe-news {
-    width: 100vw;
-    flex-grow: 1;
-    margin-top: 50px;
-    background-color: rgba(0, 0, 0, 0.03);
-    text-align: left;
+.subscribe-step {
+    max-width: 365px;
 }
 
-.subscribe-news-content {
-    max-width: 385px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+.subscribe-step .skip-link {
+    margin-top: 15px;
+    color: #717A84 !important;
+    font-style: italic;
+    padding: 0 10px;
 }
 
-.subscribe-news-content h6 {
-    font-size: 16px;
-    margin: 0 0 5px 0;
+.subscribe-step h4 {
+    font-size: 24px;
 }
 
-.subscribe-news-content p {
-    color: #717A84;
+.subscribe-step p {
+    color: #272626;
+    font-size: 18px;
 }
 
 #email-input-wrap {
+    position: relative;
     display: flex;
-    column-gap: 3px;
+    flex-direction: column;
+    row-gap: 9px;
+    width: 100%;
 }
 
 #email-input-wrap input[type=text] {
     color: #757575;
-    flex-grow: 1;
+    height: 43px;
 }
 
 input.invalid {
@@ -210,6 +207,12 @@ input.invalid:focus {
     box-shadow: 0 0 1px red;
 }
 
-.subscribe-message {
-    margin-top: 5px;
+#email-input-wrap .subscribe-message {
+    font-size: inherit;
+    position: absolute;
+    right: -10px;
+    top: 0;
+    transform: translate(100%, -15%);
+    color: #717A84;
 }
+

@@ -17,6 +17,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			update_option( 'wpmm_fresh_install', '1' ); // todo: remove after developing the wizard
+
 			if ( ! get_option( 'wpmm_settings' ) || get_option( 'wpmm_settings' ) === '' ) {
 				update_option( 'wpmm_show_migration', '0' );
 				update_option( 'wpmm_fresh_install', '1' );

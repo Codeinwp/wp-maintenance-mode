@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
 			?>
-			<span class="dashicons dashicons-external"></span><?php } ?>
+			<span id="wizard-exit"><img src="<?php echo esc_attr( WPMM_IMAGES_URL . 'external.svg' ); ?>" alt="exit"></span><?php } ?>
 	</h2>
 
 	<div class="wpmm-wrapper">
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 			<div id="wpmm-wizard-wrapper">
 				<div class="slider-wrap">
 					<div class="step-wrap">
-						<div class="step first-step">
+						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Select the type of page you want.', 'wp-maintenance-mode' ); ?></h4>
 							<p class="description"><?php esc_html_e( 'Choose the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
@@ -55,25 +55,25 @@ defined( 'ABSPATH' ) || exit;
 						</div>
 					</div>
 					<div class="step-wrap">
-						<div class="step second-step">
-							<div class="upper-half">
-								<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
-								<h4 class="step-2-header"><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
-								<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
-								<div class="buttons-wrap">
-									<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
-									<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
-								</div>
+						<div class="step subscribe-step" aria-hidden="true" style="display: none">
+							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'subscribe.svg'; ?>" alt="subscribe"/>
+							<h4><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h4>
+							<p><?php esc_html_e( 'Keep up-to-date on news, features and new templates.', 'wp-maintenance-mode' ); ?></p>
+							<div id="email-input-wrap">
+								<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
+								<input type="button" class="button button-primary button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
 							</div>
-							<div class="subscribe-news">
-								<div class="subscribe-news-content">
-									<h6><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h6>
-									<p><?php esc_html_e( 'Keep me up to date on news, features and new templates', 'wp-maintenance-mode' ); ?></p>
-									<div id="email-input-wrap">
-										<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
-										<input type="button" class="button button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
-									</div>
-								</div>
+							<input id="skip-subscribe" type="button" class="button button-link skip-link" value="<?php esc_attr_e( 'I\'ll skip for now, thanks!', 'wp-maintenance-mode' ); ?>" />
+						</div>
+					</div>
+					<div class="step-wrap">
+						<div class="step finish-step" aria-hidden="true" style="display: none">
+							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
+							<h4><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
+							<div class="buttons-wrap">
+								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+								<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
 							</div>
 						</div>
 					</div>
