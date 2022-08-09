@@ -143,7 +143,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'error_string'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
 						'loading_string'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
 						'invalid_email_string'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
-						'confirmation_string'     => __( 'Thank you for subscribing! You have received an email. Please click on the confirmation link.', 'wp-maintenance-mode' ),
 						'admin_url'               => get_admin_url(),
 						'otter_activation_link'   => add_query_arg(
 							array(
