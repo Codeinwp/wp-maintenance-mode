@@ -110,6 +110,7 @@ h2.wpmm-title span img {
 
 .templates-radio form {
     margin-top: 65px;
+    width: 100%;
 }
 
 .templates-radio [type=radio] + .template {

@@ -257,7 +257,7 @@ h2.wpmm-title {
     display: flex;
     flex-wrap: wrap;
     margin-top: 30px;
-    width: 100%;
+    max-width: 800px;
     gap: 35px;
 }
 

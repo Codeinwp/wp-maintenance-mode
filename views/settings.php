@@ -18,8 +18,8 @@ defined( 'ABSPATH' ) || exit;
 	<div class="wpmm-wrapper">
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
-			$maintenance_slug = 'maintenance-default';
-			$coming_soon_slug = 'coming-soon-default';
+			$maintenance_slug = 'maintenance-modern';
+			$coming_soon_slug = 'coming-soon-modern';
 
 			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
 			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
@@ -291,25 +291,34 @@ defined( 'ABSPATH' ) || exit;
 										update_option( 'wpmm_settings', $this->plugin_settings );
 									}
 
-									if ( $this->plugin_settings['design']['template_category'] === 'all' ) {
-										$templates = list_files( WPMM_TEMPLATES_PATH, 2 );
-									} else {
-										$templates = list_files( WPMM_TEMPLATES_PATH . $this->plugin_settings['design']['template_category'] . '/', 1 );
+									$selected_category = $this->plugin_settings['design']['template_category'];
+									$categories        = array();
+
+									if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
+										$categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
 									}
 
-									foreach ( $templates as $template ) {
-										$name      = basename( $template );
-										$category  = basename( dirname( $template ) );
-										$thumbnail = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/screenshot.png';
-										$content   = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/blocks-export.json';
-										?>
+									if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
+										$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
+									}
+
+									foreach ( $categories as $category => $label ) {
+										$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
+										foreach ( $templates as $template ) {
+											$name      = basename( $template );
+											$thumbnail = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/screenshot.png';
+											$content   = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/blocks-export.json';
+											?>
 											<div>
 												<input id="<?php echo esc_attr( $name ); ?>" type="radio" name="dashboard-template" value="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" >
 												<label for="<?php echo esc_attr( $name ); ?>" class="template">
 													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
 												</label>
 											</div>
-									<?php } ?>
+											<?php
+										}
+									}
+									?>
 								</form>
 							</div>
 							<div id="dashboard-import-button" class="import-button">
