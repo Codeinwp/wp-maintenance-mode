@@ -26,7 +26,8 @@
 	if ( isset( $settings['bot']['status'] ) && $settings['bot']['status'] === 1 ) {
 		?>
 		<div class="bot-container">
-			<div class="bot-chat-wrapper">
+			<div class="bot-avatar"><div class="avatar-notice"></div></div>
+			<div class="bot-chat-wrapper" style="display: none">
 				<div class="chat-container cf"></div>
 				<div class="input"></div>
 				<div class="choices cf"></div>

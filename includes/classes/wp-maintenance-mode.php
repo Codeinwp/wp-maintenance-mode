@@ -970,6 +970,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// "Manage Bot > Upload avatar" url
 			if ( ! empty( $this->plugin_settings['bot']['avatar'] ) ) {
 				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( $this->plugin_settings['bot']['avatar'] ) );
+			} else {
+				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( WPMM_IMAGES_URL . 'chatbot.png' ) );
 			}
 
 			// "Design > Other > Custom CSS"

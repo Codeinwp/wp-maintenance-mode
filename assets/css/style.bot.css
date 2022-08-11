@@ -31,14 +31,21 @@
 .bot-container {
     position: absolute;
     bottom: 30px;
-    left: 30px;
+    right: 30px;
+}
+
+.avatar-notice {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 8px solid #df1c44;
+  border-radius: 100%;
 }
 
  .background .bot-chat-wrapper {
    border-radius: 10px;
    background-color: rgb(255, 255, 255);
    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.2);
-   max-width: 720px;
    padding-left: 110px;
  }
 
@@ -48,7 +55,6 @@
    align-items: center;
    margin-bottom: 16px;
    width: 100%;
-   padding-left: 80px;
  }
  .chat-message-wrapper .chat-message {
    max-width: 100%;
@@ -66,16 +72,6 @@
  .message-details {
    position: relative;
  }
-
- /* Show bot-avatar on last message. */
- .chat-message-wrapper .bot-avatar {
-   display: none;
-   top: -18px;
- }
- .chat-message-wrapper:last-child .bot-avatar {
-   display: block;
- }
- /* ------------------------------ */
 
  .chat-message-wrapper .message-date {
    font-size: 12px;
@@ -95,14 +91,20 @@ CHAT BOT STYLING
 // CHAT BOT & TYPING WRAPPER
 */
 .bot-chat-wrapper {
-  max-width: 700px;
-  width: 100%;
-  height: 460px;
-  padding: 45px 40px 45px 75px;
+  height: 350px;
+  padding: 10px 40px;
   overflow-y: scroll;
   overflow-x: hidden;
-  display: grid;
-  align-content: end;
+
+  width: 400px;
+  font-size: 16px;
+  position: fixed;
+  right: 30px;
+  bottom: 130px;
+  background-color: #fff;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0 12px 24px 0;
+  border-radius: 15px;
 }
 
 .typing-wrapper {
@@ -117,16 +119,19 @@ CHAT BOT STYLING
   width: 60px;
   height: 60px;
 
-  position: absolute;
-  left: -70px;
-  top: -10px;
+  position: fixed;
+  bottom: 57px;
+  right: 30px;
 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 
   border-radius: 50%;
-  margin-right: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 12px 24px 0;
+  background-color: #fff;
+
+  z-index: 1;
 }
 
 .typing-wrapper .bot-name {
@@ -229,6 +234,7 @@ CHAT BOT STYLING
   border-bottom: 2px solid #6ecff9;
   border-radius: 0;
   padding: 10px;
+  white-space: nowrap;
 }
 
 .input { animation: fadeInGrownIn 0.5s ease; }
@@ -238,7 +244,6 @@ CHAT BOT STYLING
   color: #000;
   background: none;
   box-shadow: none;
-  margin-right: 60px;
   font-size: 14px;
 }
 

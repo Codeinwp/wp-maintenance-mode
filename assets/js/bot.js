@@ -15,18 +15,6 @@ var conversationStarted = false;
  ---------------
  */
 
-function getCurrentTime() {
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-}
-
 /**
  * Cast string
  *
@@ -108,11 +96,11 @@ function renderStatement(statement) {
     // Strip html tags from statement
     statement = strip_tags(statement);
 
-    jQuery('.chat-container').append('<div class="chat-message-wrapper"><div class="absolute-wrapper"><div class="message-details"><div class="bot-avatar"></div><span class="message-date">' + getCurrentTime() + '</span></div></div><p class="chat-message">' + statement + '</p></div>');
+    jQuery('.chat-container').append('<div class="chat-message-wrapper"><p class="chat-message">' + statement + '</p></div>');
 }
 
 function showTyping() {
-    jQuery('.chat-container').append('<div class="typing-wrapper"><div class="bot-avatar"></div><span class="bot-name">' + botName + '</span><p class="chat-message typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></p></div>');
+    jQuery('.chat-container').append('<div class="typing-wrapper"><p class="chat-message typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></p></div>');
 }
 
 function hideTyping() {
@@ -255,16 +243,9 @@ function showStatement(pos) {
         showTyping();
         scrollToBottom();
 
-        // Create random delay
-        // If statement is short, delay 1.8 seconds
-        // Else, random delay based on statement length
-        if (item.length <= 50) {
-            var delay = 1800;
-        } else {
-            var delay = (item.length / 3) * 30 * (Math.floor(Math.random() * 5) + 1.2);
-        }
+        var delay = 900;
 
-        if (DEBUG) {
+        if (DEBUG || ! jQuery('.bot-chat-wrapper')[0] ) {
             delay = 0;
         }
 
@@ -493,5 +474,17 @@ function showResponse(option) {
  Initialize Conversation
  -------------------
  */
+
+jQuery('.bot-avatar').on('click', function () {
+    const chatWrap = jQuery('.bot-chat-wrapper')[0];
+
+    if ( jQuery('.bot-chat-wrapper')[0].style.display !== 'none' ){
+        jQuery( '.avatar-notice' ).show();
+        jQuery('.bot-chat-wrapper').hide();
+    } else {
+        jQuery('.bot-chat-wrapper').show();
+        jQuery( '.avatar-notice' ).hide();
+    }
+})
 
 startConversation('homepage', 1);
