@@ -68,6 +68,17 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wp_ajax_nopriv_wpmm_send_contact', array( $this, 'send_contact' ) );
 				add_action( 'wp_ajax_wpmm_send_contact', array( $this, 'send_contact' ) );
 
+				add_filter(
+					'pre_option_page_on_front',
+					function ( $value ) {
+						if ( ! is_user_logged_in() && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+							return $this->plugin_settings['design']['page_id'];
+						}
+
+						return $value;
+					}
+				);
+
 				// Redirect
 				add_action( 'init', array( $this, 'redirect' ), 9 );
 

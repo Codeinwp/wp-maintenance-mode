@@ -18,11 +18,8 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
-	$current_url     = home_url( add_query_arg() );
-	$maintenance_url = get_permalink( $this->plugin_settings['design']['page_id'] );
-
-	if ( $maintenance_url !== $current_url . '/' && $maintenance_url !== $current_url ) {
-		wp_redirect( $maintenance_url );
+	if ( ! is_front_page() ) {
+		wp_redirect( home_url() );
 	}
 } else {
 	?>
@@ -52,10 +49,9 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 
 			<?php
 			/**
-			 * When the bot feature is enabled, the text is not displayed anymore.
-			 * Also, we don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
+			 * We don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
 			 */
-			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
+			if ( ! empty( $text ) ) {
 				$allowed_html = wp_kses_allowed_html( 'post' );
 
 				$allowed_html['form']  = array(
@@ -105,13 +101,7 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 			<?php } ?>
 
 			<?php
-			/**
-			 * When the bot feature is enabled, the subscribe form is not displayed anymore.
-			 */
-			if (
-				( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) &&
-				( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 0 )
-			) {
+			if ( ( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ) {
 				?>
 				<!-- Subscribe -->
 				<?php if ( ! empty( $this->plugin_settings['modules']['subscribe_text'] ) ) { ?>

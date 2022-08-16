@@ -255,6 +255,7 @@ defined( 'ABSPATH' ) || exit;
 													'id'   => 'design_page_id',
 													'option_none_value' => '',
 													'show_option_no_change' => 'Select page',
+													'post_status' => array( 'publish', 'private' ),
 												)
 											);
 
