@@ -35,7 +35,13 @@
 		</div>
 		<?php
 	}
+	?>
 
+	<script type='text/javascript'>
+		var wpmm_vars = {"ajax_url": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
+	</script>
+
+	<?php
 	wp_footer();
 	do_action( 'wpmm_footer' );
 	?>
