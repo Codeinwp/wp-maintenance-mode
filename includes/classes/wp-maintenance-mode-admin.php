@@ -571,7 +571,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$post_arr = array(
 				'post_type'    => 'page',
-				'post_status'  => 'publish',
+				'post_status'  => 'private',
 				'post_content' => ! is_null( $blocks ) ? $blocks : '',
 			);
 
@@ -836,7 +836,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
 					$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
 
-					if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' ) {
+					if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' && $maintenance_page->post_status !== 'private' ) {
 						$notices['maintenance_page_deleted'] = array(
 							'class' => 'error',
 							'msg'   => $maintenance_page->post_status === 'draft' ?
