@@ -475,10 +475,17 @@ function showResponse(option) {
  -------------------
  */
 
+let isOpen = false;
+
 jQuery('.bot-avatar').on('click', function () {
     const chatWrap = jQuery('.bot-chat-wrapper')[0];
 
-    if ( jQuery('.bot-chat-wrapper')[0].style.display !== 'none' ){
+    if ( ! isOpen ) {
+        isOpen = true;
+        startConversation('homepage', 1);
+    }
+
+    if ( chatWrap.style.display !== 'none' ){
         jQuery( '.avatar-notice' ).show();
         jQuery('.bot-chat-wrapper').hide();
     } else {
@@ -486,5 +493,3 @@ jQuery('.bot-avatar').on('click', function () {
         jQuery( '.avatar-notice' ).hide();
     }
 })
-
-startConversation('homepage', 1);
