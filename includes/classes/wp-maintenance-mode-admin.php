@@ -808,6 +808,28 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					);
 				}
 
+				if ( ! get_option( 'wpmm_fresh_install' ) && get_option( 'wpmm_new_look' ) && $this->plugin_settings['general']['status'] === 1 ) {
+					if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
+						$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
+
+						if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' && $maintenance_page->post_status !== 'private' ) {
+							$notices['maintenance_page_deleted'] = array(
+								'class' => 'error',
+								'msg'   => $maintenance_page->post_status === 'draft' ?
+									sprintf( __( '<strong>Action required</strong>: your Maintenance page is drafted. Visit the page to <a href="%s">publish</a> it.', 'wp-maintenance-mode' ), get_edit_post_link( $maintenance_page ) ) :
+									sprintf( __( '<strong>Action required</strong>: your Maintenance page has been deleted. Visit <a href="%s">settings page</a> to address this issue.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
+							);
+						}
+					}
+
+					if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
+						$notices['maintenance_page_not_found'] = array(
+							'class' => 'error',
+							'msg'   => __( 'Action required: you don\'t have a page as Maintenance page. Visit settings page to select one.', 'wp-maintenance-mode' ),
+						);
+					}
+				}
+
 				// show notice if plugin has a notice saved
 				$wpmm_notice = get_option( 'wpmm_notice' );
 				if ( ! empty( $wpmm_notice ) && is_array( $wpmm_notice ) ) {
@@ -830,28 +852,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 				// delete wpmm_notice
 				delete_option( 'wpmm_notice' );
-			}
-
-			if ( ! get_option( 'wpmm_fresh_install' ) && get_option( 'wpmm_new_look' ) && $this->plugin_settings['general']['status'] === 1 ) {
-				if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
-					$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
-
-					if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' && $maintenance_page->post_status !== 'private' ) {
-						$notices['maintenance_page_deleted'] = array(
-							'class' => 'error',
-							'msg'   => $maintenance_page->post_status === 'draft' ?
-								sprintf( __( '<strong>Action required</strong>: your Maintenance page is drafted. Visit the page to <a href="%s">publish</a> it.', 'wp-maintenance-mode' ), get_edit_post_link( $maintenance_page ) ) :
-								sprintf( __( '<strong>Action required</strong>: your Maintenance page has been deleted. Visit <a href="%s">settings page</a> to address this issue.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
-						);
-					}
-				}
-
-				if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
-					$notices['maintenance_page_not_found'] = array(
-						'class' => 'error',
-						'msg'   => __( 'Action required: you don\'t have a page as Maintenance page. Visit settings page to select one.', 'wp-maintenance-mode' ),
-					);
-				}
 			}
 
 			// get dismissed notices

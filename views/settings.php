@@ -240,7 +240,11 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post"></form>
-						<?php if ( get_option( 'wpmm_new_look' ) ) { ?>
+						<?php
+						if ( get_option( 'wpmm_new_look' ) ) {
+							if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) {
+								?>
+								<p class="notice notice-error"><?php esc_html_e( 'Your Maintenance Page has been deleted. Please select another one from the dropdown below or import a template and a new one will be created.', 'wp-maintenance-mode' ); ?></p><?php } ?>
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
