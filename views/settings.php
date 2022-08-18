@@ -109,13 +109,14 @@ defined( 'ABSPATH' ) || exit;
 
 					<?php esc_html_e( 'Manage Bot', 'wp-maintenance-mode' ); ?>
 				</a>
+				<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 				<a class="nav-tab" href="#gdpr">
 					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 					</svg>
 
 					<?php esc_html_e( 'GDPR', 'wp-maintenance-mode' ); ?>
-				</a>
+				</a> <?php } ?>
 			</div>
 
 			<div class="tabs-content">
@@ -215,6 +216,7 @@ defined( 'ABSPATH' ) || exit;
 										<p class="description"><?php esc_html_e( 'Do you want to see notices when maintenance mode is activated?', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
+								<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 								<tr valign="top">
 									<th scope="row">
 										<label for="options[general][admin_link]"><?php esc_html_e( 'Dashboard link', 'wp-maintenance-mode' ); ?></label>
@@ -226,7 +228,7 @@ defined( 'ABSPATH' ) || exit;
 										</select>
 										<p class="description"><?php esc_html_e( 'Do you want to add a link to the dashboard on your maintenance mode page?', 'wp-maintenance-mode' ); ?></p>
 									</td>
-								</tr>
+								</tr> <?php } ?>
 							</tbody>
 						</table>
 
@@ -238,7 +240,6 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post"></form>
-						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
 						<?php if ( get_option( 'wpmm_new_look' ) ) { ?>
 							<table class="form-table">
 								<tbody>
@@ -1014,6 +1015,7 @@ defined( 'ABSPATH' ) || exit;
 					</form>
 				</div>
 
+				<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 				<div id="tab-gdpr" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
@@ -1089,7 +1091,7 @@ defined( 'ABSPATH' ) || exit;
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit" />
 					</form>
-				</div>
+				</div> <?php } ?>
 			</div>
 		</div>
 

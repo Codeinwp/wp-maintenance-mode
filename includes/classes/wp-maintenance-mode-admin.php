@@ -840,8 +840,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						$notices['maintenance_page_deleted'] = array(
 							'class' => 'error',
 							'msg'   => $maintenance_page->post_status === 'draft' ?
-								__( 'Action required: your Maintenance page is drafted. Visit settings page to address this issue.', 'wp-maintenance-mode' ) :
-								__( 'Action required: your Maintenance page has been deleted. Visit settings page to address this issue.', 'wp-maintenance-mode' ),
+								sprintf( __( '<strong>Action required</strong>: your Maintenance page is drafted. Visit the page to <a href="%s">publish</a> it.', 'wp-maintenance-mode' ), get_edit_post_link( $maintenance_page ) ) :
+								sprintf( __( '<strong>Action required</strong>: your Maintenance page has been deleted. Visit <a href="%s">settings page</a> to address this issue.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
 						);
 					}
 				}

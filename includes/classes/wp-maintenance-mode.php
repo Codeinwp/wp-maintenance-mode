@@ -68,7 +68,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wp_ajax_nopriv_wpmm_send_contact', array( $this, 'send_contact' ) );
 				add_action( 'wp_ajax_wpmm_send_contact', array( $this, 'send_contact' ) );
 
-				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) && get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
 					wp_publish_post( $this->plugin_settings['design']['page_id'] );
 				}
 
@@ -99,12 +99,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
 			} else {
-				wp_update_post(
-					array(
-						'ID'          => $this->plugin_settings['design']['page_id'],
-						'post_status' => 'private',
-					)
-				);
+				if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
+					wp_update_post(
+						array(
+							'ID'          => $this->plugin_settings['design']['page_id'],
+							'post_status' => 'private',
+						)
+					);
+				}
 			}
 		}
 
