@@ -231,10 +231,10 @@ jQuery(function ($) {
      * TEMPLATES
      */
     let pageEditURL = '#';
-    $('#dashboard-import-button').on('click', '.button-import', function () {
+    $('.template-image-wrap').on('click', '.button-import', function () {
         const nonce = $('#tab-design #_wpnonce').val();
-        const templateSlug = $('input[name="dashboard-template"]:checked').val();
-        const category = $('input[name="dashboard-template"]:checked')[0].dataset.category;
+        const templateSlug = this.dataset.slug;
+        const category = this.dataset.category;
 
         const data = {
             _wpnonce: nonce,
@@ -243,11 +243,39 @@ jQuery(function ($) {
             category: category
         }
 
+        $(this).html( '<span class="dashicons dashicons-update"></span>' + wpmm_vars.importing_text + '...' );
+        $('.button-import').addClass('disabled');
+        $('.button-import').css('pointer-events', 'none');
+        $('.template-image-wrap').removeClass( 'can-import' );
+        this.parentElement.classList.add( 'importing' );
+
         import_template( data, function( data ) {
             pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
-            window.location.href = pageEditURL;
+
+            $('.importing .button-import').html( wpmm_vars.import_done );
+            openModal( wpmm_vars.modal_texts );
         } );
     });
+
+    function openModal( content ) {
+        const modal_overlay = $(
+            `<div class="modal-overlay">` +
+                `<div class="modal-frame">` +
+                    `<div class="modal-content">` +
+                        `<h4 class="modal-header">${content.title}</h4>` +
+                        `<p class="modal-text">${content.description}</p>` +
+                        `<div class="buttons-wrap">` +
+                            `<a href="${pageEditURL}" class="button button-primary button-big">${content.button_draft}</a>` +
+                            `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${content.button_settings}</a>` +
+                        `</div>` +
+                    `</div>` +
+                `</div>` +
+            `</div>`
+        );
+
+        $('body').addClass('has-modal');
+        $(modal_overlay).appendTo('body');
+    }
 
     $('select[name="options[design][template_category]"]').on('change', function () {
         const nonce = $('#tab-design #_wpnonce').val();
@@ -322,6 +350,7 @@ jQuery(function ($) {
             category: category
         };
 
+        import_in_progress( data.template_slug );
         import_template( data, function (data) {
             move_to_step( 'import', 'subscribe' );
             pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
@@ -408,7 +437,6 @@ jQuery(function ($) {
     }
 
     function import_template( data, callback ) {
-        import_in_progress( data.template_slug );
         if ( !wpmm_vars.is_otter_installed ) {
             install_and_activate_otter( () => add_to_page(data, callback) );
         } else if ( !wpmm_vars.is_otter_activated ) {

@@ -142,6 +142,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'is_otter_active'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
 						'error_string'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
 						'loading_string'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importing_text'          => __( 'Importing', 'wp-maintenance-mode' ),
+						'import_done'             => __( 'Done', 'wp-maintenance-mode' ),
 						'invalid_email_string'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
 						'admin_url'               => get_admin_url(),
 						'otter_activation_link'   => add_query_arg(
@@ -153,6 +155,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 								'_wpnonce'      => wp_create_nonce( 'activate-plugin_otter-blocks/otter-blocks.php' ),
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
+						),
+						'modal_texts'             => array(
+							'title'           => __( 'The template has been imported!', 'wp-maintenance-mode' ),
+							'description'     => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
+							'button_draft'    => __( 'Go to draft', 'wp-maintenance-mode' ),
+							'button_settings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
 						),
 						'image_uploader_defaults' => array(
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
@@ -825,7 +833,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
 						$notices['maintenance_page_not_found'] = array(
 							'class' => 'error',
-							'msg'   => __( 'Action required: you don\'t have a page as Maintenance page. Visit settings page to select one.', 'wp-maintenance-mode' ),
+							'msg'   => sprintf( __( '<strong>Action required</strong>: you don\'t have a page as Maintenance page. Visit <a href="%s">settings page</a> to select one.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
 						);
 					}
 				}
@@ -1010,24 +1018,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} elseif ( ! $this->get_is_policy_available() ) { // No privacy feature available
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );
 			}
-		}
-
-		/**
-		 * Returns the text for the import button based on the status of Otter plugin
-		 *
-		 * @return string
-		 */
-		public function get_import_button_text() {
-			$text = __( 'Get Otter & Import', 'wp-maintenance-mode' );
-			if ( file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ) ) {
-				$text = __( 'Activate Otter & Import', 'wp-maintenance-mode' );
-			}
-
-			if ( is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
-				$text = __( 'Import', 'wp-maintenance-mode' );
-			}
-
-			return $text;
 		}
 	}
 }

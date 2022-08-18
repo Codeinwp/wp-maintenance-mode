@@ -242,9 +242,9 @@ defined( 'ABSPATH' ) || exit;
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post"></form>
 						<?php
 						if ( get_option( 'wpmm_new_look' ) ) {
-							if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) {
+							if ( ! get_post( $this->plugin_settings['design']['page_id'] ) || get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) {
 								?>
-								<p class="notice notice-error"><?php esc_html_e( 'Your Maintenance Page has been deleted. Please select another one from the dropdown below or import a template and a new one will be created.', 'wp-maintenance-mode' ); ?></p><?php } ?>
+								<p class="notice notice-error"><?php esc_html_e( 'You don\'t have a maintenance page or your Maintenance Page has been deleted. Please select another one from the dropdown below or import a template and a new one will be created.', 'wp-maintenance-mode' ); ?></p><?php } ?>
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
@@ -289,7 +289,8 @@ defined( 'ABSPATH' ) || exit;
 									</tr>
 								</tbody>
 							</table>
-							<div class="templates-radio">
+							<p class="import-text"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+							<div class="templates">
 								<form>
 									<?php
 									if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
@@ -312,14 +313,19 @@ defined( 'ABSPATH' ) || exit;
 										$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
 										foreach ( $templates as $template ) {
 											$name      = basename( $template );
-											$thumbnail = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/screenshot.png';
-											$content   = WPMM_TEMPLATES_URL . '/' . $category . '/' . $name . '/blocks-export.json';
+											$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';
+											$content   = WPMM_TEMPLATES_PATH . $category . '/' . $name . '/blocks-export.json';
+
+											$template_label = wp_json_file_decode( $content )->label;
 											?>
-											<div>
-												<input id="<?php echo esc_attr( $name ); ?>" type="radio" name="dashboard-template" value="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" >
-												<label for="<?php echo esc_attr( $name ); ?>" class="template">
+											<div class="template-wrap">
+												<div class="template-image-wrap can-import">
 													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-												</label>
+<!--                                                    <div id="dashboard-import-button" class="import-button">-->
+													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
+<!--                                                    </div>-->
+												</div>
+												<p class="description"><?php echo $template_label; ?></p>
 											</div>
 											<?php
 										}
@@ -327,10 +333,6 @@ defined( 'ABSPATH' ) || exit;
 									?>
 								</form>
 							</div>
-							<div id="dashboard-import-button" class="import-button">
-								<input type="button" class="button button-primary button-import disabled" data-tab="design" value="<?php echo $this->get_import_button_text(); ?>" />
-							</div>
-							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 						<?php } else { /* legacy code */ ?>
 						<table class="form-table">
 							<tbody>

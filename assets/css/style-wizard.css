@@ -109,8 +109,67 @@ h2.wpmm-title span img {
 }
 
 .templates-radio form {
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 65px;
+    max-width: 800px;
     width: 100%;
+    gap: 35px;
+}
+
+.templates-radio [type=radio], .bullets-wrap [type=radio] {
+    position: absolute;
+    opacity: 0;
+}
+
+.templates-radio [type=radio] + .template {
+    cursor: pointer;
+    background-color: #fff;
+    width: 240px;
+    height: 250px;
+    display: block;
+}
+
+.templates-radio [type=radio]:checked + .template {
+    outline: 2px solid #0065A6;
+}
+
+.templates-radio .template {
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.templates-radio .template img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.templates-radio .template p {
+    position: absolute;
+    bottom: 15px;
+    transform: translateX(-50%);
+    left: 50%;
+    white-space: nowrap;
+}
+
+.import-button {
+    margin-top: 45px;
+}
+
+.dashicons-update {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: abs-spin 2s linear infinite;
+}
+
+.templates-radio .template.loading img {
+    opacity: .2;
+}
+
+.import-text {
+    color: #717A84;
 }
 
 .templates-radio [type=radio] + .template {
@@ -155,15 +214,6 @@ h2.wpmm-title span img {
     font-size: 18px;
     max-width: 440px;
     line-height: 31px;
-}
-
-.button-big {
-    min-height: 40px !important;
-    min-width: 167px;
-    padding: 12px 30px !important;
-    font-size: 16px !important;
-    line-height: 18px !important;
-    font-weight: 700;
 }
 
 .subscribe-step {
@@ -215,5 +265,14 @@ input.invalid:focus {
     top: 0;
     transform: translate(100%, -15%);
     color: #717A84;
+}
+
+@keyframes abs-spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
