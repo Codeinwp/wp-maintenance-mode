@@ -232,7 +232,7 @@ jQuery(function ($) {
      */
     let pageEditURL = '#';
     $('.template-image-wrap').on('click', '.button-import', function () {
-        if ( !! this.dataset.replace ) {
+        if ( this.dataset.replace !== '0' ) {
             openModal({
                 title: 'Import this template?',
                 description: 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?',

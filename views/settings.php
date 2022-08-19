@@ -253,6 +253,7 @@ defined( 'ABSPATH' ) || exit;
 										</th>
 										<td>
 											<?php
+											echo get_post( $this->plugin_settings['design']['page_id'] )->post_title;
 											wp_dropdown_pages(
 												array(
 													'selected' => $this->plugin_settings['design']['page_id'],
@@ -311,7 +312,9 @@ defined( 'ABSPATH' ) || exit;
 										$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
 									}
 
-									$is_page_empty = empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) );
+									$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
+														empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
+														get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' );
 
 									foreach ( $categories as $category => $label ) {
 										$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
@@ -325,7 +328,7 @@ defined( 'ABSPATH' ) || exit;
 											<div class="template-wrap">
 												<div class="template-image-wrap can-import">
 													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) ! $is_page_empty; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
+													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
 												</div>
 												<p class="description"><?php echo $template_label; ?></p>
 											</div>
