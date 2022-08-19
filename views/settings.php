@@ -249,7 +249,7 @@ defined( 'ABSPATH' ) || exit;
 								<tbody>
 									<tr valign="top">
 										<th scope="row">
-											<label for="design_page_id"><?php esc_html_e( 'Custom Page', 'wp-maintenance-mode' ); ?></label>
+											<label for="design_page_id"><?php esc_html_e( 'Select page', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td>
 											<?php
@@ -277,7 +277,7 @@ defined( 'ABSPATH' ) || exit;
 								<tbody>
 									<tr valign="top">
 										<th scope="row">
-											<label for="dashboard-template"><?php esc_html_e( 'Import a template', 'wp-maintenance-mode' ); ?></label>
+											<label for="dashboard-template"><?php esc_html_e( 'Pick a template', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td class="category-select-wrap">
 											<select name="options[design][template_category]" id="template-category">
@@ -289,6 +289,7 @@ defined( 'ABSPATH' ) || exit;
 									</tr>
 								</tbody>
 							</table>
+							<p class="import-text"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customise them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
 							<p class="import-text"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 							<div class="templates">
 								<form>

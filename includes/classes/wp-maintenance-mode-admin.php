@@ -575,12 +575,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$category      = $_POST['category'];
 			$template      = wp_json_file_decode( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' );
 
-			$blocks = $template->content;
+			$blocks = str_replace( '\n', '', $template->content );
 
 			$post_arr = array(
 				'post_type'    => 'page',
 				'post_status'  => 'private',
-				'post_content' => ! is_null( $blocks ) ? $blocks : '',
+				'post_content' => $blocks,
 			);
 
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {

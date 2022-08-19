@@ -928,6 +928,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_css_files() {
+			$styles = array();
 			if ( ! get_option( 'wpmm_new_look' ) ) {
 				$styles = array(
 					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
