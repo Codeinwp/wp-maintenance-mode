@@ -232,9 +232,30 @@ jQuery(function ($) {
      */
     let pageEditURL = '#';
     $('.template-image-wrap').on('click', '.button-import', function () {
+        if ( !! this.dataset.replace ) {
+            openModal({
+                title: 'Import this template?',
+                description: 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?',
+                first_button: `<button class="button button-primary button-big confirm button-import">Continue</button>`,
+                second_button: `<a href="#" class="button button-secondary button-big go-back" onClick="window.location.reload()">Go back</a>`
+            });
+
+            const import_button = this;
+            $('button.confirm').on('click', function () {
+                $(this).html( '<span class="dashicons dashicons-update"></span>' + wpmm_vars.importing_text + '...' );
+                $('.modal-content').find('.go-back').addClass('disabled');
+                fire_import( import_button );
+            })
+
+        } else {
+            fire_import( this );
+        }
+    });
+
+    function fire_import(button) {
         const nonce = $('#tab-design #_wpnonce').val();
-        const templateSlug = this.dataset.slug;
-        const category = this.dataset.category;
+        const templateSlug = button.dataset.slug;
+        const category = button.dataset.category;
 
         const data = {
             _wpnonce: nonce,
@@ -243,19 +264,24 @@ jQuery(function ($) {
             category: category
         }
 
-        $(this).html( '<span class="dashicons dashicons-update"></span>' + wpmm_vars.importing_text + '...' );
+        $(button).html( '<span class="dashicons dashicons-update"></span>' + wpmm_vars.importing_text + '...' );
         $('.button-import').addClass('disabled');
         $('.button-import').css('pointer-events', 'none');
         $('.template-image-wrap').removeClass( 'can-import' );
-        this.parentElement.classList.add( 'importing' );
+        button.parentElement.classList.add( 'importing' );
 
         import_template( data, function( data ) {
             pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
 
             $('.importing .button-import').html( wpmm_vars.import_done );
-            openModal( wpmm_vars.modal_texts );
+            openModal( {
+                title: wpmm_vars.modal_texts.title,
+                description: wpmm_vars.modal_texts.description,
+                first_button: `<a href="${pageEditURL}" class="button button-primary button-big">${wpmm_vars.modal_texts.button_draft}</a>`,
+                second_button: `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${wpmm_vars.modal_texts.button_settings}</a>`
+            } );
         } );
-    });
+    }
 
     function openModal( content ) {
         const modal_overlay = $(
@@ -265,8 +291,8 @@ jQuery(function ($) {
                         `<h4 class="modal-header">${content.title}</h4>` +
                         `<p class="modal-text">${content.description}</p>` +
                         `<div class="buttons-wrap">` +
-                            `<a href="${pageEditURL}" class="button button-primary button-big">${content.button_draft}</a>` +
-                            `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${content.button_settings}</a>` +
+                            content.first_button +
+                            content.second_button +
                         `</div>` +
                     `</div>` +
                 `</div>` +
@@ -274,7 +300,12 @@ jQuery(function ($) {
         );
 
         $('body').addClass('has-modal');
-        $(modal_overlay).appendTo('body');
+
+        if ( $('.modal-overlay').length ) {
+            $('.modal-overlay').replaceWith(modal_overlay)
+        } else {
+            $(modal_overlay).appendTo('body');
+        }
     }
 
     $('select[name="options[design][template_category]"]').on('change', function () {

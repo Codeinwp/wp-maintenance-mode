@@ -289,8 +289,9 @@ defined( 'ABSPATH' ) || exit;
 									</tr>
 								</tbody>
 							</table>
-							<p class="import-text"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customise them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
-							<p class="import-text"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+							<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customise them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
+							<br/>
+							<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 							<div class="templates">
 								<form>
 									<?php
@@ -310,6 +311,8 @@ defined( 'ABSPATH' ) || exit;
 										$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
 									}
 
+									$is_page_empty = empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) );
+
 									foreach ( $categories as $category => $label ) {
 										$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
 										foreach ( $templates as $template ) {
@@ -322,9 +325,7 @@ defined( 'ABSPATH' ) || exit;
 											<div class="template-wrap">
 												<div class="template-image-wrap can-import">
 													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-<!--                                                    <div id="dashboard-import-button" class="import-button">-->
-													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
-<!--                                                    </div>-->
+													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) ! $is_page_empty; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
 												</div>
 												<p class="description"><?php echo $template_label; ?></p>
 											</div>
