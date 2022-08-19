@@ -928,9 +928,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_css_files() {
-			$styles = array(
-				'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
-			);
+			if ( ! get_option( 'wpmm_new_look' ) ) {
+				$styles = array(
+					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
+				);
+			}
 
 			if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 				$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION;
@@ -947,6 +949,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_inline_css_style() {
+			if ( get_option( 'wpmm_new_look' ) ) {
+				return;
+			}
+
 			$css_rules = array();
 
 			// "Design > Content > Heading" color
@@ -1018,23 +1024,27 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_js_files() {
-
 			$scripts = array(
 				'jquery'   => site_url( '/wp-includes/js/jquery/jquery' . WPMM_ASSETS_SUFFIX . '.js' ),
 				'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
 				'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
 			);
 
-			if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
-				$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
-				$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
+			if ( ! get_option( 'wpmm_new_look' ) ) {
+				if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
+					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
+					$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
+				}
+
+				if (
+					( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
+					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 )
+				) {
+					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
+				}
 			}
 
-			if (
-					( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
-					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ||
-					( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 )
-			) {
+			if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 				$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 			}
 
