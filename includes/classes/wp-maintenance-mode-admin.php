@@ -159,8 +159,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'modal_texts'             => array(
 							'title'           => __( 'The template has been imported!', 'wp-maintenance-mode' ),
 							'description'     => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
-							'button_draft'    => __( 'Go to draft', 'wp-maintenance-mode' ),
+							'button_page'     => __( 'Go to page', 'wp-maintenance-mode' ),
 							'button_settings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
+						),
+						'confirm_modal_texts'     => array(
+							'title'           => __( 'Import this template?', 'wp-maintenance-mode' ),
+							'description'     => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
+							'button_continue' => __( 'Continue', 'wp-maintenance-mode' ),
+							'button_go_back'  => __( 'Go back', 'wp-maintenance-mode' ),
 						),
 						'image_uploader_defaults' => array(
 							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),

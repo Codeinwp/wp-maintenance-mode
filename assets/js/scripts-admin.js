@@ -12,6 +12,10 @@ jQuery(function ($) {
      * Notice dismissal
      */
     $('button.notice-dismiss').on('click', function() {
+        if (!this.parentElement.dataset.key) {
+            return;
+        }
+
         $.post(wpmm_vars.ajax_url, {
             action: 'wpmm_dismiss_notices',
             notice_key: this.parentElement.dataset.key,
@@ -234,10 +238,10 @@ jQuery(function ($) {
     $('.template-image-wrap').on('click', '.button-import', function () {
         if ( this.dataset.replace !== '0' ) {
             openModal({
-                title: 'Import this template?',
-                description: 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?',
-                first_button: `<button class="button button-primary button-big confirm button-import">Continue</button>`,
-                second_button: `<a href="#" class="button button-secondary button-big go-back" onClick="window.location.reload()">Go back</a>`
+                title: wpmm_vars.confirm_modal_texts.title,
+                description: wpmm_vars.confirm_modal_texts.description,
+                first_button: `<button class="button button-primary button-big confirm button-import">${wpmm_vars.confirm_modal_texts.button_continue}</button>`,
+                second_button: `<a href="#" class="button button-secondary button-big go-back" onClick="window.location.reload()">${wpmm_vars.confirm_modal_texts.button_go_back}</a>`
             });
 
             const import_button = this;
@@ -277,7 +281,7 @@ jQuery(function ($) {
             openModal( {
                 title: wpmm_vars.modal_texts.title,
                 description: wpmm_vars.modal_texts.description,
-                first_button: `<a href="${pageEditURL}" class="button button-primary button-big">${wpmm_vars.modal_texts.button_draft}</a>`,
+                first_button: `<a href="${pageEditURL}" class="button button-primary button-big">${wpmm_vars.modal_texts.button_page}</a>`,
                 second_button: `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${wpmm_vars.modal_texts.button_settings}</a>`
             } );
         } );

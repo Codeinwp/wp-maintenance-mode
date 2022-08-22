@@ -149,7 +149,7 @@ h2.wpmm-title {
     text-align: center;
 }
 
-.templates form {
+.templates {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;

@@ -72,7 +72,7 @@ defined( 'ABSPATH' ) || exit;
 							<h4><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
 							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
 							<div class="buttons-wrap">
-								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View draft', 'wp-maintenance-mode' ); ?>"/>
+								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View page', 'wp-maintenance-mode' ); ?>"/>
 								<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
 							</div>
 						</div>
@@ -239,7 +239,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 
 				<div id="tab-design" class="hidden">
-					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post"></form>
+					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<?php
 						if ( get_option( 'wpmm_new_look' ) ) {
 							if ( ( ! get_post( $this->plugin_settings['design']['page_id'] ) || get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) && $this->plugin_settings['general']['status'] === 1 ) {
@@ -293,49 +293,47 @@ defined( 'ABSPATH' ) || exit;
 							<br/>
 							<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 							<div class="templates">
-								<form>
-									<?php
-									if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
-										$this->plugin_settings['design']['template_category'] = 'all';
-										update_option( 'wpmm_settings', $this->plugin_settings );
-									}
+								<?php
+								if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
+									$this->plugin_settings['design']['template_category'] = 'all';
+									update_option( 'wpmm_settings', $this->plugin_settings );
+								}
 
-									$selected_category = $this->plugin_settings['design']['template_category'];
-									$categories        = array();
+								$selected_category = $this->plugin_settings['design']['template_category'];
+								$categories        = array();
 
-									if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
-										$categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
-									}
+								if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
+									$categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
+								}
 
-									if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
-										$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
-									}
+								if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
+									$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
+								}
 
-									$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
-														empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
-														get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' );
+								$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
+													empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
+													get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' );
 
-									foreach ( $categories as $category => $label ) {
-										$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
-										foreach ( $templates as $template ) {
-											$name      = basename( $template );
-											$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';
-											$content   = WPMM_TEMPLATES_PATH . $category . '/' . $name . '/blocks-export.json';
+								foreach ( $categories as $category => $label ) {
+									$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
+									foreach ( $templates as $template ) {
+										$name      = basename( $template );
+										$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';
+										$content   = WPMM_TEMPLATES_PATH . $category . '/' . $name . '/blocks-export.json';
 
-											$template_label = wp_json_file_decode( $content )->label;
-											?>
-											<div class="template-wrap">
-												<div class="template-image-wrap can-import">
-													<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
-												</div>
-												<p class="description"><?php echo $template_label; ?></p>
+										$template_label = wp_json_file_decode( $content )->label;
+										?>
+										<div class="template-wrap">
+											<div class="template-image-wrap can-import">
+												<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
+												<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
 											</div>
-											<?php
-										}
+											<p class="description"><?php echo $template_label; ?></p>
+										</div>
+										<?php
 									}
-									?>
-								</form>
+								}
+								?>
 							</div>
 						<?php } else { /* legacy code */ ?>
 						<table class="form-table">

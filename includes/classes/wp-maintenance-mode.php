@@ -950,11 +950,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_inline_css_style() {
-			if ( get_option( 'wpmm_new_look' ) ) {
-				return;
+			$css_rules = array();
+
+			// "Manage Bot > Upload avatar" url
+			if ( ! empty( $this->plugin_settings['bot']['avatar'] ) ) {
+				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( $this->plugin_settings['bot']['avatar'] ) );
+			} else {
+				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( WPMM_IMAGES_URL . 'chatbot.png' ) );
 			}
 
-			$css_rules = array();
+			// style below is not necessary in the new look
+			if ( get_option( 'wpmm_new_look' ) ) {
+				if ( empty( $css_rules ) ) {
+					return;
+				}
+
+				printf( "<style type=\"text/css\">\n%s\n</style>\n", wp_strip_all_tags( implode( "\n", $css_rules ) ) );
+				return;
+			}
 
 			// "Design > Content > Heading" color
 			if ( ! empty( $this->plugin_settings['design']['heading_color'] ) ) {
@@ -998,13 +1011,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// "Modules > Subscribe > Text" color
 			if ( ! empty( $this->plugin_settings['modules']['subscribe_text_color'] ) ) {
 				$css_rules['modules.subscribe_text_color'] = sprintf( '.wrap h3, .wrap .subscribe_wrapper { color: %s; }', sanitize_hex_color( $this->plugin_settings['modules']['subscribe_text_color'] ) );
-			}
-
-			// "Manage Bot > Upload avatar" url
-			if ( ! empty( $this->plugin_settings['bot']['avatar'] ) ) {
-				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( $this->plugin_settings['bot']['avatar'] ) );
-			} else {
-				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( WPMM_IMAGES_URL . 'chatbot.png' ) );
 			}
 
 			// "Design > Other > Custom CSS"

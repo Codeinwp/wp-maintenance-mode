@@ -1,10 +1,15 @@
 .wpmm-wizard-fullscreen #adminmenumain,
+.wpmm-wizard-fullscreen #wpadminbar,
 .wpmm-wizard-fullscreen .notice,
 .wpmm-wizard-fullscreen .wrap .notice,
 .wpmm-wizard-fullscreen .wrap .error,
 .wpmm-wizard-fullscreen .wrap .updated,
-.wpmm-wizard-fullscreen #wpfooter{
-    display: none;
+.wpmm-wizard-fullscreen #wpfooter {
+    display: none !important;
+}
+
+.wp-toolbar .wpmm-wizard-fullscreen {
+    margin-top: -32px;
 }
 
 #wpwrap {
