@@ -253,7 +253,6 @@ defined( 'ABSPATH' ) || exit;
 										</th>
 										<td>
 											<?php
-											echo get_post( $this->plugin_settings['design']['page_id'] )->post_title;
 											wp_dropdown_pages(
 												array(
 													'selected' => $this->plugin_settings['design']['page_id'],
