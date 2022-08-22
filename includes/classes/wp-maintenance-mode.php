@@ -929,7 +929,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function add_css_files() {
 			$styles = array();
-			if ( ! get_option( 'wpmm_new_look' ) ) {
+			if ( ! get_option( 'wpmm_new_look' ) || ! ( isset( $this->plugin_settings['design']['page_id'] ) ) ) {
 				$styles = array(
 					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
 				);
@@ -960,7 +960,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			// style below is not necessary in the new look
-			if ( get_option( 'wpmm_new_look' ) ) {
+			if ( get_option( 'wpmm_new_look' ) && isset( $this->plugin_settings['design']['page_id'] ) ) {
 				if ( empty( $css_rules ) ) {
 					return;
 				}
@@ -1037,7 +1037,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
 			);
 
-			if ( ! get_option( 'wpmm_new_look' ) ) {
+			if ( ! get_option( 'wpmm_new_look' ) || ! ( isset( $this->plugin_settings['design']['page_id'] ) ) ) {
 				if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
 					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
 					$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
