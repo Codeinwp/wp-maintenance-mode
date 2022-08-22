@@ -33,6 +33,8 @@
 				<div class="choices cf"></div>
 			</div>
 		</div>
+		<div class="bot-error"><p></p></div>
+		<div class="wrap under-bot">
 		<?php
 	}
 	?>

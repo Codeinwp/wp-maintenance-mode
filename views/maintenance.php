@@ -80,18 +80,15 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 
 			<!-- Bot -->
 			<div class="bot-container">
-				<div class="bot-chat-wrapper">
-					<!-- Chats -->
+				<div class="bot-avatar"><div class="avatar-notice"></div></div>
+				<div class="bot-chat-wrapper" style="display: none">
 					<div class="chat-container cf"></div>
-					<!-- User input -->
 					<div class="input"></div>
-					<!-- User choices -->
 					<div class="choices cf"></div>
 				</div>
 			</div>
 
 			<div class="bot-error"><p></p></div>
-
 			<div class="wrap under-bot">
 			<?php } ?>
 
