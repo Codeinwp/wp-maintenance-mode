@@ -1,5 +1,7 @@
 <?php
 
+use ThemeIsle\GutenbergBlocks\CSS\Block_Frontend;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
@@ -46,11 +48,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			add_filter(
 				'page_template',
 				function( $page_template ) {
-					global $wp_query;
 					$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
 					$page_id  = $settings['design']['page_id'];
 
-					if ( $wp_query->post->ID == $page_id ) {
+					if ( is_page( $page_id ) ) {
 						return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
 					}
 
@@ -78,7 +79,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'pre_option_page_on_front',
 					function ( $value ) {
 						if ( ! is_user_logged_in() && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
-							return $this->plugin_settings['design']['page_id'];
+							$page_id = $this->plugin_settings['design']['page_id'];
+
+							Block_Frontend::$instance->enqueue_google_fonts( $page_id );
+							return $page_id;
 						}
 
 						return $value;
