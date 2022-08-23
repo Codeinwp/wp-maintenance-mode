@@ -297,7 +297,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		public function maybe_redirect() {
-			if ( ! get_option( 'wpmm_settings_redirect', '1' ) ) {
+			if ( ! get_option( 'wpmm_fresh_install', false ) || ! get_option( 'wpmm_settings_redirect', '1' ) ) {
 				return;
 			}
 
