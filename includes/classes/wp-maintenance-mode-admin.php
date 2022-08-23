@@ -33,6 +33,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			// Add the options page and menu item.
 			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
 
+			add_action( 'admin_init', array( $this, 'maybe_redirect' ) );
+
 			// Add an action link pointing to the options page
 			if ( is_multisite() && is_plugin_active_for_network( $this->plugin_basename ) ) {
 				// settings link will point to admin_url of the main blog, not to network_admin_url
@@ -292,6 +294,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$this->plugin_slug,
 				array( $this, 'display_plugin_settings' )
 			);
+		}
+
+		public function maybe_redirect() {
+			if ( ! get_option( 'wpmm_settings_redirect', '1' ) ) {
+				return;
+			}
+
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				return;
+			}
+
+			if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
+				return;
+			}
+
+			update_option( 'wpmm_settings_redirect', '0' );
+			wp_safe_redirect( admin_url( 'options-general.php?page=wp-maintenance-mode' ) );
+			exit;
 		}
 
 		/**
