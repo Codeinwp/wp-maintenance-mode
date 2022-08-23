@@ -49,19 +49,27 @@ defined( 'ABSPATH' ) || exit;
 			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
 				$allowed_html = wp_kses_allowed_html( 'post' );
 
-				$allowed_html['form']  = array(
+				$allowed_html['form']   = array(
 					'id'     => array(),
 					'class'  => array(),
 					'action' => array(),
 					'method' => array(),
 				);
-				$allowed_html['input'] = array(
+				$allowed_html['input']  = array(
 					'type'        => array(),
 					'id'          => array(),
 					'name'        => array(),
 					'value'       => array(),
 					'class'       => array(),
 					'placeholder' => array(),
+				);
+				$allowed_html['iframe'] = array(
+					'src'             => array(),
+					'height'          => array(),
+					'width'           => array(),
+					'frameborder'     => array(),
+					'allowfullscreen' => array(),
+					'data-*'          => true,
 				);
 				?>
 				<!-- Text -->
