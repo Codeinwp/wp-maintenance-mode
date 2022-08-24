@@ -1,518 +1,491 @@
-/* global wp */
+/* global jQuery, wpmmVars */
 
-jQuery(function ($) {
-    function isEmailValid( email ) {
-        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const result = regex.test( String( email.toLowerCase() ) );
+jQuery( function( $ ) {
+	function isEmailValid( email ) {
+		const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		const result = regex.test( String( email.toLowerCase() ) );
 
-        return email.length > 7 && result === true
-    }
+		return email.length > 7 && result === true;
+	}
 
-    /**
-     * Notice dismissal
-     */
-    $('button.notice-dismiss').on('click', function() {
-        if (!this.parentElement.dataset.key) {
-            return;
-        }
+	/**
+	 * Migration & Rollback
+	 */
+	$( '#wpmm-migrate, #wpmm-rollback' ).on( 'click', function() {
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_toggle_gutenberg',
+			source: this.parentElement.parentElement.dataset.key,
+			_wpnonce: this.parentElement.parentElement.dataset.nonce
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response );
+				return false;
+			}
 
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_dismiss_notices',
-            notice_key: this.parentElement.dataset.key,
-            _wpnonce: this.parentElement.dataset.nonce
-        }, function (response) {
-            if (!response.success) {
-                alert(response);
-                return false;
-            }
-        })
-    })
+			window.location.reload();
+		}, 'json' );
+	} );
 
-    /**
-     * Migration & Rollback
-     */
-    $('#wpmm-migrate, #wpmm-rollback').on('click', function() {
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_toggle_gutenberg',
-            source: this.parentElement.parentElement.dataset.key,
-            _wpnonce: this.parentElement.parentElement.dataset.nonce,
-        }, function (response) {
-            if (!response.success) {
-                alert(response);
-                return false;
-            }
+	/**
+	 * TABS
+	 */
+	const hash = window.location.hash;
+	if ( hash !== '' ) {
+		$( '.nav-tab-wrapper' ).children().removeClass( 'nav-tab-active' );
+		$( '.nav-tab-wrapper a[href="' + hash + '"]' ).addClass( 'nav-tab-active' );
 
-            window.location.reload();
-        }, 'json');
-    })
+		// active tab content
+		$( '.tabs-content' ).children().addClass( 'hidden' );
+		$( '.tabs-content div' + hash.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
 
-    /**
-     * TABS
-     */
-    var hash = window.location.hash;
-    if (hash !== '') {
-        $('.nav-tab-wrapper').children().removeClass('nav-tab-active');
-        $('.nav-tab-wrapper a[href="' + hash + '"]').addClass('nav-tab-active');
+		// trigger `show_{name}_tab_content` event (we use it to refresh codemirror instance on design tab)
+		$( 'body' ).trigger( 'show_' + hash.replace( '#', '' ) + '_tab_content' );
+	}
 
-        // active tab content
-        $('.tabs-content').children().addClass('hidden');
-        $('.tabs-content div' + hash.replace('#', '#tab-')).removeClass('hidden');
+	$( '.nav-tab-wrapper' ).on( 'click', 'a', function() {
+		const tabHash = $( this ).attr( 'href' ),
+			tabId = tabHash.replace( '#', '#tab-' );
 
-        // trigger `show_{name}_tab_content` event (we use it to refresh codemirror instance on design tab)
-        $('body').trigger('show_' + hash.replace('#', '') + '_tab_content');
-    }
+		// active tab
+		$( this ).parent().children().removeClass( 'nav-tab-active' );
+		$( this ).addClass( 'nav-tab-active' );
 
-    $('.nav-tab-wrapper').on('click', 'a', function () {
-        var tab_hash = $(this).attr('href'),
-                tab_id = tab_hash.replace('#', '#tab-');
+		// active tab content
+		$( '.tabs-content' ).children().addClass( 'hidden' );
+		$( '.tabs-content div' + tabId ).removeClass( 'hidden' );
 
-        // active tab
-        $(this).parent().children().removeClass('nav-tab-active');
-        $(this).addClass('nav-tab-active');
+		// trigger `show_{name}_tab_content` event (we use it to refresh codemirror instance on design tab)
+		$( 'body' ).trigger( 'show_' + tabHash.replace( '#', '' ) + '_tab_content' );
+	} );
 
-        // active tab content
-        $('.tabs-content').children().addClass('hidden');
-        $('.tabs-content div' + tab_id).removeClass('hidden');
+	/**
+	 * COLOR PICKER
+	 */
+	$( '.color_picker_trigger' ).wpColorPicker();
 
-        // trigger `show_{name}_tab_content` event (we use it to refresh codemirror instance on design tab)
-        $('body').trigger('show_' + tab_hash.replace('#', '') + '_tab_content');
-    });
+	/**
+	 * AVAILABLE SHORTCODES
+	 */
+	$( '.shortcodes-list-wrapper' ).on( 'click', '.toggle-shortcodes-list', function( e ) {
+		e.preventDefault();
 
-    /**
-     * COLOR PICKER
-     */
-    $('.color_picker_trigger').wpColorPicker();
+		const hideText = $( this ).data( 'hide' ),
+			showText = $( this ).data( 'show' ),
+			list = $( this ).next( '.shortcodes-list' );
 
-    /**
-     * AVAILABLE SHORTCODES
-     */
-    $('.shortcodes-list-wrapper').on('click', '.toggle-shortcodes-list', function (e) {
-        e.preventDefault();
+		list.toggleClass( 'show' );
 
-        var hide_text = $(this).data('hide'),
-                show_text = $(this).data('show'),
-                list = $(this).next('.shortcodes-list');
+		const currentText = list.hasClass( 'show' ) ? hideText : showText;
 
-        list.toggleClass('show');
+		$( this ).text( currentText );
+	} );
 
-        var current_text = list.hasClass('show') ? hide_text : show_text;
+	/**
+	 * CHOSEN.JS MULTISELECT
+	 *
+	 * @used for "Backend role" and "Frontend role" -> General tab
+	 */
+	$( '.chosen-select' ).chosen( { disable_search_threshold: 10 } );
 
-        $(this).text(current_text);
-    });
+	/**
+	 * IMAGE UPLOADER
+	 */
+	const imageUploaders = {};
 
-    /**
-     * CHOSEN.JS MULTISELECT
-     * @used for "Backend role" and "Frontend role" -> General tab
-     */
-    $('.chosen-select').chosen({disable_search_threshold: 10});
+	$( 'body' ).on( 'click', '.image_uploader_trigger', function( e ) {
+		e.preventDefault();
 
-    /**
-     * IMAGE UPLOADER
-     */
-    var image_uploaders = {};
+		const name = $( this ).data( 'name' ) || '',
+			title = $( this ).data( 'title' ) || wpmmVars.imageUploaderDefaults.title,
+			buttonText = $( this ).data( 'button-text' ) || wpmmVars.imageUploaderDefaults.buttonText,
+			toSelector = $( this ).data( 'to-selector' ) || '';
 
-    $('body').on('click', '.image_uploader_trigger', function (e) {
-        e.preventDefault();
+		if ( name === '' || toSelector === '' ) {
+			alert( 'Required `data` attributes: name, to-selector' );
+			return;
+		}
 
-        var name = $(this).data('name') || '',
-                title = $(this).data('title') || wpmm_vars.image_uploader_defaults.title,
-                button_text = $(this).data('button-text') || wpmm_vars.image_uploader_defaults.button_text,
-                to_selector = $(this).data('to-selector') || '';
+		// If the uploader object has already been created, reopen the dialog
+		if ( imageUploaders.hasOwnProperty( name ) ) {
+			imageUploaders[ name ].open();
+			return;
+		}
 
-        if (name === '' || to_selector === '') {
-            alert('Required `data` attributes: name, to-selector');
-            return;
-        }
+		// Extend the wp.media object
+		imageUploaders[ name ] = wp.media.frames.file_frame = wp.media( {
+			title,
+			button: {
+				text: buttonText,
+			},
+			multiple: false,
+		} );
 
-        // If the uploader object has already been created, reopen the dialog
-        if (image_uploaders.hasOwnProperty(name)) {
-            image_uploaders[name].open();
-            return;
-        }
+		// When a file is selected, grab the URL and set it as the text field's value
+		imageUploaders[ name ].on( 'select', function() {
+			const attachment = imageUploaders[ name ].state().get( 'selection' ).first().toJSON();
+			const url = attachment.url || '';
 
-        // Extend the wp.media object
-        image_uploaders[name] = wp.media.frames.file_frame = wp.media({
-            title: title,
-            button: {
-                text: button_text
-            },
-            multiple: false
-        });
+			$( toSelector ).val( url );
+		} );
 
-        // When a file is selected, grab the URL and set it as the text field's value
-        image_uploaders[name].on('select', function () {
-            var attachment = image_uploaders[name].state().get('selection').first().toJSON();
-            var url = attachment.url || '';
+		// Open the uploader dialog
+		imageUploaders[ name ].open();
+	} );
 
-            $(to_selector).val(url);
-        });
+	/**
+	 * SHOW DESIGN BACKGROUND TYPE BASED ON SELECTED FIELD
+	 *
+	 * @param  selectedVal
+	 */
+	const showBgType = function( selectedVal ) {
+		$( '.design_bg_types' ).hide();
+		$( '#show_' + selectedVal ).show();
+	};
 
-        // Open the uploader dialog
-        image_uploaders[name].open();
-    });
+	showBgType( $( '#design_bg_type' ).val() );
 
-    /**
-     * SHOW DESIGN BACKGROUND TYPE BASED ON SELECTED FIELD
-     */
-    var show_bg_type = function (selected_val) {
-        $('.design_bg_types').hide();
-        $('#show_' + selected_val).show();
-    };
+	$( 'body' ).on( 'change', '#design_bg_type', function() {
+		const selectedVal = $( this ).val();
 
-    show_bg_type($('#design_bg_type').val());
+		showBgType( selectedVal );
+	} );
 
-    $('body').on('change', '#design_bg_type', function () {
-        var selected_val = $(this).val();
+	/**
+	 * PREDEFINED BACKGROUND
+	 */
+	$( 'ul.bg_list' ).on( 'click', 'li', function() {
+		$( this ).parent().children().removeClass( 'active' );
+		$( this ).addClass( 'active' );
+	} );
 
-        show_bg_type(selected_val);
-    });
+	/**
+	 * SUBSCRIBERS EXPORT
+	 */
+	$( '#subscribers_wrap' ).on( 'click', '#subscribers-export', function() {
+		const nonce = $( '#tab-modules #_wpnonce' ).val();
+		$( '<iframe />' ).attr( 'src', wpmmVars.ajaxURL + '?action=wpmm_subscribers_export&_wpnonce=' + encodeURI( nonce ) ).appendTo( 'body' ).hide();
+	} );
 
-    /**
-     * PREDEFINED BACKGROUND
-     */
-    $('ul.bg_list').on('click', 'li', function () {
-        $(this).parent().children().removeClass('active');
-        $(this).addClass('active');
-    });
+	/**
+	 * SUBSCRIBERS EMPTY LIST
+	 *
+	 * @since 2.0.4
+	 */
+	$( '#subscribers_wrap' ).on( 'click', '#subscribers-empty-list', function() {
+		const nonce = $( '#tab-modules #_wpnonce' ).val();
 
-    /**
-     * SUBSCRIBERS EXPORT
-     */
-    $('#subscribers_wrap').on('click', '#subscribers-export', function () {
-        var nonce = $('#tab-modules #_wpnonce').val();
-        $('<iframe />').attr('src', wpmm_vars.ajax_url + '?action=wpmm_subscribers_export&_wpnonce='+encodeURI( nonce )).appendTo('body').hide();
-    });
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_subscribers_empty_list',
+			_wpnonce: nonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data );
+				return false;
+			}
 
-    /**
-     * SUBSCRIBERS EMPTY LIST
-     *
-     * @since 2.0.4
-     */
-    $('#subscribers_wrap').on('click', '#subscribers-empty-list', function () {
+			$( '#subscribers_wrap' ).html( response.data );
+		}, 'json' );
+	} );
 
-        var nonce = $('#tab-modules #_wpnonce').val();
+	/**
+	 * RESET SETTINGS
+	 */
+	$( 'body' ).on( 'click', '.reset_settings', function() {
+		const tab = $( this ).data( 'tab' ),
+			nonce = $( '#tab-' + tab + ' #_wpnonce' ).val();
 
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_subscribers_empty_list',
-            _wpnonce: nonce
-        }, function (response) {
-            if (!response.success) {
-                alert(response.data);
-                return false;
-            }
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_reset_settings',
+			tab,
+			_wpnonce: nonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data );
+				return false;
+			}
 
-            $('#subscribers_wrap').html(response.data);
-        }, 'json');
-    });
+			window.location.reload( true );
+		}, 'json' );
+	} );
 
-    /**
-     * RESET SETTINGS
-     */
-    $('body').on('click', '.reset_settings', function () {
-        var tab = $(this).data('tab'),
-                nonce = $('#tab-' + tab + ' #_wpnonce').val();
+	/**
+	 * COUNTDOWN TIMEPICKER
+	 */
+	$( '.countdown_start' ).datetimepicker( { timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy' } );
 
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_reset_settings',
-            tab: tab,
-            _wpnonce: nonce
-        }, function (response) {
-            if (!response.success) {
-                alert(response.data);
-                return false;
-            }
+	/**
+	 * TEMPLATES
+	 */
+	let pageEditURL = '#';
+	$( '.template-image-wrap' ).on( 'click', '.button-import', function() {
+		if ( this.dataset.replace !== '0' ) {
+			openModal( {
+				title: wpmmVars.confirmModalTexts.title,
+				description: wpmmVars.confirmModalTexts.description,
+				first_button: `<button class="button button-primary button-big confirm button-import">${ wpmmVars.confirmModalTexts.buttonContinue }</button>`,
+				second_button: `<a href="#" class="button button-secondary button-big go-back" onClick="window.location.reload()">${ wpmmVars.confirmModalTexts.buttonGoBack }</a>`,
+			} );
 
-            window.location.reload(true);
-        }, 'json');
-    });
+			const importButton = this;
+			$( 'button.confirm' ).on( 'click', function() {
+				$( this ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
+				$( '.modal-content' ).find( '.go-back' ).addClass( 'disabled' );
+				fireTmport( importButton );
+			} );
+		} else {
+			fireTmport( this );
+		}
+	} );
 
-    /**
-     * COUNTDOWN TIMEPICKER
-     */
-    $('.countdown_start').datetimepicker({timeFormat: 'HH:mm:ss', dateFormat: 'dd-mm-yy'});
+	function fireTmport( button ) {
+		const nonce = $( '#tab-design #_wpnonce' ).val();
+		const templateSlug = button.dataset.slug;
+		const category = button.dataset.category;
 
-    /**
-     * TEMPLATES
-     */
-    let pageEditURL = '#';
-    $('.template-image-wrap').on('click', '.button-import', function () {
-        if ( this.dataset.replace !== '0' ) {
-            openModal({
-                title: wpmm_vars.confirm_modal_texts.title,
-                description: wpmm_vars.confirm_modal_texts.description,
-                first_button: `<button class="button button-primary button-big confirm button-import">${wpmm_vars.confirm_modal_texts.button_continue}</button>`,
-                second_button: `<a href="#" class="button button-secondary button-big go-back" onClick="window.location.reload()">${wpmm_vars.confirm_modal_texts.button_go_back}</a>`
-            });
+		const data = {
+			_wpnonce: nonce,
+			source: 'tab-design',
+			template_slug: templateSlug,
+			category,
+		};
 
-            const import_button = this;
-            $('button.confirm').on('click', function () {
-                $(this).html( '<span class="dashicons dashicons-update"></span>' + wpmm_vars.importing_text + '...' );
-                $('.modal-content').find('.go-back').addClass('disabled');
-                fire_import( import_button );
-            })
+		$( button ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
+		$( '.button-import' ).addClass( 'disabled' ).css( 'pointer-events', 'none' );
+		$( '.template-image-wrap' ).removeClass( 'can-import' );
+		button.parentElement.classList.add( 'importing' );
 
-        } else {
-            fire_import( this );
-        }
-    });
+		importTemplate( data, function( response ) {
+			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
 
-    function fire_import(button) {
-        const nonce = $('#tab-design #_wpnonce').val();
-        const templateSlug = button.dataset.slug;
-        const category = button.dataset.category;
+			$( '.importing .button-import' ).html( wpmmVars.importDone );
+			openModal( {
+				title: wpmmVars.modalTexts.title,
+				description: wpmmVars.modalTexts.description,
+				first_button: `<a href="${ pageEditURL }" class="button button-primary button-big">${ wpmmVars.modalTexts.buttonPage }</a>`,
+				second_button: `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${ wpmmVars.modalTexts.buttonSettings }</a>`,
+			} );
+		} );
+	}
 
-        const data = {
-            _wpnonce: nonce,
-            source: 'tab-design',
-            template_slug: templateSlug,
-            category: category
-        }
-
-        $(button).html( '<span class="dashicons dashicons-update"></span>' + wpmm_vars.importing_text + '...' );
-        $('.button-import').addClass('disabled');
-        $('.button-import').css('pointer-events', 'none');
-        $('.template-image-wrap').removeClass( 'can-import' );
-        button.parentElement.classList.add( 'importing' );
-
-        import_template( data, function( data ) {
-            pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
-
-            $('.importing .button-import').html( wpmm_vars.import_done );
-            openModal( {
-                title: wpmm_vars.modal_texts.title,
-                description: wpmm_vars.modal_texts.description,
-                first_button: `<a href="${pageEditURL}" class="button button-primary button-big">${wpmm_vars.modal_texts.button_page}</a>`,
-                second_button: `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${wpmm_vars.modal_texts.button_settings}</a>`
-            } );
-        } );
-    }
-
-    function openModal( content ) {
-        const modal_overlay = $(
-            `<div class="modal-overlay">` +
-                `<div class="modal-frame">` +
-                    `<div class="modal-content">` +
-                        `<h4 class="modal-header">${content.title}</h4>` +
-                        `<p class="modal-text">${content.description}</p>` +
-                        `<div class="buttons-wrap">` +
+	function openModal( content ) {
+		const modalOverlay = $(
+			'<div class="modal-overlay">' +
+                '<div class="modal-frame">' +
+                    '<div class="modal-content">' +
+                        `<h4 class="modal-header">${ content.title }</h4>` +
+                        `<p class="modal-text">${ content.description }</p>` +
+                        '<div class="buttons-wrap">' +
                             content.first_button +
                             content.second_button +
-                        `</div>` +
-                    `</div>` +
-                `</div>` +
-            `</div>`
-        );
+                        '</div>' +
+                    '</div>' +
+				'</div>' +
+            '</div>'
+		);
 
-        $('body').addClass('has-modal');
+		$( 'body' ).addClass( 'has-modal' );
 
-        if ( $('.modal-overlay').length ) {
-            $('.modal-overlay').replaceWith(modal_overlay)
-        } else {
-            $(modal_overlay).appendTo('body');
-        }
-    }
+		if ( $( '.modal-overlay' ).length ) {
+			$( '.modal-overlay' ).replaceWith( modalOverlay );
+		} else {
+			$( modalOverlay ).appendTo( 'body' );
+		}
+	}
 
-    $('select[name="options[design][template_category]"]').on('change', function () {
-        const nonce = $('#tab-design #_wpnonce').val();
+	$( 'select[name="options[design][template_category]"]' ).on( 'change', function() {
+		const nonce = $( '#tab-design #_wpnonce' ).val();
 
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_change_template_category',
-            category: this.value,
-            _wpnonce: nonce
-        }, function (response) {
-            if (!response.success) {
-                alert(response);
-                return false;
-            }
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_change_template_category',
+			category: this.value,
+			_wpnonce: nonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response );
+				return false;
+			}
 
-            window.location.reload();
-        }, 'json');
-    });
+			window.location.reload();
+		}, 'json' );
+	} );
 
-    $('select[name="options[design][page_id]"]').on('change', function () {
-        const nonce = $('#tab-design #_wpnonce').val();
+	$( 'select[name="options[design][page_id]"]' ).on( 'change', function() {
+		const nonce = $( '#tab-design #_wpnonce' ).val();
 
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wpmm_select_page',
-            page_id: this.value,
-            _wpnonce: nonce
-        }, function (response) {
-            if (!response.success) {
-                alert(response.data);
-                return false;
-            }
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_select_page',
+			page_id: this.value,
+			_wpnonce: nonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data );
+				return false;
+			}
 
-            window.location.reload();
-        }, 'json');
-    });
+			window.location.reload();
+		}, 'json' );
+	} );
 
-    /**
-     * WIZARD
-     */
-    const slider = $('.slider-wrap');
+	/**
+	 * WIZARD
+	 */
+	const slider = $( '.slider-wrap' );
 
-    $('h2.wpmm-title span').on('click', function() {
-        window.location.href = wpmm_vars.admin_url;
-    });
+	$( 'h2.wpmm-title span' ).on( 'click', function() {
+		window.location.href = wpmmVars.adminURL;
+	} );
 
-    if ( $('input[name="wizard-template"]:checked').val() ) {
-        $('#wpmm-wizard-wrapper .button-import').removeClass('disabled');
-    } else {
-        $('input[name="wizard-template"]').on('change', function () {
-            $('#wpmm-wizard-wrapper .button-import').removeClass('disabled');
-            $('input[name="wizard-template"]').off('change');
-        });
-    }
+	if ( $( 'input[name="wizard-template"]:checked' ).val() ) {
+		$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
+	} else {
+		$( 'input[name="wizard-template"]' ).on( 'change', function() {
+			$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
+			$( 'input[name="wizard-template"]' ).off( 'change' );
+		} );
+	}
 
-    if ( $('input[name="dashboard-template"]:checked').val() ) {
-        $('#dashboard-import-button .button-import').removeClass('disabled');
-    } else {
-        $('input[name="dashboard-template"]').on('change', function () {
-            $('#dashboard-import-button .button-import').removeClass('disabled');
-            $('input[name="dashboard-template"]').off('change');
-        });
-    }
+	if ( $( 'input[name="dashboard-template"]:checked' ).val() ) {
+		$( '#dashboard-import-button .button-import' ).removeClass( 'disabled' );
+	} else {
+		$( 'input[name="dashboard-template"]' ).on( 'change', function() {
+			$( '#dashboard-import-button .button-import' ).removeClass( 'disabled' );
+			$( 'input[name="dashboard-template"]' ).off( 'change' );
+		} );
+	}
 
-    $('#wizard-import-button').on('click', '.button-import:not(.disabled)', function() {
-        const templateSelect = $('input[name="wizard-template"]:checked')
-        const templateSlug = templateSelect.val();
-        const category = templateSelect[0].dataset.category;
+	$( '#wizard-import-button' ).on( 'click', '.button-import:not(.disabled)', function() {
+		const templateSelect = $( 'input[name="wizard-template"]:checked' );
+		const templateSlug = templateSelect.val();
+		const category = templateSelect[ 0 ].dataset.category;
 
-        const data = {
-            _wpnonce: wpmm_vars.wizard_nonce,
-            source: 'wizard',
-            template_slug: templateSlug,
-            category: category
-        };
+		const data = {
+			_wpnonce: wpmmVars.wizardNonce,
+			source: 'wizard',
+			template_slug: templateSlug,
+			category,
+		};
 
-        import_in_progress( data.template_slug );
-        import_template( data, function (data) {
-            move_to_step( 'import', 'subscribe' );
-            pageEditURL = data['pageEditURL'].replace(/&amp;/g, '&');
-        } );
-    });
+		importInProgress( data.template_slug );
+		importTemplate( data, function( response ) {
+			moveToStep( 'import', 'subscribe' );
+			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
+		} );
+	} );
 
-    $('#email-input-wrap input[type="text"]').on( 'keypress', (e) => {
-        if (e.key === 'Enter') {
-            const button = $('#email-input-wrap .subscribe-button');
-            button.trigger('focus').trigger( 'click' );
-        }
-    })
+	$( '#email-input-wrap input[type="text"]' ).on( 'keypress', ( e ) => {
+		if ( e.key === 'Enter' ) {
+			const button = $( '#email-input-wrap .subscribe-button' );
+			button.trigger( 'click' );
+		}
+	} );
 
-    $('#email-input-wrap').on('click', '.subscribe-button', function(event) {
-        event.preventDefault();
+	$( '#email-input-wrap' ).on( 'click', '.subscribe-button', function( event ) {
+		event.preventDefault();
 
-        const emailInput = $('#email-input-wrap input[type="text"]');
-        const email = emailInput.val();
+		const emailInput = $( '#email-input-wrap input[type="text"]' );
+		const email = emailInput.val();
 
-        if ( !isEmailValid( email ) ) {
-            $('#email-input-wrap').append(`<p class="subscribe-message email-error"><i>${ wpmm_vars.invalid_email_string }</i></p>`);
-            emailInput.addClass( 'invalid' );
+		if ( ! isEmailValid( email ) ) {
+			$( '#email-input-wrap' ).append( `<p class="subscribe-message email-error"><i>${ wpmmVars.invalidEmailString }</i></p>` );
+			emailInput.addClass( 'invalid' );
 
-            setTimeout(function() {
-                $('.email-error').remove();
-            }, 1500);
+			setTimeout( function() {
+				$( '.email-error' ).remove();
+			}, 1500 );
 
-            return;
-        }
+			return;
+		}
 
-        emailInput.removeClass( 'invalid' );
+		emailInput.removeClass( 'invalid' );
 
-        $.post( wpmm_vars.ajax_url, {
-            action: 'wpmm_subscribe',
-            email: email,
-            _wpnonce: wpmm_vars.wizard_nonce
-        }, function (response) {
-            if(!response.success) {
-                alert(response.data);
-            }
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_subscribe',
+			email,
+			_wpnonce: wpmmVars.wizardNonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data );
+			}
 
-            move_to_step( 'subscribe', 'finish' );
-        });
+			moveToStep( 'subscribe', 'finish' );
+		} );
 
-        return false;
-    })
+		return false;
+	} );
 
-    $('#skip-subscribe').on('click', function() {
-        move_to_step('subscribe', 'finish');
-    })
+	$( '#skip-subscribe' ).on( 'click', function() {
+		moveToStep( 'subscribe', 'finish' );
+	} );
 
-    $('#view-page-button').on('click', function() {
-        window.location.href = pageEditURL;
-    })
+	$( '#view-page-button' ).on( 'click', function() {
+		window.location.href = pageEditURL;
+	} );
 
+	$( '#refresh-button' ).on( 'click', function() {
+		window.location.reload();
+	} );
 
-    $('#refresh-button').on('click', function() {
-        window.location.reload();
-    })
+	function importInProgress( slug ) {
+		const template = $( 'input[value=' + slug + '] + .template' );
 
-    function import_in_progress(slug) {
-        const template = $('input[value=' + slug + '] + .template');
+		template.addClass( 'loading' );
+		template.append( '<span class="dashicons dashicons-update"></span><p><i>' + wpmmVars.loadingString + '</i></p>' );
 
-        template.addClass( 'loading' );
-        template.append( '<span class="dashicons dashicons-update"></span>' );
-        template.append( '<p><i>' + wpmm_vars.loading_string + '</i></p>' );
+		$( '.button-import' ).attr( 'disabled', 'disabled' );
+		$( '#wpmm-wizard-wrapper .templates-radio label' ).css( 'pointer-events', 'none' );
+	}
 
-        $('.button-import').attr( 'disabled', 'disabled' );
-        $('#wpmm-wizard-wrapper .templates-radio label').css('pointer-events', 'none');
-    }
+	function moveToStep( prevStep, nextStep ) {
+		slider.removeClass( `move-to-${ prevStep }` ).addClass( `move-to-${ nextStep }` );
 
-    function move_to_step( prevStep, nextStep ) {
-        slider.removeClass(`move-to-${prevStep}`);
-        slider.addClass(`move-to-${nextStep}`);
+		$( `.${ prevStep }-step` ).attr( 'aria-hidden', 'true' ).css( 'display', 'none' );
+		$( `.${ nextStep }-step` ).removeAttr( 'aria-hidden' ).removeAttr( 'style' );
+	}
 
-        const prevStepElement = $(`.${prevStep}-step`);
-        const nextStepElement = $(`.${nextStep}-step`);
+	function importTemplate( data, callback ) {
+		if ( ! wpmmVars.isOtterInstalled ) {
+			installAndActivateOtter( () => addToPage( data, callback ) );
+		} else if ( ! wpmmVars.isOtterActivated ) {
+			activateOtter( () => addToPage( data, callback ) );
+		}
+	}
 
-        prevStepElement.attr('aria-hidden', 'true');
-        prevStepElement.css( 'display', 'none' );
+	function addToPage( data, callback ) {
+		data.action = 'wpmm_insert_template';
+		$.post( wpmmVars.ajaxURL, data, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data );
+				$( '.dashicons-update' ).remove();
+				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-import-button' );
+				return false;
+			}
 
-        nextStepElement.removeAttr( 'aria-hidden' );
-        nextStepElement.removeAttr('style');
-    }
+			callback( response.data );
+		}, 'json' );
+	}
 
-    function import_template( data, callback ) {
-        if ( !wpmm_vars.is_otter_installed ) {
-            install_and_activate_otter( () => add_to_page(data, callback) );
-        } else if ( !wpmm_vars.is_otter_activated ) {
-            activate_otter( () => add_to_page(data, callback) );
-        }
-    }
+	function installAndActivateOtter( callback ) {
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wp_ajax_install_plugin',
+			_ajax_nonce: wpmmVars.pluginInstallNonce,
+			slug: 'otter-blocks',
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data.errorMessage );
+				$( '.dashicons-update' ).remove();
+				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-import-button' );
 
-    function add_to_page(data, callback) {
-        data['action'] = 'wpmm_insert_template';
-        $.post(wpmm_vars.ajax_url, data, function(response) {
-            if (!response.success) {
-                alert(response.data);
-                $('.dashicons-update').remove();
-                $('<p class="error import-error">' + wpmm_vars.error_string + '</p>').insertAfter('#wizard-import-button');
-                return false;
-            }
+				window.location.reload();
+				return false;
+			}
 
-            callback( response.data );
-        }, 'json');
-    }
+			activateOtter( callback );
+		} );
+	}
 
-    function install_and_activate_otter( callback ) {
-        $.post(wpmm_vars.ajax_url, {
-            action: 'wp_ajax_install_plugin',
-            _ajax_nonce: wpmm_vars.plugin_install_nonce,
-            slug: 'otter-blocks',
-        }, function(response) {
-            if (!response.success) {
-                alert(response.data);
-                $('.dashicons-update').remove();
-                $('<p class="error import-error">' + wpmm_vars.error_string + '</p>').insertAfter('#wizard-import-button');
-                return false;
-            }
-
-            activate_otter( callback );
-        });
-    }
-
-    function activate_otter( callback ) {
-        $.get( wpmm_vars.otter_activation_link, function() {
-            callback();
-        } )
-    }
-});
+	function activateOtter( callback ) {
+		$.get( wpmmVars.otterActivationLink, function() {
+			callback();
+		} );
+	}
+} );

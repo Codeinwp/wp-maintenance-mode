@@ -134,21 +134,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery' . WPMM_ASSETS_SUFFIX . '.js', array(), WP_Maintenance_Mode::VERSION, true );
 				wp_localize_script(
 					$this->plugin_slug . '-admin-script',
-					'wpmm_vars',
+					'wpmmVars',
 					array(
-						'ajax_url'                => admin_url( 'admin-ajax.php' ),
-						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
-						'wizard_nonce'            => wp_create_nonce( 'wizard' ),
-						'plugin_install_nonce'    => wp_create_nonce( 'updates' ),
-						'is_otter_installed'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
-						'is_otter_active'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
-						'error_string'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
-						'loading_string'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
-						'importing_text'          => __( 'Importing', 'wp-maintenance-mode' ),
-						'import_done'             => __( 'Done', 'wp-maintenance-mode' ),
-						'invalid_email_string'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
-						'admin_url'               => get_admin_url(),
-						'otter_activation_link'   => add_query_arg(
+						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'wizardNonce'           => wp_create_nonce( 'wizard' ),
+						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
+						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
+						'isOtterActive'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'errorString'           => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loadingString'         => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
+						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
+						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'adminURL'              => get_admin_url(),
+						'otterActivationLink'   => add_query_arg(
 							array(
 								'action'        => 'activate',
 								'plugin'        => rawurlencode( 'otter-blocks/otter-blocks.php' ),
@@ -158,21 +158,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'modal_texts'             => array(
-							'title'           => __( 'The template has been imported!', 'wp-maintenance-mode' ),
-							'description'     => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
-							'button_page'     => __( 'Go to page', 'wp-maintenance-mode' ),
-							'button_settings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
+						'modalTexts'            => array(
+							'title'          => __( 'The template has been imported!', 'wp-maintenance-mode' ),
+							'description'    => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
+							'buttonPage'     => __( 'Go to page', 'wp-maintenance-mode' ),
+							'buttonSettings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
 						),
-						'confirm_modal_texts'     => array(
-							'title'           => __( 'Import this template?', 'wp-maintenance-mode' ),
-							'description'     => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
-							'button_continue' => __( 'Continue', 'wp-maintenance-mode' ),
-							'button_go_back'  => __( 'Go back', 'wp-maintenance-mode' ),
+						'confirmModalTexts'     => array(
+							'title'          => __( 'Import this template?', 'wp-maintenance-mode' ),
+							'description'    => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
+							'buttonContinue' => __( 'Continue', 'wp-maintenance-mode' ),
+							'buttonGoBack'   => __( 'Go back', 'wp-maintenance-mode' ),
 						),
-						'image_uploader_defaults' => array(
-							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
-							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
+						'imageUploaderDefaults' => array(
+							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
+							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
 					)
 				);
@@ -878,7 +878,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						);
 					} else {
 						$notices['rollback'] = array(
-							'class' => 'notice notice-info is-dismissible',
+							'class' => 'notice wpmm_notices notice-info is-dismissible',
 							'msg'   => __( 'You migrated to use Gutenberg for building the Maintenance page.&emsp;<button id="wpmm-rollback" class="button button-link button-link-delete">Rollback</button>', 'wp-maintenance-mode' ),
 						);
 					}
@@ -907,12 +907,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( empty( $notice_key ) ) {
 					throw new Exception( __( 'Notice key cannot be empty.', 'wp-maintenance-mode' ) );
 				}
-				if ( empty( $_POST['_wpnonce'] ) ) {
+				if ( empty( $_POST['_nonce'] ) ) {
 					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
 				}
 
 				// check nonce validation
-				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $notice_key ) ) {
+				if ( ! wp_verify_nonce( $_POST['_nonce'], 'notice_nonce_' . $notice_key ) ) {
 					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
 				}
 

@@ -40,7 +40,7 @@
 	?>
 
 	<script type='text/javascript'>
-		var wpmm_vars = {"ajax_url": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
+		var wpmmVars = {"ajaxURL": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
 	</script>
 
 	<?php

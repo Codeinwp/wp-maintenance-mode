@@ -239,7 +239,7 @@ if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_n
 		</div>
 
 		<script type='text/javascript'>
-			var wpmm_vars = {"ajax_url": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
+			const wpmmVars = {"ajaxURL": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
 		</script>
 
 		<?php
