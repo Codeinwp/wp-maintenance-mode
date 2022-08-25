@@ -5,7 +5,7 @@ Plugin URI: https://themeisle.com/
 Author: Themeisle
 Author URI: https://themeisle.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
-Requires at least: 5.8
+Requires at least: 3.5
 Tested up to: 6.0
 Stable tag: 2.4.6
 Requires PHP: 5.6

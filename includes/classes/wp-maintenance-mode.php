@@ -21,8 +21,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		private function __construct() {
 			if ( ! get_option( 'wpmm_settings' ) || get_option( 'wpmm_settings' ) === '' ) {
 				update_option( 'wpmm_show_migration', '0' );
-				update_option( 'wpmm_fresh_install', '1' );
 				update_option( 'wpmm_new_look', '1' );
+
+				if ( version_compare( $GLOBALS['wp_version'], '5.8', '>=' ) ) {
+					update_option( 'wpmm_fresh_install', '1' );
+				}
 			}
 
 			if ( get_option( 'wpmm_migration_time' ) && ( ( time() - intval( get_option( 'wpmm_migration_time' ) ) > WEEK_IN_SECONDS ) ) ) {

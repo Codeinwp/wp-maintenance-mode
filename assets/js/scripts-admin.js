@@ -15,7 +15,7 @@ jQuery( function( $ ) {
 		$.post( wpmmVars.ajaxURL, {
 			action: 'wpmm_toggle_gutenberg',
 			source: this.parentElement.parentElement.dataset.key,
-			_wpnonce: this.parentElement.parentElement.dataset.nonce
+			_wpnonce: this.parentElement.parentElement.dataset.nonce,
 		}, function( response ) {
 			if ( ! response.success ) {
 				alert( response );

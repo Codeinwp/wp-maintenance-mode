@@ -6,6 +6,8 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+$is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
@@ -83,27 +85,27 @@ defined( 'ABSPATH' ) || exit;
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="#general">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
 					</svg>
 
 					<?php esc_html_e( 'General', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#design">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 					</svg>
 
 					<?php esc_html_e( 'Design', 'wp-maintenance-mode' ); ?></a>
 				<a class="nav-tab" href="#modules">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
 					</svg>
 
 					<?php esc_html_e( 'Modules', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#bot">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 					</svg>
 
@@ -111,7 +113,7 @@ defined( 'ABSPATH' ) || exit;
 				</a>
 				<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 				<a class="nav-tab" href="#gdpr">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 					</svg>
 
@@ -289,9 +291,13 @@ defined( 'ABSPATH' ) || exit;
 									</tr>
 								</tbody>
 							</table>
-							<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customise them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
-							<br/>
-							<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+							<?php if ( $is_old_version ) { ?>
+								<p class="description"><i><?php echo __( '<b>Note</b>: You need at least WP 5.8 to use new generation maintenance pages.', 'wp-maintenance-mode' ); ?></i></p>
+							<?php } else { ?>
+								<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customise them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
+								<br/>
+								<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+							<?php } ?>
 							<div class="templates">
 								<?php
 								if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
@@ -321,12 +327,14 @@ defined( 'ABSPATH' ) || exit;
 										$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';
 										$content   = WPMM_TEMPLATES_PATH . $category . '/' . $name . '/blocks-export.json';
 
-										$template_label = wp_json_file_decode( $content )->label;
+										$template_label = json_decode( file_get_contents( $content ) )->label;
 										?>
 										<div class="template-wrap">
-											<div class="template-image-wrap can-import">
+											<div class="template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
 												<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
-												<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
+												<?php if ( ! $is_old_version ) { ?>
+													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
+												<?php } ?>
 											</div>
 											<p class="description"><?php echo $template_label; ?></p>
 										</div>
