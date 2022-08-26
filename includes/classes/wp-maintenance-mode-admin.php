@@ -453,7 +453,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['modules']['contact_email']   = sanitize_text_field( $_POST['options']['modules']['contact_email'] );
 					$_POST['options']['modules']['contact_effects'] = sanitize_text_field( $_POST['options']['modules']['contact_effects'] );
 
-					// Google analytics
+					// Google Analytics
 					$_POST['options']['modules']['ga_status']       = (int) $_POST['options']['modules']['ga_status'];
 					$_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
 					$_POST['options']['modules']['ga_code']         = wpmm_sanitize_ga_code( $_POST['options']['modules']['ga_code'] );
@@ -569,6 +569,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 		}
 
+		/**
+		 * Select a page as Maintenance Page
+		 *
+		 * @return void
+		 */
 		public function select_page() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
@@ -586,6 +591,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			wp_send_json_success();
 		}
 
+		/**
+		 * Insert the content from the template to the Maintenance Page
+		 * If no Maintenance Page exists, create one.
+		 *
+		 * @return void
+		 */
 		public function insert_template() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
@@ -632,6 +643,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
+		/**
+		 * Subscribe user to plugin newsletter
+		 *
+		 * @return void
+		 */
 		public function subscribe_newsletter() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
@@ -670,6 +686,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			wp_send_json_success( $response );
 		}
 
+		/**
+		 * Change the category of templates to display
+		 *
+		 * @return void
+		 */
 		public function change_template_category() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
@@ -691,6 +712,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			wp_send_json_success();
 		}
 
+		/**
+		 * Migrate to the new method of building the maintenance page or downgrade to the old one.
+		 * Used from the migration notice.
+		 *
+		 * @return void
+		 */
 		public function toggle_gutenberg() {
 			if ( empty( $_POST['source'] ) ) {
 				die( esc_html__( 'The source filed must not be empty.', 'wp-maintenance-mode' ) );

@@ -217,7 +217,11 @@ jQuery( function( $ ) {
 	 * TEMPLATES
 	 */
 	let pageEditURL = '#';
-	$( '.template-image-wrap' ).on( 'click', '.button-import', function() {
+	const templateWrap = $( '.template-image-wrap' );
+
+	templateWrap.on( 'click', '.button-import', function() {
+		/* If the page has some content inside, show a confirmation prompt to let the use know the
+		content will be replaced and fire the import only after confirmation */
 		if ( this.dataset.replace !== '0' ) {
 			openModal( {
 				title: wpmmVars.confirmModalTexts.title,
@@ -230,14 +234,14 @@ jQuery( function( $ ) {
 			$( 'button.confirm' ).on( 'click', function() {
 				$( this ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
 				$( '.modal-content' ).find( '.go-back' ).addClass( 'disabled' );
-				fireTmport( importButton );
+				fireImport( importButton );
 			} );
 		} else {
-			fireTmport( this );
+			fireImport( this );
 		}
 	} );
 
-	function fireTmport( button ) {
+	function fireImport( button ) {
 		const nonce = $( '#tab-design #_wpnonce' ).val();
 		const templateSlug = button.dataset.slug;
 		const category = button.dataset.category;
@@ -251,7 +255,8 @@ jQuery( function( $ ) {
 
 		$( button ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
 		$( '.button-import' ).addClass( 'disabled' ).css( 'pointer-events', 'none' );
-		$( '.template-image-wrap' ).removeClass( 'can-import' );
+
+		templateWrap.removeClass( 'can-import' );
 		button.parentElement.classList.add( 'importing' );
 
 		importTemplate( data, function( response ) {
@@ -329,8 +334,6 @@ jQuery( function( $ ) {
 	/**
 	 * WIZARD
 	 */
-	const slider = $( '.slider-wrap' );
-
 	$( 'h2.wpmm-title span' ).on( 'click', function() {
 		window.location.href = wpmmVars.adminURL;
 	} );
@@ -341,15 +344,6 @@ jQuery( function( $ ) {
 		$( 'input[name="wizard-template"]' ).on( 'change', function() {
 			$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
 			$( 'input[name="wizard-template"]' ).off( 'change' );
-		} );
-	}
-
-	if ( $( 'input[name="dashboard-template"]:checked' ).val() ) {
-		$( '#dashboard-import-button .button-import' ).removeClass( 'disabled' );
-	} else {
-		$( 'input[name="dashboard-template"]' ).on( 'change', function() {
-			$( '#dashboard-import-button .button-import' ).removeClass( 'disabled' );
-			$( 'input[name="dashboard-template"]' ).off( 'change' );
 		} );
 	}
 
@@ -425,6 +419,11 @@ jQuery( function( $ ) {
 		window.location.reload();
 	} );
 
+	/**
+	 * Adds elements and CSS
+	 *
+	 * @param {string} slug The template that will be imported
+	 */
 	function importInProgress( slug ) {
 		const template = $( 'input[value=' + slug + '] + .template' );
 
@@ -435,13 +434,25 @@ jQuery( function( $ ) {
 		$( '#wpmm-wizard-wrapper .templates-radio label' ).css( 'pointer-events', 'none' );
 	}
 
+	/**
+	 * Goes to the next step from wizard
+	 *
+	 * @param {string} prevStep
+	 * @param {string} nextStep
+	 */
 	function moveToStep( prevStep, nextStep ) {
-		slider.removeClass( `move-to-${ prevStep }` ).addClass( `move-to-${ nextStep }` );
+		$( '.slider-wrap' ).removeClass( `move-to-${ prevStep }` ).addClass( `move-to-${ nextStep }` );
 
 		$( `.${ prevStep }-step` ).attr( 'aria-hidden', 'true' ).css( 'display', 'none' );
 		$( `.${ nextStep }-step` ).removeAttr( 'aria-hidden' ).removeAttr( 'style' );
 	}
 
+	/**
+	 * Installs or activates Otter and adds the template after
+	 *
+	 * @param {Object}   data
+	 * @param {Function} callback
+	 */
 	function importTemplate( data, callback ) {
 		if ( ! wpmmVars.isOtterInstalled ) {
 			installAndActivateOtter( () => addToPage( data, callback ) );
@@ -450,6 +461,13 @@ jQuery( function( $ ) {
 		}
 	}
 
+	/**
+	 * Adds the template content to the Maintenance Page
+	 * and calls the callback after
+	 *
+	 * @param {Object}   data
+	 * @param {Function} callback
+	 */
 	function addToPage( data, callback ) {
 		data.action = 'wpmm_insert_template';
 		$.post( wpmmVars.ajaxURL, data, function( response ) {
@@ -464,6 +482,11 @@ jQuery( function( $ ) {
 		}, 'json' );
 	}
 
+	/**
+	 * Installs Otter then calls the activation function with the callback
+	 *
+	 * @param {Function} callback
+	 */
 	function installAndActivateOtter( callback ) {
 		$.post( wpmmVars.ajaxURL, {
 			action: 'wp_ajax_install_plugin',
@@ -483,6 +506,11 @@ jQuery( function( $ ) {
 		} );
 	}
 
+	/**
+	 * Activates Otter and calls a callback
+	 *
+	 * @param {Function} callback
+	 */
 	function activateOtter( callback ) {
 		$.get( wpmmVars.otterActivationLink, function() {
 			callback();
