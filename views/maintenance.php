@@ -167,6 +167,10 @@ defined( 'ABSPATH' ) || exit;
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_linkedin'] ) ) { ?>
 						<a class="linkedin" href="<?php echo esc_url( $this->plugin_settings['modules']['social_linkedin'] ); ?>">linkedin</a>
 					<?php } ?>
+
+					<?php if ( ! empty( $this->plugin_settings['modules']['social_buymeacoffee'] ) ) { ?>
+						<a class="bmc" href="<?php echo esc_url( $this->plugin_settings['modules']['social_buymeacoffee'] ); ?>">buy me a coffee</a>
+					<?php } ?>
 				</div>
 			<?php } ?>
 

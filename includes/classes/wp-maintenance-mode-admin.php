@@ -367,16 +367,17 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color( $_POST['options']['modules']['subscribe_text_color'] );
 
 					// Social networks
-					$_POST['options']['modules']['social_status']    = (int) $_POST['options']['modules']['social_status'];
-					$_POST['options']['modules']['social_target']    = (int) $_POST['options']['modules']['social_target'];
-					$_POST['options']['modules']['social_github']    = sanitize_text_field( $_POST['options']['modules']['social_github'] );
-					$_POST['options']['modules']['social_dribbble']  = sanitize_text_field( $_POST['options']['modules']['social_dribbble'] );
-					$_POST['options']['modules']['social_twitter']   = sanitize_text_field( $_POST['options']['modules']['social_twitter'] );
-					$_POST['options']['modules']['social_facebook']  = sanitize_text_field( $_POST['options']['modules']['social_facebook'] );
-					$_POST['options']['modules']['social_instagram'] = sanitize_text_field( $_POST['options']['modules']['social_instagram'] );
-					$_POST['options']['modules']['social_pinterest'] = sanitize_text_field( $_POST['options']['modules']['social_pinterest'] );
-					$_POST['options']['modules']['social_google+']   = sanitize_text_field( $_POST['options']['modules']['social_google+'] );
-					$_POST['options']['modules']['social_linkedin']  = sanitize_text_field( $_POST['options']['modules']['social_linkedin'] );
+					$_POST['options']['modules']['social_status']    	= (int) $_POST['options']['modules']['social_status'];
+					$_POST['options']['modules']['social_target']    	= (int) $_POST['options']['modules']['social_target'];
+					$_POST['options']['modules']['social_github']    	= sanitize_text_field( $_POST['options']['modules']['social_github'] );
+					$_POST['options']['modules']['social_dribbble']  	= sanitize_text_field( $_POST['options']['modules']['social_dribbble'] );
+					$_POST['options']['modules']['social_twitter']   	= sanitize_text_field( $_POST['options']['modules']['social_twitter'] );
+					$_POST['options']['modules']['social_facebook']  	= sanitize_text_field( $_POST['options']['modules']['social_facebook'] );
+					$_POST['options']['modules']['social_instagram'] 	= sanitize_text_field( $_POST['options']['modules']['social_instagram'] );
+					$_POST['options']['modules']['social_pinterest'] 	= sanitize_text_field( $_POST['options']['modules']['social_pinterest'] );
+					$_POST['options']['modules']['social_google+']   	= sanitize_text_field( $_POST['options']['modules']['social_google+'] );
+					$_POST['options']['modules']['social_linkedin']  	= sanitize_text_field( $_POST['options']['modules']['social_linkedin'] );
+					$_POST['options']['modules']['social_buymeacoffee'] = sanitize_text_field( $_POST['options']['modules']['social_buymeacoffee'] );
 
 					// Contact
 					$_POST['options']['modules']['contact_status']  = (int) $_POST['options']['modules']['contact_status'];

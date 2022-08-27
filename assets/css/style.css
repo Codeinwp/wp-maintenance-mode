@@ -294,6 +294,9 @@ body {
 .wrap .social .linkedin {
     background-position: -633px 0;
 }
+.wrap .social .bmc {
+	background-position: -777px 0;
+}
 /**
  * CONTACT FORM
  **/

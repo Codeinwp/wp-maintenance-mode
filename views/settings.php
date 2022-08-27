@@ -540,6 +540,14 @@ defined( 'ABSPATH' ) || exit;
 										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_linkedin'] ); ?>" name="options[modules][social_linkedin]" />
 									</td>
 								</tr>
+								<tr valign="top">
+									<th scope="row">
+										<label for="options[modules][social_buymeacoffee]">Buy Me a Coffee</label>
+									</th>
+									<td>
+										<input type="text" value="<?php echo esc_attr( $this->plugin_settings['modules']['social_buymeacoffee'] ); ?>" name="options[modules][social_buymeacoffee]" />
+									</td>
+								</tr>
 							</tbody>
 						</table>
 

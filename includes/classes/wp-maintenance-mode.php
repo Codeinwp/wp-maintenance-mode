@@ -151,6 +151,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'social_pinterest'     => '',
 					'social_google+'       => '',
 					'social_linkedin'      => '',
+					'social_buymeacoffee'  => '',
 					'contact_status'       => 0,
 					'contact_email'        => get_option( 'admin_email' ) ? get_option( 'admin_email' ) : '',
 					'contact_effects'      => 'move_top|move_bottom',
