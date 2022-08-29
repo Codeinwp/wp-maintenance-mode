@@ -127,7 +127,7 @@ function scrollToBottom() {
 function inputError( msg ) {
 	jQuery( '.bot-error p' ).text( msg );
 	jQuery( '.bot-error' )
-		.animate( { bottom: 0 }, 500 )
+		.animate( { bottom: '20px' }, 500 )
 		.delay( 3000 )
 		.animate( { bottom: '-70px' }, 500 );
 }
@@ -230,6 +230,10 @@ function showStatement( pos ) {
 		statements = [ node.statement ];
 	} else if ( jQuery.type( node.statement ) === 'function' ) {
 		statements = node.statement( context );
+	}
+
+	if ( pos === 1.5 || pos === 1.6 ) {
+		jQuery( '.avatar-notice' ).remove();
 	}
 
 	/*

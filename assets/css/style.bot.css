@@ -4,7 +4,6 @@
  */
 .bot .wrap { margin-top: 60px; }
 .bot .wrap h1 { margin-bottom: 50px; }
-.wrap.under-bot { margin-top: 50px; }
 .wrap.under-bot .countdown { margin-bottom: 50px; }
 .wrap.under-bot .social { margin-bottom: 50px; }
 
@@ -267,14 +266,15 @@ CHAT BOT STYLING
 }
 
 .bot-error {
-  width: 100%;
-  background: rgba(255, 69, 69, 0.8);
-  line-height: 65px;
+  background: #000;
+  line-height: 50px;
   padding: 0 50px;
   color: #fff;
-  font-size: 20px;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 5px;
+  z-index: 5;
 }
 
 .bot-error p {
