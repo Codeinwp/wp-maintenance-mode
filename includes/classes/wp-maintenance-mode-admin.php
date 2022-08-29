@@ -56,6 +56,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_subscribe', array( $this, 'subscribe_newsletter' ) );
 			add_action( 'wp_ajax_wpmm_change_template_category', array( $this, 'change_template_category' ) );
 			add_action( 'wp_ajax_wpmm_toggle_gutenberg', array( $this, 'toggle_gutenberg' ) );
+			add_action( 'wp_ajax_wpmm_update_sdk_options', array( $this, 'wpmm_update_sdk_options' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
@@ -138,6 +139,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					array(
 						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
 						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'ajaxNonce'             => wp_create_nonce( 'ajax' ),
 						'wizardNonce'           => wp_create_nonce( 'wizard' ),
 						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
 						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
@@ -739,6 +741,28 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			if ( ! $current_option && ! get_option( 'wpmm_migration_time' ) ) {
 				update_option( 'wpmm_migration_time', time() );
 			}
+
+			wp_send_json_success();
+		}
+
+		/**
+		 * Updates options to track Otter traffic
+		 *
+		 * @return void
+		 */
+		function wpmm_update_sdk_options() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'ajax' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			update_option( 'themeisle_sdk_promotions_otter_installed', true );
+			update_option( 'otter_reference_key', 'wp-maintenance-mode' );
 
 			wp_send_json_success();
 		}

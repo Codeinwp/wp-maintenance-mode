@@ -502,6 +502,7 @@ jQuery( function( $ ) {
 				return false;
 			}
 
+			updateSDKOptions();
 			activateOtter( callback );
 		} );
 	}
@@ -514,6 +515,22 @@ jQuery( function( $ ) {
 	function activateOtter( callback ) {
 		$.get( wpmmVars.otterActivationLink, function() {
 			callback();
+		} );
+	}
+
+	/**
+	 * Updates options to track Otter traffic.
+	 * Fires when Otter is installed.
+	 */
+	function updateSDKOptions() {
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_update_sdk_options',
+			_wpnonce: wpmmVars.ajaxNonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				// eslint-disable-next-line no-console
+				console.error( response.data );
+			}
 		} );
 	}
 } );
