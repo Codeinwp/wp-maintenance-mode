@@ -180,7 +180,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				);
 
 				// add code editor (Code Mirror) to the `other_custom_css` textarea
-				if ( isset( $GLOBALS['wp_version'] ) && version_compare( $GLOBALS['wp_version'], '4.9.0', '>=' ) && function_exists( 'wp_enqueue_code_editor' ) ) {
+				if ( ! get_option( 'wpmm_new_look' ) && isset( $GLOBALS['wp_version'] ) && version_compare( $GLOBALS['wp_version'], '4.9.0', '>=' ) && function_exists( 'wp_enqueue_code_editor' ) ) {
 					$settings = wp_enqueue_code_editor(
 						array(
 							'type'       => 'text/css',
