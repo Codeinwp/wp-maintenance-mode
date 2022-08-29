@@ -227,14 +227,18 @@ jQuery( function( $ ) {
 				title: wpmmVars.confirmModalTexts.title,
 				description: wpmmVars.confirmModalTexts.description,
 				first_button: `<button class="button button-primary button-big confirm button-import">${ wpmmVars.confirmModalTexts.buttonContinue }</button>`,
-				second_button: `<a href="#" class="button button-secondary button-big go-back" onClick="window.location.reload()">${ wpmmVars.confirmModalTexts.buttonGoBack }</a>`,
+				second_button: `<button class="button button-secondary button-big go-back">${ wpmmVars.confirmModalTexts.buttonGoBack }</button>`,
 			} );
 
 			const importButton = this;
 			$( 'button.confirm' ).on( 'click', function() {
 				$( this ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
-				$( '.modal-content' ).find( '.go-back' ).addClass( 'disabled' );
+				$( '.modal-content' ).find( $( '.go-back' ) ).addClass( 'disabled' );
 				fireImport( importButton );
+			} );
+
+			$( 'button.go-back' ).on( 'click', function() {
+				$( '.modal-overlay' ).remove();
 			} );
 		} else {
 			fireImport( this );
@@ -253,11 +257,13 @@ jQuery( function( $ ) {
 			category,
 		};
 
+		const prevText = $( button ).text();
+
 		$( button ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
 		$( '.button-import' ).addClass( 'disabled' ).css( 'pointer-events', 'none' );
 
 		templateWrap.removeClass( 'can-import' );
-		button.parentElement.classList.add( 'importing' );
+		$( button ).add( 'importing' );
 
 		importTemplate( data, function( response ) {
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
@@ -267,7 +273,18 @@ jQuery( function( $ ) {
 				title: wpmmVars.modalTexts.title,
 				description: wpmmVars.modalTexts.description,
 				first_button: `<a href="${ pageEditURL }" class="button button-primary button-big">${ wpmmVars.modalTexts.buttonPage }</a>`,
-				second_button: `<a href="#" class="button button-secondary button-big" onClick="window.location.reload()">${ wpmmVars.modalTexts.buttonSettings }</a>`,
+				second_button: `<button class="button button-secondary button-big go-back">${ wpmmVars.modalTexts.buttonSettings }</button>`,
+			} );
+
+			$( 'button.go-back' ).on( 'click', function() {
+				$( button ).find( $( '.dashicons.dashicons-update' ) ).remove();
+				$( button ).text( prevText );
+				$( '.button-import' ).removeClass( 'disabled' ).css( 'pointer-events', 'auto' );
+
+				templateWrap.addClass( 'can-import' );
+				$( button ).removeClass( 'importing' );
+
+				$( '.modal-overlay' ).remove();
 			} );
 		} );
 	}
@@ -420,7 +437,7 @@ jQuery( function( $ ) {
 	} );
 
 	/**
-	 * Adds elements and CSS
+	 * Adds elements and CSS when importing from wizard
 	 *
 	 * @param {string} slug The template that will be imported
 	 */
