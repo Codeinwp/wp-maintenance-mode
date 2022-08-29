@@ -90,3 +90,10 @@ $autoload_path = __DIR__ . '/vendor/autoload.php';
 if ( is_file( $autoload_path ) ) {
 	require_once $autoload_path;
 }
+
+add_filter(
+	'wp_maintenance_mode_load_promotions',
+	function() {
+		return array( 'otter' );
+	}
+);
