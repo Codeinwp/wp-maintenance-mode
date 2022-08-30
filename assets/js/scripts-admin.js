@@ -263,7 +263,7 @@ jQuery( function( $ ) {
 		$( '.button-import' ).addClass( 'disabled' ).css( 'pointer-events', 'none' );
 
 		templateWrap.removeClass( 'can-import' );
-		$( button ).add( 'importing' );
+		$( button ).parent().addClass( 'importing' );
 
 		importTemplate( data, function( response ) {
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
@@ -273,18 +273,7 @@ jQuery( function( $ ) {
 				title: wpmmVars.modalTexts.title,
 				description: wpmmVars.modalTexts.description,
 				first_button: `<a href="${ pageEditURL }" class="button button-primary button-big">${ wpmmVars.modalTexts.buttonPage }</a>`,
-				second_button: `<button class="button button-secondary button-big go-back">${ wpmmVars.modalTexts.buttonSettings }</button>`,
-			} );
-
-			$( 'button.go-back' ).on( 'click', function() {
-				$( button ).find( $( '.dashicons.dashicons-update' ) ).remove();
-				$( button ).text( prevText );
-				$( '.button-import' ).removeClass( 'disabled' ).css( 'pointer-events', 'auto' );
-
-				templateWrap.addClass( 'can-import' );
-				$( button ).removeClass( 'importing' );
-
-				$( '.modal-overlay' ).remove();
+				second_button: `<button class="button button-secondary button-big" onClick="window.location.reload()">${ wpmmVars.modalTexts.buttonSettings }</button>`,
 			} );
 		} );
 	}
