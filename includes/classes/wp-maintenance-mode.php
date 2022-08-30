@@ -19,7 +19,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
-			if ( ! get_option( 'wpmm_settings' ) || get_option( 'wpmm_settings' ) === '' ) {
+			if ( false ) {
 				update_option( 'wpmm_show_migration', '0' );
 				update_option( 'wpmm_new_look', '1' );
 
@@ -48,19 +48,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// Check update
 			add_action( 'admin_init', array( $this, 'check_update' ) );
 
-			add_filter(
-				'page_template',
-				function( $page_template ) {
-					$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
-					$page_id  = $settings['design']['page_id'];
+			if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
+				add_filter(
+					'page_template',
+					function( $page_template ) {
+						$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
+						$page_id  = $settings['design']['page_id'];
 
-					if ( is_page( $page_id ) ) {
-						return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
+						if ( is_page( $page_id ) ) {
+							return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
+						}
+
+						return $page_template;
 					}
-
-					return $page_template;
-				}
-			);
+				);
+			}
 
 			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 				// INIT
@@ -637,6 +639,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! $this->check_search_bots() &&
 					! ( defined( 'WP_CLI' ) && WP_CLI )
 			) {
+				if ( get_option( 'wpmm_new_look' ) ) {
+					include_once wpmm_get_template_path( 'maintenance.php', true );
+					return;
+				}
+
 				// HEADER STUFF
 				$protocol         = ! empty( $_SERVER['SERVER_PROTOCOL'] ) && in_array( $_SERVER['SERVER_PROTOCOL'], array( 'HTTP/1.1', 'HTTP/1.0' ), true ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 				$charset          = get_bloginfo( 'charset' ) ? get_bloginfo( 'charset' ) : 'UTF-8';
