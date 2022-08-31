@@ -257,8 +257,6 @@ jQuery( function( $ ) {
 			category,
 		};
 
-		const prevText = $( button ).text();
-
 		$( button ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
 		$( '.button-import' ).addClass( 'disabled' ).css( 'pointer-events', 'none' );
 
@@ -369,6 +367,8 @@ jQuery( function( $ ) {
 		importTemplate( data, function( response ) {
 			moveToStep( 'import', 'subscribe' );
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
+
+			$( '#wpmm-wizard-wrapper .finish-step .heading' ).text( wpmmVars.finishWizardStrings[ category ] );
 		} );
 	} );
 

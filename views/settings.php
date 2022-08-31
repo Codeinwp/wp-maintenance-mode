@@ -31,7 +31,7 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 					<div class="step-wrap">
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Select the type of page you want.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Choose the type of template you want. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Choose the type of template you want. You can always customize your layout.', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
 								<form>
 									<div>
@@ -71,7 +71,7 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 					<div class="step-wrap">
 						<div class="step finish-step" aria-hidden="true" style="display: none">
 							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
-							<h4><?php esc_html_e( 'Your coming soon page is ready!', 'wp-maintenance-mode' ); ?></h4>
+							<h4 class="heading"><?php esc_html_e( 'Your page is ready!', 'wp-maintenance-mode' ); ?></h4>
 							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
 							<div class="buttons-wrap">
 								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View page', 'wp-maintenance-mode' ); ?>"/>
@@ -294,7 +294,7 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 							<?php if ( $is_old_version ) { ?>
 								<p class="description"><i><?php echo __( '<b>Note</b>: You need at least WP 5.8 to use new generation maintenance pages.', 'wp-maintenance-mode' ); ?></i></p>
 							<?php } else { ?>
-								<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customise them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customize them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
 								<br/>
 								<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 							<?php } ?>

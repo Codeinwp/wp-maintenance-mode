@@ -149,6 +149,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
 						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
 						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'finishWizardStrings'   => array(
+							'maintenance' => __( 'Your maintenance page is ready!', 'wp-maintenance-mode' ),
+							'coming-soon' => __( 'Your coming soon page is ready!', 'wp-maintenance-mode' ),
+						),
 						'adminURL'              => get_admin_url(),
 						'otterActivationLink'   => add_query_arg(
 							array(
