@@ -624,6 +624,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				'post_type'    => 'page',
 				'post_status'  => 'private',
 				'post_content' => $blocks,
+				'meta_input'   => array( '_wp_page_template' => 'templates/wpmm-page-template.php' ),
 			);
 
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {

@@ -15,6 +15,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		protected $plugin_basename;
 		protected static $instance = null;
 
+		private $style_buffer;
+
 		/**
 		 * 3, 2, 1... Start!
 		 */
@@ -48,21 +50,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// Check update
 			add_action( 'admin_init', array( $this, 'check_update' ) );
 
-			if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
-				add_filter(
-					'page_template',
-					function( $page_template ) {
-						$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
-						$page_id  = $settings['design']['page_id'];
-
-						if ( is_page( $page_id ) ) {
-							return WPMM_VIEWS_PATH . '/wpmm-page-template.php';
-						}
-
-						return $page_template;
-					}
-				);
-			}
+			// Add maintenance page template
+			add_filter( 'theme_page_templates', array( $this, 'add_maintenance_template' ) );
+			add_filter( 'template_include', array( $this, 'use_maintenance_template' ) );
 
 			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 				// INIT
@@ -79,7 +69,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				}
 
 				update_option( 'show_on_front', 'page' );
-
 				add_filter(
 					'pre_option_page_on_front',
 					function ( $value ) {
@@ -107,6 +96,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// Enqueue Javascript files and add inline javascript
 				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
+
+				// This is a fix for some styles not being loaded on block themes
+				if ( wp_is_block_theme() ) {
+					add_action( 'wpmm_head', array( $this, 'remember_style_fse' ) );
+					add_action( 'wpmm_footer', array( $this, 'add_style_fse' ) );
+				}
 			} else {
 				if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
 					wp_update_post(
@@ -956,6 +951,106 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			foreach ( apply_filters( 'wpmm_styles', $styles ) as $handle => $href ) {
 				printf( "<link rel=\"stylesheet\" id=\"%s-css\" href=\"%s\" media=\"all\">\n", esc_attr( $handle ), esc_url( $href ) );
 			}
+		}
+
+		/**
+		 * Adds the maintenance page template to the templates dropdown
+		 *
+		 * @param $templates
+		 * @return mixed
+		 */
+		public function add_maintenance_template( $templates ) {
+			return array_merge(
+				$templates,
+				array(
+					'templates/wpmm-page-template.php' => html_entity_decode( '&harr; ' ) . __( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
+				)
+			);
+		}
+
+		/**
+		 * Applies the maintenance page template to the page
+		 *
+		 * @param $template
+		 * @return mixed|string
+		 */
+		public function use_maintenance_template( $template ) {
+			global $post;
+			if ( empty( $post ) ) {
+				return $template;
+			}
+
+			$current_template = get_post_meta( $post->ID, '_wp_page_template', true );
+			if ( 'templates/wpmm-page-template.php' !== $current_template ) {
+				return $template;
+			}
+
+			$file = WPMM_VIEWS_PATH . '/wpmm-page-template.php';
+			if ( file_exists( $file ) ) {
+				return $file;
+			}
+
+			return $template;
+		}
+
+		/**
+		 * Calls `wp_head()` and remembers all the stylesheets rendered in the
+		 * `style_buffer` variable.
+		 * This is a fix for block themes.
+		 *
+		 * @return void
+		 */
+		public function remember_style_fse() {
+			ob_start();
+			wp_head();
+			$output = ob_get_contents();
+			ob_end_clean();
+
+			echo $output;
+
+			$doc = new DOMDocument();
+			$doc->loadHTML( '<html>' . $output . '</html>' );
+			$this->style_buffer = $doc->getElementsByTagName( 'style' );
+		}
+
+		/**
+		 * Calls `wp_head()` at the end of file so that the missing stylesheets from the header
+		 * are added. Checks the `style_buffer` variable to not have duplicated styles.
+		 * This is a fix for block themes.
+		 *
+		 * @return void
+		 */
+		public function add_style_fse() {
+			ob_start();
+			wp_head();
+			$output = ob_get_contents();
+			ob_end_clean();
+
+			$doc = new DOMDocument();
+			$doc->loadHTML( '<html>' . $output . '</html>' );
+			$elems = $doc->getElementsByTagName( 'style' );
+			$css   = '';
+
+			$elems_length     = $elems->length;
+			$common_positions = array();
+
+			for ( $i = 0; $i < $elems_length; ++$i ) {
+				foreach ( $this->style_buffer as $style ) {
+					if ( $elems->item( $i )->C14N() == $style->C14N() ) {
+						$common_positions[] = $i;
+					};
+				}
+			}
+
+			for ( $i = 0; $i < $elems_length; ++$i ) {
+				if ( in_array( $i, $common_positions ) ) {
+					continue;
+				}
+
+				$css .= $elems->item( $i )->C14N();
+			}
+
+			echo $css;
 		}
 
 		/**
