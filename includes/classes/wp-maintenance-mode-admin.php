@@ -2,6 +2,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use ThemeIsle\GutenbergBlocks\CSS\CSS_Handler;
+
 if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 	class WP_Maintenance_Mode_Admin {
@@ -592,6 +594,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$this->plugin_settings['design']['page_id'] = $_POST['page_id'];
+			wp_update_post(
+				array(
+					'ID'         => $this->plugin_settings['design']['page_id'],
+					'meta_input' => array( '_wp_page_template' => 'templates/wpmm-page-template.php' ),
+				)
+			);
+
 			update_option( 'wpmm_settings', $this->plugin_settings );
 
 			wp_send_json_success();
@@ -604,6 +613,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return void
 		 */
 		public function insert_template() {
+			if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+				wp_send_json_error( array( 'error' => 'Otter Blocks is not activated' ) );
+			}
+
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
 				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
@@ -640,6 +653,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
+			CSS_Handler::generate_css_file( $page_id );
 
 			if ( 'wizard' === $_POST['source'] ) {
 				$this->plugin_settings['general']['status'] = 1;

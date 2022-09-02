@@ -10,11 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php do_action( 'wpmm_head' ); ?>
-	<?php
-	if ( ! wp_is_block_theme() ) {
-		wp_head();
-	}
-	?>
+	<?php wp_head(); ?>
 </head>
 <body  <?php body_class(); ?>>
 	<?php

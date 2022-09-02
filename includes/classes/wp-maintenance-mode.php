@@ -75,7 +75,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 						if ( ! is_user_logged_in() && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
 							$page_id = $this->plugin_settings['design']['page_id'];
 
-							Block_Frontend::$instance->enqueue_google_fonts( $page_id );
+							if ( ! function_exists( 'is_plugin_active' ) ) {
+								include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+							}
+
+							if ( is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+								Block_Frontend::$instance->enqueue_google_fonts( $page_id );
+							}
+
 							return $page_id;
 						}
 
@@ -1031,10 +1038,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$elems = $doc->getElementsByTagName( 'style' );
 			$css   = '';
 
-			$elems_length     = $elems->length;
 			$common_positions = array();
 
-			for ( $i = 0; $i < $elems_length; ++$i ) {
+			foreach ( $elems as $i => $elem ) {
 				foreach ( $this->style_buffer as $style ) {
 					if ( $elems->item( $i )->C14N() == $style->C14N() ) {
 						$common_positions[] = $i;
@@ -1042,7 +1048,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				}
 			}
 
-			for ( $i = 0; $i < $elems_length; ++$i ) {
+			foreach ( $elems as $i => $elem ) {
 				if ( in_array( $i, $common_positions ) ) {
 					continue;
 				}
