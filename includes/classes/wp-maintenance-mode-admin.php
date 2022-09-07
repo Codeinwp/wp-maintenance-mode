@@ -629,7 +629,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$template_slug = $_POST['template_slug'];
 			$category      = $_POST['category'];
-			$template      = wp_json_file_decode( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' );
+			$template      = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
 
 			$blocks = str_replace( '\n', '', $template->content );
 

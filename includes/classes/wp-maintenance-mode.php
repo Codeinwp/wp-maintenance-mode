@@ -105,7 +105,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
 
 				// This is a fix for some styles not being loaded on block themes
-				if ( wp_is_block_theme() ) {
+				if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
 					add_action( 'wpmm_head', array( $this, 'remember_style_fse' ) );
 					add_action( 'wpmm_footer', array( $this, 'add_style_fse' ) );
 				}
