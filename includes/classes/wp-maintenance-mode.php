@@ -54,6 +54,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			add_filter( 'theme_page_templates', array( $this, 'add_maintenance_template' ) );
 			add_filter( 'template_include', array( $this, 'use_maintenance_template' ) );
 
+			// This is a fix for some styles not being loaded on block themes
+			if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+				add_action( 'wpmm_head', array( $this, 'remember_style_fse' ) );
+				add_action( 'wpmm_footer', array( $this, 'add_style_fse' ) );
+			}
+
 			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 				// INIT
 				add_action( ( is_admin() ? 'init' : 'template_redirect' ), array( $this, 'init' ) );
@@ -103,21 +109,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// Enqueue Javascript files and add inline javascript
 				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
-
-				// This is a fix for some styles not being loaded on block themes
-				if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
-					add_action( 'wpmm_head', array( $this, 'remember_style_fse' ) );
-					add_action( 'wpmm_footer', array( $this, 'add_style_fse' ) );
-				}
 			} else {
-				if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
-					wp_update_post(
-						array(
-							'ID'          => $this->plugin_settings['design']['page_id'],
-							'post_status' => 'private',
-						)
-					);
-				}
+				// make maintenance page private when maintenance mode is disabled
+				add_action(
+					'init',
+					function() {
+						if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
+							wp_update_post(
+								array(
+									'ID'          => $this->plugin_settings['design']['page_id'],
+									'post_status' => 'private',
+								)
+							);
+						}
+					}
+				);
 			}
 		}
 
