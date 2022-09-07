@@ -596,8 +596,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$this->plugin_settings['design']['page_id'] = $_POST['page_id'];
 			wp_update_post(
 				array(
-					'ID'         => $this->plugin_settings['design']['page_id'],
-					'meta_input' => array( '_wp_page_template' => 'templates/wpmm-page-template.php' ),
+					'ID'            => $this->plugin_settings['design']['page_id'],
+					'page_template' => 'templates/wpmm-page-template.php',
 				)
 			);
 
@@ -634,10 +634,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$blocks = str_replace( '\n', '', $template->content );
 
 			$post_arr = array(
-				'post_type'    => 'page',
-				'post_status'  => 'private',
-				'post_content' => $blocks,
-				'meta_input'   => array( '_wp_page_template' => 'templates/wpmm-page-template.php' ),
+				'post_type'     => 'page',
+				'post_status'   => 'private',
+				'post_content'  => $blocks,
+				'page_template' => 'templates/wpmm-page-template.php',
 			);
 
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {
