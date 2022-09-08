@@ -476,7 +476,7 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 													__( '* source <a href="%s" target="_blank">Free Photos</a>', 'wp-maintenance-mode' ),
 													wpmm_translated_string_allowed_html()
 												),
-												esc_url( wpmm_get_utmized_url( 'https://themeisle.com/blog/wordpress-stock-photos/', array( 'source' => 'settings' ) ) )
+												esc_url( wpmm_get_utmized_url( 'https://themeisle.com/blog/wordpress-stock-photos/', array( 'campaign' => 'settings' ) ) )
 											);
 											?>
 										</p>
