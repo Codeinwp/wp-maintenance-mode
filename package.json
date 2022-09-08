@@ -22,7 +22,7 @@
     "conventional-changelog-simple-preset": "^1.0.14",
     "cssnano": "^4.1.11",
     "eslint": "^8.22.0",
-    "grunt": "^1.4.0",
+    "grunt": "^1.5.3",
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-contrib-uglify-es": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
