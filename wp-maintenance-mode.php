@@ -4,7 +4,7 @@
  *
  * Plugin Name: WP Maintenance Mode & Coming Soon
  * Description: Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
- * Version: 2.4.6
+ * Version: 2.4.7
  * Author: Themeisle
  * Author URI: https://themeisle.com/
  * Twitter: themeisle
