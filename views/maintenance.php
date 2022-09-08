@@ -16,7 +16,13 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-?>
+
+if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+	if ( ! is_front_page() ) {
+		wp_redirect( home_url() );
+	}
+} else {
+	?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> >
 	<head>
@@ -43,10 +49,9 @@ defined( 'ABSPATH' ) || exit;
 
 			<?php
 			/**
-			 * When the bot feature is enabled, the text is not displayed anymore.
-			 * Also, we don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
+			 * We don't escape the $text, because wp_kses_post was applied before do_shortcode. So it's safe to output it.
 			 */
-			if ( ! empty( $text ) && $this->plugin_settings['bot']['status'] === 0 ) {
+			if ( ! empty( $text ) ) {
 				$allowed_html = wp_kses_allowed_html( 'post' );
 
 				$allowed_html['form']  = array(
@@ -75,18 +80,15 @@ defined( 'ABSPATH' ) || exit;
 
 			<!-- Bot -->
 			<div class="bot-container">
-				<div class="bot-chat-wrapper">
-					<!-- Chats -->
+				<div class="bot-avatar"><div class="avatar-notice"></div></div>
+				<div class="bot-chat-wrapper" style="display: none">
 					<div class="chat-container cf"></div>
-					<!-- User input -->
 					<div class="input"></div>
-					<!-- User choices -->
 					<div class="choices cf"></div>
 				</div>
 			</div>
 
 			<div class="bot-error"><p></p></div>
-
 			<div class="wrap under-bot">
 			<?php } ?>
 
@@ -96,13 +98,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php } ?>
 
 			<?php
-			/**
-			 * When the bot feature is enabled, the subscribe form is not displayed anymore.
-			 */
-			if (
-					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) &&
-					( isset( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 0 )
-			) {
+			if ( ( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ) {
 				?>
 				<!-- Subscribe -->
 				<?php if ( ! empty( $this->plugin_settings['modules']['subscribe_text'] ) ) { ?>
@@ -134,7 +130,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php } ?>
 
 			<?php if ( ! empty( $this->plugin_settings['modules']['social_status'] ) && $this->plugin_settings['modules']['social_status'] === 1 ) { ?>
-				<!-- Social networks -->        
+				<!-- Social networks -->
 				<div class="social" data-target="<?php echo ! empty( $this->plugin_settings['modules']['social_target'] ) ? 1 : 0; ?>">
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_twitter'] ) ) { ?>
 						<a class="tw" href="<?php echo esc_url( $this->plugin_settings['modules']['social_twitter'] ); ?>">twitter</a>
@@ -146,7 +142,7 @@ defined( 'ABSPATH' ) || exit;
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_instagram'] ) ) { ?>
 						<a class="instagram" href="<?php echo esc_url( $this->plugin_settings['modules']['social_instagram'] ); ?>">instagram</a>
-					<?php } ?>    
+					<?php } ?>
 
 					<?php if ( ! empty( $this->plugin_settings['modules']['social_pinterest'] ) ) { ?>
 						<a class="pin" href="<?php echo esc_url( $this->plugin_settings['modules']['social_pinterest'] ); ?>">pinterest</a>
@@ -225,14 +221,14 @@ defined( 'ABSPATH' ) || exit;
 
 			<?php
 			if (
-					( ! empty( $this->plugin_settings['general']['admin_link'] ) && $this->plugin_settings['general']['admin_link'] === 1 ) ||
-					( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 )
+				( ! empty( $this->plugin_settings['general']['admin_link'] ) && $this->plugin_settings['general']['admin_link'] === 1 ) ||
+				( ! empty( $this->plugin_settings['gdpr']['status'] ) && $this->plugin_settings['gdpr']['status'] === 1 )
 			) {
 				?>
 				<!-- Footer links -->
 				<div class="footer_links">
 					<?php if ( $this->plugin_settings['general']['admin_link'] === 1 ) { ?>
-						<a href="<?php echo esc_url( admin_url() ); ?>"><?php esc_html_e( 'Dashboard', 'wp-maintenance-mode' ); ?></a> 
+						<a href="<?php echo esc_url( admin_url() ); ?>"><?php esc_html_e( 'Dashboard', 'wp-maintenance-mode' ); ?></a>
 					<?php } ?>
 
 					<?php if ( $this->plugin_settings['gdpr']['status'] === 1 ) { ?>
@@ -243,7 +239,7 @@ defined( 'ABSPATH' ) || exit;
 		</div>
 
 		<script type='text/javascript'>
-			var wpmm_vars = {"ajax_url": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
+			const wpmmVars = {"ajaxURL": "<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"};
 		</script>
 
 		<?php
@@ -252,3 +248,7 @@ defined( 'ABSPATH' ) || exit;
 		?>
 	</body>
 </html>
+	<?php
+	exit();
+}
+?>

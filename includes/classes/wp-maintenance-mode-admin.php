@@ -2,9 +2,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use ThemeIsle\GutenbergBlocks\CSS\CSS_Handler;
+
 if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 	class WP_Maintenance_Mode_Admin {
+
+		const SUBSCRIBE_ROUTE = 'https://api.themeisle.com/tracking/subscribe';
 
 		protected static $instance = null;
 		protected $plugin_slug;
@@ -31,6 +35,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			// Add the options page and menu item.
 			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
 
+			add_action( 'admin_init', array( $this, 'maybe_redirect' ) );
+
 			// Add an action link pointing to the options page
 			if ( is_multisite() && is_plugin_active_for_network( $this->plugin_basename ) ) {
 				// settings link will point to admin_url of the main blog, not to network_admin_url
@@ -47,12 +53,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_subscribers_empty_list', array( $this, 'subscribers_empty_list' ) );
 			add_action( 'wp_ajax_wpmm_dismiss_notices', array( $this, 'dismiss_notices' ) );
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
+			add_action( 'wp_ajax_wpmm_select_page', array( $this, 'select_page' ) );
+			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
+			add_action( 'wp_ajax_wpmm_subscribe', array( $this, 'subscribe_newsletter' ) );
+			add_action( 'wp_ajax_wpmm_change_template_category', array( $this, 'change_template_category' ) );
+			add_action( 'wp_ajax_wpmm_toggle_gutenberg', array( $this, 'toggle_gutenberg' ) );
+			add_action( 'wp_ajax_wpmm_update_sdk_options', array( $this, 'wpmm_update_sdk_options' ) );
 
 			// Add admin_post_$action
 			add_action( 'admin_post_wpmm_save_settings', array( $this, 'save_plugin_settings' ) );
 
 			// Add text to footer
 			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 5 );
+
+			// Wizard screen setup
+			add_filter( 'admin_body_class', array( $this, 'add_wizard_classes' ) );
+
+			// Display custom page state
+			add_filter( 'display_post_states', array( $this, 'add_display_post_states' ), 10, 2 );
 		}
 
 		/**
@@ -72,7 +90,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * Load CSS files
 		 *
 		 * @since 2.0.0
-		 * @return type
+		 * @return void
 		 */
 		public function enqueue_admin_styles() {
 			if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
@@ -93,6 +111,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				wp_enqueue_style( $this->plugin_slug . '-admin-chosen', WPMM_CSS_URL . 'chosen' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-timepicker-addon-script', WPMM_CSS_URL . 'jquery-ui-timepicker-addon' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-admin-styles', WPMM_CSS_URL . 'style-admin' . WPMM_ASSETS_SUFFIX . '.css', array( 'wp-color-picker' ), WP_Maintenance_Mode::VERSION );
+
+				// wizard stylesheet
+				if ( get_option( 'wpmm_fresh_install', false ) ) {
+					wp_enqueue_style( $this->plugin_slug . '-wizard-styles', WPMM_CSS_URL . 'style-wizard' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
+				}
 			}
 		}
 
@@ -114,19 +137,56 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-admin-chosen', WPMM_JS_URL . 'chosen.jquery' . WPMM_ASSETS_SUFFIX . '.js', array(), WP_Maintenance_Mode::VERSION, true );
 				wp_localize_script(
 					$this->plugin_slug . '-admin-script',
-					'wpmm_vars',
+					'wpmmVars',
 					array(
-						'ajax_url'                => admin_url( 'admin-ajax.php' ),
-						'plugin_url'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
-						'image_uploader_defaults' => array(
-							'title'       => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
-							'button_text' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
+						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'ajaxNonce'             => wp_create_nonce( 'ajax' ),
+						'wizardNonce'           => wp_create_nonce( 'wizard' ),
+						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
+						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
+						'isOtterActive'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'errorString'           => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loadingString'         => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
+						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
+						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'finishWizardStrings'   => array(
+							'maintenance' => __( 'Your maintenance page is ready!', 'wp-maintenance-mode' ),
+							'coming-soon' => __( 'Your coming soon page is ready!', 'wp-maintenance-mode' ),
+						),
+						'adminURL'              => get_admin_url(),
+						'otterActivationLink'   => add_query_arg(
+							array(
+								'action'        => 'activate',
+								'plugin'        => rawurlencode( 'otter-blocks/otter-blocks.php' ),
+								'plugin_status' => 'all',
+								'paged'         => '1',
+								'_wpnonce'      => wp_create_nonce( 'activate-plugin_otter-blocks/otter-blocks.php' ),
+							),
+							esc_url( network_admin_url( 'plugins.php' ) )
+						),
+						'modalTexts'            => array(
+							'title'          => __( 'The template has been imported!', 'wp-maintenance-mode' ),
+							'description'    => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
+							'buttonPage'     => __( 'Go to page', 'wp-maintenance-mode' ),
+							'buttonSettings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
+						),
+						'confirmModalTexts'     => array(
+							'title'          => __( 'Import this template?', 'wp-maintenance-mode' ),
+							'description'    => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
+							'buttonContinue' => __( 'Continue', 'wp-maintenance-mode' ),
+							'buttonGoBack'   => __( 'Go back', 'wp-maintenance-mode' ),
+						),
+						'imageUploaderDefaults' => array(
+							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
+							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
 					)
 				);
 
 				// add code editor (Code Mirror) to the `other_custom_css` textarea
-				if ( isset( $GLOBALS['wp_version'] ) && version_compare( $GLOBALS['wp_version'], '4.9.0', '>=' ) && function_exists( 'wp_enqueue_code_editor' ) ) {
+				if ( ! get_option( 'wpmm_new_look' ) && isset( $GLOBALS['wp_version'] ) && version_compare( $GLOBALS['wp_version'], '4.9.0', '>=' ) && function_exists( 'wp_enqueue_code_editor' ) ) {
 					$settings = wp_enqueue_code_editor(
 						array(
 							'type'       => 'text/css',
@@ -242,6 +302,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$this->plugin_slug,
 				array( $this, 'display_plugin_settings' )
 			);
+		}
+
+		public function maybe_redirect() {
+			if ( ! get_option( 'wpmm_fresh_install', false ) || ! get_option( 'wpmm_settings_redirect', '1' ) ) {
+				return;
+			}
+
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				return;
+			}
+
+			if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
+				return;
+			}
+
+			update_option( 'wpmm_settings_redirect', '0' );
+			wp_safe_redirect( admin_url( 'options-general.php?page=wp-maintenance-mode' ) );
+			exit;
 		}
 
 		/**
@@ -383,7 +461,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$_POST['options']['modules']['contact_email']   = sanitize_text_field( $_POST['options']['modules']['contact_email'] );
 					$_POST['options']['modules']['contact_effects'] = sanitize_text_field( $_POST['options']['modules']['contact_effects'] );
 
-					// Google analytics
+					// Google Analytics
 					$_POST['options']['modules']['ga_status']       = (int) $_POST['options']['modules']['ga_status'];
 					$_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
 					$_POST['options']['modules']['ga_code']         = wpmm_sanitize_ga_code( $_POST['options']['modules']['ga_code'] );
@@ -497,6 +575,215 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} catch ( Exception $ex ) {
 				wp_send_json_error( $ex->getMessage() );
 			}
+		}
+
+		/**
+		 * Select a page as Maintenance Page
+		 *
+		 * @return void
+		 */
+		public function select_page() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-design' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			$this->plugin_settings['design']['page_id'] = $_POST['page_id'];
+			wp_update_post(
+				array(
+					'ID'            => $this->plugin_settings['design']['page_id'],
+					'page_template' => 'templates/wpmm-page-template.php',
+				)
+			);
+
+			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			wp_send_json_success();
+		}
+
+		/**
+		 * Insert the content from the template to the Maintenance Page
+		 * If no Maintenance Page exists, create one.
+		 *
+		 * @return void
+		 */
+		public function insert_template() {
+			if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+				wp_send_json_error( array( 'error' => 'Otter Blocks is not activated' ) );
+			}
+
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], $_POST['source'] ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			$template_slug = $_POST['template_slug'];
+			$category      = $_POST['category'];
+			$template      = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
+
+			$blocks = str_replace( '\n', '', $template->content );
+
+			$post_arr = array(
+				'post_type'     => 'page',
+				'post_status'   => 'private',
+				'post_content'  => $blocks,
+				'page_template' => 'templates/wpmm-page-template.php',
+			);
+
+			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {
+				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
+				$page_id        = wp_update_post( $post_arr );
+			} else {
+				$post_arr['post_title'] = 'Maintenance Page';
+				$page_id                = wp_insert_post( $post_arr );
+			}
+
+			if ( $page_id === 0 || $page_id instanceof WP_Error ) {
+				wp_send_json_error( array( 'error' => 'Could not get the page' ) );
+			}
+
+			$this->plugin_settings['design']['page_id'] = $page_id;
+			CSS_Handler::generate_css_file( $page_id );
+
+			if ( 'wizard' === $_POST['source'] ) {
+				$this->plugin_settings['general']['status'] = 1;
+				update_option( 'wpmm_fresh_install', false );
+			}
+
+			update_option( 'wpmm_settings', $this->plugin_settings );
+			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
+		}
+
+		/**
+		 * Subscribe user to plugin newsletter
+		 *
+		 * @return void
+		 */
+		public function subscribe_newsletter() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wizard' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			if ( ! isset( $_POST['email'] ) ) {
+				die( esc_html__( 'Empty field: email', 'wp-maintenance-mode' ) );
+			}
+
+			$response = wp_remote_post(
+				self::SUBSCRIBE_ROUTE,
+				array(
+					'headers' => array(
+						'Content-Type' => 'application/json',
+					),
+					'body'    => wp_json_encode(
+						array(
+							'slug'  => 'wp-maintenance-mode',
+							'site'  => get_site_url(),
+							'email' => $_POST['email'],
+						)
+					),
+				)
+			);
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json_error( $response->get_error_message() );
+			}
+
+			wp_send_json_success( $response );
+		}
+
+		/**
+		 * Change the category of templates to display
+		 *
+		 * @return void
+		 */
+		public function change_template_category() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'tab-design' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			if ( empty( $_POST['category'] ) ) {
+				die( esc_html__( 'Empty field: category.', 'wp-maintenance-mode' ) );
+			}
+
+			$this->plugin_settings['design']['template_category'] = $_POST['category'];
+			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			wp_send_json_success();
+		}
+
+		/**
+		 * Migrate to the new method of building the maintenance page or downgrade to the old one.
+		 * Used from the migration notice.
+		 *
+		 * @return void
+		 */
+		public function toggle_gutenberg() {
+			if ( empty( $_POST['source'] ) ) {
+				die( esc_html__( 'The source filed must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $_POST['source'] ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			$current_option = get_option( 'wpmm_new_look', false );
+			update_option( 'wpmm_new_look', ! $current_option );
+
+			if ( ! $current_option && ! get_option( 'wpmm_migration_time' ) ) {
+				update_option( 'wpmm_migration_time', time() );
+			}
+
+			wp_send_json_success();
+		}
+
+		/**
+		 * Updates options to track Otter traffic
+		 *
+		 * @return void
+		 */
+		function wpmm_update_sdk_options() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'ajax' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			update_option( 'themeisle_sdk_promotions_otter_installed', true );
+			update_option( 'otter_reference_key', 'wp-maintenance-mode' );
+
+			wp_send_json_success();
 		}
 
 		/**
@@ -625,12 +912,48 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					);
 				}
 
+				if ( ! get_option( 'wpmm_fresh_install' ) && get_option( 'wpmm_new_look' ) && $this->plugin_settings['general']['status'] === 1 ) {
+					if ( isset( $this->plugin_settings['design']['page_id'] ) ) {
+						$maintenance_page = get_post( $this->plugin_settings['design']['page_id'] );
+
+						if ( ( $maintenance_page instanceof WP_Post ) && $maintenance_page->post_status !== 'publish' && $maintenance_page->post_status !== 'private' ) {
+							$notices['maintenance_page_deleted'] = array(
+								'class' => 'error',
+								'msg'   => $maintenance_page->post_status === 'draft' ?
+									sprintf( __( '<strong>Action required</strong>: your Maintenance page is drafted. Visit the page to <a href="%s">publish</a> it.', 'wp-maintenance-mode' ), get_edit_post_link( $maintenance_page ) ) :
+									sprintf( __( '<strong>Action required</strong>: your Maintenance page has been deleted. Visit <a href="%s">settings page</a> to address this issue.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
+							);
+						}
+					}
+
+					if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
+						$notices['maintenance_page_not_found'] = array(
+							'class' => 'error',
+							'msg'   => sprintf( __( '<strong>Action required</strong>: you don\'t have a page as Maintenance page. Visit <a href="%s">settings page</a> to select one.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
+						);
+					}
+				}
+
 				// show notice if plugin has a notice saved
 				$wpmm_notice = get_option( 'wpmm_notice' );
 				if ( ! empty( $wpmm_notice ) && is_array( $wpmm_notice ) ) {
 					$notices['other'] = $wpmm_notice;
 				}
 			} else {
+				if ( get_option( 'wpmm_show_migration', true ) ) {
+					if ( ! get_option( 'wpmm_new_look' ) ) {
+						$notices['migration'] = array(
+							'class' => 'notice notice-success',
+							'msg'   => __( 'We upgraded the way maintenance pages are build. Migrate to use Gutenberg for your page!&emsp;<button id="wpmm-migrate" class="button button-primary">Migrate</button>', 'wp-maintenance-mode' ),
+						);
+					} else {
+						$notices['rollback'] = array(
+							'class' => 'notice wpmm_notices notice-info is-dismissible',
+							'msg'   => __( 'You migrated to use Gutenberg for building the Maintenance page.&emsp;<button id="wpmm-rollback" class="button button-link button-link-delete">Rollback</button>', 'wp-maintenance-mode' ),
+						);
+					}
+				}
+
 				// delete wpmm_notice
 				delete_option( 'wpmm_notice' );
 			}
@@ -654,12 +977,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				if ( empty( $notice_key ) ) {
 					throw new Exception( __( 'Notice key cannot be empty.', 'wp-maintenance-mode' ) );
 				}
-				if ( empty( $_POST['_wpnonce'] ) ) {
+				if ( empty( $_POST['_nonce'] ) ) {
 					throw new Exception( __( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
 				}
 
 				// check nonce validation
-				if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $notice_key ) ) {
+				if ( ! wp_verify_nonce( $_POST['_nonce'], 'notice_nonce_' . $notice_key ) ) {
 					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
 				}
 
@@ -717,6 +1040,35 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		/**
+		 * Add custom state to the maintenance page
+		 *
+		 * @param array $post_states Post states.
+		 * @param WP_Post $post Current post.
+		 * @return array
+		 */
+		public function add_display_post_states( $post_states, $post ) {
+			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] == $post->ID ) {
+				$post_states['wpmm_for_maintenance'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
+			}
+
+			return $post_states;
+		}
+
+		/**
+		 * Add classes to make the wizard full screen
+		 *
+		 * @param string $classes Body classes.
+		 * @return string
+		 */
+		public function add_wizard_classes( $classes ) {
+			if ( get_option( 'wpmm_fresh_install', false ) ) {
+				$classes .= 'wpmm-wizard-fullscreen';
+			}
+
+			return $classes;
+		}
+
+		/**
 		 * Return if policy is available. Useful for older WordPress versions.
 		 *
 		 * @return boolean
@@ -763,7 +1115,5 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );
 			}
 		}
-
 	}
-
 }

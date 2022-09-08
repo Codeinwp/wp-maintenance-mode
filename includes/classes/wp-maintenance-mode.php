@@ -1,5 +1,7 @@
 <?php
 
+use ThemeIsle\GutenbergBlocks\CSS\Block_Frontend;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
@@ -13,10 +15,25 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		protected $plugin_basename;
 		protected static $instance = null;
 
+		private $style_buffer;
+
 		/**
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			if ( ! get_option( 'wpmm_settings' ) || get_option( 'wpmm_settings' ) === '' ) {
+				update_option( 'wpmm_show_migration', '0' );
+				update_option( 'wpmm_new_look', '1' );
+
+				if ( version_compare( $GLOBALS['wp_version'], '5.8', '>=' ) ) {
+					update_option( 'wpmm_fresh_install', '1' );
+				}
+			}
+
+			if ( get_option( 'wpmm_migration_time' ) && ( ( time() - intval( get_option( 'wpmm_migration_time' ) ) > WEEK_IN_SECONDS ) ) ) {
+				update_option( 'wpmm_show_migration', '0' );
+			}
+
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
@@ -33,6 +50,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			// Check update
 			add_action( 'admin_init', array( $this, 'check_update' ) );
 
+			// Add maintenance page template
+			add_filter( 'theme_page_templates', array( $this, 'add_maintenance_template' ) );
+			add_filter( 'template_include', array( $this, 'use_maintenance_template' ) );
+
+			// This is a fix for some styles not being loaded on block themes
+			if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+				add_action( 'wpmm_head', array( $this, 'remember_style_fse' ) );
+				add_action( 'wpmm_footer', array( $this, 'add_style_fse' ) );
+			}
+
 			if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 				// INIT
 				add_action( ( is_admin() ? 'init' : 'template_redirect' ), array( $this, 'init' ) );
@@ -42,6 +69,32 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wp_ajax_wpmm_add_subscriber', array( $this, 'add_subscriber' ) );
 				add_action( 'wp_ajax_nopriv_wpmm_send_contact', array( $this, 'send_contact' ) );
 				add_action( 'wp_ajax_wpmm_send_contact', array( $this, 'send_contact' ) );
+
+				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) && get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
+					wp_publish_post( $this->plugin_settings['design']['page_id'] );
+				}
+
+				update_option( 'show_on_front', 'page' );
+				add_filter(
+					'pre_option_page_on_front',
+					function ( $value ) {
+						if ( ! is_user_logged_in() && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+							$page_id = $this->plugin_settings['design']['page_id'];
+
+							if ( ! function_exists( 'is_plugin_active' ) ) {
+								include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+							}
+
+							if ( is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+								Block_Frontend::$instance->enqueue_google_fonts( $page_id );
+							}
+
+							return $page_id;
+						}
+
+						return $value;
+					}
+				);
 
 				// Redirect
 				add_action( 'init', array( $this, 'redirect' ), 9 );
@@ -56,6 +109,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// Enqueue Javascript files and add inline javascript
 				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
+			} else {
+				// make maintenance page private when maintenance mode is disabled
+				add_action(
+					'init',
+					function() {
+						if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
+							return;
+						}
+						if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
+							wp_update_post(
+								array(
+									'ID'          => $this->plugin_settings['design']['page_id'],
+									'post_status' => 'private',
+								)
+							);
+						}
+					}
+				);
 			}
 		}
 
@@ -128,6 +199,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					'bg_custom'          => '',
 					'bg_predefined'      => 'bg1.jpg',
 					'other_custom_css'   => '',
+					'template_category'  => 'all',
 				),
 				'modules' => array(
 					'countdown_status'     => 0,
@@ -219,6 +291,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			} else {
 				self::single_activate();
 			}
+
+			update_option( 'wpmm_activated', time() );
 
 			// delete old options
 			delete_option( 'wp-maintenance-mode' );
@@ -576,6 +650,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! $this->check_search_bots() &&
 					! ( defined( 'WP_CLI' ) && WP_CLI )
 			) {
+				if ( get_option( 'wpmm_new_look' ) ) {
+					include_once wpmm_get_template_path( 'maintenance.php', true );
+					return;
+				}
+
 				// HEADER STUFF
 				$protocol         = ! empty( $_SERVER['SERVER_PROTOCOL'] ) && in_array( $_SERVER['SERVER_PROTOCOL'], array( 'HTTP/1.1', 'HTTP/1.0' ), true ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 				$charset          = get_bloginfo( 'charset' ) ? get_bloginfo( 'charset' ) : 'UTF-8';
@@ -633,8 +712,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// load maintenance mode template
 				include_once wpmm_get_template_path( 'maintenance.php', true );
 				ob_flush();
-
-				exit();
 			}
 		}
 
@@ -876,9 +953,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_css_files() {
-			$styles = array(
-				'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
-			);
+			$styles = array();
+			if ( ! get_option( 'wpmm_new_look' ) || ! ( isset( $this->plugin_settings['design']['page_id'] ) ) ) {
+				$styles = array(
+					'frontend' => WPMM_CSS_URL . 'style' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION,
+				);
+			}
 
 			if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 				$styles['bot'] = WPMM_CSS_URL . 'style.bot' . WPMM_ASSETS_SUFFIX . '.css?ver=' . self::VERSION;
@@ -890,12 +970,128 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		}
 
 		/**
+		 * Adds the maintenance page template to the templates dropdown
+		 *
+		 * @param $templates
+		 * @return mixed
+		 */
+		public function add_maintenance_template( $templates ) {
+			return array_merge(
+				$templates,
+				array(
+					'templates/wpmm-page-template.php' => html_entity_decode( '&harr; ' ) . __( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
+				)
+			);
+		}
+
+		/**
+		 * Applies the maintenance page template to the page
+		 *
+		 * @param $template
+		 * @return mixed|string
+		 */
+		public function use_maintenance_template( $template ) {
+			global $post;
+			if ( empty( $post ) ) {
+				return $template;
+			}
+
+			$current_template = get_post_meta( $post->ID, '_wp_page_template', true );
+			if ( 'templates/wpmm-page-template.php' !== $current_template ) {
+				return $template;
+			}
+
+			$file = WPMM_VIEWS_PATH . '/wpmm-page-template.php';
+			if ( file_exists( $file ) ) {
+				return $file;
+			}
+
+			return $template;
+		}
+
+		/**
+		 * Calls `wp_head()` and remembers all the stylesheets rendered in the
+		 * `style_buffer` variable.
+		 * This is a fix for block themes.
+		 *
+		 * @return void
+		 */
+		public function remember_style_fse() {
+			ob_start();
+			wp_head();
+			$output = ob_get_contents();
+			ob_end_clean();
+
+			echo $output;
+
+			$doc = new DOMDocument();
+			$doc->loadHTML( '<html>' . $output . '</html>' );
+			$this->style_buffer = $doc->getElementsByTagName( 'style' );
+		}
+
+		/**
+		 * Calls `wp_head()` at the end of file so that the missing stylesheets from the header
+		 * are added. Checks the `style_buffer` variable to not have duplicated styles.
+		 * This is a fix for block themes.
+		 *
+		 * @return void
+		 */
+		public function add_style_fse() {
+			ob_start();
+			wp_head();
+			$output = ob_get_contents();
+			ob_end_clean();
+
+			$doc = new DOMDocument();
+			$doc->loadHTML( '<html>' . $output . '</html>' );
+			$elems = $doc->getElementsByTagName( 'style' );
+			$css   = '';
+
+			$common_positions = array();
+
+			foreach ( $elems as $i => $elem ) {
+				foreach ( $this->style_buffer as $style ) {
+					if ( $elems->item( $i )->C14N() == $style->C14N() ) {
+						$common_positions[] = $i;
+					};
+				}
+			}
+
+			foreach ( $elems as $i => $elem ) {
+				if ( in_array( $i, $common_positions ) ) {
+					continue;
+				}
+
+				$css .= $elems->item( $i )->C14N();
+			}
+
+			echo $css;
+		}
+
+		/**
 		 * Add inline CSS style
 		 *
 		 * @since 2.4.0
 		 */
 		public function add_inline_css_style() {
 			$css_rules = array();
+
+			// "Manage Bot > Upload avatar" url
+			if ( ! empty( $this->plugin_settings['bot']['avatar'] ) ) {
+				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( $this->plugin_settings['bot']['avatar'] ) );
+			} else {
+				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( WPMM_IMAGES_URL . 'chatbot.png' ) );
+			}
+
+			// style below is not necessary in the new look
+			if ( get_option( 'wpmm_new_look' ) && isset( $this->plugin_settings['design']['page_id'] ) ) {
+				if ( empty( $css_rules ) ) {
+					return;
+				}
+
+				printf( "<style type=\"text/css\">\n%s\n</style>\n", wp_strip_all_tags( implode( "\n", $css_rules ) ) );
+				return;
+			}
 
 			// "Design > Content > Heading" color
 			if ( ! empty( $this->plugin_settings['design']['heading_color'] ) ) {
@@ -941,11 +1137,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$css_rules['modules.subscribe_text_color'] = sprintf( '.wrap h3, .wrap .subscribe_wrapper { color: %s; }', sanitize_hex_color( $this->plugin_settings['modules']['subscribe_text_color'] ) );
 			}
 
-			// "Manage Bot > Upload avatar" url
-			if ( ! empty( $this->plugin_settings['bot']['avatar'] ) ) {
-				$css_rules['bot.avatar'] = sprintf( '.bot-avatar { background-image: url("%s"); }', esc_url( $this->plugin_settings['bot']['avatar'] ) );
-			}
-
 			// "Design > Other > Custom CSS"
 			if ( ! empty( $this->plugin_settings['design']['other_custom_css'] ) ) {
 				$css_rules['design.other_custom_css'] = sanitize_textarea_field( $this->plugin_settings['design']['other_custom_css'] );
@@ -964,23 +1155,27 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.4.0
 		 */
 		public function add_js_files() {
-
 			$scripts = array(
 				'jquery'   => site_url( '/wp-includes/js/jquery/jquery' . WPMM_ASSETS_SUFFIX . '.js' ),
 				'fitvids'  => WPMM_JS_URL . 'jquery.fitvids' . WPMM_ASSETS_SUFFIX . '.js',
 				'frontend' => WPMM_JS_URL . 'scripts' . WPMM_ASSETS_SUFFIX . '.js?ver=' . self::VERSION,
 			);
 
-			if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
-				$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
-				$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
+			if ( ! get_option( 'wpmm_new_look' ) || ! ( isset( $this->plugin_settings['design']['page_id'] ) ) ) {
+				if ( ! empty( $this->plugin_settings['modules']['countdown_status'] ) && $this->plugin_settings['modules']['countdown_status'] === 1 ) {
+					$scripts['countdown-dependency'] = WPMM_JS_URL . 'jquery.plugin' . WPMM_ASSETS_SUFFIX . '.js';
+					$scripts['countdown']            = WPMM_JS_URL . 'jquery.countdown' . WPMM_ASSETS_SUFFIX . '.js';
+				}
+
+				if (
+					( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
+					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 )
+				) {
+					$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
+				}
 			}
 
-			if (
-					( ! empty( $this->plugin_settings['modules']['contact_status'] ) && $this->plugin_settings['modules']['contact_status'] === 1 ) ||
-					( ! empty( $this->plugin_settings['modules']['subscribe_status'] ) && $this->plugin_settings['modules']['subscribe_status'] === 1 ) ||
-					( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 )
-			) {
+			if ( ! empty( $this->plugin_settings['bot']['status'] ) && $this->plugin_settings['bot']['status'] === 1 ) {
 				$scripts['validate'] = WPMM_JS_URL . 'jquery.validate' . WPMM_ASSETS_SUFFIX . '.js';
 			}
 

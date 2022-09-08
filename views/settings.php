@@ -6,47 +6,119 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+$is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 ?>
 <div class="wrap">
-	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
+		<?php
+		if ( get_option( 'wpmm_fresh_install', false ) ) {
+			?>
+			<span id="wizard-exit"><img src="<?php echo esc_attr( WPMM_IMAGES_URL . 'external.svg' ); ?>" alt="exit"></span><?php } ?>
+	</h2>
 
 	<div class="wpmm-wrapper">
+		<?php
+		if ( get_option( 'wpmm_fresh_install', false ) ) {
+			$maintenance_slug = 'maintenance-modern';
+			$coming_soon_slug = 'coming-soon-modern';
+
+			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
+			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
+			?>
+			<div id="wpmm-wizard-wrapper">
+				<div class="slider-wrap">
+					<div class="step-wrap">
+						<div class="step import-step">
+							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
+							<p class="description"><?php esc_html_e( 'Just click on one of the pre-written templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
+							<div class="templates-radio">
+								<form>
+									<div>
+										<h6 class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></h6>
+										<input id="<?php echo esc_attr( $maintenance_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $maintenance_slug ); ?>" data-category="maintenance" checked="checked">
+										<label for="<?php echo esc_attr( $maintenance_slug ); ?>" class="template">
+											<img src="<?php echo esc_url( $maintenance_thumbnail ); ?>" alt="<?php echo esc_attr( $maintenance_slug ); ?>"/>
+										</label>
+									</div>
+									<div>
+										<h6 class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></h6>
+										<input id="<?php echo esc_attr( $coming_soon_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $coming_soon_slug ); ?>" data-category="coming-soon">
+										<label for="<?php echo esc_attr( $coming_soon_slug ); ?>" class="template">
+											<img src="<?php echo esc_url( $coming_soon_thumbnail ); ?>" alt="<?php echo esc_attr( $coming_soon_slug ); ?>"/>
+										</label>
+									</div>
+								</form>
+							</div>
+							<div id="wizard-import-button" class="import-button">
+								<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
+							</div>
+							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+						</div>
+					</div>
+					<div class="step-wrap">
+						<div class="step subscribe-step" aria-hidden="true" style="display: none">
+							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'subscribe.svg'; ?>" alt="subscribe"/>
+							<h4><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h4>
+							<p><?php esc_html_e( 'Keep up with feature announcements, promotions, tutorials, and new template releases.', 'wp-maintenance-mode' ); ?></p>
+							<div id="email-input-wrap">
+								<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
+								<input type="button" class="button button-primary button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
+							</div>
+							<input id="skip-subscribe" type="button" class="button button-link skip-link" value="<?php esc_attr_e( 'I\'ll skip for now, thanks!', 'wp-maintenance-mode' ); ?>" />
+						</div>
+					</div>
+					<div class="step-wrap">
+						<div class="step finish-step" aria-hidden="true" style="display: none">
+							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
+							<h4 class="heading"><?php esc_html_e( 'Your page is ready!', 'wp-maintenance-mode' ); ?></h4>
+							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
+							<div class="buttons-wrap">
+								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View page', 'wp-maintenance-mode' ); ?>"/>
+								<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } else { ?>
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="#general">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
 					</svg>
 
 					<?php esc_html_e( 'General', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#design">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 					</svg>
 
 					<?php esc_html_e( 'Design', 'wp-maintenance-mode' ); ?></a>
 				<a class="nav-tab" href="#modules">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
 					</svg>
 
 					<?php esc_html_e( 'Modules', 'wp-maintenance-mode' ); ?>
 				</a>
 				<a class="nav-tab" href="#bot">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 					</svg>
 
 					<?php esc_html_e( 'Manage Bot', 'wp-maintenance-mode' ); ?>
 				</a>
+				<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 				<a class="nav-tab" href="#gdpr">
-					<svg class="nav-tab-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="nav-tab-icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 					</svg>
 
 					<?php esc_html_e( 'GDPR', 'wp-maintenance-mode' ); ?>
-				</a>
+				</a> <?php } ?>
 			</div>
 
 			<div class="tabs-content">
@@ -146,6 +218,7 @@ defined( 'ABSPATH' ) || exit;
 										<p class="description"><?php esc_html_e( 'Do you want to see notices when maintenance mode is activated?', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
+								<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 								<tr valign="top">
 									<th scope="row">
 										<label for="options[general][admin_link]"><?php esc_html_e( 'Dashboard link', 'wp-maintenance-mode' ); ?></label>
@@ -157,7 +230,7 @@ defined( 'ABSPATH' ) || exit;
 										</select>
 										<p class="description"><?php esc_html_e( 'Do you want to add a link to the dashboard on your maintenance mode page?', 'wp-maintenance-mode' ); ?></p>
 									</td>
-								</tr>
+								</tr> <?php } ?>
 							</tbody>
 						</table>
 
@@ -169,8 +242,108 @@ defined( 'ABSPATH' ) || exit;
 
 				<div id="tab-design" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-						<h3>&raquo; <?php esc_html_e( 'Content', 'wp-maintenance-mode' ); ?></h3>
+						<?php
+						if ( get_option( 'wpmm_new_look' ) ) {
+							if ( ( ! get_post( $this->plugin_settings['design']['page_id'] ) || get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) && $this->plugin_settings['general']['status'] === 1 ) {
+								?>
+								<p class="notice notice-error"><?php esc_html_e( 'You don\'t have a maintenance page or your Maintenance Page has been deleted. Please select another one from the dropdown below or import a template and a new one will be created.', 'wp-maintenance-mode' ); ?></p><?php } ?>
+							<table class="form-table">
+								<tbody>
+									<tr valign="top">
+										<th scope="row">
+											<label for="design_page_id"><?php esc_html_e( 'Select page', 'wp-maintenance-mode' ); ?></label>
+										</th>
+										<td>
+											<?php
+											wp_dropdown_pages(
+												array(
+													'selected' => $this->plugin_settings['design']['page_id'],
+													'name' => 'options[design][page_id]',
+													'id'   => 'design_page_id',
+													'option_none_value' => '',
+													'show_option_no_change' => 'Select page',
+													'post_status' => array( 'publish', 'private' ),
+												)
+											);
 
+											$page_status = get_post_status( $this->plugin_settings['design']['page_id'] );
+											if ( $page_status && $page_status !== 'trash' ) {
+												?>
+												<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a> <?php } ?>
+											<p class="description"><?php esc_html_e( 'Select the page that will be used as your maintenance or coming soon page', 'wp-maintenance-mode' ); ?></p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="form-table">
+								<tbody>
+									<tr valign="top">
+										<th scope="row">
+											<label for="dashboard-template"><?php esc_html_e( 'Pick a template', 'wp-maintenance-mode' ); ?></label>
+										</th>
+										<td class="category-select-wrap">
+											<select name="options[design][template_category]" id="template-category">
+												<option value="all"<?php selected( $this->plugin_settings['design']['template_category'], 'all' ); ?>><?php esc_html_e( 'All Templates', 'wp-maintenance-mode' ); ?></option>
+												<option value="coming-soon"<?php selected( $this->plugin_settings['design']['template_category'], 'coming-soon' ); ?>><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></option>
+												<option value="maintenance"<?php selected( $this->plugin_settings['design']['template_category'], 'predefined' ); ?>><?php esc_html_e( 'Maintenance Mode', 'wp-maintenance-mode' ); ?></option>
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<?php if ( $is_old_version ) { ?>
+								<p class="description"><i><?php echo __( '<b>Note</b>: You need at least WP 5.8 to use new generation maintenance pages.', 'wp-maintenance-mode' ); ?></i></p>
+							<?php } else { ?>
+								<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customize them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
+								<br/>
+								<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+							<?php } ?>
+							<div class="templates">
+								<?php
+								if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
+									$this->plugin_settings['design']['template_category'] = 'all';
+									update_option( 'wpmm_settings', $this->plugin_settings );
+								}
+
+								$selected_category = $this->plugin_settings['design']['template_category'];
+								$categories        = array();
+
+								if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
+									$categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
+								}
+
+								if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
+									$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
+								}
+
+								$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
+													empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
+													get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' );
+
+								foreach ( $categories as $category => $label ) {
+									$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
+									foreach ( $templates as $template ) {
+										$name      = basename( $template );
+										$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';
+										$content   = WPMM_TEMPLATES_PATH . $category . '/' . $name . '/blocks-export.json';
+
+										$template_label = json_decode( file_get_contents( $content ) )->label;
+										?>
+										<div class="template-wrap">
+											<div class="template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
+												<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
+												<?php if ( ! $is_old_version ) { ?>
+													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
+												<?php } ?>
+											</div>
+											<p class="description"><?php echo $template_label; ?></p>
+										</div>
+										<?php
+									}
+								}
+								?>
+							</div>
+						<?php } else { /* legacy code */ ?>
 						<table class="form-table">
 							<tbody>
 								<tr valign="top">
@@ -280,14 +453,14 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<input type="text" value="<?php echo esc_url( $this->plugin_settings['design']['bg_custom'] ); ?>" name="options[design][bg_custom]" class="background_url" />
 										<input
-											type="button"
-											value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>"
-											class="button image_uploader_trigger"
-											data-name="background"
-											data-title="<?php esc_attr_e( 'Upload Background', 'wp-maintenance-mode' ); ?>"
-											data-button-text="<?php esc_attr_e( 'Choose Background', 'wp-maintenance-mode' ); ?>"
-											data-to-selector=".background_url"
-											/>
+												type="button"
+												value="<?php echo esc_attr_x( 'Upload', 'upload background button', 'wp-maintenance-mode' ); ?>"
+												class="button image_uploader_trigger"
+												data-name="background"
+												data-title="<?php esc_attr_e( 'Upload Background', 'wp-maintenance-mode' ); ?>"
+												data-button-text="<?php esc_attr_e( 'Choose Background', 'wp-maintenance-mode' ); ?>"
+												data-to-selector=".background_url"
+										/>
 										<p class="description"><?php esc_html_e( 'Backgrounds should have 1920x1280 px size.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -299,11 +472,11 @@ defined( 'ABSPATH' ) || exit;
 											<?php
 											printf(
 												wp_kses(
-															/* translators: free photos url */
+												/* translators: free photos url */
 													__( '* source <a href="%s" target="_blank">Free Photos</a>', 'wp-maintenance-mode' ),
 													wpmm_translated_string_allowed_html()
 												),
-												esc_url( wpmm_get_utmized_url( 'https://themeisle.com/blog/wordpress-stock-photos/', array( 'source' => 'settings' ) ) )
+												esc_url( wpmm_get_utmized_url( 'https://themeisle.com/blog/wordpress-stock-photos/', array( 'campaign' => 'settings' ) ) )
 											);
 											?>
 										</p>
@@ -340,14 +513,19 @@ defined( 'ABSPATH' ) || exit;
 							</tbody>
 						</table>
 
-						<?php wpmm_form_hidden_fields( 'design' ); ?>
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="design" name="submit" />
+
+							<?php
+						} /* end of legacy code */
+						wpmm_form_hidden_fields( 'design' );
+						?>
 					</form>
 				</div>
 
 				<div id="tab-modules" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+						<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 						<h3>&raquo; <?php esc_html_e( 'Countdown', 'wp-maintenance-mode' ); ?></h3>
 
 						<table class="form-table">
@@ -580,6 +758,34 @@ defined( 'ABSPATH' ) || exit;
 								</tr>
 							</tbody>
 						</table>
+						<?php } ?>
+
+						<h3>&raquo; <?php esc_html_e( 'Subscribe', 'wp-maintenance-mode' ); ?></h3>
+
+						<table class="form-table">
+							<tbody>
+							<tr valign="top">
+								<th scope="row">
+									<label for="options[modules][stats]"><?php esc_html_e( 'Stats', 'wp-maintenance-mode' ); ?></label>
+								</th>
+								<td id="subscribers_wrap">
+									<?php
+									$subscribers_no = wpmm_get_subscribers_count();
+
+									/* translators: number of subscribers */
+									echo esc_html( sprintf( _nx( 'You have %d subscriber', 'You have %d subscribers', $subscribers_no, 'settings page', 'wp-maintenance-mode' ), $subscribers_no ) );
+
+									if ( current_user_can( wpmm_get_capability( 'subscribers' ) ) && $subscribers_no > 0 ) {
+										?>
+										<div class="buttons">
+											<a class="button button-primary" id="subscribers-export" href="javascript:void(0);"><?php esc_html_e( 'Export as CSV', 'wp-maintenance-mode' ); ?></a>
+											<a class="button button-secondary" id="subscribers-empty-list" href="javascript:void(0);"><?php esc_html_e( 'Empty subscribers list', 'wp-maintenance-mode' ); ?></a>
+										</div>
+									<?php } ?>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 
 						<h3>&raquo; <?php esc_html_e( 'Google Analytics', 'wp-maintenance-mode' ); ?></h3>
 
@@ -609,7 +815,7 @@ defined( 'ABSPATH' ) || exit;
 											<?php
 											printf(
 												wp_kses(
-															/* translators: Google Analytics documentation url */
+												/* translators: Google Analytics documentation url */
 													__( 'Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs. It is always enabled on Google Analytics 4.', 'wp-maintenance-mode' ),
 													wpmm_translated_string_allowed_html()
 												),
@@ -636,6 +842,7 @@ defined( 'ABSPATH' ) || exit;
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="modules" name="submit" />
 					</form>
 				</div>
+
 				<div id="tab-bot" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
@@ -673,14 +880,14 @@ defined( 'ABSPATH' ) || exit;
 									<td>
 										<input type="text" value="<?php echo esc_url( $this->plugin_settings['bot']['avatar'] ); ?>" name="options[bot][avatar]" id="options[bot][avatar]" class="avatar_url" />
 										<input
-											type="button"
-											value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>"
-											class="button image_uploader_trigger"
-											data-name="avatar"
-											data-title="<?php esc_attr_e( 'Upload Avatar', 'wp-maintenance-mode' ); ?>"
-											data-button-text="<?php esc_attr_e( 'Choose picture', 'wp-maintenance-mode' ); ?>"
-											data-to-selector=".avatar_url"
-											/>
+												type="button"
+												value="<?php echo esc_attr_x( 'Upload', 'upload avatar button', 'wp-maintenance-mode' ); ?>"
+												class="button image_uploader_trigger"
+												data-name="avatar"
+												data-title="<?php esc_attr_e( 'Upload Avatar', 'wp-maintenance-mode' ); ?>"
+												data-button-text="<?php esc_attr_e( 'Choose picture', 'wp-maintenance-mode' ); ?>"
+												data-to-selector=".avatar_url"
+										/>
 										<p class="description"><?php esc_html_e( 'A 512 x 512 px will work just fine.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -823,6 +1030,8 @@ defined( 'ABSPATH' ) || exit;
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="bot" name="submit" />
 					</form>
 				</div>
+
+				<?php if ( ! get_option( 'wpmm_new_look' ) ) { ?>
 				<div id="tab-gdpr" class="hidden">
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
@@ -898,10 +1107,10 @@ defined( 'ABSPATH' ) || exit;
 						<input type="submit" value="<?php esc_attr_e( 'Save settings', 'wp-maintenance-mode' ); ?>" class="button button-primary" name="submit" />
 						<input type="button" value="<?php esc_attr_e( 'Reset settings', 'wp-maintenance-mode' ); ?>" class="button button-secondary reset_settings" data-tab="gdpr" name="submit" />
 					</form>
-				</div>
+				</div> <?php } ?>
 			</div>
 		</div>
 
-		<?php require_once 'sidebar.php'; ?>
+		<?php require_once 'sidebar.php'; } ?>
 	</div>
 </div>
