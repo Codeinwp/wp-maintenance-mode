@@ -30,8 +30,8 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 				<div class="slider-wrap">
 					<div class="step-wrap">
 						<div class="step import-step">
-							<h4 class="header"><?php esc_html_e( 'Select the type of page you want.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Choose the type of template you want. You can always customize your layout.', 'wp-maintenance-mode' ); ?></p>
+							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
+							<p class="description"><?php esc_html_e( 'Just click on one of the pre-written templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
 								<form>
 									<div>
@@ -60,7 +60,7 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 						<div class="step subscribe-step" aria-hidden="true" style="display: none">
 							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'subscribe.svg'; ?>" alt="subscribe"/>
 							<h4><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h4>
-							<p><?php esc_html_e( 'Keep up-to-date on news, features and new templates.', 'wp-maintenance-mode' ); ?></p>
+							<p><?php esc_html_e( 'Keep up with feature announcements, promotions, tutorials, and new template releases.', 'wp-maintenance-mode' ); ?></p>
 							<div id="email-input-wrap">
 								<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
 								<input type="button" class="button button-primary button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
