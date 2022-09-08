@@ -86,7 +86,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 							}
 
 							if ( is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
-								Block_Frontend::$instance->enqueue_google_fonts( $page_id );
+								Block_Frontend::instance()->enqueue_google_fonts( $page_id );
 							}
 
 							return $page_id;
