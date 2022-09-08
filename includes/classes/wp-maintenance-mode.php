@@ -114,6 +114,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action(
 					'init',
 					function() {
+						if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
+							return;
+						}
 						if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
 							wp_update_post(
 								array(
