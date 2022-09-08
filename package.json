@@ -31,6 +31,7 @@
     "grunt-wp-readme-to-markdown": "^2.1.0",
     "replace-in-file": "^6.1.0",
     "semantic-release": "^17.3.7",
+    "semantic-release-slack-bot": "^3.5.3",
     "time-grunt": "^2.0.0"
   }
 }
