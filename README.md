@@ -7,7 +7,7 @@
 **Tags:** maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown  
 **Requires at least:** 3.5  
 **Tested up to:** 6.0  
-**Stable tag:** 2.4.7  
+**Stable tag:** 2.5.0  
 **Requires PHP:** 5.6  
 **License:** GPL-2.0+  
 
@@ -90,6 +90,14 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 Notice: `wp-cron.php` is excluded by default.
 
 ## Changelog ##
+
+#### [Version 2.5.0](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.7...v2.5.0) (2022-09-08)
+
+- New Feature: Adds compatibility with Block Editor or any page builder for building the maintenance mode page.
+- New Feature: Adds coming soon and maintenance mode starting templates.
+
+
+
 
 ##### [Version 2.4.7](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.6...v2.4.7) (2022-08-08)
 
