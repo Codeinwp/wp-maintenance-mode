@@ -40,3 +40,4 @@ webpack.config.js
 assets/vue
 .wordpress-org
 yarn.lock
+.eslintrc
