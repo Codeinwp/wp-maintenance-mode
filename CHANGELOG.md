@@ -1,3 +1,7 @@
+##### [Version 2.5.1](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.0...v2.5.1) (2022-09-08)
+
+- Fixes a bug which was causing error on some instances
+
 #### [Version 2.5.0](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.7...v2.5.0) (2022-09-08)
 
 - New Feature: Adds compatibility with Block Editor or any page builder for building the maintenance mode page.
