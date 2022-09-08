@@ -114,7 +114,7 @@ h2.wpmm-title {
 
 .tabs-content td.has-inline-color-picker {
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
 .tabs-content td.has-inline-color-picker .wp-picker-container .wp-color-result {
@@ -143,6 +143,58 @@ h2.wpmm-title {
 
 .tabs-content ul.shortcodes-list.show {
     display: block;
+}
+
+.category-select-wrap {
+    text-align: center;
+}
+
+.templates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.template-wrap {
+    width: calc( 100% / 3 - 20px);
+    max-width: 380px;
+}
+
+.template-image-wrap {
+    background-color: #fff;
+    line-height: 0;
+}
+
+.template-image-wrap img {
+    width: 100%;
+}
+
+.template-image-wrap.can-import:hover img,
+.template-image-wrap.importing img {
+    opacity: .1;
+}
+
+.template-image-wrap {
+    position: relative;
+}
+
+.template-wrap .template-image-wrap .button-import {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+}
+
+.button-import .dashicons.dashicons-update {
+    margin-right: 5px;
+    animation: spin 2s linear infinite;
+}
+
+.template-image-wrap.can-import:hover .button-import,
+.template-image-wrap.importing .button-import {
+    display: flex;
+    align-items: center;
 }
 
 @media screen and (max-width: 782px) {
@@ -182,8 +234,8 @@ h2.wpmm-title {
     color: #fff;
 }
 
-.tabs-content .bot-button { 
-    display: inline-block; 
+.tabs-content .bot-button {
+    display: inline-block;
 }
 
 /* SIDEBARS */
@@ -226,8 +278,68 @@ h2.wpmm-title {
     background-image: none !important;
 }
 
+.button-big {
+    min-height: 40px !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    line-height: 18px !important;
+    font-weight: 700;
+}
+
 /* FOOTER RATING */
 #footer-left .wpmm_rating:hover {
     text-decoration: none !important;
     color: #FFB900 !important;
+}
+
+/* MODAL */
+.has-modal {
+    overflow: hidden !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 100000;
+    display: flex;
+}
+
+.modal-frame {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    margin: auto;
+    max-width: 480px;
+}
+
+.modal-content {
+    padding: 45px 40px;
+}
+
+.modal-header {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 0;
+}
+
+.modal-text {
+    margin: 30px 0 40px 0;
+}
+
+.buttons-wrap {
+    gap: 10px;
+    display: flex;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -17,7 +17,9 @@
         }
     ],
     "require": {
-        "codeinwp/themeisle-sdk": "^3.2"
+        "codeinwp/themeisle-sdk": "^3.2",
+        "ext-json": "*",
+        "ext-dom": "*"
     },
     "require-dev": {
         "codeinwp/phpcs-ruleset": "dev-main",
