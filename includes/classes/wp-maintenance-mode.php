@@ -78,7 +78,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_filter(
 					'pre_option_page_on_front',
 					function ( $value ) {
-						if ( ! is_user_logged_in() && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+						if ( ( ! $this->check_user_role() && ! $this->check_exclude() ) && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
 							$page_id = $this->plugin_settings['design']['page_id'];
 
 							if ( ! function_exists( 'is_plugin_active' ) ) {
@@ -997,11 +997,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			$current_template = get_post_meta( $post->ID, '_wp_page_template', true );
-			if ( 'templates/wpmm-page-template.php' !== $current_template ) {
+			if ( ! empty( $current_template ) && 'templates/wpmm-page-template.php' !== $current_template ) {
 				return $template;
 			}
 
-			$file = WPMM_VIEWS_PATH . '/wpmm-page-template.php';
+			$file = WPMM_VIEWS_PATH . 'wpmm-page-template.php';
 			if ( file_exists( $file ) ) {
 				return $file;
 			}
