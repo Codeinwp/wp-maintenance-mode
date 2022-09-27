@@ -1329,7 +1329,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					$wpdb->insert(
 						$wpdb->prefix . 'wpmm_subscribers',
 						array(
-							'email'       => $email,
+							'email'       => sanitize_email( $email ),
 							'insert_date' => date( 'Y-m-d H:i:s' ),
 						),
 						array( '%s', '%s' )
