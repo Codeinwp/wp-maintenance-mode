@@ -206,7 +206,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 										$exclude_list = ! empty( $this->plugin_settings['general']['exclude'] ) && is_array( $this->plugin_settings['general']['exclude'] ) ? $this->plugin_settings['general']['exclude'] : array();
 										?>
 										<textarea rows="7" name="options[general][exclude]" style="width: 625px;"><?php echo esc_textarea( implode( "\n", $exclude_list ) ); ?></textarea>
-										<p class="description"><?php esc_html_e( 'Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / IP per line!', 'wp-maintenance-mode' ); ?></p>
+										<p class="description"><?php esc_html_e( 'Exclude feed, pages, archives or IPs from maintenance mode. Add one slug / IP per line! Comments start with # and can be appended at the end of a line.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
 								<tr valign="top">
