@@ -650,7 +650,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! $this->check_search_bots() &&
 					! ( defined( 'WP_CLI' ) && WP_CLI )
 			) {
-				if ( get_option( 'wpmm_new_look' ) ) {
+				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
 					include_once wpmm_get_template_path( 'maintenance.php', true );
 					return;
 				}
