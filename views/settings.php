@@ -8,6 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
+if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
+	$this->plugin_settings['design']['page_id'] = 0;
+}
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
