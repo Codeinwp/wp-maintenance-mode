@@ -69,6 +69,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wp_ajax_wpmm_add_subscriber', array( $this, 'add_subscriber' ) );
 				add_action( 'wp_ajax_nopriv_wpmm_send_contact', array( $this, 'send_contact' ) );
 				add_action( 'wp_ajax_wpmm_send_contact', array( $this, 'send_contact' ) );
+				add_action( 'otter_form_after_submit', array( $this, 'otter_add_subscriber' ) );
 
 				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) && get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
 					wp_publish_post( $this->plugin_settings['design']['page_id'] );
@@ -1216,18 +1217,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				) {
 					throw new Exception( __( 'Security check.', 'wp-maintenance-mode' ) );
 				}
-				// save
-				$exists = $wpdb->get_row( $wpdb->prepare( "SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", $email ), ARRAY_A );
-				if ( empty( $exists ) ) {
-					$wpdb->insert(
-						$wpdb->prefix . 'wpmm_subscribers',
-						array(
-							'email'       => $email,
-							'insert_date' => date( 'Y-m-d H:i:s' ),
-						),
-						array( '%s', '%s' )
-					);
-				}
+				// save.
+				$this->insert_subscriber( $email );
 
 				wp_send_json_success( __( 'You successfully subscribed. Thanks!', 'wp-maintenance-mode' ) );
 			} catch ( Exception $ex ) {
@@ -1293,6 +1284,59 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 		}
 
+		/**
+		 * Save subscriber into database.
+		 *
+		 * @param Form_Data_Request $form_data The form data.
+		 * @return void
+		 */
+		public function otter_add_subscriber( $form_data ) {
+			if ( $form_data ) {
+				$input_data = $form_data->get_payload_field( 'formInputsData' );
+				$input_data = array_map(
+					function( $input_field ) {
+						if ( isset( $input_field['type'] ) && 'email' === $input_field['type'] ) {
+							return $input_field['value'];
+						}
+						return false;
+					},
+					$input_data
+				);
+				$input_data = array_filter( $input_data );
+				if ( ! empty( $input_data ) ) {
+					foreach ( $input_data as $email ) {
+						$this->insert_subscriber( $email );
+					}
+				}
+			}
+		}
+
+		/**
+		 * Save subscriber into database.
+		 *
+		 * @param string $email Email address.
+		 * @global object $wpdb
+		 *
+		 * @return void
+		 */
+		public function insert_subscriber( $email = '' ) {
+			global $wpdb;
+			if ( ! empty( $email ) ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				$exists = $wpdb->get_row( $wpdb->prepare( "SELECT id_subscriber FROM {$wpdb->prefix}wpmm_subscribers WHERE email = %s", $email ), ARRAY_A );
+				if ( empty( $exists ) ) {
+					// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+					$wpdb->insert(
+						$wpdb->prefix . 'wpmm_subscribers',
+						array(
+							'email'       => $email,
+							'insert_date' => date( 'Y-m-d H:i:s' ),
+						),
+						array( '%s', '%s' )
+					);
+				}
+			}
+		}
 	}
 
 }
