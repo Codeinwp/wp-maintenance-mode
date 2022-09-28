@@ -1002,7 +1002,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			$current_template = get_post_meta( $post->ID, '_wp_page_template', true );
-			if ( ! empty( $current_template ) && 'templates/wpmm-page-template.php' !== $current_template ) {
+
+			if ( empty( $current_template ) ) {
+				return $template;
+			}
+			if ( 'templates/wpmm-page-template.php' !== $current_template ) {
 				return $template;
 			}
 
