@@ -4,7 +4,7 @@
  *
  * Plugin Name: WP Maintenance Mode & Coming Soon
  * Description: Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page.
- * Version: 2.4.5
+ * Version: 2.5.3
  * Author: Themeisle
  * Author URI: https://themeisle.com/
  * Twitter: themeisle
@@ -28,6 +28,7 @@ define( 'WPMM_FUNCTIONS_PATH', WPMM_PATH . 'includes/functions/' );
 define( 'WPMM_LANGUAGES_PATH', basename( WPMM_PATH ) . '/languages/' );
 define( 'WPMM_VIEWS_PATH', WPMM_PATH . 'views/' );
 define( 'WPMM_CSS_PATH', WPMM_PATH . 'assets/css/' );
+define( 'WPMM_TEMPLATES_PATH', WPMM_PATH . 'assets/templates/' );
 
 /**
  * DEFINE URLS
@@ -36,6 +37,7 @@ define( 'WPMM_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPMM_JS_URL', WPMM_URL . 'assets/js/' );
 define( 'WPMM_CSS_URL', WPMM_URL . 'assets/css/' );
 define( 'WPMM_IMAGES_URL', WPMM_URL . 'assets/images/' );
+define( 'WPMM_TEMPLATES_URL', WPMM_URL . 'assets/templates/' );
 
 /**
  * OTHER DEFINES
@@ -88,3 +90,10 @@ $autoload_path = __DIR__ . '/vendor/autoload.php';
 if ( is_file( $autoload_path ) ) {
 	require_once $autoload_path;
 }
+
+add_filter(
+	'wp_maintenance_mode_load_promotions',
+	function() {
+		return array( 'otter' );
+	}
+);

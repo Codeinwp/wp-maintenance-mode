@@ -66,7 +66,7 @@ function wpmm_get_utmized_url( $url, $utms = array() ) {
 	$utms = wp_parse_args(
 		$utms,
 		array(
-			'source'   => null,
+			'source'   => 'wpadmin',
 			'medium'   => 'wpmaintenance',
 			'campaign' => null,
 			'term'     => null,

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f3a5416f09f61c4b831226618af4c16",
+    "content-hash": "19bc4816084d3a730a5d8ad4781b1890",
     "packages": [
         {
             "name": "codeinwp/themeisle-sdk",
-            "version": "3.2.24",
+            "version": "3.2.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeinwp/themeisle-sdk.git",
-                "reference": "e5c171e33120fdf8ce6dd3a7bddad984583023f0"
+                "reference": "7239104ae452b13cd6d506d44e8fc127232d35ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/e5c171e33120fdf8ce6dd3a7bddad984583023f0",
-                "reference": "e5c171e33120fdf8ce6dd3a7bddad984583023f0",
+                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/7239104ae452b13cd6d506d44e8fc127232d35ce",
+                "reference": "7239104ae452b13cd6d506d44e8fc127232d35ce",
                 "shasum": ""
             },
             "require-dev": {
@@ -42,9 +42,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeinwp/themeisle-sdk/issues",
-                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.2.24"
+                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.2.30"
             },
-            "time": "2022-02-09T21:11:37+00:00"
+            "time": "2022-09-15T19:54:34+00:00"
         }
     ],
     "packages-dev": [
@@ -624,10 +624,13 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-json": "*",
+        "ext-dom": "*"
+    },
     "platform-dev": [],
     "platform-overrides": {
         "php": "5.6"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

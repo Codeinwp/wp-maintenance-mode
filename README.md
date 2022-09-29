@@ -7,7 +7,7 @@
 **Tags:** maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown  
 **Requires at least:** 3.5  
 **Tested up to:** 6.0  
-**Stable tag:** 2.4.5  
+**Stable tag:** 2.5.3  
 **Requires PHP:** 5.6  
 **License:** GPL-2.0+  
 
@@ -90,6 +90,55 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 Notice: `wp-cron.php` is excluded by default.
 
 ## Changelog ##
+
+##### [Version 2.5.3](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.2...v2.5.3) (2022-09-28)
+
+* Fix wrong template loaded when the current post template is empty.
+
+
+
+
+##### [Version 2.5.2](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.1...v2.5.2) (2022-09-27)
+
+* Fix maintenance mode issue for previously logged users [#321](https://github.com/Codeinwp/wp-maintenance-mode/issues/321) 
+* Allow comments into exclude textarea so that you can comment on the IP addresses for location, props [@joostdekeijzer](https://github.com/joostdekeijzer) 
+* Fix PHP notice errors on specific scenarios [#324](https://github.com/Codeinwp/wp-maintenance-mode/issues/324) 
+* Fix Otter for saving subscriber entry
+
+
+
+
+##### [Version 2.5.1](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.0...v2.5.1) (2022-09-08)
+
+- Fixes a bug which was causing error on some instances
+
+
+
+
+#### [Version 2.5.0](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.7...v2.5.0) (2022-09-08)
+
+- New Feature: Adds compatibility with Block Editor or any page builder for building the maintenance mode page.
+- New Feature: Adds coming soon and maintenance mode starting templates.
+
+
+
+
+##### [Version 2.4.7](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.6...v2.4.7) (2022-08-08)
+
+##### Fixes
+* Fix login form display
+* Fix email collecting by the bot
+* Improve accessibility of the maintenance page thanks to @SophieWeb
+
+
+
+
+##### [Version 2.4.6](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.5...v2.4.6) (2022-06-15)
+
+* Improve data sanitizations for custom css and contact module
+
+
+
 
 ##### [Version 2.4.5](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.4.4...v2.4.5) (2022-06-15)
 
