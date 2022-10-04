@@ -3,7 +3,17 @@
  * Template Name: Full Width for Maintenance Page
  */
 
-?><!DOCTYPE html>
+defined( 'ABSPATH' ) || exit;
+$settings              = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
+$overrideable_template = wpmm_get_template_path( 'maintenance.php', true );
+
+if ( ( isset( $settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) && WPMM_VIEWS_PATH . 'maintenance.php' !== $overrideable_template ) {
+	if ( ! is_front_page() ) {
+		wp_redirect( home_url() );
+	}
+} else {
+	?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -19,7 +29,6 @@
 	the_post();
 	the_content();
 
-	$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
 	if ( isset( $settings['bot']['status'] ) && $settings['bot']['status'] === 1 ) {
 		?>
 		<div class="bot-container">
@@ -46,3 +55,6 @@
 	?>
 </body>
 </html>
+	<?php
+	exit();
+}
