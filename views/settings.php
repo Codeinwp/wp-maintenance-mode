@@ -5,6 +5,8 @@
  * @version 2.4.0
  */
 
+// todo: make a global attribute 'category', so we can keep track of what type of page is used
+
 defined( 'ABSPATH' ) || exit;
 
 $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
@@ -23,11 +25,14 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 	<div class="wpmm-wrapper">
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
-			$maintenance_slug = 'maintenance-modern';
-			$coming_soon_slug = 'coming-soon-modern';
+			// todo: refactor
+			$maintenance_slug  = 'maintenance-modern';
+			$coming_soon_slug  = 'coming-soon-modern';
+			$landing_page_slug = 'landing-page-default';
 
-			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
-			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
+			$maintenance_thumbnail  = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
+			$coming_soon_thumbnail  = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
+			$landing_page_thumbnail = WPMM_TEMPLATES_URL . 'landing-page/' . $landing_page_slug . '/screenshot.png';
 			?>
 			<div id="wpmm-wizard-wrapper">
 				<div class="slider-wrap">
@@ -49,6 +54,13 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 										<input id="<?php echo esc_attr( $coming_soon_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $coming_soon_slug ); ?>" data-category="coming-soon">
 										<label for="<?php echo esc_attr( $coming_soon_slug ); ?>" class="template">
 											<img src="<?php echo esc_url( $coming_soon_thumbnail ); ?>" alt="<?php echo esc_attr( $coming_soon_slug ); ?>"/>
+										</label>
+									</div>
+									<div>
+										<h6 class="tag"><?php esc_html_e( 'Landing Page', 'wp-maintenance-mode' ); ?></h6>
+										<input id="<?php echo esc_attr( $landing_page_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $landing_page_slug ); ?>" data-category="landing-page">
+										<label for="<?php echo esc_attr( $landing_page_slug ); ?>" class="template">
+											<img src="<?php echo esc_url( $landing_page_thumbnail ); ?>" alt="<?php echo esc_attr( $landing_page_slug ); ?>"/>
 										</label>
 									</div>
 								</form>
@@ -311,12 +323,17 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 								$selected_category = $this->plugin_settings['design']['template_category'];
 								$categories        = array();
 
+								// todo: refactor
 								if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
 									$categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
 								}
 
 								if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
 									$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
+								}
+
+								if ( $selected_category === 'landing-page' || $selected_category === 'all' ) {
+									$categories['landing-page'] = __( 'Landing Page', 'wp-maintenance-mode' );
 								}
 
 								$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
