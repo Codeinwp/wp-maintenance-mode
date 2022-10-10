@@ -385,8 +385,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					} else {
 						$_POST['options']['general']['exclude'] = array();
 					}
-					$_POST['options']['general']['notice']     = (int) $_POST['options']['general']['notice'];
-					$_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
+					$_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
+
+					if ( ! empty( $_POST['options']['general']['admin_link'] ) ) {
+						$_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
+					}
 
 					// delete cache when is already activated, when is activated and when is deactivated
 					if (
