@@ -1,3 +1,8 @@
+##### [Version 2.5.4](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.3...v2.5.4) (2022-10-10)
+
+* Fix subscribers entry export for legacy forms.
+* Fix PHP notice showing up on edge cases new installs.
+
 ##### [Version 2.5.3](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.2...v2.5.3) (2022-09-28)
 
 * Fix wrong template loaded when the current post template is empty.
