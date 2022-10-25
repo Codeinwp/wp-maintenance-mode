@@ -10,12 +10,17 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 		const VERSION = '2.5.3';
 
+		const MAINTENANCE  = 'maintenance';
+		const COMING_SOON  = 'coming-soon';
+		const LANDING_PAGE = 'landing-page';
+
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
 		protected $plugin_basename;
 		protected static $instance = null;
 
 		private $style_buffer;
+		private $current_page_category;
 
 		/**
 		 * 3, 2, 1... Start!
@@ -162,6 +167,35 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function get_plugin_settings() {
 			return $this->plugin_settings;
+		}
+
+		/**
+		 * Return the plugin's page categories
+		 *
+		 * @return array
+		 */
+		public static function get_page_categories() {
+			return array(
+				self::MAINTENANCE  => __( 'Maintenance', 'wp-maintenance-mode' ),
+				self::COMING_SOON  => __( 'Coming Soon', 'wp-maintenance-mode' ),
+				self::LANDING_PAGE => __( 'Landing Page', 'wp-maintenance-mode' ),
+			);
+		}
+
+		/**
+		 * Return the plugin's page categories with labels
+		 *
+		 * @return string
+		 */
+		public static function get_page_status_by_category( $category ) {
+			switch ( $category ) {
+				case self::MAINTENANCE:
+					return __( 'Maintenance Page', 'wp-maintenance-mode' );
+				case self::COMING_SOON:
+					return __( 'Coming Soon Page', 'wp-maintenance-mode' );
+				case self::LANDING_PAGE:
+					return __( 'Landing Page', 'wp-maintenance-mode' );
+			}
 		}
 
 		/**
@@ -1344,6 +1378,25 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					);
 				}
 			}
+		}
+
+		/**
+		 * Set the current_page_category property
+		 * @param $category
+		 *
+		 * @return void
+		 */
+		public function set_current_page_category( $category ) {
+			$this->current_page_category = $category;
+		}
+
+		/**
+		 * Get the current_page_category property
+		 *
+		 * @return mixed
+		 */
+		public function get_current_page_category() {
+			return $this->current_page_category;
 		}
 	}
 

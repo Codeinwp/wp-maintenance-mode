@@ -647,7 +647,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
 				$page_id        = wp_update_post( $post_arr );
 			} else {
-				$post_arr['post_title'] = 'Maintenance Page';
+				$post_arr['post_title'] = WP_Maintenance_Mode::get_page_categories()[ $category ];
 				$page_id                = wp_insert_post( $post_arr );
 			}
 
@@ -663,6 +663,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				update_option( 'wpmm_fresh_install', false );
 			}
 
+			update_option( 'wpmm_page_category', $category );
 			update_option( 'wpmm_settings', $this->plugin_settings );
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
@@ -1051,7 +1052,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 */
 		public function add_display_post_states( $post_states, $post ) {
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] == $post->ID ) {
-				$post_states['wpmm_for_maintenance'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
+				$post_states['wpmm_for_maintenance'] = WP_Maintenance_Mode::get_page_status_by_category( get_option( 'wpmm_page_category', 'maintenance' ) );
 			}
 
 			return $post_states;

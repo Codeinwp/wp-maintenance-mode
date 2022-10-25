@@ -163,10 +163,13 @@ h2.wpmm-title {
 .template-image-wrap {
     background-color: #fff;
     line-height: 0;
+    height: calc( 100% - 20px );
 }
 
 .template-image-wrap img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .template-image-wrap.can-import:hover img,
