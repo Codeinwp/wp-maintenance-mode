@@ -171,7 +171,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 											<?php foreach ( wpmm_get_user_roles() as $role_key => $role_name ) { ?>
 												<option value="<?php echo esc_attr( $role_key ); ?>"<?php echo wpmm_multiselect( (array) $this->plugin_settings['general']['backend_role'], $role_key ); ?>><?php echo esc_html( $role_name ); ?></option>
 											<?php } ?>
-										 </select>
+										</select>
 										<p class="description"><?php esc_html_e( 'Which user role is allowed to access the backend of the website? Administrators will always have access.', 'wp-maintenance-mode' ); ?></p>
 									</td>
 								</tr>
@@ -332,18 +332,6 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 								if ( $selected_category !== 'all' ) {
 									$categories = array( $selected_category => array( $selected_category ) );
 								}
-
-								//                              if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
-								//                                  $categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
-								//                              }
-								//
-								//                              if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
-								//                                  $categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
-								//                              }
-								//
-								//                              if ( $selected_category === 'landing-page' || $selected_category === 'all' ) {
-								//                                  $categories['landing-page'] = __( 'Landing Page', 'wp-maintenance-mode' );
-								//                              }
 
 								$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
 													empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
