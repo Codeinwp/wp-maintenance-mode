@@ -696,10 +696,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					),
 					'body'    => wp_json_encode(
 						array(
-							'slug'     => 'wp-maintenance-mode',
-							'site'     => get_site_url(),
-							'email'    => $_POST['email'],
-							'category' => get_option( 'wpmm_page_category' ),
+							'slug'  => 'wp-maintenance-mode',
+							'site'  => get_site_url(),
+							'email' => $_POST['email'],
+							'data'  => array(
+								'category' => get_option( 'wpmm_page_category' ),
+							),
 						)
 					),
 				)
