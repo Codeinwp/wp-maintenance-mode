@@ -647,7 +647,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
 				$page_id        = wp_update_post( $post_arr );
 			} else {
-				$post_arr['post_title'] = WP_Maintenance_Mode::get_page_categories()[ $category ];
+				$post_arr['post_title'] = __( 'New Page', 'wp-maintenance-mode' );
 				$page_id                = wp_insert_post( $post_arr );
 			}
 
