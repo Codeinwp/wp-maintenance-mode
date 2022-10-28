@@ -25,16 +25,16 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
 			$default_templates = array(
 				'maintenance'  => array(
-					'slug'      => 'maintenance-modern',
-					'thumbnail' => WPMM_TEMPLATES_URL . 'maintenance/maintenance-modern/screenshot.png',
+					'slug'      => 'maintenance-1',
+					'thumbnail' => WPMM_TEMPLATES_URL . 'maintenance/maintenance-1/screenshot.png',
 				),
 				'coming-soon'  => array(
-					'slug'      => 'coming-soon-modern',
-					'thumbnail' => WPMM_TEMPLATES_URL . 'coming-soon/coming-soon-modern/screenshot.png',
+					'slug'      => 'coming-soon-1',
+					'thumbnail' => WPMM_TEMPLATES_URL . 'coming-soon/coming-soon-1/screenshot.png',
 				),
 				'landing-page' => array(
-					'slug'      => 'landing-page-default',
-					'thumbnail' => WPMM_TEMPLATES_URL . 'landing-page/landing-page-default/screenshot.png',
+					'slug'      => 'landing-page-1',
+					'thumbnail' => WPMM_TEMPLATES_URL . 'landing-page/landing-page-1/screenshot.png',
 				),
 			);
 
@@ -44,7 +44,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 					<div class="step-wrap">
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Just click on one of the pre-written templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Just click on one of the pre-designed templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
 								<form>
 									<?php
@@ -55,7 +55,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 										?>
 											<div>
 												<h6 class="tag"><?php echo $label; ?></h6>
-												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>">
+												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
 												<label for="<?php echo esc_attr( $slug ); ?>" class="template">
 													<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
 												</label>
@@ -339,6 +339,9 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 
 								foreach ( $categories as $category => $label ) {
 									$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
+
+									natsort( $templates );
+
 									foreach ( $templates as $template ) {
 										$name      = basename( $template );
 										$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';
