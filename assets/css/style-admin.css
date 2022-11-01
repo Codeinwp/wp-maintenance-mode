@@ -1,5 +1,5 @@
 h2.wpmm-title {
-    background: url('../images/icon-48.png') no-repeat left center;
+    background: url('../images/icon.svg') no-repeat left center;
     line-height: 42px !important;
     margin-bottom: 30px !important;
     height: 48px;
@@ -118,7 +118,7 @@ h2.wpmm-title {
 }
 
 .tabs-content td.has-inline-color-picker .wp-picker-container .wp-color-result {
-    margin: 0 6px 0px 6px;
+    margin: 0 6px;
 }
 
 .tabs-content .shortcodes-list-wrapper {
@@ -146,7 +146,7 @@ h2.wpmm-title {
 }
 
 .category-select-wrap {
-    text-align: center;
+    text-align: end;
 }
 
 .templates {
@@ -157,16 +157,19 @@ h2.wpmm-title {
 
 .template-wrap {
     width: calc( 100% / 3 - 20px);
-    max-width: 380px;
+    max-width: 290px;
 }
 
 .template-image-wrap {
     background-color: #fff;
     line-height: 0;
+    height: calc( 100% - 20px );
 }
 
 .template-image-wrap img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .template-image-wrap.can-import:hover img,

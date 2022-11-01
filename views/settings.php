@@ -23,34 +23,46 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 	<div class="wpmm-wrapper">
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
-			$maintenance_slug = 'maintenance-modern';
-			$coming_soon_slug = 'coming-soon-modern';
+			$default_templates = array(
+				'maintenance'  => array(
+					'slug'      => 'maintenance-1',
+					'thumbnail' => WPMM_TEMPLATES_URL . 'maintenance/maintenance-1/screenshot.png',
+				),
+				'coming-soon'  => array(
+					'slug'      => 'coming-soon-1',
+					'thumbnail' => WPMM_TEMPLATES_URL . 'coming-soon/coming-soon-1/screenshot.png',
+				),
+				'landing-page' => array(
+					'slug'      => 'landing-page-1',
+					'thumbnail' => WPMM_TEMPLATES_URL . 'landing-page/landing-page-1/screenshot.png',
+				),
+			);
 
-			$maintenance_thumbnail = WPMM_TEMPLATES_URL . 'maintenance/' . $maintenance_slug . '/screenshot.png';
-			$coming_soon_thumbnail = WPMM_TEMPLATES_URL . 'coming-soon/' . $coming_soon_slug . '/screenshot.png';
 			?>
 			<div id="wpmm-wizard-wrapper">
 				<div class="slider-wrap">
 					<div class="step-wrap">
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Just click on one of the pre-written templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Just click on one of the pre-designed templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
 							<div class="templates-radio">
 								<form>
-									<div>
-										<h6 class="tag"><?php esc_html_e( 'Maintenance', 'wp-maintenance-mode' ); ?></h6>
-										<input id="<?php echo esc_attr( $maintenance_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $maintenance_slug ); ?>" data-category="maintenance" checked="checked">
-										<label for="<?php echo esc_attr( $maintenance_slug ); ?>" class="template">
-											<img src="<?php echo esc_url( $maintenance_thumbnail ); ?>" alt="<?php echo esc_attr( $maintenance_slug ); ?>"/>
-										</label>
-									</div>
-									<div>
-										<h6 class="tag"><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></h6>
-										<input id="<?php echo esc_attr( $coming_soon_slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $coming_soon_slug ); ?>" data-category="coming-soon">
-										<label for="<?php echo esc_attr( $coming_soon_slug ); ?>" class="template">
-											<img src="<?php echo esc_url( $coming_soon_thumbnail ); ?>" alt="<?php echo esc_attr( $coming_soon_slug ); ?>"/>
-										</label>
-									</div>
+									<?php
+									$categories = WP_Maintenance_Mode::get_page_categories();
+									foreach ( $categories as $category => $label ) {
+										$slug          = $default_templates[ $category ]['slug'];
+										$thumbnail_url = $default_templates[ $category ]['thumbnail'];
+										?>
+											<div>
+												<h6 class="tag"><?php echo $label; ?></h6>
+												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
+												<label for="<?php echo esc_attr( $slug ); ?>" class="template">
+													<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
+												</label>
+											</div>
+										<?php
+									}
+									?>
 								</form>
 							</div>
 							<div id="wizard-import-button" class="import-button">
@@ -273,7 +285,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 											if ( $page_status && $page_status !== 'trash' ) {
 												?>
 												<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a> <?php } ?>
-											<p class="description"><?php esc_html_e( 'Select the page that will be used as your maintenance or coming soon page', 'wp-maintenance-mode' ); ?></p>
+											<p class="description"><?php esc_html_e( 'Select the page that will be used as the Maintenance, Coming Soon or Landing page.', 'wp-maintenance-mode' ); ?></p>
 										</td>
 									</tr>
 								</tbody>
@@ -287,8 +299,14 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 										<td class="category-select-wrap">
 											<select name="options[design][template_category]" id="template-category">
 												<option value="all"<?php selected( $this->plugin_settings['design']['template_category'], 'all' ); ?>><?php esc_html_e( 'All Templates', 'wp-maintenance-mode' ); ?></option>
-												<option value="coming-soon"<?php selected( $this->plugin_settings['design']['template_category'], 'coming-soon' ); ?>><?php esc_html_e( 'Coming Soon', 'wp-maintenance-mode' ); ?></option>
-												<option value="maintenance"<?php selected( $this->plugin_settings['design']['template_category'], 'predefined' ); ?>><?php esc_html_e( 'Maintenance Mode', 'wp-maintenance-mode' ); ?></option>
+												<?php
+												$categories = WP_Maintenance_Mode::get_page_categories();
+												foreach ( $categories as $category => $label ) {
+													?>
+														<option value="<?php echo esc_attr( $category ); ?>"<?php selected( $this->plugin_settings['design']['template_category'], $category ); ?>><?php echo esc_html( $label ); ?></option>
+													<?php
+												}
+												?>
 											</select>
 										</td>
 									</tr>
@@ -309,14 +327,10 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 								}
 
 								$selected_category = $this->plugin_settings['design']['template_category'];
-								$categories        = array();
+								$categories        = WP_Maintenance_Mode::get_page_categories();
 
-								if ( $selected_category === 'maintenance' || $selected_category === 'all' ) {
-									$categories['maintenance'] = __( 'Maintenance', 'wp-maintenance-mode' );
-								}
-
-								if ( $selected_category === 'coming-soon' || $selected_category === 'all' ) {
-									$categories['coming-soon'] = __( 'Coming Soon', 'wp-maintenance-mode' );
+								if ( $selected_category !== 'all' ) {
+									$categories = array( $selected_category => array( $selected_category ) );
 								}
 
 								$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
@@ -325,6 +339,9 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 
 								foreach ( $categories as $category => $label ) {
 									$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
+
+									natsort( $templates );
+
 									foreach ( $templates as $template ) {
 										$name      = basename( $template );
 										$thumbnail = WPMM_TEMPLATES_URL . $category . '/' . $name . '/screenshot.png';

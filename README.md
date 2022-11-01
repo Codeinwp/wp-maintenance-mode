@@ -1,6 +1,6 @@
-# WP Maintenance Mode & Coming Soon#
+# LightStart - Maintenance Mode, Coming Soon and Landing Page Builder #
 **Contributors:** [themeisle](https://profiles.wordpress.org/themeisle/)  
-**Plugin Name:** WP Maintenance Mode & Coming Soon  
+**Plugin Name:** LightStart - Maintenance Mode, Coming Soon and Landing Page Builder  
 **Plugin URI:** https://themeisle.com/  
 **Author:** Themeisle  
 **Author URI:** https://themeisle.com/  

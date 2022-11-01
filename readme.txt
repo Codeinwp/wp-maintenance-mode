@@ -1,6 +1,6 @@
-=== WP Maintenance Mode & Coming Soon===
+=== LightStart - Maintenance Mode, Coming Soon and Landing Page Builder ===
 Contributors: Themeisle
-Plugin Name: WP Maintenance Mode & Coming Soon
+Plugin Name: LightStart - Maintenance Mode, Coming Soon and Landing Page Builder
 Plugin URI: https://themeisle.com/
 Author: Themeisle
 Author URI: https://themeisle.com/
@@ -108,9 +108,9 @@ Notice: `wp-cron.php` is excluded by default.
 
 ##### [Version 2.5.2](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.1...v2.5.2) (2022-09-27)
 
-* Fix maintenance mode issue for previously logged users [#321](https://github.com/Codeinwp/wp-maintenance-mode/issues/321) 
-* Allow comments into exclude textarea so that you can comment on the IP addresses for location, props [@joostdekeijzer](https://github.com/joostdekeijzer) 
-* Fix PHP notice errors on specific scenarios [#324](https://github.com/Codeinwp/wp-maintenance-mode/issues/324) 
+* Fix maintenance mode issue for previously logged users [#321](https://github.com/Codeinwp/wp-maintenance-mode/issues/321)
+* Allow comments into exclude textarea so that you can comment on the IP addresses for location, props [@joostdekeijzer](https://github.com/joostdekeijzer)
+* Fix PHP notice errors on specific scenarios [#324](https://github.com/Codeinwp/wp-maintenance-mode/issues/324)
 * Fix Otter for saving subscriber entry
 
 
