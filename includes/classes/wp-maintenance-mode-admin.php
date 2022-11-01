@@ -296,8 +296,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 */
 		public function add_plugin_menu() {
 			$this->plugin_screen_hook_suffix = add_options_page(
-				__( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
-				__( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
+				__( 'LightStart', 'wp-maintenance-mode' ),
+				__( 'LightStart', 'wp-maintenance-mode' ),
 				wpmm_get_capability( 'settings' ),
 				$this->plugin_slug,
 				array( $this, 'display_plugin_settings' )

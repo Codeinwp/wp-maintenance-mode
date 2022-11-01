@@ -1018,7 +1018,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			return array_merge(
 				$templates,
 				array(
-					'templates/wpmm-page-template.php' => html_entity_decode( '&harr; ' ) . __( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
+					'templates/wpmm-page-template.php' => html_entity_decode( '&harr; ' ) . __( 'LightStart template', 'wp-maintenance-mode' ),
 				)
 			);
 		}

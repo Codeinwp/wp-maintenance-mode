@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 						</tr>
 						<tr>
 							<td style="text-align:center;">
-								<img src="<?php echo esc_url( WPMM_IMAGES_URL . 'icon-48.png' ); ?>" />
+								<img src="<?php echo esc_url( WPMM_IMAGES_URL . 'icon.svg' ); ?>" />
 							</td>
 						</tr>
 						<tr>
@@ -77,7 +77,7 @@ defined( 'ABSPATH' ) || exit;
 											</td>
 											<td width="80%" style="border-bottom:1px solid #e3e5e5;padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
 												<?php echo esc_html( $name ); ?>
-											</td>                                            
+											</td>
 										</tr>
 										<tr>
 											<td height="30"></td>
@@ -102,12 +102,12 @@ defined( 'ABSPATH' ) || exit;
 											<td colspan="2" style="padding:0 0 30px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;font-weight:bold;">
 												<?php esc_html_e( 'Content:', 'wp-maintenance-mode' ); ?>
 											</td>
-										</tr> 
+										</tr>
 										<tr>
 											<td colspan="2" style="padding:0 0 20px 20px;text-align:left;font-size:14px;font-family:Lato, Helvetica, Arial, sans-serif;color:#747e7e;">
 												<?php echo nl2br( esc_html( $content ) ); ?>
 											</td>
-										</tr> 
+										</tr>
 
 										<?php do_action( 'wpmm_contact_template_after_message' ); ?>
 
