@@ -6,16 +6,16 @@ Author: Themeisle
 Author URI: https://themeisle.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 6.0
+Tested up to: 6.1
 Stable tag: 2.6.0
 Requires PHP: 5.6
 License: GPL-2.0+
 
-Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon page. The new Bot functionality is here!
+Easy Drag & Drop Page Builder that adds a splash page to your site that it's perfect for a coming soon page, maintenance or landing page.
 
 == Description ==
 
-Add a maintenance page to your blog that lets visitors know your blog is down for maintenance, or add a coming soon page for a new website. User with admin rights gets full access to the blog including the front end.
+Add a maintenance page to your blog that lets visitors know your blog is down for maintenance, add a coming soon page for a new website or create a landing page for an existing site. User with admin rights gets full access to the blog including the front end.
 
 Activate the plugin and your blog is in maintenance-mode, works and only registered users with enough rights can see the front end. You can use a date with a countdown timer for visitor information or set a value and unit for information.
 
@@ -51,6 +51,7 @@ Developed by [Themeisle](https://themeisle.com)
 If you like this plugin, then consider checking out our other projects:
 
 * <a href="https://optimole.com/">Optimole</a> - Optimole is your all-in-one image optimization solution for WordPress & beyond.
+* <a href="https://wpshout.com/">WPShout</a> - In-Depth WordPress Tutorials for Developers
 * <a href="https://revive.social/">Revive Social</a> - Revive Old Posts helps you keep your content alive and in front the audiences that matter.
 * <a href="https://www.codeinwp.com/">CodeinWP</a> - CodeinWP stands for all-things-WordPress. From web design to freelancing and from development to business, your questions are covered.
 * <a href="https://domainwheel.com">DomainWheel</a> - Free Short Website name generator, with the help of AI, for instant ideas.
