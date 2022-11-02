@@ -23,10 +23,10 @@ Also works with WordPress Multisite installs (each blog from the network has its
 
 = Features =
 
-* Fully customizable (change colors, texts and backgrounds);
-* Subscription form (export emails to .csv file);
-* Countdown timer (remaining time);
-* Contact form (receive emails from visitors);
+* Fully customizable (change colors, texts and backgrounds).
+* Subscription form (export emails to .csv file).
+* Countdown timer (remaining time).
+* Contact form (receive emails from visitors).
 * Coming soon page;
 * Landing page templates;
 * WordPress multisite;
