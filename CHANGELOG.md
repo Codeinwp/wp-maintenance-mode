@@ -1,3 +1,9 @@
+#### [Version 2.6.0](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.4...v2.6.0) (2022-11-02)
+
+* Adds Landing pages templates
+* Adds more Coming soon and Maintenance mode templates
+* Rebrand the plugin into LightStart
+
 ##### [Version 2.5.4](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.3...v2.5.4) (2022-10-10)
 
 * Fix subscribers entry export for legacy forms.
