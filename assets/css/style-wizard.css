@@ -117,7 +117,6 @@ h2.wpmm-title span img {
     display: flex;
     flex-wrap: wrap;
     margin-top: 65px;
-    max-width: 800px;
     width: 100%;
     gap: 35px;
 }

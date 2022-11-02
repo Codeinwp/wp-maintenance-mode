@@ -296,8 +296,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 */
 		public function add_plugin_menu() {
 			$this->plugin_screen_hook_suffix = add_options_page(
-				__( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
-				__( 'WP Maintenance Mode', 'wp-maintenance-mode' ),
+				__( 'LightStart', 'wp-maintenance-mode' ),
+				__( 'LightStart', 'wp-maintenance-mode' ),
 				wpmm_get_capability( 'settings' ),
 				$this->plugin_slug,
 				array( $this, 'display_plugin_settings' )
@@ -647,7 +647,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
 				$page_id        = wp_update_post( $post_arr );
 			} else {
-				$post_arr['post_title'] = 'Maintenance Page';
+				$post_arr['post_title'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
 				$page_id                = wp_insert_post( $post_arr );
 			}
 
@@ -663,6 +663,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				update_option( 'wpmm_fresh_install', false );
 			}
 
+			update_option( 'wpmm_page_category', $category );
 			update_option( 'wpmm_settings', $this->plugin_settings );
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
@@ -698,6 +699,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							'slug'  => 'wp-maintenance-mode',
 							'site'  => get_site_url(),
 							'email' => $_POST['email'],
+							'data'  => array(
+								'category' => get_option( 'wpmm_page_category' ),
+							),
 						)
 					),
 				)
@@ -1051,7 +1055,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 */
 		public function add_display_post_states( $post_states, $post ) {
 			if ( isset( $this->plugin_settings['design']['page_id'] ) && $this->plugin_settings['design']['page_id'] == $post->ID ) {
-				$post_states['wpmm_for_maintenance'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
+				$post_states['wpmm_for_maintenance'] = WP_Maintenance_Mode::get_page_status_by_category( get_option( 'wpmm_page_category', 'maintenance' ) );
 			}
 
 			return $post_states;
