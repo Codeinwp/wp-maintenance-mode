@@ -23,6 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * DEFINE PATHS
  */
 define( 'WPMM_PATH', plugin_dir_path( __FILE__ ) );
+define( 'WPMM_FILE', __FILE__ );
 define( 'WPMM_CLASSES_PATH', WPMM_PATH . 'includes/classes/' );
 define( 'WPMM_FUNCTIONS_PATH', WPMM_PATH . 'includes/functions/' );
 define( 'WPMM_LANGUAGES_PATH', basename( WPMM_PATH ) . '/languages/' );
