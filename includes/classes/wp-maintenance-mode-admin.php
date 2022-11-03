@@ -902,6 +902,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$screen  = get_current_screen();
 			$notices = array();
 
+			// show this notice if user had the plugin installed on the moment of rebranding
+			if ( ThemeisleSDK\Product::get( WPMM_FILE )->get_install_time() < strtotime( '2022-11-02' ) ) {
+				$notices['rebrand'] = array(
+					'class' => 'notice wpmm_notices notice-success is-dismissible',
+					'msg'   => __( 'WP Maintenance Mode is now LightStart. Enjoy the same features, more templates and new landing pages building compatibility.', 'wp-maintenance-mode' ),
+				);
+			}
+
 			if ( $this->plugin_screen_hook_suffix !== $screen->id ) {
 				// notice if plugin is activated
 				if (
