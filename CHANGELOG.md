@@ -1,3 +1,7 @@
+##### [Version 2.6.1](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.0...v2.6.1) (2022-11-03)
+
+* Add a notice to announce the rebrand of the plugin
+
 #### [Version 2.6.0](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.5.4...v2.6.0) (2022-11-02)
 
 * Adds Landing pages templates
