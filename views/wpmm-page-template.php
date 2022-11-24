@@ -4,6 +4,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
 $settings              = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
 $overrideable_template = wpmm_get_template_path( 'maintenance.php', true );
 
