@@ -18,7 +18,6 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
-	defined( 'ABSPATH' ) || exit;
 	if ( ! is_front_page() ) {
 		wp_redirect( home_url() );
 	}

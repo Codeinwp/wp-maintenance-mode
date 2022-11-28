@@ -6,7 +6,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $overrideable_template = wpmm_get_template_path( 'maintenance.php', true );
-if ( defined( 'IS_MAINTENANCE' ) && WPMM_VIEWS_PATH . 'maintenance.php' !== $overrideable_template ) {
+if ( ( defined( 'IS_MAINTENANCE' ) && IS_MAINTENANCE ) && WPMM_VIEWS_PATH . 'maintenance.php' !== $overrideable_template ) {
 	exit();
 } else {
 	$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
