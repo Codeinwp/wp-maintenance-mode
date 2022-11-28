@@ -5,14 +5,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$settings              = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
 $overrideable_template = wpmm_get_template_path( 'maintenance.php', true );
-
-if ( ( isset( $settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) && WPMM_VIEWS_PATH . 'maintenance.php' !== $overrideable_template ) {
-	if ( ! is_front_page() ) {
-		wp_redirect( home_url() );
-	}
+if ( defined( 'IS_MAINTENANCE' ) && WPMM_VIEWS_PATH . 'maintenance.php' !== $overrideable_template ) {
+	exit();
 } else {
+	$settings = WP_Maintenance_Mode::get_instance()->get_plugin_settings();
 	?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
