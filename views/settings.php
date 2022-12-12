@@ -319,7 +319,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 								<br/>
 								<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 							<?php } ?>
-							<div class="templates">
+							<div class="wpmm-templates">
 								<?php
 								if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
 									$this->plugin_settings['design']['template_category'] = 'all';
@@ -349,8 +349,8 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 
 										$template_label = json_decode( file_get_contents( $content ) )->label;
 										?>
-										<div class="template-wrap">
-											<div class="template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
+										<div class="wpmm-template-wrap">
+											<div class="wpmm-template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
 												<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
 												<?php if ( ! $is_old_version ) { ?>
 													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>

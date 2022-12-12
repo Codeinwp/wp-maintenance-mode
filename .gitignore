@@ -42,5 +42,5 @@ artifact
 .idea
 
 # build assets files
-./assets/js/*.min.js
-./assets/css/*.min.css
+assets/js/*.min.js
+assets/css/*.min.css
