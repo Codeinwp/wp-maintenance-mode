@@ -40,3 +40,7 @@ Temporary Items
 dist
 artifact
 .idea
+
+# build assets files
+./assets/js/*.min.js
+./assets/css/*.min.css
