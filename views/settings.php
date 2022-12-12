@@ -45,7 +45,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
 							<p class="description"><?php esc_html_e( 'Just click on one of the pre-designed templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
-							<div class="templates-radio">
+							<div class="wpmm-templates-radio">
 								<form>
 									<?php
 									$categories = WP_Maintenance_Mode::get_page_categories();
@@ -56,7 +56,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 											<div>
 												<h6 class="tag"><?php echo $label; ?></h6>
 												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
-												<label for="<?php echo esc_attr( $slug ); ?>" class="template">
+												<label for="<?php echo esc_attr( $slug ); ?>" class="wpmm-template">
 													<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
 												</label>
 											</div>
