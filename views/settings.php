@@ -65,10 +65,10 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 									?>
 								</form>
 							</div>
-							<div id="wizard-import-button" class="import-button">
+							<div id="wizard-buttons" class="import-button">
 								<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
+								<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a template', 'wp-maintenance-mode' ); ?>"/>
 							</div>
-							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 						</div>
 					</div>
 					<div class="step-wrap">

@@ -218,6 +218,7 @@ jQuery( function( $ ) {
 	 */
 	let pageEditURL = '#';
 	const templateWrap = $( '.template-image-wrap' );
+	const wizardButtons = $( '#wizard-buttons' );
 
 	templateWrap.on( 'click', '.button-import', function() {
 		/* If the page has some content inside, show a confirmation prompt to let the use know the
@@ -338,6 +339,8 @@ jQuery( function( $ ) {
 	/**
 	 * WIZARD
 	 */
+	let skipWizard = false;
+
 	$( 'h2.wpmm-title span' ).on( 'click', function() {
 		window.location.href = wpmmVars.adminURL;
 	} );
@@ -351,7 +354,7 @@ jQuery( function( $ ) {
 		} );
 	}
 
-	$( '#wizard-import-button' ).on( 'click', '.button-import:not(.disabled)', function() {
+	wizardButtons.on( 'click', '.button-import:not(.disabled)', function() {
 		const templateSelect = $( 'input[name="wizard-template"]:checked' );
 		const templateSlug = templateSelect.val();
 		const category = templateSelect[ 0 ].dataset.category;
@@ -369,6 +372,21 @@ jQuery( function( $ ) {
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
 
 			$( '#wpmm-wizard-wrapper .finish-step .heading' ).text( wpmmVars.finishWizardStrings[ category ] );
+		} );
+	} );
+
+	wizardButtons.on( 'click', '.button-skip', function() {
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_skip_wizard',
+			_wpnonce: wpmmVars.wizardNonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				// eslint-disable-next-line no-console
+				console.error( response.data );
+				return;
+			}
+			skipWizard = true;
+			moveToStep( 'import', 'subscribe' );
 		} );
 	} );
 
@@ -397,6 +415,7 @@ jQuery( function( $ ) {
 		}
 
 		emailInput.removeClass( 'invalid' );
+		$( this ).addClass( 'is-busy' );
 
 		$.post( wpmmVars.ajaxURL, {
 			action: 'wpmm_subscribe',
@@ -407,14 +426,24 @@ jQuery( function( $ ) {
 				alert( response.data );
 			}
 
-			moveToStep( 'subscribe', 'finish' );
+			if ( ! skipWizard ) {
+				moveToStep( 'subscribe', 'finish' );
+				return;
+			}
+
+			window.location.reload();
 		} );
 
 		return false;
 	} );
 
 	$( '#skip-subscribe' ).on( 'click', function() {
-		moveToStep( 'subscribe', 'finish' );
+		if ( ! skipWizard ) {
+			moveToStep( 'subscribe', 'finish' );
+			return;
+		}
+
+		window.location.reload();
 	} );
 
 	$( '#view-page-button' ).on( 'click', function() {
@@ -480,7 +509,7 @@ jQuery( function( $ ) {
 			if ( ! response.success ) {
 				alert( response.data );
 				$( '.dashicons-update' ).remove();
-				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-import-button' );
+				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
 				return false;
 			}
 
@@ -502,7 +531,7 @@ jQuery( function( $ ) {
 			if ( ! response.success ) {
 				alert( response.data.errorMessage );
 				$( '.dashicons-update' ).remove();
-				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-import-button' );
+				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
 
 				window.location.reload();
 				return false;

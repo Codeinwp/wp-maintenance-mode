@@ -161,6 +161,12 @@ h2.wpmm-title span img {
     margin-top: 45px;
 }
 
+#wizard-buttons .button-skip {
+    margin-left: 15px;
+    color: #555D66;
+    border-color: #555D66;
+}
+
 .dashicons-update {
     position: absolute;
     top: 50%;
