@@ -231,6 +231,9 @@ jQuery( function( $ ) {
 				second_button: `<button class="button button-secondary button-big go-back">${ wpmmVars.confirmModalTexts.buttonGoBack }</button>`,
 			} );
 
+			$( this ).parent().addClass( 'importing' );
+			$( this ).hide();
+
 			const importButton = this;
 			$( 'button.confirm' ).on( 'click', function() {
 				$( this ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
@@ -240,6 +243,9 @@ jQuery( function( $ ) {
 
 			$( 'button.go-back' ).on( 'click', function() {
 				$( '.modal-overlay' ).remove();
+				$( 'body' ).removeClass( 'has-modal' );
+				$( importButton ).show();
+				$( importButton ).parent().removeClass( 'importing' );
 			} );
 		} else {
 			fireImport( this );
@@ -371,11 +377,13 @@ jQuery( function( $ ) {
 		};
 
 		importInProgress( data.template_slug );
+		$( '#wpmm-wizard-wrapper .button-skip' ).addClass( 'disabled' );
 		importTemplate( data, function( response ) {
 			moveToStep( 'import', 'subscribe' );
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
 
 			$( '#wpmm-wizard-wrapper .finish-step .heading' ).text( wpmmVars.finishWizardStrings[ category ] );
+			$( '#wpmm-wizard-wrapper .button-skip' ).removeClass( 'disabled' );
 		} );
 	} );
 
@@ -406,6 +414,7 @@ jQuery( function( $ ) {
 
 		const emailInput = $( '#email-input-wrap input[type="text"]' );
 		const email = emailInput.val();
+		const subscribeButton = $( this );
 
 		if ( ! isEmailValid( email ) ) {
 			$( '#email-input-wrap' ).append( `<p class="subscribe-message email-error"><i>${ wpmmVars.invalidEmailString }</i></p>` );
@@ -419,7 +428,7 @@ jQuery( function( $ ) {
 		}
 
 		emailInput.removeClass( 'invalid' );
-		$( this ).addClass( 'is-busy' );
+		subscribeButton.addClass( 'is-busy' );
 
 		$.post( wpmmVars.ajaxURL, {
 			action: 'wpmm_subscribe',
@@ -430,6 +439,7 @@ jQuery( function( $ ) {
 				alert( response.data );
 			}
 
+			subscribeButton.removeClass( 'is-busy' );
 			if ( ! skipWizard ) {
 				moveToStep( 'subscribe', 'finish' );
 				return;

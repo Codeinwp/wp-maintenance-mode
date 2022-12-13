@@ -44,7 +44,8 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 					<div class="step-wrap">
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Just click on one of the pre-designed templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Choose the type of template you want, powered by Otter Blocks. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+							<?php echo $this->get_otter_notice( 'wizard' ); ?>
 							<div class="templates-radio">
 								<form>
 									<?php
@@ -265,7 +266,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
-										<th scope="row">
+										<th scope="row" class="wpmm-page-select-label">
 											<label for="design_page_id"><?php esc_html_e( 'Select page', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td>
@@ -285,16 +286,20 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 											if ( $page_status && $page_status !== 'trash' ) {
 												?>
 												<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a> <?php } ?>
-											<p class="description"><?php esc_html_e( 'Select the page that will be used as the Maintenance, Coming Soon or Landing page.', 'wp-maintenance-mode' ); ?></p>
 										</td>
 									</tr>
 								</tbody>
+							</table>
+							<table>
+								<tbody><tr valign="top">
+									<p class="description"><?php esc_html_e( 'Select the page that will be used as the Maintenance, Coming Soon or Landing page.', 'wp-maintenance-mode' ); ?></p>
+								</tr></tbody>
 							</table>
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
 										<th scope="row">
-											<label for="dashboard-template"><?php esc_html_e( 'Pick a template', 'wp-maintenance-mode' ); ?></label>
+											<label for="dashboard-template" class="wpmm-templates-gallery__label"><?php esc_html_e( 'Pick a template', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td class="category-select-wrap">
 											<select name="options[design][template_category]" id="template-category">
@@ -315,9 +320,12 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							<?php if ( $is_old_version ) { ?>
 								<p class="description"><i><?php echo __( '<b>Note</b>: You need at least WP 5.8 to use new generation maintenance pages.', 'wp-maintenance-mode' ); ?></i></p>
 							<?php } else { ?>
-								<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customize them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
-								<br/>
-								<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+								<p class="wpmm-templates-gallery__description">
+									<?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customize them based on your needs.', 'wp-maintenance-mode' ); ?>
+									<br/>
+									<?php esc_html_e( 'Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?>
+								</p>
+								<?php echo $this->get_otter_notice( 'settings' ); ?>
 							<?php } ?>
 							<div class="templates">
 								<?php

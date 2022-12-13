@@ -1157,5 +1157,26 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );
 			}
 		}
+
+		/**
+		 * Returns the HTML of the Otter notice
+		 *
+		 * @return string
+		 */
+		public function get_otter_notice( $location = null ) {
+			return sprintf(
+				'<div class="wpmm_otter-notice">
+					<div class="wpmm_otter-notice__logo">
+						<img src="%s"/>
+					</div>
+					<div class="wpmm_otter-notice__text">%s&nbsp;<a href="%s" target="_blank">%s</a></div>
+				</div>',
+				esc_url( WPMM_URL . 'assets/images/otter-logo.svg' ),
+				/* translators: %1$s %2$s bold text tags */
+				sprintf( __( 'These templates make use of %1$s Otter Blocks %2$s powerful features, which will be installed and activated.', 'wp-maintenance-mode' ), '<b>', '</b>' ),
+				tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, $location ),
+				__( 'Learn more about Otter.', 'wp-maintenance-mode' )
+			);
+		}
 	}
 }

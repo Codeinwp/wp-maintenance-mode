@@ -10,6 +10,7 @@
 
 .wp-toolbar .wpmm-wizard-fullscreen {
     margin-top: -32px;
+    height: 100vh;
 }
 
 #wpwrap {
@@ -110,7 +111,6 @@ h2.wpmm-title span img {
     font-size: 18px;
     font-weight: 400;
     color: currentColor;
-    max-width: 600px;
 }
 
 .templates-radio form {
@@ -140,7 +140,6 @@ h2.wpmm-title span img {
 
 .templates-radio .template {
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .templates-radio .template img {

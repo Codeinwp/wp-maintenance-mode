@@ -12,10 +12,6 @@ h2.wpmm-title {
     width: 100%;
 }
 
-.wpmm-wrapper #content {
-    min-width: 800px;
-}
-
 .wpmm-wrapper #sidebar {
     padding: 0 0 0 20px;
     width: 280px;
@@ -77,6 +73,10 @@ h2.wpmm-title {
 }
 
 /* TABS CONTENT */
+#tab-design {
+    max-width: 1220px;
+}
+
 .tabs-content {
     margin-top: 20px;
     padding-left: 10px;
@@ -145,6 +145,22 @@ h2.wpmm-title {
     display: block;
 }
 
+/* Design tab content */
+.form-table th.wpmm-page-select-label {
+    width: 80px;
+}
+
+p.wpmm-templates-gallery__description {
+    font-size: 16px;
+    line-height: 160%;
+    margin-top: 0;
+}
+
+label.wpmm-templates-gallery__label {
+    font-weight: 700;
+    font-size: 24px;
+}
+
 .category-select-wrap {
     text-align: end;
 }
@@ -153,6 +169,8 @@ h2.wpmm-title {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    margin-top: 25px;
+    justify-content: center;
 }
 
 .template-wrap {
@@ -343,6 +361,23 @@ input[type="button"].is-busy {
     background-image: linear-gradient(-45deg, #2271b1 33%, #135e96 33%, #135e96 70%,  #2271b1 70%) !important;
     border-color:  #2271b1;
     animation: button-busy-animation 2500ms infinite linear;
+}
+
+.wpmm_otter-notice {
+    background: #fff;
+    padding: 13px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    column-gap: 18px;
+    font-size: 16px;
+    color: #717A84;
+    margin-top: 35px;
+}
+
+.wpmm_otter-notice__text {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 @keyframes spin {
