@@ -183,6 +183,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
+						'skipImportStrings'     => array(
+							'maintenance'  => __( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ),
+							'coming-soon'  => __( 'I don’t want to use a Coming Soon Template', 'wp-maintenance-mode' ),
+							'landing-page' => __( 'I don’t want to use a Landing Page Template', 'wp-maintenance-mode' ),
+						),
+						'skipImportDefault'     => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
 					)
 				);
 

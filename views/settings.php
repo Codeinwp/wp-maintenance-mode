@@ -67,7 +67,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							</div>
 							<div id="wizard-buttons" class="import-button">
 								<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
-								<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a template', 'wp-maintenance-mode' ); ?>"/>
+								<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ); ?>"/>
 							</div>
 						</div>
 					</div>

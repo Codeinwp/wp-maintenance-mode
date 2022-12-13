@@ -161,6 +161,10 @@ h2.wpmm-title span img {
     margin-top: 45px;
 }
 
+#wizard-buttons .button-import {
+    min-width: 200px;
+}
+
 #wizard-buttons .button-skip {
     margin-left: 15px;
     color: #555D66;

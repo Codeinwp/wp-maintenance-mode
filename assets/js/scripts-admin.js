@@ -340,6 +340,8 @@ jQuery( function( $ ) {
 	 * WIZARD
 	 */
 	let skipWizard = false;
+	const wizardTemplateSelect = $( 'input[name="wizard-template"]' );
+	const wizardImportButton = $( '#wpmm-wizard-wrapper .button-import' );
 
 	$( 'h2.wpmm-title span' ).on( 'click', function() {
 		window.location.href = wpmmVars.adminURL;
@@ -347,12 +349,14 @@ jQuery( function( $ ) {
 
 	if ( $( 'input[name="wizard-template"]:checked' ).val() ) {
 		$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
-	} else {
-		$( 'input[name="wizard-template"]' ).on( 'change', function() {
-			$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
-			$( 'input[name="wizard-template"]' ).off( 'change' );
-		} );
 	}
+
+	wizardTemplateSelect.on( 'change', function() {
+		wizardImportButton.removeClass( 'disabled' );
+
+		const selected = $( 'input[name="wizard-template"]:checked' ).data( 'category' );
+		$( '#wizard-buttons .button-skip' ).attr( 'value', selected ? wpmmVars.skipImportStrings[ selected ] : wpmmVars.skipImportDefault );
+	} );
 
 	wizardButtons.on( 'click', '.button-import:not(.disabled)', function() {
 		const templateSelect = $( 'input[name="wizard-template"]:checked' );
