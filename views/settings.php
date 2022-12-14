@@ -45,7 +45,11 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
 							<p class="description"><?php esc_html_e( 'Choose the type of template you want, powered by Otter Blocks. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
-							<?php echo $this->get_otter_notice( 'wizard' ); ?>
+							<?php
+							if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+								echo $this->get_otter_notice( 'wizard' );
+							}
+							?>
 							<div class="templates-radio">
 								<form>
 									<?php
@@ -325,7 +329,11 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 									<br/>
 									<?php esc_html_e( 'Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?>
 								</p>
-								<?php echo $this->get_otter_notice( 'settings' ); ?>
+								<?php
+								if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+									echo $this->get_otter_notice( 'settings' );
+								}
+								?>
 							<?php } ?>
 							<div class="templates">
 								<?php
