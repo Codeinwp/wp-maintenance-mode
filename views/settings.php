@@ -11,6 +11,8 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 	$this->plugin_settings['design']['page_id'] = 0;
 }
+
+$is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || defined( 'OTTER_BLOCKS_VERSION' );
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
@@ -46,7 +48,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
 							<p class="description"><?php esc_html_e( 'Choose the type of template you want, powered by Otter Blocks. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
 							<?php
-							if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+							if ( ! $is_otter_active ) {
 								echo $this->get_otter_notice( 'wizard' );
 							}
 							?>
@@ -330,7 +332,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 									<?php esc_html_e( 'Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?>
 								</p>
 								<?php
-								if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+								if ( ! $is_otter_active ) {
 									echo $this->get_otter_notice( 'settings' );
 								}
 								?>
