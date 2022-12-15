@@ -1,5 +1,6 @@
 h2.wpmm-title {
     background: url('../images/icon.svg') no-repeat left center;
+    background-size: 40px;
     line-height: 42px !important;
     margin-bottom: 30px !important;
     height: 48px;
@@ -302,8 +303,8 @@ label.wpmm-templates-gallery__label {
 .button-big {
     min-height: 40px !important;
     padding: 12px 30px !important;
-    font-size: 16px !important;
-    line-height: 18px !important;
+    font-size: 1.2em !important;
+    line-height: 1.2 !important;
     font-weight: 700;
 }
 
@@ -378,6 +379,13 @@ input[type="button"].is-busy {
 .wpmm_otter-notice__text {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.wpmm_otter-notice__logo {
+    margin: auto;
+    position: relative;
+    height: 51px;
+    width: 52px;
 }
 
 @keyframes spin {

@@ -60,7 +60,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 										$slug          = $default_templates[ $category ]['slug'];
 										$thumbnail_url = $default_templates[ $category ]['thumbnail'];
 										?>
-											<div>
+											<div class="templates-radio__item" >
 												<h6 class="tag"><?php echo $label; ?></h6>
 												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
 												<label for="<?php echo esc_attr( $slug ); ?>" class="template">
