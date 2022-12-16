@@ -1,3 +1,9 @@
+##### [Version 2.6.2](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.1...v2.6.2) (2022-12-16)
+
+* Add the option in the wizard to skip importing a template and installing Otter
+* Improve the quality of the template screenshots
+* Fix the template overriding issue
+
 ##### [Version 2.6.1](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.0...v2.6.1) (2022-11-03)
 
 * Add a notice to announce the rebrand of the plugin
