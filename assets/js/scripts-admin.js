@@ -217,7 +217,8 @@ jQuery( function( $ ) {
 	 * TEMPLATES
 	 */
 	let pageEditURL = '#';
-	const templateWrap = $( '.template-image-wrap' );
+	const templateWrap = $( '.wpmm-template-image-wrap' );
+	const wizardButtons = $( '#wizard-buttons' );
 
 	templateWrap.on( 'click', '.button-import', function() {
 		/* If the page has some content inside, show a confirmation prompt to let the use know the
@@ -230,6 +231,9 @@ jQuery( function( $ ) {
 				second_button: `<button class="button button-secondary button-big go-back">${ wpmmVars.confirmModalTexts.buttonGoBack }</button>`,
 			} );
 
+			$( this ).parent().addClass( 'importing' );
+			$( this ).hide();
+
 			const importButton = this;
 			$( 'button.confirm' ).on( 'click', function() {
 				$( this ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
@@ -239,6 +243,9 @@ jQuery( function( $ ) {
 
 			$( 'button.go-back' ).on( 'click', function() {
 				$( '.modal-overlay' ).remove();
+				$( 'body' ).removeClass( 'has-modal' );
+				$( importButton ).show();
+				$( importButton ).parent().removeClass( 'importing' );
 			} );
 		} else {
 			fireImport( this );
@@ -338,20 +345,26 @@ jQuery( function( $ ) {
 	/**
 	 * WIZARD
 	 */
+	let skipWizard = false;
+	const wizardTemplateSelect = $( 'input[name="wizard-template"]' );
+	const wizardImportButton = $( '#wpmm-wizard-wrapper .button-import' );
+
 	$( 'h2.wpmm-title span' ).on( 'click', function() {
 		window.location.href = wpmmVars.adminURL;
 	} );
 
 	if ( $( 'input[name="wizard-template"]:checked' ).val() ) {
 		$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
-	} else {
-		$( 'input[name="wizard-template"]' ).on( 'change', function() {
-			$( '#wpmm-wizard-wrapper .button-import' ).removeClass( 'disabled' );
-			$( 'input[name="wizard-template"]' ).off( 'change' );
-		} );
 	}
 
-	$( '#wizard-import-button' ).on( 'click', '.button-import:not(.disabled)', function() {
+	wizardTemplateSelect.on( 'change', function() {
+		wizardImportButton.removeClass( 'disabled' );
+
+		const selected = $( 'input[name="wizard-template"]:checked' ).data( 'category' );
+		$( '#wizard-buttons .button-skip' ).attr( 'value', selected ? wpmmVars.skipImportStrings[ selected ] : wpmmVars.skipImportDefault );
+	} );
+
+	wizardButtons.on( 'click', '.button-import:not(.disabled)', function() {
 		const templateSelect = $( 'input[name="wizard-template"]:checked' );
 		const templateSlug = templateSelect.val();
 		const category = templateSelect[ 0 ].dataset.category;
@@ -364,11 +377,28 @@ jQuery( function( $ ) {
 		};
 
 		importInProgress( data.template_slug );
+		$( '#wpmm-wizard-wrapper .button-skip' ).addClass( 'disabled' );
 		importTemplate( data, function( response ) {
 			moveToStep( 'import', 'subscribe' );
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
 
 			$( '#wpmm-wizard-wrapper .finish-step .heading' ).text( wpmmVars.finishWizardStrings[ category ] );
+			$( '#wpmm-wizard-wrapper .button-skip' ).removeClass( 'disabled' );
+		} );
+	} );
+
+	wizardButtons.on( 'click', '.button-skip', function() {
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_skip_wizard',
+			_wpnonce: wpmmVars.wizardNonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				// eslint-disable-next-line no-console
+				console.error( response.data );
+				return;
+			}
+			skipWizard = true;
+			moveToStep( 'import', 'subscribe' );
 		} );
 	} );
 
@@ -384,6 +414,7 @@ jQuery( function( $ ) {
 
 		const emailInput = $( '#email-input-wrap input[type="text"]' );
 		const email = emailInput.val();
+		const subscribeButton = $( this );
 
 		if ( ! isEmailValid( email ) ) {
 			$( '#email-input-wrap' ).append( `<p class="subscribe-message email-error"><i>${ wpmmVars.invalidEmailString }</i></p>` );
@@ -397,6 +428,7 @@ jQuery( function( $ ) {
 		}
 
 		emailInput.removeClass( 'invalid' );
+		subscribeButton.addClass( 'is-busy' );
 
 		$.post( wpmmVars.ajaxURL, {
 			action: 'wpmm_subscribe',
@@ -407,14 +439,25 @@ jQuery( function( $ ) {
 				alert( response.data );
 			}
 
-			moveToStep( 'subscribe', 'finish' );
+			subscribeButton.removeClass( 'is-busy' );
+			if ( ! skipWizard ) {
+				moveToStep( 'subscribe', 'finish' );
+				return;
+			}
+
+			window.location.reload();
 		} );
 
 		return false;
 	} );
 
 	$( '#skip-subscribe' ).on( 'click', function() {
-		moveToStep( 'subscribe', 'finish' );
+		if ( ! skipWizard ) {
+			moveToStep( 'subscribe', 'finish' );
+			return;
+		}
+
+		window.location.reload();
 	} );
 
 	$( '#view-page-button' ).on( 'click', function() {
@@ -431,13 +474,13 @@ jQuery( function( $ ) {
 	 * @param {string} slug The template that will be imported
 	 */
 	function importInProgress( slug ) {
-		const template = $( 'input[value=' + slug + '] + .template' );
+		const template = $( 'input[value=' + slug + '] + .wpmm-template' );
 
 		template.addClass( 'loading' );
 		template.append( '<span class="dashicons dashicons-update"></span><p><i>' + wpmmVars.loadingString + '</i></p>' );
 
 		$( '.button-import' ).attr( 'disabled', 'disabled' );
-		$( '#wpmm-wizard-wrapper .templates-radio label' ).css( 'pointer-events', 'none' );
+		$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).css( 'pointer-events', 'none' );
 	}
 
 	/**
@@ -480,7 +523,7 @@ jQuery( function( $ ) {
 			if ( ! response.success ) {
 				alert( response.data );
 				$( '.dashicons-update' ).remove();
-				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-import-button' );
+				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
 				return false;
 			}
 
@@ -502,7 +545,7 @@ jQuery( function( $ ) {
 			if ( ! response.success ) {
 				alert( response.data.errorMessage );
 				$( '.dashicons-update' ).remove();
-				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-import-button' );
+				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
 
 				window.location.reload();
 				return false;

@@ -1,5 +1,6 @@
 h2.wpmm-title {
     background: url('../images/icon.svg') no-repeat left center;
+    background-size: 40px;
     line-height: 42px !important;
     margin-bottom: 30px !important;
     height: 48px;
@@ -10,10 +11,6 @@ h2.wpmm-title {
 .wpmm-wrapper {
     display: table;
     width: 100%;
-}
-
-.wpmm-wrapper #content {
-    min-width: 800px;
 }
 
 .wpmm-wrapper #sidebar {
@@ -77,6 +74,10 @@ h2.wpmm-title {
 }
 
 /* TABS CONTENT */
+#tab-design {
+    max-width: 1220px;
+}
+
 .tabs-content {
     margin-top: 20px;
     padding-left: 10px;
@@ -145,43 +146,61 @@ h2.wpmm-title {
     display: block;
 }
 
+/* Design tab content */
+.form-table th.wpmm-page-select-label {
+    width: 80px;
+}
+
+p.wpmm-templates-gallery__description {
+    font-size: 16px;
+    line-height: 160%;
+    margin-top: 0;
+}
+
+label.wpmm-templates-gallery__label {
+    font-weight: 700;
+    font-size: 24px;
+}
+
 .category-select-wrap {
     text-align: end;
 }
 
-.templates {
+.wpmm-templates {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    margin-top: 25px;
+    justify-content: center;
 }
 
-.template-wrap {
+.wpmm-template-wrap {
     width: calc( 100% / 3 - 20px);
     max-width: 290px;
 }
 
-.template-image-wrap {
+.wpmm-template-image-wrap {
     background-color: #fff;
     line-height: 0;
     height: calc( 100% - 20px );
 }
 
-.template-image-wrap img {
+.wpmm-template-image-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.template-image-wrap.can-import:hover img,
-.template-image-wrap.importing img {
+.wpmm-template-image-wrap.can-import:hover img,
+.wpmm-template-image-wrap.importing img {
     opacity: .1;
 }
 
-.template-image-wrap {
+.wpmm-template-image-wrap {
     position: relative;
 }
 
-.template-wrap .template-image-wrap .button-import {
+.wpmm-template-wrap .wpmm-template-image-wrap .button-import {
     display: none;
     position: absolute;
     top: 50%;
@@ -194,8 +213,8 @@ h2.wpmm-title {
     animation: spin 2s linear infinite;
 }
 
-.template-image-wrap.can-import:hover .button-import,
-.template-image-wrap.importing .button-import {
+.wpmm-template-image-wrap.can-import:hover .button-import,
+.wpmm-template-image-wrap.importing .button-import {
     display: flex;
     align-items: center;
 }
@@ -284,8 +303,8 @@ h2.wpmm-title {
 .button-big {
     min-height: 40px !important;
     padding: 12px 30px !important;
-    font-size: 16px !important;
-    line-height: 18px !important;
+    font-size: 1.2em !important;
+    line-height: 1.2 !important;
     font-weight: 700;
 }
 
@@ -338,11 +357,48 @@ h2.wpmm-title {
     display: flex;
 }
 
+input[type="button"].is-busy {
+    background-size: 100px 100% !important;
+    background-image: linear-gradient(-45deg, #2271b1 33%, #135e96 33%, #135e96 70%,  #2271b1 70%) !important;
+    border-color:  #2271b1;
+    animation: button-busy-animation 2500ms infinite linear;
+}
+
+.wpmm_otter-notice {
+    background: #fff;
+    padding: 13px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    column-gap: 18px;
+    font-size: 16px;
+    color: #717A84;
+    margin-top: 35px;
+}
+
+.wpmm_otter-notice__text {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.wpmm_otter-notice__logo {
+    margin: auto 0;
+    position: relative;
+    height: 51px;
+    width: 52px;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes button-busy-animation {
+    0% {
+        background-position: 200px 0;
     }
 }

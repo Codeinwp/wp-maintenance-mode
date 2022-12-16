@@ -11,6 +11,8 @@ $is_old_version = version_compare( $GLOBALS['wp_version'], '5.8', '<' );
 if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 	$this->plugin_settings['design']['page_id'] = 0;
 }
+
+$is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || defined( 'OTTER_BLOCKS_VERSION' );
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
@@ -44,8 +46,13 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 					<div class="step-wrap">
 						<div class="step import-step">
 							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Just click on one of the pre-designed templates below to get started. You can always edit and customize later, so these are a perfect starting point!', 'wp-maintenance-mode' ); ?></p>
-							<div class="templates-radio">
+							<p class="description"><?php esc_html_e( 'Choose the type of template you want, powered by Otter Blocks. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
+							<?php
+							if ( ! $is_otter_active ) {
+								echo $this->get_otter_notice( 'wizard' );
+							}
+							?>
+							<div class="wpmm-templates-radio">
 								<form>
 									<?php
 									$categories = WP_Maintenance_Mode::get_page_categories();
@@ -53,10 +60,10 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 										$slug          = $default_templates[ $category ]['slug'];
 										$thumbnail_url = $default_templates[ $category ]['thumbnail'];
 										?>
-											<div>
+											<div class="templates-radio__item" >
 												<h6 class="tag"><?php echo $label; ?></h6>
 												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
-												<label for="<?php echo esc_attr( $slug ); ?>" class="template">
+												<label for="<?php echo esc_attr( $slug ); ?>" class="wpmm-template">
 													<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
 												</label>
 											</div>
@@ -65,10 +72,10 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 									?>
 								</form>
 							</div>
-							<div id="wizard-import-button" class="import-button">
+							<div id="wizard-buttons" class="import-button">
 								<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
+								<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ); ?>"/>
 							</div>
-							<p class="import-text"><i><?php esc_html_e( 'This template uses Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
 						</div>
 					</div>
 					<div class="step-wrap">
@@ -285,16 +292,20 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 											if ( $page_status && $page_status !== 'trash' ) {
 												?>
 												<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a> <?php } ?>
-											<p class="description"><?php esc_html_e( 'Select the page that will be used as the Maintenance, Coming Soon or Landing page.', 'wp-maintenance-mode' ); ?></p>
 										</td>
 									</tr>
 								</tbody>
+							</table>
+							<table>
+								<tbody><tr valign="top">
+									<p class="description"><?php esc_html_e( 'Select the page that will be used as the Maintenance, Coming Soon or Landing page.', 'wp-maintenance-mode' ); ?></p>
+								</tr></tbody>
 							</table>
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
 										<th scope="row">
-											<label for="dashboard-template"><?php esc_html_e( 'Pick a template', 'wp-maintenance-mode' ); ?></label>
+											<label for="dashboard-template" class="wpmm-templates-gallery__label"><?php esc_html_e( 'Pick a template', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td class="category-select-wrap">
 											<select name="options[design][template_category]" id="template-category">
@@ -315,11 +326,18 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							<?php if ( $is_old_version ) { ?>
 								<p class="description"><i><?php echo __( '<b>Note</b>: You need at least WP 5.8 to use new generation maintenance pages.', 'wp-maintenance-mode' ); ?></i></p>
 							<?php } else { ?>
-								<p class="description"><?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customize them based on your needs.  Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?></p>
-								<br/>
-								<p class="description"><i><?php esc_html_e( 'This templates use Otter Blocks plugin which will be installed on import.', 'wp-maintenance-mode' ); ?></i></p>
+								<p class="wpmm-templates-gallery__description">
+									<?php esc_html_e( 'Pick one of our starter templates for your maintenance or coming soon page. You can always customize them based on your needs.', 'wp-maintenance-mode' ); ?>
+									<br/>
+									<?php esc_html_e( 'Stay in the loop for more templates!', 'wp-maintenance-mode' ); ?>
+								</p>
+								<?php
+								if ( ! $is_otter_active ) {
+									echo $this->get_otter_notice( 'settings' );
+								}
+								?>
 							<?php } ?>
-							<div class="templates">
+							<div class="wpmm-templates">
 								<?php
 								if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
 									$this->plugin_settings['design']['template_category'] = 'all';
@@ -349,8 +367,8 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 
 										$template_label = json_decode( file_get_contents( $content ) )->label;
 										?>
-										<div class="template-wrap">
-											<div class="template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
+										<div class="wpmm-template-wrap">
+											<div class="wpmm-template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
 												<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
 												<?php if ( ! $is_old_version ) { ?>
 													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
