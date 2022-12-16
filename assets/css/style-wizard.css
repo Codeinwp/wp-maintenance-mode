@@ -113,7 +113,7 @@ h2.wpmm-title span img {
     max-width: 600px;
 }
 
-.templates-radio form {
+.wpmm-templates-radio form {
     display: flex;
     flex-wrap: wrap;
     margin-top: 65px;
@@ -121,12 +121,12 @@ h2.wpmm-title span img {
     gap: 35px;
 }
 
-.templates-radio [type=radio], .bullets-wrap [type=radio] {
+.wpmm-templates-radio [type=radio], .bullets-wrap [type=radio] {
     position: absolute;
     opacity: 0;
 }
 
-.templates-radio [type=radio] + .template {
+.wpmm-templates-radio [type=radio] + .wpmm-template {
     cursor: pointer;
     background-color: #fff;
     width: 240px;
@@ -134,22 +134,22 @@ h2.wpmm-title span img {
     display: block;
 }
 
-.templates-radio [type=radio]:checked + .template {
+.wpmm-templates-radio [type=radio]:checked + .wpmm-template {
     outline: 2px solid #0065A6;
 }
 
-.templates-radio .template {
+.wpmm-templates-radio .wpmm-template {
     position: relative;
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.templates-radio .template img {
+.wpmm-templates-radio .wpmm-template img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.templates-radio .template p {
+.wpmm-templates-radio .wpmm-template p {
     position: absolute;
     bottom: 15px;
     transform: translateX(-50%);
@@ -168,7 +168,7 @@ h2.wpmm-title span img {
     animation: abs-spin 2s linear infinite;
 }
 
-.templates-radio .template.loading img {
+.wpmm-templates-radio .wpmm-template.loading img {
     opacity: .2;
 }
 
@@ -176,12 +176,12 @@ h2.wpmm-title span img {
     color: #717A84;
 }
 
-.templates-radio [type=radio] + .template {
+.wpmm-templates-radio [type=radio] + .wpmm-template {
     width: 340px;
     height: 357px;
 }
 
-.templates-radio .tag {
+.wpmm-templates-radio .tag {
     font-size: 15px;
     margin: 0 0 12px 0;
     color: #7a7979;

@@ -149,39 +149,39 @@ h2.wpmm-title {
     text-align: end;
 }
 
-.templates {
+.wpmm-templates {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.template-wrap {
+.wpmm-template-wrap {
     width: calc( 100% / 3 - 20px);
     max-width: 290px;
 }
 
-.template-image-wrap {
+.wpmm-template-image-wrap {
     background-color: #fff;
     line-height: 0;
     height: calc( 100% - 20px );
 }
 
-.template-image-wrap img {
+.wpmm-template-image-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.template-image-wrap.can-import:hover img,
-.template-image-wrap.importing img {
+.wpmm-template-image-wrap.can-import:hover img,
+.wpmm-template-image-wrap.importing img {
     opacity: .1;
 }
 
-.template-image-wrap {
+.wpmm-template-image-wrap {
     position: relative;
 }
 
-.template-wrap .template-image-wrap .button-import {
+.wpmm-template-wrap .wpmm-template-image-wrap .button-import {
     display: none;
     position: absolute;
     top: 50%;
@@ -194,8 +194,8 @@ h2.wpmm-title {
     animation: spin 2s linear infinite;
 }
 
-.template-image-wrap.can-import:hover .button-import,
-.template-image-wrap.importing .button-import {
+.wpmm-template-image-wrap.can-import:hover .button-import,
+.wpmm-template-image-wrap.importing .button-import {
     display: flex;
     align-items: center;
 }
