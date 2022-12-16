@@ -382,7 +382,7 @@ input[type="button"].is-busy {
 }
 
 .wpmm_otter-notice__logo {
-    margin: auto;
+    margin: auto 0;
     position: relative;
     height: 51px;
     width: 52px;
