@@ -217,7 +217,7 @@ jQuery( function( $ ) {
 	 * TEMPLATES
 	 */
 	let pageEditURL = '#';
-	const templateWrap = $( '.template-image-wrap' );
+	const templateWrap = $( '.wpmm-template-image-wrap' );
 	const wizardButtons = $( '#wizard-buttons' );
 
 	templateWrap.on( 'click', '.button-import', function() {
@@ -474,13 +474,13 @@ jQuery( function( $ ) {
 	 * @param {string} slug The template that will be imported
 	 */
 	function importInProgress( slug ) {
-		const template = $( 'input[value=' + slug + '] + .template' );
+		const template = $( 'input[value=' + slug + '] + .wpmm-template' );
 
 		template.addClass( 'loading' );
 		template.append( '<span class="dashicons dashicons-update"></span><p><i>' + wpmmVars.loadingString + '</i></p>' );
 
 		$( '.button-import' ).attr( 'disabled', 'disabled' );
-		$( '#wpmm-wizard-wrapper .templates-radio label' ).css( 'pointer-events', 'none' );
+		$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).css( 'pointer-events', 'none' );
 	}
 
 	/**

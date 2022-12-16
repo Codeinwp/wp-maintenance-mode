@@ -52,7 +52,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 								echo $this->get_otter_notice( 'wizard' );
 							}
 							?>
-							<div class="templates-radio">
+							<div class="wpmm-templates-radio">
 								<form>
 									<?php
 									$categories = WP_Maintenance_Mode::get_page_categories();
@@ -63,7 +63,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 											<div class="templates-radio__item" >
 												<h6 class="tag"><?php echo $label; ?></h6>
 												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
-												<label for="<?php echo esc_attr( $slug ); ?>" class="template">
+												<label for="<?php echo esc_attr( $slug ); ?>" class="wpmm-template">
 													<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
 												</label>
 											</div>
@@ -272,7 +272,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 							<table class="form-table">
 								<tbody>
 									<tr valign="top">
-										<th scope="row" class="wpmm-page-select-label">
+										<th scope="row">
 											<label for="design_page_id"><?php esc_html_e( 'Select page', 'wp-maintenance-mode' ); ?></label>
 										</th>
 										<td>
@@ -337,7 +337,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 								}
 								?>
 							<?php } ?>
-							<div class="templates">
+							<div class="wpmm-templates">
 								<?php
 								if ( ! isset( $this->plugin_settings['design']['template_category'] ) ) {
 									$this->plugin_settings['design']['template_category'] = 'all';
@@ -367,8 +367,8 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 
 										$template_label = json_decode( file_get_contents( $content ) )->label;
 										?>
-										<div class="template-wrap">
-											<div class="template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
+										<div class="wpmm-template-wrap">
+											<div class="wpmm-template-image-wrap <?php echo $is_old_version ? '' : 'can-import'; ?>">
 												<img src="<?php echo $thumbnail; ?>" alt="<?php echo $name; ?>"/>
 												<?php if ( ! $is_old_version ) { ?>
 													<button type="button" class="button button-primary button-import" data-tab="design" data-slug="<?php echo esc_attr( $name ); ?>" data-category="<?php echo esc_attr( $category ); ?>" data-replace="<?php echo (int) $will_replace; ?>"><?php esc_html_e( 'Import template', 'wp-maintenance-mode' ); ?></button>
