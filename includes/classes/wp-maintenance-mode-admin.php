@@ -55,6 +55,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			add_action( 'wp_ajax_wpmm_reset_settings', array( $this, 'reset_plugin_settings' ) );
 			add_action( 'wp_ajax_wpmm_select_page', array( $this, 'select_page' ) );
 			add_action( 'wp_ajax_wpmm_insert_template', array( $this, 'insert_template' ) );
+			add_action( 'wp_ajax_wpmm_skip_wizard', array( $this, 'skip_wizard' ) );
 			add_action( 'wp_ajax_wpmm_subscribe', array( $this, 'subscribe_newsletter' ) );
 			add_action( 'wp_ajax_wpmm_change_template_category', array( $this, 'change_template_category' ) );
 			add_action( 'wp_ajax_wpmm_toggle_gutenberg', array( $this, 'toggle_gutenberg' ) );
@@ -182,6 +183,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
+						'skipImportStrings'     => array(
+							'maintenance'  => __( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ),
+							'coming-soon'  => __( 'I don’t want to use a Coming Soon Template', 'wp-maintenance-mode' ),
+							'landing-page' => __( 'I don’t want to use a Landing Page Template', 'wp-maintenance-mode' ),
+						),
+						'skipImportDefault'     => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
 					)
 				);
 
@@ -669,6 +676,26 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		/**
+		 * Skip importing a template (and installing Otter) from the wizard
+		 *
+		 * @return void
+		 */
+		public function skip_wizard() {
+			// check nonce existence
+			if ( empty( $_POST['_wpnonce'] ) ) {
+				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
+			}
+
+			// check nonce validation
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wizard' ) ) {
+				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
+			}
+
+			update_option( 'wpmm_fresh_install', false );
+			wp_send_json_success();
+		}
+
+		/**
 		 * Subscribe user to plugin newsletter
 		 *
 		 * @return void
@@ -1129,6 +1156,27 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} elseif ( ! $this->get_is_policy_available() ) { // No privacy feature available
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );
 			}
+		}
+
+		/**
+		 * Returns the HTML of the Otter notice
+		 *
+		 * @return string
+		 */
+		public function get_otter_notice( $location = null ) {
+			return sprintf(
+				'<div class="wpmm_otter-notice">
+					<div class="wpmm_otter-notice__logo">
+						<img src="%s"/>
+					</div>
+					<div class="wpmm_otter-notice__text">%s&nbsp;<a href="%s" target="_blank">%s</a></div>
+				</div>',
+				esc_url( WPMM_URL . 'assets/images/otter-logo.svg' ),
+				/* translators: %1$s %2$s bold text tags */
+				sprintf( __( 'These templates make use of %1$s Otter Blocks %2$s powerful features, which will be installed and activated.', 'wp-maintenance-mode' ), '<b>', '</b>' ),
+				tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, $location ),
+				__( 'Learn more about Otter.', 'wp-maintenance-mode' )
+			);
 		}
 	}
 }

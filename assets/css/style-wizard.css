@@ -10,6 +10,7 @@
 
 .wp-toolbar .wpmm-wizard-fullscreen {
     margin-top: -32px;
+    height: 100vh;
 }
 
 #wpwrap {
@@ -42,14 +43,18 @@
 }
 
 h2.wpmm-title {
-    margin: 0 !important;
-    padding: 8px 48px 8px 188px !important;
-    background-color: #fff;
-    background-position: 130px;
     position: relative;
+
+    margin: 0 !important;
+    padding: 8px 80px !important;
+    font-size: 15px !important;
+
+    background-color: #fff;
+    background-position: 25px;
 }
 
 h2.wpmm-title span {
+    display: flex;
     position: absolute;
     right: 75px;
     top: 50%;
@@ -94,8 +99,7 @@ h2.wpmm-title span img {
 }
 
 .step.import-step {
-    margin-left: 130px;
-    margin-top: 100px;
+    margin: min(10%, 10vh) min(12%, 12vh);
 }
 
 .import-step .header {
@@ -110,12 +114,20 @@ h2.wpmm-title span img {
     font-size: 18px;
     font-weight: 400;
     color: currentColor;
-    max-width: 600px;
+}
+
+.templates-radio {
+    max-width: calc( 340px * 3 + 35px * 2 );
+}
+
+.templates-radio__item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .wpmm-templates-radio form {
     display: flex;
-    flex-wrap: wrap;
     margin-top: 65px;
     width: 100%;
     gap: 35px;
@@ -140,13 +152,17 @@ h2.wpmm-title span img {
 
 .wpmm-templates-radio .wpmm-template {
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 106.57%;
+    width: 100%;
+    height: 0;
 }
 
 .wpmm-templates-radio .wpmm-template img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    position: absolute;
 }
 
 .wpmm-templates-radio .wpmm-template p {
@@ -159,6 +175,23 @@ h2.wpmm-title span img {
 
 .import-button {
     margin-top: 45px;
+}
+
+#wizard-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#wizard-buttons .button-import {
+    max-width: 200px;
+    width: 100%;
+}
+
+#wizard-buttons .button-skip {
+    color: #555D66;
+    border-color: #555D66;
+    white-space: break-spaces;
 }
 
 .dashicons-update {
@@ -177,14 +210,16 @@ h2.wpmm-title span img {
 }
 
 .wpmm-templates-radio [type=radio] + .wpmm-template {
-    width: 340px;
-    height: 357px;
+    max-width: 320px;
+    width: 100%;
+    height: auto;
 }
 
 .wpmm-templates-radio .tag {
     font-size: 15px;
     margin: 0 0 12px 0;
     color: #7a7979;
+    white-space: nowrap;
 }
 
 .finish-step, .subscribe-step {
@@ -277,6 +312,22 @@ input.invalid:focus {
     }
     to {
         transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #wpbody {
+        padding-top: 0;
+    }
+
+    .templates-radio form {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    html.wp-toolbar {
+        padding-top: 32px;
     }
 }
 
