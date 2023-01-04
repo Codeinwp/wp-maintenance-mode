@@ -16,6 +16,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
+		protected $plugin_network_settings = array();
 		protected $plugin_basename;
 		protected static $instance = null;
 
@@ -41,6 +42,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
+
+			if ( is_multisite() && apply_filters( 'wpmm_manage_from_network_dashboard', true ) ) {
+				$this->plugin_network_settings = wpmm_get_option( 'wpmm_settings_network', array() );
+				if ( ! empty( $this->plugin_network_settings['general']['status'] ) ) {
+					$this->plugin_settings['general']['status'] = $this->plugin_network_settings['general']['status'];
+				}
+			}
 
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -167,6 +175,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function get_plugin_settings() {
 			return $this->plugin_settings;
+		}
+
+		/**
+		 * Return plugin network site settings
+		 *
+		 * @since 2.6.2
+		 * @return array
+		 */
+		public function get_plugin_network_settings() {
+			return $this->plugin_network_settings;
 		}
 
 		/**

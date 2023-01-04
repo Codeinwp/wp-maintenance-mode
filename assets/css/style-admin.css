@@ -388,6 +388,11 @@ input[type="button"].is-busy {
     width: 52px;
 }
 
+.wpmm_status_disable {
+    opacity: .4;
+    pointer-events: none;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

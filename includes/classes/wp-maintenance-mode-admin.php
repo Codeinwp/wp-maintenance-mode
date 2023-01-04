@@ -13,6 +13,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		protected static $instance = null;
 		protected $plugin_slug;
 		protected $plugin_settings;
+		protected $plugin_network_settings;
 		protected $plugin_default_settings;
 		protected $plugin_basename;
 		protected $plugin_screen_hook_suffix = null;
@@ -25,6 +26,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$plugin                        = WP_Maintenance_Mode::get_instance();
 			$this->plugin_slug             = $plugin->get_plugin_slug();
 			$this->plugin_settings         = $plugin->get_plugin_settings();
+			$this->plugin_network_settings = $plugin->get_plugin_network_settings();
 			$this->plugin_default_settings = $plugin->default_settings();
 			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
@@ -34,6 +36,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add the options page and menu item.
 			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
+			if ( apply_filters( 'wpmm_manage_from_network_dashboard', true ) ) {
+				add_action( 'network_admin_menu', array( $this, 'add_plugin_menu' ) );
+			}
 
 			add_action( 'admin_init', array( $this, 'maybe_redirect' ) );
 
@@ -47,6 +52,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add admin notices
 			add_action( 'admin_notices', array( $this, 'add_notices' ) );
+
+			if ( apply_filters( 'wpmm_manage_from_network_dashboard', true ) ) {
+				// Add network admin notices.
+				add_action( 'network_admin_notices', array( $this, 'add_notices' ) );
+				add_action( 'network_admin_notices', array( $this, 'save_plugin_settings_notice' ) );
+			}
 
 			// Add ajax methods
 			add_action( 'wp_ajax_wpmm_subscribers_export', array( $this, 'subscribers_export' ) );
@@ -302,13 +313,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function add_plugin_menu() {
-			$this->plugin_screen_hook_suffix = add_options_page(
+			$parent_menu              = 'options-general.php';
+			$network_menu_hook_suffix = '';
+			if ( is_multisite() && is_network_admin() ) {
+				$parent_menu              = 'settings.php';
+				$network_menu_hook_suffix = '-network';
+			}
+			$this->plugin_screen_hook_suffix = add_submenu_page(
+				$parent_menu,
 				__( 'LightStart', 'wp-maintenance-mode' ),
 				__( 'LightStart', 'wp-maintenance-mode' ),
 				wpmm_get_capability( 'settings' ),
 				$this->plugin_slug,
 				array( $this, 'display_plugin_settings' )
 			);
+			$this->plugin_screen_hook_suffix = $this->plugin_screen_hook_suffix . $network_menu_hook_suffix;
 		}
 
 		public function maybe_redirect() {
@@ -335,7 +354,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function display_plugin_settings() {
-			include_once wpmm_get_template_path( 'settings.php' );
+			if ( is_multisite() && is_network_admin() ) {
+				include_once wpmm_get_template_path( 'network-settings.php' );
+			} else {
+				include_once wpmm_get_template_path( 'settings.php' );
+			}
 		}
 
 		/**
@@ -377,13 +400,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					if ( ! empty( $_POST['options']['general']['status'] ) && $_POST['options']['general']['status'] === 1 ) {
 						$_POST['options']['general']['status_date'] = date( 'Y-m-d H:i:s' );
 					}
-					$_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
+					if ( isset( $_POST['options']['general']['bypass_bots'] ) ) {
+						$_POST['options']['general']['bypass_bots'] = (int) $_POST['options']['general']['bypass_bots'];
+					}
 
 					$_POST['options']['general']['backend_role']  = ! empty( $_POST['options']['general']['backend_role'] ) ? array_map( 'sanitize_text_field', $_POST['options']['general']['backend_role'] ) : array();
 					$_POST['options']['general']['frontend_role'] = ! empty( $_POST['options']['general']['frontend_role'] ) ? array_map( 'sanitize_text_field', $_POST['options']['general']['frontend_role'] ) : array();
-
-					$_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
-					$_POST['options']['general']['redirection'] = esc_url_raw( $_POST['options']['general']['redirection'] );
+					if ( isset( $_POST['options']['general']['meta_robots'] ) ) {
+						$_POST['options']['general']['meta_robots'] = (int) $_POST['options']['general']['meta_robots'];
+					}
+					if ( isset( $_POST['options']['general']['redirection'] ) ) {
+						$_POST['options']['general']['redirection'] = esc_url_raw( $_POST['options']['general']['redirection'] );
+					}
 					if ( ! empty( $_POST['options']['general']['exclude'] ) ) {
 						$exclude_array = explode( "\n", $_POST['options']['general']['exclude'] );
 						// we need to be sure that empty lines will not be saved
@@ -392,7 +420,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					} else {
 						$_POST['options']['general']['exclude'] = array();
 					}
-					$_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
+					if ( isset( $_POST['options']['general']['notice'] ) ) {
+						$_POST['options']['general']['notice'] = (int) $_POST['options']['general']['notice'];
+					}
 
 					if ( ! empty( $_POST['options']['general']['admin_link'] ) ) {
 						$_POST['options']['general']['admin_link'] = (int) $_POST['options']['general']['admin_link'];
@@ -528,7 +558,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// save settings
 			$this->plugin_settings[ $tab ] = $_POST['options'][ $tab ];
-			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			$redirect_to = wpmm_option_page_url();
+			$option_name = 'wpmm_settings';
+			if ( ! empty( $_POST['options']['is_network_site'] ) ) {
+				$redirect_to           = network_admin_url( 'settings.php' );
+				$option_name           = 'wpmm_settings_network';
+				$this->plugin_settings = array(
+					'general' => array(
+						'status' => $this->plugin_settings['general']['status'],
+					),
+				);
+			}
+
+			update_option( $option_name, $this->plugin_settings );
 
 			// redirect back
 			wp_safe_redirect(
@@ -537,7 +580,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'page'    => $this->plugin_slug,
 						'updated' => true,
 					),
-					admin_url( 'options-general.php' )
+					$redirect_to
 				) . '#' . $tab
 			);
 			exit;
@@ -968,7 +1011,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						}
 					}
 
-					if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
+					if ( ! isset( $this->plugin_settings['design']['page_id'] ) || ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
 						$notices['maintenance_page_not_found'] = array(
 							'class' => 'error',
 							'msg'   => sprintf( __( '<strong>Action required</strong>: you don\'t have a page as Maintenance page. Visit <a href="%s">settings page</a> to select one.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
@@ -1177,6 +1220,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, $location ),
 				__( 'Learn more about Otter.', 'wp-maintenance-mode' )
 			);
+		}
+
+		/**
+		 * Display save plugin settings notice.
+		 */
+		public function save_plugin_settings_notice() {
+			$screen  = get_current_screen();
+			$notices = array();
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! empty( $_GET['updated'] ) && $this->plugin_screen_hook_suffix === $screen->id ) { ?>
+				<div id="message" class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Settings saved.', 'wp-maintenance-mode' ); ?></strong></p></div>
+				<?php
+			}
 		}
 	}
 }
