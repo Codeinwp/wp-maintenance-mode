@@ -315,7 +315,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function add_plugin_menu() {
 			$parent_menu              = 'options-general.php';
 			$network_menu_hook_suffix = '';
-			if ( is_multisite() && is_network_admin() ) {
+			if ( apply_filters( 'wpmm_manage_from_network_dashboard', true ) && ( is_multisite() && is_network_admin() ) ) {
 				$parent_menu              = 'settings.php';
 				$network_menu_hook_suffix = '-network';
 			}
