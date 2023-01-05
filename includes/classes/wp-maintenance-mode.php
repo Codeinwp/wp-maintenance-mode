@@ -16,7 +16,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
-		protected $plugin_network_settings = array();
+		protected $plugin_network_settings = array(
+			'general' => array(
+				'status' => 0,
+			),
+		);
 		protected $plugin_basename;
 		protected static $instance = null;
 
@@ -44,7 +48,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 
 			if ( is_multisite() && apply_filters( 'wpmm_manage_from_network_dashboard', true ) ) {
-				$this->plugin_network_settings = wpmm_get_option( 'wpmm_settings_network', array() );
+				$this->plugin_network_settings = get_network_option( get_current_network_id(), 'wpmm_settings_network', $this->plugin_network_settings );
 				if ( ! empty( $this->plugin_network_settings['general']['status'] ) ) {
 					$this->plugin_settings['general']['status'] = $this->plugin_network_settings['general']['status'];
 				}

@@ -560,7 +560,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$this->plugin_settings[ $tab ] = $_POST['options'][ $tab ];
 
 			$redirect_to = wpmm_option_page_url();
-			$option_name = 'wpmm_settings';
 			if ( ! empty( $_POST['options']['is_network_site'] ) ) {
 				$redirect_to           = network_admin_url( 'settings.php' );
 				$option_name           = 'wpmm_settings_network';
@@ -569,9 +568,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'status' => $this->plugin_settings['general']['status'],
 					),
 				);
+				update_network_option( get_current_network_id(), 'wpmm_settings_network', $this->plugin_settings );
+			} else {
+				update_option( 'wpmm_settings', $this->plugin_settings );
 			}
-
-			update_option( $option_name, $this->plugin_settings );
 
 			// redirect back
 			wp_safe_redirect(
