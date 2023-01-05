@@ -22,6 +22,14 @@ defined( 'ABSPATH' ) || exit;
 				<tbody>
 					<tr valign="top">
 						<th scope="row">
+							<label for="options[general][status]"><?php esc_html_e( 'Enable network mode', 'wp-maintenance-mode' ); ?></label>
+						</th>
+						<td>
+							<label><input type="checkbox" class="wpmm_network_mode" value="1" name="options[general][network_mode]"<?php checked( $this->plugin_network_settings['general']['network_mode'], 1 ); ?> /></label>
+						</td>
+					</tr>
+					<tr valign="top" class="wpmm_status <?php echo empty( $this->plugin_network_settings['general']['network_mode'] ) ? 'wpmm_status_disable' : ''; ?>">
+						<th scope="row">
 							<label for="options[general][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 						</th>
 						<td>

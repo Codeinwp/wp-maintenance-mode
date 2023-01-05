@@ -468,6 +468,15 @@ jQuery( function( $ ) {
 		window.location.reload();
 	} );
 
+	$( document ).on( 'change', 'input.wpmm_network_mode', function() {
+        var status = $( this ).parents( 'table' ).find( '.wpmm_status' );
+        if ( status.hasClass( 'wpmm_status_disable' ) ) {
+            status.removeClass( 'wpmm_status_disable' );
+        } else {
+            status.addClass( 'wpmm_status_disable' );
+        }
+    } );
+
 	/**
 	 * Adds elements and CSS when importing from wizard
 	 *

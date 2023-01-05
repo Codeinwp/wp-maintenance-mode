@@ -36,9 +36,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add the options page and menu item.
 			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
-			if ( apply_filters( 'wpmm_manage_from_network_dashboard', true ) ) {
-				add_action( 'network_admin_menu', array( $this, 'add_plugin_menu' ) );
-			}
+			add_action( 'network_admin_menu', array( $this, 'add_plugin_menu' ) );
 
 			add_action( 'admin_init', array( $this, 'maybe_redirect' ) );
 
@@ -53,11 +51,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			// Add admin notices
 			add_action( 'admin_notices', array( $this, 'add_notices' ) );
 
-			if ( apply_filters( 'wpmm_manage_from_network_dashboard', true ) ) {
-				// Add network admin notices.
-				add_action( 'network_admin_notices', array( $this, 'add_notices' ) );
-				add_action( 'network_admin_notices', array( $this, 'save_plugin_settings_notice' ) );
-			}
+			// Add network admin notices.
+			add_action( 'network_admin_notices', array( $this, 'add_notices' ) );
+			add_action( 'network_admin_notices', array( $this, 'save_plugin_settings_notice' ) );
 
 			// Add ajax methods
 			add_action( 'wp_ajax_wpmm_subscribers_export', array( $this, 'subscribers_export' ) );
@@ -315,7 +311,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function add_plugin_menu() {
 			$parent_menu              = 'options-general.php';
 			$network_menu_hook_suffix = '';
-			if ( apply_filters( 'wpmm_manage_from_network_dashboard', true ) && ( is_multisite() && is_network_admin() ) ) {
+			if ( is_multisite() && is_network_admin() ) {
 				$parent_menu              = 'settings.php';
 				$network_menu_hook_suffix = '-network';
 			}
@@ -437,6 +433,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							)
 					) {
 						wpmm_delete_cache();
+					}
+					if ( isset( $_POST['options']['general']['network_mode'] ) ) {
+						$_POST['options']['general']['network_mode'] = (int) $_POST['options']['general']['network_mode'];
 					}
 					break;
 				case 'design':
@@ -565,7 +564,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$option_name           = 'wpmm_settings_network';
 				$this->plugin_settings = array(
 					'general' => array(
-						'status' => $this->plugin_settings['general']['status'],
+						'status'       => $this->plugin_settings['general']['status'],
+						'network_mode' => $this->plugin_settings['general']['network_mode'],
 					),
 				);
 				update_network_option( get_current_network_id(), 'wpmm_settings_network', $this->plugin_settings );
