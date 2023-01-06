@@ -52,9 +52,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$plugin_network_settings       = get_network_option( get_current_network_id(), 'wpmm_settings_network', $this->plugin_network_settings );
 				$plugin_network_settings       = array_filter( $plugin_network_settings );
 				$this->plugin_network_settings = wp_parse_args( $plugin_network_settings, $this->plugin_network_settings );
+				if ( ! isset( $this->plugin_network_settings['general']['network_mode'] ) ) {
+					$this->plugin_network_settings['general']['network_mode'] = 0;
+				}
 				if ( ! empty( $this->plugin_network_settings ) ) {
-					$this->plugin_settings['general']['status']       = ! empty( $this->plugin_network_settings['general']['status'] ) ? 1 : 0;
 					$this->plugin_settings['general']['network_mode'] = ! empty( $this->plugin_network_settings['general']['network_mode'] ) ? 1 : 0;
+					if ( $this->plugin_settings['general']['network_mode'] ) {
+						$this->plugin_settings['general']['status'] = ! empty( $this->plugin_network_settings['general']['status'] ) ? 1 : 0;
+					}
 				}
 			}
 
