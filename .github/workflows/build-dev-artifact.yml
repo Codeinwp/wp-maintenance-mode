@@ -86,7 +86,7 @@ jobs:
         uses: peter-evans/find-comment@v1
         with:
           issue-number: ${{ steps.get-pr-number.outputs.num }}
-          comment-author: github-actions[bot]
+          comment-author: pirate-bot
           body-includes: Download [build]
 
       - name: Get comment body
@@ -102,6 +102,7 @@ jobs:
         with:
           issue-number: ${{ steps.get-pr-number.outputs.num }}
           body: ${{ steps.get-comment-body.outputs.body }}
+          token: ${{ secrets.BOT_TOKEN }}
 
       - name: Update comment on PR with links to plugin builds
         if: ${{ steps.find-comment.outputs.comment-id != '' }}
@@ -109,4 +110,5 @@ jobs:
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           edit-mode: replace
+          token: ${{ secrets.BOT_TOKEN }}
           body: ${{ steps.get-comment-body.outputs.body }}
