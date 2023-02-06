@@ -632,5 +632,5 @@
     "platform-overrides": {
         "php": "5.6"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }
