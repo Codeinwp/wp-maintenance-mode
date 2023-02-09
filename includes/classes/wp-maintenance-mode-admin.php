@@ -968,7 +968,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						}
 					}
 
-					if ( ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
+					$overrideable_template = wpmm_get_template_path( 'maintenance.php', true );
+					if ( WPMM_VIEWS_PATH . 'maintenance.php' === $overrideable_template && ( isset( $this->plugin_settings['design']['page_id'] ) || ! get_post( $this->plugin_settings['design']['page_id'] ) ) ) {
 						$notices['maintenance_page_not_found'] = array(
 							'class' => 'error',
 							'msg'   => sprintf( __( '<strong>Action required</strong>: you don\'t have a page as Maintenance page. Visit <a href="%s">settings page</a> to select one.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),

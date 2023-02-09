@@ -388,6 +388,10 @@ input[type="button"].is-busy {
     width: 52px;
 }
 
+.wpmm-wrapper p.notice {
+    padding: 10px 15px;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
