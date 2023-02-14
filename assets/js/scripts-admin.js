@@ -359,9 +359,6 @@ jQuery( function( $ ) {
 
 	wizardTemplateSelect.on( 'change', function() {
 		wizardImportButton.removeClass( 'disabled' );
-
-		const selected = $( 'input[name="wizard-template"]:checked' ).data( 'category' );
-		$( '#wizard-buttons .button-skip' ).attr( 'value', selected ? wpmmVars.skipImportStrings[ selected ] : wpmmVars.skipImportDefault );
 	} );
 
 	wizardButtons.on( 'click', '.button-import:not(.disabled)', function() {
@@ -377,7 +374,6 @@ jQuery( function( $ ) {
 		};
 
 		importInProgress( data.template_slug );
-		$( '#wpmm-wizard-wrapper .button-skip' ).addClass( 'disabled' );
 		importTemplate( data, function( response ) {
 			moveToStep( 'import', 'subscribe' );
 			pageEditURL = response.pageEditURL.replace( /&amp;/g, '&' );
@@ -388,17 +384,25 @@ jQuery( function( $ ) {
 	} );
 
 	wizardButtons.on( 'click', '.button-skip', function() {
-		$.post( wpmmVars.ajaxURL, {
-			action: 'wpmm_skip_wizard',
-			_wpnonce: wpmmVars.wizardNonce,
-		}, function( response ) {
-			if ( ! response.success ) {
-				// eslint-disable-next-line no-console
-				console.error( response.data );
-				return;
-			}
-			skipWizard = true;
-			moveToStep( 'import', 'subscribe' );
+		$( this ).attr( 'disabled', 'disabled' );
+		$( this ).addClass( 'is-busy' );
+
+		handleOptimole().then( function() {
+			$( this ).removeClass( 'is-busy' );
+			$( this ).removeAttr( 'disabled' );
+
+			$.post( wpmmVars.ajaxURL, {
+				action: 'wpmm_skip_wizard',
+				_wpnonce: wpmmVars.wizardNonce,
+			}, function( response ) {
+				if ( ! response.success ) {
+					// eslint-disable-next-line no-console
+					console.error( response.data );
+					return;
+				}
+				skipWizard = true;
+				moveToStep( 'import', 'subscribe' );
+			} );
 		} );
 	} );
 
@@ -414,7 +418,6 @@ jQuery( function( $ ) {
 
 		const emailInput = $( '#email-input-wrap input[type="text"]' );
 		const email = emailInput.val();
-		const subscribeButton = $( this );
 
 		if ( ! isEmailValid( email ) ) {
 			$( '#email-input-wrap' ).append( `<p class="subscribe-message email-error"><i>${ wpmmVars.invalidEmailString }</i></p>` );
@@ -426,6 +429,8 @@ jQuery( function( $ ) {
 
 			return;
 		}
+
+		const subscribeButton = $( this );
 
 		emailInput.removeClass( 'invalid' );
 		subscribeButton.addClass( 'is-busy' );
@@ -480,6 +485,7 @@ jQuery( function( $ ) {
 		template.append( '<span class="dashicons dashicons-update"></span><p><i>' + wpmmVars.loadingString + '</i></p>' );
 
 		$( '.button-import' ).attr( 'disabled', 'disabled' );
+		$( '#wpmm-wizard-wrapper .button-skip' ).addClass( 'disabled' );
 		$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).css( 'pointer-events', 'none' );
 	}
 
@@ -503,11 +509,9 @@ jQuery( function( $ ) {
 	 * @param {Function} callback
 	 */
 	function importTemplate( data, callback ) {
-		if ( ! wpmmVars.isOtterInstalled ) {
-			installAndActivateOtter( () => addToPage( data, callback ) );
-		} else if ( ! wpmmVars.isOtterActivated ) {
-			activateOtter( () => addToPage( data, callback ) );
-		}
+		Promise.allSettled( [ handleOptimole(), handleOtter() ] ).then( function() {
+			addToPage( data, callback );
+		} );
 	}
 
 	/**
@@ -521,7 +525,7 @@ jQuery( function( $ ) {
 		data.action = 'wpmm_insert_template';
 		$.post( wpmmVars.ajaxURL, data, function( response ) {
 			if ( ! response.success ) {
-				alert( response.data );
+				alert( response.data.error );
 				$( '.dashicons-update' ).remove();
 				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
 				return false;
@@ -532,39 +536,34 @@ jQuery( function( $ ) {
 	}
 
 	/**
-	 * Installs Otter then calls the activation function with the callback
-	 *
-	 * @param {Function} callback
+	 * Install and activate Optimole if the checkbox is checked.
 	 */
-	function installAndActivateOtter( callback ) {
-		$.post( wpmmVars.ajaxURL, {
-			action: 'wp_ajax_install_plugin',
-			_ajax_nonce: wpmmVars.pluginInstallNonce,
-			slug: 'otter-blocks',
-		}, function( response ) {
-			if ( ! response.success ) {
-				alert( response.data.errorMessage );
-				$( '.dashicons-update' ).remove();
-				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
-
-				window.location.reload();
-				return false;
+	async function handleOptimole() {
+		if ( $( '#wizard-optimole-checkbox' ).is( ':checked' ) ) {
+			if ( ! wpmmVars.isOptimoleInstalled ) {
+				await installPlugin( 'optimole-wp' ).then( async function() {
+					if ( ! wpmmVars.isOptimoleActive ) {
+						await activatePlugin( 'optimole-wp' );
+					}
+				} );
+			} else if ( ! wpmmVars.isOptimoleActive ) {
+				await activatePlugin( 'optimole-wp' );
 			}
-
-			updateSDKOptions();
-			activateOtter( callback );
-		} );
+		}
 	}
 
 	/**
-	 * Activates Otter and calls a callback
-	 *
-	 * @param {Function} callback
+	 * Install and activate Otter.
 	 */
-	function activateOtter( callback ) {
-		$.get( wpmmVars.otterActivationLink, function() {
-			callback();
-		} );
+	async function handleOtter() {
+		if ( ! wpmmVars.isOtterInstalled ) {
+			await installPlugin( 'otter-blocks' ).then( async function() {
+				updateSDKOptions();
+				await activatePlugin( 'otter-blocks' );
+			} );
+		} else if ( ! wpmmVars.isOtterActivated ) {
+			await activatePlugin( 'otter-blocks' );
+		}
 	}
 
 	/**
@@ -581,5 +580,40 @@ jQuery( function( $ ) {
 				console.error( response.data );
 			}
 		} );
+	}
+
+	/**
+	 * Install a plugin.
+	 *
+	 * @param {string} slug
+	 */
+	async function installPlugin( slug ) {
+		await $.post( wpmmVars.ajaxURL, {
+			action: 'wp_ajax_install_plugin',
+			_ajax_nonce: wpmmVars.pluginInstallNonce,
+			slug,
+		}, function( response ) {
+			if ( ! response.success ) {
+				alert( response.data.errorMessage );
+				window.location.reload();
+				return false;
+			}
+		} );
+	}
+
+	/**
+	 * Activate a plugin.
+	 *
+	 * @param {string} slug
+	 */
+	async function activatePlugin( slug ) {
+		switch ( slug ) {
+			case 'otter-blocks':
+				return $.get( wpmmVars.otterActivationLink );
+			case 'optimole-wp':
+				return $.get( wpmmVars.optimoleActivationLink );
+			default:
+				break;
+		}
 	}
 } );
