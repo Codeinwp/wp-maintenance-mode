@@ -22,8 +22,15 @@ $default_templates = array(
 				<h4 class="header"><?php esc_html_e( 'Select the type of page you want', 'wp-maintenance-mode' ); ?></h4>
 				<p class="templates-description">
 					<?php
-						esc_html_e( 'Get started with custom templates, and build engaging pages using Contact forms, Popups and more, with Otter.', 'wp-maintenance-mode' );
-					?>
+						printf(
+							wp_kses(
+								/* translators: Otter url */
+								__( 'Get started with custom templates, and build engaging pages using Contact forms, Popups and more, with <a href="%s" target="_blank">Otter</a>.', 'wp-maintenance-mode' ),
+								wpmm_translated_string_allowed_html()
+							),
+							tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' )
+						);
+						?>
 					<br>
 					<?php
 						esc_html_e( 'Pick your template below, you can always customise it later.', 'wp-maintenance-mode' );
@@ -64,8 +71,15 @@ $default_templates = array(
 					</div>
 					<p class="description">
 						<?php
-							esc_html_e( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80% increase in speed, with Optimole.', 'wp-maintenance-mode' );
-						?>
+							printf(
+								wp_kses(
+									/* translators: Optimole url */
+									__( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80%% increase in speed, with <a href="%s" target="_blank">Optimole</a>.', 'wp-maintenance-mode' ),
+									wpmm_translated_string_allowed_html()
+								),
+								esc_url( 'https://wordpress.org/plugins/optimole-wp/' )
+							);
+							?>
 				</div>
 				<div id="wizard-buttons" class="import-button">
 					<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
