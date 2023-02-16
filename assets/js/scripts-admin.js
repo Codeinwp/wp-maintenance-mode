@@ -384,25 +384,26 @@ jQuery( function( $ ) {
 	} );
 
 	wizardButtons.on( 'click', '.button-skip', function() {
-		$( this ).attr( 'disabled', 'disabled' );
 		$( this ).addClass( 'is-busy' );
+		$( this ).trigger( 'blur' );
 
 		handleOptimole().then( function() {
-			$( this ).removeClass( 'is-busy' );
-			$( this ).removeAttr( 'disabled' );
-
 			$.post( wpmmVars.ajaxURL, {
 				action: 'wpmm_skip_wizard',
 				_wpnonce: wpmmVars.wizardNonce,
 			}, function( response ) {
 				if ( ! response.success ) {
-					// eslint-disable-next-line no-console
-					console.error( response.data );
+					addErrorMessage();
 					return;
 				}
+
 				skipWizard = true;
 				moveToStep( 'import', 'subscribe' );
 			} );
+		} ).catch( function() {
+			addErrorMessage();
+		} ).finally( function() {
+			$( '.button-skip' ).removeClass( 'is-busy' );
 		} );
 	} );
 
@@ -503,15 +504,43 @@ jQuery( function( $ ) {
 	}
 
 	/**
-	 * Installs or activates Otter and adds the template after
+	 * Installs or activates Otter and Optimole and adds the template after
 	 *
 	 * @param {Object}   data
 	 * @param {Function} callback
 	 */
 	function importTemplate( data, callback ) {
-		Promise.allSettled( [ handleOptimole(), handleOtter() ] ).then( function() {
-			addToPage( data, callback );
+		Promise.allSettled( [ handleOptimole(), handleOtter() ] ).then( function( values ) {
+			if ( values.find( ( value ) => value.status === 'rejected' ) ) {
+				const template = $( '.wpmm-template.loading' );
+
+				template.removeClass( 'loading' );
+				$( '.wpmm-template .dashicons.dashicons-update' ).remove();
+				$( '.wpmm-template p' ).remove();
+
+				$( '.button-import' ).removeAttr( 'disabled' );
+				$( '#wpmm-wizard-wrapper .button-skip' ).removeClass( 'disabled' );
+				$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).removeAttr( 'style' );
+
+				addErrorMessage();
+			} else {
+				addToPage( data, callback );
+			}
 		} );
+	}
+
+	/**
+	 * Displays an error message
+	 */
+	function addErrorMessage() {
+		if ( $( '#import-step-error' ).length ) {
+			return;
+		}
+
+		$( '.import-step' ).append( `<p id="import-step-error">${ wpmmVars.errorString }</p>` );
+		setTimeout( function() {
+			$( '#import-step-error' ).remove();
+		}, 2000 );
 	}
 
 	/**
@@ -527,7 +556,7 @@ jQuery( function( $ ) {
 			if ( ! response.success ) {
 				alert( response.data.error );
 				$( '.dashicons-update' ).remove();
-				$( '<p class="error import-error">' + wpmmVars.errorString + '</p>' ).insertAfter( '#wizard-buttons' );
+				addErrorMessage();
 				return false;
 			}
 
@@ -542,9 +571,7 @@ jQuery( function( $ ) {
 		if ( $( '#wizard-optimole-checkbox' ).is( ':checked' ) ) {
 			if ( ! wpmmVars.isOptimoleInstalled ) {
 				await installPlugin( 'optimole-wp' ).then( async function() {
-					if ( ! wpmmVars.isOptimoleActive ) {
-						await activatePlugin( 'optimole-wp' );
-					}
+					await activatePlugin( 'optimole-wp' );
 				} );
 			} else if ( ! wpmmVars.isOptimoleActive ) {
 				await activatePlugin( 'optimole-wp' );
@@ -594,8 +621,7 @@ jQuery( function( $ ) {
 			slug,
 		}, function( response ) {
 			if ( ! response.success ) {
-				alert( response.data.errorMessage );
-				window.location.reload();
+				addErrorMessage();
 				return false;
 			}
 		} );

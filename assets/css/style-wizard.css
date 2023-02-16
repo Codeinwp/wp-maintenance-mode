@@ -324,6 +324,10 @@ input.invalid:focus {
     color: #717A84;
 }
 
+.optimole-upsell-container {
+    display: flex;
+}
+
 .optimole-upsell {
     margin-top: 72px;
 }
@@ -341,6 +345,10 @@ input.invalid:focus {
     max-width: 980px;
 }
 
+#import-step-error {
+    color: #d63638;
+}
+
 @keyframes abs-spin {
     from {
         transform: translate(-50%, -50%) rotate(0deg);
@@ -350,12 +358,12 @@ input.invalid:focus {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 660px) {
     #wpbody {
         padding-top: 0;
     }
 
-    .templates-radio form {
+    .wpmm-templates-radio form {
         flex-wrap: wrap;
     }
 }

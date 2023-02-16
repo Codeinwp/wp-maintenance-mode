@@ -59,28 +59,30 @@ $default_templates = array(
 						?>
 					</form>
 				</div>
-				<div class="optimole-upsell">
-					<div>
-						<span class="components-checkbox-control__input-container">
-							<input id="wizard-optimole-checkbox" type="checkbox" class="components-checkbox-control__input" checked>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
-						</span>
-						<label for="wizard-optimole-checkbox">
-							<?php esc_html_e( 'Image and speed optimisation', 'wp-maintenance-mode' ); ?>
-						</label>
-					</div>
-					<p class="description">
-						<?php
-							printf(
-								wp_kses(
-									/* translators: Optimole url */
-									__( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80%% increase in speed, with <a href="%s" target="_blank">Optimole</a>.', 'wp-maintenance-mode' ),
-									wpmm_translated_string_allowed_html()
-								),
-								esc_url( 'https://wordpress.org/plugins/optimole-wp/' )
-							);
+				<?php if ( ! is_plugin_active( 'optimole-wp/optimole-wp.php' ) ) { ?>
+					<div class="optimole-upsell">
+						<div class="optimole-upsell-container">
+							<span class="components-checkbox-control__input-container">
+								<input id="wizard-optimole-checkbox" type="checkbox" class="components-checkbox-control__input" checked>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
+							</span>
+							<label for="wizard-optimole-checkbox">
+								<?php esc_html_e( 'Image and speed optimisation', 'wp-maintenance-mode' ); ?>
+							</label>
+						</div>
+						<p class="description">
+							<?php
+								printf(
+									wp_kses(
+										/* translators: Optimole url */
+										__( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80%% increase in speed, with <a href="%s" target="_blank">Optimole</a>.', 'wp-maintenance-mode' ),
+										wpmm_translated_string_allowed_html()
+									),
+									esc_url( 'https://wordpress.org/plugins/optimole-wp/' )
+								);
 							?>
-				</div>
+					</div>
+				<?php } ?>
 				<div id="wizard-buttons" class="import-button">
 					<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
 					<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a template', 'wp-maintenance-mode' ); ?>"/>

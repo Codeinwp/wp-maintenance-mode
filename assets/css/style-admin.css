@@ -357,18 +357,19 @@ label.wpmm-templates-gallery__label {
     display: flex;
 }
 
-input[type="button"].button-primary.is-busy {
-    background-image: linear-gradient(-45deg, #2271b1 33%, #135e96 33%, #135e96 70%,  #2271b1 70%) !important;
+input[type="button"].button.button-primary.is-busy {
+    background-image: linear-gradient(-45deg, #2271b1 33%, #135e96 33%, #135e96 70%, #2271b1 70%) !important;
     border-color:  #2271b1;
 }
 
-input[type="button"].is-busy {
+input[type="button"].button.is-busy {
     background-size: 100px 100% !important;
+    pointer-events: none;
     animation: button-busy-animation 2500ms infinite linear;
 }
 
-input[type="button"].button-secondary.is-busy {
-    background-image: linear-gradient(-45deg, #fafafa 33%, #e0e0e0 33%, #e0e0e0 70%,  #fafafa 70%) !important;
+input[type="button"].button.button-secondary.is-busy {
+    background-image: linear-gradient(-45deg, #fafafa 33%, #e0e0e0 33%, #e0e0e0 70%, #fafafa 70%) !important;
 }
 
 .wpmm_otter-notice {
