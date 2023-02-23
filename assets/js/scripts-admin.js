@@ -402,7 +402,6 @@ jQuery( function( $ ) {
 			} );
 		} ).catch( function() {
 			addErrorMessage();
-		} ).finally( function() {
 			$( '.button-skip' ).removeClass( 'is-busy' );
 		} );
 	} );
@@ -510,8 +509,13 @@ jQuery( function( $ ) {
 	 * @param {Function} callback
 	 */
 	function importTemplate( data, callback ) {
-		Promise.allSettled( [ handleOptimole(), handleOtter() ] ).then( function( values ) {
-			if ( values.find( ( value ) => value.status === 'rejected' ) ) {
+		handleOtter()
+			.then( () => handleOptimole() )
+			.then( () => addToPage( data, callback ) )
+			.catch( ( error ) => {
+				// eslint-disable-next-line no-console
+				console.error( error );
+
 				const template = $( '.wpmm-template.loading' );
 
 				template.removeClass( 'loading' );
@@ -523,10 +527,7 @@ jQuery( function( $ ) {
 				$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).removeAttr( 'style' );
 
 				addErrorMessage();
-			} else {
-				addToPage( data, callback );
-			}
-		} );
+			} );
 	}
 
 	/**
@@ -540,7 +541,7 @@ jQuery( function( $ ) {
 		$( '.import-step' ).append( `<p id="import-step-error">${ wpmmVars.errorString }</p>` );
 		setTimeout( function() {
 			$( '#import-step-error' ).remove();
-		}, 2000 );
+		}, 3000 );
 	}
 
 	/**
@@ -567,14 +568,17 @@ jQuery( function( $ ) {
 	/**
 	 * Install and activate Optimole if the checkbox is checked.
 	 */
-	async function handleOptimole() {
-		if ( $( '#wizard-optimole-checkbox' ).is( ':checked' ) ) {
+	function handleOptimole() {
+		const optimoleCheckbox = $( '#wizard-optimole-checkbox' );
+
+		if ( optimoleCheckbox.length && optimoleCheckbox.is( ':checked' ) ) {
 			if ( ! wpmmVars.isOptimoleInstalled ) {
-				await installPlugin( 'optimole-wp' ).then( async function() {
-					await activatePlugin( 'optimole-wp' );
-				} );
+				return installPlugin( 'optimole-wp' )
+					.then( () => {
+						return activatePlugin( 'optimole-wp' );
+					} );
 			} else if ( ! wpmmVars.isOptimoleActive ) {
-				await activatePlugin( 'optimole-wp' );
+				return activatePlugin( 'optimole-wp' );
 			}
 		}
 	}
@@ -582,14 +586,15 @@ jQuery( function( $ ) {
 	/**
 	 * Install and activate Otter.
 	 */
-	async function handleOtter() {
+	function handleOtter() {
 		if ( ! wpmmVars.isOtterInstalled ) {
-			await installPlugin( 'otter-blocks' ).then( async function() {
-				updateSDKOptions();
-				await activatePlugin( 'otter-blocks' );
-			} );
+			return installPlugin( 'otter-blocks' )
+				.then( () => {
+					updateSDKOptions();
+					return activatePlugin( 'otter-blocks' );
+				} );
 		} else if ( ! wpmmVars.isOtterActivated ) {
-			await activatePlugin( 'otter-blocks' );
+			return activatePlugin( 'otter-blocks' );
 		}
 	}
 
@@ -614,8 +619,8 @@ jQuery( function( $ ) {
 	 *
 	 * @param {string} slug
 	 */
-	async function installPlugin( slug ) {
-		await $.post( wpmmVars.ajaxURL, {
+	function installPlugin( slug ) {
+		return $.post( wpmmVars.ajaxURL, {
 			action: 'wp_ajax_install_plugin',
 			_ajax_nonce: wpmmVars.pluginInstallNonce,
 			slug,
@@ -632,7 +637,7 @@ jQuery( function( $ ) {
 	 *
 	 * @param {string} slug
 	 */
-	async function activatePlugin( slug ) {
+	function activatePlugin( slug ) {
 		switch ( slug ) {
 			case 'otter-blocks':
 				return $.get( wpmmVars.otterActivationLink );
