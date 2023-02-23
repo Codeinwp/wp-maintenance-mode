@@ -25,10 +25,11 @@ $default_templates = array(
 						printf(
 							wp_kses(
 								/* translators: Otter url */
-								__( 'Get started with custom templates, and build engaging pages using Contact forms, Popups and more, with <a href="%s" target="_blank">Otter</a>.', 'wp-maintenance-mode' ),
+								__( 'Get started with custom templates, and build engaging pages using Contact forms, Popups and more, with <a href="%1$s" target="_blank">Otter%2$s</a>.', 'wp-maintenance-mode' ),
 								wpmm_translated_string_allowed_html()
 							),
-							tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' )
+							tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' ),
+							$this->get_external_link_icon()
 						);
 						?>
 					<br>
@@ -75,10 +76,11 @@ $default_templates = array(
 								printf(
 									wp_kses(
 										/* translators: Optimole url */
-										__( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80%% increase in speed, with <a href="%s" target="_blank">Optimole</a>.', 'wp-maintenance-mode' ),
+										__( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80%% increase in speed, with <a href="%1$s" target="_blank">Optimole%2$s</a>.', 'wp-maintenance-mode' ),
 										wpmm_translated_string_allowed_html()
 									),
-									esc_url( 'https://wordpress.org/plugins/optimole-wp/' )
+									esc_url( 'https://wordpress.org/plugins/optimole-wp/' ),
+									$this->get_external_link_icon()
 								);
 							?>
 					</div>

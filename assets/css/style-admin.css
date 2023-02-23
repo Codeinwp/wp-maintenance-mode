@@ -396,6 +396,12 @@ input[type="button"].button.button-secondary.is-busy {
     width: 52px;
 }
 
+.wpmm-external_link_icon {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
