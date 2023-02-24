@@ -122,7 +122,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 				// wizard stylesheet
 				if ( get_option( 'wpmm_fresh_install', false ) ) {
-					wp_enqueue_style( $this->plugin_slug . '-wizard-styles', WPMM_CSS_URL . 'style-wizard' . WPMM_ASSETS_SUFFIX . '.css', array(), WP_Maintenance_Mode::VERSION );
+					wp_enqueue_style( $this->plugin_slug . '-wizard-styles', WPMM_CSS_URL . 'style-wizard' . WPMM_ASSETS_SUFFIX . '.css', array( 'wp-components' ), WP_Maintenance_Mode::VERSION );
 				}
 			}
 		}
@@ -147,24 +147,26 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->plugin_slug . '-admin-script',
 					'wpmmVars',
 					array(
-						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
-						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
-						'ajaxNonce'             => wp_create_nonce( 'ajax' ),
-						'wizardNonce'           => wp_create_nonce( 'wizard' ),
-						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
-						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
-						'isOtterActive'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
-						'errorString'           => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
-						'loadingString'         => __( 'Doing some magic...', 'wp-maintenance-mode' ),
-						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
-						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
-						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
-						'finishWizardStrings'   => array(
+						'ajaxURL'                => admin_url( 'admin-ajax.php' ),
+						'pluginURL'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'ajaxNonce'              => wp_create_nonce( 'ajax' ),
+						'wizardNonce'            => wp_create_nonce( 'wizard' ),
+						'pluginInstallNonce'     => wp_create_nonce( 'updates' ),
+						'isOtterInstalled'       => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
+						'isOtterActive'          => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'isOptimoleInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/optimole-wp/optimole-wp.php' ),
+						'isOptimoleActive'       => is_plugin_active( 'optimole-wp/optimole-wp.php' ),
+						'errorString'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loadingString'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importingText'          => __( 'Importing', 'wp-maintenance-mode' ),
+						'importDone'             => __( 'Done', 'wp-maintenance-mode' ),
+						'invalidEmailString'     => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'finishWizardStrings'    => array(
 							'maintenance' => __( 'Your maintenance page is ready!', 'wp-maintenance-mode' ),
 							'coming-soon' => __( 'Your coming soon page is ready!', 'wp-maintenance-mode' ),
 						),
-						'adminURL'              => get_admin_url(),
-						'otterActivationLink'   => add_query_arg(
+						'adminURL'               => get_admin_url(),
+						'otterActivationLink'    => add_query_arg(
 							array(
 								'action'        => 'activate',
 								'plugin'        => rawurlencode( 'otter-blocks/otter-blocks.php' ),
@@ -174,28 +176,38 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'modalTexts'            => array(
+						'optimoleActivationLink' => add_query_arg(
+							array(
+								'action'        => 'activate',
+								'plugin'        => rawurlencode( 'optimole-wp/optimole-wp.php' ),
+								'plugin_status' => 'all',
+								'paged'         => '1',
+								'_wpnonce'      => wp_create_nonce( 'activate-plugin_optimole-wp/optimole-wp.php' ),
+							),
+							esc_url( network_admin_url( 'plugins.php' ) )
+						),
+						'modalTexts'             => array(
 							'title'          => __( 'The template has been imported!', 'wp-maintenance-mode' ),
 							'description'    => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
 							'buttonPage'     => __( 'Go to page', 'wp-maintenance-mode' ),
 							'buttonSettings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
 						),
-						'confirmModalTexts'     => array(
+						'confirmModalTexts'      => array(
 							'title'          => __( 'Import this template?', 'wp-maintenance-mode' ),
 							'description'    => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
 							'buttonContinue' => __( 'Continue', 'wp-maintenance-mode' ),
 							'buttonGoBack'   => __( 'Go back', 'wp-maintenance-mode' ),
 						),
-						'imageUploaderDefaults' => array(
+						'imageUploaderDefaults'  => array(
 							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
-						'skipImportStrings'     => array(
+						'skipImportStrings'      => array(
 							'maintenance'  => __( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ),
 							'coming-soon'  => __( 'I don’t want to use a Coming Soon Template', 'wp-maintenance-mode' ),
 							'landing-page' => __( 'I don’t want to use a Landing Page Template', 'wp-maintenance-mode' ),
 						),
-						'skipImportDefault'     => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
+						'skipImportDefault'      => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
 					)
 				);
 
@@ -1116,7 +1128,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				$text = sprintf(
 						/* translators: link to plugin reviews page on wp.org */
-					__( 'If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ),
+					__( 'If you like <strong>Lightstart</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ),
 					'<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#new-post" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
 				);
 			}
@@ -1199,6 +1211,17 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			} elseif ( ! $this->get_is_policy_available() ) { // No privacy feature available
 				return __( 'No privacy features detected for your WordPress version. Update WordPress to get this field automatically filled in or type in the URL that points to your privacy policy page.', 'wp-maintenance-mode' );
 			}
+
+			return '';
+		}
+
+		/**
+		 * Return external link icon
+		 *
+		 * @return string
+		 */
+		public function get_external_link_icon() {
+			return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="wpmm-external_link_icon" aria-hidden="true" focusable="false"><path d="M18.2 17c0 .7-.6 1.2-1.2 1.2H7c-.7 0-1.2-.6-1.2-1.2V7c0-.7.6-1.2 1.2-1.2h3.2V4.2H7C5.5 4.2 4.2 5.5 4.2 7v10c0 1.5 1.2 2.8 2.8 2.8h10c1.5 0 2.8-1.2 2.8-2.8v-3.6h-1.5V17zM14.9 3v1.5h3.7l-6.4 6.4 1.1 1.1 6.4-6.4v3.7h1.5V3h-6.3z"></path></svg>';
 		}
 
 		/**
@@ -1218,7 +1241,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				/* translators: %1$s %2$s bold text tags */
 				sprintf( __( 'These templates make use of %1$s Otter Blocks %2$s powerful features, which will be installed and activated.', 'wp-maintenance-mode' ), '<b>', '</b>' ),
 				tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, $location ),
-				__( 'Learn more about Otter.', 'wp-maintenance-mode' )
+				__( 'Learn more about Otter.', 'wp-maintenance-mode' ) . $this->get_external_link_icon()
 			);
 		}
 

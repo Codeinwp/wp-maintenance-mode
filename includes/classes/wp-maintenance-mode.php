@@ -8,7 +8,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.6.2';
+		const VERSION = '2.6.3';
 
 		const MAINTENANCE  = 'maintenance';
 		const COMING_SOON  = 'coming-soon';
@@ -207,8 +207,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public static function get_page_categories() {
 			return array(
-				self::MAINTENANCE  => __( 'Maintenance', 'wp-maintenance-mode' ),
 				self::COMING_SOON  => __( 'Coming Soon', 'wp-maintenance-mode' ),
+				self::MAINTENANCE  => __( 'Maintenance mode', 'wp-maintenance-mode' ),
 				self::LANDING_PAGE => __( 'Landing Page', 'wp-maintenance-mode' ),
 			);
 		}
