@@ -46,24 +46,24 @@ h2.wpmm-title {
     position: relative;
 
     margin: 0 !important;
-    padding: 8px 80px !important;
-    font-size: 15px !important;
+    padding: 8px 105px !important;
+    font-size: 18px !important;
 
     background-color: #fff;
-    background-position: 25px;
+    background-position: 50px;
 }
 
 h2.wpmm-title span {
     display: flex;
     position: absolute;
-    right: 75px;
+    right: 48px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
 }
 
 h2.wpmm-title span img {
-    width: 25px;
+    width: 16px;
 }
 
 .wpmm-wizard-fullscreen #wpcontent {
@@ -76,6 +76,9 @@ h2.wpmm-title span img {
     overflow: hidden;
     color: #1b1b1b;
     width: 100%;
+
+    letter-spacing: .04em;
+    line-height: 1;
 }
 
 #wpmm-wizard-wrapper .slider-wrap {
@@ -99,17 +102,17 @@ h2.wpmm-title span img {
 }
 
 .step.import-step {
-    margin: min(10%, 10vh) min(12%, 12vh);
+    margin: min(10%, 65px) min(12%, 195px);
+    width: 1090px;
 }
 
 .import-step .header {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 28px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
-.import-step .description {
+.import-step .templates-description {
     line-height: 30px;
     font-size: 18px;
     font-weight: 400;
@@ -128,7 +131,7 @@ h2.wpmm-title span img {
 
 .wpmm-templates-radio form {
     display: flex;
-    margin-top: 65px;
+    margin-top: 60px;
     width: 100%;
     gap: 35px;
 }
@@ -147,12 +150,27 @@ h2.wpmm-title span img {
 }
 
 .wpmm-templates-radio [type=radio]:checked + .wpmm-template {
-    outline: 2px solid #0065A6;
+    box-shadow: 0 0 0 5px #0065a6;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.wpmm-templates-radio [type=radio] + .wpmm-template .checked-icon {
+    display: none;
+}
+
+.wpmm-templates-radio [type=radio]:checked + .wpmm-template .checked-icon {
+    display: block;
+    position: absolute;
+    top: 4%;
+    right: 4%;
+    width: 40px;
+    height: 40px;
 }
 
 .wpmm-templates-radio .wpmm-template {
     position: relative;
-    padding-bottom: 106.57%;
+    padding-bottom: 104%;
     width: 100%;
     height: 0;
 }
@@ -210,9 +228,9 @@ h2.wpmm-title span img {
 }
 
 .wpmm-templates-radio [type=radio] + .wpmm-template {
-    max-width: 320px;
     width: 100%;
     height: auto;
+    position: relative;
 }
 
 .wpmm-templates-radio .tag {
@@ -306,6 +324,31 @@ input.invalid:focus {
     color: #717A84;
 }
 
+.optimole-upsell-container {
+    display: flex;
+}
+
+.optimole-upsell {
+    margin-top: 72px;
+}
+
+.optimole-upsell label {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+}
+
+.optimole-upsell p.description {
+    margin-left: 35px;
+    margin-top: 12px;
+    font-size: 15px;
+    max-width: 980px;
+}
+
+#import-step-error {
+    color: #d63638;
+}
+
 @keyframes abs-spin {
     from {
         transform: translate(-50%, -50%) rotate(0deg);
@@ -315,12 +358,12 @@ input.invalid:focus {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 660px) {
     #wpbody {
         padding-top: 0;
     }
 
-    .templates-radio form {
+    .wpmm-templates-radio form {
         flex-wrap: wrap;
     }
 }

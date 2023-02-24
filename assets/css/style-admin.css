@@ -3,7 +3,7 @@ h2.wpmm-title {
     background-size: 40px;
     line-height: 42px !important;
     margin-bottom: 30px !important;
-    height: 48px;
+    height: 45px;
     padding-left: 55px !important;
 }
 
@@ -357,11 +357,19 @@ label.wpmm-templates-gallery__label {
     display: flex;
 }
 
-input[type="button"].is-busy {
-    background-size: 100px 100% !important;
-    background-image: linear-gradient(-45deg, #2271b1 33%, #135e96 33%, #135e96 70%,  #2271b1 70%) !important;
+input[type="button"].button.button-primary.is-busy {
+    background-image: linear-gradient(-45deg, #2271b1 33%, #135e96 33%, #135e96 70%, #2271b1 70%) !important;
     border-color:  #2271b1;
+}
+
+input[type="button"].button.is-busy {
+    background-size: 100px 100% !important;
+    pointer-events: none;
     animation: button-busy-animation 2500ms infinite linear;
+}
+
+input[type="button"].button.button-secondary.is-busy {
+    background-image: linear-gradient(-45deg, #fafafa 33%, #e0e0e0 33%, #e0e0e0 70%, #fafafa 70%) !important;
 }
 
 .wpmm_otter-notice {
@@ -386,6 +394,17 @@ input[type="button"].is-busy {
     position: relative;
     height: 51px;
     width: 52px;
+}
+
+.wpmm_status_disable {
+    opacity: .4;
+    pointer-events: none;
+}
+
+.wpmm-external_link_icon {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
 }
 
 @keyframes spin {

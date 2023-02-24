@@ -13,16 +13,16 @@ defined( 'ABSPATH' ) || exit;
 		<div class="inside">
 			<?php $plugin_data = wpmm_plugin_info( $this->plugin_slug ); ?>
 			<ul>
-				<li><?php esc_html_e( 'Name', 'wp-maintenance-mode' ); ?>: 
+				<li><?php esc_html_e( 'Name', 'wp-maintenance-mode' ); ?>:
 					<?php
 					echo ! empty( $plugin_data['Name'] ) ? esc_html( $plugin_data['Name'] ) : '';
 					echo ! empty( $plugin_data['Version'] ) ? esc_html( ' v' . $plugin_data['Version'] ) : '';
 					?>
 				</li>
 				<li><?php esc_html_e( 'Author', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['AuthorName'] ) ? esc_html( $plugin_data['AuthorName'] ) : ''; ?></li>
-				<li><?php esc_html_e( 'Website', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['AuthorURI'] ) ? '<a href="' . esc_url( wpmm_get_utmized_url( $plugin_data['AuthorURI'], array( 'campaign' => 'plugininfo' ) ) ) . '" target="_blank">' . esc_html( $plugin_data['AuthorName'] ) . '</a>' : ''; ?></li>
-				<li><?php esc_html_e( 'Twitter', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['Twitter'] ) ? '<a href="' . esc_url( 'https://twitter.com/' . $plugin_data['Twitter'] ) . '" target="_blank">@' . esc_html( $plugin_data['Twitter'] ) . '</a>' : ''; ?></li>
-				<li><?php esc_html_e( 'GitHub', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['GitHub Plugin URI'] ) ? '<a href="' . esc_url( wpmm_get_utmized_url( $plugin_data['GitHub Plugin URI'], array( 'campaign' => 'plugininfo' ) ) ) . '" target="_blank">' . esc_html( basename( $plugin_data['GitHub Plugin URI'] ) ) . '</a>' : ''; ?></li>
+				<li><?php esc_html_e( 'Website', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['AuthorURI'] ) ? '<a href="' . esc_url( wpmm_get_utmized_url( $plugin_data['AuthorURI'], array( 'campaign' => 'plugininfo' ) ) ) . '" target="_blank">' . esc_html( $plugin_data['AuthorName'] ) . $this->get_external_link_icon() . '</a>' : ''; ?></li>
+				<li><?php esc_html_e( 'Twitter', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['Twitter'] ) ? '<a href="' . esc_url( 'https://twitter.com/' . $plugin_data['Twitter'] ) . '" target="_blank">@' . esc_html( $plugin_data['Twitter'] ) . $this->get_external_link_icon() . '</a>' : ''; ?></li>
+				<li><?php esc_html_e( 'GitHub', 'wp-maintenance-mode' ); ?>: <?php echo ! empty( $plugin_data['GitHub Plugin URI'] ) ? '<a href="' . esc_url( wpmm_get_utmized_url( $plugin_data['GitHub Plugin URI'], array( 'campaign' => 'plugininfo' ) ) ) . '" target="_blank">' . esc_html( basename( $plugin_data['GitHub Plugin URI'] ) ) . $this->get_external_link_icon() . '</a>' : ''; ?></li>
 			</ul>
 		</div>
 	</div>
@@ -55,6 +55,6 @@ defined( 'ABSPATH' ) || exit;
 					?>
 				</ul>
 			</div>
-		</div>     
+		</div>
 	<?php } ?>
 </div>

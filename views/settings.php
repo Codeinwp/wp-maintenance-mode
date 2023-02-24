@@ -19,91 +19,15 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
 			?>
-			<span id="wizard-exit"><img src="<?php echo esc_attr( WPMM_IMAGES_URL . 'external.svg' ); ?>" alt="exit"></span><?php } ?>
+			<span id="wizard-exit"><img src="<?php echo esc_attr( WPMM_IMAGES_URL . 'exit.svg' ); ?>" alt="exit"></span><?php } ?>
 	</h2>
 
 	<div class="wpmm-wrapper">
 		<?php
 		if ( get_option( 'wpmm_fresh_install', false ) ) {
-			$default_templates = array(
-				'maintenance'  => array(
-					'slug'      => 'maintenance-1',
-					'thumbnail' => WPMM_TEMPLATES_URL . 'maintenance/maintenance-1/screenshot.png',
-				),
-				'coming-soon'  => array(
-					'slug'      => 'coming-soon-1',
-					'thumbnail' => WPMM_TEMPLATES_URL . 'coming-soon/coming-soon-1/screenshot.png',
-				),
-				'landing-page' => array(
-					'slug'      => 'landing-page-1',
-					'thumbnail' => WPMM_TEMPLATES_URL . 'landing-page/landing-page-1/screenshot.png',
-				),
-			);
-
+			include 'wizard.php';
+		} else {
 			?>
-			<div id="wpmm-wizard-wrapper">
-				<div class="slider-wrap">
-					<div class="step-wrap">
-						<div class="step import-step">
-							<h4 class="header"><?php esc_html_e( 'Get started with a free template.', 'wp-maintenance-mode' ); ?></h4>
-							<p class="description"><?php esc_html_e( 'Choose the type of template you want, powered by Otter Blocks. You can always customise your layout.', 'wp-maintenance-mode' ); ?></p>
-							<?php
-							if ( ! $is_otter_active ) {
-								echo $this->get_otter_notice( 'wizard' );
-							}
-							?>
-							<div class="wpmm-templates-radio">
-								<form>
-									<?php
-									$categories = WP_Maintenance_Mode::get_page_categories();
-									foreach ( $categories as $category => $label ) {
-										$slug          = $default_templates[ $category ]['slug'];
-										$thumbnail_url = $default_templates[ $category ]['thumbnail'];
-										?>
-											<div class="templates-radio__item" >
-												<h6 class="tag"><?php echo $label; ?></h6>
-												<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'maintenance' ); ?>>
-												<label for="<?php echo esc_attr( $slug ); ?>" class="wpmm-template">
-													<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
-												</label>
-											</div>
-										<?php
-									}
-									?>
-								</form>
-							</div>
-							<div id="wizard-buttons" class="import-button">
-								<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
-								<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ); ?>"/>
-							</div>
-						</div>
-					</div>
-					<div class="step-wrap">
-						<div class="step subscribe-step" aria-hidden="true" style="display: none">
-							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'subscribe.svg'; ?>" alt="subscribe"/>
-							<h4><?php esc_html_e( 'Stay in the loop!', 'wp-maintenance-mode' ); ?></h4>
-							<p><?php esc_html_e( 'Keep up with feature announcements, promotions, tutorials, and new template releases.', 'wp-maintenance-mode' ); ?></p>
-							<div id="email-input-wrap">
-								<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
-								<input type="button" class="button button-primary button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
-							</div>
-							<input id="skip-subscribe" type="button" class="button button-link skip-link" value="<?php esc_attr_e( 'I\'ll skip for now, thanks!', 'wp-maintenance-mode' ); ?>" />
-						</div>
-					</div>
-					<div class="step-wrap">
-						<div class="step finish-step" aria-hidden="true" style="display: none">
-							<img width="250px" src="<?php echo WPMM_IMAGES_URL . 'finish-setup.svg'; ?>" alt="finish-setup"/>
-							<h4 class="heading"><?php esc_html_e( 'Your page is ready!', 'wp-maintenance-mode' ); ?></h4>
-							<p><?php esc_html_e( 'Head over to the settings page to activate your Coming soon page', 'wp-maintenance-mode' ); ?></p>
-							<div class="buttons-wrap">
-								<input id="view-page-button" type="button" class="button-big button" value="<?php esc_attr_e( 'View page', 'wp-maintenance-mode' ); ?>"/>
-								<input id="refresh-button" type="button" class="button-big button button-primary" value="<?php esc_attr_e( 'Go to settings', 'wp-maintenance-mode' ); ?>"/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php } else { ?>
 		<div id="content" class="wrapper-cell">
 			<div class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="#general">
@@ -148,7 +72,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
 							<tbody>
-								<tr valign="top">
+								<tr valign="top" class="<?php echo ! empty( $this->plugin_settings['general']['network_mode'] ) ? 'wpmm_status_disable' : ''; ?>">
 									<th scope="row">
 										<label for="options[general][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 									</th>
