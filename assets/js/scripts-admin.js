@@ -581,6 +581,8 @@ jQuery( function( $ ) {
 				return activatePlugin( 'optimole-wp' );
 			}
 		}
+
+		return Promise.resolve();
 	}
 
 	/**
@@ -596,6 +598,8 @@ jQuery( function( $ ) {
 		} else if ( ! wpmmVars.isOtterActivated ) {
 			return activatePlugin( 'otter-blocks' );
 		}
+
+		return Promise.resolve();
 	}
 
 	/**
