@@ -16,6 +16,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 		protected $plugin_slug = 'wp-maintenance-mode';
 		protected $plugin_settings;
+		protected $plugin_network_settings = array(
+			'general' => array(
+				'status'       => 0,
+				'network_mode' => 0,
+			),
+		);
 		protected $plugin_basename;
 		protected static $instance = null;
 
@@ -41,6 +47,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			$this->plugin_settings = wpmm_get_option( 'wpmm_settings', array() );
 			$this->plugin_basename = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
+
+			if ( is_multisite() ) {
+				$plugin_network_settings       = get_network_option( get_current_network_id(), 'wpmm_settings_network', $this->plugin_network_settings );
+				$plugin_network_settings       = array_filter( $plugin_network_settings );
+				$this->plugin_network_settings = wp_parse_args( $plugin_network_settings, $this->plugin_network_settings );
+				if ( ! isset( $this->plugin_network_settings['general']['network_mode'] ) ) {
+					$this->plugin_network_settings['general']['network_mode'] = 0;
+				}
+				if ( ! empty( $this->plugin_network_settings ) ) {
+					$this->plugin_settings['general']['network_mode'] = ! empty( $this->plugin_network_settings['general']['network_mode'] ) ? 1 : 0;
+					if ( $this->plugin_settings['general']['network_mode'] ) {
+						$this->plugin_settings['general']['status'] = ! empty( $this->plugin_network_settings['general']['status'] ) ? 1 : 0;
+					}
+				}
+			}
 
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -167,6 +188,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function get_plugin_settings() {
 			return $this->plugin_settings;
+		}
+
+		/**
+		 * Return plugin network site settings
+		 *
+		 * @since 2.6.2
+		 * @return array
+		 */
+		public function get_plugin_network_settings() {
+			return $this->plugin_network_settings;
 		}
 
 		/**

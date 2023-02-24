@@ -72,7 +72,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<table class="form-table">
 							<tbody>
-								<tr valign="top">
+								<tr valign="top" class="<?php echo ! empty( $this->plugin_settings['general']['network_mode'] ) ? 'wpmm_status_disable' : ''; ?>">
 									<th scope="row">
 										<label for="options[general][status]"><?php esc_html_e( 'Status', 'wp-maintenance-mode' ); ?></label>
 									</th>
