@@ -176,8 +176,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public static function get_page_categories() {
 			return array(
-				self::MAINTENANCE  => __( 'Maintenance', 'wp-maintenance-mode' ),
 				self::COMING_SOON  => __( 'Coming Soon', 'wp-maintenance-mode' ),
+				self::MAINTENANCE  => __( 'Maintenance mode', 'wp-maintenance-mode' ),
 				self::LANDING_PAGE => __( 'Landing Page', 'wp-maintenance-mode' ),
 			);
 		}
