@@ -207,7 +207,7 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 													'name' => 'options[design][page_id]',
 													'id'   => 'design_page_id',
 													'option_none_value' => '',
-													'show_option_no_change' => 'Select page',
+													'show_option_no_change' => __( 'Select page', 'wp-maintenance-mode' ),
 													'post_status' => array( 'publish', 'private' ),
 												)
 											);
