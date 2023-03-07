@@ -1,3 +1,12 @@
+##### [Version 2.6.5](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.4...v2.6.5) (2023-03-01)
+
+Update dependencies
+
+##### [Version 2.6.4](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.3...v2.6.4) (2023-02-24)
+
+- Add the option to manage maintenance status on all sites from the network dashboard
+- Update dependencies
+
 ##### [Version 2.6.3](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.2...v2.6.3) (2023-02-06)
 
 * Update dependencies
