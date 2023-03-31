@@ -1,3 +1,8 @@
+##### [Version 2.6.6](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.5...v2.6.6) (2023-03-31)
+
+- Remove error notice for users that use an overriding custom template
+- Update dependencies
+
 ##### [Version 2.6.5](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.4...v2.6.5) (2023-03-01)
 
 Update dependencies
