@@ -396,6 +396,10 @@ input[type="button"].button.button-secondary.is-busy {
     width: 52px;
 }
 
+.wpmm-wrapper p.notice {
+    padding: 10px 15px;
+}
+
 .wpmm_status_disable {
     opacity: .4;
     pointer-events: none;
