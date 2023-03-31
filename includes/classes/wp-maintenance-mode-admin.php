@@ -1129,7 +1129,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			if ( $this->plugin_screen_hook_suffix === $screen->id ) {
 				$text = sprintf(
 						/* translators: link to plugin reviews page on wp.org */
-					__( 'If you like <strong>WP Maintenance Mode</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ),
+					__( 'If you like <strong>Lightstart</strong> please leave us a %s rating. A huge thank you from WP Maintenance Mode makers in advance!', 'wp-maintenance-mode' ),
 					'<a href="https://wordpress.org/support/view/plugin-reviews/wp-maintenance-mode?filter=5#new-post" class="wpmm_rating" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
 				);
 			}
@@ -1244,6 +1244,20 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, $location ),
 				__( 'Learn more about Otter.', 'wp-maintenance-mode' ) . $this->get_external_link_icon()
 			);
+		}
+
+		/**
+		 * Display save plugin settings notice.
+		 */
+		public function save_plugin_settings_notice() {
+			$screen  = get_current_screen();
+			$notices = array();
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! empty( $_GET['updated'] ) && $this->plugin_screen_hook_suffix === $screen->id ) { ?>
+				<div id="message" class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Settings saved.', 'wp-maintenance-mode' ); ?></strong></p></div>
+				<?php
+			}
 		}
 	}
 }
