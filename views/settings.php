@@ -190,7 +190,13 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 					<form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 						<?php
 						if ( get_option( 'wpmm_new_look' ) ) {
-							if ( ( ! get_post( $this->plugin_settings['design']['page_id'] ) || get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) && $this->plugin_settings['general']['status'] === 1 ) {
+							$overrideable_template = wpmm_get_template_path( 'maintenance.php', true );
+
+							if ( WPMM_VIEWS_PATH . 'maintenance.php' !== $overrideable_template ) {
+								?>
+								<p class="notice notice-info"><?php esc_html_e( 'You are using a custom template from your theme/child theme folder.', 'wp-maintenance-mode' ); ?></p>
+								<?php
+							} elseif ( ( ! get_post( $this->plugin_settings['design']['page_id'] ) || get_post_status( $this->plugin_settings['design']['page_id'] ) === 'trash' ) && $this->plugin_settings['general']['status'] === 1 ) {
 								?>
 								<p class="notice notice-error"><?php esc_html_e( 'You don\'t have a maintenance page or your Maintenance Page has been deleted. Please select another one from the dropdown below or import a template and a new one will be created.', 'wp-maintenance-mode' ); ?></p><?php } ?>
 							<table class="form-table">
@@ -203,16 +209,16 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 											<?php
 											wp_dropdown_pages(
 												array(
-													'selected' => $this->plugin_settings['design']['page_id'],
+													'selected' => isset( $this->plugin_settings['design']['page_id'] ) ? $this->plugin_settings['design']['page_id'] : 0,
 													'name' => 'options[design][page_id]',
 													'id'   => 'design_page_id',
 													'option_none_value' => '',
-													'show_option_no_change' => 'Select page',
+													'show_option_no_change' => __( 'Select page', 'wp-maintenance-mode' ),
 													'post_status' => array( 'publish', 'private' ),
 												)
 											);
 
-											$page_status = get_post_status( $this->plugin_settings['design']['page_id'] );
+											$page_status = get_post_status( isset( $this->plugin_settings['design']['page_id'] ) ? $this->plugin_settings['design']['page_id'] : 0 );
 											if ( $page_status && $page_status !== 'trash' ) {
 												?>
 												<a href="<?php echo get_edit_post_link( $this->plugin_settings['design']['page_id'] ); ?>"><?php esc_html_e( 'Edit page', 'wp-maintenance-mode' ); ?></a> <?php } ?>
@@ -275,7 +281,8 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 									$categories = array( $selected_category => array( $selected_category ) );
 								}
 
-								$will_replace = ! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
+								$will_replace = isset( $this->plugin_settings['design']['page_id'] ) &&
+												! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
 													empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
 													get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' );
 
