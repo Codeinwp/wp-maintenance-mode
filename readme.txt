@@ -1,4 +1,5 @@
 === LightStart - Maintenance Mode, Coming Soon and Landing Page Builder ===
+
 Contributors: Themeisle
 Plugin Name: LightStart - Maintenance Mode, Coming Soon and Landing Page Builder
 Plugin URI: https://themeisle.com/
