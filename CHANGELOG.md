@@ -1,3 +1,7 @@
+##### [Version 2.6.7](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.6...v2.6.7) (2023-04-01)
+
+- Bug fix: Addressed an unnecessary 'no maintenance page' error occurrence.
+
 ##### [Version 2.6.6](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.5...v2.6.6) (2023-03-31)
 
 - Remove error notice for users that use an overriding custom template
