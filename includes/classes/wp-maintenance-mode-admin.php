@@ -478,39 +478,41 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					}
 					break;
 				case 'modules':
-					// Countdown
-					$_POST['options']['modules']['countdown_status']  = (int) $_POST['options']['modules']['countdown_status'];
-					$_POST['options']['modules']['countdown_start']   = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
-					$_POST['options']['modules']['countdown_details'] = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
-					$_POST['options']['modules']['countdown_details'] = array(
-						'days'    => isset( $_POST['options']['modules']['countdown_details']['days'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['days'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['days'] ) : 0,
-						'hours'   => isset( $_POST['options']['modules']['countdown_details']['hours'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['hours'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['hours'] ) : 1,
-						'minutes' => isset( $_POST['options']['modules']['countdown_details']['minutes'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['minutes'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['minutes'] ) : 0,
-					);
+					if ( ! get_option( 'wpmm_new_look' ) ) {
+						// Countdown
+						$_POST['options']['modules']['countdown_status']  = (int) $_POST['options']['modules']['countdown_status'];
+						$_POST['options']['modules']['countdown_start']   = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
+						$_POST['options']['modules']['countdown_details'] = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
+						$_POST['options']['modules']['countdown_details'] = array(
+							'days'    => isset( $_POST['options']['modules']['countdown_details']['days'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['days'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['days'] ) : 0,
+							'hours'   => isset( $_POST['options']['modules']['countdown_details']['hours'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['hours'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['hours'] ) : 1,
+							'minutes' => isset( $_POST['options']['modules']['countdown_details']['minutes'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['minutes'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['minutes'] ) : 0,
+						);
 
-					$_POST['options']['modules']['countdown_color'] = sanitize_hex_color( $_POST['options']['modules']['countdown_color'] );
+						$_POST['options']['modules']['countdown_color'] = sanitize_hex_color( $_POST['options']['modules']['countdown_color'] );
 
-					// Subscribe
-					$_POST['options']['modules']['subscribe_status']     = (int) $_POST['options']['modules']['subscribe_status'];
-					$_POST['options']['modules']['subscribe_text']       = sanitize_text_field( $_POST['options']['modules']['subscribe_text'] );
-					$_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color( $_POST['options']['modules']['subscribe_text_color'] );
+						// Subscribe
+						$_POST['options']['modules']['subscribe_status']     = (int) $_POST['options']['modules']['subscribe_status'];
+						$_POST['options']['modules']['subscribe_text']       = sanitize_text_field( $_POST['options']['modules']['subscribe_text'] );
+						$_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color( $_POST['options']['modules']['subscribe_text_color'] );
 
-					// Social networks
-					$_POST['options']['modules']['social_status']    = (int) $_POST['options']['modules']['social_status'];
-					$_POST['options']['modules']['social_target']    = (int) $_POST['options']['modules']['social_target'];
-					$_POST['options']['modules']['social_github']    = sanitize_text_field( $_POST['options']['modules']['social_github'] );
-					$_POST['options']['modules']['social_dribbble']  = sanitize_text_field( $_POST['options']['modules']['social_dribbble'] );
-					$_POST['options']['modules']['social_twitter']   = sanitize_text_field( $_POST['options']['modules']['social_twitter'] );
-					$_POST['options']['modules']['social_facebook']  = sanitize_text_field( $_POST['options']['modules']['social_facebook'] );
-					$_POST['options']['modules']['social_instagram'] = sanitize_text_field( $_POST['options']['modules']['social_instagram'] );
-					$_POST['options']['modules']['social_pinterest'] = sanitize_text_field( $_POST['options']['modules']['social_pinterest'] );
-					$_POST['options']['modules']['social_google+']   = sanitize_text_field( $_POST['options']['modules']['social_google+'] );
-					$_POST['options']['modules']['social_linkedin']  = sanitize_text_field( $_POST['options']['modules']['social_linkedin'] );
+						// Social networks
+						$_POST['options']['modules']['social_status']    = (int) $_POST['options']['modules']['social_status'];
+						$_POST['options']['modules']['social_target']    = (int) $_POST['options']['modules']['social_target'];
+						$_POST['options']['modules']['social_github']    = sanitize_text_field( $_POST['options']['modules']['social_github'] );
+						$_POST['options']['modules']['social_dribbble']  = sanitize_text_field( $_POST['options']['modules']['social_dribbble'] );
+						$_POST['options']['modules']['social_twitter']   = sanitize_text_field( $_POST['options']['modules']['social_twitter'] );
+						$_POST['options']['modules']['social_facebook']  = sanitize_text_field( $_POST['options']['modules']['social_facebook'] );
+						$_POST['options']['modules']['social_instagram'] = sanitize_text_field( $_POST['options']['modules']['social_instagram'] );
+						$_POST['options']['modules']['social_pinterest'] = sanitize_text_field( $_POST['options']['modules']['social_pinterest'] );
+						$_POST['options']['modules']['social_google+']   = sanitize_text_field( $_POST['options']['modules']['social_google+'] );
+						$_POST['options']['modules']['social_linkedin']  = sanitize_text_field( $_POST['options']['modules']['social_linkedin'] );
 
-					// Contact
-					$_POST['options']['modules']['contact_status']  = (int) $_POST['options']['modules']['contact_status'];
-					$_POST['options']['modules']['contact_email']   = sanitize_text_field( $_POST['options']['modules']['contact_email'] );
-					$_POST['options']['modules']['contact_effects'] = sanitize_text_field( $_POST['options']['modules']['contact_effects'] );
+						// Contact
+						$_POST['options']['modules']['contact_status']  = (int) $_POST['options']['modules']['contact_status'];
+						$_POST['options']['modules']['contact_email']   = sanitize_text_field( $_POST['options']['modules']['contact_email'] );
+						$_POST['options']['modules']['contact_effects'] = sanitize_text_field( $_POST['options']['modules']['contact_effects'] );
+					}
 
 					// Google Analytics
 					$_POST['options']['modules']['ga_status']       = (int) $_POST['options']['modules']['ga_status'];
