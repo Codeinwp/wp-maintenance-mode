@@ -517,7 +517,7 @@ if ( ! function_exists( 'sanitize_hex_color' ) ) {
  * Get option page URL.
  */
 function wpmm_option_page_url() {
-	$option_page = admin_url( 'options-general.php' );
+	$option_page = admin_url( 'admin.php' );
 	if ( is_multisite() && is_network_admin() ) {
 		$option_page = network_admin_url( 'settings.php' );
 	}
