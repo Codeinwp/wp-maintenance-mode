@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c3cf1e7041a98a87291ecb3b92dfaf2",
+    "content-hash": "9b1879380ae78835add5efa9d95f34ae",
     "packages": [
         {
             "name": "codeinwp/themeisle-sdk",
@@ -40,10 +40,6 @@
             "keywords": [
                 "wordpress"
             ],
-            "support": {
-                "issues": "https://github.com/Codeinwp/themeisle-sdk/issues",
-                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.0"
-            },
             "time": "2023-05-30T08:55:06+00:00"
         }
     ],
@@ -120,7 +116,6 @@
                 "sirbrillig/phpcs-variable-analysis": "^2.10",
                 "wptrt/wpthemereview": "*"
             },
-            "default-branch": true,
             "bin": [
                 "bin/phpcbf-fix-exit-0"
             ],
@@ -635,5 +630,5 @@
     "platform-overrides": {
         "php": "5.6"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "1.1.0"
 }

@@ -74,6 +74,15 @@ if ( is_admin() ) {
 
 add_filter( 'themeisle_sdk_products', 'wpmm_load_sdk' );
 
+add_filter(
+	'wp_maintenance_mode_about_us_metadata',
+	function() {
+		return array(
+			'logo'     => esc_url( WPMM_IMAGES_URL . 'icon.svg' ),
+			'location' => 'wp-maintenance-mode',
+		);
+	}
+);
 
 /**
  * Filter products array.
