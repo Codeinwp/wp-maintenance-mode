@@ -36,6 +36,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Add the options page and menu item.
 			add_action( 'admin_menu', array( $this, 'add_plugin_menu' ) );
+			add_action( 'admin_head', array( $this, 'add_inline_global_style' ) );
 			add_action( 'network_admin_menu', array( $this, 'add_plugin_menu' ) );
 
 			add_action( 'admin_init', array( $this, 'maybe_redirect' ) );
@@ -148,7 +149,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					'wpmmVars',
 					array(
 						'ajaxURL'                => admin_url( 'admin-ajax.php' ),
-						'pluginURL'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ),
+						'pluginURL'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
 						'ajaxNonce'              => wp_create_nonce( 'ajax' ),
 						'wizardNonce'            => wp_create_nonce( 'wizard' ),
 						'pluginInstallNonce'     => wp_create_nonce( 'updates' ),
@@ -321,19 +322,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @since 2.0.0
 		 */
 		public function add_plugin_menu() {
-			$parent_menu              = 'options-general.php';
 			$network_menu_hook_suffix = '';
 			if ( is_multisite() && is_network_admin() ) {
-				$parent_menu              = 'settings.php';
 				$network_menu_hook_suffix = '-network';
 			}
-			$this->plugin_screen_hook_suffix = add_submenu_page(
-				$parent_menu,
+			$this->plugin_screen_hook_suffix = add_menu_page(
 				__( 'LightStart', 'wp-maintenance-mode' ),
 				__( 'LightStart', 'wp-maintenance-mode' ),
 				wpmm_get_capability( 'settings' ),
 				$this->plugin_slug,
-				array( $this, 'display_plugin_settings' )
+				array( $this, 'display_plugin_settings' ),
+				esc_url( WPMM_IMAGES_URL . 'icon.svg' ),
+				99
 			);
 			$this->plugin_screen_hook_suffix = $this->plugin_screen_hook_suffix . $network_menu_hook_suffix;
 		}
@@ -352,7 +352,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			update_option( 'wpmm_settings_redirect', '0' );
-			wp_safe_redirect( admin_url( 'options-general.php?page=wp-maintenance-mode' ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=wp-maintenance-mode' ) );
 			exit;
 		}
 
@@ -478,39 +478,41 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					}
 					break;
 				case 'modules':
-					// Countdown
-					$_POST['options']['modules']['countdown_status']  = (int) $_POST['options']['modules']['countdown_status'];
-					$_POST['options']['modules']['countdown_start']   = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
-					$_POST['options']['modules']['countdown_details'] = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
-					$_POST['options']['modules']['countdown_details'] = array(
-						'days'    => isset( $_POST['options']['modules']['countdown_details']['days'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['days'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['days'] ) : 0,
-						'hours'   => isset( $_POST['options']['modules']['countdown_details']['hours'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['hours'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['hours'] ) : 1,
-						'minutes' => isset( $_POST['options']['modules']['countdown_details']['minutes'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['minutes'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['minutes'] ) : 0,
-					);
+					if ( ! get_option( 'wpmm_new_look' ) ) {
+						// Countdown
+						$_POST['options']['modules']['countdown_status']  = (int) $_POST['options']['modules']['countdown_status'];
+						$_POST['options']['modules']['countdown_start']   = sanitize_text_field( $_POST['options']['modules']['countdown_start'] );
+						$_POST['options']['modules']['countdown_details'] = array_map( 'trim', $_POST['options']['modules']['countdown_details'] );
+						$_POST['options']['modules']['countdown_details'] = array(
+							'days'    => isset( $_POST['options']['modules']['countdown_details']['days'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['days'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['days'] ) : 0,
+							'hours'   => isset( $_POST['options']['modules']['countdown_details']['hours'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['hours'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['hours'] ) : 1,
+							'minutes' => isset( $_POST['options']['modules']['countdown_details']['minutes'] ) && is_numeric( $_POST['options']['modules']['countdown_details']['minutes'] ) ? sanitize_text_field( $_POST['options']['modules']['countdown_details']['minutes'] ) : 0,
+						);
 
-					$_POST['options']['modules']['countdown_color'] = sanitize_hex_color( $_POST['options']['modules']['countdown_color'] );
+						$_POST['options']['modules']['countdown_color'] = sanitize_hex_color( $_POST['options']['modules']['countdown_color'] );
 
-					// Subscribe
-					$_POST['options']['modules']['subscribe_status']     = (int) $_POST['options']['modules']['subscribe_status'];
-					$_POST['options']['modules']['subscribe_text']       = sanitize_text_field( $_POST['options']['modules']['subscribe_text'] );
-					$_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color( $_POST['options']['modules']['subscribe_text_color'] );
+						// Subscribe
+						$_POST['options']['modules']['subscribe_status']     = (int) $_POST['options']['modules']['subscribe_status'];
+						$_POST['options']['modules']['subscribe_text']       = sanitize_text_field( $_POST['options']['modules']['subscribe_text'] );
+						$_POST['options']['modules']['subscribe_text_color'] = sanitize_hex_color( $_POST['options']['modules']['subscribe_text_color'] );
 
-					// Social networks
-					$_POST['options']['modules']['social_status']    = (int) $_POST['options']['modules']['social_status'];
-					$_POST['options']['modules']['social_target']    = (int) $_POST['options']['modules']['social_target'];
-					$_POST['options']['modules']['social_github']    = sanitize_text_field( $_POST['options']['modules']['social_github'] );
-					$_POST['options']['modules']['social_dribbble']  = sanitize_text_field( $_POST['options']['modules']['social_dribbble'] );
-					$_POST['options']['modules']['social_twitter']   = sanitize_text_field( $_POST['options']['modules']['social_twitter'] );
-					$_POST['options']['modules']['social_facebook']  = sanitize_text_field( $_POST['options']['modules']['social_facebook'] );
-					$_POST['options']['modules']['social_instagram'] = sanitize_text_field( $_POST['options']['modules']['social_instagram'] );
-					$_POST['options']['modules']['social_pinterest'] = sanitize_text_field( $_POST['options']['modules']['social_pinterest'] );
-					$_POST['options']['modules']['social_google+']   = sanitize_text_field( $_POST['options']['modules']['social_google+'] );
-					$_POST['options']['modules']['social_linkedin']  = sanitize_text_field( $_POST['options']['modules']['social_linkedin'] );
+						// Social networks
+						$_POST['options']['modules']['social_status']    = (int) $_POST['options']['modules']['social_status'];
+						$_POST['options']['modules']['social_target']    = (int) $_POST['options']['modules']['social_target'];
+						$_POST['options']['modules']['social_github']    = sanitize_text_field( $_POST['options']['modules']['social_github'] );
+						$_POST['options']['modules']['social_dribbble']  = sanitize_text_field( $_POST['options']['modules']['social_dribbble'] );
+						$_POST['options']['modules']['social_twitter']   = sanitize_text_field( $_POST['options']['modules']['social_twitter'] );
+						$_POST['options']['modules']['social_facebook']  = sanitize_text_field( $_POST['options']['modules']['social_facebook'] );
+						$_POST['options']['modules']['social_instagram'] = sanitize_text_field( $_POST['options']['modules']['social_instagram'] );
+						$_POST['options']['modules']['social_pinterest'] = sanitize_text_field( $_POST['options']['modules']['social_pinterest'] );
+						$_POST['options']['modules']['social_google+']   = sanitize_text_field( $_POST['options']['modules']['social_google+'] );
+						$_POST['options']['modules']['social_linkedin']  = sanitize_text_field( $_POST['options']['modules']['social_linkedin'] );
 
-					// Contact
-					$_POST['options']['modules']['contact_status']  = (int) $_POST['options']['modules']['contact_status'];
-					$_POST['options']['modules']['contact_email']   = sanitize_text_field( $_POST['options']['modules']['contact_email'] );
-					$_POST['options']['modules']['contact_effects'] = sanitize_text_field( $_POST['options']['modules']['contact_effects'] );
+						// Contact
+						$_POST['options']['modules']['contact_status']  = (int) $_POST['options']['modules']['contact_status'];
+						$_POST['options']['modules']['contact_email']   = sanitize_text_field( $_POST['options']['modules']['contact_email'] );
+						$_POST['options']['modules']['contact_effects'] = sanitize_text_field( $_POST['options']['modules']['contact_effects'] );
+					}
 
 					// Google Analytics
 					$_POST['options']['modules']['ga_status']       = (int) $_POST['options']['modules']['ga_status'];
@@ -969,7 +971,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function add_settings_link( $links ) {
 			return array_merge(
 				array(
-					'wpmm_settings' => sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) ), esc_html__( 'Settings', 'wp-maintenance-mode' ) ),
+					'wpmm_settings' => sprintf( '<a href="%s">%s</a>', add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ), esc_html__( 'Settings', 'wp-maintenance-mode' ) ),
 				),
 				$links
 			);
@@ -1004,7 +1006,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'msg'   => sprintf(
 								/* translators: plugin settings url */
 							__( 'The Maintenance Mode is <strong>active</strong>. Please don\'t forget to <a href="%s">deactivate</a> as soon as you are done.', 'wp-maintenance-mode' ),
-							add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'options-general.php' ) )
+							add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) )
 						),
 					);
 				}
@@ -1018,7 +1020,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 								'class' => 'error',
 								'msg'   => $maintenance_page->post_status === 'draft' ?
 									sprintf( __( '<strong>Action required</strong>: your Maintenance page is drafted. Visit the page to <a href="%s">publish</a> it.', 'wp-maintenance-mode' ), get_edit_post_link( $maintenance_page ) ) :
-									sprintf( __( '<strong>Action required</strong>: your Maintenance page has been deleted. Visit <a href="%s">settings page</a> to address this issue.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
+									sprintf( __( '<strong>Action required</strong>: your Maintenance page has been deleted. Visit <a href="%s">settings page</a> to address this issue.', 'wp-maintenance-mode' ), get_admin_url() . 'admin.php?page=wp-maintenance-mode#design' ),
 							);
 						}
 					}
@@ -1029,7 +1031,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						if ( ! isset( $this->plugin_settings['design']['page_id'] ) || ! get_post( $this->plugin_settings['design']['page_id'] ) ) {
 							$notices['maintenance_page_not_found'] = array(
 								'class' => 'error',
-								'msg'   => sprintf( __( '<strong>Action required</strong>: you don\'t have a page as Maintenance page. Visit <a href="%s">settings page</a> to select one.', 'wp-maintenance-mode' ), get_admin_url() . 'options-general.php?page=wp-maintenance-mode#design' ),
+								'msg'   => sprintf( __( '<strong>Action required</strong>: you don\'t have a page as Maintenance page. Visit <a href="%s">settings page</a> to select one.', 'wp-maintenance-mode' ), get_admin_url() . 'admin.php?page=wp-maintenance-mode#design' ),
 							);
 						}
 					}
@@ -1261,6 +1263,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				<div id="message" class="updated notice is-dismissible"><p><strong><?php esc_html_e( 'Settings saved.', 'wp-maintenance-mode' ); ?></strong></p></div>
 				<?php
 			}
+		}
+
+		/**
+		 * Add inline global style.
+		 */
+		public function add_inline_global_style() {
+			?>
+			<style type="text/css">
+				#toplevel_page_wp-maintenance-mode .wp-menu-image img {
+					padding: 7px 0 0 0;
+					opacity: 1;
+					max-width: 20px;
+				}
+			</style>
+			<?php
 		}
 	}
 }
