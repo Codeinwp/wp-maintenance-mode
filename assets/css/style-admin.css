@@ -177,6 +177,7 @@ label.wpmm-templates-gallery__label {
 .wpmm-template-wrap {
     width: calc( 100% / 3 - 20px);
     max-width: 290px;
+    height: 100%;
 }
 
 .wpmm-template-image-wrap {
