@@ -689,8 +689,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
+			// sanitize source only allow specific sources for further nonce verification.
+			$source = isset( $_POST['source'] ) && in_array( $_POST['source'], array( 'wizard', 'tab-design' ), true ) ? $_POST['source'] : '';
+			if ( empty( $source ) ) {
+				die( esc_html__( 'The source must not be empty.', 'wp-maintenance-mode' ) );
+			}
 			// check nonce validation
-			if ( ! wp_verify_nonce( $_POST['_wpnonce'], $_POST['source'] ) ) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], $source ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
