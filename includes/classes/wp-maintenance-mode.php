@@ -98,6 +98,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'otter_form_after_submit', array( $this, 'otter_add_subscriber' ) );
 
 				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) && get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
+					if ( function_exists( 'wp_functionality_constants' ) ) {
+						wp_functionality_constants();
+					}
 					wp_publish_post( $this->plugin_settings['design']['page_id'] );
 				}
 
