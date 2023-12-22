@@ -8,7 +8,7 @@ Author URI: https://themeisle.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 4.7
 Tested up to: 6.4
-Stable tag: 2.6.8
+Stable tag: 2.6.9
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -92,6 +92,17 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 Notice: `wp-cron.php` is excluded by default.
 
 == Changelog ==
+
+##### [Version 2.6.9](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.8...v2.6.9) (2023-12-22)
+
+### Bug Fixes
+- Fixed compatibility issue with WP 6.4
+- Fixed broken templates layout issue on the Safari browser
+- Enhanced security
+- Fixed compatibility issue with WP-Optimize
+
+
+
 
 ##### [Version 2.6.8](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.7...v2.6.8) (2023-06-07)
 
