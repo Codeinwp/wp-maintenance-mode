@@ -41,3 +41,4 @@ assets/vue
 .wordpress-org
 yarn.lock
 .eslintrc
+CONTRIBUTING.md
