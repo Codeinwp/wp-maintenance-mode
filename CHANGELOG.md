@@ -1,3 +1,8 @@
+##### [Version 2.6.11](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.10...v2.6.11) (2024-04-18)
+
+### Improvements
+​- **Updated internal dependencies:​​** Enhanced performance and security.
+
 ##### [Version 2.6.10](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.9...v2.6.10) (2024-02-28)
 
 ### Fixes
