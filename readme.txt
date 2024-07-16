@@ -7,7 +7,7 @@ Author: Themeisle
 Author URI: https://themeisle.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 4.7
-Tested up to: 6.5
+Tested up to: 6.6
 Stable tag: 2.6.11
 Requires PHP: 5.6
 License: GPL-2.0+
