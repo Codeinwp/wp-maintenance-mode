@@ -1068,13 +1068,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		public function use_maintenance_template( $template ) {
 			global $post;
 
-			// Return the default template if Elementor edit mode.
-			if ( class_exists( '\Elementor\Plugin', false ) && ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				return $template;
-			}
-
-			// Return the default template if Elementor preview mode.
-			if ( class_exists( '\Elementor\Plugin', false ) && isset( $_GET['elementor-preview'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			// Return the default template for Elementor when:
+			if (
+				class_exists( '\Elementor\Plugin', false ) &&
+				(
+					// Edit Mode is on.
+					( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] ) || // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					// Preview Mode is on.
+					isset( $_GET['elementor-preview'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				)
+			) {
 				return $template;
 			}
 
