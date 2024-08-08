@@ -24,8 +24,10 @@ if ( ( defined( 'IS_MAINTENANCE' ) && IS_MAINTENANCE ) && WPMM_VIEWS_PATH . 'mai
 	<?php
 	wp_body_open();
 
-	the_post();
-	the_content();
+	while ( have_posts() ) {
+		the_post();
+		the_content();
+	}
 
 	if ( isset( $settings['bot']['status'] ) && $settings['bot']['status'] === 1 ) {
 		?>
