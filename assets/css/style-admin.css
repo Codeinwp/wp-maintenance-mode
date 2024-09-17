@@ -412,6 +412,29 @@ input[type="button"].button.button-secondary.is-busy {
     height: 1em;
 }
 
+.wpmm-notice {
+    background-color: #fff;
+    border-left: 4px solid #00a0d2;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.wpmm-notice-content {
+    flex-grow: 1;
+}
+
+.wpmm-notice h3 {
+    margin: 0.5em 0;
+    font-size: 14px;
+}
+
+.wpmm-notice p {
+    margin: 0.5em 0;
+    font-size: 13px;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

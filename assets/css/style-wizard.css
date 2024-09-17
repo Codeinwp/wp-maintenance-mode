@@ -79,6 +79,8 @@ h2.wpmm-title span img {
 
     letter-spacing: .04em;
     line-height: 1;
+    --checkbox-input-size: 20px;
+    --checkmark-size: calc(var(--checkbox-input-size) + 4px);
 }
 
 #wpmm-wizard-wrapper .slider-wrap {
