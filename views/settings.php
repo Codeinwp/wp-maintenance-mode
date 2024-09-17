@@ -12,7 +12,19 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 	$this->plugin_settings['design']['page_id'] = 0;
 }
 
-$is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || defined( 'OTTER_BLOCKS_VERSION' );
+$is_otter_active   = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || defined( 'OTTER_BLOCKS_VERSION' );
+$is_hyve_installed = file_exists( ABSPATH . 'wp-content/plugins/hyve-lite/hyve-lite.php' ) || defined( 'HYVE_LITE_VERSION' );
+
+$hyve_url = add_query_arg(
+	array(
+		'tab'       => 'plugin-information',
+		'plugin'    => 'hyve-lite',
+		'TB_iframe' => true,
+		'width'     => 800,
+		'height'    => 800,
+	),
+	network_admin_url( 'plugin-install.php' )
+);
 ?>
 <div class="wrap">
 	<h2 class="wpmm-title"><?php echo esc_html( get_admin_page_title() ); ?>
@@ -818,6 +830,15 @@ $is_otter_active = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || define
 							<tbody>
 								<tr valign="top">
 									<td colspan="2">
+										<?php if ( ! $is_hyve_installed ) : ?>
+											<div class="wpmm-notice">
+												<div class="wpmm-notice-content">
+													<h3><?php esc_html_e( 'Enhance Your WordPress Site with Hyve AI Chatbot', 'wp-maintenance-mode' ); ?></h3>
+													<p><?php esc_html_e( 'Hyve is an AI chatbot plugin for WordPress, ideal for sites in maintenance mode. It enhances user experience by turning your content into interactive conversations, helping visitors access information while your site is under development.', 'wp-maintenance-mode' ); ?></p>
+												</div>
+												<a target="_black" href="<?php echo esc_url( $hyve_url ); ?>" class="button button-primary"><?php esc_html_e( 'Install Hyve', 'wp-maintenance-mode' ); ?></a>
+											</div>
+										<?php endif; ?>
 										<h4><?php esc_html_e( 'Setup the conversation steps to capture more subscribers with this friendly way of asking email addresses.', 'wp-maintenance-mode' ); ?></h4>
 										<p><?php esc_html_e( 'You may also want to use these wildcards: {bot_name} and {visitor_name} to make the conversation even more realistic.', 'wp-maintenance-mode' ); ?></p>
 										<p><?php esc_html_e( 'It is also ok if you don\'t fill in all the conversation steps if you don\'t need to.', 'wp-maintenance-mode' ); ?></p>
