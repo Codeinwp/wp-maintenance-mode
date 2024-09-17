@@ -8,7 +8,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 	class WP_Maintenance_Mode {
 
-		const VERSION = '2.6.11';
+		const VERSION = '2.6.12';
 
 		const MAINTENANCE  = 'maintenance';
 		const COMING_SOON  = 'coming-soon';

@@ -1,3 +1,9 @@
+##### [Version 2.6.12](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.11...v2.6.12) (2024-09-17)
+
+### Bug Fixes
+- **Compatibility with Elementor**: Fixes a compatibility issue with Elementor.
+- **Fixes Checkbox Styles**: Fixes a styling issue with Checkbox in the wizard that makes it almost invisible on screen.
+
 ##### [Version 2.6.11](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.10...v2.6.11) (2024-04-18)
 
 ### Improvements
