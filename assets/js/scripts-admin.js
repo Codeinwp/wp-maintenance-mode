@@ -588,7 +588,9 @@ jQuery( function( $ ) {
 				.then(() => {
 					if ( ! wpmmVars.isOptimoleInstalled ) {
 						return installPlugin( 'optimole-wp' ).then( () => activatePlugin( 'optimole-wp' ) );
-					} else if ( ! wpmmVars.isOptimoleActive ) {
+					}
+
+					if ( ! wpmmVars.isOptimoleActive ) {
 						return activatePlugin( 'optimole-wp' );
 					}
 				});
@@ -599,7 +601,9 @@ jQuery( function( $ ) {
 				.then(() => {
 					if ( ! wpmmVars.isHyveInstalled ) {
 						return installPlugin( 'hyve-lite' ).then( () => activatePlugin( 'hyve-lite' ) );
-					} else if ( ! wpmmVars.isHyveActive ) {
+					}
+
+					if ( ! wpmmVars.isHyveActive ) {
 						return activatePlugin( 'hyve-lite' );
 					}
 				});
