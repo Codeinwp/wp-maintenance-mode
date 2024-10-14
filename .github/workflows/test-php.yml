@@ -56,6 +56,8 @@ jobs:
           tools: phpunit-polyfills
       - name: Checkout source code
         uses: actions/checkout@v2
+      - name: Install Subversion
+        run: sudo apt-get update && sudo apt-get install -y subversion
       - name: Install WordPress Test Suite
         run: |
           bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
