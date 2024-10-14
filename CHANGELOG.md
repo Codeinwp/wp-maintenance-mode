@@ -1,3 +1,7 @@
+##### [Version 2.6.13](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.12...v2.6.13) (2024-10-14)
+
+- Codebase updates.
+
 ##### [Version 2.6.12](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.11...v2.6.12) (2024-09-17)
 
 ### Bug Fixes
