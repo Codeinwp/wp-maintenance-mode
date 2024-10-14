@@ -14,6 +14,7 @@ if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 
 $is_otter_active   = is_plugin_active( 'otter-blocks/otter-blocks.php' ) || defined( 'OTTER_BLOCKS_VERSION' );
 $is_hyve_installed = file_exists( ABSPATH . 'wp-content/plugins/hyve-lite/hyve-lite.php' ) || defined( 'HYVE_LITE_VERSION' );
+$is_min_php_8_1    = version_compare( PHP_VERSION, '8.1', '>=' );
 
 $hyve_url = add_query_arg(
 	array(
@@ -830,7 +831,7 @@ $hyve_url = add_query_arg(
 							<tbody>
 								<tr valign="top">
 									<td colspan="2">
-										<?php if ( ! $is_hyve_installed ) : ?>
+										<?php if ( ! $is_hyve_installed && $is_min_php_8_1 ) : ?>
 											<div class="wpmm-notice">
 												<div class="wpmm-notice-content">
 													<h3><?php esc_html_e( 'Enhance Your WordPress Site with Hyve AI Chatbot', 'wp-maintenance-mode' ); ?></h3>

@@ -14,6 +14,8 @@ $default_templates = array(
 	),
 );
 
+$show_hyve_promo = version_compare( PHP_VERSION, '8.1', '>=' ) && ! is_plugin_active( 'hyve-lite/hyve-lite.php' ) && ! defined( 'HYVE_LITE_VERSION' );
+
 ?>
 <div id="wpmm-wizard-wrapper">
 	<div class="slider-wrap">
@@ -86,7 +88,7 @@ $default_templates = array(
 					</div>
 				<?php } ?>
 
-				<?php if ( ! is_plugin_active( 'hyve-lite/hyve-lite.php' ) || ! defined( 'HYVE_LITE_VERSION' ) ) { ?>
+				<?php if ( $show_hyve_promo ) { ?>
 					<div class="optimole-upsell">
 						<div class="optimole-upsell-container">
 							<span class="components-checkbox-control__input-container">
