@@ -1182,7 +1182,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 */
 		public function add_wizard_classes( $classes ) {
 			if ( ! get_option( 'wpmm_fresh_install', false ) ) {
-				$classes .= 'wpmm-wizard-fullscreen';
+				$classes .= ' wpmm-wizard-fullscreen';
 			}
 
 			return $classes;
