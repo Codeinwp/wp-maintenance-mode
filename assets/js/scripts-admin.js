@@ -579,8 +579,6 @@ jQuery( function( $ ) {
 	 */
 	function handlePlugins() {
 		const optimoleCheckbox = $( '#wizard-optimole-checkbox' );
-		const hyveCheckbox = $( '#wizard-hyve-checkbox' );
-
 		let promiseChain = Promise.resolve();
 
 		if ( optimoleCheckbox.length && optimoleCheckbox.is( ':checked' ) ) {
@@ -592,19 +590,6 @@ jQuery( function( $ ) {
 
 					if ( ! wpmmVars.isOptimoleActive ) {
 						return activatePlugin( 'optimole-wp' );
-					}
-				});
-		}
-
-		if ( hyveCheckbox.length && hyveCheckbox.is( ':checked' ) ) {
-			promiseChain = promiseChain
-				.then(() => {
-					if ( ! wpmmVars.isHyveInstalled ) {
-						return installPlugin( 'hyve-lite' ).then( () => activatePlugin( 'hyve-lite' ) );
-					}
-
-					if ( ! wpmmVars.isHyveActive ) {
-						return activatePlugin( 'hyve-lite' );
 					}
 				});
 		}
@@ -676,8 +661,6 @@ jQuery( function( $ ) {
 				return $.get( wpmmVars.otterActivationLink );
 			case 'optimole-wp':
 				return $.get( wpmmVars.optimoleActivationLink );
-			case 'hyve-lite':
-				return $.get( wpmmVars.hyveActivationLink );
 			default:
 				break;
 		}

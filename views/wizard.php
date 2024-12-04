@@ -14,8 +14,6 @@ $default_templates = array(
 	),
 );
 
-$show_hyve_promo = version_compare( PHP_VERSION, '8.1', '>=' ) && ! is_plugin_active( 'hyve-lite/hyve-lite.php' ) && ! defined( 'HYVE_LITE_VERSION' );
-
 ?>
 <div id="wpmm-wizard-wrapper">
 	<div class="slider-wrap">
@@ -88,31 +86,6 @@ $show_hyve_promo = version_compare( PHP_VERSION, '8.1', '>=' ) && ! is_plugin_ac
 					</div>
 				<?php } ?>
 
-				<?php if ( $show_hyve_promo ) { ?>
-					<div class="optimole-upsell">
-						<div class="optimole-upsell-container">
-							<span class="components-checkbox-control__input-container">
-								<input id="wizard-hyve-checkbox" type="checkbox" class="components-checkbox-control__input" checked>
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
-							</span>
-							<label for="wizard-hyve-checkbox">
-								<?php esc_html_e( 'Interactive Chatbot', 'wp-maintenance-mode' ); ?>
-							</label>
-						</div>
-						<p class="description">
-							<?php
-								printf(
-									wp_kses(
-										/* translators: Hyve Lite url */
-										__( '<a href="%1$s" target="_blank">Hyve%2$s</a> is an AI chatbot plugin for WordPress, ideal for sites in maintenance mode. It enhances user experience by turning your content into interactive conversations, helping visitors access information while your site is under development.', 'wp-maintenance-mode' ),
-										wpmm_translated_string_allowed_html()
-									),
-									esc_url( 'https://wordpress.org/plugins/hyve-lite/' ),
-									$this->get_external_link_icon()
-								);
-							?>
-					</div>
-				<?php } ?>
 				<div id="wizard-buttons" class="import-button">
 					<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
 					<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a template', 'wp-maintenance-mode' ); ?>"/>
