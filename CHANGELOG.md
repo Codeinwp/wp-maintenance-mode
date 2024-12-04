@@ -1,3 +1,7 @@
+##### [Version 2.6.15](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.14...v2.6.15) (2024-12-04)
+
+- Codebase changes.
+
 ##### [Version 2.6.14](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.13...v2.6.14) (2024-11-11)
 
 - Fixed conflict with WPForms
