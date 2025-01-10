@@ -4,7 +4,7 @@
  *
  * Plugin Name: LightStart - Maintenance Mode, Coming Soon and Landing Page Builder
  * Description: Adds a splash page to your site that lets visitors know your site is down for maintenance. It's perfect for a coming soon or landing page.
- * Version: 2.6.15
+ * Version: 2.6.16
  * Author: Themeisle
  * Author URI: https://themeisle.com/
  * Twitter: themeisle
