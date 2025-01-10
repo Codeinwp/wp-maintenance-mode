@@ -4,7 +4,8 @@
 .wpmm-wizard-fullscreen .wrap .notice,
 .wpmm-wizard-fullscreen .wrap .error,
 .wpmm-wizard-fullscreen .wrap .updated,
-.wpmm-wizard-fullscreen #wpfooter {
+.wpmm-wizard-fullscreen #wpfooter,
+.wpmm-wizard-fullscreen .rop-revive-network-admin-notice {
     display: none !important;
 }
 
@@ -328,6 +329,7 @@ input.invalid:focus {
 
 .optimole-upsell-container {
     display: flex;
+    gap: 8px;
 }
 
 .optimole-upsell {
@@ -341,7 +343,7 @@ input.invalid:focus {
 }
 
 .optimole-upsell p.description {
-    margin-left: 35px;
+    margin-left: 30px;
     margin-top: 12px;
     font-size: 15px;
     max-width: 980px;

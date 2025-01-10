@@ -23,12 +23,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
-			$plugin                        = WP_Maintenance_Mode::get_instance();
-			$this->plugin_slug             = $plugin->get_plugin_slug();
-			$this->plugin_settings         = $plugin->get_plugin_settings();
-			$this->plugin_network_settings = $plugin->get_plugin_network_settings();
-			$this->plugin_default_settings = $plugin->default_settings();
-			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
+			// Init.
+			add_action( 'init', array( $this, 'load_default_settings' ) );
 
 			// Load admin style sheet and JavaScript.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -93,6 +89,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			return self::$instance;
+		}
+
+		/**
+		 * Load default settings.
+		 */
+		public function load_default_settings() {
+			$plugin                        = WP_Maintenance_Mode::get_instance();
+			$this->plugin_slug             = $plugin->get_plugin_slug();
+			$this->plugin_settings         = $plugin->get_plugin_settings();
+			$this->plugin_network_settings = $plugin->get_plugin_network_settings();
+			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
+			$this->plugin_default_settings = $plugin->default_settings();
 		}
 
 		/**
@@ -1169,7 +1177,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return string
 		 */
 		public function add_wizard_classes( $classes ) {
-			if ( ! get_option( 'wpmm_fresh_install', false ) ) {
+			if ( get_option( 'wpmm_fresh_install', false ) ) {
 				$classes .= ' wpmm-wizard-fullscreen';
 			}
 
