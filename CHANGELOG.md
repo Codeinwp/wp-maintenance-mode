@@ -1,3 +1,7 @@
+##### [Version 2.6.17](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.16...v2.6.17) (2025-04-16)
+
+- Updated dependencies
+
 ##### [Version 2.6.16](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.15...v2.6.16) (2025-01-10)
 
 - Fixed compatibility issue with WordPress 6.7
