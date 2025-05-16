@@ -76,6 +76,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			// Display custom page state
 			add_filter( 'display_post_states', array( $this, 'add_display_post_states' ), 10, 2 );
+
+			add_filter( 'themeisle_sdk_blackfriday_data', array( $this, 'add_black_friday_data' ) );
 		}
 
 		/**
@@ -235,6 +237,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 					wp_add_inline_script( 'code-editor', sprintf( 'jQuery(function ($) { var custom_css_editor = wp.codeEditor.initialize("other_custom_css", %s); $("body").on("show_design_tab_content", function () { custom_css_editor.codemirror.refresh(); }); });', wp_json_encode( $settings ) ) );
 				}
+
+				do_action( 'themeisle_internal_page', WPMM_PRODUCT_SLUG, 'dashboard' );
 			}
 
 			// For global actions like dismiss notices
@@ -1291,6 +1295,32 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				}
 			</style>
 			<?php
+		}
+
+		/**
+		 * Add Black Friday data.
+		 *
+		 * @param array $configs The configuration array for the loaded products.
+		 *
+		 * @return array
+		 */
+		public function add_black_friday_data( $configs ) {
+			$config = $configs['default'];
+
+			// translators: %1$s - plugin namce, %2$s - HTML tag, %3$s - discount, %4$s - HTML tag, %5$s - company name.
+			$message_template = __( 'Brought to you by the team behind %1$s— our biggest sale of the year is here: %2$sup to %3$s OFF%4$s on premium products from %5$s! Limited-time only.', 'wp-maintenance-mode' );
+
+			$config['message']  = sprintf( $message_template, 'WP Maintenance Mode', '<strong>', '70%', '</strong>', '<strong>Themeisle</strong>' );
+			$config['sale_url'] = add_query_arg(
+				array(
+					'utm_term' => 'free',
+				),
+				tsdk_translate_link( tsdk_utmify( 'https://themeisle.link/all-bf', 'bfcm', 'wp-maintenance-mode' ) )
+			);
+
+			$configs[ WPMM_PRODUCT_SLUG ] = $config;
+
+			return $configs;
 		}
 	}
 }
