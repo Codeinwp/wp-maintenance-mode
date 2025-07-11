@@ -692,9 +692,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return void
 		 */
 		public function insert_template() {
-			if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
-				wp_send_json_error( array( 'error' => 'Otter Blocks is not activated' ) );
-			}
+			// if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+			// 	wp_send_json_error( array( 'error' => 'Otter Blocks is not activated' ) );
+			// }
 
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
@@ -712,10 +712,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$template_slug = $_POST['template_slug'];
-			$category      = $_POST['category'];
-			$template      = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
+			$blocks        = '';
+			$category      = 'maintenance';
+			if ( ! empty( $_POST['category'] ) ) {
+				$category = $_POST['category'];
+				$template = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
 
-			$blocks = str_replace( '\n', '', $template->content );
+				$blocks = str_replace( '\n', '', $template->content );
+			}
 
 			$post_arr = array(
 				'post_type'     => 'page',
@@ -737,7 +741,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-			CSS_Handler::generate_css_file( $page_id );
+
+			if ( is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
+				CSS_Handler::generate_css_file( $page_id );
+			}
 
 			if ( 'wizard' === $_POST['source'] ) {
 				$this->plugin_settings['general']['status'] = 1;

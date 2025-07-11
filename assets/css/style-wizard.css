@@ -353,6 +353,11 @@ input.invalid:focus {
     color: #d63638;
 }
 
+.wpmm-templates-radio.disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
 @keyframes abs-spin {
     from {
         transform: translate(-50%, -50%) rotate(0deg);

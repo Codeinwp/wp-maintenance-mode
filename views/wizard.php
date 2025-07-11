@@ -19,47 +19,53 @@ $default_templates = array(
 	<div class="slider-wrap">
 		<div class="step-wrap">
 			<div class="step import-step">
-				<h4 class="header"><?php esc_html_e( 'Select the type of page you want', 'wp-maintenance-mode' ); ?></h4>
-				<p class="templates-description">
-					<?php
-						printf(
-							wp_kses(
-								/* translators: Otter url */
-								__( 'Get started with custom templates, and build engaging pages using Contact forms, Popups and more, with <a href="%1$s" target="_blank">Otter%2$s</a>.', 'wp-maintenance-mode' ),
-								wpmm_translated_string_allowed_html()
-							),
-							tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' ),
-							$this->get_external_link_icon()
-						);
-						?>
-					<br>
-					<?php
-						esc_html_e( 'Pick your template below, you can always customise it later.', 'wp-maintenance-mode' );
-					?>
-				</p>
-				<div class="wpmm-templates-radio">
-					<form>
-						<?php
-						$categories = WP_Maintenance_Mode::get_page_categories();
-						foreach ( $categories as $category => $label ) {
-							$slug          = $default_templates[ $category ]['slug'];
-							$thumbnail_url = $default_templates[ $category ]['thumbnail'];
-							?>
-							<div class="templates-radio__item" >
-								<h6 class="tag"><?php echo $label; ?></h6>
-								<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'coming-soon' ); ?>>
-								<label for="<?php echo esc_attr( $slug ); ?>" class="wpmm-template">
-									<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
-									<span class="checked-icon">
-										<img src="<?php echo esc_url( WPMM_URL . 'assets/images/checked.svg' ); ?>" alt="<?php echo esc_attr( 'checked-icon' ); ?>"/>
-									</span>
-								</label>
-							</div>
+				<h4 class="header"><?php esc_html_e( 'Get a boost with our free features', 'wp-maintenance-mode' ); ?></h4>
+				<?php if ( ! is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) { ?>
+					<div class="optimole-upsell">
+						<div class="optimole-upsell-container">
+							<span class="components-checkbox-control__input-container">
+								<input id="wizard-otter-block-checkbox" type="checkbox" class="components-checkbox-control__input" checked>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
+							</span>
+							<label for="wizard-otter-block-checkbox"><?php echo esc_html__( 'Essential Page Templates', 'wp-maintenance-mode' ); ?></label>
+						</div>
+						<p class="description">
 							<?php
-						}
-						?>
-					</form>
-				</div>
+								printf(
+									wp_kses(
+										/* translators: Otter url */
+										__( '<strong>Pick a template to get started. <a href="%1$s" target="_blank">Otter Blocks</a> plugin will be installed and activated to support and customize your layout.</strong> It also unlocks tools like forms and popups - if you need them later.', 'wp-maintenance-mode' ),
+										wpmm_translated_string_allowed_html()
+									),
+									tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' ),
+								);
+							?>
+						</p>
+					</div>
+					<div class="wpmm-templates-radio">
+						<form>
+							<?php
+							$categories = WP_Maintenance_Mode::get_page_categories();
+							foreach ( $categories as $category => $label ) {
+								$slug          = $default_templates[ $category ]['slug'];
+								$thumbnail_url = $default_templates[ $category ]['thumbnail'];
+								?>
+								<div class="templates-radio__item" >
+									<h6 class="tag"><?php echo $label; ?></h6>
+									<input id="<?php echo esc_attr( $slug ); ?>" type="radio" name="wizard-template" value="<?php echo esc_attr( $slug ); ?>" data-category="<?php echo esc_attr( $category ); ?>" <?php checked( $category, 'coming-soon' ); ?>>
+									<label for="<?php echo esc_attr( $slug ); ?>" class="wpmm-template">
+										<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php echo esc_attr( $slug ); ?>"/>
+										<span class="checked-icon">
+											<img src="<?php echo esc_url( WPMM_URL . 'assets/images/checked.svg' ); ?>" alt="<?php echo esc_attr( 'checked-icon' ); ?>"/>
+										</span>
+									</label>
+								</div>
+								<?php
+							}
+							?>
+						</form>
+					</div>
+				<?php } ?>
 				<?php if ( ! is_plugin_active( 'optimole-wp/optimole-wp.php' ) ) { ?>
 					<div class="optimole-upsell">
 						<div class="optimole-upsell-container">
