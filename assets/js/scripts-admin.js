@@ -571,7 +571,19 @@ jQuery( function( $ ) {
 	 */
 	function addToPage( data, callback ) {
 		if ($('.wpmm-templates-radio').hasClass('disabled')) {
-			data.category = '';
+			$.post( wpmmVars.ajaxURL, {
+				action: 'wpmm_skip_insert_template',
+				_wpnonce: wpmmVars.wizardNonce,
+			}, function( response ) {
+				if ( ! response.success ) {
+					addErrorMessage();
+					return;
+				}
+
+				skipWizard = true;
+				moveToStep( 'import', 'subscribe' );
+			} );
+			return Promise.resolve();
 		}
 	
 		data.action = 'wpmm_insert_template';

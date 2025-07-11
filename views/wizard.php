@@ -37,10 +37,14 @@ $default_templates = array(
 									__( 'Pick a template to get started.', 'wp-maintenance-mode' ),
 									tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' ),
 									__( 'Otter Blocks', 'wp-maintenance-mode' ),
-									__( 'It also unlocks tools like forms and popups - if you need them later.', 'wp-maintenance-mode' ),
+									__( 'plugin will be installed and activated to support and customize your layout.' , 'wp-maintenance-mode' ),
 								),
 								wpmm_translated_string_allowed_html()
 							);
+							?>
+							<br>
+							<?php
+							esc_html_e( 'It also unlocks tools like forms and popups - if you need them later.', 'wp-maintenance-mode' );
 							?>
 						</p>
 					</div>
@@ -81,22 +85,23 @@ $default_templates = array(
 						</div>
 						<p class="description">
 							<?php
-								printf(
-									wp_kses(
-										/* translators: Optimole url */
-										__( 'Templates would have pre-optimized images and all of your website\'s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80%% increase in speed, with <a href="%1$s" target="_blank">Optimole%2$s</a>.', 'wp-maintenance-mode' ),
-										wpmm_translated_string_allowed_html()
-									),
+							echo wp_kses(
+								sprintf(
+									'%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s',
+									__( 'Templates would have pre-optimized images and all of your website’s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80% increase in speed.', 'wp-maintenance-mode' ),
 									esc_url( 'https://wordpress.org/plugins/optimole-wp/' ),
-									$this->get_external_link_icon()
-								);
+									'Optimole',
+									__( 'plugin will be installed and activated.', 'wp-maintenance-mode' ),
+								),
+								wpmm_translated_string_allowed_html(),
+							);
 							?>
 					</div>
 				<?php } ?>
 
 				<div id="wizard-buttons" class="import-button">
 					<input type="button" class="button button-big button-primary disabled button-import" value="<?php esc_html_e( 'Continue', 'wp-maintenance-mode' ); ?>"/>
-					<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'I don’t want to use a template', 'wp-maintenance-mode' ); ?>"/>
+					<input type="button" class="button button-big button-secondary button-skip" value="<?php esc_html_e( 'Skip this step', 'wp-maintenance-mode' ); ?>"/>
 				</div>
 			</div>
 		</div>
