@@ -709,8 +709,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$template_slug = $_POST['template_slug'];
-			$category = $_POST['category'];
-			$template = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
+			$category      = $_POST['category'];
+			$template      = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
 
 			$blocks = str_replace( '\n', '', $template->content );
 
@@ -735,7 +735,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
 			CSS_Handler::generate_css_file( $page_id );
-
 
 			if ( 'wizard' === $_POST['source'] ) {
 				$this->plugin_settings['general']['status'] = 1;
