@@ -31,14 +31,16 @@ $default_templates = array(
 						</div>
 						<p class="description">
 							<?php
-								printf(
-									wp_kses(
-										/* translators: Otter url */
-										__( '<strong>Pick a template to get started. <a href="%1$s" target="_blank">Otter Blocks</a> plugin will be installed and activated to support and customize your layout.</strong> It also unlocks tools like forms and popups - if you need them later.', 'wp-maintenance-mode' ),
-										wpmm_translated_string_allowed_html()
-									),
+							echo wp_kses(
+								sprintf(
+									'<strong>%1$s <a href="%2$s" target="_blank">%3$s</a></strong> %4$s',
+									__( 'Pick a template to get started.', 'wp-maintenance-mode' ),
 									tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' ),
-								);
+									__( 'Otter Blocks', 'wp-maintenance-mode' ),
+									__( 'It also unlocks tools like forms and popups - if you need them later.', 'wp-maintenance-mode' ),
+								),
+								wpmm_translated_string_allowed_html()
+							);
 							?>
 						</p>
 					</div>
