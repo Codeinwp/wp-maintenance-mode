@@ -1,3 +1,7 @@
+##### [Version 2.6.19](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.18...v2.6.19) (2025-07-11)
+
+- Improved onboarding wizard
+
 ##### [Version 2.6.18](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.17...v2.6.18) (2025-05-27)
 
 - Updated dependencies
