@@ -387,22 +387,17 @@ jQuery( function( $ ) {
 		$( this ).addClass( 'is-busy' );
 		$( this ).trigger( 'blur' );
 
-		handlePlugins().then( function() {
-			$.post( wpmmVars.ajaxURL, {
-				action: 'wpmm_skip_wizard',
-				_wpnonce: wpmmVars.wizardNonce,
-			}, function( response ) {
-				if ( ! response.success ) {
-					addErrorMessage();
-					return;
-				}
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_skip_wizard',
+			_wpnonce: wpmmVars.wizardNonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				addErrorMessage();
+				return;
+			}
 
-				skipWizard = true;
-				moveToStep( 'import', 'subscribe' );
-			} );
-		} ).catch( function() {
-			addErrorMessage();
-			$( '.button-skip' ).removeClass( 'is-busy' );
+			skipWizard = true;
+			moveToStep( 'import', 'subscribe' );
 		} );
 	} );
 
