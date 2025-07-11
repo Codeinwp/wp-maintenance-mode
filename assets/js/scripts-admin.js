@@ -387,22 +387,17 @@ jQuery( function( $ ) {
 		$( this ).addClass( 'is-busy' );
 		$( this ).trigger( 'blur' );
 
-		handlePlugins().then( function() {
-			$.post( wpmmVars.ajaxURL, {
-				action: 'wpmm_skip_wizard',
-				_wpnonce: wpmmVars.wizardNonce,
-			}, function( response ) {
-				if ( ! response.success ) {
-					addErrorMessage();
-					return;
-				}
+		$.post( wpmmVars.ajaxURL, {
+			action: 'wpmm_skip_wizard',
+			_wpnonce: wpmmVars.wizardNonce,
+		}, function( response ) {
+			if ( ! response.success ) {
+				addErrorMessage();
+				return;
+			}
 
-				skipWizard = true;
-				moveToStep( 'import', 'subscribe' );
-			} );
-		} ).catch( function() {
-			addErrorMessage();
-			$( '.button-skip' ).removeClass( 'is-busy' );
+			skipWizard = true;
+			moveToStep( 'import', 'subscribe' );
 		} );
 	} );
 
@@ -482,16 +477,26 @@ jQuery( function( $ ) {
         }
     } );
 
+	$( '#wizard-otter-block-checkbox' ).on( 'change', function() {
+		if ( ! $(this).is(':checked') ) {
+			$( '.wpmm-templates-radio' ).addClass( 'disabled' );
+		} else {
+			$( '.wpmm-templates-radio' ).removeClass( 'disabled' );
+		}
+	} );
+
 	/**
 	 * Adds elements and CSS when importing from wizard
 	 *
 	 * @param {string} slug The template that will be imported
 	 */
 	function importInProgress( slug ) {
-		const template = $( 'input[value=' + slug + '] + .wpmm-template' );
-
-		template.addClass( 'loading' );
-		template.append( '<span class="dashicons dashicons-update"></span><p><i>' + wpmmVars.loadingString + '</i></p>' );
+		if ( ! $('.wpmm-templates-radio').hasClass('disabled') ) {
+			const template = $( 'input[value=' + slug + '] + .wpmm-template' );
+	
+			template.addClass( 'loading' );
+			template.append( '<span class="dashicons dashicons-update"></span><p><i>' + wpmmVars.loadingString + '</i></p>' );
+		}
 
 		$( '.button-import' ).attr( 'disabled', 'disabled' );
 		$( '#wpmm-wizard-wrapper .button-skip' ).addClass( 'disabled' );
@@ -518,8 +523,7 @@ jQuery( function( $ ) {
 	 * @param {Function} callback
 	 */
 	function importTemplate( data, callback ) {
-		handleOtter()
-			.then( () => handlePlugins() )
+		handlePlugins()
 			.then( () => addToPage( data, callback ) )
 			.catch( ( error ) => {
 				// eslint-disable-next-line no-console
@@ -561,6 +565,22 @@ jQuery( function( $ ) {
 	 * @param {Function} callback
 	 */
 	function addToPage( data, callback ) {
+		if ($('.wpmm-templates-radio').hasClass('disabled')) {
+			$.post( wpmmVars.ajaxURL, {
+				action: 'wpmm_skip_insert_template',
+				_wpnonce: wpmmVars.wizardNonce,
+			}, function( response ) {
+				if ( ! response.success ) {
+					addErrorMessage();
+					return;
+				}
+
+				skipWizard = true;
+				moveToStep( 'import', 'subscribe' );
+			} );
+			return Promise.resolve();
+		}
+	
 		data.action = 'wpmm_insert_template';
 		$.post( wpmmVars.ajaxURL, data, function( response ) {
 			if ( ! response.success ) {
@@ -579,6 +599,7 @@ jQuery( function( $ ) {
 	 */
 	function handlePlugins() {
 		const optimoleCheckbox = $( '#wizard-optimole-checkbox' );
+		const otterBlockCheckbox = $( '#wizard-otter-block-checkbox' );
 		let promiseChain = Promise.resolve();
 
 		if ( optimoleCheckbox.length && optimoleCheckbox.is( ':checked' ) ) {
@@ -592,6 +613,11 @@ jQuery( function( $ ) {
 						return activatePlugin( 'optimole-wp' );
 					}
 				});
+		}
+
+		if ( otterBlockCheckbox.length && otterBlockCheckbox.is( ':checked' ) ) {
+			promiseChain = promiseChain
+				.then(() => handleOtter());
 		}
 
 		return promiseChain.catch( ( error ) => {
