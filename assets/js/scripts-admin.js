@@ -617,16 +617,7 @@ jQuery( function( $ ) {
 
 		if ( otterBlockCheckbox.length && otterBlockCheckbox.is( ':checked' ) ) {
 			promiseChain = promiseChain
-				.then(() => handleOtter())
-				.then(() => {
-					if ( ! wpmmVars.isOtterInstalled ) {
-						return installPlugin( 'otter-blocks' ).then( () => activatePlugin( 'otter-blocks' ) );
-					}
-
-					if ( ! wpmmVars.isOtterActive ) {
-						return activatePlugin( 'otter-blocks' );
-					}
-				});
+				.then(() => handleOtter());
 		}
 
 		return promiseChain.catch( ( error ) => {
