@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cdf04ff1fe809c4646fe45f2727e0d9",
+    "content-hash": "b5f5da36c50a2fe2bccfce677431bfbc",
     "packages": [
         {
             "name": "codeinwp/themeisle-sdk",
-            "version": "3.3.46",
+            "version": "3.3.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeinwp/themeisle-sdk.git",
-                "reference": "af2e7360bbe3af6a1bd2c3779fc33b7765104461"
+                "reference": "0727d2cf2fc9bfb81b42968aeaf2bf4e340f021e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/af2e7360bbe3af6a1bd2c3779fc33b7765104461",
-                "reference": "af2e7360bbe3af6a1bd2c3779fc33b7765104461",
+                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/0727d2cf2fc9bfb81b42968aeaf2bf4e340f021e",
+                "reference": "0727d2cf2fc9bfb81b42968aeaf2bf4e340f021e",
                 "shasum": ""
             },
             "require-dev": {
@@ -43,9 +43,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeinwp/themeisle-sdk/issues",
-                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.46"
+                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.48"
             },
-            "time": "2025-05-16T15:38:02+00:00"
+            "time": "2025-08-11T16:47:24+00:00"
         }
     ],
     "packages-dev": [
@@ -667,9 +667,9 @@
         "ext-json": "*",
         "ext-dom": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "5.6"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
