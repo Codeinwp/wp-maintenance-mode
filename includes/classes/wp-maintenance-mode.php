@@ -1385,7 +1385,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function otter_add_subscriber( $form_data ) {
 			if ( $form_data ) {
-				$input_data = $form_data->get_payload_field( 'formInputsData' );
+				$input_data = $form_data->get_data_from_payload( 'formInputsData' );
 				$input_data = array_map(
 					function( $input_field ) {
 						if ( isset( $input_field['type'] ) && 'email' === $input_field['type'] ) {
