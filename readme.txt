@@ -9,7 +9,7 @@ Tags: maintenance mode, admin, administration, unavailable, coming soon, multisi
 Requires at least: 4.7
 Tested up to: 6.8
 Stable tag: 2.6.20
-Requires PHP: 5.6
+Requires PHP: 7.1
 License: GPL-2.0+
 
 Easy Drag & Drop Page Builder that adds a splash page to your site that it's perfect for a coming soon page, maintenance or landing page.
