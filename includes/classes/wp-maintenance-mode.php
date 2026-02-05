@@ -1464,11 +1464,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_filter(
 					'themeisle_sdk_telemetry_products',
 					function( $products ) {
-						$license = get_option( 'visualizer_pro_license_data', 'free' );
-						if ( ! empty( $license ) && is_object( $license ) ) {
-							$license = $license->key;
-						}
-
 						foreach ( $products as &$product ) {
 							if ( isset( $product['slug'] ) && 'wp' === $product['slug'] ) {
 								$product['slug'] = 'wp_maintenance_mode';

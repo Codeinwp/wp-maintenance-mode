@@ -806,7 +806,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Empty field: email', 'wp-maintenance-mode' ) );
 			}
 
-			if ( isset( $_POST['opt_in'] ) && $_POST['opt_in'] ) {
+			if ( isset( $_POST['opt_in'] ) && sanitize_text_field( $_POST['opt_in'] ) ) {
 				update_option( 'wp_maintenance_mode_logger_flag', 'yes' );
 			}
 
