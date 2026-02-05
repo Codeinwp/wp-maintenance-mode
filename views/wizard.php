@@ -116,6 +116,13 @@ $default_templates = array(
 					<input type="text" value="<?php echo esc_attr( get_bloginfo( 'admin_email' ) ); ?>" />
 					<input type="button" class="button button-primary button-big subscribe-button" value="<?php esc_attr_e( 'Sign me up', 'wp-maintenance-mode' ); ?>" />
 				</div>
+				<div class="opt-in-container">
+					<span class="components-checkbox-control__input-container">
+						<input id="wizard-opt-in" type="checkbox" class="components-checkbox-control__input" checked>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
+					</span>
+					<label for="wizard-opt-in"><?php echo esc_html__( 'Help us improve LightStart by opting in to anonymous usage tracking. No sensitive data is collected.', 'wp-maintenance-mode' ); ?></label>
+				</div>
 				<input id="skip-subscribe" type="button" class="button button-link skip-link" value="<?php esc_attr_e( 'I\'ll skip for now, thanks!', 'wp-maintenance-mode' ); ?>" />
 			</div>
 		</div>

@@ -296,6 +296,19 @@ h2.wpmm-title span img {
     font-size: 18px;
 }
 
+.subscribe-step .opt-in-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.subscribe-step .opt-in-container svg.components-checkbox-control__checked {
+    top: 20%;
+}
+
+.subscribe-step .opt-in-container label {
+    text-align: left;
+}
 #email-input-wrap {
     position: relative;
     display: flex;

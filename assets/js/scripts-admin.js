@@ -429,11 +429,13 @@ jQuery( function( $ ) {
 
 		emailInput.removeClass( 'invalid' );
 		subscribeButton.addClass( 'is-busy' );
+		const optIn = $('#wizard-opt-in').is( ':checked' );
 
 		$.post( wpmmVars.ajaxURL, {
 			action: 'wpmm_subscribe',
 			email,
 			_wpnonce: wpmmVars.wizardNonce,
+			opt_in: optIn ? 1 : 0,
 		}, function( response ) {
 			if ( ! response.success ) {
 				alert( response.data );

@@ -159,6 +159,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					}
 				);
 			}
+
+			add_action( 'init', array( $this, 'initialize_telemetry' ) );
+
 		}
 
 		/**
@@ -1448,6 +1451,35 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 */
 		public function get_current_page_category() {
 			return $this->current_page_category;
+		}
+
+		/**
+		 * Initialize telemetry.
+		 *
+		 * @return void
+		 */
+		public function initialize_telemetry() {
+			if ( 'yes' === get_option( 'wp_maintenance_mode_logger_flag' ) ) {
+				add_filter( 'themeisle_sdk_enable_telemetry', '__return_true' );
+				add_filter(
+					'themeisle_sdk_telemetry_products',
+					function( $products ) {
+						$license = get_option( 'visualizer_pro_license_data', 'free' );
+						if ( ! empty( $license ) && is_object( $license ) ) {
+							$license = $license->key;
+						}
+
+						foreach ( $products as &$product ) {
+							if ( isset( $product['slug'] ) && 'wp' === $product['slug'] ) {
+								$product['slug'] = 'wp_maintenance_mode';
+							}
+						}
+
+						return $products;
+					}
+				);
+			}
+
 		}
 	}
 
