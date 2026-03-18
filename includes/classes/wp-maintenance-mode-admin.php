@@ -1324,15 +1324,13 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		public function add_black_friday_data( $configs ) {
 			$config = $configs['default'];
 
-			// translators: %1$s - plugin namce, %2$s - HTML tag, %3$s - discount, %4$s - HTML tag, %5$s - company name.
-			$message_template = __( 'Brought to you by the team behind %1$s— our biggest sale of the year is here: %2$sup to %3$s OFF%4$s on premium products from %5$s! Limited-time only.', 'wp-maintenance-mode' );
-
-			$config['message']  = sprintf( $message_template, 'WP Maintenance Mode', '<strong>', '70%', '</strong>', '<strong>Themeisle</strong>' );
+			$config['message']  = __( 'You use LightStart to build your site. Take it further with Neve Pro: starter sites, header builder, WooCommerce layouts. Built by the same team. ', 'wp-maintenance-mode' );
+			$config['cta_label'] = __( 'Get Neve Pro free', 'wp-maintenance-mode' );
 			$config['sale_url'] = add_query_arg(
 				array(
 					'utm_term' => 'free',
 				),
-				tsdk_translate_link( tsdk_utmify( 'https://themeisle.link/all-bf', 'bfcm', 'wp-maintenance-mode' ) )
+				tsdk_translate_link( tsdk_utmify( 'https://themeisle.link/neve-bf', 'bfcm', 'lightstart' ) )
 			);
 
 			$configs[ WPMM_PRODUCT_SLUG ] = $config;
