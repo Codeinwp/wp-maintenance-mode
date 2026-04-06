@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5f5da36c50a2fe2bccfce677431bfbc",
+    "content-hash": "6acace5af549ca9a6ced24d8aeef359d",
     "packages": [
         {
             "name": "codeinwp/themeisle-sdk",
-            "version": "3.3.48",
+            "version": "3.3.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeinwp/themeisle-sdk.git",
-                "reference": "0727d2cf2fc9bfb81b42968aeaf2bf4e340f021e"
+                "reference": "bb2a8414b0418b18c68c9ff1df3d7fb10467928d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/0727d2cf2fc9bfb81b42968aeaf2bf4e340f021e",
-                "reference": "0727d2cf2fc9bfb81b42968aeaf2bf4e340f021e",
+                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/bb2a8414b0418b18c68c9ff1df3d7fb10467928d",
+                "reference": "bb2a8414b0418b18c68c9ff1df3d7fb10467928d",
                 "shasum": ""
             },
             "require-dev": {
                 "codeinwp/phpcs-ruleset": "dev-main",
-                "yoast/phpunit-polyfills": "^2.0"
+                "yoast/phpunit-polyfills": "^4.0"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -36,16 +36,16 @@
                     "homepage": "https://themeisle.com"
                 }
             ],
-            "description": "ThemeIsle SDK",
+            "description": "Themeisle SDK.",
             "homepage": "https://github.com/Codeinwp/themeisle-sdk",
             "keywords": [
                 "wordpress"
             ],
             "support": {
                 "issues": "https://github.com/Codeinwp/themeisle-sdk/issues",
-                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.48"
+                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.51"
             },
-            "time": "2025-08-11T16:47:24+00:00"
+            "time": "2026-03-30T07:58:49+00:00"
         }
     ],
     "packages-dev": [
@@ -671,5 +671,5 @@
     "platform-overrides": {
         "php": "5.6"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
