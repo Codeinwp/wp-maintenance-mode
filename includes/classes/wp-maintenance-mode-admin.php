@@ -1328,14 +1328,15 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				return $configs;
 			}
 
-			$config['message']  = __( 'You use LightStart to build your site. Take it further with Neve Pro: starter sites, header builder, WooCommerce layouts. Built by the same team. ', 'wp-maintenance-mode' );
-			$config['cta_label'] = __( 'Get Neve Pro free', 'wp-maintenance-mode' );
+			// translators: 1. Number of free licenses, 2. The price of the product.
+			$config['message']             = sprintf( __( 'You\'re using LightStart, and the team behind it is celebrating Black Friday by giving away %1$s licences of Neve Pro. A premium WordPress theme worth %2$s, packed with starter sites, a header builder, and WooCommerce layouts. Claim yours before they run out.', 'wp-maintenance-mode' ), 100, '$69' );
+			$config['cta_label']           = __( 'Get Neve Pro free', 'wp-maintenance-mode' );
 			$config['plugin_meta_message'] = __( 'Black Friday Sale - Get Neve Pro free', 'wp-maintenance-mode' );
-			$config['sale_url'] = add_query_arg(
+			$config['sale_url']            = add_query_arg(
 				array(
 					'utm_term' => 'free',
 				),
-				tsdk_translate_link( tsdk_utmify( 'https://themeisle.link/neve-bf', 'bfcm', 'lightstart' ) )
+				tsdk_translate_link( tsdk_utmify( 'https://themeisle.link/neve-claim-bf', 'bfcm', 'lightstart' ) )
 			);
 
 			$configs[ WPMM_PRODUCT_SLUG ] = $config;
