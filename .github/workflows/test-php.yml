@@ -53,7 +53,7 @@ jobs:
         with:
           php-version: '7.2'
           extensions: simplexml, mysql
-          tools: phpunit-polyfills
+          tools: phpunit:7.5.20, phpunit-polyfills
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Install Subversion
@@ -73,7 +73,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
       - name: Install composer
-        run: composer install --prefer-dist --no-progress --no-suggest --no-dev
+        run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpunit
         run: composer run-script phpunit
-

@@ -168,6 +168,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 						'isOtterActive'          => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
 						'isOptimoleInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/optimole-wp/optimole-wp.php' ),
 						'isOptimoleActive'       => is_plugin_active( 'optimole-wp/optimole-wp.php' ),
+						'isWPSCInstalled'        => file_exists( ABSPATH . 'wp-content/plugins/wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) || file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
+						'isWPSCActive'           => is_plugin_active( 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) || is_plugin_active( 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
+						'isWPSCProInstalled'     => file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
 						'errorString'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
 						'loadingString'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
 						'importingText'          => __( 'Importing', 'wp-maintenance-mode' ),
@@ -195,6 +198,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 								'plugin_status' => 'all',
 								'paged'         => '1',
 								'_wpnonce'      => wp_create_nonce( 'activate-plugin_optimole-wp/optimole-wp.php' ),
+							),
+							esc_url( network_admin_url( 'plugins.php' ) )
+						),
+						'wpscActivationLink'     => add_query_arg(
+							array(
+								'action'        => 'activate',
+								'plugin'        => rawurlencode( file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ? 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' : 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ),
+								'plugin_status' => 'all',
+								'paged'         => '1',
+								'_wpnonce'      => wp_create_nonce( file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ? 'activate-plugin_wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' : 'activate-plugin_wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ),
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),

@@ -98,6 +98,35 @@ $default_templates = array(
 								wpmm_translated_string_allowed_html(),
 							);
 							?>
+						</p>
+					</div>
+				<?php } ?>
+				<?php if ( ! is_plugin_active( 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) && ! is_plugin_active( 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ) { ?>
+					<div class="optimole-upsell">
+						<div class="optimole-upsell-container">
+							<span class="components-checkbox-control__input-container">
+								<input id="wizard-wpsc-checkbox" type="checkbox" class="components-checkbox-control__input" checked>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
+							</span>
+							<label for="wizard-wpsc-checkbox">
+								<?php esc_html_e( 'Accelerate your website performance', 'wp-maintenance-mode' ); ?>
+							</label>
+						</div>
+						<p class="description">
+							<?php
+							echo wp_kses(
+								sprintf(
+									// translators: %1$s is a description, %2$s is the Super Page Cache URL, %3$s is the plugin name, %4$s is description text.
+									'%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s',
+									__( 'Speed up your pages by 60-80% with intelligent caching. Achieve faster load times and better search rankings automatically, with', 'wp-maintenance-mode' ),
+									esc_url( 'https://wordpress.org/plugins/wp-cloudflare-page-cache/' ),
+									__( 'Super Page Cache', 'wp-maintenance-mode' ),
+									__( 'plugin installed and activated automatically.', 'wp-maintenance-mode' ),
+								),
+								wpmm_translated_string_allowed_html(),
+							);
+							?>
+						</p>
 					</div>
 				<?php } ?>
 

@@ -601,6 +601,7 @@ jQuery( function( $ ) {
 	 */
 	function handlePlugins() {
 		const optimoleCheckbox = $( '#wizard-optimole-checkbox' );
+		const wpscCheckbox = $( '#wizard-wpsc-checkbox' );
 		const otterBlockCheckbox = $( '#wizard-otter-block-checkbox' );
 		let promiseChain = Promise.resolve();
 
@@ -615,6 +616,19 @@ jQuery( function( $ ) {
 						return activatePlugin( 'optimole-wp' );
 					}
 				});
+		}
+
+		if ( wpscCheckbox.length && wpscCheckbox.is( ':checked' ) ) {
+			promiseChain = promiseChain
+				.then( () => {
+					if ( ! wpmmVars.isWPSCInstalled ) {
+						return installPlugin( 'wp-cloudflare-page-cache' ).then( () => activatePlugin( 'wp-cloudflare-page-cache' ) );
+					}
+
+					if ( ! wpmmVars.isWPSCActive ) {
+						return activatePlugin( wpmmVars.isWPSCProInstalled ? 'wp-super-page-cache-pro' : 'wp-cloudflare-page-cache' );
+					}
+				} );
 		}
 
 		if ( otterBlockCheckbox.length && otterBlockCheckbox.is( ':checked' ) ) {
@@ -637,7 +651,7 @@ jQuery( function( $ ) {
 					updateSDKOptions();
 					return activatePlugin( 'otter-blocks' );
 				} );
-		} else if ( ! wpmmVars.isOtterActivated ) {
+		} else if ( ! wpmmVars.isOtterActive ) {
 			return activatePlugin( 'otter-blocks' );
 		}
 
@@ -689,6 +703,9 @@ jQuery( function( $ ) {
 				return $.get( wpmmVars.otterActivationLink );
 			case 'optimole-wp':
 				return $.get( wpmmVars.optimoleActivationLink );
+			case 'wp-super-page-cache-pro':
+			case 'wp-cloudflare-page-cache':
+				return $.get( wpmmVars.wpscActivationLink );
 			default:
 				break;
 		}

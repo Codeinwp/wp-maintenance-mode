@@ -107,6 +107,7 @@ h2.wpmm-title span img {
 .step.import-step {
     margin: min(10%, 65px) min(12%, 195px);
     width: 1090px;
+    outline: 0;
 }
 
 .import-step .header {
