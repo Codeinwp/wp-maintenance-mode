@@ -686,13 +686,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
-			$this->plugin_settings['design']['page_id'] = $_POST['page_id'];
-			wp_update_post(
-				array(
-					'ID'            => $this->plugin_settings['design']['page_id'],
-					'page_template' => 'templates/wpmm-page-template.php',
-				)
-			);
+			$page_id = isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
+
+			$this->plugin_settings['design']['page_id'] = $page_id;
+
+			if ( $page_id ) {
+				// remember the page's original state before taking it over as a maintenance page
+				wpmm_record_page_state( $page_id );
+
+				wp_update_post(
+					array(
+						'ID'            => $page_id,
+						'page_template' => 'templates/wpmm-page-template.php',
+					)
+				);
+			}
 
 			update_option( 'wpmm_settings', $this->plugin_settings );
 

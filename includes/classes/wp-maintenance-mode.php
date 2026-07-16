@@ -97,12 +97,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wp_ajax_wpmm_send_contact', array( $this, 'send_contact' ) );
 				add_action( 'otter_form_after_submit', array( $this, 'otter_add_subscriber' ) );
 
-				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) && get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
-					add_filter( 'wpo_purge_all_cache_on_update', '__return_true' );
-					if ( function_exists( 'wp_functionality_constants' ) ) {
-						wp_functionality_constants();
+				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+					// remember the page's original state so it can be restored when maintenance mode is disabled
+					wpmm_record_page_state( (int) $this->plugin_settings['design']['page_id'], false );
+
+					if ( get_post_meta( $this->plugin_settings['design']['page_id'], '_wp_page_template', true ) !== 'templates/wpmm-page-template.php' ) {
+						update_post_meta( $this->plugin_settings['design']['page_id'], '_wp_page_template', 'templates/wpmm-page-template.php' );
 					}
-					wp_publish_post( $this->plugin_settings['design']['page_id'] );
+
+					if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
+						add_filter( 'wpo_purge_all_cache_on_update', '__return_true' );
+						if ( function_exists( 'wp_functionality_constants' ) ) {
+							wp_functionality_constants();
+						}
+						wp_publish_post( $this->plugin_settings['design']['page_id'] );
+					}
 				}
 
 				update_option( 'show_on_front', 'page' );
@@ -141,21 +150,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
 			} else {
-				// make maintenance page private when maintenance mode is disabled
+				// restore the maintenance page to its original state when maintenance mode is disabled
 				add_action(
 					'init',
 					function() {
 						if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							return;
 						}
-						if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'publish' ) {
-							wp_update_post(
-								array(
-									'ID'          => $this->plugin_settings['design']['page_id'],
-									'post_status' => 'private',
-								)
-							);
-						}
+						wpmm_restore_page_state( (int) $this->plugin_settings['design']['page_id'] );
 					}
 				);
 			}
@@ -671,6 +673,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function single_deactivate() {
+			// give the selected page back to the site in its original state
+			$settings = get_option( 'wpmm_settings' );
+			if ( ! empty( $settings['design']['page_id'] ) ) {
+				wpmm_restore_page_state( (int) $settings['design']['page_id'] );
+			}
+
 			wpmm_delete_cache();
 		}
 

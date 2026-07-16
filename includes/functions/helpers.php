@@ -514,6 +514,55 @@ if ( ! function_exists( 'sanitize_hex_color' ) ) {
 }
 
 /**
+ * Record the current state of the selected maintenance page so it can be
+ * restored when maintenance mode is disabled or the plugin is deactivated.
+ *
+ * @since 2.6.23
+ * @param int  $page_id   page ID
+ * @param bool $overwrite whether to overwrite a previously recorded state
+ */
+function wpmm_record_page_state( $page_id, $overwrite = true ) {
+	if ( ! $overwrite && get_post_meta( $page_id, '_wpmm_original_status', true ) ) {
+		return;
+	}
+
+	update_post_meta( $page_id, '_wpmm_original_status', get_post_status( $page_id ) );
+	update_post_meta( $page_id, '_wpmm_original_template', get_post_meta( $page_id, '_wp_page_template', true ) );
+}
+
+/**
+ * Restore the selected maintenance page to its recorded original state.
+ * Pages without a recorded state are left untouched.
+ *
+ * @since 2.6.23
+ * @param int $page_id page ID
+ */
+function wpmm_restore_page_state( $page_id ) {
+	$original_status = get_post_meta( $page_id, '_wpmm_original_status', true );
+
+	if ( empty( $original_status ) || ! get_post( $page_id ) ) {
+		return;
+	}
+
+	if ( get_post_status( $page_id ) !== $original_status ) {
+		wp_update_post(
+			array(
+				'ID'          => $page_id,
+				'post_status' => $original_status,
+			)
+		);
+	}
+
+	$original_template = get_post_meta( $page_id, '_wpmm_original_template', true );
+
+	if ( empty( $original_template ) ) {
+		delete_post_meta( $page_id, '_wp_page_template' );
+	} else {
+		update_post_meta( $page_id, '_wp_page_template', $original_template );
+	}
+}
+
+/**
  * Get option page URL.
  */
 function wpmm_option_page_url() {
