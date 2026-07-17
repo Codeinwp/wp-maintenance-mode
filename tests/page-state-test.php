@@ -147,6 +147,81 @@ class Test_Page_State extends WP_UnitTestCase {
 		$_POST = array();
 	}
 
+	/**
+	 * Simulate the select-page AJAX call the Design tab dropdown fires.
+	 *
+	 * @param array $settings Value for the wpmm_settings option.
+	 * @param int   $page_id  Page being selected.
+	 * @return void
+	 */
+	private function select_page( $settings, $page_id ) {
+		$this->boot_plugin( $settings );
+
+		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
+			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
+		}
+
+		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
+		$instance->setAccessible( true );
+		$instance->setValue( null, null );
+
+		$admin = WP_Maintenance_Mode_Admin::get_instance();
+		$admin->load_default_settings();
+
+		$_POST = array(
+			'_wpnonce' => wp_create_nonce( 'tab-design' ),
+			'page_id'  => (string) $page_id,
+		);
+
+		$die_handler = function () {
+			return function () {
+				throw new WPDieException( 'json response sent' );
+			};
+		};
+		add_filter( 'wp_doing_ajax', '__return_true' );
+		add_filter( 'wp_die_ajax_handler', $die_handler );
+
+		ob_start();
+		try {
+			$admin->select_page();
+		} catch ( WPDieException $e ) {
+			// wp_send_json_*() ends the request with wp_die(); expected.
+		}
+		ob_end_clean();
+
+		remove_filter( 'wp_doing_ajax', '__return_true' );
+		remove_filter( 'wp_die_ajax_handler', $die_handler );
+		$_POST = array();
+	}
+
+	public function test_issue_523_workflow_leaves_selected_homepage_public() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_content' => 'Real homepage content.',
+			)
+		);
+
+		// 1. The user selects their existing homepage in Design > Select page.
+		$this->select_page( $this->make_settings( 0, 0 ), $page_id );
+
+		$settings = get_option( 'wpmm_settings' );
+		$this->assertSame( $page_id, (int) $settings['design']['page_id'] );
+
+		// 2. Maintenance mode is enabled...
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		// 3. ...then disabled, and another request runs the init callback.
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+
+		// The homepage is publicly available in its original state (issue #523).
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'Real homepage content.', get_post( $page_id )->post_content );
+		$this->assertSame( '', get_post_meta( $page_id, '_wp_page_template', true ) );
+	}
+
 	public function test_applying_template_to_user_page_creates_new_page_instead_of_overwriting() {
 		$page_id = self::factory()->post->create(
 			array(
