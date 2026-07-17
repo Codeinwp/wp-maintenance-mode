@@ -517,12 +517,15 @@ if ( ! function_exists( 'sanitize_hex_color' ) ) {
  * Record the current state of the selected maintenance page so it can be
  * restored when maintenance mode is disabled or the plugin is deactivated.
  *
+ * A previously recorded state is never overwritten: the page may already be
+ * carrying plugin-made changes, and recording those would poison the original
+ * state. The record is cleared when the page is restored.
+ *
  * @since 2.6.23
- * @param int  $page_id   page ID
- * @param bool $overwrite whether to overwrite a previously recorded state
+ * @param int $page_id page ID
  */
-function wpmm_record_page_state( $page_id, $overwrite = true ) {
-	if ( ! $overwrite && get_post_meta( $page_id, '_wpmm_original_status', true ) ) {
+function wpmm_record_page_state( $page_id ) {
+	if ( get_post_meta( $page_id, '_wpmm_original_status', true ) ) {
 		return;
 	}
 
@@ -560,6 +563,10 @@ function wpmm_restore_page_state( $page_id ) {
 	} else {
 		update_post_meta( $page_id, '_wp_page_template', $original_template );
 	}
+
+	// clear the record so the next take-over captures the page's state afresh
+	delete_post_meta( $page_id, '_wpmm_original_status' );
+	delete_post_meta( $page_id, '_wpmm_original_template' );
 }
 
 /**

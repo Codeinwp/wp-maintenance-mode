@@ -742,12 +742,25 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				'page_template' => 'templates/wpmm-page-template.php',
 			);
 
-			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {
-				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
+			$selected_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
+			$page_exists      = $selected_page_id && get_post_status( $selected_page_id ) && get_post_status( $selected_page_id ) !== 'trash';
+
+			if ( $page_exists && get_post_meta( $selected_page_id, '_wpmm_generated', true ) ) {
+				// only pages created by the plugin may be overwritten
+				$post_arr['ID'] = $selected_page_id;
 				$page_id        = wp_update_post( $post_arr );
 			} else {
+				if ( $page_exists ) {
+					// hand the user's page back before switching to a generated one
+					wpmm_restore_page_state( $selected_page_id );
+				}
+
 				$post_arr['post_title'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
 				$page_id                = wp_insert_post( $post_arr );
+
+				if ( $page_id && ! $page_id instanceof WP_Error ) {
+					update_post_meta( $page_id, '_wpmm_generated', 1 );
+				}
 			}
 
 			if ( $page_id === 0 || $page_id instanceof WP_Error ) {
@@ -755,7 +768,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-			CSS_Handler::generate_css_file( $page_id );
+
+			if ( class_exists( 'ThemeIsle\GutenbergBlocks\CSS\CSS_Handler' ) ) {
+				CSS_Handler::generate_css_file( $page_id );
+			}
 
 			if ( 'wizard' === $_POST['source'] ) {
 				$this->plugin_settings['general']['status'] = 1;

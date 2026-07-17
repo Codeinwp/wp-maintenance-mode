@@ -99,7 +99,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
 					// remember the page's original state so it can be restored when maintenance mode is disabled
-					wpmm_record_page_state( (int) $this->plugin_settings['design']['page_id'], false );
+					wpmm_record_page_state( (int) $this->plugin_settings['design']['page_id'] );
 
 					if ( get_post_meta( $this->plugin_settings['design']['page_id'], '_wp_page_template', true ) !== 'templates/wpmm-page-template.php' ) {
 						update_post_meta( $this->plugin_settings['design']['page_id'], '_wp_page_template', 'templates/wpmm-page-template.php' );

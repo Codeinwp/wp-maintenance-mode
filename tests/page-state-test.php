@@ -97,6 +97,156 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->assertSame( 'templates/wpmm-page-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
 	}
 
+	/**
+	 * Boot a fresh admin instance and simulate the insert-template AJAX call.
+	 *
+	 * @param array $settings Value for the wpmm_settings option.
+	 * @return void
+	 */
+	private function apply_template( $settings ) {
+		$this->boot_plugin( $settings );
+
+		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
+			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
+		}
+
+		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
+		$instance->setAccessible( true );
+		$instance->setValue( null, null );
+
+		$admin = WP_Maintenance_Mode_Admin::get_instance();
+		$admin->load_default_settings();
+
+		$_POST = array(
+			'_wpnonce'      => wp_create_nonce( 'tab-design' ),
+			'source'        => 'tab-design',
+			'template_slug' => 'coming-soon-1',
+			'category'      => 'coming-soon',
+		);
+
+		$die_handler = function () {
+			return function () {
+				throw new WPDieException( 'json response sent' );
+			};
+		};
+		// Outside of admin-ajax.php, wp_send_json_*() ends with a bare `die`;
+		// claiming AJAX context routes it through a catchable die handler instead.
+		add_filter( 'wp_doing_ajax', '__return_true' );
+		add_filter( 'wp_die_ajax_handler', $die_handler );
+
+		ob_start();
+		try {
+			$admin->insert_template();
+		} catch ( WPDieException $e ) {
+			// wp_send_json_*() ends the request with wp_die(); expected.
+		}
+		ob_end_clean();
+
+		remove_filter( 'wp_doing_ajax', '__return_true' );
+		remove_filter( 'wp_die_ajax_handler', $die_handler );
+		$_POST = array();
+	}
+
+	public function test_applying_template_to_user_page_creates_new_page_instead_of_overwriting() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_content' => 'My real homepage content.',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
+
+		// What select_page() does when the user picks an existing page.
+		wpmm_record_page_state( $page_id );
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+
+		$this->apply_template( $this->make_settings( 0, $page_id ) );
+
+		// The user's page is handed back untouched.
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'My real homepage content.', get_post( $page_id )->post_content );
+		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
+
+		// The template landed on a newly created, plugin-owned page instead.
+		$settings    = get_option( 'wpmm_settings' );
+		$new_page_id = (int) $settings['design']['page_id'];
+
+		$this->assertNotSame( $page_id, $new_page_id );
+		$this->assertSame( 'private', get_post_status( $new_page_id ) );
+		$this->assertNotEmpty( get_post_meta( $new_page_id, '_wpmm_generated', true ) );
+		$this->assertNotEmpty( get_post( $new_page_id )->post_content );
+	}
+
+	public function test_applying_template_to_generated_page_updates_it_in_place() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'private',
+			)
+		);
+		update_post_meta( $page_id, '_wpmm_generated', 1 );
+
+		$this->apply_template( $this->make_settings( 0, $page_id ) );
+
+		$settings = get_option( 'wpmm_settings' );
+
+		$this->assertSame( $page_id, (int) $settings['design']['page_id'] );
+		$this->assertNotEmpty( get_post( $page_id )->post_content );
+	}
+
+	public function test_recording_twice_does_not_poison_the_original_state() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
+
+		wpmm_record_page_state( $page_id );
+
+		// The plugin takes the page over...
+		wp_update_post(
+			array(
+				'ID'          => $page_id,
+				'post_status' => 'private',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+
+		// ...and the user re-selects the same page while it is in that state.
+		wpmm_record_page_state( $page_id );
+
+		wpmm_restore_page_state( $page_id );
+
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
+	}
+
+	public function test_page_edits_after_restore_become_the_new_baseline() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
+
+		// First take-over / hand-back cycle.
+		wpmm_record_page_state( $page_id );
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+		wpmm_restore_page_state( $page_id );
+
+		// The user changes the page's template, then the plugin takes it over again.
+		update_post_meta( $page_id, '_wp_page_template', 'new-template.php' );
+		wpmm_record_page_state( $page_id );
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+		wpmm_restore_page_state( $page_id );
+
+		$this->assertSame( 'new-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
+	}
+
 	public function test_plugin_deactivation_restores_selected_page() {
 		$page_id = self::factory()->post->create(
 			array(
