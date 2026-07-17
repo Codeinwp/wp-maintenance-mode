@@ -729,9 +729,19 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
-			$template_slug = $_POST['template_slug'];
-			$category      = $_POST['category'];
-			$template      = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
+			$template_slug = isset( $_POST['template_slug'] ) ? basename( sanitize_text_field( $_POST['template_slug'] ) ) : '';
+			$category      = isset( $_POST['category'] ) ? basename( sanitize_text_field( $_POST['category'] ) ) : '';
+			$template_file = WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json';
+
+			if ( '' === $template_slug || '' === $category || ! is_readable( $template_file ) ) {
+				wp_send_json_error( array( 'error' => 'Unknown template' ) );
+			}
+
+			$template = json_decode( file_get_contents( $template_file ) );
+
+			if ( empty( $template->content ) ) {
+				wp_send_json_error( array( 'error' => 'Unknown template' ) );
+			}
 
 			$blocks = str_replace( '\n', '', $template->content );
 

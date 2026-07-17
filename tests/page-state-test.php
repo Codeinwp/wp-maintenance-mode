@@ -103,7 +103,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	 * @param array $settings Value for the wpmm_settings option.
 	 * @return void
 	 */
-	private function apply_template( $settings ) {
+	private function apply_template( $settings, $template_slug = 'coming-soon-1', $category = 'coming-soon' ) {
 		$this->boot_plugin( $settings );
 
 		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
@@ -120,8 +120,8 @@ class Test_Page_State extends WP_UnitTestCase {
 		$_POST = array(
 			'_wpnonce'      => wp_create_nonce( 'tab-design' ),
 			'source'        => 'tab-design',
-			'template_slug' => 'coming-soon-1',
-			'category'      => 'coming-soon',
+			'template_slug' => $template_slug,
+			'category'      => $category,
 		);
 
 		$die_handler = function () {
@@ -193,6 +193,33 @@ class Test_Page_State extends WP_UnitTestCase {
 
 		$this->assertSame( $page_id, (int) $settings['design']['page_id'] );
 		$this->assertNotEmpty( get_post( $page_id )->post_content );
+	}
+
+	public function test_applying_unknown_template_is_rejected() {
+		$pages_before = count( get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'numberposts' => -1 ) ) );
+
+		$this->apply_template( $this->make_settings( 0, 0 ), '../../nonexistent', 'coming-soon' );
+
+		$settings    = get_option( 'wpmm_settings' );
+		$pages_after = count( get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'numberposts' => -1 ) ) );
+
+		$this->assertSame( 0, (int) $settings['design']['page_id'], 'selection must not change' );
+		$this->assertSame( $pages_before, $pages_after, 'no page must be created' );
+	}
+
+	public function test_enabled_mode_with_deleted_page_writes_nothing() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		wp_delete_post( $page_id, true );
+
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wp_page_template' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
 	}
 
 	public function test_recording_twice_does_not_poison_the_original_state() {
