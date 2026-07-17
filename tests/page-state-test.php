@@ -222,6 +222,39 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
 	}
 
+	public function test_trashed_page_is_not_resurrected_on_disable() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		wpmm_record_page_state( $page_id );
+
+		// The user deliberately trashes the page while it is selected.
+		wp_trash_post( $page_id );
+
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+
+		$this->assertSame( 'trash', get_post_status( $page_id ) );
+	}
+
+	public function test_enabled_mode_with_trashed_page_records_nothing() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		wp_trash_post( $page_id );
+
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
+	}
+
 	public function test_recording_twice_does_not_poison_the_original_state() {
 		$page_id = self::factory()->post->create(
 			array(

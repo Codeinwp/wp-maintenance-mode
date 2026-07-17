@@ -547,6 +547,11 @@ function wpmm_restore_page_state( $page_id ) {
 		return;
 	}
 
+	// a trashed page reflects user intent; the plugin never trashes, so leave it alone
+	if ( get_post_status( $page_id ) === 'trash' ) {
+		return;
+	}
+
 	if ( get_post_status( $page_id ) !== $original_status ) {
 		wp_update_post(
 			array(
