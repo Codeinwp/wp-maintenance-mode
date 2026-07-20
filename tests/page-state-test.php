@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for the selected-page state lifecycle (issue #523).
+ * Tests for the selected-page state lifecycle.
  */
 
 /**
@@ -194,7 +194,7 @@ class Test_Page_State extends WP_UnitTestCase {
 		$_POST = array();
 	}
 
-	public function test_issue_523_workflow_leaves_selected_homepage_public() {
+	public function test_select_page_workflow_leaves_selected_homepage_public() {
 		$page_id = self::factory()->post->create(
 			array(
 				'post_type'    => 'page',
@@ -216,7 +216,7 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
 		do_action( 'init' );
 
-		// The homepage is publicly available in its original state (issue #523).
+		// The homepage is publicly available in its original state.
 		$this->assertSame( 'publish', get_post_status( $page_id ) );
 		$this->assertSame( 'Real homepage content.', get_post( $page_id )->post_content );
 		$this->assertSame( '', get_post_meta( $page_id, '_wp_page_template', true ) );
