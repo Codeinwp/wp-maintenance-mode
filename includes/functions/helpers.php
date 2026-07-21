@@ -525,12 +525,21 @@ if ( ! function_exists( 'sanitize_hex_color' ) ) {
  * @param int $page_id page ID
  */
 function wpmm_record_page_state( $page_id ) {
-	if ( get_post_meta( $page_id, '_wpmm_original_status', true ) ) {
+	$status = get_post_status( $page_id );
+
+	if ( ! $status ) {
 		return;
 	}
 
-	update_post_meta( $page_id, '_wpmm_original_status', get_post_status( $page_id ) );
-	update_post_meta( $page_id, '_wpmm_original_template', get_post_meta( $page_id, '_wp_page_template', true ) );
+	$template = get_post_meta( $page_id, '_wp_page_template', true );
+
+	// the unique flag makes the status key a first-write-wins claim on the
+	// record, so a racing request cannot save the plugin-modified state
+	if ( ! add_post_meta( $page_id, '_wpmm_original_status', $status, true ) ) {
+		return;
+	}
+
+	update_post_meta( $page_id, '_wpmm_original_template', $template );
 }
 
 /**
@@ -547,12 +556,9 @@ function wpmm_restore_page_state( $page_id ) {
 		return;
 	}
 
-	// a trashed page reflects user intent; the plugin never trashes, so leave it alone
-	if ( get_post_status( $page_id ) === 'trash' ) {
-		return;
-	}
-
-	if ( get_post_status( $page_id ) !== $original_status ) {
+	// a trashed page reflects user intent; the plugin never trashes, so keep the
+	// status but still hand back the template and clear the record below
+	if ( get_post_status( $page_id ) !== 'trash' && get_post_status( $page_id ) !== $original_status ) {
 		wp_update_post(
 			array(
 				'ID'          => $page_id,

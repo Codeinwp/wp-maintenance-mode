@@ -688,6 +688,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$page_id = isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
 
+			$previous_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
+
+			if ( $previous_page_id && $previous_page_id !== $page_id ) {
+				// hand the previously selected page back before abandoning it,
+				// otherwise nothing would ever restore it
+				wpmm_restore_page_state( $previous_page_id );
+			}
+
 			$this->plugin_settings['design']['page_id'] = $page_id;
 
 			if ( $page_id ) {

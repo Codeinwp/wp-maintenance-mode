@@ -222,6 +222,77 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->assertSame( '', get_post_meta( $page_id, '_wp_page_template', true ) );
 	}
 
+	public function test_changing_selection_restores_the_previously_selected_page() {
+		$first_page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $first_page_id, '_wp_page_template', 'custom-template.php' );
+
+		$second_page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		$this->select_page( $this->make_settings( 0, 0 ), $first_page_id );
+		$this->assertSame( 'templates/wpmm-page-template.php', get_post_meta( $first_page_id, '_wp_page_template', true ) );
+
+		$this->select_page( $this->make_settings( 0, $first_page_id ), $second_page_id );
+
+		// The first page is handed back with its own template, and its record is cleared.
+		$this->assertSame( 'custom-template.php', get_post_meta( $first_page_id, '_wp_page_template', true ) );
+		$this->assertFalse( metadata_exists( 'post', $first_page_id, '_wpmm_original_status' ) );
+
+		$settings = get_option( 'wpmm_settings' );
+		$this->assertSame( $second_page_id, (int) $settings['design']['page_id'] );
+	}
+
+	public function test_clearing_selection_restores_the_previously_selected_page() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'private',
+			)
+		);
+
+		$this->select_page( $this->make_settings( 0, 0 ), $page_id );
+
+		// Simulate the state an active maintenance mode leaves the page in.
+		wp_publish_post( $page_id );
+
+		$this->select_page( $this->make_settings( 0, $page_id ), 0 );
+
+		$this->assertSame( 'private', get_post_status( $page_id ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
+	}
+
+	public function test_restoring_a_trashed_page_keeps_trash_but_clears_template_and_record() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
+
+		wpmm_record_page_state( $page_id );
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+
+		// The user deliberately trashes the page, then the plugin hands it back.
+		wp_trash_post( $page_id );
+		wpmm_restore_page_state( $page_id );
+
+		// The status is untouched, but the page no longer carries plugin state.
+		$this->assertSame( 'trash', get_post_status( $page_id ) );
+		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_template' ) );
+	}
+
 	public function test_applying_template_to_user_page_creates_new_page_instead_of_overwriting() {
 		$page_id = self::factory()->post->create(
 			array(
