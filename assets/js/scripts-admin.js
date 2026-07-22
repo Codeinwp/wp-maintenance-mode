@@ -219,6 +219,8 @@ jQuery( function( $ ) {
 	let pageEditURL = '#';
 	const templateWrap = $( '.wpmm-template-image-wrap' );
 	const wizardButtons = $( '#wizard-buttons' );
+	let activeImportButton = null;
+	let activeImportButtonHtml = '';
 
 	templateWrap.on( 'click', '.button-import', function() {
 		/* If the page has some content inside, show a confirmation prompt to let the use know the
@@ -264,6 +266,8 @@ jQuery( function( $ ) {
 			category,
 		};
 
+		activeImportButton = button;
+		activeImportButtonHtml = button.innerHTML;
 		$( button ).html( '<span class="dashicons dashicons-update"></span>' + wpmmVars.importingText + '...' );
 		$( '.button-import' ).addClass( 'disabled' ).css( 'pointer-events', 'none' );
 
@@ -525,21 +529,17 @@ jQuery( function( $ ) {
 	 * @param {Function} callback
 	 */
 	function importTemplate( data, callback ) {
-		handlePlugins()
+		return handlePlugins()
 			.then( () => addToPage( data, callback ) )
 			.catch( ( error ) => {
 				// eslint-disable-next-line no-console
 				console.error( error );
 
-				const template = $( '.wpmm-template.loading' );
+				resetImportUI();
 
-				template.removeClass( 'loading' );
-				$( '.wpmm-template .dashicons.dashicons-update' ).remove();
-				$( '.wpmm-template p' ).remove();
-
-				$( '.button-import' ).removeAttr( 'disabled' );
-				$( '#wpmm-wizard-wrapper .button-skip' ).removeClass( 'disabled' );
-				$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).removeAttr( 'style' );
+				if ( error && error.data && error.data.error ) {
+					alert( error.data.error );
+				}
 
 				addErrorMessage();
 			} );
@@ -560,6 +560,34 @@ jQuery( function( $ ) {
 	}
 
 	/**
+	 * Restores the tab-design and wizard import UI to an interactive state
+	 * after a failed import, so the user can retry without reloading the page.
+	 */
+	function resetImportUI() {
+		$( '.modal-overlay' ).remove();
+		$( 'body' ).removeClass( 'has-modal' );
+
+		// Restore the import button that was active when the import failed, if any.
+		if ( activeImportButton ) {
+			$( activeImportButton ).html( activeImportButtonHtml );
+			activeImportButton = null;
+			activeImportButtonHtml = '';
+		}
+
+		$( '.button-import' ).show().removeClass( 'disabled' ).css( 'pointer-events', '' );
+		templateWrap.has( '.button-import' ).addClass( 'can-import' );
+		$( '.importing' ).removeClass( 'importing' );
+
+		$( '.wpmm-template.loading' ).removeClass( 'loading' );
+		$( '.wpmm-template .dashicons.dashicons-update' ).remove();
+		$( '.wpmm-template p' ).remove();
+
+		$( '.button-import' ).removeAttr( 'disabled' );
+		$( '#wpmm-wizard-wrapper .button-skip' ).removeClass( 'disabled' );
+		$( '#wpmm-wizard-wrapper .wpmm-templates-radio label' ).removeAttr( 'style' );
+	}
+
+	/**
 	 * Adds the template content to the Maintenance Page
 	 * and calls the callback after
 	 *
@@ -567,33 +595,29 @@ jQuery( function( $ ) {
 	 * @param {Function} callback
 	 */
 	function addToPage( data, callback ) {
-		if ($('.wpmm-templates-radio').hasClass('disabled')) {
-			$.post( wpmmVars.ajaxURL, {
+		if ( $( '.wpmm-templates-radio' ).hasClass( 'disabled' ) ) {
+			return $.post( wpmmVars.ajaxURL, {
 				action: 'wpmm_skip_insert_template',
 				_wpnonce: wpmmVars.wizardNonce,
-			}, function( response ) {
+			}, undefined, 'json' ).then( ( response ) => {
 				if ( ! response.success ) {
-					addErrorMessage();
-					return;
+					return Promise.reject( response );
 				}
 
 				skipWizard = true;
 				moveToStep( 'import', 'subscribe' );
 			} );
-			return Promise.resolve();
 		}
-	
+
 		data.action = 'wpmm_insert_template';
-		$.post( wpmmVars.ajaxURL, data, function( response ) {
+
+		return $.post( wpmmVars.ajaxURL, data, undefined, 'json' ).then( ( response ) => {
 			if ( ! response.success ) {
-				alert( response.data.error );
-				$( '.dashicons-update' ).remove();
-				addErrorMessage();
-				return false;
+				return Promise.reject( response );
 			}
 
 			callback( response.data );
-		}, 'json' );
+		} );
 	}
 
 	/**
