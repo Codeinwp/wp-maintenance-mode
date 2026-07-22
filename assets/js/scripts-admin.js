@@ -539,6 +539,8 @@ jQuery( function( $ ) {
 
 				if ( error && error.data && error.data.error ) {
 					alert( error.data.error );
+				} else if ( ! $( '.import-step' ).length ) {
+ 					alert( wpmmVars.errorString );
 				}
 
 				addErrorMessage();
