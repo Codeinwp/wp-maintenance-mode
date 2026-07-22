@@ -38,7 +38,7 @@ $default_templates = array(
 									__( 'Pick a template to get started.', 'wp-maintenance-mode' ),
 									tsdk_utmify( 'https://themeisle.com/plugins/otter-blocks/', $this->plugin_slug, 'wizard' ),
 									__( 'Otter Blocks', 'wp-maintenance-mode' ),
-									__( 'plugin will be installed and activated to support and customize your layout.', 'wp-maintenance-mode' ),
+									__( 'plugin will be installed and activated to support and customize your layout.', 'wp-maintenance-mode' )
 								),
 								wpmm_translated_string_allowed_html()
 							);
@@ -93,9 +93,9 @@ $default_templates = array(
 									__( 'Templates would have pre-optimized images and all of your website’s images would be delivered via Amazon Cloudfront CDN, resulting in an ≈ 80% increase in speed.', 'wp-maintenance-mode' ),
 									esc_url( 'https://wordpress.org/plugins/optimole-wp/' ),
 									'Optimole',
-									__( 'plugin will be installed and activated.', 'wp-maintenance-mode' ),
+									__( 'plugin will be installed and activated.', 'wp-maintenance-mode' )
 								),
-								wpmm_translated_string_allowed_html(),
+								wpmm_translated_string_allowed_html()
 							);
 							?>
 						</p>
