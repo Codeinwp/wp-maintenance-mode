@@ -85,21 +85,34 @@ test.describe( 'maintenance mode access rules', () => {
 		} );
 	} );
 
-	test( 'search bots see the site while bot bypass is enabled', async ( {
+	test( 'search bots see the site only while bot bypass is enabled', async ( {
 		admin,
 		page,
 		browser,
 	} ) => {
+		// Bypass off: a crawler is blocked like any visitor.
 		await saveGeneralSettings( admin, page, async ( form ) => {
 			await form
 				.locator( 'input[name="options[general][status]"][value="1"]' )
 				.check( { force: true } );
 			await form
 				.locator( 'select[name="options[general][bypass_bots]"]' )
+				.selectOption( '0', { force: true } );
+		} );
+
+		const blockedBot = await openAsVisitor( browser, '/', {
+			userAgent: GOOGLEBOT_UA,
+		} );
+		expect( blockedBot.response.status() ).toBe( 503 );
+		await blockedBot.context.close();
+
+		// Bypass on: the crawler gets the real site.
+		await saveGeneralSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'select[name="options[general][bypass_bots]"]' )
 				.selectOption( '1', { force: true } );
 		} );
 
-		// A crawler identifying as Googlebot gets the real site.
 		const bot = await openAsVisitor( browser, '/', {
 			userAgent: GOOGLEBOT_UA,
 		} );
@@ -120,6 +133,74 @@ test.describe( 'maintenance mode access rules', () => {
 				.check( { force: true } );
 			await form
 				.locator( 'select[name="options[general][bypass_bots]"]' )
+				.selectOption( '0', { force: true } );
+		} );
+	} );
+
+	test( 'feeds and the REST API stay reachable during maintenance', async ( {
+		admin,
+		page,
+		browser,
+	} ) => {
+		await saveGeneralSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'input[name="options[general][status]"][value="1"]' )
+				.check( { force: true } );
+		} );
+
+		// "feed" is on the default exclude list.
+		const feed = await openAsVisitor( browser, '/feed/' );
+		expect( feed.response.status() ).toBe( 200 );
+		expect( feed.response.headers()[ 'content-type' ] ).toContain( 'xml' );
+		await feed.context.close();
+
+		// REST requests never reach the template_redirect takeover; this pins
+		// the current behavior so a change to it is a conscious decision.
+		const rest = await openAsVisitor( browser, '/wp-json/wp/v2/types' );
+		expect( rest.response.status() ).toBe( 200 );
+		await rest.context.close();
+
+		await saveGeneralSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'input[name="options[general][status]"][value="0"]' )
+				.check( { force: true } );
+		} );
+	} );
+
+	test( 'the maintenance response advertises Retry-After and the configured robots policy', async ( {
+		admin,
+		page,
+		browser,
+	} ) => {
+		await saveGeneralSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'input[name="options[general][status]"][value="1"]' )
+				.check( { force: true } );
+			await form
+				.locator( 'select[name="options[general][meta_robots]"]' )
+				.selectOption( '1', { force: true } );
+		} );
+
+		const visitor = await openAsVisitor( browser );
+		expect( visitor.response.status() ).toBe( 503 );
+		expect(
+			Number( visitor.response.headers()[ 'retry-after' ] )
+		).toBeGreaterThan( 0 );
+		// WordPress core injects its own robots meta (max-image-preview), so
+		// assert the plugin's tag specifically.
+		await expect(
+			visitor.page.locator(
+				'meta[name="robots"][content="noindex, nofollow"]'
+			)
+		).toBeAttached();
+		await visitor.context.close();
+
+		await saveGeneralSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'input[name="options[general][status]"][value="0"]' )
+				.check( { force: true } );
+			await form
+				.locator( 'select[name="options[general][meta_robots]"]' )
 				.selectOption( '0', { force: true } );
 		} );
 	} );
