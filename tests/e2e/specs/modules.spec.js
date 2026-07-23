@@ -131,6 +131,36 @@ test.describe( 'maintenance page modules', () => {
 		} );
 	} );
 
+	test( 'the Google Analytics module embeds the tracking code', async ( {
+		admin,
+		page,
+		browser,
+	} ) => {
+		await saveModulesSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'select[name="options[modules][ga_status]"]' )
+				.selectOption( '1', { force: true } );
+			await form
+				.locator( 'input[name="options[modules][ga_code]"]' )
+				.fill( 'G-E2ETRACK1', { force: true } );
+		} );
+		await setMaintenanceMode( admin, page, true );
+
+		const visitor = await openAsVisitor( browser );
+		expect( await visitor.page.content() ).toContain( 'G-E2ETRACK1' );
+		await visitor.context.close();
+
+		await setMaintenanceMode( admin, page, false );
+		await saveModulesSettings( admin, page, async ( form ) => {
+			await form
+				.locator( 'select[name="options[modules][ga_status]"]' )
+				.selectOption( '0', { force: true } );
+			await form
+				.locator( 'input[name="options[modules][ga_code]"]' )
+				.fill( '', { force: true } );
+		} );
+	} );
+
 	test( 'the GDPR module adds a consent checkbox to the subscribe form', async ( {
 		admin,
 		page,

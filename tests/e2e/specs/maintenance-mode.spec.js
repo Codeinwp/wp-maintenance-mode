@@ -55,6 +55,25 @@ test.describe( 'maintenance mode lifecycle', () => {
 		);
 	} );
 
+	test( 'admins get a warning notice in wp-admin while maintenance mode is active', async ( {
+		admin,
+		page,
+	} ) => {
+		await setMaintenanceMode( admin, page, true );
+
+		await admin.visitAdminPage( 'index.php', '' );
+		await expect(
+			page.getByText( /The Maintenance Mode is/ ).first()
+		).toBeVisible();
+
+		await setMaintenanceMode( admin, page, false );
+
+		await admin.visitAdminPage( 'index.php', '' );
+		await expect(
+			page.getByText( /The Maintenance Mode is/ )
+		).toHaveCount( 0 );
+	} );
+
 	test( 'disabling maintenance mode makes the site public again', async ( {
 		admin,
 		page,

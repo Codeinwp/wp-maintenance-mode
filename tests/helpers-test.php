@@ -85,6 +85,23 @@ class Test_Helpers extends WP_UnitTestCase {
 	}
 
 	/*
+	 * wpmm_do_shortcode()
+	 */
+
+	public function test_do_shortcode_expands_registered_shortcodes() {
+		add_shortcode(
+			'wpmm_test_probe',
+			function () {
+				return 'EXPANDED';
+			}
+		);
+
+		$this->assertSame( 'before EXPANDED after', wpmm_do_shortcode( 'before [wpmm_test_probe] after' ) );
+
+		remove_shortcode( 'wpmm_test_probe' );
+	}
+
+	/*
 	 * wpmm_get_option()
 	 */
 
