@@ -121,9 +121,9 @@ $default_templates = array(
 									__( 'Speed up your pages by 60-80% with intelligent caching. Achieve faster load times and better search rankings automatically, with', 'wp-maintenance-mode' ),
 									esc_url( 'https://wordpress.org/plugins/wp-cloudflare-page-cache/' ),
 									__( 'Super Page Cache', 'wp-maintenance-mode' ),
-									__( 'plugin installed and activated automatically.', 'wp-maintenance-mode' ),
+									__( 'plugin installed and activated automatically.', 'wp-maintenance-mode' )
 								),
-								wpmm_translated_string_allowed_html(),
+								wpmm_translated_string_allowed_html()
 							);
 							?>
 						</p>
