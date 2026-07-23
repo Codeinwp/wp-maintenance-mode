@@ -45,6 +45,10 @@ artifact
 assets/js/*.min.js
 assets/css/*.min.css
 
+### yarn.lock is the tracked lockfile; npm's lockfile must never be committed
+### (npm install also rewrites yarn.lock into a format yarn 1 cannot parse)
+package-lock.json
+
 ### wp-env / tests
 .wp-env.override.json
 .phpunit.result.cache
