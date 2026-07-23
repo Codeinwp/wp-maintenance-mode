@@ -26,7 +26,7 @@ jobs:
           cache: "yarn"
       - name: Install JS deps
         run: |
-          yarn install --frozen-lockfile
+          yarn install --frozen-lockfile --ignore-engines
       - name: Install Playwright
         run: |
           npx playwright install --with-deps chromium

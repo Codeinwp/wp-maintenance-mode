@@ -7,9 +7,11 @@ WP Maintenance Mode (LightStart) is a WordPress plugin by Themeisle that display
 ## Commands
 
 ```bash
-# Install dependencies (yarn.lock is the tracked lockfile; package-lock.json is ignored)
+# Install dependencies (yarn.lock is the tracked lockfile; package-lock.json is
+# ignored, and --ignore-engines is needed because the legacy eslint toolchain
+# caps its node engines range below current node versions)
 composer install
-yarn install --frozen-lockfile
+yarn install --frozen-lockfile --ignore-engines
 
 # Environment (wp-env, requires Docker)
 npm run env:start    # reuse a running instance, or pick a free port + start
