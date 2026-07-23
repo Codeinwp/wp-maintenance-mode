@@ -43,6 +43,8 @@ yarn.lock
 .eslintrc
 CONTRIBUTING.md
 AGENTS.md
+phpstan.neon
+phpstan-baseline.neon
 .wp-env.json
 .wp-env.override.json
 .phpunit.result.cache

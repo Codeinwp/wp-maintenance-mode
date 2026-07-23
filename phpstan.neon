@@ -1,0 +1,17 @@
+parameters:
+	level: 6
+	paths:
+		- %currentWorkingDirectory%/includes
+		- %currentWorkingDirectory%/wp-maintenance-mode.php
+		- %currentWorkingDirectory%/uninstall.php
+	scanDirectories:
+		- %currentWorkingDirectory%/vendor/codeinwp/themeisle-sdk
+	bootstrapFiles:
+		- %currentWorkingDirectory%/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+		- %currentWorkingDirectory%/tests/static-analysis-stubs/constants.php
+		- %currentWorkingDirectory%/tests/static-analysis-stubs/integrations.php
+	dynamicConstantNames:
+		- WPMM_ASSETS_SUFFIX
+includes:
+	- %currentWorkingDirectory%/phpstan-baseline.neon
+	- phar://phpstan.phar/conf/bleedingEdge.neon

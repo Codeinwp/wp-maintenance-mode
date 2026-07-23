@@ -23,6 +23,10 @@ composer run lint    # on the host
 npm run lint:php     # same, inside the wp-env container
 npm run format:php
 
+# Static analysis (PHPStan level 6, WordPress stubs)
+composer run phpstan
+composer run phpstan:generate:baseline   # refresh phpstan-baseline.neon after intentional changes
+
 # PHP unit tests (run inside wp-env; no local MySQL/SVN setup needed)
 npm run test:unit:php         # start env + run the suite
 npm run test:unit:php:base    # run the suite against an already-running env
@@ -38,7 +42,7 @@ npm run build        # or: npx grunt
 npx grunt watch
 ```
 
-Configs: PHPUnit `phpunit.xml` (+ `tests/bootstrap.php`), Playwright `tests/e2e/playwright.config.js`, wp-env `.wp-env.json` + gitignored `.wp-env.override.json`.
+Configs: PHPUnit `phpunit.xml` (+ `tests/bootstrap.php`), Playwright `tests/e2e/playwright.config.js`, wp-env `.wp-env.json` + gitignored `.wp-env.override.json`, PHPStan `phpstan.neon` + `phpstan-baseline.neon` (stubs for optional integrations and dynamic constants live in `tests/static-analysis-stubs/`, loaded only during analysis).
 
 ## wp-env Instance
 

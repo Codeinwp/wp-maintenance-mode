@@ -30,7 +30,7 @@ define( 'WPMM_LANGUAGES_PATH', basename( WPMM_PATH ) . '/languages/' );
 define( 'WPMM_VIEWS_PATH', WPMM_PATH . 'views/' );
 define( 'WPMM_CSS_PATH', WPMM_PATH . 'assets/css/' );
 define( 'WPMM_TEMPLATES_PATH', WPMM_PATH . 'assets/templates/' );
-define( 'WPMM_PRODUCT_SLUG', basename( dirname( __FILE__ ) ) );
+define( 'WPMM_PRODUCT_SLUG', basename( __DIR__ ) );
 
 /**
  * DEFINE URLS
@@ -77,7 +77,7 @@ add_filter( 'themeisle_sdk_products', 'wpmm_load_sdk' );
 
 add_filter(
 	'wp_maintenance_mode_about_us_metadata',
-	function() {
+	function () {
 		return array(
 			'logo'     => esc_url( WPMM_IMAGES_URL . 'icon.svg' ),
 			'location' => 'wp-maintenance-mode',
@@ -104,7 +104,7 @@ if ( is_file( $autoload_path ) ) {
 
 add_filter(
 	'wp_maintenance_mode_load_promotions',
-	function() {
+	function () {
 		return array( 'otter' );
 	}
 );
