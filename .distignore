@@ -42,3 +42,10 @@ assets/vue
 yarn.lock
 .eslintrc
 CONTRIBUTING.md
+AGENTS.md
+.wp-env.json
+.wp-env.override.json
+.phpunit.result.cache
+artifacts
+playwright-report
+test-results

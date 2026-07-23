@@ -44,3 +44,10 @@ artifact
 # build assets files
 assets/js/*.min.js
 assets/css/*.min.css
+
+### wp-env / tests
+.wp-env.override.json
+.phpunit.result.cache
+artifacts/
+playwright-report/
+test-results/
