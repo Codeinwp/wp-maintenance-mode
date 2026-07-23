@@ -64,16 +64,6 @@ class Test_Ajax_Api extends WP_Ajax_UnitTestCase {
 		// The instance normally hydrates its settings caches on init, which has
 		// already fired by the time the class is loaded here.
 		self::$admin->load_default_settings();
-
-		// _handleAjax() fires admin_init without defining DOING_AJAX; whenever a
-		// test leaves the install marked fresh, maybe_redirect() would redirect
-		// to the wizard and exit, killing the PHPUnit process.
-		remove_action( 'admin_init', array( self::$admin, 'maybe_redirect' ) );
-
-		// The frontend AJAX hooks are only registered while maintenance mode is
-		// enabled at plugins_loaded; register them against the same handlers.
-		add_action( 'wp_ajax_nopriv_wpmm_add_subscriber', array( self::$frontend, 'add_subscriber' ) );
-		add_action( 'wp_ajax_nopriv_wpmm_send_contact', array( self::$frontend, 'send_contact' ) );
 	}
 
 	public function set_up() {
@@ -82,6 +72,42 @@ class Test_Ajax_Api extends WP_Ajax_UnitTestCase {
 		global $wpdb;
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}wpmm_subscribers" );
 		update_option( 'wpmm_settings', WP_Maintenance_Mode::get_instance()->default_settings() );
+
+		// Hook registration must happen per test: the suite snapshots the hook
+		// state once per process (first test's set_up) and every tear_down
+		// restores that snapshot, so anything registered in a class-level
+		// fixture evaporates after the first test of this class.
+		//
+		// The frontend AJAX hooks are only registered while maintenance mode is
+		// enabled at plugins_loaded; register them against the same handlers.
+		add_action( 'wp_ajax_nopriv_wpmm_add_subscriber', array( self::$frontend, 'add_subscriber' ) );
+		add_action( 'wp_ajax_nopriv_wpmm_send_contact', array( self::$frontend, 'send_contact' ) );
+
+		// The admin constructor registered its wp_ajax_* hooks when the
+		// singleton was created in wpSetUpBeforeClass; re-register the ones
+		// under test against the same instance.
+		add_action( 'wp_ajax_wpmm_subscribers_export', array( self::$admin, 'subscribers_export' ) );
+		add_action( 'wp_ajax_wpmm_subscribers_empty_list', array( self::$admin, 'subscribers_empty_list' ) );
+		add_action( 'wp_ajax_wpmm_dismiss_notices', array( self::$admin, 'dismiss_notices' ) );
+		add_action( 'wp_ajax_wpmm_reset_settings', array( self::$admin, 'reset_plugin_settings' ) );
+		add_action( 'wp_ajax_wpmm_select_page', array( self::$admin, 'select_page' ) );
+		add_action( 'wp_ajax_wpmm_skip_insert_template', array( self::$admin, 'skip_insert_template' ) );
+		add_action( 'wp_ajax_wpmm_skip_wizard', array( self::$admin, 'skip_wizard' ) );
+		add_action( 'wp_ajax_wpmm_subscribe', array( self::$admin, 'subscribe_newsletter' ) );
+		add_action( 'wp_ajax_wpmm_change_template_category', array( self::$admin, 'change_template_category' ) );
+		add_action( 'wp_ajax_wpmm_toggle_gutenberg', array( self::$admin, 'toggle_gutenberg' ) );
+
+		// _handleAjax() fires admin_init without defining DOING_AJAX; whenever a
+		// test leaves the install marked fresh, maybe_redirect() would redirect
+		// to the wizard and exit, killing the PHPUnit process.
+		remove_action( 'admin_init', array( self::$admin, 'maybe_redirect' ) );
+
+		// The ajax testcase removes these in a class-level fixture, which the
+		// per-process hook snapshot undoes; without the removal, admin_init
+		// reaches out to wordpress.org for core/plugin/theme update checks.
+		remove_action( 'admin_init', '_maybe_update_core' );
+		remove_action( 'admin_init', '_maybe_update_plugins' );
+		remove_action( 'admin_init', '_maybe_update_themes' );
 
 		// Replace the suite's die handler (registered at priority 1) with one
 		// that signals via an Error the plugin's catch-all blocks cannot eat.
@@ -353,6 +379,10 @@ class Test_Ajax_Api extends WP_Ajax_UnitTestCase {
 		add_filter(
 			'pre_http_request',
 			function ( $preempt, $args, $url ) use ( &$captured ) {
+				if ( WP_Maintenance_Mode_Admin::SUBSCRIBE_ROUTE !== $url ) {
+					return $preempt;
+				}
+
 				$captured = array(
 					'url'  => $url,
 					'body' => $args['body'],
@@ -386,9 +416,15 @@ class Test_Ajax_Api extends WP_Ajax_UnitTestCase {
 
 		add_filter(
 			'pre_http_request',
-			function () {
+			function ( $preempt, $args, $url ) {
+				if ( WP_Maintenance_Mode_Admin::SUBSCRIBE_ROUTE !== $url ) {
+					return $preempt;
+				}
+
 				return new WP_Error( 'http_request_failed', 'Could not resolve host.' );
-			}
+			},
+			10,
+			3
 		);
 
 		$_POST['email']    = 'owner@example.com';

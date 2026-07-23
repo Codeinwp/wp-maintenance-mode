@@ -94,13 +94,14 @@ export async function setMaintenanceMode( admin, page, enabled ) {
 /**
  * Open a page as a logged-out visitor and return { page, response, context }.
  *
- * @param {Object} browser The Playwright browser fixture.
- * @param {string} url     URL (or path) to open.
+ * @param {Object} browser        The Playwright browser fixture.
+ * @param {string} url            URL (or path) to open.
+ * @param {Object} contextOptions Extra context options (e.g. userAgent).
  */
-export async function openAsVisitor( browser, url = '/' ) {
+export async function openAsVisitor( browser, url = '/', contextOptions = {} ) {
 	// Contexts created through the runner's browser fixture inherit the
 	// config's admin storageState, so drop the login cookies explicitly.
-	const context = await browser.newContext();
+	const context = await browser.newContext( contextOptions );
 	await context.clearCookies();
 	const page = await context.newPage();
 	const response = await page.goto( url );
