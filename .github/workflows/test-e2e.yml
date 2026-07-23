@@ -1,0 +1,51 @@
+name: Test E2E
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: Playwright
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: "yarn"
+      - name: Setup PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+      - name: Install composer
+        run: composer install --prefer-dist --no-progress
+      - name: Install JS deps
+        run: |
+          yarn install --frozen-lockfile
+      - name: Install Playwright
+        run: |
+          npx playwright install --with-deps chromium
+      - name: Setup WP Env
+        run: |
+          yarn run env:start
+      - name: Run Playwright tests
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: true
+        run: |
+          yarn run test:e2e
+      - name: Upload tests artifacts
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: artifacts-e2e
+          path: ./artifacts
+          retention-days: 3
