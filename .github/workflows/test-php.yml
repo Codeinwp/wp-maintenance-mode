@@ -15,9 +15,9 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          # the modern sniffer stack needs PHP 7.4+ and a current composer
+          php-version: '7.4'
           extensions: simplexml
-          tools: composer:v2.1
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Get Composer Cache Directory
