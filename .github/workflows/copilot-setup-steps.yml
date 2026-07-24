@@ -1,0 +1,43 @@
+name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    # These steps run before the Copilot coding agent starts, so the agent
+    # boots into a checkout with a running wp-env instance and both test
+    # suites (npm run test:unit:php:base / npm run test:e2e) ready to use.
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: "yarn"
+      - name: Install JS deps
+        run: |
+          yarn install --frozen-lockfile --ignore-engines
+      - name: Install Playwright
+        run: |
+          npx playwright install --with-deps chromium
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          extensions: simplexml, mysql, mbstring, curl
+          tools: wp-cli
+      - name: Install composer deps
+        run: composer install --no-progress
+      - name: Start the WordPress environment via wp-env
+        run: |
+          yarn run env:start

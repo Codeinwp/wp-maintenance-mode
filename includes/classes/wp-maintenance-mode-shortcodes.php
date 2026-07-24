@@ -27,12 +27,12 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 		 * Shortcode Wrapper
 		 *
 		 * @since 2.0.3
-		 * @param string $function
+		 * @param string $callback
 		 * @param array  $atts
 		 * @param array  $wrapper
 		 * @return string
 		 */
-		public static function shortcode_wrapper( $function, $atts = array(), $wrapper = array(
+		public static function shortcode_wrapper( $callback, $atts = array(), $wrapper = array(
 			'before' => null,
 			'after'  => null,
 		) ) {
@@ -40,7 +40,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 
                         // @codingStandardsIgnoreStart
 			echo wp_kses_post( $wrapper['before'] );
-			call_user_func( $function, $atts );
+			call_user_func( $callback, $atts );
 			echo wp_kses_post( $wrapper['after'] );
                         // @codingStandardsIgnoreEnd
 
@@ -57,7 +57,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcodes' ) ) {
 		public static function loginform( $atts ) {
 			return self::shortcode_wrapper( array( 'WP_Maintenance_Mode_Shortcode_Loginform', 'output' ), $atts );
 		}
-
 	}
 
 }

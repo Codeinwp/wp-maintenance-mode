@@ -22,7 +22,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Shortcode_Loginform' ) ) {
 
 			include_once wpmm_get_template_path( 'loginform.php' );
 		}
-
 	}
 
 }
