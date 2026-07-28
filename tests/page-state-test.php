@@ -245,7 +245,7 @@ class Test_Page_State extends WP_UnitTestCase {
 
 		// The first page is handed back with its own template, and its record is cleared.
 		$this->assertSame( 'custom-template.php', get_post_meta( $first_page_id, '_wp_page_template', true ) );
-		$this->assertFalse( metadata_exists( 'post', $first_page_id, '_wpmm_original_status' ) );
+		$this->assertFalse( metadata_exists( 'post', $first_page_id, '_wpmm_original_state' ) );
 
 		$settings = get_option( 'wpmm_settings' );
 		$this->assertSame( $second_page_id, (int) $settings['design']['page_id'] );
@@ -261,13 +261,59 @@ class Test_Page_State extends WP_UnitTestCase {
 
 		$this->select_page( $this->make_settings( 0, 0 ), $page_id );
 
-		// Simulate the state an active maintenance mode leaves the page in.
-		wp_publish_post( $page_id );
+		// Maintenance mode takes the page over and publishes it.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
 
 		$this->select_page( $this->make_settings( 0, $page_id ), 0 );
 
 		$this->assertSame( 'private', get_post_status( $page_id ) );
-		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
+	}
+
+	public function test_status_change_made_by_the_user_survives_disable() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		// The user selects the page and enables maintenance mode...
+		$this->select_page( $this->make_settings( 0, 0 ), $page_id );
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		// ...then deliberately unpublishes the page while the mode is active.
+		wp_update_post(
+			array(
+				'ID'          => $page_id,
+				'post_status' => 'draft',
+			)
+		);
+
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+
+		// The draft is the user's latest intent; disabling must not republish it.
+		$this->assertSame( 'draft', get_post_status( $page_id ) );
+	}
+
+	public function test_template_installed_by_an_old_release_is_not_recorded_as_original() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		// A selection carried over from an old plugin release already wears
+		// the maintenance template; it must not be mistaken for user state.
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+
+		$this->assertSame( '', get_post_meta( $page_id, '_wp_page_template', true ) );
 	}
 
 	public function test_restoring_a_trashed_page_keeps_trash_but_clears_template_and_record() {
@@ -289,8 +335,8 @@ class Test_Page_State extends WP_UnitTestCase {
 		// The status is untouched, but the page no longer carries plugin state.
 		$this->assertSame( 'trash', get_post_status( $page_id ) );
 		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
-		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
-		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_template' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_applied_status' ) );
 	}
 
 	public function test_applying_template_to_user_page_creates_new_page_instead_of_overwriting() {
@@ -365,7 +411,7 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
 
 		$this->assertFalse( metadata_exists( 'post', $page_id, '_wp_page_template' ) );
-		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
 	}
 
 	public function test_trashed_page_is_not_resurrected_on_disable() {
@@ -398,35 +444,27 @@ class Test_Page_State extends WP_UnitTestCase {
 
 		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
 
-		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_status' ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
 	}
 
 	public function test_recording_twice_does_not_poison_the_original_state() {
 		$page_id = self::factory()->post->create(
 			array(
 				'post_type'   => 'page',
-				'post_status' => 'publish',
+				'post_status' => 'private',
 			)
 		);
 		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
 
-		wpmm_record_page_state( $page_id );
+		// The plugin takes the page over: applies its template and publishes.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
 
-		// The plugin takes the page over...
-		wp_update_post(
-			array(
-				'ID'          => $page_id,
-				'post_status' => 'private',
-			)
-		);
-		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
-
-		// ...and the user re-selects the same page while it is in that state.
+		// The user re-selects the same page while it is in that state.
 		wpmm_record_page_state( $page_id );
 
 		wpmm_restore_page_state( $page_id );
 
-		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'private', get_post_status( $page_id ) );
 		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
 	}
 
@@ -457,23 +495,17 @@ class Test_Page_State extends WP_UnitTestCase {
 		$page_id = self::factory()->post->create(
 			array(
 				'post_type'   => 'page',
-				'post_status' => 'publish',
-			)
-		);
-
-		update_option( 'wpmm_settings', $this->make_settings( 0, $page_id ) );
-		wpmm_record_page_state( $page_id );
-
-		// Simulate the state a broken site is in: selected page left private.
-		wp_update_post(
-			array(
-				'ID'          => $page_id,
 				'post_status' => 'private',
 			)
 		);
 
+		// Maintenance mode is active: the page is taken over and published.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+
+		// Deactivating the plugin hands the page back, private again.
 		WP_Maintenance_Mode::single_deactivate();
 
-		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'private', get_post_status( $page_id ) );
 	}
 }

@@ -113,6 +113,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 							wp_functionality_constants();
 						}
 						wp_publish_post( $this->plugin_settings['design']['page_id'] );
+
+						// mark the publish as plugin-made, so restore can tell it apart
+						// from a status the user chose deliberately
+						update_post_meta( $this->plugin_settings['design']['page_id'], '_wpmm_applied_status', 'publish' );
 					}
 				}
 
