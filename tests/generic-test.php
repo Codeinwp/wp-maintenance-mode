@@ -18,7 +18,9 @@ class Test_Generic extends WP_UnitTestCase {
 		$this->assertTrue( defined('WPMM_JS_URL') );
 		$this->assertTrue( defined('WPMM_CSS_URL') );
 		$this->assertTrue( defined('WPMM_IMAGES_URL') );
-		$this->assertTrue( defined('WPMM_ASSETS_SUFFIX') && WPMM_ASSETS_SUFFIX === '.min' );
+		// wp-env runs with SCRIPT_DEBUG enabled, which switches the suffix off.
+		$expected_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$this->assertTrue( defined('WPMM_ASSETS_SUFFIX') && WPMM_ASSETS_SUFFIX === $expected_suffix );
 	}
 
 	public function test_wpmm_maybe_define_constant() {

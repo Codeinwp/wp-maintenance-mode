@@ -242,11 +242,11 @@ function wpmm_get_template_path( $template_name, $overrideable = false ) {
  *
  * @since 2.4.0
  * @param string $option
- * @param mixed  $default
+ * @param mixed  $default_value
  * @return mixed
  */
-function wpmm_get_option( $option, $default = false ) {
-	return stripslashes_deep( get_option( $option, $default ) );
+function wpmm_get_option( $option, $default_value = false ) {
+	return stripslashes_deep( get_option( $option, $default_value ) );
 }
 
 /**
@@ -258,11 +258,11 @@ function wpmm_get_option( $option, $default = false ) {
  * G-..........
  *
  * @since 2.0.7
- * @param string $string
+ * @param string $tracking_code
  * @return string
  */
-function wpmm_sanitize_ga_code( $string ) {
-	preg_match( '/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $string, $matches );
+function wpmm_sanitize_ga_code( $tracking_code ) {
+	preg_match( '/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $tracking_code, $matches );
 
 	return isset( $matches[0] ) ? $matches[0] : '';
 }

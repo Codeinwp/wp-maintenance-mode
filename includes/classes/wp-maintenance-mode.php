@@ -124,7 +124,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 							$page_id = $this->plugin_settings['design']['page_id'];
 
 							if ( ! function_exists( 'is_plugin_active' ) ) {
-								include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+								include_once ABSPATH . 'wp-admin/includes/plugin.php';
 							}
 
 							if ( is_plugin_active( 'otter-blocks/otter-blocks.php' ) ) {
@@ -155,7 +155,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				// restore the maintenance page to its original state when maintenance mode is disabled
 				add_action(
 					'init',
-					function() {
+					function () {
 						if ( ! isset( $this->plugin_settings['design']['page_id'] ) ) {
 							return;
 						}
@@ -165,7 +165,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			}
 
 			add_action( 'init', array( $this, 'initialize_telemetry' ) );
-
 		}
 
 		/**
@@ -1160,7 +1159,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				foreach ( $this->style_buffer as $style ) {
 					if ( $elems->item( $i )->C14N() == $style->C14N() ) {
 						$common_positions[] = $i;
-					};
+					}
 				}
 			}
 
@@ -1367,7 +1366,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$message = ob_get_clean();
 
 				// add temporary filters
-				$from_name = function() use ( $name ) {
+				$from_name = function () use ( $name ) {
 					return $name;
 				};
 				add_filter( 'wp_mail_content_type', 'wpmm_change_mail_content_type', 10, 1 );
@@ -1393,14 +1392,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		/**
 		 * Save subscriber into database.
 		 *
-		 * @param Form_Data_Request $form_data The form data.
+		 * @param \ThemeIsle\GutenbergBlocks\Integration\Form_Data_Request $form_data The form data.
 		 * @return void
 		 */
 		public function otter_add_subscriber( $form_data ) {
 			if ( $form_data ) {
 				$input_data = $form_data->get_data_from_payload( 'formInputsData' );
 				$input_data = array_map(
-					function( $input_field ) {
+					function ( $input_field ) {
 						if ( isset( $input_field['type'] ) && 'email' === $input_field['type'] ) {
 							return $input_field['value'];
 						}
@@ -1473,7 +1472,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_filter( 'themeisle_sdk_enable_telemetry', '__return_true' );
 				add_filter(
 					'themeisle_sdk_telemetry_products',
-					function( $products ) {
+					function ( $products ) {
 						foreach ( $products as &$product ) {
 							if ( isset( $product['slug'] ) && 'wp' === $product['slug'] ) {
 								$product['slug'] = 'wp_maintenance_mode';
@@ -1484,7 +1483,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					}
 				);
 			}
-
 		}
 	}
 

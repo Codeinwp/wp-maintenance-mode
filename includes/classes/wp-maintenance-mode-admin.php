@@ -953,7 +953,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 *
 		 * @return void
 		 */
-		function wpmm_update_sdk_options() {
+		public function wpmm_update_sdk_options() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
 				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );

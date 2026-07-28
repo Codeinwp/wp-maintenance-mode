@@ -1,0 +1,16 @@
+{
+	"core": null,
+	"phpVersion": "7.4",
+	"testsEnvironment": false,
+	"plugins": [ "." ],
+	"config": {
+		"WP_DEBUG": true,
+		"WP_DEBUG_LOG": true,
+		"WP_DEBUG_DISPLAY": false,
+		"SCRIPT_DEBUG": true,
+		"FS_METHOD": "direct"
+	},
+	"lifecycleScripts": {
+		"afterStart": "bash bin/wp-env-setup.sh"
+	}
+}
