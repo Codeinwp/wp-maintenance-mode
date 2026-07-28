@@ -776,7 +776,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$post_arr['post_title'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
 				$page_id                = wp_insert_post( $post_arr );
 
-				if ( $page_id && ! $page_id instanceof WP_Error ) {
+				if ( $page_id ) {
 					update_post_meta( $page_id, '_wpmm_generated', 1 );
 				}
 			}

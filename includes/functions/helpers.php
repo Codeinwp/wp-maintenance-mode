@@ -523,6 +523,7 @@ if ( ! function_exists( 'sanitize_hex_color' ) ) {
  *
  * @since 2.6.23
  * @param int $page_id page ID
+ * @return void
  */
 function wpmm_record_page_state( $page_id ) {
 	$status = get_post_status( $page_id );
@@ -548,6 +549,7 @@ function wpmm_record_page_state( $page_id ) {
  *
  * @since 2.6.23
  * @param int $page_id page ID
+ * @return void
  */
 function wpmm_restore_page_state( $page_id ) {
 	$original_status = get_post_meta( $page_id, '_wpmm_original_status', true );
