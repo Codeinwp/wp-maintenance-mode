@@ -1,3 +1,12 @@
+##### [Version 2.6.23](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.22...v2.6.23) (2026-07-29)
+
+- Strengthened the automated testing that runs behind the scenes, helping catch problems earlier and making future releases more reliable
+- Fixed an existing page selected as the maintenance page being left private and returning a 404 after maintenance mode was turned off, and its content being overwritten when a template was applied
+- Fixed the chat bot on small screens, where the avatar was hidden and the chat box did not fit the phone display
+- Fixed template imports staying stuck on Importing when the request failed — the error is now shown and the import can be retried without reloading the page
+- Fixed a parse error that broke the setup wizard on PHP 7.1 and 7.2
+- Updated dependencies
+
 ##### [Version 2.6.22](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.21...v2.6.22) (2026-05-19)
 
 - Updated dependencies
