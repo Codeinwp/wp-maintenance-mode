@@ -276,6 +276,53 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->assertSame( $second_page_id, (int) $settings['design']['page_id'] );
 	}
 
+	public function test_resetting_the_design_tab_restores_the_selected_page() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
+
+		$this->select_page( $this->make_settings( 0, 0 ), $page_id );
+
+		// The user resets the Design tab while the page is selected.
+		$admin = WP_Maintenance_Mode_Admin::get_instance();
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$_POST = array(
+			'_wpnonce' => wp_create_nonce( 'tab-design' ),
+			'tab'      => 'design',
+		);
+
+		$die_handler = function () {
+			return function () {
+				throw new WPDieException( 'json response sent' );
+			};
+		};
+		add_filter( 'wp_doing_ajax', '__return_true' );
+		add_filter( 'wp_die_ajax_handler', $die_handler );
+
+		try {
+			$admin->reset_plugin_settings();
+		} catch ( WPDieException $e ) {
+			// wp_send_json_*() ends the request with wp_die(); expected.
+		}
+
+		remove_filter( 'wp_doing_ajax', '__return_true' );
+		remove_filter( 'wp_die_ajax_handler', $die_handler );
+		$_POST = array();
+		wp_set_current_user( 0 );
+
+		// The page is handed back, not orphaned with plugin state.
+		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
+
+		$settings = get_option( 'wpmm_settings' );
+		$this->assertTrue( empty( $settings['design']['page_id'] ) );
+	}
+
 	public function test_importing_template_over_a_trashed_selection_cleans_it_up() {
 		$page_id = self::factory()->post->create(
 			array(

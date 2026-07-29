@@ -665,6 +665,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					throw new Exception( __( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 				}
 
+				// resetting design drops the selection, so hand the page back first
+				if ( 'design' === $tab ) {
+					$this->switch_selected_page( 0 );
+				}
+
 				// update options using the default values
 				$this->plugin_settings[ $tab ] = $this->plugin_default_settings[ $tab ];
 				update_option( 'wpmm_settings', $this->plugin_settings );
