@@ -70,7 +70,7 @@ jobs:
           # the latest WordPress test suite requires PHP 7.4+
           php-version: '7.4'
           extensions: simplexml, mysql
-          tools: phpunit:7.5.20, phpunit-polyfills
+          tools: phpunit-polyfills
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Install Subversion
