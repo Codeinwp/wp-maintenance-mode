@@ -8,7 +8,7 @@ Author URI: https://themeisle.com/
 Tags: maintenance mode, coming soon, landing page, splash page, under construction
 Requires at least: 4.7
 Tested up to: 7.0
-Stable tag: 2.6.22
+Stable tag: 2.6.23
 Requires PHP: 7.1
 License: GPL-2.0+
 
@@ -98,6 +98,18 @@ Plugin security is a core priority for us. If you identify a potential vulnerabi
 Please follow the reporting protocols outlined on our [Security Page](https://themeisle.com/security/).
 
 == Changelog ==
+
+##### [Version 2.6.23](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.22...v2.6.23) (2026-07-29)
+
+- Strengthened the automated testing that runs behind the scenes, helping catch problems earlier and making future releases more reliable
+- Fixed an existing page selected as the maintenance page being left private and returning a 404 after maintenance mode was turned off, and its content being overwritten when a template was applied
+- Fixed the chat bot on small screens, where the avatar was hidden and the chat box did not fit the phone display
+- Fixed template imports staying stuck on Importing when the request failed — the error is now shown and the import can be retried without reloading the page
+- Fixed a parse error that broke the setup wizard on PHP 7.1 and 7.2
+- Updated dependencies
+
+
+
 
 ##### [Version 2.6.22](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.21...v2.6.22) (2026-05-19)
 
