@@ -384,12 +384,15 @@ CHAT BOT STYLING
 
 @media screen and (max-width: 700px) {
   .bot-avatar {
-    display: none !important;
+    width: 50px;
+    height: 50px;
   }
 
   .bot-chat-wrapper,
   .bg-image .bot-chat-wrapper {
       padding: 20px;
+      width: 85%;
+      height: 60%;
   }
 
   .bg-image .bot-chat-wrapper  {
