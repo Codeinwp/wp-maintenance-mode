@@ -22,13 +22,15 @@
         "ext-dom": "*"
     },
     "require-dev": {
-        "codeinwp/phpcs-ruleset": "dev-main",
-        "squizlabs/php_codesniffer": "^3.5",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "squizlabs/php_codesniffer": "^3.13",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "wp-coding-standards/wpcs": "*",
-        "yoast/phpunit-polyfills": "^4.0"
+        "wp-coding-standards/wpcs": "^3.2",
+        "phpunit/phpunit": "^9.6",
+        "yoast/phpunit-polyfills": "^4.0",
+        "phpstan/phpstan": "^2.1",
+        "php-stubs/wordpress-stubs": "^6.8"
     },
     "autoload": {
         "files": [
@@ -38,7 +40,7 @@
     "config": {
         "optimize-autoloader": true,
         "platform": {
-            "php": "7.2"
+            "php": "7.4"
         },
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
@@ -51,10 +53,11 @@
     ],
     "scripts": {
         "format": "./vendor/bin/phpcbf --standard=phpcs.xml --report-summary --report-source -s  --runtime-set testVersion 7.0- ",
-        "format-fix-exit": "./vendor/bin/phpcbf-fix-exit-0 --standard=phpcs.xml --report-summary --report-source -s  --runtime-set testVersion 7.0- ",
         "phpcs": "phpcs --standard=phpcs.xml -s  --runtime-set testVersion 7.0-",
         "lint": "composer run-script phpcs",
         "phpcs-i": "phpcs -i",
-        "phpunit": "phpunit"
+        "phpunit": "phpunit",
+        "phpstan": "phpstan --memory-limit=-1",
+        "phpstan:generate:baseline": "phpstan --generate-baseline --memory-limit=-1"
     }
 }

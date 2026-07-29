@@ -15,9 +15,9 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          # the modern sniffer stack needs PHP 7.4+ and a current composer
+          php-version: '7.4'
           extensions: simplexml
-          tools: composer:v2.1
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Get Composer Cache Directory
@@ -35,6 +35,22 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHPCS
         run: composer run lint
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: simplexml
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Install composer
+        run: composer install --prefer-dist --no-progress
+      - name: PHPStan Static Analysis
+        run: composer run phpstan
 
   phpunit:
     name: PHPUnit (PHP ${{ matrix.php-version }}, WP ${{ matrix.wp-version }})
@@ -59,9 +75,10 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-version }}
+          # the latest WordPress test suite requires PHP 7.4+
+          php-version: '7.4'
           extensions: simplexml, mysql
-          tools: phpunit:7.5.20, phpunit-polyfills
+          tools: phpunit-polyfills
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Install Subversion

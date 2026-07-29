@@ -242,11 +242,11 @@ function wpmm_get_template_path( $template_name, $overrideable = false ) {
  *
  * @since 2.4.0
  * @param string $option
- * @param mixed  $default
+ * @param mixed  $default_value
  * @return mixed
  */
-function wpmm_get_option( $option, $default = false ) {
-	return stripslashes_deep( get_option( $option, $default ) );
+function wpmm_get_option( $option, $default_value = false ) {
+	return stripslashes_deep( get_option( $option, $default_value ) );
 }
 
 /**
@@ -258,11 +258,11 @@ function wpmm_get_option( $option, $default = false ) {
  * G-..........
  *
  * @since 2.0.7
- * @param string $string
+ * @param string $tracking_code
  * @return string
  */
-function wpmm_sanitize_ga_code( $string ) {
-	preg_match( '/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $string, $matches );
+function wpmm_sanitize_ga_code( $tracking_code ) {
+	preg_match( '/(UA-\d{4,10}(-\d{1,4})?|G-\w+)/', $tracking_code, $matches );
 
 	return isset( $matches[0] ) ? $matches[0] : '';
 }
@@ -511,6 +511,91 @@ if ( ! function_exists( 'sanitize_hex_color' ) ) {
 			return $color;
 		}
 	}
+}
+
+/**
+ * Record the current state of the selected maintenance page so it can be
+ * restored when maintenance mode is disabled or the plugin is deactivated.
+ *
+ * A previously recorded state is never overwritten: the page may already be
+ * carrying plugin-made changes, and recording those would poison the original
+ * state. The record is cleared when the page is restored.
+ *
+ * @since 2.6.23
+ * @param int $page_id page ID
+ * @return void
+ */
+function wpmm_record_page_state( $page_id ) {
+	$status = get_post_status( $page_id );
+
+	if ( ! $status ) {
+		return;
+	}
+
+	$template = get_post_meta( $page_id, '_wp_page_template', true );
+
+	// a selection carried over from an old release already wears the plugin's
+	// template; recording that would make the takeover permanent
+	if ( $template === 'templates/wpmm-page-template.php' ) {
+		$template = '';
+	}
+
+	// a single first-write-wins meta keeps the record atomic: a racing request
+	// can neither save the plugin-modified state nor observe half a record
+	add_post_meta(
+		$page_id,
+		'_wpmm_original_state',
+		array(
+			'status'   => $status,
+			'template' => $template,
+		),
+		true
+	);
+}
+
+/**
+ * Restore the selected maintenance page to its recorded original state.
+ * Pages without a recorded state are left untouched.
+ *
+ * The status is only put back while the page still carries the status the
+ * plugin applied: any other status — trash included — was the user's own
+ * doing and expresses intent the record predates.
+ *
+ * @since 2.6.23
+ * @param int $page_id page ID
+ * @return void
+ */
+function wpmm_restore_page_state( $page_id ) {
+	$state = get_post_meta( $page_id, '_wpmm_original_state', true );
+
+	if ( empty( $state ) || ! is_array( $state ) || ! get_post( $page_id ) ) {
+		return;
+	}
+
+	$original_status = isset( $state['status'] ) ? $state['status'] : '';
+	$applied_status  = get_post_meta( $page_id, '_wpmm_applied_status', true );
+	$current_status  = get_post_status( $page_id );
+
+	if ( $original_status && $applied_status && $current_status === $applied_status && $current_status !== $original_status ) {
+		wp_update_post(
+			array(
+				'ID'          => $page_id,
+				'post_status' => $original_status,
+			)
+		);
+	}
+
+	$original_template = isset( $state['template'] ) ? $state['template'] : '';
+
+	if ( empty( $original_template ) ) {
+		delete_post_meta( $page_id, '_wp_page_template' );
+	} else {
+		update_post_meta( $page_id, '_wp_page_template', $original_template );
+	}
+
+	// clear the record so the next take-over captures the page's state afresh
+	delete_post_meta( $page_id, '_wpmm_original_state' );
+	delete_post_meta( $page_id, '_wpmm_applied_status' );
 }
 
 /**

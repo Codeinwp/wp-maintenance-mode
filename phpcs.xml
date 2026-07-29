@@ -29,6 +29,8 @@
         <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
         <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
         <exclude name="WordPress.PHP.StrictComparisons.LooseComparison"/>
+        <!-- WPCS 3 moved the loose-comparison sniff here; keep the original exclusion intent. -->
+        <exclude name="Universal.Operators.StrictComparisons.LooseEqual"/>
         <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/>
         <exclude name="WordPress.PHP.RestrictedPHPFunctions.date_date"/>
         <exclude name="Squiz.PHP.DisallowMultipleAssignments.Found"/>

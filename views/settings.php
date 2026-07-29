@@ -297,7 +297,8 @@ $hyve_url = add_query_arg(
 								$will_replace = isset( $this->plugin_settings['design']['page_id'] ) &&
 												! ( ! get_post( $this->plugin_settings['design']['page_id'] ) ||
 													empty( trim( get_post( $this->plugin_settings['design']['page_id'] )->post_content ) ) ||
-													get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' );
+													get_post( $this->plugin_settings['design']['page_id'] )->post_status === 'trash' ) &&
+												get_post_meta( (int) $this->plugin_settings['design']['page_id'], '_wpmm_generated', true );
 
 								foreach ( $categories as $category => $label ) {
 									$templates = list_files( WPMM_TEMPLATES_PATH . $category . '/', 1 );
