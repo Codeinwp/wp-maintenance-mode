@@ -108,15 +108,21 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					}
 
 					if ( get_post_status( $this->plugin_settings['design']['page_id'] ) === 'private' ) {
-						add_filter( 'wpo_purge_all_cache_on_update', '__return_true' );
-						if ( function_exists( 'wp_functionality_constants' ) ) {
-							wp_functionality_constants();
-						}
-						wp_publish_post( $this->plugin_settings['design']['page_id'] );
+						$original_state = get_post_meta( $this->plugin_settings['design']['page_id'], '_wpmm_original_state', true );
 
-						// mark the publish as plugin-made, so restore can tell it apart
-						// from a status the user chose deliberately
-						update_post_meta( $this->plugin_settings['design']['page_id'], '_wpmm_applied_status', 'publish' );
+						// only publish the page that was private when first taken over, and
+						// only once: a private status the user chose afterwards is theirs to keep
+						if ( is_array( $original_state ) && isset( $original_state['status'] ) && $original_state['status'] === 'private' && ! get_post_meta( $this->plugin_settings['design']['page_id'], '_wpmm_applied_status', true ) ) {
+							add_filter( 'wpo_purge_all_cache_on_update', '__return_true' );
+							if ( function_exists( 'wp_functionality_constants' ) ) {
+								wp_functionality_constants();
+							}
+							wp_publish_post( $this->plugin_settings['design']['page_id'] );
+
+							// mark the publish as plugin-made, so restore can tell it apart
+							// from a status the user chose deliberately
+							update_post_meta( $this->plugin_settings['design']['page_id'], '_wpmm_applied_status', 'publish' );
+						}
 					}
 				}
 

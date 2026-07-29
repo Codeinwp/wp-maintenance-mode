@@ -270,6 +270,64 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
 	}
 
+	public function test_private_status_chosen_during_active_mode_is_preserved() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		$this->select_page( $this->make_settings( 0, 0 ), $page_id );
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		// The user makes the page private while maintenance mode is active.
+		wp_update_post(
+			array(
+				'ID'          => $page_id,
+				'post_status' => 'private',
+			)
+		);
+
+		// Any later request while the mode is still active must not republish it.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'private', get_post_status( $page_id ) );
+
+		// And disabling the mode must not resurrect the pre-private status either.
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+		$this->assertSame( 'private', get_post_status( $page_id ) );
+	}
+
+	public function test_replugin_published_page_reprivated_by_user_stays_private() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'private',
+			)
+		);
+
+		// The plugin legitimately publishes the originally private page once.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+
+		// The user puts it back to private while the mode is still active.
+		wp_update_post(
+			array(
+				'ID'          => $page_id,
+				'post_status' => 'private',
+			)
+		);
+
+		// The plugin already used its one publish; the user's choice stays.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'private', get_post_status( $page_id ) );
+
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+		$this->assertSame( 'private', get_post_status( $page_id ) );
+	}
+
 	public function test_status_change_made_by_the_user_survives_disable() {
 		$page_id = self::factory()->post->create(
 			array(
