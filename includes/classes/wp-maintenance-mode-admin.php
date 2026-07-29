@@ -498,6 +498,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					// Other
 					$_POST['options']['design']['other_custom_css'] = sanitize_textarea_field( $_POST['options']['design']['other_custom_css'] );
 
+					// Selected page: the form is a second writer besides the AJAX
+					// select, so route it through the same take-over lifecycle
+					$_POST['options']['design']['page_id'] = isset( $_POST['options']['design']['page_id'] ) ? absint( $_POST['options']['design']['page_id'] ) : 0;
+					$this->switch_selected_page( $_POST['options']['design']['page_id'] );
+
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 						wpmm_delete_cache();
@@ -688,6 +693,23 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			$page_id = isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
 
+			$this->switch_selected_page( $page_id );
+
+			update_option( 'wpmm_settings', $this->plugin_settings );
+
+			wp_send_json_success();
+		}
+
+		/**
+		 * Switch the selected maintenance page, handing the previous page back
+		 * and taking the new one over. Every path that changes the selection
+		 * (AJAX select, settings form) must go through here.
+		 *
+		 * @since 2.6.23
+		 * @param int $page_id The newly selected page ID; 0 clears the selection.
+		 * @return void
+		 */
+		private function switch_selected_page( $page_id ) {
 			$previous_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
 
 			if ( $previous_page_id && $previous_page_id !== $page_id ) {
@@ -709,10 +731,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					)
 				);
 			}
-
-			update_option( 'wpmm_settings', $this->plugin_settings );
-
-			wp_send_json_success();
 		}
 
 		/**
@@ -772,8 +790,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				$post_arr['ID'] = $selected_page_id;
 				$page_id        = wp_update_post( $post_arr );
 			} else {
-				if ( $page_exists ) {
-					// hand the user's page back before switching to a generated one
+				if ( $selected_page_id && get_post_status( $selected_page_id ) ) {
+					// hand the user's page back before switching to a generated one —
+					// trashed pages included, or their record and template are orphaned
 					wpmm_restore_page_state( $selected_page_id );
 				}
 

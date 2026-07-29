@@ -194,6 +194,114 @@ class Test_Page_State extends WP_UnitTestCase {
 		$_POST = array();
 	}
 
+	/**
+	 * Simulate a plain (non-AJAX) Design tab form submission.
+	 *
+	 * @param array $settings Value for the wpmm_settings option.
+	 * @param array $design   Posted options[design] values.
+	 * @return void
+	 */
+	private function save_design_settings( $settings, $design ) {
+		$this->boot_plugin( $settings );
+
+		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
+			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
+		}
+
+		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
+		$instance->setAccessible( true );
+		$instance->setValue( null, null );
+
+		$admin = WP_Maintenance_Mode_Admin::get_instance();
+		$admin->load_default_settings();
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$_POST = array(
+			'_wpnonce' => wp_create_nonce( 'tab-design' ),
+			'tab'      => 'design',
+			'options'  => array( 'design' => $design ),
+		);
+
+		$redirect_catcher = function () {
+			// save_plugin_settings() ends with wp_safe_redirect() + exit;
+			// escaping on the redirect filter keeps the test process alive
+			throw new WPDieException( 'redirected' );
+		};
+		add_filter( 'wp_redirect', $redirect_catcher );
+
+		try {
+			$admin->save_plugin_settings();
+		} catch ( WPDieException $e ) {
+			// expected
+		}
+
+		remove_filter( 'wp_redirect', $redirect_catcher );
+		$_POST = array();
+		wp_set_current_user( 0 );
+	}
+
+	public function test_design_form_save_switches_selection_through_the_same_lifecycle() {
+		$first_page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $first_page_id, '_wp_page_template', 'custom-template.php' );
+
+		$second_page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		$this->select_page( $this->make_settings( 0, 0 ), $first_page_id );
+
+		// The user switches the dropdown and submits the form without the AJAX call.
+		$design            = WP_Maintenance_Mode::get_instance()->default_settings()['design'];
+		$design['page_id'] = (string) $second_page_id;
+		$this->save_design_settings( $this->make_settings( 0, $first_page_id ), $design );
+
+		// The first page is handed back...
+		$this->assertSame( 'custom-template.php', get_post_meta( $first_page_id, '_wp_page_template', true ) );
+		$this->assertFalse( metadata_exists( 'post', $first_page_id, '_wpmm_original_state' ) );
+
+		// ...and the second is taken over, exactly as the AJAX path does it.
+		$this->assertSame( 'templates/wpmm-page-template.php', get_post_meta( $second_page_id, '_wp_page_template', true ) );
+		$this->assertTrue( metadata_exists( 'post', $second_page_id, '_wpmm_original_state' ) );
+
+		$settings = get_option( 'wpmm_settings' );
+		$this->assertSame( $second_page_id, (int) $settings['design']['page_id'] );
+	}
+
+	public function test_importing_template_over_a_trashed_selection_cleans_it_up() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+		update_post_meta( $page_id, '_wp_page_template', 'custom-template.php' );
+
+		// The page is taken over, then the user trashes it while it is selected.
+		wpmm_record_page_state( $page_id );
+		update_post_meta( $page_id, '_wp_page_template', 'templates/wpmm-page-template.php' );
+		wp_trash_post( $page_id );
+
+		$this->apply_template( $this->make_settings( 0, $page_id ) );
+
+		// The trashed page keeps its status but sheds all plugin state.
+		$this->assertSame( 'trash', get_post_status( $page_id ) );
+		$this->assertSame( 'custom-template.php', get_post_meta( $page_id, '_wp_page_template', true ) );
+		$this->assertFalse( metadata_exists( 'post', $page_id, '_wpmm_original_state' ) );
+
+		// The template landed on a fresh generated page.
+		$settings = get_option( 'wpmm_settings' );
+		$this->assertNotSame( $page_id, (int) $settings['design']['page_id'] );
+	}
+
 	public function test_select_page_workflow_leaves_selected_homepage_public() {
 		$page_id = self::factory()->post->create(
 			array(
