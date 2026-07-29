@@ -498,6 +498,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					// Other
 					$_POST['options']['design']['other_custom_css'] = sanitize_textarea_field( $_POST['options']['design']['other_custom_css'] );
 
+					// Selected page: the form is a second writer besides the AJAX
+					// select, so route it through the same take-over lifecycle
+					$_POST['options']['design']['page_id'] = isset( $_POST['options']['design']['page_id'] ) ? absint( $_POST['options']['design']['page_id'] ) : 0;
+					$this->switch_selected_page( $_POST['options']['design']['page_id'] );
+
 					// Delete cache when is activated
 					if ( ! empty( $this->plugin_settings['general']['status'] ) && $this->plugin_settings['general']['status'] === 1 ) {
 						wpmm_delete_cache();
@@ -660,6 +665,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					throw new Exception( __( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 				}
 
+				// resetting design drops the selection, so hand the page back first
+				if ( 'design' === $tab ) {
+					$this->switch_selected_page( 0 );
+				}
+
 				// update options using the default values
 				$this->plugin_settings[ $tab ] = $this->plugin_default_settings[ $tab ];
 				update_option( 'wpmm_settings', $this->plugin_settings );
@@ -686,17 +696,46 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
-			$this->plugin_settings['design']['page_id'] = $_POST['page_id'];
-			wp_update_post(
-				array(
-					'ID'            => $this->plugin_settings['design']['page_id'],
-					'page_template' => 'templates/wpmm-page-template.php',
-				)
-			);
+			$page_id = isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : 0;
+
+			$this->switch_selected_page( $page_id );
 
 			update_option( 'wpmm_settings', $this->plugin_settings );
 
 			wp_send_json_success();
+		}
+
+		/**
+		 * Switch the selected maintenance page, handing the previous page back
+		 * and taking the new one over. Every path that changes the selection
+		 * (AJAX select, settings form) must go through here.
+		 *
+		 * @since 2.6.23
+		 * @param int $page_id The newly selected page ID; 0 clears the selection.
+		 * @return void
+		 */
+		private function switch_selected_page( $page_id ) {
+			$previous_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
+
+			if ( $previous_page_id && $previous_page_id !== $page_id ) {
+				// hand the previously selected page back before abandoning it,
+				// otherwise nothing would ever restore it
+				wpmm_restore_page_state( $previous_page_id );
+			}
+
+			$this->plugin_settings['design']['page_id'] = $page_id;
+
+			if ( $page_id ) {
+				// remember the page's original state before taking it over as a maintenance page
+				wpmm_record_page_state( $page_id );
+
+				wp_update_post(
+					array(
+						'ID'            => $page_id,
+						'page_template' => 'templates/wpmm-page-template.php',
+					)
+				);
+			}
 		}
 
 		/**
@@ -721,9 +760,19 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
-			$template_slug = $_POST['template_slug'];
-			$category      = $_POST['category'];
-			$template      = json_decode( file_get_contents( WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json' ) );
+			$template_slug = isset( $_POST['template_slug'] ) ? basename( sanitize_text_field( $_POST['template_slug'] ) ) : '';
+			$category      = isset( $_POST['category'] ) ? basename( sanitize_text_field( $_POST['category'] ) ) : '';
+			$template_file = WPMM_TEMPLATES_PATH . $category . '/' . $template_slug . '/blocks-export.json';
+
+			if ( '' === $template_slug || '' === $category || ! is_readable( $template_file ) ) {
+				wp_send_json_error( array( 'error' => 'Unknown template' ) );
+			}
+
+			$template = json_decode( file_get_contents( $template_file ) );
+
+			if ( empty( $template->content ) ) {
+				wp_send_json_error( array( 'error' => 'Unknown template' ) );
+			}
 
 			$blocks = str_replace( '\n', '', $template->content );
 
@@ -734,12 +783,30 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				'page_template' => 'templates/wpmm-page-template.php',
 			);
 
-			if ( isset( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) && get_post_status( $this->plugin_settings['design']['page_id'] ) !== 'trash' ) {
-				$post_arr['ID'] = $this->plugin_settings['design']['page_id'];
+			$selected_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
+			$page_exists      = $selected_page_id && get_post_status( $selected_page_id ) && get_post_status( $selected_page_id ) !== 'trash';
+
+			if ( $page_exists && get_post_meta( $selected_page_id, '_wpmm_generated', true ) ) {
+				// only pages created by the plugin may be overwritten; the private
+				// status is for new pages only — overwriting must not unpublish a
+				// page maintenance mode already made public
+				unset( $post_arr['post_status'] );
+
+				$post_arr['ID'] = $selected_page_id;
 				$page_id        = wp_update_post( $post_arr );
 			} else {
+				if ( $selected_page_id && get_post_status( $selected_page_id ) ) {
+					// hand the user's page back before switching to a generated one —
+					// trashed pages included, or their record and template are orphaned
+					wpmm_restore_page_state( $selected_page_id );
+				}
+
 				$post_arr['post_title'] = __( 'Maintenance Page', 'wp-maintenance-mode' );
 				$page_id                = wp_insert_post( $post_arr );
+
+				if ( $page_id ) {
+					update_post_meta( $page_id, '_wpmm_generated', 1 );
+				}
 			}
 
 			if ( $page_id === 0 || $page_id instanceof WP_Error ) {
@@ -747,7 +814,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-			CSS_Handler::generate_css_file( $page_id );
+
+			if ( class_exists( 'ThemeIsle\GutenbergBlocks\CSS\CSS_Handler' ) ) {
+				CSS_Handler::generate_css_file( $page_id );
+			}
 
 			if ( 'wizard' === $_POST['source'] ) {
 				$this->plugin_settings['general']['status'] = 1;
@@ -911,7 +981,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 *
 		 * @return void
 		 */
-		function wpmm_update_sdk_options() {
+		public function wpmm_update_sdk_options() {
 			// check nonce existence
 			if ( empty( $_POST['_wpnonce'] ) ) {
 				die( esc_html__( 'The nonce field must not be empty.', 'wp-maintenance-mode' ) );

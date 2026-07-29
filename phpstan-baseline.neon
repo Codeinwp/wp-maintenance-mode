@@ -1,0 +1,661 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Shortcode_Loginform::output() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/shortcodes/wp-maintenance-mode-shortcode-loginform.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Shortcode_Loginform::output() has parameter $atts with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/shortcodes/wp-maintenance-mode-shortcode-loginform.php
+
+		-
+			rawMessage: 'Instanceof between int<1, max> and WP_Error will always evaluate to false.'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_black_friday_data() has parameter $configs with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_black_friday_data() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_display_post_states() has parameter $post_states with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_display_post_states() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_inline_global_style() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_notices() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_plugin_menu() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_safe_style_css() has parameter $properties with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_safe_style_css() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_settings_link() has parameter $links with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::add_settings_link() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::admin_footer_text() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::delete_cache() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::dismiss_notices() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::display_plugin_settings() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::enqueue_admin_scripts() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::get_dismissed_notices() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::get_otter_notice() has parameter $location with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::get_policy_link() should return string but return statement is missing.'
+			identifier: return.missing
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::load_default_settings() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::maybe_redirect() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::reset_plugin_settings() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::save_dismissed_notices() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::save_plugin_settings() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::save_plugin_settings_notice() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::set_datajs_file() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::set_datajs_file() has parameter $messages with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::subscribers_empty_list() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Admin::subscribers_export() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Parameter #2 $callback of function array_filter expects (callable(string): bool)|null, ''trim'' given.'
+			identifier: argument.type
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$dismissed_notices_key has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$instance has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$plugin_basename has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$plugin_default_settings has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$plugin_network_settings has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$plugin_screen_hook_suffix has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$plugin_settings has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode_Admin::$plugin_slug has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode-admin.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Shortcodes::init() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode-shortcodes.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Shortcodes::loginform() has parameter $atts with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-shortcodes.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Shortcodes::shortcode_wrapper() has parameter $atts with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-shortcodes.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode_Shortcodes::shortcode_wrapper() has parameter $wrapper with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode-shortcodes.php
+
+		-
+			rawMessage: 'Parameter #1 $callback of static method WP_Maintenance_Mode_Shortcodes::shortcode_wrapper() expects string, array<int, string> given.'
+			identifier: argument.type
+			count: 1
+			path: includes/classes/wp-maintenance-mode-shortcodes.php
+
+		-
+			rawMessage: 'Function remove_filter invoked with 4 parameters, 2-3 required.'
+			identifier: arguments.count
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: If condition is always true.
+			identifier: if.alwaysTrue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::activate() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::activate_new_site() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_bot_extras() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_css_files() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_google_analytics_code() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_inline_css_style() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_js_files() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_maintenance_template() has parameter $templates with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::add_subscriber() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::check_update() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::deactivate() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::default_settings() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::get_blog_ids() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::get_page_categories() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::get_page_status_by_category() has parameter $category with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::get_page_status_by_category() should return string but return statement is missing.'
+			identifier: return.missing
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::get_plugin_network_settings() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::get_plugin_settings() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::init() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::load_plugin_textdomain() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::send_contact() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::set_current_page_category() has parameter $category with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::single_activate() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::single_deactivate() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Method WP_Maintenance_Mode::use_maintenance_template() has parameter $template with no type specified.'
+			identifier: missingType.parameter
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$current_page_category has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$instance has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$plugin_basename has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$plugin_network_settings has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$plugin_settings has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$plugin_slug has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Property WP_Maintenance_Mode::$style_buffer has no type specified.
+			identifier: missingType.property
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Right side of && is always false.
+			identifier: booleanAnd.rightAlwaysFalse
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: Right side of && is always true.
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Strict comparison using === between mixed~(0|0.0|''''|''0''|array{}|false|null) and '''' will always evaluate to false.'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Variable $css_rules in empty() always exists and is not falsy.'
+			identifier: empty.variable
+			count: 2
+			path: includes/classes/wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Call to function method_exists() with ''Cache_Enabler'' and ''clear_site_cache'' will always evaluate to false.'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Call to function method_exists() with ''Endurance_Page_Cache'' and ''purge_all'' will always evaluate to false.'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Call to function method_exists() with ''Swift_Performance…'' and ''clear_all_cache'' will always evaluate to false.'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Call to function method_exists() with ''\\LiteSpeed\\Purge'' and ''purge_all'' will always evaluate to false.'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Call to function method_exists() with ''\\SiteGround…'' and ''purge_cache'' will always evaluate to false.'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Purger and ''purge_all'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function remove_filter invoked with 4 parameters, 2-3 required.'
+			identifier: arguments.count
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_delete_cache() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_form_hidden_fields() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_gdpr_textarea_allowed_html() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_get_backgrounds() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_get_banners() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_get_user_roles() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_get_utmized_url() has parameter $utms with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_maybe_define_constant() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_multiselect() has parameter $values with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_multiselect() should return string but return statement is missing.'
+			identifier: return.missing
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_option_page_url() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_plugin_info() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_set_nocache_constants() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_translated_string_allowed_html() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/helpers.php
+
+		-
+			rawMessage: 'Function wpmm_add_extra_plugin_headers() has parameter $headers with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/hooks.php
+
+		-
+			rawMessage: 'Function wpmm_add_extra_plugin_headers() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: includes/functions/hooks.php
+
+		-
+			rawMessage: 'Function single_uninstall() has no return type specified.'
+			identifier: missingType.return
+			count: 1
+			path: uninstall.php
+
+		-
+			rawMessage: 'Function wpmm_load_sdk() has parameter $products with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: wp-maintenance-mode.php
+
+		-
+			rawMessage: 'Function wpmm_load_sdk() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: wp-maintenance-mode.php

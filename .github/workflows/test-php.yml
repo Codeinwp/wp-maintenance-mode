@@ -7,6 +7,8 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
 jobs:
   phplint:
     name: PHP Lint
@@ -15,9 +17,9 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          # the modern sniffer stack needs PHP 7.4+ and a current composer
+          php-version: '7.4'
           extensions: simplexml
-          tools: composer:v2.1
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Get Composer Cache Directory
@@ -36,9 +38,33 @@ jobs:
       - name: Run PHPCS
         run: composer run lint
 
-  phpunit:
-    name: PHPUnit
+  phpstan:
+    name: PHPStan
     runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: simplexml
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Install composer
+        run: composer install --prefer-dist --no-progress
+      - name: PHPStan Static Analysis
+        run: composer run phpstan
+
+  phpunit:
+    name: PHPUnit (PHP ${{ matrix.php-version }}, WP ${{ matrix.wp-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php-version: '7.2'
+            wp-version: '6.4'
+          - php-version: '7.4'
+            wp-version: 'latest'
     services:
       mysql:
         image: mysql:5.7
@@ -51,16 +77,17 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          # the latest WordPress test suite requires PHP 7.4+
+          php-version: '7.4'
           extensions: simplexml, mysql
-          tools: phpunit:7.5.20, phpunit-polyfills
+          tools: phpunit-polyfills
       - name: Checkout source code
         uses: actions/checkout@v2
       - name: Install Subversion
         run: sudo apt-get update && sudo apt-get install -y subversion
       - name: Install WordPress Test Suite
         run: |
-          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }} ${{ matrix.wp-version }}
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
