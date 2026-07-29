@@ -428,6 +428,30 @@ class Test_Page_State extends WP_UnitTestCase {
 		$this->assertNotEmpty( get_post( $new_page_id )->post_content );
 	}
 
+	public function test_importing_template_into_published_generated_page_keeps_it_public() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'private',
+			)
+		);
+		update_post_meta( $page_id, '_wpmm_generated', 1 );
+
+		// Maintenance mode takes the generated page over and publishes it.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+
+		// The user imports another template into the same page while the mode is active.
+		$this->apply_template( $this->make_settings( 1, $page_id ) );
+
+		// The maintenance page must stay publicly visible; the plugin's one
+		// publish is spent, so nothing would ever republish it.
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'publish', get_post_status( $page_id ) );
+	}
+
 	public function test_applying_template_to_generated_page_updates_it_in_place() {
 		$page_id = self::factory()->post->create(
 			array(

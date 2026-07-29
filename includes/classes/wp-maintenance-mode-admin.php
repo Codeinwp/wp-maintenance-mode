@@ -764,7 +764,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$page_exists      = $selected_page_id && get_post_status( $selected_page_id ) && get_post_status( $selected_page_id ) !== 'trash';
 
 			if ( $page_exists && get_post_meta( $selected_page_id, '_wpmm_generated', true ) ) {
-				// only pages created by the plugin may be overwritten
+				// only pages created by the plugin may be overwritten; the private
+				// status is for new pages only — overwriting must not unpublish a
+				// page maintenance mode already made public
+				unset( $post_arr['post_status'] );
+
 				$post_arr['ID'] = $selected_page_id;
 				$page_id        = wp_update_post( $post_arr );
 			} else {
