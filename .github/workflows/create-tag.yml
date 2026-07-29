@@ -22,7 +22,7 @@ jobs:
       - name: Release new version
         id: release
         run: |
-          yarn install --frozen-lockfile
+          yarn install --frozen-lockfile --ignore-engines
           yarn run release
         env:
           CI: true
