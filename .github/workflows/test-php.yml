@@ -7,6 +7,8 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
 jobs:
   phplint:
     name: PHP Lint
@@ -53,8 +55,16 @@ jobs:
         run: composer run phpstan
 
   phpunit:
-    name: PHPUnit
+    name: PHPUnit (PHP ${{ matrix.php-version }}, WP ${{ matrix.wp-version }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php-version: '7.2'
+            wp-version: '6.4'
+          - php-version: '7.4'
+            wp-version: 'latest'
     services:
       mysql:
         image: mysql:5.7
@@ -77,7 +87,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y subversion
       - name: Install WordPress Test Suite
         run: |
-          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }} ${{ matrix.wp-version }}
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
