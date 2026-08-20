@@ -7,7 +7,7 @@ Author: Themeisle
 Author URI: https://themeisle.com/
 Tags: maintenance mode, coming soon, landing page, splash page, under construction
 Requires at least: 4.7
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 2.6.23
 Requires PHP: 7.1
 License: GPL-2.0+
