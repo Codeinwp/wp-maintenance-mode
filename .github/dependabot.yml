@@ -1,11 +1,12 @@
-
 version: 2
-
 updates:
-
-  # Maintain dependencies for Composer
-  - package-ecosystem: "composer"
-    directory: "/"
-    target-branch: "development"
-    schedule:
-      interval: "weekly"
+- package-ecosystem: composer
+  directory: "/"
+  target-branch: development
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  cooldown:
+    default-days: 7
+    exclude:
+    - codeinwp/themeisle-sdk
