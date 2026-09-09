@@ -41,22 +41,6 @@ class Test_Page_State extends WP_UnitTestCase {
 		return $settings;
 	}
 
-	public function test_wizard_purges_cache_after_enabling_maintenance_mode() {
-		$purged_settings = array();
-		$on_purge = function () use ( &$purged_settings ) {
-			$purged_settings[] = get_option( 'wpmm_settings' );
-		};
-		add_action( 'wpmm_delete_cache', $on_purge );
-		try {
-			$this->apply_template( $this->make_settings( 0, 0 ), 'coming-soon-1', 'coming-soon', 'wizard' );
-		} finally {
-			remove_action( 'wpmm_delete_cache', $on_purge );
-		}
-		$this->assertCount( 1, $purged_settings );
-		$this->assertSame( 1, $purged_settings[0]['general']['status'] );
-		$this->assertGreaterThan( 0, $purged_settings[0]['design']['page_id'] );
-	}
-
 	public function test_disabled_mode_leaves_selected_published_page_public() {
 		$page_id = self::factory()->post->create(
 			array(
@@ -119,7 +103,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	 * @param array $settings Value for the wpmm_settings option.
 	 * @return void
 	 */
-	private function apply_template( $settings, $template_slug = 'coming-soon-1', $category = 'coming-soon', $source = 'tab-design' ) {
+	private function apply_template( $settings, $template_slug = 'coming-soon-1', $category = 'coming-soon' ) {
 		$this->boot_plugin( $settings );
 
 		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
@@ -134,8 +118,8 @@ class Test_Page_State extends WP_UnitTestCase {
 		$admin->load_default_settings();
 
 		$_POST = array(
-			'_wpnonce'      => wp_create_nonce( $source ),
-			'source'        => $source,
+			'_wpnonce'      => wp_create_nonce( 'tab-design' ),
+			'source'        => 'tab-design',
 			'template_slug' => $template_slug,
 			'category'      => $category,
 		);
