@@ -826,6 +826,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 
 			update_option( 'wpmm_page_category', $category );
 			update_option( 'wpmm_settings', $this->plugin_settings );
+			if ( 'wizard' === $source ) {
+				wpmm_delete_cache();
+			}
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
