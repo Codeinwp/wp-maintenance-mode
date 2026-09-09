@@ -819,7 +819,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				CSS_Handler::generate_css_file( $page_id );
 			}
 
-			if ( 'wizard' === $_POST['source'] ) {
+			if ( 'wizard' === $source ) {
 				$this->plugin_settings['general']['status'] = 1;
 				update_option( 'wpmm_fresh_install', false );
 			}
