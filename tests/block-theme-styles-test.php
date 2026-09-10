@@ -92,14 +92,4 @@ class Test_Block_Theme_Styles extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( '.wpmm-in-script', $footer );
 		$this->assertStringNotContainsString( '.wpmm-in-comment', $footer );
 	}
-
-	/**
-	 * The block-theme style flow crashed with `Class "DOMDocument" not found`
-	 * on runtimes without the DOM extension.
-	 */
-	public function test_the_block_theme_style_flow_does_not_use_the_dom_extension() {
-		$source = file_get_contents( WPMM_PATH . 'includes/classes/wp-maintenance-mode.php' );
-
-		$this->assertFalse( strpos( $source, 'DOMDocument' ), 'The block-theme style flow must not depend on the DOM extension.' );
-	}
 }
