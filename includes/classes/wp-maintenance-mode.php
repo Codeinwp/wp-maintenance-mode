@@ -1174,7 +1174,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				return array();
 			}
 
-			preg_match_all( '#<style\b[^>]*>.*?</style>#is', $html, $matches );
+			// Comments and script bodies can hold `<style>` text that is not an element.
+			$markup = preg_replace( '#<!--.*?-->|<script\b[^>]*>.*?</script>#is', '', $html );
+
+			if ( ! is_string( $markup ) ) {
+				return array();
+			}
+
+			preg_match_all( '#<style\b[^>]*>.*?</style>#is', $markup, $matches );
 
 			return $matches[0];
 		}

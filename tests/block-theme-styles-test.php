@@ -23,6 +23,7 @@ class Test_Block_Theme_Styles extends WP_UnitTestCase {
 	public function tear_down() {
 		remove_action( 'wp_head', array( $this, 'print_head_style' ) );
 		remove_action( 'wp_head', array( $this, 'print_late_style' ) );
+		remove_action( 'wp_head', array( $this, 'print_style_lookalikes' ) );
 
 		$prop = new ReflectionProperty( 'WP_Maintenance_Mode', 'style_buffer' );
 		$prop->setAccessible( true );
@@ -33,6 +34,11 @@ class Test_Block_Theme_Styles extends WP_UnitTestCase {
 
 	public function print_head_style() {
 		echo '<style id="wpmm-head-style">.wpmm-head{color:red}</style>';
+	}
+
+	public function print_style_lookalikes() {
+		echo '<script>const sample = \'<style>.wpmm-in-script{color:lime}</style>\';</script>';
+		echo '<!-- <style>.wpmm-in-comment{color:teal}</style> -->';
 	}
 
 	public function print_late_style() {
@@ -74,6 +80,17 @@ class Test_Block_Theme_Styles extends WP_UnitTestCase {
 		$footer = ob_get_clean();
 
 		$this->assertStringContainsString( '.wpmm-late{color:blue}', $footer );
+	}
+
+	public function test_the_footer_callback_ignores_style_markup_inside_scripts_and_comments() {
+		add_action( 'wp_head', array( $this, 'print_style_lookalikes' ) );
+
+		ob_start();
+		self::$frontend->add_style_fse();
+		$footer = ob_get_clean();
+
+		$this->assertStringNotContainsString( '.wpmm-in-script', $footer );
+		$this->assertStringNotContainsString( '.wpmm-in-comment', $footer );
 	}
 
 	/**
