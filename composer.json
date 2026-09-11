@@ -30,7 +30,7 @@
         "phpunit/phpunit": "^9.6",
         "yoast/phpunit-polyfills": "^4.0",
         "phpstan/phpstan": "^2.1",
-        "php-stubs/wordpress-stubs": "^6.8"
+        "php-stubs/wordpress-stubs": "^7.0"
     },
     "autoload": {
         "files": [
