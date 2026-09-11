@@ -25,7 +25,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		protected $plugin_basename;
 		protected static $instance = null;
 
-		private $style_buffer;
+		private $style_buffer = array();
 		private $current_page_category;
 
 		/**
@@ -1140,9 +1140,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			echo $output;
 
-			$doc = new DOMDocument();
-			$doc->loadHTML( '<html>' . $output . '</html>' );
-			$this->style_buffer = $doc->getElementsByTagName( 'style' );
+			$this->style_buffer = $this->extract_style_tags( $output );
 		}
 
 		/**
@@ -1158,30 +1156,34 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$output = ob_get_contents();
 			ob_end_clean();
 
-			$doc = new DOMDocument();
-			$doc->loadHTML( '<html>' . $output . '</html>' );
-			$elems = $doc->getElementsByTagName( 'style' );
-			$css   = '';
+			$styles  = $this->extract_style_tags( $output );
+			$missing = array_diff( $styles, (array) $this->style_buffer );
 
-			$common_positions = array();
+			echo implode( '', $missing );
+		}
 
-			foreach ( $elems as $i => $elem ) {
-				foreach ( $this->style_buffer as $style ) {
-					if ( $elems->item( $i )->C14N() == $style->C14N() ) {
-						$common_positions[] = $i;
-					}
-				}
+		/**
+		 * Collect the inline `<style>` tags of an HTML fragment.
+		 *
+		 * @param string $html Markup rendered by `wp_head()`.
+		 *
+		 * @return string[] List of `<style>...</style>` tags, as they appear in the markup.
+		 */
+		private function extract_style_tags( $html ) {
+			if ( empty( $html ) ) {
+				return array();
 			}
 
-			foreach ( $elems as $i => $elem ) {
-				if ( in_array( $i, $common_positions ) ) {
-					continue;
-				}
+			// Comments and script bodies can hold `<style>` text that is not an element.
+			$markup = preg_replace( '#<!--.*?-->|<script\b[^>]*>.*?</script>#is', '', $html );
 
-				$css .= $elems->item( $i )->C14N();
+			if ( ! is_string( $markup ) ) {
+				return array();
 			}
 
-			echo $css;
+			preg_match_all( '#<style\b[^>]*>.*?</style>#is', $markup, $matches );
+
+			return $matches[0];
 		}
 
 		/**
