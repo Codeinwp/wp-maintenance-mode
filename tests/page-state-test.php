@@ -745,4 +745,23 @@ class Test_Page_State extends WP_UnitTestCase {
 
 		$this->assertSame( 'private', get_post_status( $page_id ) );
 	}
+
+	public function test_maintenance_front_page_does_not_change_the_reading_setting() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		update_option( 'show_on_front', 'posts' );
+		wp_set_current_user( 0 );
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+
+		$this->assertSame( 'page', get_option( 'show_on_front' ) );
+
+		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
+		wp_set_current_user( $admin_id );
+		$this->assertSame( 'posts', get_option( 'show_on_front' ) );
+	}
 }

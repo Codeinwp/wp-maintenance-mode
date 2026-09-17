@@ -126,7 +126,17 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					}
 				}
 
-				update_option( 'show_on_front', 'page' );
+				// Make the maintenance page the front page for blocked visitors without changing the site's Reading settings.
+				add_filter(
+					'pre_option_show_on_front',
+					function ( $value ) {
+						if ( ( ! $this->check_user_role() && ! $this->check_exclude() ) && isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+							return 'page';
+						}
+
+						return $value;
+					}
+				);
 				add_filter(
 					'pre_option_page_on_front',
 					function ( $value ) {
