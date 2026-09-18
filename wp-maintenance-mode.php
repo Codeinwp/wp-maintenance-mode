@@ -91,6 +91,30 @@ add_filter(
 	}
 );
 
+add_filter(
+	'wp_maintenance_mode_ai_connect_metadata',
+	function () {
+		return array(
+			'name'         => 'LightStart',
+			'notice_cases' => array(
+				__( 'turn maintenance mode on or off', 'wp-maintenance-mode' ),
+				__( 'change who can bypass it', 'wp-maintenance-mode' ),
+				__( 'list your subscribers', 'wp-maintenance-mode' ),
+			),
+			'prompts'      => array(
+				__( 'Is maintenance mode on right now, and which roles and URLs can bypass it?', 'wp-maintenance-mode' ),
+				__( 'Turn on LightStart maintenance mode and let editors keep access to the site while it is on.', 'wp-maintenance-mode' ),
+				__( 'List the email addresses collected by my maintenance page subscribe form, newest first.', 'wp-maintenance-mode' ),
+			),
+			'abilities'    => array(
+				'lightstart/get-mode',
+				'lightstart/set-mode',
+				'lightstart/list-subscribers',
+			),
+		);
+	}
+);
+
 /**
  * Filter products array.
  *
