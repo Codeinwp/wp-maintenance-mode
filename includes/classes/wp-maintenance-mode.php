@@ -126,6 +126,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					}
 				}
 
+				wpmm_record_show_on_front();
 				update_option( 'show_on_front', 'page' );
 				add_filter(
 					'pre_option_page_on_front',
@@ -162,6 +163,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				add_action( 'wpmm_before_scripts', array( $this, 'add_bot_extras' ) );
 				add_action( 'wpmm_footer', array( $this, 'add_js_files' ) );
 			} else {
+				wpmm_restore_show_on_front();
+
 				// restore the maintenance page to its original state when maintenance mode is disabled
 				add_action(
 					'init',
@@ -684,6 +687,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function single_deactivate() {
+			wpmm_restore_show_on_front();
+
 			// give the selected page back to the site in its original state
 			$settings = get_option( 'wpmm_settings' );
 			if ( ! empty( $settings['design']['page_id'] ) ) {
