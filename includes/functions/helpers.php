@@ -599,6 +599,32 @@ function wpmm_restore_page_state( $page_id ) {
 }
 
 /**
+ * Record the site's front-page setting before maintenance mode changes it.
+ * The first recorded value is kept until maintenance mode is disabled.
+ *
+ * @return void
+ */
+function wpmm_record_show_on_front() {
+	add_option( 'wpmm_original_show_on_front', get_option( 'show_on_front', 'posts' ) );
+}
+
+/**
+ * Restore the front-page setting recorded when maintenance mode was enabled.
+ *
+ * @return void
+ */
+function wpmm_restore_show_on_front() {
+	$original_value = get_option( 'wpmm_original_show_on_front', false );
+
+	if ( false === $original_value ) {
+		return;
+	}
+
+	update_option( 'show_on_front', $original_value );
+	delete_option( 'wpmm_original_show_on_front' );
+}
+
+/**
  * Get option page URL.
  */
 function wpmm_option_page_url() {

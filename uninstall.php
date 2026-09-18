@@ -17,6 +17,7 @@ function single_uninstall() {
 		'wpmm_settings',
 		'wpmm_notice',
 		'wpmm_version',
+		'wpmm_original_show_on_front',
 	);
 
 	foreach ( $options_to_delete as $option ) {

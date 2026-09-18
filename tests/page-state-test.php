@@ -736,17 +736,23 @@ class Test_Page_State extends WP_UnitTestCase {
 			)
 		);
 
+		update_option( 'show_on_front', 'posts' );
+
 		// Maintenance mode is active: the page is taken over and published.
 		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
 		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'page', get_option( 'show_on_front' ) );
+		$this->assertSame( 'posts', get_option( 'wpmm_original_show_on_front' ) );
 
-		// Deactivating the plugin hands the page back, private again.
+		// Deactivating the plugin hands both the page and Reading setting back.
 		WP_Maintenance_Mode::single_deactivate();
 
 		$this->assertSame( 'private', get_post_status( $page_id ) );
+		$this->assertSame( 'posts', get_option( 'show_on_front' ) );
+		$this->assertFalse( get_option( 'wpmm_original_show_on_front', false ) );
 	}
 
-	public function test_maintenance_front_page_does_not_change_the_reading_setting() {
+	public function test_disabling_maintenance_mode_restores_the_initial_reading_setting() {
 		$page_id = self::factory()->post->create(
 			array(
 				'post_type'   => 'page',
@@ -755,13 +761,18 @@ class Test_Page_State extends WP_UnitTestCase {
 		);
 
 		update_option( 'show_on_front', 'posts' );
-		wp_set_current_user( 0 );
 		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
-
 		$this->assertSame( 'page', get_option( 'show_on_front' ) );
+		$this->assertSame( 'posts', get_option( 'wpmm_original_show_on_front' ) );
 
-		$admin_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
-		wp_set_current_user( $admin_id );
+		// Another active request must not overwrite the recorded initial value.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'posts', get_option( 'wpmm_original_show_on_front' ) );
+
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+
 		$this->assertSame( 'posts', get_option( 'show_on_front' ) );
+		$this->assertFalse( get_option( 'wpmm_original_show_on_front', false ) );
 	}
 }
