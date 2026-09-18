@@ -66,6 +66,12 @@ register_deactivation_hook( __FILE__, array( 'WP_Maintenance_Mode', 'deactivate'
 add_action( 'plugins_loaded', array( 'WP_Maintenance_Mode', 'get_instance' ) );
 
 /**
+ * ABILITIES API
+ */
+require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-abilities.php';
+WP_Maintenance_Mode_Abilities::init();
+
+/**
  * DASHBOARD
  */
 if ( is_admin() ) {
@@ -81,6 +87,30 @@ add_filter(
 		return array(
 			'logo'     => esc_url( WPMM_IMAGES_URL . 'icon.svg' ),
 			'location' => 'wp-maintenance-mode',
+		);
+	}
+);
+
+add_filter(
+	'wp_maintenance_mode_ai_connect_metadata',
+	function () {
+		return array(
+			'name'         => 'LightStart',
+			'notice_cases' => array(
+				__( 'turn maintenance mode on or off', 'wp-maintenance-mode' ),
+				__( 'change who can bypass it', 'wp-maintenance-mode' ),
+				__( 'list your subscribers', 'wp-maintenance-mode' ),
+			),
+			'prompts'      => array(
+				__( 'Turn on LightStart maintenance mode and let editors keep access to the site while it is on.', 'wp-maintenance-mode' ),
+				__( 'List the email addresses collected by my maintenance page subscribe form, newest first.', 'wp-maintenance-mode' ),
+				__( 'Is maintenance mode on right now, and which roles and URLs can bypass it?', 'wp-maintenance-mode' ),
+			),
+			'abilities'    => array(
+				'lightstart/get-mode',
+				'lightstart/set-mode',
+				'lightstart/list-subscribers',
+			),
 		);
 	}
 );
