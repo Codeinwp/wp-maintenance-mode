@@ -66,6 +66,12 @@ register_deactivation_hook( __FILE__, array( 'WP_Maintenance_Mode', 'deactivate'
 add_action( 'plugins_loaded', array( 'WP_Maintenance_Mode', 'get_instance' ) );
 
 /**
+ * ABILITIES API
+ */
+require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-abilities.php';
+WP_Maintenance_Mode_Abilities::init();
+
+/**
  * DASHBOARD
  */
 if ( is_admin() ) {
