@@ -102,9 +102,9 @@ add_filter(
 				__( 'list your subscribers', 'wp-maintenance-mode' ),
 			),
 			'prompts'      => array(
-				__( 'Is maintenance mode on right now, and which roles and URLs can bypass it?', 'wp-maintenance-mode' ),
 				__( 'Turn on LightStart maintenance mode and let editors keep access to the site while it is on.', 'wp-maintenance-mode' ),
 				__( 'List the email addresses collected by my maintenance page subscribe form, newest first.', 'wp-maintenance-mode' ),
+				__( 'Is maintenance mode on right now, and which roles and URLs can bypass it?', 'wp-maintenance-mode' ),
 			),
 			'abilities'    => array(
 				'lightstart/get-mode',
