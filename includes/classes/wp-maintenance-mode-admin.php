@@ -819,13 +819,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				CSS_Handler::generate_css_file( $page_id );
 			}
 
-			if ( 'wizard' === $_POST['source'] ) {
+			if ( 'wizard' === $source ) {
 				$this->plugin_settings['general']['status'] = 1;
 				update_option( 'wpmm_fresh_install', false );
 			}
 
 			update_option( 'wpmm_page_category', $category );
 			update_option( 'wpmm_settings', $this->plugin_settings );
+			if ( 'wizard' === $source ) {
+				wpmm_delete_cache();
+			}
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
