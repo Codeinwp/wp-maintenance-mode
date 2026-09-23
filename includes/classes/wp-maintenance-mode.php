@@ -742,12 +742,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! $this->check_search_bots() &&
 					! ( defined( 'WP_CLI' ) && WP_CLI )
 			) {
-				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
-					define( 'IS_MAINTENANCE', true );
-					include_once wpmm_get_template_path( 'maintenance.php', true );
-					return;
-				}
-
 				// HEADER STUFF
 				$protocol         = ! empty( $_SERVER['SERVER_PROTOCOL'] ) && in_array( $_SERVER['SERVER_PROTOCOL'], array( 'HTTP/1.1', 'HTTP/1.0' ), true ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 				$charset          = get_bloginfo( 'charset' ) ? get_bloginfo( 'charset' ) : 'UTF-8';
@@ -755,6 +749,18 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$status_code      = (int) apply_filters( 'wpmm_status_code', $status_code );
 				$backtime_seconds = $this->calculate_backtime();
 				$backtime         = (int) apply_filters( 'wpmm_backtime', $backtime_seconds );
+
+				// send the status headers before the selected page branch, so that both maintenance flows return them
+				wpmm_set_nocache_constants();
+				nocache_headers();
+				header( "$protocol $status_code Service Unavailable", true, $status_code );
+				header( "Retry-After: $backtime" );
+
+				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+					define( 'IS_MAINTENANCE', true );
+					include_once wpmm_get_template_path( 'maintenance.php', true );
+					return;
+				}
 
 				// META STUFF
 				$title = ! empty( $this->plugin_settings['design']['title'] ) ? $this->plugin_settings['design']['title'] : get_bloginfo( 'name' ) . ' - ' . __( 'Maintenance Mode', 'wp-maintenance-mode' );
@@ -794,13 +800,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$countdown_start = ! empty( $this->plugin_settings['modules']['countdown_start'] ) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_date'];
 				$countdown_end   = strtotime( $countdown_start . ' +' . $backtime_seconds . ' seconds' );
 
-				wpmm_set_nocache_constants();
-				nocache_headers();
-
 				ob_start();
 				header( "Content-type: text/html; charset=$charset" );
-				header( "$protocol $status_code Service Unavailable", true, $status_code );
-				header( "Retry-After: $backtime" );
 
 				// load maintenance mode template
 				include_once wpmm_get_template_path( 'maintenance.php', true );
