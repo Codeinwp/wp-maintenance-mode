@@ -115,16 +115,28 @@ test.describe( 'maintenance mode lifecycle', () => {
 			const visitor = await openAsVisitor( browser );
 			expect( visitor.response.status() ).toBe( 503 );
 			expect( visitor.response.headers()[ 'retry-after' ] ).toBeTruthy();
+			expect( visitor.response.headers()[ 'cache-control' ] ).toContain(
+				'no-cache'
+			);
 			await expect( visitor.page.locator( 'body' ) ).toContainText(
 				'Back in a moment.'
 			);
+
+			// Other URLs redirect to the maintenance page without delay.
+			const redirect = await visitor.context.request.get(
+				'/sample-page/',
+				{ maxRedirects: 0 }
+			);
+			expect( redirect.status() ).toBe( 302 );
+			expect( redirect.headers()[ 'retry-after' ] ).toBeUndefined();
 			await visitor.context.close();
 		} finally {
 			// Hand the classic flow back for the specs that follow.
 			wpCli( 'option update wpmm_new_look 0' );
 			wpCli( 'option patch delete wpmm_settings design page_id' );
-			wpCli( 'option update show_on_front posts' );
 			await setMaintenanceMode( admin, page, false );
+			// Active maintenance mode sets it on every request, so reset it only after disabling.
+			wpCli( 'option update show_on_front posts' );
 			await requestUtils.rest( {
 				path: `/wp/v2/pages/${ maintenancePage.id }`,
 				method: 'DELETE',

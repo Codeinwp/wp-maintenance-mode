@@ -750,13 +750,19 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$backtime_seconds = $this->calculate_backtime();
 				$backtime         = (int) apply_filters( 'wpmm_backtime', $backtime_seconds );
 
+				$is_selected_page = isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' );
+
 				// send the status headers before the selected page branch, so that both maintenance flows return them
 				wpmm_set_nocache_constants();
 				nocache_headers();
-				header( "$protocol $status_code Service Unavailable", true, $status_code );
-				header( "Retry-After: $backtime" );
 
-				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
+				// the selected page template redirects other URLs to the front page, and a redirect must not tell clients to wait
+				if ( ! $is_selected_page || is_front_page() ) {
+					header( "$protocol $status_code Service Unavailable", true, $status_code );
+					header( "Retry-After: $backtime" );
+				}
+
+				if ( $is_selected_page ) {
 					define( 'IS_MAINTENANCE', true );
 					include_once wpmm_get_template_path( 'maintenance.php', true );
 					return;
