@@ -31,10 +31,10 @@ class Test_Plugin_Action_Links extends WP_UnitTestCase {
 	/**
 	 * Assert that the row actions contain the LightStart Settings link.
 	 *
-	 * @param array $actions Row actions returned by the action links filter.
+	 * @param array<string, string> $actions Row actions returned by the action links filter.
 	 * @return void
 	 */
-	private function assert_settings_link( $actions ) {
+	private function assert_settings_link( array $actions ) {
 		$this->assertArrayHasKey( 'wpmm_settings', $actions );
 		$this->assertStringContainsString( 'admin.php?page=wp-maintenance-mode', $actions['wpmm_settings'] );
 		$this->assertStringContainsString( '>Settings</a>', $actions['wpmm_settings'] );
