@@ -43,4 +43,26 @@ class Test_Plugin_Action_Links extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'admin.php?page=wp-maintenance-mode', $actions['wpmm_settings'] );
 		$this->assertStringContainsString( '>Settings</a>', $actions['wpmm_settings'] );
 	}
+
+	/**
+	 * The Network Admin Plugins screen shows a Settings link when the plugin is network-activated.
+	 *
+	 * Runs only in multisite mode: WP_MULTISITE=1.
+	 *
+	 * @group ms-required
+	 */
+	public function test_network_plugin_row_has_settings_link() {
+		$this->skipWithoutMultisite();
+
+		$plugin_file = plugin_basename( WPMM_FILE );
+		update_site_option( 'active_sitewide_plugins', array( $plugin_file => time() ) );
+
+		$this->boot_admin();
+
+		$actions = apply_filters( 'network_admin_plugin_action_links_' . $plugin_file, array() );
+
+		$this->assertArrayHasKey( 'wpmm_settings', $actions );
+		$this->assertStringContainsString( 'admin.php?page=wp-maintenance-mode', $actions['wpmm_settings'] );
+		$this->assertStringContainsString( '>Settings</a>', $actions['wpmm_settings'] );
+	}
 }
