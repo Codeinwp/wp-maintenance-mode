@@ -11,7 +11,7 @@ class Test_Plugin_Action_Links extends WP_UnitTestCase {
 	/**
 	 * Boot a fresh admin instance, the same way plugins_loaded does on admin requests.
 	 *
-	 * @return WP_Maintenance_Mode_Admin
+	 * @return void
 	 */
 	private function boot_admin() {
 		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
@@ -26,8 +26,18 @@ class Test_Plugin_Action_Links extends WP_UnitTestCase {
 
 		// init fires after plugins_loaded, before the Plugins screen renders.
 		$admin->load_default_settings();
+	}
 
-		return $admin;
+	/**
+	 * Assert that the row actions contain the LightStart Settings link.
+	 *
+	 * @param array $actions Row actions returned by the action links filter.
+	 * @return void
+	 */
+	private function assert_settings_link( $actions ) {
+		$this->assertArrayHasKey( 'wpmm_settings', $actions );
+		$this->assertStringContainsString( 'admin.php?page=wp-maintenance-mode', $actions['wpmm_settings'] );
+		$this->assertStringContainsString( '>Settings</a>', $actions['wpmm_settings'] );
 	}
 
 	/**
@@ -39,9 +49,7 @@ class Test_Plugin_Action_Links extends WP_UnitTestCase {
 		// WP_Plugins_List_Table filters the row actions by the plugin file.
 		$actions = apply_filters( 'plugin_action_links_' . plugin_basename( WPMM_FILE ), array() );
 
-		$this->assertArrayHasKey( 'wpmm_settings', $actions );
-		$this->assertStringContainsString( 'admin.php?page=wp-maintenance-mode', $actions['wpmm_settings'] );
-		$this->assertStringContainsString( '>Settings</a>', $actions['wpmm_settings'] );
+		$this->assert_settings_link( $actions );
 	}
 
 	/**
@@ -61,8 +69,6 @@ class Test_Plugin_Action_Links extends WP_UnitTestCase {
 
 		$actions = apply_filters( 'network_admin_plugin_action_links_' . $plugin_file, array() );
 
-		$this->assertArrayHasKey( 'wpmm_settings', $actions );
-		$this->assertStringContainsString( 'admin.php?page=wp-maintenance-mode', $actions['wpmm_settings'] );
-		$this->assertStringContainsString( '>Settings</a>', $actions['wpmm_settings'] );
+		$this->assert_settings_link( $actions );
 	}
 }
