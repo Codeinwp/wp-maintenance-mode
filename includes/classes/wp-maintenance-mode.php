@@ -25,7 +25,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 		protected $plugin_basename;
 		protected static $instance = null;
 
-		private $style_buffer;
+		private $style_buffer = array();
 		private $current_page_category;
 
 		/**
@@ -747,12 +747,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 					! $this->check_search_bots() &&
 					! ( defined( 'WP_CLI' ) && WP_CLI )
 			) {
-				if ( isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' ) ) {
-					define( 'IS_MAINTENANCE', true );
-					include_once wpmm_get_template_path( 'maintenance.php', true );
-					return;
-				}
-
 				// HEADER STUFF
 				$protocol         = ! empty( $_SERVER['SERVER_PROTOCOL'] ) && in_array( $_SERVER['SERVER_PROTOCOL'], array( 'HTTP/1.1', 'HTTP/1.0' ), true ) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
 				$charset          = get_bloginfo( 'charset' ) ? get_bloginfo( 'charset' ) : 'UTF-8';
@@ -760,6 +754,24 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$status_code      = (int) apply_filters( 'wpmm_status_code', $status_code );
 				$backtime_seconds = $this->calculate_backtime();
 				$backtime         = (int) apply_filters( 'wpmm_backtime', $backtime_seconds );
+
+				$is_selected_page = isset( $this->plugin_settings['design']['page_id'] ) && get_option( 'wpmm_new_look' );
+
+				// send the status headers before the selected page branch, so that both maintenance flows return them
+				wpmm_set_nocache_constants();
+				nocache_headers();
+
+				// the selected page template redirects other URLs to the front page, and a redirect must not tell clients to wait
+				if ( ! $is_selected_page || is_front_page() ) {
+					header( "$protocol $status_code Service Unavailable", true, $status_code );
+					header( "Retry-After: $backtime" );
+				}
+
+				if ( $is_selected_page ) {
+					define( 'IS_MAINTENANCE', true );
+					include_once wpmm_get_template_path( 'maintenance.php', true );
+					return;
+				}
 
 				// META STUFF
 				$title = ! empty( $this->plugin_settings['design']['title'] ) ? $this->plugin_settings['design']['title'] : get_bloginfo( 'name' ) . ' - ' . __( 'Maintenance Mode', 'wp-maintenance-mode' );
@@ -799,13 +811,8 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 				$countdown_start = ! empty( $this->plugin_settings['modules']['countdown_start'] ) ? $this->plugin_settings['modules']['countdown_start'] : $this->plugin_settings['general']['status_date'];
 				$countdown_end   = strtotime( $countdown_start . ' +' . $backtime_seconds . ' seconds' );
 
-				wpmm_set_nocache_constants();
-				nocache_headers();
-
 				ob_start();
 				header( "Content-type: text/html; charset=$charset" );
-				header( "$protocol $status_code Service Unavailable", true, $status_code );
-				header( "Retry-After: $backtime" );
 
 				// load maintenance mode template
 				include_once wpmm_get_template_path( 'maintenance.php', true );
@@ -1145,9 +1152,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 
 			echo $output;
 
-			$doc = new DOMDocument();
-			$doc->loadHTML( '<html>' . $output . '</html>' );
-			$this->style_buffer = $doc->getElementsByTagName( 'style' );
+			$this->style_buffer = $this->extract_style_tags( $output );
 		}
 
 		/**
@@ -1163,30 +1168,34 @@ if ( ! class_exists( 'WP_Maintenance_Mode' ) ) {
 			$output = ob_get_contents();
 			ob_end_clean();
 
-			$doc = new DOMDocument();
-			$doc->loadHTML( '<html>' . $output . '</html>' );
-			$elems = $doc->getElementsByTagName( 'style' );
-			$css   = '';
+			$styles  = $this->extract_style_tags( $output );
+			$missing = array_diff( $styles, (array) $this->style_buffer );
 
-			$common_positions = array();
+			echo implode( '', $missing );
+		}
 
-			foreach ( $elems as $i => $elem ) {
-				foreach ( $this->style_buffer as $style ) {
-					if ( $elems->item( $i )->C14N() == $style->C14N() ) {
-						$common_positions[] = $i;
-					}
-				}
+		/**
+		 * Collect the inline `<style>` tags of an HTML fragment.
+		 *
+		 * @param string $html Markup rendered by `wp_head()`.
+		 *
+		 * @return string[] List of `<style>...</style>` tags, as they appear in the markup.
+		 */
+		private function extract_style_tags( $html ) {
+			if ( empty( $html ) ) {
+				return array();
 			}
 
-			foreach ( $elems as $i => $elem ) {
-				if ( in_array( $i, $common_positions ) ) {
-					continue;
-				}
+			// Comments and script bodies can hold `<style>` text that is not an element.
+			$markup = preg_replace( '#<!--.*?-->|<script\b[^>]*>.*?</script>#is', '', $html );
 
-				$css .= $elems->item( $i )->C14N();
+			if ( ! is_string( $markup ) ) {
+				return array();
 			}
 
-			echo $css;
+			preg_match_all( '#<style\b[^>]*>.*?</style>#is', $markup, $matches );
+
+			return $matches[0];
 		}
 
 		/**
