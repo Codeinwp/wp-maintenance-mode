@@ -81,19 +81,16 @@ $default_templates = array(
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="presentation" class="components-checkbox-control__checked" aria-hidden="true" focusable="false"><path d="M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"></path></svg>
 							</span>
 							<label for="wizard-easy-mcp-checkbox">
-								<?php esc_html_e( 'Manage your site with AI', 'wp-maintenance-mode' ); ?>
+								<?php esc_html_e( 'Manage maintenance mode with AI', 'wp-maintenance-mode' ); ?>
 							</label>
 						</div>
 						<p class="description">
 							<?php
 							echo wp_kses(
 								sprintf(
-									// translators: %1$s is a description, %2$s is the Easy MCP AI URL, %3$s is the plugin name, %4$s is description text.
-									'%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s',
-									__( 'Ask Claude or ChatGPT to take your site live, update pages or check new sign-ups, in plain English. No dashboard needed.', 'wp-maintenance-mode' ),
-									esc_url( 'https://wordpress.org/plugins/easy-mcp-ai/' ),
-									'Easy MCP AI',
-									__( 'will be installed for you.', 'wp-maintenance-mode' )
+									// translators: %s is the Easy MCP AI plugin link.
+									__( 'Ask Claude or ChatGPT to put your site into maintenance mode, bring it back live, update your pages or check new sign-ups. The free %s plugin will be installed and activated.', 'wp-maintenance-mode' ),
+									'<a href="' . esc_url( 'https://wordpress.org/plugins/easy-mcp-ai/' ) . '" target="_blank">Easy MCP AI</a>'
 								),
 								wpmm_translated_string_allowed_html()
 							);
