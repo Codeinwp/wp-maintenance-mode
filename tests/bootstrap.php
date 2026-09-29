@@ -34,3 +34,23 @@ tests_add_filter( 'muplugins_loaded', '_register_module' );
 
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
+
+/**
+ * Boot a fresh admin instance, the same way plugins_loaded and init do on admin requests.
+ *
+ * @return WP_Maintenance_Mode_Admin
+ */
+function wpmm_test_boot_admin() {
+	if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
+		require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
+	}
+
+	$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
+	$instance->setAccessible( true );
+	$instance->setValue( null, null );
+
+	$admin = WP_Maintenance_Mode_Admin::get_instance();
+	$admin->load_default_settings();
+
+	return $admin;
+}

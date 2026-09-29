@@ -106,16 +106,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	private function apply_template( $settings, $template_slug = 'coming-soon-1', $category = 'coming-soon' ) {
 		$this->boot_plugin( $settings );
 
-		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
-			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
-		}
-
-		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
-		$instance->setAccessible( true );
-		$instance->setValue( null, null );
-
-		$admin = WP_Maintenance_Mode_Admin::get_instance();
-		$admin->load_default_settings();
+		$admin = wpmm_test_boot_admin();
 
 		$_POST = array(
 			'_wpnonce'      => wp_create_nonce( 'tab-design' ),
@@ -157,16 +148,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	private function select_page( $settings, $page_id ) {
 		$this->boot_plugin( $settings );
 
-		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
-			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
-		}
-
-		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
-		$instance->setAccessible( true );
-		$instance->setValue( null, null );
-
-		$admin = WP_Maintenance_Mode_Admin::get_instance();
-		$admin->load_default_settings();
+		$admin = wpmm_test_boot_admin();
 
 		$_POST = array(
 			'_wpnonce' => wp_create_nonce( 'tab-design' ),
@@ -204,16 +186,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	private function save_design_settings( $settings, $design ) {
 		$this->boot_plugin( $settings );
 
-		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
-			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
-		}
-
-		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
-		$instance->setAccessible( true );
-		$instance->setValue( null, null );
-
-		$admin = WP_Maintenance_Mode_Admin::get_instance();
-		$admin->load_default_settings();
+		$admin = wpmm_test_boot_admin();
 
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
@@ -736,13 +709,43 @@ class Test_Page_State extends WP_UnitTestCase {
 			)
 		);
 
+		update_option( 'show_on_front', 'posts' );
+
 		// Maintenance mode is active: the page is taken over and published.
 		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
 		$this->assertSame( 'publish', get_post_status( $page_id ) );
+		$this->assertSame( 'page', get_option( 'show_on_front' ) );
+		$this->assertSame( 'posts', get_option( 'wpmm_original_show_on_front' ) );
 
-		// Deactivating the plugin hands the page back, private again.
+		// Deactivating the plugin hands both the page and Reading setting back.
 		WP_Maintenance_Mode::single_deactivate();
 
 		$this->assertSame( 'private', get_post_status( $page_id ) );
+		$this->assertSame( 'posts', get_option( 'show_on_front' ) );
+		$this->assertFalse( get_option( 'wpmm_original_show_on_front', false ) );
+	}
+
+	public function test_disabling_maintenance_mode_restores_the_initial_reading_setting() {
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			)
+		);
+
+		update_option( 'show_on_front', 'posts' );
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'page', get_option( 'show_on_front' ) );
+		$this->assertSame( 'posts', get_option( 'wpmm_original_show_on_front' ) );
+
+		// Another active request must not overwrite the recorded initial value.
+		$this->boot_plugin( $this->make_settings( 1, $page_id ) );
+		$this->assertSame( 'posts', get_option( 'wpmm_original_show_on_front' ) );
+
+		$this->boot_plugin( $this->make_settings( 0, $page_id ) );
+		do_action( 'init' );
+
+		$this->assertSame( 'posts', get_option( 'show_on_front' ) );
+		$this->assertFalse( get_option( 'wpmm_original_show_on_front', false ) );
 	}
 }

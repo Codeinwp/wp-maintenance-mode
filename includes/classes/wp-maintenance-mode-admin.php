@@ -23,6 +23,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			// The basename needs no translations, so set it here: the action link filters below use it.
+			$this->plugin_basename = plugin_basename( WPMM_FILE );
+
 			// Init.
 			add_action( 'init', array( $this, 'load_default_settings' ) );
 
@@ -102,7 +105,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$this->plugin_slug             = $plugin->get_plugin_slug();
 			$this->plugin_settings         = $plugin->get_plugin_settings();
 			$this->plugin_network_settings = $plugin->get_plugin_network_settings();
-			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 			$this->plugin_default_settings = $plugin->default_settings();
 		}
 
@@ -159,29 +161,26 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->plugin_slug . '-admin-script',
 					'wpmmVars',
 					array(
-						'ajaxURL'                => admin_url( 'admin-ajax.php' ),
-						'pluginURL'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
-						'ajaxNonce'              => wp_create_nonce( 'ajax' ),
-						'wizardNonce'            => wp_create_nonce( 'wizard' ),
-						'pluginInstallNonce'     => wp_create_nonce( 'updates' ),
-						'isOtterInstalled'       => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
-						'isOtterActive'          => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
-						'isOptimoleInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/optimole-wp/optimole-wp.php' ),
-						'isOptimoleActive'       => is_plugin_active( 'optimole-wp/optimole-wp.php' ),
-						'isWPSCInstalled'        => file_exists( ABSPATH . 'wp-content/plugins/wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) || file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
-						'isWPSCActive'           => is_plugin_active( 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) || is_plugin_active( 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
-						'isWPSCProInstalled'     => file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
-						'errorString'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
-						'loadingString'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
-						'importingText'          => __( 'Importing', 'wp-maintenance-mode' ),
-						'importDone'             => __( 'Done', 'wp-maintenance-mode' ),
-						'invalidEmailString'     => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
-						'finishWizardStrings'    => array(
+						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
+						'ajaxNonce'             => wp_create_nonce( 'ajax' ),
+						'wizardNonce'           => wp_create_nonce( 'wizard' ),
+						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
+						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
+						'isOtterActive'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'isEasyMcpInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/easy-mcp-ai/easy-mcp-ai.php' ),
+						'isEasyMcpActive'       => is_plugin_active( 'easy-mcp-ai/easy-mcp-ai.php' ),
+						'errorString'           => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loadingString'         => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
+						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
+						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'finishWizardStrings'   => array(
 							'maintenance' => __( 'Your maintenance page is ready!', 'wp-maintenance-mode' ),
 							'coming-soon' => __( 'Your coming soon page is ready!', 'wp-maintenance-mode' ),
 						),
-						'adminURL'               => get_admin_url(),
-						'otterActivationLink'    => add_query_arg(
+						'adminURL'              => get_admin_url(),
+						'otterActivationLink'   => add_query_arg(
 							array(
 								'action'        => 'activate',
 								'plugin'        => rawurlencode( 'otter-blocks/otter-blocks.php' ),
@@ -191,48 +190,38 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'optimoleActivationLink' => add_query_arg(
+						'easyMcpActivationLink' => add_query_arg(
 							array(
 								'action'        => 'activate',
-								'plugin'        => rawurlencode( 'optimole-wp/optimole-wp.php' ),
+								'plugin'        => rawurlencode( 'easy-mcp-ai/easy-mcp-ai.php' ),
 								'plugin_status' => 'all',
 								'paged'         => '1',
-								'_wpnonce'      => wp_create_nonce( 'activate-plugin_optimole-wp/optimole-wp.php' ),
+								'_wpnonce'      => wp_create_nonce( 'activate-plugin_easy-mcp-ai/easy-mcp-ai.php' ),
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'wpscActivationLink'     => add_query_arg(
-							array(
-								'action'        => 'activate',
-								'plugin'        => rawurlencode( file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ? 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' : 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ),
-								'plugin_status' => 'all',
-								'paged'         => '1',
-								'_wpnonce'      => wp_create_nonce( file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ? 'activate-plugin_wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' : 'activate-plugin_wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ),
-							),
-							esc_url( network_admin_url( 'plugins.php' ) )
-						),
-						'modalTexts'             => array(
+						'modalTexts'            => array(
 							'title'          => __( 'The template has been imported!', 'wp-maintenance-mode' ),
 							'description'    => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
 							'buttonPage'     => __( 'Go to page', 'wp-maintenance-mode' ),
 							'buttonSettings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
 						),
-						'confirmModalTexts'      => array(
+						'confirmModalTexts'     => array(
 							'title'          => __( 'Import this template?', 'wp-maintenance-mode' ),
 							'description'    => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
 							'buttonContinue' => __( 'Continue', 'wp-maintenance-mode' ),
 							'buttonGoBack'   => __( 'Go back', 'wp-maintenance-mode' ),
 						),
-						'imageUploaderDefaults'  => array(
+						'imageUploaderDefaults' => array(
 							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
-						'skipImportStrings'      => array(
+						'skipImportStrings'     => array(
 							'maintenance'  => __( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ),
 							'coming-soon'  => __( 'I don’t want to use a Coming Soon Template', 'wp-maintenance-mode' ),
 							'landing-page' => __( 'I don’t want to use a Landing Page Template', 'wp-maintenance-mode' ),
 						),
-						'skipImportDefault'      => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
+						'skipImportDefault'     => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
 					)
 				);
 
@@ -717,25 +706,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		private function switch_selected_page( $page_id ) {
 			$previous_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
 
-			if ( $previous_page_id && $previous_page_id !== $page_id ) {
-				// hand the previously selected page back before abandoning it,
-				// otherwise nothing would ever restore it
-				wpmm_restore_page_state( $previous_page_id );
-			}
+			wpmm_switch_selected_page( $previous_page_id, $page_id );
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-
-			if ( $page_id ) {
-				// remember the page's original state before taking it over as a maintenance page
-				wpmm_record_page_state( $page_id );
-
-				wp_update_post(
-					array(
-						'ID'            => $page_id,
-						'page_template' => 'templates/wpmm-page-template.php',
-					)
-				);
-			}
 		}
 
 		/**
@@ -819,13 +792,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				CSS_Handler::generate_css_file( $page_id );
 			}
 
-			if ( 'wizard' === $_POST['source'] ) {
+			if ( 'wizard' === $source ) {
 				$this->plugin_settings['general']['status'] = 1;
 				update_option( 'wpmm_fresh_install', false );
 			}
 
 			update_option( 'wpmm_page_category', $category );
 			update_option( 'wpmm_settings', $this->plugin_settings );
+			if ( 'wizard' === $source ) {
+				wpmm_delete_cache();
+			}
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
