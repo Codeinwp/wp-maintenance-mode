@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7fc00fa48d0706a4ef763350684383c",
+    "content-hash": "a9912abacd1400467048e76dde8dfcd2",
     "packages": [
         {
             "name": "codeinwp/themeisle-sdk",
-            "version": "3.3.61",
+            "version": "3.3.65",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeinwp/themeisle-sdk.git",
-                "reference": "9fe698b52dec768a0dd8b500fb51efe40962ee99"
+                "reference": "f650fe856d52ce4e5754557d89ba2f3127ad54d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/9fe698b52dec768a0dd8b500fb51efe40962ee99",
-                "reference": "9fe698b52dec768a0dd8b500fb51efe40962ee99",
+                "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/f650fe856d52ce4e5754557d89ba2f3127ad54d8",
+                "reference": "f650fe856d52ce4e5754557d89ba2f3127ad54d8",
                 "shasum": ""
             },
             "require-dev": {
@@ -43,9 +43,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeinwp/themeisle-sdk/issues",
-                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.61"
+                "source": "https://github.com/Codeinwp/themeisle-sdk/tree/v3.3.65"
             },
-            "time": "2026-08-24T15:59:27+00:00"
+            "time": "2026-09-29T09:35:47+00:00"
         }
     ],
     "packages-dev": [
@@ -892,11 +892,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.9",
+            "version": "2.2.14",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/13d6b4f347bad222da436580c8304fa6f83e6bd0",
-                "reference": "13d6b4f347bad222da436580c8304fa6f83e6bd0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
+                "reference": "9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
                 "shasum": ""
             },
             "require": {
@@ -952,7 +952,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-22T07:38:16+00:00"
+            "time": "2026-09-12T21:39:33+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
