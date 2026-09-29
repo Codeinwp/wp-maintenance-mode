@@ -1,3 +1,13 @@
+##### [Version 2.6.24](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.23...v2.6.24) (2026-09-29)
+
+- Fixed cached live pages showing after enabling Coming Soon mode through the setup wizard.
+- Fixed selected-page maintenance mode to return HTTP 503 responses.
+- Fixed block-theme maintenance pages to render without the PHP DOM extension.
+- Fixed LightStart to restore the original homepage setting when maintenance mode ends.
+- Fixed the missing Settings link in the LightStart row on the Plugins screen.
+- Added AI agent support: let AI assistants turn maintenance mode on or off and change your LightStart settings. 
+- Updated dependencies
+
 ##### [Version 2.6.23](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.22...v2.6.23) (2026-07-29)
 
 - Strengthened the automated testing that runs behind the scenes, helping catch problems earlier and making future releases more reliable
