@@ -599,6 +599,35 @@ function wpmm_restore_page_state( $page_id ) {
 }
 
 /**
+ * Switch the selected maintenance page: hand the previous page back and take
+ * the new one over. The caller is responsible for saving the new selection.
+ *
+ * @since 2.6.23
+ * @param int $previous_page_id The currently selected page ID; 0 when none.
+ * @param int $page_id The newly selected page ID; 0 clears the selection.
+ * @return void
+ */
+function wpmm_switch_selected_page( $previous_page_id, $page_id ) {
+	if ( $previous_page_id && $previous_page_id !== $page_id ) {
+		// hand the previously selected page back before abandoning it,
+		// otherwise nothing would ever restore it
+		wpmm_restore_page_state( $previous_page_id );
+	}
+
+	if ( $page_id ) {
+		// remember the page's original state before taking it over as a maintenance page
+		wpmm_record_page_state( $page_id );
+
+		wp_update_post(
+			array(
+				'ID'            => $page_id,
+				'page_template' => 'templates/wpmm-page-template.php',
+			)
+		);
+	}
+}
+
+/**
  * Get option page URL.
  */
 function wpmm_option_page_url() {

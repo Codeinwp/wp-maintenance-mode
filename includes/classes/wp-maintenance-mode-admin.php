@@ -717,25 +717,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		private function switch_selected_page( $page_id ) {
 			$previous_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
 
-			if ( $previous_page_id && $previous_page_id !== $page_id ) {
-				// hand the previously selected page back before abandoning it,
-				// otherwise nothing would ever restore it
-				wpmm_restore_page_state( $previous_page_id );
-			}
+			wpmm_switch_selected_page( $previous_page_id, $page_id );
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-
-			if ( $page_id ) {
-				// remember the page's original state before taking it over as a maintenance page
-				wpmm_record_page_state( $page_id );
-
-				wp_update_post(
-					array(
-						'ID'            => $page_id,
-						'page_template' => 'templates/wpmm-page-template.php',
-					)
-				);
-			}
 		}
 
 		/**
