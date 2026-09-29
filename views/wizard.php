@@ -90,7 +90,7 @@ $default_templates = array(
 								sprintf(
 									// translators: %1$s is a description, %2$s is the Easy MCP AI URL, %3$s is the plugin name, %4$s is description text.
 									'%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s',
-									__( 'Connect AI assistants like Claude and ChatGPT to your site so they can create pages, edit content and manage settings for you, with', 'wp-maintenance-mode' ),
+									__( 'Let AI assistants like Claude and ChatGPT put your site in or out of maintenance mode, check who signed up on your coming soon page and edit your pages for you, with', 'wp-maintenance-mode' ),
 									esc_url( 'https://wordpress.org/plugins/easy-mcp-ai/' ),
 									'Easy MCP AI',
 									__( 'plugin installed and activated automatically.', 'wp-maintenance-mode' )
