@@ -159,26 +159,26 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->plugin_slug . '-admin-script',
 					'wpmmVars',
 					array(
-						'ajaxURL'                => admin_url( 'admin-ajax.php' ),
-						'pluginURL'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
-						'ajaxNonce'              => wp_create_nonce( 'ajax' ),
-						'wizardNonce'            => wp_create_nonce( 'wizard' ),
-						'pluginInstallNonce'     => wp_create_nonce( 'updates' ),
-						'isOtterInstalled'       => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
-						'isOtterActive'          => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
-						'isEasyMcpInstalled'     => file_exists( ABSPATH . 'wp-content/plugins/easy-mcp-ai/easy-mcp-ai.php' ),
-						'isEasyMcpActive'        => is_plugin_active( 'easy-mcp-ai/easy-mcp-ai.php' ),
-						'errorString'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
-						'loadingString'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
-						'importingText'          => __( 'Importing', 'wp-maintenance-mode' ),
-						'importDone'             => __( 'Done', 'wp-maintenance-mode' ),
-						'invalidEmailString'     => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
-						'finishWizardStrings'    => array(
+						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
+						'ajaxNonce'             => wp_create_nonce( 'ajax' ),
+						'wizardNonce'           => wp_create_nonce( 'wizard' ),
+						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
+						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
+						'isOtterActive'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'isEasyMcpInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/easy-mcp-ai/easy-mcp-ai.php' ),
+						'isEasyMcpActive'       => is_plugin_active( 'easy-mcp-ai/easy-mcp-ai.php' ),
+						'errorString'           => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loadingString'         => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
+						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
+						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'finishWizardStrings'   => array(
 							'maintenance' => __( 'Your maintenance page is ready!', 'wp-maintenance-mode' ),
 							'coming-soon' => __( 'Your coming soon page is ready!', 'wp-maintenance-mode' ),
 						),
-						'adminURL'               => get_admin_url(),
-						'otterActivationLink'    => add_query_arg(
+						'adminURL'              => get_admin_url(),
+						'otterActivationLink'   => add_query_arg(
 							array(
 								'action'        => 'activate',
 								'plugin'        => rawurlencode( 'otter-blocks/otter-blocks.php' ),
@@ -188,7 +188,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'easyMcpActivationLink'  => add_query_arg(
+						'easyMcpActivationLink' => add_query_arg(
 							array(
 								'action'        => 'activate',
 								'plugin'        => rawurlencode( 'easy-mcp-ai/easy-mcp-ai.php' ),
@@ -198,28 +198,28 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'modalTexts'             => array(
+						'modalTexts'            => array(
 							'title'          => __( 'The template has been imported!', 'wp-maintenance-mode' ),
 							'description'    => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
 							'buttonPage'     => __( 'Go to page', 'wp-maintenance-mode' ),
 							'buttonSettings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
 						),
-						'confirmModalTexts'      => array(
+						'confirmModalTexts'     => array(
 							'title'          => __( 'Import this template?', 'wp-maintenance-mode' ),
 							'description'    => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
 							'buttonContinue' => __( 'Continue', 'wp-maintenance-mode' ),
 							'buttonGoBack'   => __( 'Go back', 'wp-maintenance-mode' ),
 						),
-						'imageUploaderDefaults'  => array(
+						'imageUploaderDefaults' => array(
 							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
-						'skipImportStrings'      => array(
+						'skipImportStrings'     => array(
 							'maintenance'  => __( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ),
 							'coming-soon'  => __( 'I don’t want to use a Coming Soon Template', 'wp-maintenance-mode' ),
 							'landing-page' => __( 'I don’t want to use a Landing Page Template', 'wp-maintenance-mode' ),
 						),
-						'skipImportDefault'      => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
+						'skipImportDefault'     => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
 					)
 				);
 
