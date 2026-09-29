@@ -106,16 +106,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	private function apply_template( $settings, $template_slug = 'coming-soon-1', $category = 'coming-soon' ) {
 		$this->boot_plugin( $settings );
 
-		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
-			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
-		}
-
-		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
-		$instance->setAccessible( true );
-		$instance->setValue( null, null );
-
-		$admin = WP_Maintenance_Mode_Admin::get_instance();
-		$admin->load_default_settings();
+		$admin = wpmm_test_boot_admin();
 
 		$_POST = array(
 			'_wpnonce'      => wp_create_nonce( 'tab-design' ),
@@ -157,16 +148,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	private function select_page( $settings, $page_id ) {
 		$this->boot_plugin( $settings );
 
-		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
-			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
-		}
-
-		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
-		$instance->setAccessible( true );
-		$instance->setValue( null, null );
-
-		$admin = WP_Maintenance_Mode_Admin::get_instance();
-		$admin->load_default_settings();
+		$admin = wpmm_test_boot_admin();
 
 		$_POST = array(
 			'_wpnonce' => wp_create_nonce( 'tab-design' ),
@@ -204,16 +186,7 @@ class Test_Page_State extends WP_UnitTestCase {
 	private function save_design_settings( $settings, $design ) {
 		$this->boot_plugin( $settings );
 
-		if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
-			require_once WPMM_CLASSES_PATH . 'wp-maintenance-mode-admin.php';
-		}
-
-		$instance = new ReflectionProperty( 'WP_Maintenance_Mode_Admin', 'instance' );
-		$instance->setAccessible( true );
-		$instance->setValue( null, null );
-
-		$admin = WP_Maintenance_Mode_Admin::get_instance();
-		$admin->load_default_settings();
+		$admin = wpmm_test_boot_admin();
 
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 

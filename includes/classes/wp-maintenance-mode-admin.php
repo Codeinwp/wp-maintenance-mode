@@ -23,6 +23,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			// The basename needs no translations, so set it here: the action link filters below use it.
+			$this->plugin_basename = plugin_basename( WPMM_FILE );
+
 			// Init.
 			add_action( 'init', array( $this, 'load_default_settings' ) );
 
@@ -102,7 +105,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$this->plugin_slug             = $plugin->get_plugin_slug();
 			$this->plugin_settings         = $plugin->get_plugin_settings();
 			$this->plugin_network_settings = $plugin->get_plugin_network_settings();
-			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 			$this->plugin_default_settings = $plugin->default_settings();
 		}
 
