@@ -1,3 +1,7 @@
+##### [Version 2.6.25](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.24...v2.6.25) (2026-10-29)
+
+- Updated dependencies
+
 ##### [Version 2.6.24](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.23...v2.6.24) (2026-09-29)
 
 - Fixed cached live pages showing after enabling Coming Soon mode through the setup wizard.
