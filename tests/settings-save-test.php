@@ -32,7 +32,7 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	/**
 	 * Submit a settings tab form as an administrator.
 	 *
-	 * @param 'general'|'modules'|'bot'                     $tab    Settings tab slug.
+	 * @param 'general'|'design'|'modules'|'bot'            $tab    Settings tab slug.
 	 * @param array{options?: string|array<string, mixed>} $fields Submitted fields besides nonce and tab.
 	 * @return string The message the request ended with.
 	 */
@@ -68,34 +68,39 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @return array<string, array{0: array{options?: string|array{general: string}}}>
+	 * @return array<string, array{0: 'general'|'design', 1: array{options?: string|array{general?: string, design?: string}}}>
 	 */
 	public function malformed_payloads(): array {
 		return array(
-			'options is a string'          => array( array( 'options' => 'status' ) ),
-			'options is an empty string'   => array( array( 'options' => '' ) ),
-			'options[general] is a string' => array( array( 'options' => array( 'general' => 'status' ) ) ),
-			'options is missing'           => array( array() ),
+			'options is a string'          => array( 'general', array( 'options' => 'status' ) ),
+			'options is an empty string'   => array( 'general', array( 'options' => '' ) ),
+			'options[general] is a string' => array( 'general', array( 'options' => array( 'general' => 'status' ) ) ),
+			'options is missing'           => array( 'general', array() ),
+			'design options is a string'   => array( 'design', array( 'options' => 'title' ) ),
+			'options[design] is a string'  => array( 'design', array( 'options' => array( 'design' => 'title' ) ) ),
 		);
 	}
 
 	/**
 	 * @dataProvider malformed_payloads
 	 *
-	 * @param array{options?: string|array{general: string}} $fields Submitted fields besides nonce and tab.
+	 * @param 'general'|'design'                                            $tab    Settings tab slug.
+	 * @param array{options?: string|array{general?: string, design?: string}} $fields Submitted fields besides nonce and tab.
 	 */
-	public function test_malformed_payload_is_rejected_without_saving( array $fields ): void {
-		$message = $this->save_settings( 'general', $fields );
+	public function test_malformed_payload_is_rejected_without_saving( string $tab, array $fields ): void {
+		$message = $this->save_settings( $tab, $fields );
 
 		$this->assertSame( 'The submitted settings are invalid.', $message );
 		$this->assertSame( $this->settings, get_option( 'wpmm_settings' ) );
 	}
 
 	/**
-	 * @return array<string, array{0: 'general'|'modules'|'bot', 1: string, 2: string|array<array-key, string|list<string>>}>
+	 * @return array<string, array{0: 'general'|'design'|'modules'|'bot', 1: string, 2: string|array<array-key, string|list<string>>}>
 	 */
 	public function malformed_fields(): array {
 		return array(
+			'heading_color is an array'        => array( 'design', 'heading_color', array( '#000000' ) ),
+			'bg_custom is an array'            => array( 'design', 'bg_custom', array( 'https://example.org/bg.jpg' ) ),
 			'backend_role is a string'         => array( 'general', 'backend_role', 'administrator' ),
 			'frontend_role is a string'        => array( 'general', 'frontend_role', 'editor' ),
 			'exclude is an array'              => array( 'general', 'exclude', array( 'feed' ) ),
@@ -111,7 +116,7 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	 *
 	 * @dataProvider malformed_fields
 	 *
-	 * @param 'general'|'modules'|'bot'                    $tab   Settings tab slug.
+	 * @param 'general'|'design'|'modules'|'bot'           $tab   Settings tab slug.
 	 * @param string                                       $field Field name inside the tab.
 	 * @param string|array<array-key, string|list<string>> $value Submitted value.
 	 */
