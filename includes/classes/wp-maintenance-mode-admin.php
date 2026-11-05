@@ -397,6 +397,11 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				return false;
 			}
 
+			// the classic Modules save maps over countdown_details unconditionally
+			if ( 'modules' === $tab && ! get_option( 'wpmm_new_look' ) && ! isset( $options['countdown_details'] ) ) {
+				return false;
+			}
+
 			$list_fields = array(
 				'general' => array( 'backend_role', 'frontend_role' ),
 				'modules' => array( 'countdown_details' ),

@@ -131,6 +131,28 @@ class Test_Settings_Save extends WP_UnitTestCase {
 		$this->assertSame( $this->settings, get_option( 'wpmm_settings' ) );
 	}
 
+	public function test_classic_modules_save_without_countdown_details_is_rejected(): void {
+		$form = $this->settings['modules'];
+		unset( $form['countdown_details'] );
+
+		$message = $this->save_settings( 'modules', array( 'options' => array( 'modules' => $form ) ) );
+
+		$this->assertSame( 'The submitted settings are invalid.', $message );
+		$this->assertSame( $this->settings, get_option( 'wpmm_settings' ) );
+	}
+
+	public function test_new_look_modules_save_without_countdown_details_is_saved(): void {
+		update_option( 'wpmm_new_look', '1' );
+		$form = $this->settings['modules'];
+		unset( $form['countdown_details'] );
+		$form['ga_status'] = '1';
+
+		$message = $this->save_settings( 'modules', array( 'options' => array( 'modules' => $form ) ) );
+
+		$this->assertSame( 'redirected', $message );
+		$this->assertSame( 1, get_option( 'wpmm_settings' )['modules']['ga_status'] );
+	}
+
 	public function test_general_form_save_stores_status(): void {
 		$message = $this->save_settings( 'general', array( 'options' => array( 'general' => array( 'status' => '1' ) ) ) );
 
