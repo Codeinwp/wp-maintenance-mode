@@ -928,7 +928,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return void
 		 */
 		public function toggle_gutenberg() {
-			if ( empty( $_POST['source'] ) ) {
+			// check capabilities
+			if ( ! current_user_can( wpmm_get_capability( 'settings' ) ) ) {
+				wp_send_json_error( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
+			}
+
+			// only the migration notices may toggle; other notice nonces reach every role.
+			$source = isset( $_POST['source'] ) && in_array( $_POST['source'], array( 'migration', 'rollback' ), true ) ? $_POST['source'] : '';
+			if ( empty( $source ) ) {
 				die( esc_html__( 'The source filed must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
@@ -938,7 +945,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			// check nonce validation
-			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $_POST['source'] ) ) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $source ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
