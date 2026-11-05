@@ -8,6 +8,21 @@
  */
 class Test_Settings_Save extends WP_UnitTestCase {
 
+	/**
+	 * Seeded settings, built once: defaults embed the current time.
+	 *
+	 * @var array<string, array<string, mixed>>
+	 */
+	private $settings;
+
+	public function set_up(): void {
+		parent::set_up();
+
+		$this->settings = WP_Maintenance_Mode::get_instance()->default_settings();
+		update_option( 'wpmm_settings', $this->settings );
+		update_option( 'wpmm_new_look', '0' );
+	}
+
 	public function tear_down(): void {
 		$_POST = array();
 		wp_set_current_user( 0 );
@@ -22,9 +37,6 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	 * @return string The message the request ended with.
 	 */
 	private function save_settings( string $tab, array $fields ): string {
-		update_option( 'wpmm_settings', WP_Maintenance_Mode::get_instance()->default_settings() );
-		update_option( 'wpmm_new_look', '0' );
-
 		$admin = wpmm_test_boot_admin();
 
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
@@ -76,7 +88,7 @@ class Test_Settings_Save extends WP_UnitTestCase {
 		$message = $this->save_settings( 'general', $fields );
 
 		$this->assertSame( 'The submitted settings are invalid.', $message );
-		$this->assertSame( WP_Maintenance_Mode::get_instance()->default_settings(), get_option( 'wpmm_settings' ) );
+		$this->assertSame( $this->settings, get_option( 'wpmm_settings' ) );
 	}
 
 	/**
@@ -104,15 +116,14 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	 * @param string|array<array-key, string|list<string>> $value Submitted value.
 	 */
 	public function test_malformed_field_is_rejected_without_saving( string $tab, string $field, $value ): void {
-		$defaults = WP_Maintenance_Mode::get_instance()->default_settings();
 		// the stored general defaults keep exclude as a list, while the form posts a string
-		$form           = 'general' === $tab ? array( 'status' => '0' ) : $defaults[ $tab ];
+		$form           = 'general' === $tab ? array( 'status' => '0' ) : $this->settings[ $tab ];
 		$form[ $field ] = $value;
 
 		$message = $this->save_settings( $tab, array( 'options' => array( $tab => $form ) ) );
 
 		$this->assertSame( 'The submitted settings are invalid.', $message );
-		$this->assertSame( $defaults, get_option( 'wpmm_settings' ) );
+		$this->assertSame( $this->settings, get_option( 'wpmm_settings' ) );
 	}
 
 	public function test_general_form_save_stores_status(): void {
