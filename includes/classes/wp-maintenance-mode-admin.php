@@ -416,6 +416,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				die( esc_html__( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
 			}
 
+			if ( ! isset( $_POST['options'][ $tab ] ) || ! is_array( $_POST['options'][ $tab ] ) ) {
+				wp_die( esc_html__( 'The submitted settings are invalid.', 'wp-maintenance-mode' ), '', array( 'response' => 400 ) );
+			}
+
 			// Do some sanitizations
 			switch ( $tab ) {
 				case 'general':
