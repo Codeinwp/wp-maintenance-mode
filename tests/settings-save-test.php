@@ -15,15 +15,15 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Submit the General tab form as an administrator.
+	 * Submit a settings tab form as an administrator.
 	 *
-	 * @param array{options?: string|array{general: string|array{status: string}}} $fields Submitted fields besides nonce and tab.
+	 * @param 'general'|'modules'|'bot'                     $tab    Settings tab slug.
+	 * @param array{options?: string|array<string, mixed>} $fields Submitted fields besides nonce and tab.
 	 * @return string The message the request ended with.
 	 */
-	private function save_general_settings( array $fields ): string {
-		$settings                      = WP_Maintenance_Mode::get_instance()->default_settings();
-		$settings['general']['status'] = 0;
-		update_option( 'wpmm_settings', $settings );
+	private function save_settings( string $tab, array $fields ): string {
+		update_option( 'wpmm_settings', WP_Maintenance_Mode::get_instance()->default_settings() );
+		update_option( 'wpmm_new_look', '0' );
 
 		$admin = wpmm_test_boot_admin();
 
@@ -31,8 +31,8 @@ class Test_Settings_Save extends WP_UnitTestCase {
 
 		$_POST = array_merge(
 			array(
-				'_wpnonce' => wp_create_nonce( 'tab-general' ),
-				'tab'      => 'general',
+				'_wpnonce' => wp_create_nonce( 'tab-' . $tab ),
+				'tab'      => $tab,
 			),
 			$fields
 		);
@@ -72,15 +72,51 @@ class Test_Settings_Save extends WP_UnitTestCase {
 	 *
 	 * @param array{options?: string|array{general: string}} $fields Submitted fields besides nonce and tab.
 	 */
-	public function test_malformed_general_payload_is_rejected_without_saving( array $fields ): void {
-		$message = $this->save_general_settings( $fields );
+	public function test_malformed_payload_is_rejected_without_saving( array $fields ): void {
+		$message = $this->save_settings( 'general', $fields );
 
 		$this->assertSame( 'The submitted settings are invalid.', $message );
-		$this->assertSame( 0, get_option( 'wpmm_settings' )['general']['status'] );
+		$this->assertSame( WP_Maintenance_Mode::get_instance()->default_settings(), get_option( 'wpmm_settings' ) );
+	}
+
+	/**
+	 * @return array<string, array{0: 'general'|'modules'|'bot', 1: string, 2: string|array<array-key, string|list<string>>}>
+	 */
+	public function malformed_fields(): array {
+		return array(
+			'backend_role is a string'         => array( 'general', 'backend_role', 'administrator' ),
+			'frontend_role is a string'        => array( 'general', 'frontend_role', 'editor' ),
+			'exclude is an array'              => array( 'general', 'exclude', array( 'feed' ) ),
+			'redirection is an array'          => array( 'general', 'redirection', array( 'https://example.org' ) ),
+			'countdown_details is a string'    => array( 'modules', 'countdown_details', '1' ),
+			'countdown day is an array'        => array( 'modules', 'countdown_details', array( 'days' => array( '1' ), 'hours' => '1', 'minutes' => '0' ) ),
+			'bot messages is a string'         => array( 'bot', 'messages', 'hello' ),
+		);
+	}
+
+	/**
+	 * Submit an otherwise complete form for the tab with one field of the wrong type.
+	 *
+	 * @dataProvider malformed_fields
+	 *
+	 * @param 'general'|'modules'|'bot'                    $tab   Settings tab slug.
+	 * @param string                                       $field Field name inside the tab.
+	 * @param string|array<array-key, string|list<string>> $value Submitted value.
+	 */
+	public function test_malformed_field_is_rejected_without_saving( string $tab, string $field, $value ): void {
+		$defaults = WP_Maintenance_Mode::get_instance()->default_settings();
+		// the stored general defaults keep exclude as a list, while the form posts a string
+		$form           = 'general' === $tab ? array( 'status' => '0' ) : $defaults[ $tab ];
+		$form[ $field ] = $value;
+
+		$message = $this->save_settings( $tab, array( 'options' => array( $tab => $form ) ) );
+
+		$this->assertSame( 'The submitted settings are invalid.', $message );
+		$this->assertSame( $defaults, get_option( 'wpmm_settings' ) );
 	}
 
 	public function test_general_form_save_stores_status(): void {
-		$message = $this->save_general_settings( array( 'options' => array( 'general' => array( 'status' => '1' ) ) ) );
+		$message = $this->save_settings( 'general', array( 'options' => array( 'general' => array( 'status' => '1' ) ) ) );
 
 		$this->assertSame( 'redirected', $message );
 		$this->assertSame( 1, get_option( 'wpmm_settings' )['general']['status'] );
