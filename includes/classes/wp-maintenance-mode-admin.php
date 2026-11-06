@@ -385,6 +385,46 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		/**
+		 * Whether a submitted settings tab has the shape the save handler expects:
+		 * list fields hold arrays of scalars, every other field is a scalar.
+		 *
+		 * @param string                              $tab     Settings tab slug.
+		 * @param string|array<array-key, mixed>|null $options Submitted options for the tab.
+		 * @return bool
+		 */
+		private function is_valid_settings_payload( string $tab, $options ): bool {
+			if ( ! is_array( $options ) ) {
+				return false;
+			}
+
+			// the classic Modules save maps over countdown_details unconditionally
+			if ( 'modules' === $tab && ! get_option( 'wpmm_new_look' ) && ! isset( $options['countdown_details'] ) ) {
+				return false;
+			}
+
+			$list_fields = array(
+				'general' => array( 'backend_role', 'frontend_role' ),
+				'modules' => array( 'countdown_details' ),
+				'bot'     => array( 'messages', 'responses' ),
+			);
+			$tab_lists   = isset( $list_fields[ $tab ] ) ? $list_fields[ $tab ] : array();
+
+			foreach ( $options as $field => $value ) {
+				$is_list = in_array( $field, $tab_lists, true );
+				if ( $is_list !== is_array( $value ) ) {
+					return false;
+				}
+
+				$items = $is_list ? $value : array( $value );
+				if ( count( array_filter( $items, 'is_scalar' ) ) !== count( $items ) ) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/**
 		 * Save settings
 		 *
 		 * @since 2.0.0
@@ -414,6 +454,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$tab = sanitize_key( $_POST['tab'] );
 			if ( empty( $this->plugin_default_settings[ $tab ] ) ) {
 				die( esc_html__( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
+			}
+
+			if ( ! $this->is_valid_settings_payload( $tab, isset( $_POST['options'][ $tab ] ) ? $_POST['options'][ $tab ] : null ) ) {
+				wp_die( esc_html__( 'The submitted settings are invalid.', 'wp-maintenance-mode' ), '', array( 'response' => 400 ) );
 			}
 
 			// Do some sanitizations
@@ -928,7 +972,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return void
 		 */
 		public function toggle_gutenberg() {
-			if ( empty( $_POST['source'] ) ) {
+			// check capabilities
+			if ( ! current_user_can( wpmm_get_capability( 'settings' ) ) ) {
+				wp_send_json_error( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
+			}
+
+			// only the migration notices may toggle; other notice nonces reach every role.
+			$source = isset( $_POST['source'] ) && in_array( $_POST['source'], array( 'migration', 'rollback' ), true ) ? $_POST['source'] : '';
+			if ( empty( $source ) ) {
 				die( esc_html__( 'The source filed must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
@@ -938,7 +989,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			// check nonce validation
-			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $_POST['source'] ) ) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $source ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
