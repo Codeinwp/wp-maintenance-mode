@@ -103,3 +103,5 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run phpunit
         run: composer run-script phpunit
+      - name: Run phpunit (multisite)
+        run: WP_MULTISITE=1 composer run-script phpunit

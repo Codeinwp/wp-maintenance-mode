@@ -523,7 +523,7 @@ jQuery( function( $ ) {
 	}
 
 	/**
-	 * Installs or activates Otter and Optimole and adds the template after
+	 * Installs or activates the selected recommended plugins and adds the template after
 	 *
 	 * @param {Object}   data
 	 * @param {Function} callback
@@ -626,33 +626,19 @@ jQuery( function( $ ) {
 	 * Install and activate recommended plugins if the checkboxes is checked.
 	 */
 	function handlePlugins() {
-		const optimoleCheckbox = $( '#wizard-optimole-checkbox' );
-		const wpscCheckbox = $( '#wizard-wpsc-checkbox' );
+		const easyMcpCheckbox = $( '#wizard-easy-mcp-checkbox' );
 		const otterBlockCheckbox = $( '#wizard-otter-block-checkbox' );
 		let promiseChain = Promise.resolve();
 
-		if ( optimoleCheckbox.length && optimoleCheckbox.is( ':checked' ) ) {
-			promiseChain = promiseChain
-				.then(() => {
-					if ( ! wpmmVars.isOptimoleInstalled ) {
-						return installPlugin( 'optimole-wp' ).then( () => activatePlugin( 'optimole-wp' ) );
-					}
-
-					if ( ! wpmmVars.isOptimoleActive ) {
-						return activatePlugin( 'optimole-wp' );
-					}
-				});
-		}
-
-		if ( wpscCheckbox.length && wpscCheckbox.is( ':checked' ) ) {
+		if ( easyMcpCheckbox.length && easyMcpCheckbox.is( ':checked' ) ) {
 			promiseChain = promiseChain
 				.then( () => {
-					if ( ! wpmmVars.isWPSCInstalled ) {
-						return installPlugin( 'wp-cloudflare-page-cache' ).then( () => activatePlugin( 'wp-cloudflare-page-cache' ) );
+					if ( ! wpmmVars.isEasyMcpInstalled ) {
+						return installPlugin( 'easy-mcp-ai' ).then( () => activatePlugin( 'easy-mcp-ai' ) );
 					}
 
-					if ( ! wpmmVars.isWPSCActive ) {
-						return activatePlugin( wpmmVars.isWPSCProInstalled ? 'wp-super-page-cache-pro' : 'wp-cloudflare-page-cache' );
+					if ( ! wpmmVars.isEasyMcpActive ) {
+						return activatePlugin( 'easy-mcp-ai' );
 					}
 				} );
 		}
@@ -727,11 +713,8 @@ jQuery( function( $ ) {
 		switch ( slug ) {
 			case 'otter-blocks':
 				return $.get( wpmmVars.otterActivationLink );
-			case 'optimole-wp':
-				return $.get( wpmmVars.optimoleActivationLink );
-			case 'wp-super-page-cache-pro':
-			case 'wp-cloudflare-page-cache':
-				return $.get( wpmmVars.wpscActivationLink );
+			case 'easy-mcp-ai':
+				return $.get( wpmmVars.easyMcpActivationLink );
 			default:
 				break;
 		}

@@ -23,6 +23,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * 3, 2, 1... Start!
 		 */
 		private function __construct() {
+			// The basename needs no translations, so set it here: the action link filters below use it.
+			$this->plugin_basename = plugin_basename( WPMM_FILE );
+
 			// Init.
 			add_action( 'init', array( $this, 'load_default_settings' ) );
 
@@ -102,7 +105,6 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$this->plugin_slug             = $plugin->get_plugin_slug();
 			$this->plugin_settings         = $plugin->get_plugin_settings();
 			$this->plugin_network_settings = $plugin->get_plugin_network_settings();
-			$this->plugin_basename         = plugin_basename( WPMM_PATH . $this->plugin_slug . '.php' );
 			$this->plugin_default_settings = $plugin->default_settings();
 		}
 
@@ -159,29 +161,26 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 					$this->plugin_slug . '-admin-script',
 					'wpmmVars',
 					array(
-						'ajaxURL'                => admin_url( 'admin-ajax.php' ),
-						'pluginURL'              => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
-						'ajaxNonce'              => wp_create_nonce( 'ajax' ),
-						'wizardNonce'            => wp_create_nonce( 'wizard' ),
-						'pluginInstallNonce'     => wp_create_nonce( 'updates' ),
-						'isOtterInstalled'       => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
-						'isOtterActive'          => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
-						'isOptimoleInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/optimole-wp/optimole-wp.php' ),
-						'isOptimoleActive'       => is_plugin_active( 'optimole-wp/optimole-wp.php' ),
-						'isWPSCInstalled'        => file_exists( ABSPATH . 'wp-content/plugins/wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) || file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
-						'isWPSCActive'           => is_plugin_active( 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ) || is_plugin_active( 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
-						'isWPSCProInstalled'     => file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ),
-						'errorString'            => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
-						'loadingString'          => __( 'Doing some magic...', 'wp-maintenance-mode' ),
-						'importingText'          => __( 'Importing', 'wp-maintenance-mode' ),
-						'importDone'             => __( 'Done', 'wp-maintenance-mode' ),
-						'invalidEmailString'     => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
-						'finishWizardStrings'    => array(
+						'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+						'pluginURL'             => add_query_arg( array( 'page' => $this->plugin_slug ), admin_url( 'admin.php' ) ),
+						'ajaxNonce'             => wp_create_nonce( 'ajax' ),
+						'wizardNonce'           => wp_create_nonce( 'wizard' ),
+						'pluginInstallNonce'    => wp_create_nonce( 'updates' ),
+						'isOtterInstalled'      => file_exists( ABSPATH . 'wp-content/plugins/otter-blocks/otter-blocks.php' ),
+						'isOtterActive'         => is_plugin_active( 'otter-blocks/otter-blocks.php' ),
+						'isEasyMcpInstalled'    => file_exists( ABSPATH . 'wp-content/plugins/easy-mcp-ai/easy-mcp-ai.php' ),
+						'isEasyMcpActive'       => is_plugin_active( 'easy-mcp-ai/easy-mcp-ai.php' ),
+						'errorString'           => __( 'Something went wrong, please try again.', 'wp-maintenance-mode' ),
+						'loadingString'         => __( 'Doing some magic...', 'wp-maintenance-mode' ),
+						'importingText'         => __( 'Importing', 'wp-maintenance-mode' ),
+						'importDone'            => __( 'Done', 'wp-maintenance-mode' ),
+						'invalidEmailString'    => __( 'Invalid email, please try again.', 'wp-maintenance-mode' ),
+						'finishWizardStrings'   => array(
 							'maintenance' => __( 'Your maintenance page is ready!', 'wp-maintenance-mode' ),
 							'coming-soon' => __( 'Your coming soon page is ready!', 'wp-maintenance-mode' ),
 						),
-						'adminURL'               => get_admin_url(),
-						'otterActivationLink'    => add_query_arg(
+						'adminURL'              => get_admin_url(),
+						'otterActivationLink'   => add_query_arg(
 							array(
 								'action'        => 'activate',
 								'plugin'        => rawurlencode( 'otter-blocks/otter-blocks.php' ),
@@ -191,48 +190,38 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'optimoleActivationLink' => add_query_arg(
+						'easyMcpActivationLink' => add_query_arg(
 							array(
 								'action'        => 'activate',
-								'plugin'        => rawurlencode( 'optimole-wp/optimole-wp.php' ),
+								'plugin'        => rawurlencode( 'easy-mcp-ai/easy-mcp-ai.php' ),
 								'plugin_status' => 'all',
 								'paged'         => '1',
-								'_wpnonce'      => wp_create_nonce( 'activate-plugin_optimole-wp/optimole-wp.php' ),
+								'_wpnonce'      => wp_create_nonce( 'activate-plugin_easy-mcp-ai/easy-mcp-ai.php' ),
 							),
 							esc_url( network_admin_url( 'plugins.php' ) )
 						),
-						'wpscActivationLink'     => add_query_arg(
-							array(
-								'action'        => 'activate',
-								'plugin'        => rawurlencode( file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ? 'wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' : 'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ),
-								'plugin_status' => 'all',
-								'paged'         => '1',
-								'_wpnonce'      => wp_create_nonce( file_exists( ABSPATH . 'wp-content/plugins/wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' ) ? 'activate-plugin_wp-super-page-cache-pro/wp-cloudflare-super-page-cache-pro.php' : 'activate-plugin_wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' ),
-							),
-							esc_url( network_admin_url( 'plugins.php' ) )
-						),
-						'modalTexts'             => array(
+						'modalTexts'            => array(
 							'title'          => __( 'The template has been imported!', 'wp-maintenance-mode' ),
 							'description'    => __( 'The template has been imported to a new draft page. You can take a look and enable it from plugin settings.', 'wp-maintenance-mode' ),
 							'buttonPage'     => __( 'Go to page', 'wp-maintenance-mode' ),
 							'buttonSettings' => __( 'Go to Settings', 'wp-maintenance-mode' ),
 						),
-						'confirmModalTexts'      => array(
+						'confirmModalTexts'     => array(
 							'title'          => __( 'Import this template?', 'wp-maintenance-mode' ),
 							'description'    => __( 'By importing this template, the existing content on your Maintenance Page will be replaced. Do you wish to continue?', 'wp-maintenance-mode' ),
 							'buttonContinue' => __( 'Continue', 'wp-maintenance-mode' ),
 							'buttonGoBack'   => __( 'Go back', 'wp-maintenance-mode' ),
 						),
-						'imageUploaderDefaults'  => array(
+						'imageUploaderDefaults' => array(
 							'title'      => _x( 'Upload Image', 'image_uploader default title', 'wp-maintenance-mode' ),
 							'buttonText' => _x( 'Choose Image', 'image_uploader default button_text', 'wp-maintenance-mode' ),
 						),
-						'skipImportStrings'      => array(
+						'skipImportStrings'     => array(
 							'maintenance'  => __( 'I don’t want to use a Maintenance Template', 'wp-maintenance-mode' ),
 							'coming-soon'  => __( 'I don’t want to use a Coming Soon Template', 'wp-maintenance-mode' ),
 							'landing-page' => __( 'I don’t want to use a Landing Page Template', 'wp-maintenance-mode' ),
 						),
-						'skipImportDefault'      => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
+						'skipImportDefault'     => __( 'I don’t want to use a template', 'wp-maintenance-mode' ),
 					)
 				);
 
@@ -396,6 +385,46 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		}
 
 		/**
+		 * Whether a submitted settings tab has the shape the save handler expects:
+		 * list fields hold arrays of scalars, every other field is a scalar.
+		 *
+		 * @param string                              $tab     Settings tab slug.
+		 * @param string|array<array-key, mixed>|null $options Submitted options for the tab.
+		 * @return bool
+		 */
+		private function is_valid_settings_payload( string $tab, $options ): bool {
+			if ( ! is_array( $options ) ) {
+				return false;
+			}
+
+			// the classic Modules save maps over countdown_details unconditionally
+			if ( 'modules' === $tab && ! get_option( 'wpmm_new_look' ) && ! isset( $options['countdown_details'] ) ) {
+				return false;
+			}
+
+			$list_fields = array(
+				'general' => array( 'backend_role', 'frontend_role' ),
+				'modules' => array( 'countdown_details' ),
+				'bot'     => array( 'messages', 'responses' ),
+			);
+			$tab_lists   = isset( $list_fields[ $tab ] ) ? $list_fields[ $tab ] : array();
+
+			foreach ( $options as $field => $value ) {
+				$is_list = in_array( $field, $tab_lists, true );
+				if ( $is_list !== is_array( $value ) ) {
+					return false;
+				}
+
+				$items = $is_list ? $value : array( $value );
+				if ( count( array_filter( $items, 'is_scalar' ) ) !== count( $items ) ) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/**
 		 * Save settings
 		 *
 		 * @since 2.0.0
@@ -425,6 +454,10 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			$tab = sanitize_key( $_POST['tab'] );
 			if ( empty( $this->plugin_default_settings[ $tab ] ) ) {
 				die( esc_html__( 'The tab slug must exist.', 'wp-maintenance-mode' ) );
+			}
+
+			if ( ! $this->is_valid_settings_payload( $tab, isset( $_POST['options'][ $tab ] ) ? $_POST['options'][ $tab ] : null ) ) {
+				wp_die( esc_html__( 'The submitted settings are invalid.', 'wp-maintenance-mode' ), '', array( 'response' => 400 ) );
 			}
 
 			// Do some sanitizations
@@ -717,25 +750,9 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		private function switch_selected_page( $page_id ) {
 			$previous_page_id = isset( $this->plugin_settings['design']['page_id'] ) ? absint( $this->plugin_settings['design']['page_id'] ) : 0;
 
-			if ( $previous_page_id && $previous_page_id !== $page_id ) {
-				// hand the previously selected page back before abandoning it,
-				// otherwise nothing would ever restore it
-				wpmm_restore_page_state( $previous_page_id );
-			}
+			wpmm_switch_selected_page( $previous_page_id, $page_id );
 
 			$this->plugin_settings['design']['page_id'] = $page_id;
-
-			if ( $page_id ) {
-				// remember the page's original state before taking it over as a maintenance page
-				wpmm_record_page_state( $page_id );
-
-				wp_update_post(
-					array(
-						'ID'            => $page_id,
-						'page_template' => 'templates/wpmm-page-template.php',
-					)
-				);
-			}
 		}
 
 		/**
@@ -819,13 +836,16 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 				CSS_Handler::generate_css_file( $page_id );
 			}
 
-			if ( 'wizard' === $_POST['source'] ) {
+			if ( 'wizard' === $source ) {
 				$this->plugin_settings['general']['status'] = 1;
 				update_option( 'wpmm_fresh_install', false );
 			}
 
 			update_option( 'wpmm_page_category', $category );
 			update_option( 'wpmm_settings', $this->plugin_settings );
+			if ( 'wizard' === $source ) {
+				wpmm_delete_cache();
+			}
 			wp_send_json_success( array( 'pageEditURL' => get_edit_post_link( $page_id ) ) );
 		}
 
@@ -952,7 +972,14 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 		 * @return void
 		 */
 		public function toggle_gutenberg() {
-			if ( empty( $_POST['source'] ) ) {
+			// check capabilities
+			if ( ! current_user_can( wpmm_get_capability( 'settings' ) ) ) {
+				wp_send_json_error( __( 'You do not have access to this resource.', 'wp-maintenance-mode' ) );
+			}
+
+			// only the migration notices may toggle; other notice nonces reach every role.
+			$source = isset( $_POST['source'] ) && in_array( $_POST['source'], array( 'migration', 'rollback' ), true ) ? $_POST['source'] : '';
+			if ( empty( $source ) ) {
 				die( esc_html__( 'The source filed must not be empty.', 'wp-maintenance-mode' ) );
 			}
 
@@ -962,7 +989,7 @@ if ( ! class_exists( 'WP_Maintenance_Mode_Admin' ) ) {
 			}
 
 			// check nonce validation
-			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $_POST['source'] ) ) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'notice_nonce_' . $source ) ) {
 				die( esc_html__( 'Security check.', 'wp-maintenance-mode' ) );
 			}
 
