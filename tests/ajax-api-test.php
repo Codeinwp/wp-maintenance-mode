@@ -358,14 +358,29 @@ class Test_Ajax_Api extends WP_Ajax_UnitTestCase {
 		delete_option( 'wpmm_new_look' );
 		delete_option( 'wpmm_migration_time' );
 
-		$_POST['source']   = 'dashboard';
-		$_POST['_wpnonce'] = wp_create_nonce( 'notice_nonce_dashboard' );
+		$_POST['source']   = 'migration';
+		$_POST['_wpnonce'] = wp_create_nonce( 'notice_nonce_migration' );
 
 		$response = $this->handle( 'wpmm_toggle_gutenberg' );
 
 		$this->assertTrue( $response['success'] );
 		$this->assertTrue( (bool) get_option( 'wpmm_new_look' ) );
 		$this->assertNotEmpty( get_option( 'wpmm_migration_time' ) );
+	}
+
+	public function test_toggle_gutenberg_requires_capability_even_with_a_notice_nonce() {
+		$this->_setRole( 'subscriber' );
+		update_option( 'wpmm_new_look', '1' );
+
+		// Every role sees the rebrand notice, so a subscriber holds its nonce.
+		$_POST['source']   = 'rebrand';
+		$_POST['_wpnonce'] = wp_create_nonce( 'notice_nonce_rebrand' );
+
+		$response = $this->handle( 'wpmm_toggle_gutenberg' );
+
+		$this->assertFalse( $response['success'] );
+		$this->assertSame( 'You do not have access to this resource.', $response['data'] );
+		$this->assertSame( '1', get_option( 'wpmm_new_look' ) );
 	}
 
 	/*
