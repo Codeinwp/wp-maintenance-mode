@@ -8,7 +8,7 @@ Author URI: https://themeisle.com/
 Tags: maintenance mode, coming soon, landing page, splash page, under construction
 Requires at least: 4.7
 Tested up to: 7.1
-Stable tag: 2.6.25
+Stable tag: 2.6.26
 Requires PHP: 7.1
 License: GPL-2.0+
 
@@ -98,6 +98,16 @@ Plugin security is a core priority for us. If you identify a potential vulnerabi
 Please follow the reporting protocols outlined on our [Security Page](https://themeisle.com/security/).
 
 == Changelog ==
+
+##### [Version 2.6.26](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.25...v2.6.26) (2026-11-13)
+
+- Enhanced security
+- Fixed settings save failing on invalid submitted data
+- Fixed settings saves crashing on malformed form submissions
+- Updated dependencies
+
+
+
 
 ##### [Version 2.6.25](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.24...v2.6.25) (2026-10-29)
 

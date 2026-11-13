@@ -1,3 +1,10 @@
+##### [Version 2.6.26](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.25...v2.6.26) (2026-11-13)
+
+- Enhanced security
+- Fixed settings save failing on invalid submitted data
+- Fixed settings saves crashing on malformed form submissions
+- Updated dependencies
+
 ##### [Version 2.6.25](https://github.com/Codeinwp/wp-maintenance-mode/compare/v2.6.24...v2.6.25) (2026-10-29)
 
 - Updated dependencies
