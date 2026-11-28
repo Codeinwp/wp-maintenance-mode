@@ -111,6 +111,22 @@ add_filter(
 	}
 );
 
+add_filter(
+	'wp_maintenance_mode_support_hub_metadata',
+	function () {
+		return array(
+			'is_pro' => false,
+			'links'  => array(
+				array(
+					'icon' => 'groups',
+					'text' => __( 'Community Forum', 'wp-maintenance-mode' ),
+					'url'  => 'https://wordpress.org/support/plugin/wp-maintenance-mode/',
+				),
+			),
+		);
+	}
+);
+
 /**
  * Filter products array.
  *
